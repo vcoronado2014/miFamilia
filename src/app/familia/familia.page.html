@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar [style.--background]="miColor" mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" class="fcw"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="fcw">Familia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- si no hay registros -->
+  <div *ngIf="hayInfo == false" style="padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;"><p>No hay familiares para mostrar  <br>
+    <ion-icon name="information-circle" style="font-size: 60px;"></ion-icon></p>
+  </div>
+  <!-- si hay registros -->
+  <div *ngIf="listadoUsuario.length > 0">
+    <ion-list *ngFor="let item of listadoUsuario" #myList>
+      <ion-item (click)="openModalAjustes(item)">
+        <ion-avatar slot="start">
+          <text-avatar [text]="item.Nombres" [color]="item.Color" [textColor]="textColor"></text-avatar>
+        </ion-avatar>
+        <ion-label>{{item.Nombres + ' ' + item.ApellidoPaterno}}</ion-label>
+      </ion-item>
+    </ion-list> 
+  </div>
+  <!-- ESQUELETON -->
+  <div *ngIf="listadoUsuario.length == 0">
+    <ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-item>
+    </ion-list> 
+  </div>
+
+
+</ion-content>

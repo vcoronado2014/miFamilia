@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar [style.--background]="miColor" mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" class="fcw"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="fcw">Eventos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- selección de fecha -->
+  <!-- <ion-row> -->
+    <ion-item class="ion-text-center" lines="none">
+      <!-- <ion-icon name="calendar" item-start style="padding-bottom:0;margin-bottom: 0;padding-right:0;margin-right:0;"></ion-icon> -->
+      <ion-icon name="calendar" slot="start"></ion-icon>
+      <ion-select okText="Aceptar" cancelText="Cancelar" (ionChange)="mesSelected($event)" multiple="false" value="{{mesActualSeleccionado}}">
+        <!-- <ion-select-option *ngFor="let mes of mesesVertical" [value]="mes.mesNumero" [selected]="mesActualSeleccionado == mes.mesNumero"> -->
+          <ion-select-option *ngFor="let mes of mesesVertical" [value]="mes.mesNumero">
+            {{mes.mesTexto}}
+          </ion-select-option>
+      </ion-select>
+    </ion-item>
+ <!--  </ion-row> -->
+ <div *ngIf="!tiene">
+  <div style="position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;">
+    <p style="display: table-cell; vertical-align: middle">No hay eventos para mostrar  <br>
+    <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p>
+  </div>
+ </div>
+ <div *ngIf="tiene">
+  <div *ngFor="let item of citasVertical">
+    <ion-grid *ngIf="item.Mostrar">
+      <ion-row>
+        <ion-col size="2" class="ion-text-center">
+          <strong style="font-size: xx-large;">{{item.NumeroDia}}</strong><br/>
+          <label>{{item.NombreDiaReducido}}</label>
+        </ion-col>
+        <ion-col size="10" class="ion-no-padding">
+          <ion-card class="ion-margin-bottom ion-no-margin" *ngFor="let evento of item.Eventos" (click)="goToDetalleCita(evento)">
+            <!-- LOS DATOS DE CADA EVENTO -->
+              <img src="./assets/img/{{evento.Imagen}}">
+              <ion-card-header>
+                <ion-card-title>
+                  {{evento.DetalleEventoMes.Titulo}}
+                  <ion-badge [ngStyle]="{'--background-color': evento.Color}" class="ion-float-right">{{evento.HoraInicioFin}}</ion-badge>
+                </ion-card-title>
+              </ion-card-header>
+            
+              <ion-card-content class="ion-no-padding">
+                <ion-item lines="none" #myList>
+                  <ion-avatar slot="start">
+                    <text-avatar [text]="evento.DetalleEventoMes.NombrePaciente" [color]="evento.Color" [textColor]="textColor"></text-avatar>
+                  </ion-avatar>
+                  <ion-label>{{evento.DetalleEventoMes.NombrePaciente}}</ion-label>
+                </ion-item>
+              </ion-card-content>
+            
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+ </div>
+
+
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="logout()" [style.--background]="miColor">
+    <ion-icon name="close"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

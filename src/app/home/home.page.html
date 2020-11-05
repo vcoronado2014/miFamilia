@@ -1,0 +1,58 @@
+<ion-menu side="start" menuId="first" contentId="content">
+  <ion-header>
+    <ion-toolbar [style.--background]="miColor">
+      <ion-title class="fcw">Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-item class="ion-text-center" lines="none" *ngIf = "miImagen != ''">
+      <img src={{miImagen}} style="width: 100%;"/>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="ion-text-center ion-text-wrap">{{miNombre}}</ion-label>
+    </ion-item>
+    <ion-list>
+      <ion-item *ngFor="let p of pages" (click)="openPage(p)" button>
+        <ion-icon name={{p.icon}} slot="start"></ion-icon>
+        <ion-label>
+          {{p.title}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-header>
+  <ion-toolbar [style.--background]="miColor">
+    <ion-buttons slot="start">
+      <ion-menu-button class="home"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="home">Mi salud familiar</ion-title>
+    <ion-buttons slot="end" class="pdr10" (click)="openFamiliaPage()">
+      <ion-icon class="home" slot="icon-only" name="settings-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="card-background-page-home" id="content">
+  <!-- CONTENIDO DE LA PAGINA HOME -->
+  <ion-card (click)="openAntePage()" style="height: 29.1%;">
+    <div style="background-color: #fff; opacity: 0.8; width: 100%; height: 100%;"><img class="img-exam" src="./assets/img/home_antecedentes.png" alt="ImgAnte"/></div>
+    <div class="card-title">Antecedentes</div>
+  </ion-card>
+
+  <ion-card (click)="openCalendarioPage()" style="height: 29.1%;">
+    <div style="background-color: #fff; opacity: 0.8; width: 100%; height: 100%;"><img class="img-exam" src="./assets/img/home_calendario.png" alt="ImgCalendario"/></div>
+    <div class="card-title">Calendario</div>
+  </ion-card>
+
+ <ion-card  (click)="openOrdenesPage()" style="height: 29.1%;">
+    <div style="background-color: #fff; opacity: 0.8; width: 100%; height: 100%;"><img class="img-exam" src="./assets/img/muestra.jpg" alt="ImgExam"/></div>
+    <div class="card-title">Exámenes</div>
+  </ion-card>
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="logout()" [style.--background]="miColor">
+    <ion-icon name="close"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+

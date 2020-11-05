@@ -1,0 +1,31 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content id="login" [fullscreen]="true">
+  <ion-grid class="h-100">
+    <ion-row  class="h-100 justify-content-center align-items-center">
+      <ion-col size-sm="6" size-md="4">
+        <div class="caja_maestra">
+          <img class="profile-img" src="./assets/img/logo_oficial.png" alt="icon">
+          <div class="loginBox">
+            <!-- <ion-item lines="none" *ngIf="recordarme"> -->
+              <p style="text-align: center;" *ngIf="recordarme" class="text-wrap">{{textoBienvenida}}</p>
+            <!-- </ion-item> -->
+            <ion-input class="inputBox" type="text" [(ngModel)]="usuario" required placeholder="RUN 123456789" *ngIf="recordarme == false"></ion-input>
+            <ion-input class="inputBox" type="password" [(ngModel)]="password" required placeholder="Contraseña" ></ion-input>
+            <ion-item lines="none">
+              <ion-label>Recordar mi Rut</ion-label>
+              <ion-toggle [disabled]="!usuario" color="primary" slot="end" [(ngModel)]="recordarme" (ionChange)="onChangeRecordarme($event)" mode="ios"></ion-toggle>
+            </ion-item>
+          </div>
+            <!-- <button ion-button round (click)="Signup()">Ingresar</button> -->
+
+            <ion-button [disabled]="!usuario || !password" color="primary" type="ios" shape="round" expand="full" (click)="Signup()">Ingresar</ion-button>              
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-content>

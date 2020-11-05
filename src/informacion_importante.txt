@@ -1,0 +1,3 @@
+#la directiva text-avatar se encuentra en la siguiente url
+https://github.com/mumairofficial/text-avatar
+
