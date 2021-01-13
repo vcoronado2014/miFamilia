@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 
 import { CalendarioPage } from './calendario.page';
 import { TextAvatarModule } from '../../directives/text-avatar/index'
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -15,12 +17,14 @@ import { TextAvatarModule } from '../../directives/text-avatar/index'
     FormsModule,
     IonicModule,
     TextAvatarModule,
+    MatCardModule,
+    MatButtonModule,
     RouterModule.forChild([
       {
         path: '',
         component: CalendarioPage
       }
-    ])
+    ]),
   ],
   declarations: [CalendarioPage]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ɵConsole } from '@angular/core';
 import { NavController, ToastController, Platform, ModalController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -10,6 +10,7 @@ import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 
 import * as moment from 'moment';
+declare var window;
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ import * as moment from 'moment';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  locations: any;
   recordarme = false;
   textoBienvenida;
   tokenDispositivo: any;
@@ -42,6 +44,8 @@ export class LoginPage implements OnInit {
   loggedIn: boolean;
   CodigoMensaje: any;
   Mensaje: string;
+  //para el intervalo
+  intervalo;
 
   constructor(
     public navCtrl: NavController,
@@ -57,6 +61,7 @@ export class LoginPage implements OnInit {
     public utiles: ServicioUtiles,
     public servicioGeo: ServicioGeo,
     public acceso: ServicioAcceso,
+
   ) { 
     //ready
     platform.ready().then(() => {
@@ -83,9 +88,26 @@ export class LoginPage implements OnInit {
         console.log('Error getting location', error);
       });
 
+      //para pruebas
+      //notificacion.lanzarNotificacionPrueba();
+/*       this.locations = [];
+      this.StartBackgroundTracking(); */
     });
 
   }
+/*   StartBackgroundTracking(){
+    window.app.backgroudGeolocation.start();
+  }
+  StopBackgroundGeolocation(){
+    window.app.backgroudGeolocation.stop();
+  }
+  GetLocations(){
+    this.locations = (JSON.parse(localStorage.getItem("location")) == null) ?[] : JSON.parse(localStorage.getItem("location"));
+  }
+  ClearLocation(){
+    localStorage.removeItem("location");
+  } */
+
   onChangeRecordarme(event) {
     console.log(this.usuario);
 
@@ -98,9 +120,6 @@ export class LoginPage implements OnInit {
         //localStorage.removeItem('MI_RUT');
       }
     }
-
-
-
     //console.log(this.esPublico);
   }
 
@@ -116,14 +135,7 @@ export class LoginPage implements OnInit {
     }
   }
   ngOnInit() {
-/*     if (localStorage.getItem('RECORDARME')){
-      console.log(localStorage.getItem('RECORDARME'));
-      this.recordarme = JSON.parse(localStorage.getItem('RECORDARME'));
-      if (this.recordarme && localStorage.getItem('MI_RUT') && localStorage.getItem('MI_NOMBRE')){
-        //texto bienvenida
-        this.textoBienvenida = this.utiles.textoBienvenida(localStorage.getItem('MI_NOMBRE'));
-      }
-    } */
+    //this.startTrackingLoop();
   }
   doGeocodeNative(lat, lon){
         //antes para omitir tantas llamadas vamos a buscar la info
@@ -211,7 +223,10 @@ export class LoginPage implements OnInit {
           localStorage.setItem('MI_RUT', retorno.UsuarioAps.Rut);
           localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres +' ' + retorno.UsuarioAps.ApellidoPaterno);
           localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);   
-          localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen);                
+          localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen);
+          //lo vamos a guardar en el local storage para realizar la llamada
+          //en el background
+          localStorage.setItem('UsuarioAps', user);                
         }
         if (retorno.UsuariosFamilia){
           userFamilia = JSON.stringify(retorno.UsuariosFamilia);

@@ -22,6 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
 //Pipes
 import { CelsiusPipe } from '../app/pipes/toCelsius.pipe';
 import { SplitPipe } from '../app/pipes/split.pipe';
+import { MomentPipe } from '../app/pipes/fecha.pipe';
+import { FilterPipe } from '../app/pipes/filter.pipe';
 //servicios
 import { ServicioUtiles } from './services/ServicioUtiles';
 import { ServicioGeo } from './services/ServicioGeo';
@@ -30,19 +32,39 @@ import { ServicioInfoUsuario } from './services/ServicioInfoUsuario';
 import { ServicioImagen } from './services/ServicioImagen';
 import { ServicioLaboratorio } from './services/ServicioLaboratorio';
 import { ServicioCitas } from './services/ServicioCitas';
+import { ServicioPaginacion } from './services/ServicioPaginacion';
+import { ServicioNotificaciones } from './services/ServicioNotificaciones';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/** componentes material  */
+import { MatCardModule  } from '@angular/material/card';
+import { MatButtonModule  } from '@angular/material/button';
+import { MatFormFieldModule  } from '@angular/material/form-field';
+import { MatSelectModule  } from '@angular/material/select'
+/* import { MatSelectModule  } from '@angular/material/select';
+import { MatFormField  } from '@angular/material/form-field/form-field';
+import { MatFormField  } from '@angular/material/form-field/label'; */
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+/* import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'; */
 
 @NgModule({
   declarations: [
     AppComponent,
     CelsiusPipe,
     SplitPipe,
+    MomentPipe,
+    FilterPipe,
   ],
   entryComponents: [],
   imports: [
     HttpClientModule,
     BrowserModule, 
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
     IonicModule.forRoot(), 
-    AppRoutingModule
+    AppRoutingModule, BrowserAnimationsModule
   ],
   providers: [
     StatusBar,
@@ -61,7 +83,12 @@ import { ServicioCitas } from './services/ServicioCitas';
     ServicioImagen,
     ServicioLaboratorio,
     ServicioCitas,
+    ServicioPaginacion,
+    ServicioNotificaciones,
     LaunchNavigator,
+    LocalNotifications,
+    BackgroundMode,
+   /*  BackgroundGeolocation, */
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

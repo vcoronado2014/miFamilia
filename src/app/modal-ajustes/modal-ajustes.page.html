@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar [style.--background]="miColor">
-    <ion-title class="home">Ajustes</ion-title>
+    <ion-title class="home">Ajustes {{nombrePaciente}}</ion-title>
     <ion-buttons slot="end" class="pdr10" (click)="dismiss()">
       <ion-icon class="home" slot="icon-only" name="close"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="back-app">
   <!-- la imagen -->
   <ion-card>
     <ion-card-content>

@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { ModalDetalleCitaPage } from './modal-detalle-cita.page';
+import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MatButtonModule,
     RouterModule.forChild([
       {
         path: '',

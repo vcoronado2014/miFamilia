@@ -18,6 +18,7 @@ export class ModalAjustesPage implements OnInit {
   public uspId;
   image: string = null;
   lastImage: string = null;
+  nombrePaciente = '';
 
   imagenBD;
   public color: string = "#127bdc";
@@ -38,10 +39,12 @@ export class ModalAjustesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.miColor = this.utiles.entregaMiColor();
+    //this.miColor = this.utiles.entregaMiColor();
     this.usuarioAps= JSON.parse(this.navParams.get('usuario'));
     this.image = this.usuarioAps.UrlImagen;
+    this.miColor = this.utiles.entregaColor(this.usuarioAps);
     this.color = this.miColor;//this.usuarioAps.Color;
+    this.nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
     console.log(this.usuarioAps);
   }
   dismiss(){
@@ -74,6 +77,7 @@ export class ModalAjustesPage implements OnInit {
     /*  } */
 
   }
+
   async putImagen(files){
     var uspId = this.usuarioAps.Id.toString();
       console.log(files.size);
@@ -99,8 +103,26 @@ export class ModalAjustesPage implements OnInit {
               if (sessionStorage.UsuarioAps) {
                 var nuevoUsuarioAps = JSON.parse(sessionStorage.UsuarioAps);
                 //cambiamos este elemento solo si el usuario existe
-                if (nuevoUsuarioAps.Id == uspId)
-                  nuevoUsuarioAps.UrlImagen = environment.URL_FOTOS + data;
+                if (nuevoUsuarioAps.Id == uspId){
+                  //nuevoUsuarioAps.UrlImagen = environment.URL_FOTOS + data;
+                  nuevoUsuarioAps.UrlImagen = data;
+                  //debemos guardar el objeto serializado
+                  sessionStorage.setItem('UsuarioAps', JSON.stringify(nuevoUsuarioAps));
+                }
+                else{
+                  //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
+                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  if (usuariosFamilia && usuariosFamilia.length > 0){
+                    usuariosFamilia.forEach(usuario => {
+                      if (usuario.Id == uspId){
+                        //usuario.UrlImagen = environment.URL_FOTOS + data;
+                        usuario.UrlImagen =  data;                      }
+                    });
+                    //ahora serializamos y cambiamos
+                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                  }
+                }
+                  
     
               }
             }
@@ -124,8 +146,24 @@ export class ModalAjustesPage implements OnInit {
               if (sessionStorage.UsuarioAps) {
                 var nuevoUsuarioAps = JSON.parse(sessionStorage.UsuarioAps);
                 //cambiamos este elemento solo si el usuario existe
-                if (nuevoUsuarioAps.Id == uspId)
-                  nuevoUsuarioAps.UrlImagen = environment.URL_FOTOS + JSON.parse(data.data);
+                if (nuevoUsuarioAps.Id == uspId){
+                  nuevoUsuarioAps.UrlImagen = JSON.parse(data.data);
+                  //debemos guardar el objeto serializado
+                  sessionStorage.setItem('UsuarioAps', JSON.stringify(nuevoUsuarioAps));
+                }
+                else{
+                  //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
+                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  if (usuariosFamilia && usuariosFamilia.length > 0){
+                    usuariosFamilia.forEach(usuario => {
+                      if (usuario.Id == uspId){
+                        usuario.UrlImagen = JSON.parse(data.data);
+                      }
+                    });
+                    //ahora serializamos y cambiamos
+                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                  }
+                }                  
     
               }
             }
@@ -151,19 +189,36 @@ export class ModalAjustesPage implements OnInit {
           this.img.putColor(uspId, colorGuardar).subscribe((data:any)=>{
             if (data){
               //hay que setear el color del localstorage
-              this.utiles.cambiaColorLocalStorage(data);
+              //this.utiles.cambiaColorLocalStorage(data);
               this.color = data;
               if (this.usuarioAps) {
                 if (this.usuarioAps.Color){
                   //dejamos al usuario con la nueva imagen
                   this.usuarioAps.Color = data;
+                  //sessionStorage.setItem('UsuarioAps', JSON.stringify(nuevoUsuarioAps));
                 }
               }
               if (sessionStorage.UsuarioAps) {
                 var nuevoUsuarioAps = JSON.parse(sessionStorage.UsuarioAps);
                 //cambiamos este elemento solo si el usuario existe
-                if (nuevoUsuarioAps.Id == uspId)
+                if (nuevoUsuarioAps.Id == uspId) {
                   nuevoUsuarioAps.Color = data;
+                  sessionStorage.setItem('UsuarioAps', JSON.stringify(nuevoUsuarioAps));
+                }
+                else{
+                  //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
+                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  if (usuariosFamilia && usuariosFamilia.length > 0){
+                    usuariosFamilia.forEach(usuario => {
+                      if (usuario.Id == uspId){
+                        usuario.Color = data;
+                      }
+                    });
+                    //ahora serializamos y cambiamos
+                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                  }
+                }
+                  
     
               }
               localStorage.setItem('MI_COLOR', data);
@@ -187,8 +242,24 @@ export class ModalAjustesPage implements OnInit {
               if (sessionStorage.UsuarioAps) {
                 var nuevoUsuarioAps = JSON.parse(sessionStorage.UsuarioAps);
                 //cambiamos este elemento solo si el usuario existe
-                if (nuevoUsuarioAps.Id == uspId)
+                if (nuevoUsuarioAps.Id == uspId){
                   nuevoUsuarioAps.Color = JSON.parse(data.data);
+                  sessionStorage.setItem('UsuarioAps', JSON.stringify(nuevoUsuarioAps));
+                }
+                else{
+                  //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
+                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  if (usuariosFamilia && usuariosFamilia.length > 0){
+                    usuariosFamilia.forEach(usuario => {
+                      if (usuario.Id == uspId){
+                        usuario.Color = JSON.parse(data.data);
+                      }
+                    });
+                    //ahora serializamos y cambiamos
+                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                  }
+                }
+                  
               }
             }
             //terminamos loader

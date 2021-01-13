@@ -37,3 +37,51 @@ ion-select {
     color: #971e49;
     opacity: 1;
   }
+  .content-card-fav{
+    height: 58px;
+    min-height: 56px;
+  }
+  .ion-fav-calendar{
+    height: 48px;
+    width: 48px;
+  }
+  .botonReservar{
+    /*color:#000000DE;
+    font-weight: 20px;*/
+    font: normal normal medium 14px/16px Roboto;
+    letter-spacing: 1.25px;
+    color: #000000DE;
+    text-transform: uppercase;
+    opacity: 1;
+  }
+  /* estilos para material */
+  .example-header-image {
+    background-size: cover;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  mat-card{
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  ::ng-dep .mat-card-header-text{
+    width: 100%;
+    margin: 0;
+  }
+  .hora{
+    font-size: 0.8em;
+  }
+  .row-card{
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .img-card{
+    width: 80px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    min-width: 80px;
+  }
+  

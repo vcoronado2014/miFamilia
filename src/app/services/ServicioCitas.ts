@@ -70,6 +70,47 @@ export class ServicioCitas{
 
         return this.http.post(url, body, {});
     }
+    entregaPorMesNuevo(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        const body = JSON.stringify({
+            UspId: uspId.toString(),
+            IdRyf: idRyf.toString(),
+            NodId: nodId.toString(),
+            NumeroMes: numeroMes.toString(),
+            AnnoConsulta: annoConsulta.toString()
+        });
+
+        let url = environment.API_ENDPOINT + 'MesNuevo';
+        let httpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+        let options = { headers: httpHeaders };
+
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    entregaPorMesNuevoNative(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+            "UspId": uspId.toString(),
+            "IdRyf": idRyf.toString(),
+            "NodId": nodId.toString(),
+            "NumeroMes": numeroMes.toString(),
+            "AnnoConsulta": annoConsulta.toString()
+        };
+
+        let url = environment.API_ENDPOINT + 'MesNuevo';
+        this.http.setDataSerializer('json');
+
+
+        return this.http.post(url, body, {});
+    }
 
     getDiagnosticosByUspId(uspId){
 
@@ -598,85 +639,42 @@ export class ServicioCitas{
 
         return this.arregloGeneral;
     }
-
-/*     getVacunasFuturas(uspId, numeroMes, annoConsulta) {
-        const body = JSON.stringify({
-            UspId: uspId.toString()
-        });
-
-        let url = environment.API_ENDPOINT + 'Vacuna';
-        let httpHeaders = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Cache-Control': 'no-cache'
-        });
-        httpHeaders.set('Access-Control-Allow-Origin', '*');
-        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-        httpHeaders.set("Access-Control-Allow-Headers", "*");
-
-        let options = { headers: httpHeaders };
-        let reposVac = this.httpClient.post(url, body, options);
-
-        reposVac.subscribe(
-            (data: any) => {
-                this.arregloVacunas = data.VacunasUsp;
-                if (data.RespuestaBase) {
-                    if (data.RespuestaBase.CodigoMensaje != 0) {
-                        this.arregloErrores.push(data.RespuestaBase);
-                    }
-                }
-                //procesar la data
-                if (this.arregloVacunas) {
-                    for (var s in this.arregloVacunas) {
-                        var contador = 999;
-                        //vamos creando una entidad genérica con los resultados
-                        let fechaIni = moment(this.arregloVacunas[s].FechaProximaDosis);
-                        var fechaIniComparar = new Date(fechaIni.year(), fechaIni.month(), 1, 0, 0, 1, 0);
-                        var fechaActual = moment();
-                        var annoVacuna = fechaIni.year();
-                        var mesVacuna = fechaIni.month() + 1;
-                        if (annoConsulta == annoVacuna && numeroMes == mesVacuna) {
-                            //esta hay que agregarla
-                            console.log('Fecha proxima vacuna ' + fechaIni.format('YYYY-MM-DD HH:mm'));
-                            console.log('Fecha inicio comparar ' + moment(fechaIniComparar).format('YYYY-MM-DD HH:mm'));
-                            var difMonth = moment(fechaIniComparar).diff(fechaActual, 'months');
-                            console.log('diferencia meses con la actual ' + difMonth);
-                            contador++;
-                            //si funciona, hay que generar un elemento parecido a la cita
-                            var entidad = {
-                                FechaCompleta: this.arregloVacunas[s].FechaProximaDosis,
-                                Id: contador,
-                                Mostrar: true,
-                                NombreDia: fechaIni.format('dddd'),
-                                NombreDiaReducido: fechaIni.format('ddd'),
-                                NumeroDia: fechaIni.format('DD'),
-                                Eventos: [{
-                                    Color: this.utiles.entregaMiColor(),
-                                    HoraInicioFin: fechaIni.format('HH:mm'),
-                                    Imagen: 'inmunizacion.png',
-                                    ListaFarmacos: null,
-                                    NombrePrincipal: this.arregloVacunas[s].Descripcion,
-                                    DescripcionSecundaria: this.arregloVacunas[s].DescripcionDosis,
-                                    DetalleEventoMes: {
-                                        DescripcionPrincipal: this.arregloVacunas[s].Descripcion,
-                                        DescripcionSecundaria: this.arregloVacunas[s].DescripcionDosis,
-                                        FechaHora: this.arregloVacunas[s].FechaProximaDosis,
-                                        Lugar: '',
-                                        NombrePaciente: this.arregloVacunas[s].NombreUsuario,
-                                        Subtitulo: 'Vacuna por administrar',
-                                        Titulo: 'Vacuna'
-                                    }
-                                }]
-                            }
-                            this.arregloVacunasFuturas.push(entidad);
-                        }
-                    }
-                }
-
-            },
-            err => console.error(err),
-            () => console.log('get completed')
-        );
-        return this.arregloVacunasFuturas;
-    } */
-
+    //get cupos
+    //http://localhost:27563/api/ObtenerDisponibilidad?start=2020-11-10T00:00:00-04:00&end=2020-11-10T23:59:59-04:00&organization=199991&patient=17000904-5&serviceType=346
+    getDisponibilidad(start, end, organization, patient, serviceType, status, count, operacion, nodId){
+        let urlCorta = environment.API_ENDPOINT + 'ObtenerDisponibilidad' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
+        let data = this.httpClient.get(urlCorta,{});
+        return data;
+    }
+    getDisponibilidadNative(start, end, organization, patient, serviceType, status, count, operacion, nodId){
+        let urlCorta = environment.API_ENDPOINT+ 'ObtenerDisponibilidad' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
+        let data = this.http.get(urlCorta, {}, {});
+        return data;
+    }
+    //las operaciones pueden ser
+    //booked reservar cita
+    //confirmed confirmar cita
+    //cancelled cancelar cita
+    //noshow informar que el paciente no asistió a la cita
+    //fulfilled informar que la cita se llevo a cabo
+    getOperacionCita(idCita, idPaciente, operacion){
+        let urlCorta = environment.API_ENDPOINT + 'ReservarCita' +'?idAppoinment=' + idCita + '&patient=' + idPaciente + '&operacion=' + operacion;
+        let data = this.httpClient.get(urlCorta,{});
+        return data;
+    }
+    getOperacionCitaNative(idCita, idPaciente, operacion){
+        let urlCorta = environment.API_ENDPOINT + 'ReservarCita' +'?idAppoinment=' + idCita + '&patient=' + idPaciente + '&operacion=' + operacion;
+        let data = this.http.get(urlCorta, {}, {});
+        return data;
+    }
+    getCitasWeb(start, end, estado, idPaciente){
+        let urlCorta = environment.API_ENDPOINT + 'CitaWeb' +'?start=' + start + '&end=' + end + '&estado=' + estado +'&idPaciente=' + idPaciente;
+        let data = this.httpClient.get(urlCorta,{});
+        return data;
+    }
+    getCitasWebNative(start, end, estado, idPaciente){
+        let urlCorta = environment.API_ENDPOINT + 'CitaWeb' +'?start=' + start + '&end=' + end + '&estado=' + estado+'&idPaciente=' + idPaciente;
+        let data = this.http.get(urlCorta, {}, {});
+        return data;
+    }
 }

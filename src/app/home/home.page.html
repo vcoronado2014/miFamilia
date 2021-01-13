@@ -1,58 +1,90 @@
 <ion-menu side="start" menuId="first" contentId="content">
   <ion-header>
-    <ion-toolbar [style.--background]="miColor">
-      <ion-title class="fcw">Menu</ion-title>
+    <!-- <ion-toolbar [style.--background]="miColor"> -->
+    <ion-toolbar color="primary">
+      <!-- <ion-title class="fcw">Menu</ion-title> -->
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <ion-item class="ion-text-center" lines="none" *ngIf = "miImagen != ''">
-      <img src={{miImagen}} style="width: 100%;"/>
-    </ion-item>
+  <ion-content class="back-app">
+    <!-- menu avatar -->
     <ion-item lines="none">
-      <ion-label class="ion-text-center ion-text-wrap">{{miNombre}}</ion-label>
+      <ion-avatar slot="start">
+        <img *ngIf = "miImagen != ''" src={{miImagen}}>
+        <img *ngIf = "miImagen == ''" src="../assets/img/no-imagen.jpg">
+      </ion-avatar>
+      <ion-row>
+        <h3 class="text-avatar">{{miNombre}}</h3>
+        <p class="subtext-avatar">{{miInstitucion}}</p>
+      </ion-row>
     </ion-item>
     <ion-list>
-      <ion-item *ngFor="let p of pages" (click)="openPage(p)" button>
+      <ion-item *ngFor="let p of pages" (click)="openPage(p)" button lines="none">
         <ion-icon name={{p.icon}} slot="start"></ion-icon>
         <ion-label>
           {{p.title}}
         </ion-label>
       </ion-item>
+      <!-- cerrar sesión -->
+      <ion-item button lines="none" (click)="logout()">
+        <ion-icon name="close" slot="start"></ion-icon>
+        <ion-label>
+          Cerrar sesión
+        </ion-label>
+      </ion-item>
+
     </ion-list>
+
   </ion-content>
 </ion-menu>
 
 <ion-header>
-  <ion-toolbar [style.--background]="miColor">
+  <!-- <ion-toolbar [style.--background]="miColor"> -->
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button class="home"></ion-menu-button>
     </ion-buttons>
     <ion-title class="home">Mi salud familiar</ion-title>
-    <ion-buttons slot="end" class="pdr10" (click)="openFamiliaPage()">
-      <ion-icon class="home" slot="icon-only" name="settings-outline"></ion-icon>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="card-background-page-home" id="content">
-  <!-- CONTENIDO DE LA PAGINA HOME -->
-  <ion-card (click)="openAntePage()" style="height: 29.1%;">
-    <div style="background-color: #fff; opacity: 0.8; width: 100%; height: 100%;"><img class="img-exam" src="./assets/img/home_antecedentes.png" alt="ImgAnte"/></div>
-    <div class="card-title">Antecedentes</div>
-  </ion-card>
-
-  <ion-card (click)="openCalendarioPage()" style="height: 29.1%;">
-    <div style="background-color: #fff; opacity: 0.8; width: 100%; height: 100%;"><img class="img-exam" src="./assets/img/home_calendario.png" alt="ImgCalendario"/></div>
-    <div class="card-title">Calendario</div>
-  </ion-card>
-
- <ion-card  (click)="openOrdenesPage()" style="height: 29.1%;">
-    <div style="background-color: #fff; opacity: 0.8; width: 100%; height: 100%;"><img class="img-exam" src="./assets/img/muestra.jpg" alt="ImgExam"/></div>
-    <div class="card-title">Exámenes</div>
-  </ion-card>
+<ion-content class="card-background-page-home back-app" id="content">
+  <!-- card antecedentes -->
+  <ion-grid>
+    <ion-row>
+      <label class="text-seleccione">Seleccione una de las siguientes opciones</label>
+    </ion-row>
+    <ion-row>
+      <!-- card antecedentes -->
+      <ion-col size="6">
+        <mat-card style="padding: 0;" (click)="openAntePage()">
+          <img class="imgs-home" src="./assets/img/home_antecedentes.png">
+          <mat-card-header style="padding-left: 16px;">
+              <!-- <mat-card-subtitle style="font-size: 10px; color: #000000DE; padding-top: 14px;margin-bottom: 6px;">Antecedentes del usuario</mat-card-subtitle> -->
+              <mat-card-title style="padding-top: 16px;">Antecedentes</mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </ion-col>
+      <!-- card exámenes -->
+      <ion-col size="6">
+        <mat-card style="padding: 0;" (click)="openOrdenesPage()">
+          <img class="imgs-home" src="./assets/img/muestra.jpg">
+          <mat-card-header style="padding-left: 16px;">
+              <!-- <mat-card-subtitle style="font-size: 10px; color: #000000DE; padding-top: 14px;margin-bottom: 6px;">Exámenes del usuario</mat-card-subtitle> -->
+              <mat-card-title style="padding-top: 16px;">Exámenes</mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </ion-col>
+      <!-- card calendario -->
+      <ion-col size="6">
+        <mat-card style="padding: 0;" (click)="openCalendarioPage()">
+          <img class="imgs-home" src="./assets/img/home_calendario.png">
+          <mat-card-header style="padding-left: 16px;">
+              <!-- <mat-card-subtitle style="font-size: 10px; color: #000000DE; padding-top: 14px;margin-bottom: 6px;">Calendario del usuario</mat-card-subtitle> -->
+              <mat-card-title style="padding-top: 16px;">Calendario</mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="logout()" [style.--background]="miColor">
-    <ion-icon name="close"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
+
 

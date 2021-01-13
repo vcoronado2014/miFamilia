@@ -47,15 +47,17 @@ export class DetailUsuarioPage implements OnInit {
   ) { 
 
   }
-
+  //ARREGLAR TEMAS DE COLORES Y URL CUANDO SON VARIOS MIEMBROS DE LA FAMILIA
   ngOnInit() {
-    this.miColor = this.utiles.entregaMiColor();
+    //this.miColor = this.utiles.entregaMiColor();
     //capturamos los parametros
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params.usuario) {
         //store the temp in data
+        
         this.usuario = JSON.parse(params.usuario);
         this.userImagen = this.usuario.UrlImagen;
+        this.miColor = this.utiles.entregaColor(this.usuario);
         console.log(this.usuario);
         this.obtenerInfoUsuario(this.usuario.Id);
       }
@@ -136,11 +138,14 @@ export class DetailUsuarioPage implements OnInit {
   }
   procesarAlergias(data, loader){
     this.alergias = data.AlergiasUsp;
-    if(this.alergias.length == 1){
-      this.title = "Alergia";
-    }else{
-      this.title = "Alergias";
+    if (this.alergias){
+      if(this.alergias.length == 1){
+        this.title = "Alergia";
+      }else{
+        this.title = "Alergias";
+      }
     }
+
     loader.dismiss();
   }
   procesarAlergiasSinLoader(data){
@@ -241,11 +246,21 @@ export class DetailUsuarioPage implements OnInit {
         //llenar con valores predeterminados
         this.valorAltura = 'No informada';
         this.fechaAltura = 'No informada';
-        this.valorPeso = 'No informada';
+        this.valorPeso = 'No informado';
         this.fechaPeso = 'No informada';
-        this.valorImc = 'No informada';
+        this.valorImc = 'No informado';
         this.fechaImc = 'No informada';
       }
+    }
+    else {
+      //viene valor nulo
+      //llenar con valores predeterminados
+      this.valorAltura = 'No informada';
+      this.fechaAltura = 'No informada';
+      this.valorPeso = 'No informado';
+      this.fechaPeso = 'No informada';
+      this.valorImc = 'No informado';
+      this.fechaImc = 'No informada';
     }
     loader.dismiss();
   }

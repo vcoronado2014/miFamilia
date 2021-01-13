@@ -29,7 +29,8 @@ export class AntecedentesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.miColor = this.utiles.entregaMiColor();
+    //this.miColor = this.utiles.entregaMiColor();
+    //this.miColor = this.utiles.entregaColor(this.usuarioAps);
     this.cargarDatosInciales();
   }
   async cargarDatosInciales(){
@@ -43,8 +44,10 @@ export class AntecedentesPage implements OnInit {
       if (sessionStorage.UsuarioAps) {
         this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
         if (this.usuarioAps) {
-          this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
+          //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
+          this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
           this.usuarioAps.Color = this.utiles.entregaColor(this.usuarioAps);
+          this.miColor = this.utiles.entregaColor(this.usuarioAps);
         }
       }
       else{
@@ -64,11 +67,14 @@ export class AntecedentesPage implements OnInit {
       }
       //ahora vamos a generar un solo listado de usuarios con los datos que necesitamos
       if (this.usuarioAps) {
+        this.usuarioAps.Parentezco = "Yo";
         this.listadoUsuario.push(this.usuarioAps);
       }
       if (this.usuarioApsFamilia) {
         if (this.usuarioApsFamilia.length > 0) {
           for (var s in this.usuarioApsFamilia) {
+            //por mientras el parentezco lo dejamos como no informado.
+            this.usuarioApsFamilia[s].Parentezco = "No informado";
             this.listadoUsuario.push(this.usuarioApsFamilia[s]);
           }
         }
@@ -79,7 +85,8 @@ export class AntecedentesPage implements OnInit {
   }
   ionViewWillEnter() {
     //si existen cambios se setean nuevamente
-    this.miColor = this.utiles.entregaMiColor();
+    //this.miColor = this.utiles.entregaMiColor();
+    this.miColor = this.utiles.entregaColor(this.usuarioAps);
   }
   goToDetails(usuario) {
     const navigationExtras: NavigationExtras = {

@@ -15,7 +15,7 @@ $app-direction: ltr;
 
 
 $colors: (
-  primary:    #488aff,
+  primary:    #5600E8,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -31,11 +31,14 @@ $colors: (
 
 /** Ionic CSS Variables **/
 :root {
+  /* Esto lo agregamos para cambiar el background de los items */
+  --ion-item-background: #FAF9FA;
   /* Home*/
   --ion-color-home: #0088c1;
   /** primary **/
-  /* --ion-color-primary: #3880ff; */
-  --ion-color-primary: #FF4081;
+   /* --ion-color-primary: #3880ff; */
+  /*--ion-color-primary: #FF4081; */
+  --ion-color-primary: #5600E8;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -43,7 +46,7 @@ $colors: (
   --ion-color-primary-tint: #4c8dff;
 
   /** secondary **/
-  --ion-color-secondary: #3dc2ff;
+  --ion-color-secondary: #03DAC5;
   --ion-color-secondary-rgb: 61, 194, 255;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;

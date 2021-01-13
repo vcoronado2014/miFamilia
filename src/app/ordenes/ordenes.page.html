@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="back-app">
 <!--SI HAY ORDENES -->
 <ion-card *ngFor="let item of listadoOrdenes" (click)="ordenSelected(item)">
   <ion-card-content>
@@ -37,15 +37,9 @@
 </ion-card>  
 <!-- NO HAY ORDENES -->
 <div *ngIf="tiene == false" style="position: relative; height: 100vh;">
-  <div style="position: absolute; display: table; height: 100%; font-size: 30px; color:#BDBDBD; text-align: center;">
+  <div style="position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;">
     <p style="display: table-cell; vertical-align: middle">No hay órdenes para mostrar  <br>
     <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p>
   </div>
 </div>
 </ion-content>
-
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="logout()" [style.--background]="miColor">
-    <ion-icon name="close"></ion-icon>
-  </ion-fab-button>
-</ion-fab>

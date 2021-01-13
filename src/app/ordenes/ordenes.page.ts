@@ -44,7 +44,7 @@ export class OrdenesPage implements OnInit {
   }
   async loadInicio(){
     //mi color
-    this.miColor = this.utiles.entregaMiColor();
+    //this.miColor = this.utiles.entregaMiColor();
     //ordenes
     this.listadoOrdenes = [];           
     //contenido de las llamadas.
@@ -53,6 +53,7 @@ export class OrdenesPage implements OnInit {
       this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
     }
     if (this.usuarioAps){
+      this.miColor = this.utiles.entregaColor(this.usuarioAps);
       let loader = await this.loading.create({
         message: 'Obteniendo...<br>Órdenes del usuario',
         duration: 20000

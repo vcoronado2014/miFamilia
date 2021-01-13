@@ -58,13 +58,15 @@ export class FamiliaPage implements OnInit, DoCheck {
         //hay que cambiarlo
         console.log('Cambia color de '+ sessionColor.Color + ' a ' + colorLocal);
         localStorage.setItem('MI_COLOR', colorLocal);
-        this.miColor = this.utiles.entregaMiColor();
+        //this.miColor = this.utiles.entregaMiColor();
+        this.miColor = this.utiles.entregaColor(this.usuarioAps);
         
       }
     }
   }
 
   async cargarDatosIniciales(){
+    this.listadoUsuario = [];
     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Información del usuario',
       duration: 20000
@@ -78,6 +80,7 @@ export class FamiliaPage implements OnInit, DoCheck {
         this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
         if (this.usuarioAps) {
           this.usuarioAps.UrlImagen = environment.URL_FOTOS + this.usuarioAps.UrlImagen;
+          this.usuarioAps.Parentezco = 'Yo';
         }
       }
       else
@@ -89,6 +92,7 @@ export class FamiliaPage implements OnInit, DoCheck {
         if (this.usuarioApsFamilia.length > 0) {
           for (var s in this.usuarioApsFamilia) {
             this.usuarioApsFamilia[s].UrlImagen = environment.URL_FOTOS + this.usuarioApsFamilia[s].UrlImagen;
+            this.usuarioApsFamilia[s].Parentezco = "No informado";
           }
         }
       }
@@ -119,6 +123,9 @@ export class FamiliaPage implements OnInit, DoCheck {
         }
       }
     );
+    modal.onDidDismiss().then((data) => {
+      this.cargarDatosIniciales();
+    });
     return await modal.present();
   }
 

@@ -48,6 +48,26 @@ const routes: Routes = [
     path: 'modal-detalle-cita',
     loadChildren: () => import('./modal-detalle-cita/modal-detalle-cita.module').then( m => m.ModalDetalleCitaPageModule)
   },
+  {
+    path: 'agenda-disponible',
+    loadChildren: () => import('./agenda-disponible/agenda-disponible.module').then( m => m.AgendaDisponiblePageModule)
+  },
+  {
+    path: 'modal-operacion-cita',
+    loadChildren: () => import('./modal-operacion-cita/modal-operacion-cita.module').then( m => m.ModalOperacionCitaPageModule)
+  },
+  {
+    path: 'cupos-disponibles',
+    loadChildren: () => import('./cupos-disponibles/cupos-disponibles.module').then( m => m.CuposDisponiblesPageModule)
+  },
+  {
+    path: 'pre-tiposatencion',
+    loadChildren: () => import('./pre-tiposatencion/pre-tiposatencion.module').then( m => m.PreTiposatencionPageModule)
+  },
+  {
+    path: 'busqueda-avanzada',
+    loadChildren: () => import('./busqueda-avanzada/busqueda-avanzada.module').then( m => m.BusquedaAvanzadaPageModule)
+  },
 ];
 
 @NgModule({

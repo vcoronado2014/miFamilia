@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, NavController, ToastController, Platform,  LoadingController, MenuController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, NavParams, NavController, ToastController, Platform,  LoadingController, MenuController, IonList } from '@ionic/angular';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioLaboratorio } from '../../app/services/ServicioLaboratorio';
@@ -12,9 +12,12 @@ import * as moment from 'moment';
   templateUrl: './modal-examenes.page.html',
   styleUrls: ['./modal-examenes.page.scss'],
 })
+
 export class ModalExamenesPage implements OnInit {
   //color
   miColor = '#FF4081';
+  //textColor Directive
+  textColor = '#FFFFFF';
   orden: any;
   //tiene registros
   tiene = true;
@@ -25,6 +28,7 @@ export class ModalExamenesPage implements OnInit {
   public user;
   public userColor;
   fechaOrden;
+  @ViewChild('myList', {read: IonList}) list: IonList;
   constructor(
     public modalCtrl: ModalController,
     public navParams: NavParams,
@@ -39,11 +43,12 @@ export class ModalExamenesPage implements OnInit {
 
   ngOnInit() {
     moment.locale('es');
-    this.miColor = this.utiles.entregaMiColor();
+    //this.miColor = this.utiles.entregaMiColor();
     this.orden= JSON.parse(this.navParams.get('orden'));
     //this.nombreUsuario = navParams.get('NombreUsuario');
     this.user = JSON.parse(sessionStorage.UsuarioAps);
     this.userColor = this.user.Color;
+    this.miColor = this.utiles.entregaColor(this.user);
     if (this.orden){
       //existe la orden hacer las llamadas
       this.oalaId = this.orden.Id;
