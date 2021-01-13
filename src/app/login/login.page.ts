@@ -229,6 +229,10 @@ export class LoginPage implements OnInit {
           localStorage.setItem('UsuarioAps', user);                
         }
         if (retorno.UsuariosFamilia){
+          //debemos quitar los repetidos según última revisión
+          let hash= {};
+          var familia = retorno.UsuariosFamilia.filter(o => hash[o.Id] ? false : hash[o.Id] = true);
+          retorno.UsuariosFamilia = familia;
           userFamilia = JSON.stringify(retorno.UsuariosFamilia);
           //variable de sessión muy importante para el resto de la app.
           sessionStorage.setItem("UsuariosFamilia", userFamilia);
