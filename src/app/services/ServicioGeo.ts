@@ -74,5 +74,99 @@ export class ServicioGeo{
 
     return this.http.post(url, body, {});
 
+  }
+  //registro familia
+  postRegistroFamilia(objetoRegistro) {
+    //realizar la llamada post a la api
+    const body = JSON.stringify(objetoRegistro);
+
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia';
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+    httpHeaders.set('Access-Control-Allow-Origin', '*');
+    httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+    let options = { headers: httpHeaders };
+
+    let data = this.httpClient.post(url, body, options);
+    return data;
+
+  }
+  postRegistroFamiliaNative(objetoRegistro) {
+    //realizar la llamada post a la api
+    const headers = new Headers;
+    const body = objetoRegistro;
+
+
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia';
+    this.http.setDataSerializer('json');
+
+
+    return this.http.post(url, body, {});
+
+  }
+  getRegistroAppRun(run, idDispositivo){
+    let url = environment.API_ENDPOINT + 'RegistroApp?Run=' + run + '&IdDispositivo=' + idDispositivo;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  getRegistroAppNativeRun(run, idDispositivo){
+    let url = environment.API_ENDPOINT + 'RegistroApp?Run=' + run + '&IdDispositivo=' + idDispositivo;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  getRegistroAppCorreoPassword(correo, password){
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  getRegistroAppNativeCorreoPassword(correo, password){
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  verificaEnrolamiento(run){
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia?Run=' + run;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  verificaEnrolamientoNative(run){
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia?Run=' + run;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  postRecuperarClave(correo){
+    const body = JSON.stringify({ Correo: correo });
+
+    let url = environment.API_ENDPOINT + 'RecuperarClave';
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+    httpHeaders.set('Access-Control-Allow-Origin', '*');
+    httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+    let options = { headers: httpHeaders };
+
+    let data = this.httpClient.post(url, body, options);
+    return data;
+  }
+  postRecuperarClaveNative(correo){
+    //realizar la llamada post nativa
+    const headers = new Headers;
+    const body =
+    {
+      "Correo": correo
+    };
+
+    let url = environment.API_ENDPOINT + 'RecuperarClave';
+    this.http.setDataSerializer('json');
+
+
+    return this.http.post(url, body, {});
   }    
 }

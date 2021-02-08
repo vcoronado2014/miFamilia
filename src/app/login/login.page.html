@@ -24,6 +24,20 @@
             <!-- <button ion-button round (click)="Signup()">Ingresar</button> -->
 
             <ion-button [disabled]="!usuario || !password" color="primary" type="ios" shape="round" expand="full" (click)="Signup()">Ingresar</ion-button>              
+            <!-- pruebas de clave única, en href se debe dejar la url de la api para hacer el get
+            o bien un evento que llame al get para inscrustar después la respuesta (login) -->
+            <ion-button class="btn-cu" (click)="abrirClaveUnica()">
+              <span class="cl-claveunica"></span>
+              <span class="texto">Iniciar sesión</span>
+            </ion-button>
+            <ion-button class="btn-cu" href="https://accounts.claveunica.gob.cl/openid/authorize/?client_id=08e31dfd6f4d475d9947b70f59755dc8&response_type=code&scope=openid run name&redirect_uri=https%3a%2f%2fapp.mifamilia.com%2fApi%2fClaveUnica&state=68dmfgOr0tSGASttTn1aMml8xLzeL983">
+              <span class="cl-claveunica"></span>
+              <span class="texto">Iniciar sesión 2</span>
+            </ion-button>
+            <a class="btn-cu" href="#" (click)="abrirClaveUnica()">
+              <span class="cl-claveunica"></span>
+              <span class="texto">Iniciar sesión</span>
+            </a>
         </div>
       </ion-col>
     </ion-row>

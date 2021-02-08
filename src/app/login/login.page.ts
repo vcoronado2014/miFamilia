@@ -462,6 +462,9 @@ export class LoginPage implements OnInit {
 
         }
       });
+  }
+  abrirClaveUnica(){
+    this.navCtrl.navigateRoot('login-clave-unica');
   }  
 
 }

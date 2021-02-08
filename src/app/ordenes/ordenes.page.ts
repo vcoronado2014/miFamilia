@@ -105,7 +105,7 @@ export class OrdenesPage implements OnInit {
   }
   logout(){
     this.acceso.logout();
-    this.navCtrl.navigateRoot('login');
+    this.navCtrl.navigateRoot('nuevo-login');
   }
 
 }

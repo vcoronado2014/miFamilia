@@ -341,7 +341,7 @@ export class CuposDisponiblesPage implements OnInit {
   }
   logout(){
     this.acceso.logout();
-    this.navCtrl.navigateRoot('login');
+    this.navCtrl.navigateRoot('nuevo-login');
   }
   onClickCambiarSemana(operacion){
     if (operacion == 'ant'){

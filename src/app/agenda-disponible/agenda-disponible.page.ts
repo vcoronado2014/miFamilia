@@ -162,7 +162,7 @@ export class AgendaDisponiblePage implements OnInit {
 
   logout(){
     this.acceso.logout();
-    this.navCtrl.navigateRoot('login');
+    this.navCtrl.navigateRoot('nuevo-login');
   }
   async onClickSemana(item){
     console.log(item);

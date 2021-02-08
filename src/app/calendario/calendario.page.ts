@@ -241,7 +241,7 @@ export class CalendarioPage implements OnInit {
 
   logout(){
     this.acceso.logout();
-    this.navCtrl.navigateRoot('login');
+    this.navCtrl.navigateRoot('nuevo-login');
   }
   async mesSelected(item){
     //realizar la llamada para cargar los eventos del mes

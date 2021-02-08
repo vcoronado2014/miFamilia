@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios" style="height: 160px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio" class="fcw"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="fcw"></ion-title>
+    
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="top" horizontal="start" slot="fixed" style="top:-30px">
+    <ion-fab-button color="danger">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="top" horizontal="center" slot="fixed" style="top:-40px;margin-left: -110px; color: white;">
+    <h5 style="font-size: 18px;">{{nombreMostrar}}</h5>
+  </ion-fab>
+  <div class="ion-padding" style="margin-top: 32px;">
+    <form [formGroup]="forma" novalidate>
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Run</mat-label>
+          <input matInput placeholder="12535301-1" formControlName="run" name="run" required>
+          <mat-error [hidden]="!(f.run.errors && f.run.errors.required)">Run requerido</mat-error>
+        </mat-form-field>
+      </ion-row>
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput placeholder="ejemplo@gmail.com" formControlName="email" name="email" required>
+          <mat-error [hidden]="!(f.email.errors && f.email.errors.required)">Correo requerido</mat-error>
+          <mat-error [hidden]="!(f.email.errors && f.email.errors.pattern)">Correo inválido</mat-error>
+        </mat-form-field>
+      </ion-row>
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Nombre" formControlName="nombre" name="nombre" required>
+          <mat-error [hidden]="!(f.nombre.errors && f.nombre.errors.required)">Nombre requerido</mat-error>
+          <mat-error [hidden]="!(f.nombre.errors && f.nombre.errors.pattern)">Sólo letras</mat-error>
+        </mat-form-field>
+      </ion-row>
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Apellido</mat-label>
+          <input matInput placeholder="Apellido" formControlName="apellido" name="apellido" required>
+          <mat-error [hidden]="!(f.apellido.errors && f.apellido.errors.required)">Apellido requerido</mat-error>
+          <mat-error [hidden]="!(f.apellido.errors && f.apellido.errors.pattern)">Sólo letras</mat-error>
+        </mat-form-field>
+      </ion-row>
+      <ion-grid>
+        <ion-row class="ion-no-padding ion-no-margin">
+          <ion-col size="6" class="ion-no-padding ion-no-margin">
+            <!-- telefono -->
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Teléfono</mat-label>
+              <input matInput placeholder="+569XXXXXXXX" formControlName="telefono" name="telefono">
+              <mat-error [hidden]="!(f.telefono.errors && f.telefono.errors.pattern)">Teléfono inválido</mat-error>
+            </mat-form-field>
+          </ion-col>
+          <ion-col size="6" class="ion-no-padding ion-no-margin">
+            <!-- genero -->
+            <mat-form-field appearance="outline" style="width: 98%; padding-left: 2%;">
+              <mat-label>Género</mat-label>
+              <mat-select formControlName="genero" name="genero" required>
+                <mat-option value="-1">Seleccione</mat-option>
+                <mat-option value="0">Hombre</mat-option>
+                <mat-option value="1">Mujer</mat-option>
+                <mat-option value="2">No definido</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+  
+        </ion-row>
+      </ion-grid>
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Clave</mat-label>
+          <input matInput placeholder="Clave" type="password" name="clave" formControlName="clave" required>
+          <mat-error [hidden]="!(f.clave.errors && f.clave.errors.required)">Clave requerida</mat-error>
+        </mat-form-field>
+      </ion-row>
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Repetir clave</mat-label>
+          <input matInput placeholder="Repetir clave" type="password" name="repetirClave" formControlName="repetirClave"
+            required>
+          <mat-error [hidden]="!(f.repetirClave.errors && f.repetirClave.errors.required)">Repita clave requerido</mat-error>
+          <mat-error [hidden]="!(f.repetirClave.errors && f.repetirClave.errors.clavesIguales == false)">Las claves deben
+            coincidir</mat-error>
+        </mat-form-field>
+      </ion-row>
+      <!-- boton de registrarse -->
+      <ion-row>
+        <button [disabled]="forma.invalid" class="button-registrarse" (click)="onSubmit()" mat-raised-button
+          color="accent">REGISTRARSE</button>
+      </ion-row>
+      <ion-row class="ion-padding-top">
+        <p class="ion-padding-start">Al hacer clic en "Registrarte", aceptas nuestras Condiciones de uso de la aplicación.
+        </p>
+      </ion-row>
+    </form>
+  
+  </div>
+</ion-content>

@@ -1,0 +1,53 @@
+<!-- <ion-header class="back-app">
+  <ion-toolbar color="primary" mode="md">
+    <ion-title class="fcw"></ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <div class="row mt-24">
+    <img src="../../assets/img/encabezado_login.png" alt="asistente"/>
+  </div>
+  <form [formGroup]="forma" novalidate>
+    <ion-row class="ion-no-margin ion-no-padding mt-80">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput placeholder="ejemplo@gmail.com" formControlName="email" name="email" required>
+        <mat-error [hidden]="!(f.email.errors && f.email.errors.required)">Correo requerido</mat-error>
+        <mat-error [hidden]="!(f.email.errors && f.email.errors.pattern)">Correo inválido</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Clave" type="password" name="clave" formControlName="clave" required>
+        <mat-error [hidden]="!(f.clave.errors && f.clave.errors.required)">Clave requerida</mat-error>
+      </mat-form-field>
+      <!--     <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Contraseña</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"></button>
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+      </div> -->
+    </ion-row>
+    <ion-row class="ion-no-padding ion-no-margin mt-40">
+      <button mat-raised-button color="primary" style="width: 90%; margin-left: 5%; height:36px;" (click)="onSubmit()">INICIAR SESION</button>
+    </ion-row>
+  </form>
+  <ion-row class="mt-36">
+    <a mat-button routerLink="." color="primary" class="ion-text-center" style="width: 100%;" (click)="irRecuperarClave()">¿Olvidaste tu contraseña?</a>
+  </ion-row>
+  <ion-grid class="ion-no-padding mt-36">
+    <ion-row>
+      <ion-col class="ion-text-center texto-1" style="margin-top:8px;">
+        ¿No tienes cuenta?
+      </ion-col>
+      <ion-col>
+        <button (click)="abrirAsistente()" mat-button color="primary">REGISTRATE</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

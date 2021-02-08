@@ -110,7 +110,7 @@ export class HomePage implements OnInit {
   }
   logout(){
     this.acceso.logout();
-    this.navCtrl.navigateRoot('login');
+    this.navCtrl.navigateRoot('nuevo-login');
   }
   openReservarHoraPage(){
     this.navCtrl.navigateRoot('pre-tiposatencion');
