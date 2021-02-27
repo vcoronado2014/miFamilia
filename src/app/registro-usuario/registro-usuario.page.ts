@@ -72,8 +72,8 @@ export class RegistroUsuarioPage implements OnInit {
       this.forma.setValue({
         run: this.registro.Run,
         email: this.registro.CorreoElectronico,
-        nombre: this.registro.Nombres,
-        apellido: this.registro.Apellidos,
+        nombre: this.registro.Nombres.trimStart(),
+        apellido: this.registro.Apellidos.trimStart(),
         telefono: this.registro.TelefonoContacto ?  this.registro.TelefonoContacto : '',
         genero: sexo,
         clave: '',
@@ -243,9 +243,17 @@ export class RegistroUsuarioPage implements OnInit {
           localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
           localStorage.setItem('TIENE_REGISTRO', 'true');
           loader.dismiss();
-          //hay que mandarlo autentificado y con los datos del usuario aps
-          //ver que hacemos aca
-          this.autentificarse(entidadRegistro.Run, entidadRegistro.Password);
+          if (localStorage.getItem('STATE_CLAVE_UNICA')){
+            var state = localStorage.getItem('STATE_CLAVE_UNICA');
+            //ACA HAY QUE HACER EL PROCESO DE ELIMINACION DEL REGISTRO Y LUEGO CONTINUAR
+            this.descartarCU(entidadRegistro.Run, state, entidadRegistro.Run, entidadRegistro.Password);
+          }
+          else{
+            //hay que mandarlo autentificado y con los datos del usuario aps
+            //ver que hacemos aca
+            this.autentificarse(entidadRegistro.Run, entidadRegistro.Password);
+          }
+
         })
       }
       else{
@@ -265,6 +273,77 @@ export class RegistroUsuarioPage implements OnInit {
 
 
   }
+  async descartarCU(run, state, usuario,passord){
+    let loader2 = await this.loading.create({
+      message: 'Descartando...<br>Registro Clave única',
+      duration: 3000
+    });
+
+    await loader2.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //web
+        this.servicioGeo.postValidacionClaveUnica(run, state).subscribe((response:any)=>{
+          //aca quedamos, no habría que hacer nada
+          console.log(response);
+          localStorage.removeItem('STATE_CLAVE_UNICA');
+          loader2.dismiss();
+          //aca finalmente mandarlo a autentificar
+          this.autentificarse(usuario, passord);
+        })
+      }
+      else{
+        //nativa
+        this.servicioGeo.postValidacionClaveUnicaNative(run, state).then((response:any)=>{
+          var responseData = JSON.parse(response.data);
+          console.log(responseData);
+          localStorage.removeItem('STATE_CLAVE_UNICA');
+          loader2.dismiss();
+          //aca mandarlo a autentificar
+          this.autentificarse(usuario, passord);
+        })
+      }
+    })
+  }
+
+  async validarCorreo(event){
+    //let correo = event.target.value;
+    console.log(event);
+    let correo = this.forma.controls.email.value;
+    let loader = await this.loading.create({
+      message: 'Verificando...<br>Correo electrónico',
+      duration: 3000
+    });
+
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //llamada web
+        this.servicioGeo.postValidarCorreo(correo).subscribe((response:any)=>{
+          //procesar
+          if (response && response.CodigoMensaje != 0){
+            this.utiles.presentToast(response.Mensaje, "middle", 3000);
+            this.forma.controls.email.setValue('');
+          }
+        })
+      }
+      else{
+        //llamada nativa
+        this.servicioGeo.postValidarCorreoNative(correo).then((response:any)=>{
+          //procesar JSON.parse(response.data)
+          var responseData = JSON.parse(response.data);
+          if (response && response.CodigoMensaje != 0){
+            this.utiles.presentToast(response.Mensaje, "middle", 3000);
+            this.forma.controls.email.setValue('');
+          }
+        },
+        (error)=>{
+          this.utiles.presentToast('Ocurrió un al procesar clave única', 'bottom', 4000);
+        }
+        );
+      }
+    });
+    
+  }
+
   get f() { return this.forma.controls; }
 
 }

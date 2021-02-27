@@ -1,27 +1,79 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>inicio</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<ion-content fullscreen scroll-y="false">
+  <ion-slides pager="true" [options]="slideOpts" #mySlider>
+    <ion-slide>
+      <div class="slide">
+        <div class="row">
+          <img src="../../assets/img/examenes-de-salud.png" alt="asistente" />
+        </div>
+        <div class="ion-padding">
+          <h1 class="mt-16 ion-text-center font-title">INFORMACIÓN SINCRONIZADA CON SU ESTABLECIMIENTO DE SALUD</h1>
+          <p class="mt-32 ion-text-center">REVISE SUS <strong>ANTECEDENTES DE SALUD</strong> Y <strong>RESULTADOS DE EXÁMENES </strong> REGISTRADOS EN EL ESTABLECIMIENTO EN EL QUE SE ATIENDE REGULARMENTE</p>
+          <div class="row mt-32">
+            <button mat-raised-button color="primary" class="boton" (click)="slides.slideNext()">SIGUIENTE</button>
+          </div>          
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <div class="row">
+          <img src="../../assets/img/calendario-01.png" alt="asistente" />
+        </div>
+        <div class="ion-padding">
+          <h1 class="mt-16 ion-text-center font-title">CALENDARIO CON LOS EVENTOS DE SALUD</h1>
+          <p class="mt-32 ion-text-center">
+            ACCEDA A UN CALENDARIO CON LOS EVENTOS RELEVANTES DE SU RELACIÓN CON SU ESTABLECIMIENTO DE SALUD: 
+             <strong> ATENCIONES, RETIRO DE MEDICAMENTOS, RETIRO DE ALIMENTOS Y VACUNAS</strong>
+          </p>
+          <div class="row mt-32">
+            <button mat-raised-button color="primary" class="boton" (click)="slides.slideNext()">SIGUIENTE</button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <div class="row">
+          <img src="../../assets/img/interconsulta.png" alt="asistente" />
+        </div>
+        <div class="ion-padding">
+          <h1 class="mt-16 ion-text-center font-title">SEGUIMIENTO DE INTERCONSULTAS</h1>
+          <p class="mt-32 ion-text-center">
+            VISUALICE EL SEGUIMIENTO DE LAS <strong>SOLICITUDES DE INTERCONSULTA </strong> 
+            ENTRE SU ESTABLECIMIENTO DE ATENCIÓN PRIMARIA Y EL NIVEL SECUNDARIO (HOSPITALES)
+          </p>
+          <div class="row mt-32">
+            <button mat-raised-button color="primary" class="boton" (click)="slides.slideNext()">SIGUIENTE</button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <div class="row">
+          <img src="../../assets/img/agendar_citas.png" alt="asistente" />
+        </div>
+        <div class="ion-padding">
+          <h1 class="mt-16 ion-text-center font-title">RESERVA DE HORAS</h1>
+          <p class="mt-32 ion-text-center">
+            <strong>RESERVE O CANCELE EN LÍNEA </strong> 
+             SUS PROXIMAS CITAS EN EL ESTABLECIMIENTO DE SALUD
+          </p>
+          <div class="row mt-32">
+            <button mat-stroked-button color="primary" class="boton" (click)="abrirLogin()">TENGO CUENTA</button>
+          </div>
+          <div class="row mt-32">
+            <hr>
+          </div>
+          <div class="row mt-32">
+            <button mat-raised-button color="primary" class="boton" (click)="abrirPrimerosPasos()">REGISTRARME</button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
 
-<ion-content class="ion-padding">
-<h1 class="mt-40">Salud Familiar</h1>
-<div class="row mt-32">
-  <img src="../../assets/img/asistente.png" alt="asistente"/>
-</div>
-<p class="mt-24">!Gestiona tus actividades de salud con tu CESFAM de forma rápida y segura!</p>
-<ion-grid class="ion-no-padding mt-62">
-  <ion-row>
-    <ion-col>
-      <button mat-stroked-button color="primary" (click)="abrirLogin()">TENGO CUENTA</button>
-    </ion-col>
-    <ion-col>
-      <button mat-raised-button color="primary" class="ion-float-right" (click)="abrirPrimerosPasos()">PRIMEROS PASOS</button>
-    </ion-col>
-  </ion-row>
-</ion-grid>
-<ion-row>
-  
-</ion-row>
-
+  </ion-slides>
 </ion-content>
+
+
+

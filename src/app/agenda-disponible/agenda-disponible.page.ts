@@ -79,6 +79,7 @@ export class AgendaDisponiblePage implements OnInit {
     //this.cargarDatos();
     this.construyeSemanaBuscar(0, 'sig');
   }
+
   construyeSemanaBuscar(pagina, operacion){
     //si la pagina es 0 se debe construir la semana a contar de la fecha actual
     var factorDias = 0;

@@ -130,23 +130,23 @@ export class ModalDetalleCitaPage implements OnInit {
     }
     if (this.data) {
       if (this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita' || this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web') {
-        this.data.Imagen = "cita.png";
+        this.data.Imagen = "agendar_citas.png";
         this.profesional = this.data.DetalleEventoMes.DescripcionSecundaria;
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Atencion Realizada') {
-        this.data.Imagen = "diagnostico.png";
+        this.data.Imagen = "atenciones.png";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Fármaco en uso') {
-        this.data.Imagen = "farmaco_uso.png";
+        this.data.Imagen = "retiro-de-medicamentos.png";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Fármaco Pendiente') {
-        this.data.Imagen = "farmaco_pendiente.png";
+        this.data.Imagen = "retiro-de-medicamentos.png";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Alimento Entregado') {
-        this.data.Imagen = "alimento.png";
+        this.data.Imagen = "retiro-de-alimentos.png";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Vacuna Administrada') {
-        this.data.Imagen = "inmunizacion.png";
+        this.data.Imagen = "vacunas.png";
       }
       //convertimos la fecha a formato correcto
       if (this.data.DetalleEventoMes.FechaHora){

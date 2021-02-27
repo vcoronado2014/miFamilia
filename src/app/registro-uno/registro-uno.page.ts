@@ -6,6 +6,7 @@ import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { NavigationExtras } from '@angular/router';
 
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-registro-uno',
@@ -19,7 +20,9 @@ export class RegistroUnoPage implements OnInit {
   //formulario
   forma: FormGroup;
   //rut = new FormControl('', [Validators.required, this.runValidator]);
-  //estoy implementando ell run
+  //por defecto dejamos el tipo movimiento en 1 solicitud de login
+  //despues lo podemos recibir como parametro para cambiarlo
+  tipoMovimiento = '1';
   constructor(
     private navCtrl: NavController,
     public utiles: ServicioUtiles,
@@ -31,6 +34,7 @@ export class RegistroUnoPage implements OnInit {
   }
 
   ngOnInit() {
+    moment.locale('es');
     this.cargarForma();
   }
   cargarForma(){
@@ -127,7 +131,20 @@ export class RegistroUnoPage implements OnInit {
 
   }
   irAClaveUnica(){
-      this.navCtrl.navigateRoot('login-clave-unica');
+    //debemos generar un hash de al menos 30 caracteres para enviar a clave unica (state)
+    let runUsuario = this.forma.controls.run.value;
+    let fecha = moment().format('DD-MM-YYYY HH:mm');
+    let enviar = runUsuario +'|'+fecha + '|' + this.tipoMovimiento;
+    let state = this.utiles.encriptar(enviar);
+    //guardamos en el local storage el state
+    localStorage.setItem("STATE_CLAVE_UNICA", state);
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        state: state
+      }
+    };
+    //this.navCtrl.navigateRoot('login-clave-unica');
+    this.navCtrl.navigateRoot(['login-clave-unica'], navigationExtras);
   }
 
   async verficarEnrolamientoRayen(){

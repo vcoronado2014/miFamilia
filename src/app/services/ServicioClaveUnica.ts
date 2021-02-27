@@ -26,5 +26,36 @@ export class ServicioClaveUnica {
         let data = this.http.get(urlCorta, { }, {});
         return data;
     }
+    postConfiguracionClaveUnica(esProduccion){
+        const body = JSON.stringify({ EsProduccion: esProduccion });
+    
+        let url = environment.API_ENDPOINT + 'ConfiguracionClaveUnica';
+        let httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+    
+        let options = { headers: httpHeaders };
+    
+        let data = this.httpClient.post(url, body, options);
+        return data;
+      }
+      postConfiguracionClaveUnicaNative(esProduccion){
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+          "EsProduccion": esProduccion
+        };
+    
+        let url = environment.API_ENDPOINT + 'ConfiguracionClaveUnica';
+        this.http.setDataSerializer('json');
+    
+    
+        return this.http.post(url, body, {});
+      }  
 
 }

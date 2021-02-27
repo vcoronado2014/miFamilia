@@ -14,12 +14,36 @@
 
 </div> -->
 <!-- </ion-content> -->
-<ion-content>
+<ion-content class="ion-padding">
 <!--   <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(htmlClaveUnica)">
 
   </div> -->
-  <ion-button class="btn-cu" href="https://accounts.claveunica.gob.cl/openid/authorize/?client_id=08e31dfd6f4d475d9947b70f59755dc8&response_type=code&scope=openid run name&redirect_uri=https%3a%2f%2fapp.mifamilia.com%2fApi%2fClaveUnica&state=68dmfgOr0tSGASttTn1aMml8xLzeL983">
+<!--   <ion-button class="btn-cu" href="https://accounts.claveunica.gob.cl/openid/authorize/?client_id=08e31dfd6f4d475d9947b70f59755dc8&response_type=code&scope=openid run name&redirect_uri=https%3a%2f%2fapp.mifamilia.com%2fApi%2fClaveUnica&state=68dmfgOr0tSGASttTn1aMml8xLzeL983">
     <span class="cl-claveunica"></span>
     <span class="texto">Iniciar sesión 2</span>
-  </ion-button>
+  </ion-button> -->
+  <ion-row class="mt-24">
+    <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="volver()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+  </ion-row>
+  <ion-row class="texto-1 mt-52">
+    <p>
+      Para validar tu identidad necesitamos que ingreses tu clave única. Con esto podemos certificar tu identidad y acceder a tus datos o de tus familiares en el establecimiento de salud
+    </p>
+  </ion-row>
+  <div class="mt-52">
+    <div class="my-5">
+      <!-- Código para visualizar botón oficial iniciar sesión con ClaveÚnica-->
+      <a class="btn-cu btn-l btn-fw btn-color-estandar" [attr.href]="urlClaveUnica" title="Este es el botón Iniciar sesión de ClaveÚnica">
+        <span class="cl-claveunica"></span>
+        <span class="texto">Iniciar sesión</span>
+      </a>
+      <!--./ fin botón-->
+    </div>
+  </div>
+<!--   <ion-button class="btn-cu" [attr.href]="urlClaveUnica">
+    <span class="cl-claveunica"></span>
+    <span class="texto">Iniciar sesión 2</span>
+  </ion-button> -->
 </ion-content>

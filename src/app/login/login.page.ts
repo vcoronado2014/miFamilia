@@ -290,7 +290,7 @@ export class LoginPage implements OnInit {
         else {
           this.tokenDispositivo = localStorage.getItem('token_dispositivo');
         }
-        versionAppName = "Mi salud familiar"
+        versionAppName = "Mi familia app"
         versionNumber = "0.0";
         plataforma = "Web";
         //loader.dismiss();
@@ -322,12 +322,12 @@ export class LoginPage implements OnInit {
           plataforma = "Android";
         }
         else if (this.platform.is('mobileweb')){
-          versionAppName = "Mi salud familiar"
+          versionAppName = "Mi familia app"
           versionNumber = "0.0";
           plataforma = "Web";
         }
         else {
-          versionAppName = "Mi salud familiar"
+          versionAppName = "Mi familia app"
           versionNumber = "0.0";
           plataforma = "No informado";
         }

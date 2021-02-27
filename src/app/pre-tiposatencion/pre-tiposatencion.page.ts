@@ -12,7 +12,7 @@ import { FilterPipe } from '../../app/pipes/filter.pipe';
 import { environment } from 'src/environments/environment';
 //modal
 import { ModalOperacionCitaPage } from '../modal-operacion-cita/modal-operacion-cita.page';
-import { stringify } from 'querystring';
+
 
 @Component({
   selector: 'app-pre-tiposatencion',
@@ -46,6 +46,8 @@ export class PreTiposatencionPage implements OnInit {
   //para el progress de buscar diponibilidad
   mostrarProgressDisp = false;
   encontroCitasDisp = false;
+  //para procesar un arreglo de fechas
+  arregloFechas = [];
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -132,18 +134,20 @@ export class PreTiposatencionPage implements OnInit {
 
     /* }, 5000); */
   }
-  
   //metodo para obtener disponibilidad y tipos de atención
   //lo comentamos debido a que se usará progress
-  
+  //se trae correctamente los datos*************
   async buscarDisponibilidad(start, end, organization, patient, serviceType, tipoOperacion){
     //ACA ME FALTA CONTROLAR LOS MENSAJES
+    console.log(start);
+    //aca vamos a hacer un cambio, ya que no trae un mes traeremos 4 semanas
+
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
       spinner:null,
       //message: 'Cargando...<br>tipos de atención',
-      duration: 20000
+      duration: 2000
     });
 
     await loader.present().then(async () => {

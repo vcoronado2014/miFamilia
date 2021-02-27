@@ -168,5 +168,79 @@ export class ServicioGeo{
 
 
     return this.http.post(url, body, {});
-  }    
+  }
+  //validacion clave unica
+  getValidacionCU(run, state){
+    let url = environment.API_ENDPOINT + 'RegistroClaveUnica?Run=' + run + '&State=' + state;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  getValidacionCUNative(run, state){
+    let url = environment.API_ENDPOINT + 'RegistroClaveUnica?Run=' + run + '&State=' + state;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  postValidacionClaveUnica(run, state){
+    const body = JSON.stringify({ Run: run, State: state });
+
+    let url = environment.API_ENDPOINT + 'RegistroClaveUnica';
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+    httpHeaders.set('Access-Control-Allow-Origin', '*');
+    httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+    let options = { headers: httpHeaders };
+
+    let data = this.httpClient.post(url, body, options);
+    return data;
+  }
+  postValidacionClaveUnicaNative(run, state){
+    //realizar la llamada post nativa
+    const headers = new Headers;
+    const body =
+    {
+      "Run": run,
+      "State": state
+    };
+
+    let url = environment.API_ENDPOINT + 'RegistroClaveUnica';
+    this.http.setDataSerializer('json');
+
+
+    return this.http.post(url, body, {});
+  }
+  postValidarCorreo(correo){
+    const body = JSON.stringify({ Correo: correo });
+
+    let url = environment.API_ENDPOINT + 'ValidaCorreo';
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+    httpHeaders.set('Access-Control-Allow-Origin', '*');
+    httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+    let options = { headers: httpHeaders };
+
+    let data = this.httpClient.post(url, body, options);
+    return data;
+  }
+  postValidarCorreoNative(correo){
+    //realizar la llamada post nativa
+    const headers = new Headers;
+    const body =
+    {
+      "Correo": correo
+    };
+
+    let url = environment.API_ENDPOINT + 'ValidaCorreo';
+    this.http.setDataSerializer('json');
+
+
+    return this.http.post(url, body, {});
+  }  
 }

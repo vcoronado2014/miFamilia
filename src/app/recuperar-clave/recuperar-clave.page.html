@@ -10,8 +10,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-row class="texto-1">
-    Ingresa tu correo electrónico, te enviaremos un correo con las instrucciones para recuperar tu contraseña.
+  <ion-row class="texto-1 mt-32">
+    Ingresa tu correo electrónico, te enviaremos un correo con tu contraseña, recuerda revisar de igual manera los spam o correo no deseado.
   </ion-row>
   <form [formGroup]="forma" novalidate>
       <ion-row class="mt-32">
@@ -24,7 +24,7 @@
       </ion-row>
       <ion-row class="mt-32">
         <button [disabled]="forma.invalid" mat-flat-button color="primary" style="width: 90%; margin-left: 5%;"
-          (click)="verificaRegistro()">CONTINUAR</button>
+          (click)="submit()">CONTINUAR</button>
       </ion-row>
   </form>
 
