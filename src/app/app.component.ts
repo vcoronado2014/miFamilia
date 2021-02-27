@@ -38,12 +38,13 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.notificacion.buscarCitas();
       //seguimos intentando
       if (this.utiles.isAppOnDevice()) {
         //lo comentamos por mientras ya que aparece cierre inesperado.
         //this.backgroundMode.enable();
         //this.backgroundMode.disableWebViewOptimizations();
-        this.notificacion.buscarCitas();
+      //this.notificacion.buscarCitas();  
 /*         setInterval(() => {
           //aca la logica para sacar las citas
           this.notificacion.buscarCitas();
