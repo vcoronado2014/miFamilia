@@ -8,10 +8,7 @@ export const environment = {
   //URL_FOTOS: 'http://190.151.14.101:8065/',
   API_ENDPOINT: 'http://localhost:27563/Api/',
   URL_FOTOS: 'http://localhost:27563/',
-  API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
   USA_CALENDARIO: false,
-  HORAS_FECHA_INICIO: 3,
-  TIEMPO_CONSULTA_NOTIFICACIONES: 20000,
 };
 
 /*

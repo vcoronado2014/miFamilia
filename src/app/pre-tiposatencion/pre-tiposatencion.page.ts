@@ -85,7 +85,8 @@ export class PreTiposatencionPage implements OnInit {
 
   }
   setFechasInicioFin(){
-    var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
+    //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
+    var fechaIni = moment().add(this.utiles.HORAS_FECHA_INICIO(), 'hour');
     var date = new Date();
     console.log(fechaIni);
     date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0,0,0,0);

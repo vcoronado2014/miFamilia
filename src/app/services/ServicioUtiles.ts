@@ -4,6 +4,8 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import * as moment from 'moment';
 import { environment } from '../../environments/environment';
+//servicio
+import { ServicioGeo } from '../services/ServicioGeo';
 
 @Injectable()
 export class ServicioUtiles{
@@ -32,6 +34,7 @@ export class ServicioUtiles{
         public appVersion: AppVersion,
         public toast: ToastController,
         public device: Device,
+        private servicioGeo: ServicioGeo
     ){
       //inicializamos los valores
       moment.locale('es');
@@ -619,5 +622,51 @@ export class ServicioUtiles{
         return token;
 
     }
+
+    async obtenerParametrosApp(){
+        if (!this.isAppOnDevice()) {
+            //llamada web
+            this.servicioGeo.getParametros().subscribe((response:any)=>{
+              //procesar
+              console.log(response);
+              localStorage.setItem('PARAMETROS_APP',JSON.stringify(response)) 
+            })
+          }
+          else{
+            this.servicioGeo.getParametrosNative().then((response:any)=>{
+                //procesar
+                var data = JSON.parse(response.data);
+                localStorage.setItem('PARAMETROS_APP',JSON.stringify(data)) 
+                console.log(data);
+              })
+          }
+    }
+    HORAS_FECHA_INICIO = ()=>{
+        let retorno = 3;
+        if (localStorage.getItem('PARAMETROS_APP')){
+            let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+            if (elementos && elementos.length > 0){
+                let arrRetorno = elementos.find(p=>p.Nombres == 'HORAS_FECHA_INICIO');
+                if (arrRetorno && arrRetorno.length > 0){
+                    retorno = parseInt(arrRetorno[0]);
+                }
+            }
+        } 
+        return retorno;
+    }
+    API_KEY_MAPA = ()=>{
+        let retorno = "AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc";
+        if (localStorage.getItem('PARAMETROS_APP')){
+            let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+            if (elementos && elementos.length > 0){
+                let arrRetorno = elementos.find(p=>p.Nombres == 'API_KEY_MAPA');
+                if (arrRetorno && arrRetorno.length > 0){
+                    retorno = arrRetorno[0];
+                }
+            }
+        } 
+        return retorno;
+    }
+
 
 }
