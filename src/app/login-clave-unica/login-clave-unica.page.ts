@@ -108,6 +108,7 @@ export class LoginClaveUnicaPage implements OnInit {
     }
   }
   volver(){
+    localStorage.removeItem('STATE_CLAVE_UNICA');
     this.navCtrl.navigateRoot('registro-uno');
   }
 
