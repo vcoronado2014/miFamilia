@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavParams, NavController, ToastController, Platform,  LoadingController, MenuController, IonList, AlertController } from '@ionic/angular';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
-import { ServicioCalendario } from '../../app/services/ServicioCalendario';
+/* import { ServicioCalendario } from '../../app/services/ServicioCalendario'; */
 import { ServicioLaboratorio } from '../../app/services/ServicioLaboratorio';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
 import { environment } from 'src/environments/environment';
@@ -57,7 +57,7 @@ export class ModalOperacionCitaPage implements OnInit {
     public loading: LoadingController,
     private lab: ServicioLaboratorio,
     private agendar:ServicioCitas,
-    private calendario:ServicioCalendario,
+    /* private calendario:ServicioCalendario, */
     private alertController: AlertController,
   ) { }
 
@@ -162,7 +162,7 @@ export class ModalOperacionCitaPage implements OnInit {
             FechaFin: this.cita.FechaHoraTermino ? moment(this.cita.FechaHoraTermino).toDate() : new Date(),
             Id: this.cita.IdCita
           }
-          this.calendario.addEvent(objetoCalendario.Titulo, objetoCalendario.Ubicacion, objetoCalendario.Notas, objetoCalendario.FechaInicio, objetoCalendario.FechaFin, objetoCalendario.Id);
+          //this.calendario.addEvent(objetoCalendario.Titulo, objetoCalendario.Ubicacion, objetoCalendario.Notas, objetoCalendario.FechaInicio, objetoCalendario.FechaFin, objetoCalendario.Id);
           //*** end creacion cita calendario */
         }
         else if (accion === 'confirmed'){
@@ -178,7 +178,7 @@ export class ModalOperacionCitaPage implements OnInit {
             FechaInicio: this.cita.FechaHoraInicio ? moment(this.cita.FechaHoraInicio).toDate() : new Date(),
             FechaFin: this.cita.FechaHoraTermino ? moment(this.cita.FechaHoraTermino).toDate() : new Date()
           }
-          this.calendario.removeEvent(objetoCalendario.Titulo, objetoCalendario.Ubicacion, objetoCalendario.Notas, objetoCalendario.FechaInicio, objetoCalendario.FechaFin);
+          //this.calendario.removeEvent(objetoCalendario.Titulo, objetoCalendario.Ubicacion, objetoCalendario.Notas, objetoCalendario.FechaInicio, objetoCalendario.FechaFin);
           //*** end eliminacion cita calendario */
         }
         retorno = data;

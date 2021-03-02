@@ -7,7 +7,7 @@ import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioInfoUsuario } from '../../app/services/ServicioInfoUsuario';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
-import { ServicioCalendario } from '../../app/services/ServicioCalendario';
+/* import { ServicioCalendario } from '../../app/services/ServicioCalendario'; */
 import { environment } from 'src/environments/environment';
 //moment
 import * as moment from 'moment';
@@ -94,7 +94,7 @@ export class CalendarioPage implements OnInit {
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
     private alertController: AlertController,
-    private calendar: ServicioCalendario
+    /* private calendar: ServicioCalendario */
   ) { }
 
   //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
@@ -880,7 +880,7 @@ export class CalendarioPage implements OnInit {
         else if (accion === 'cancelled'){
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
           //borramos el evento del calendario
-          this.calendar.removeEventId(idCita, startDate);
+          //this.calendar.removeEventId(idCita, startDate);
         }
         this.cargarTodosLosEventos();
         //this.cargarEventosMes(mesActual, annoActual);

@@ -623,7 +623,7 @@ export class ServicioUtiles{
 
     }
 
-    obtenerParametrosApp(){
+    async obtenerParametrosApp(){
         if (!this.isAppOnDevice()) {
             //llamada web
             this.servicioGeo.getParametros().subscribe((response:any)=>{

@@ -15,7 +15,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Calendar } from '@ionic-native/calendar/ngx';
+/* import { Calendar } from '@ionic-native/calendar/ngx'; */
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +37,7 @@ import { ServicioCitas } from './services/ServicioCitas';
 import { ServicioPaginacion } from './services/ServicioPaginacion';
 import { ServicioNotificaciones } from './services/ServicioNotificaciones';
 import { ServicioClaveUnica } from './services/ServicioClaveUnica';
-import { ServicioCalendario } from './services/ServicioCalendario';
+/* import { ServicioCalendario } from './services/ServicioCalendario'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** componentes material  */
 import { MatCardModule  } from '@angular/material/card';
@@ -79,7 +79,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
   providers: [
     StatusBar,
     InAppBrowser,
-    Calendar,
+/*     Calendar, */
     SplashScreen,
     AppVersion,
     Network,
@@ -97,7 +97,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     ServicioPaginacion,
     ServicioNotificaciones,
     ServicioClaveUnica,
-    ServicioCalendario,
+    /* ServicioCalendario, */
     LaunchNavigator,
     LocalNotifications,
     BackgroundMode,
