@@ -18,6 +18,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Pipes
 import { CelsiusPipe } from '../app/pipes/toCelsius.pipe';
@@ -34,12 +35,15 @@ import { ServicioLaboratorio } from './services/ServicioLaboratorio';
 import { ServicioCitas } from './services/ServicioCitas';
 import { ServicioPaginacion } from './services/ServicioPaginacion';
 import { ServicioNotificaciones } from './services/ServicioNotificaciones';
+import { ServicioClaveUnica } from './services/ServicioClaveUnica';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** componentes material  */
 import { MatCardModule  } from '@angular/material/card';
 import { MatButtonModule  } from '@angular/material/button';
 import { MatFormFieldModule  } from '@angular/material/form-field';
+import { MatInputModule  } from '@angular/material/input';
 import { MatSelectModule  } from '@angular/material/select'
+import { MatIconModule  } from '@angular/material/icon';
 /* import { MatSelectModule  } from '@angular/material/select';
 import { MatFormField  } from '@angular/material/form-field/form-field';
 import { MatFormField  } from '@angular/material/form-field/label'; */
@@ -63,6 +67,10 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(), 
     AppRoutingModule, BrowserAnimationsModule
   ],
@@ -85,6 +93,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     ServicioCitas,
     ServicioPaginacion,
     ServicioNotificaciones,
+    ServicioClaveUnica,
     LaunchNavigator,
     LocalNotifications,
     BackgroundMode,

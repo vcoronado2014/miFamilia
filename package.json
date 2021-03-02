@@ -107,14 +107,21 @@
       },
       "cordova-plugin-nativegeocoder": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-camera": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-local-notification": {},
       "cordova-plugin-background-mode": {}
-    }
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }
