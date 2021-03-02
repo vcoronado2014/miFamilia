@@ -75,7 +75,7 @@ export class RegistroUnoPage implements OnInit {
           this.procesarRespuestaRegistro(data, loader);
         },
         (error)=>{
-          this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+          //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
           loader.dismiss();
         }
         );
@@ -173,7 +173,7 @@ export class RegistroUnoPage implements OnInit {
           this.procesaRespuestaEnrolamiento(data, loader);
         },
         (error)=>{
-          this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+          //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
           loader.dismiss();
         }
         );

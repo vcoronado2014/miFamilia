@@ -623,7 +623,7 @@ export class ServicioUtiles{
 
     }
 
-    async obtenerParametrosApp(){
+    obtenerParametrosApp(){
         if (!this.isAppOnDevice()) {
             //llamada web
             this.servicioGeo.getParametros().subscribe((response:any)=>{
@@ -641,7 +641,7 @@ export class ServicioUtiles{
               })
           }
     }
-    HORAS_FECHA_INICIO = ()=>{
+    HORAS_FECHA_INICIO(){
         let retorno = 3;
         if (localStorage.getItem('PARAMETROS_APP')){
             let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
@@ -654,12 +654,13 @@ export class ServicioUtiles{
         } 
         return retorno;
     }
-    API_KEY_MAPA = ()=>{
-        let retorno = "AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc";
+
+    AGREGA_EVENTO_CALENDARIO(){
+        let retorno = "0";
         if (localStorage.getItem('PARAMETROS_APP')){
             let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
             if (elementos && elementos.length > 0){
-                let arrRetorno = elementos.find(p=>p.Nombres == 'API_KEY_MAPA');
+                let arrRetorno = elementos.find(p=>p.Nombres == 'AGREGA_EVENTO_CALENDARIO');
                 if (arrRetorno && arrRetorno.length > 0){
                     retorno = arrRetorno[0];
                 }

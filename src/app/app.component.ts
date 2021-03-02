@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 //servicio de notificaciones para prueba
 import { ServicioNotificaciones } from '../app/services/ServicioNotificaciones';
 import { ServicioUtiles } from '../app/services/ServicioUtiles';
+import { ServicioCalendario } from '../app/services/ServicioCalendario';
 
 declare var window;
 
@@ -27,6 +28,7 @@ export class AppComponent {
     public notificacion: ServicioNotificaciones,
     public backgroundMode: BackgroundMode,
     public utiles: ServicioUtiles,
+    public calendar: ServicioCalendario
 
   ) {
     this.initializeApp();
@@ -35,11 +37,12 @@ export class AppComponent {
   //https://github.com/mauron85/cordova-plugin-background-geolocation
 
   initializeApp() {
-    this.platform.ready().then(async () => {
+    this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.notificacion.buscarCitas();
-      await this.utiles.obtenerParametrosApp();
+      this.utiles.obtenerParametrosApp();
+      //this.calendar.addEvent({id: 1, name: 'Calendario name'});
     });
   }
 }

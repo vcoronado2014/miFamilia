@@ -234,6 +234,15 @@ export class PreTiposatencionPage implements OnInit {
         loader.dismiss();
         this.disabledCombo = false;
       }
+      else if (data.Mensaje.Codigo == "business-rule"){
+        this.idComboSeleccionado = 0;
+        this.tiposAtencion = [];
+        this.citas = [];
+        this.citasFiltradas = [];
+        this.utiles.presentToast(data.Mensaje.Detalle.Texto, "middle", 4000);
+        loader.dismiss();
+        this.disabledCombo = false;
+      }
       else{
         this.idComboSeleccionado = 0;
         this.tiposAtencion = [];

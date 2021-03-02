@@ -267,7 +267,7 @@ export class InicioPage implements OnInit {
           this.procesarInfoRun(JSON.parse(response.data), loader);
         },
         (error)=>{
-          this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+          //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
         }
         );
       }
@@ -298,7 +298,7 @@ export class InicioPage implements OnInit {
             this.procesarInfo(JSON.parse(response.data), loader);
           },
           (error)=>{
-            this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+            //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
           }
           );
         }

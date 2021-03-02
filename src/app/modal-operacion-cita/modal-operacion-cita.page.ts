@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavParams, NavController, ToastController, Platform,  LoadingController, MenuController, IonList, AlertController } from '@ionic/angular';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
+import { ServicioCalendario } from '../../app/services/ServicioCalendario';
 import { ServicioLaboratorio } from '../../app/services/ServicioLaboratorio';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
 import { environment } from 'src/environments/environment';
@@ -56,6 +57,7 @@ export class ModalOperacionCitaPage implements OnInit {
     public loading: LoadingController,
     private lab: ServicioLaboratorio,
     private agendar:ServicioCitas,
+    private calendario:ServicioCalendario,
     private alertController: AlertController,
   ) { }
 
@@ -151,12 +153,33 @@ export class ModalOperacionCitaPage implements OnInit {
         //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
         if (accion === 'booked'){
           this.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
+          //creacion de la cita en el calendario
+          let objetoCalendario = {
+            Titulo: this.cita.TipoAtencion ? 'Cita ' + this.cita.TipoAtencion : 'Cita',
+            Ubicacion: this.cita.Servicio ? this.cita.Servicio.Nombre : 'Su consultorio',
+            Notas: this.cita.NombreMedico && this.cita.ApellidosMedico ? this.cita.NombresMedico + ' ' + this.cita.ApellidosMedico : 'No registrado',
+            FechaInicio: this.cita.FechaHoraInicio ? moment(this.cita.FechaHoraInicio).toDate() : new Date(),
+            FechaFin: this.cita.FechaHoraTermino ? moment(this.cita.FechaHoraTermino).toDate() : new Date(),
+            Id: this.cita.IdCita
+          }
+          this.calendario.addEvent(objetoCalendario.Titulo, objetoCalendario.Ubicacion, objetoCalendario.Notas, objetoCalendario.FechaInicio, objetoCalendario.FechaFin, objetoCalendario.Id);
+          //*** end creacion cita calendario */
         }
         else if (accion === 'confirmed'){
           this.utiles.presentToast('Cita confirmada con éxito!!', 'bottom', 3000);
         }
         else if (accion === 'cancelled'){
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
+          //eliminacion de la cita en el calendario
+          let objetoCalendario = {
+            Titulo: this.cita.TipoAtencion ? 'Cita ' + this.cita.TipoAtencion : 'Cita',
+            Ubicacion: this.cita.Servicio ? this.cita.Servicio.Nombre : 'Su consultorio',
+            Notas: this.cita.NombreMedico && this.cita.ApellidosMedico ? this.cita.NombresMedico + ' ' + this.cita.ApellidosMedico : 'No registrado',
+            FechaInicio: this.cita.FechaHoraInicio ? moment(this.cita.FechaHoraInicio).toDate() : new Date(),
+            FechaFin: this.cita.FechaHoraTermino ? moment(this.cita.FechaHoraTermino).toDate() : new Date()
+          }
+          this.calendario.removeEvent(objetoCalendario.Titulo, objetoCalendario.Ubicacion, objetoCalendario.Notas, objetoCalendario.FechaInicio, objetoCalendario.FechaFin);
+          //*** end eliminacion cita calendario */
         }
         retorno = data;
       }

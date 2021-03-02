@@ -7,6 +7,7 @@ import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioInfoUsuario } from '../../app/services/ServicioInfoUsuario';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
+import { ServicioCalendario } from '../../app/services/ServicioCalendario';
 import { environment } from 'src/environments/environment';
 //moment
 import * as moment from 'moment';
@@ -93,6 +94,7 @@ export class CalendarioPage implements OnInit {
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
     private alertController: AlertController,
+    private calendar: ServicioCalendario
   ) { }
 
   //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
@@ -826,6 +828,7 @@ export class CalendarioPage implements OnInit {
       var idPaciente = this.usuarioAps.Rut;
       var idCita = evento.DetalleEventoMes.IdElemento;
       var accion = boton.Operacion;
+      var startDate = moment(evento.DetalleEventoMes.FechaHora).toDate();
   
       let loader = await this.loading.create({
         message: 'Procesado...<br>Información',
@@ -837,7 +840,7 @@ export class CalendarioPage implements OnInit {
         if (!this.utiles.isAppOnDevice()) {
           //llamada web
           this.cita.getOperacionCita(idCita, idPaciente, accion).subscribe((response: any)=>{
-            this.procesarRespuestaAgendar(response, loader, accion);
+            this.procesarRespuestaAgendar(response, loader, accion, startDate, idCita);
           })
         }
         else{
@@ -845,14 +848,14 @@ export class CalendarioPage implements OnInit {
           //this.cargarDatosNative(mesConsultar, annoConsultar, loader);
           this.cita.getOperacionCitaNative(idCita, idPaciente, accion).then((responseData: any)=>{
             var response = JSON.parse(responseData.data);
-            this.procesarRespuestaAgendar(response, loader, accion);
+            this.procesarRespuestaAgendar(response, loader, accion, startDate, idCita);
           })
         }
       });
     }
 
   }
-  procesarRespuestaAgendar(data, loader, accion){
+  procesarRespuestaAgendar(data, loader, accion, startDate, idCita){
     var retorno = null;
     if (data && data.Mensaje){
       if (data.Mensaje.Codigo == 'correcto'){
@@ -876,6 +879,8 @@ export class CalendarioPage implements OnInit {
         }
         else if (accion === 'cancelled'){
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
+          //borramos el evento del calendario
+          this.calendar.removeEventId(idCita, startDate);
         }
         this.cargarTodosLosEventos();
         //this.cargarEventosMes(mesActual, annoActual);

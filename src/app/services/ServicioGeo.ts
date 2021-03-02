@@ -18,8 +18,8 @@ export class ServicioGeo{
     //para hacer que retorne un punto aproximado debe idicar solo location_type=APROXIMATE
     //Ver la siguiente url de la documentación https://developers.google.com/maps/documentation/geocoding/intro
     //let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=ROOFTOP&result_type=street_address&key=' + environment.API_KEY_MAPA;
-    //let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + environment.API_KEY_MAPA;
-    let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + this.API_KEY_MAPA();
+    let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + environment.API_KEY_MAPA;
+    //let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + this.API_KEY_MAPA();
     let data = this.http.get(urlCorta, {}, {});
     return data;
   }
@@ -29,8 +29,8 @@ export class ServicioGeo{
     //let url corta
     //let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=ROOFTOP&result_type=street_address&key=' + environment.API_KEY_MAPA;
     //let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&key=' + environment.API_KEY_MAPA;
-    //let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + environment.API_KEY_MAPA;
-    let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + this.API_KEY_MAPA();
+    let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + environment.API_KEY_MAPA;
+    //let urlCorta = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon +'&location_type=APPROXIMATE&key=' + this.API_KEY_MAPA();
     let data = this.httpClient.get(urlCorta,{});
     return data;
   }
@@ -255,18 +255,5 @@ export class ServicioGeo{
     let data = this.http.get(url,{}, {});
     return data;
   }
-  
-  API_KEY_MAPA = ()=>{
-    let retorno = "AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc";
-    if (localStorage.getItem('PARAMETROS_APP')){
-        let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
-        if (elementos && elementos.length > 0){
-            let arrRetorno = elementos.find(p=>p.Nombres == 'API_KEY_MAPA');
-            if (arrRetorno && arrRetorno.length > 0){
-                retorno = arrRetorno[0];
-            }
-        }
-    } 
-    return retorno;
-  }
+
 }

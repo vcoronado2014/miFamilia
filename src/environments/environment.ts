@@ -4,11 +4,12 @@
 
 export const environment = {
   production: false,
-  //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
-  //URL_FOTOS: 'http://190.151.14.101:8065/',
-  API_ENDPOINT: 'http://localhost:27563/Api/',
-  URL_FOTOS: 'http://localhost:27563/',
+  API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
+  URL_FOTOS: 'http://190.151.14.101:8065/',
+  //API_ENDPOINT: 'http://localhost:27563/Api/',
+  //URL_FOTOS: 'http://localhost:27563/',
   USA_CALENDARIO: false,
+  API_KEY_MAPA: "AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc"
 };
 
 /*

@@ -5,4 +5,5 @@ export const environment = {
   //API_ENDPOINT: 'https://app.rayensalud.com/MiFamilia/Api/',
   //URL_FOTOS: 'https://app.rayensalud.com/MiFamilia/',
   USA_CALENDARIO: false,
+  API_KEY_MAPA: "AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc"
 };
