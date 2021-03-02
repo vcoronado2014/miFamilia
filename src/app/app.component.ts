@@ -35,52 +35,11 @@ export class AppComponent {
   //https://github.com/mauron85/cordova-plugin-background-geolocation
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //seguimos intentando
-      if (this.utiles.isAppOnDevice()) {
-        //lo comentamos por mientras ya que aparece cierre inesperado.
-        //this.backgroundMode.enable();
-        //this.backgroundMode.disableWebViewOptimizations();
-        this.notificacion.buscarCitas();
-/*         setInterval(() => {
-          //aca la logica para sacar las citas
-          this.notificacion.buscarCitas();
-        }, environment.TIEMPO_CONSULTA_NOTIFICACIONES); */
-
-
-      }
-      //comentamos esto porque no sirvió
-
-/*       this.backgroudGeolocation.configure(config).then(()=>{
-        this.backgroudGeolocation.on(BackgroundGeolocationEvents.location).subscribe((location: BackgroundGeolocationResponse)=>{
-          var locationstr = localStorage.getItem("location");
-          if (locationstr == null){
-            this.arr.push(location);
-          }
-          else{
-            var locationarr = JSON.parse(locationstr);
-            this.arr = locationarr;
-          }
-          localStorage.setItem("location", JSON.stringify(this.arr));
-          //aca vamos a hacer el llamado
-          this.notificacion.buscarCitas();
-        })
-      })
-      window.app = this; */
-
-      //en backgroud
-/*       if (this.utiles.isAppOnDevice()) {
-
-        this.backgroundMode.enable();
-        this.backgroundMode.disableWebViewOptimizations();
-        setInterval(() => {
-          //aca la logica para sacar las citas
-          this.notificacion.buscarCitas();
-        }, environment.TIEMPO_CONSULTA_NOTIFICACIONES);
-
-      } */
+      this.notificacion.buscarCitas();
+      await this.utiles.obtenerParametrosApp(environment.production);
     });
   }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
@@ -68,6 +68,27 @@ const routes: Routes = [
     path: 'busqueda-avanzada',
     loadChildren: () => import('./busqueda-avanzada/busqueda-avanzada.module').then( m => m.BusquedaAvanzadaPageModule)
   },
+  {
+    path: 'nuevo-login',
+    loadChildren: () => import('./nuevo-login/nuevo-login.module').then( m => m.NuevoLoginPageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
+  },  {
+    path: 'registro-uno',
+    loadChildren: () => import('./registro-uno/registro-uno.module').then( m => m.RegistroUnoPageModule)
+  },
+  {
+    path: 'recuperar-clave',
+    loadChildren: () => import('./recuperar-clave/recuperar-clave.module').then( m => m.RecuperarClavePageModule)
+  },
+  {
+    path: 'login-clave-unica',
+    loadChildren: () => import('./login-clave-unica/login-clave-unica.module').then( m => m.LoginClaveUnicaPageModule)
+  },
+
+
 ];
 
 @NgModule({

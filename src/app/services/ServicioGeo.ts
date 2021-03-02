@@ -243,13 +243,13 @@ export class ServicioGeo{
 
     return this.http.post(url, body, {});
   }
-  getParametros(){
-    let url = environment.API_ENDPOINT + 'ParametrosApp';
+  getParametros(esProduccion){
+    let url = environment.API_ENDPOINT + 'ParametrosApp?EsProduccion=' + esProduccion;
     let data = this.httpClient.get(url,{});
     return data;
   }
-  getParametrosNative(){
-    let url = environment.API_ENDPOINT + 'ParametrosApp';
+  getParametrosNative(esProduccion){
+    let url = environment.API_ENDPOINT + 'ParametrosApp?EsProduccion=' + esProduccion;
     let data = this.http.get(url,{}, {});
     return data;
   }
