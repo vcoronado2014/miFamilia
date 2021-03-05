@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder, FormControl, ValidatorFn } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 //servicios
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
@@ -23,18 +24,26 @@ export class RegistroUnoPage implements OnInit {
   //por defecto dejamos el tipo movimiento en 1 solicitud de login
   //despues lo podemos recibir como parametro para cambiarlo
   tipoMovimiento = '1';
+  estaAgregandoFamilia = false;
   constructor(
     private navCtrl: NavController,
     public utiles: ServicioUtiles,
     public servicioGeo: ServicioGeo,
     public loading: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public activatedRoute: ActivatedRoute,
+    private router: Router,
   ) { 
 
   }
 
   ngOnInit() {
     moment.locale('es');
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params && params.estaAgregandoFamilia) {
+        this.estaAgregandoFamilia = true;
+      }
+    });
     this.cargarForma();
   }
   cargarForma(){
@@ -97,7 +106,15 @@ export class RegistroUnoPage implements OnInit {
         //tiene registro completo, enviarlo a la pagina de login
         this.utiles.presentToast('Usted ya tiene registro', 'middle', 5000);
         loader.dismiss();
-        this.abrirLogin();
+        if (this.estaAgregandoFamilia == false){
+          this.abrirLogin();
+        }
+        else{
+          //si esta agregando familia hay que crear lo que corresponde y avisar al
+          //usuario que fue creado o no exito
+          console.log('ESTA AGREGANDO FAMILIA');
+        }
+        
       }
       else{
         //su registro esta incompleto, derivarlo a la pagina de registro de la app
@@ -106,7 +123,7 @@ export class RegistroUnoPage implements OnInit {
         //******* LLAMAR A LA PAGINA DE REGISTRO  *************/
         this.utiles.presentToast('Su registro está incompleto', 'middle', 5000);
         loader.dismiss();
-        this.irARegistro();
+        this.irARegistro(this.estaAgregandoFamilia);
       }
     }
     else{
@@ -118,14 +135,17 @@ export class RegistroUnoPage implements OnInit {
 
     }
   }
-  irARegistro(){
+  irARegistro(agregaFamilia){
     //enviar registroIncompleto
     if (this.registroIncompleto){
-      const navigationExtras: NavigationExtras = {
-        queryParams: {
-          usuario: JSON.stringify(this.registroIncompleto)
-        }
+      let query = {
+        usuario: null,
+        estaAgregandoFamilia: null
       };
+      query = { usuario: JSON.stringify(this.registroIncompleto), estaAgregandoFamilia : agregaFamilia }
+      const navigationExtras: NavigationExtras = {
+        queryParams: query
+      }; 
       this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
     }
 
@@ -212,7 +232,7 @@ export class RegistroUnoPage implements OnInit {
       }
       loader.dismiss();
       //acá estamos ok deberíamos mandarlo a que complete su fomrulario
-      this.irARegistro();
+      this.irARegistro(this.estaAgregandoFamilia);
     }
     else {
       //aca definitivamente debemos enviarlo a clave única

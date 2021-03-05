@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, NavController, ToastController, Platform,  LoadingController, MenuController } from '@ionic/angular';
+import { NavigationExtras } from '@angular/router';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { environment } from 'src/environments/environment';
@@ -273,6 +274,20 @@ export class ModalAjustesPage implements OnInit {
 
         }
       });
+  }
+  abrirEditar(){
+    let registro = null;
+    if (localStorage.getItem('REGISTRO')){
+      registro = JSON.parse(localStorage.getItem('REGISTRO'));
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          usuario: JSON.stringify(registro),
+          EstaEditando: true
+        }
+      };
+      this.dismiss();
+      this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
+    }
   }
 
 /*   putColor(){

@@ -87,6 +87,10 @@ const routes: Routes = [
     path: 'login-clave-unica',
     loadChildren: () => import('./login-clave-unica/login-clave-unica.module').then( m => m.LoginClaveUnicaPageModule)
   },
+  {
+    path: 'registro-usuario',
+    loadChildren: () => import('./registro-usuario/registro-usuario.module').then( m => m.RegistroUsuarioPageModule)
+  },
 
 
 ];
