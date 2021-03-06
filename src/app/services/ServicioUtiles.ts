@@ -645,17 +645,4 @@ export class ServicioUtiles{
               })
           }
     }
-    HORAS_FECHA_INICIO = ()=>{
-        let retorno = 3;
-        if (localStorage.getItem('PARAMETROS_APP')){
-            let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
-            if (elementos && elementos.length > 0){
-                let arrRetorno = elementos.find(p=>p.Nombres == 'HORAS_FECHA_INICIO');
-                if (arrRetorno && arrRetorno.length > 0){
-                    retorno = parseInt(arrRetorno[0]);
-                }
-            }
-        } 
-        return retorno;
-    }
 }

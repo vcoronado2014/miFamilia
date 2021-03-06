@@ -4,11 +4,18 @@
   </div>
   <form [formGroup]="forma" novalidate>
     <ion-row class="ion-no-margin ion-no-padding mt-80">
-      <mat-form-field appearance="outline" style="width: 100%;">
+      <!-- solo para enrolamiento -->
+      <mat-form-field appearance="outline" style="width: 100%;" [hidden]="usaEnrolamiento == false">
+        <mat-label>Run</mat-label>
+        <input matInput placeholder="125458524" formControlName="run" name="run">
+        <mat-error [hidden]="usaEnrolamiento == false">Run requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%;" [hidden]="usaEnrolamiento">
         <mat-label>Correo electrónico</mat-label>
-        <input matInput placeholder="ejemplo@gmail.com" formControlName="email" name="email" required>
-        <mat-error [hidden]="!(f.email.errors && f.email.errors.required)">Correo requerido</mat-error>
-        <mat-error [hidden]="!(f.email.errors && f.email.errors.pattern)">Correo inválido</mat-error>
+        <input matInput placeholder="ejemplo@gmail.com" formControlName="email" name="email">
+        <mat-error [hidden]="usaEnrolamiento">Correo requerido</mat-error>
+        <mat-error [hidden]="usaEnrolamiento">Correo inválido</mat-error>
       </mat-form-field>
   
       <mat-form-field appearance="outline" style="width: 100%;">
@@ -21,7 +28,7 @@
       <button mat-raised-button color="primary" style="width: 90%; margin-left: 5%; height:36px;" (click)="onSubmit()">INICIAR SESION</button>
     </ion-row>
   </form>
-  <ion-row class="mt-36">
+  <ion-row class="mt-36" [hidden]="usaEnrolamiento">
     <a mat-button routerLink="." color="primary" class="ion-text-center" style="width: 100%;" (click)="irRecuperarClave()">¿Olvidaste tu contraseña?</a>
   </ion-row>
   <ion-grid class="ion-no-padding mt-36">

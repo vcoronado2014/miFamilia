@@ -8,6 +8,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { NavigationExtras } from '@angular/router';
 
 import * as moment from 'moment';
@@ -48,6 +49,7 @@ export class InicioPage implements OnInit {
     public utiles: ServicioUtiles,
     public servicioGeo: ServicioGeo,
     public acceso: ServicioAcceso,
+    public parametrosApp: ServicioParametrosApp,
   ) {
 
     platform.ready().then(() => {
@@ -78,23 +80,27 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
     let tieneValidacionCU = false;
-    if (localStorage.getItem('STATE_CLAVE_UNICA')){
-      let stateClaveUnica = localStorage.getItem('STATE_CLAVE_UNICA');
-      let objeto = {Run: '', Fecha: '', Tipo: ''};
-      if (stateClaveUnica != ''){
-        //descompnemos el state
-        let stateCompleto = this.utiles.desencriptar(stateClaveUnica);
-        let arr = stateCompleto.split('|');
-        if (arr && arr.length == 3){
-          objeto.Run = arr[0],
-          objeto.Fecha = arr[1];
-          objeto.Tipo = arr[2];
-        }
+    //primero validamos si usa clave unica
+    if (this.parametrosApp.USA_CLAVE_UNICA()) {
+      if (localStorage.getItem('STATE_CLAVE_UNICA')) {
+        let stateClaveUnica = localStorage.getItem('STATE_CLAVE_UNICA');
+        let objeto = { Run: '', Fecha: '', Tipo: '' };
+        if (stateClaveUnica != '') {
+          //descompnemos el state
+          let stateCompleto = this.utiles.desencriptar(stateClaveUnica);
+          let arr = stateCompleto.split('|');
+          if (arr && arr.length == 3) {
+            objeto.Run = arr[0],
+              objeto.Fecha = arr[1];
+            objeto.Tipo = arr[2];
+          }
 
+        }
+        tieneValidacionCU = true;
+        this.verificaRegistroClaveUnica(stateClaveUnica, objeto);
       }
-      tieneValidacionCU = true;
-      this.verificaRegistroClaveUnica(stateClaveUnica, objeto);
     }
+
     this.VerificarRegistro(tieneValidacionCU);
   }
   abrirLogin(){

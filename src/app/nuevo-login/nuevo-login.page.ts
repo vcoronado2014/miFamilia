@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { NavigationExtras } from '@angular/router';
 
 import * as moment from 'moment';
@@ -30,6 +31,8 @@ export class NuevoLoginPage implements OnInit {
   loggedIn: boolean;
   CodigoMensaje: any;
   Mensaje: string;
+  //para validarse solo con enrolamiento
+  usaEnrolamiento = false;
 
   constructor(
     private navCtrl: NavController,
@@ -40,10 +43,12 @@ export class NuevoLoginPage implements OnInit {
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public acceso: ServicioAcceso,
+    public parametrosApp: ServicioParametrosApp,
   ) { }
 
   ngOnInit() {
     moment.locale('es');
+    this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
     this.cargarForma();
   }
   abrirAsistente(){
@@ -51,9 +56,17 @@ export class NuevoLoginPage implements OnInit {
   }
   cargarForma(){
     this.forma = new FormGroup({
+      'run': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.required, Validators.pattern(this.expEmail)]),
       'clave':new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])    
     });
+    //si usa enrolamiento hay que quitar validación de email
+    if (this.usaEnrolamiento){
+      this.forma.get('email').clearValidators();
+    }
+    else{
+      this.forma.get('run').clearValidators();
+    }
     //acá ver si dejamos preseteado el usuario y clave
     //por lo pronto lo comentamos
 
@@ -70,12 +83,7 @@ export class NuevoLoginPage implements OnInit {
       })
     } */
   }
-
-  async onSubmit() {
-    if (this.forma.invalid) {
-      return;
-    } 
-
+  async loguearseRegistro(){
     let correo = this.forma.controls.email.value;
     let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
 
@@ -93,8 +101,6 @@ export class NuevoLoginPage implements OnInit {
             localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
             localStorage.setItem('TIENE_REGISTRO', 'true');
             loader.dismiss();
-            //hay que mandarlo autentificado y con los datos del usuario aps
-            //ver que hacemos aca
             let registro = JSON.parse(localStorage.getItem('REGISTRO'));
 
             this.autentificarse(registro.Run, password);
@@ -113,9 +119,6 @@ export class NuevoLoginPage implements OnInit {
             localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
             localStorage.setItem('TIENE_REGISTRO', 'true');
             loader.dismiss();
-            //hay que mandarlo autentificado y con los datos del usuario aps
-            //ver que hacemos aca
-            //this.irAHome();
             let registro = JSON.parse(localStorage.getItem('REGISTRO'));
             this.autentificarse(registro.Run, password);
           }
@@ -126,12 +129,31 @@ export class NuevoLoginPage implements OnInit {
         })
       }
     })
+  }
 
+  async loguearseEnrolamiento(){
+    let run = this.forma.controls.run.value;
+    let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
+    localStorage.setItem('TIENE_REGISTRO', 'false');
+    this.autentificarse(run, password);
+  }
 
+  async onSubmit() {
+    if (this.forma.invalid) {
+      return;
+    } 
+    if (this.usaEnrolamiento){
+      //loguearse con enrolamiento
+      this.loguearseEnrolamiento();
+    }
+    else{
+      //loguearse con registro app
+      this.loguearseRegistro();
+    }
   }
   async autentificarse(userName, password){
     //en este caso ya el user name es el email
-    let f = { UserName: userName, Password: password };
+    let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento };
     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Login',
       duration: 10000

@@ -36,6 +36,7 @@ import { ServicioCitas } from './services/ServicioCitas';
 import { ServicioPaginacion } from './services/ServicioPaginacion';
 import { ServicioNotificaciones } from './services/ServicioNotificaciones';
 import { ServicioClaveUnica } from './services/ServicioClaveUnica';
+import { ServicioParametrosApp } from './services/ServicioParametrosApp';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** componentes material  */
 import { MatCardModule  } from '@angular/material/card';
@@ -94,6 +95,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     ServicioPaginacion,
     ServicioNotificaciones,
     ServicioClaveUnica,
+    ServicioParametrosApp,
     LaunchNavigator,
     LocalNotifications,
     BackgroundMode,

@@ -13,10 +13,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
     path: 'antecedentes',
     loadChildren: () => import('./antecedentes/antecedentes.module').then( m => m.AntecedentesPageModule)
   },
@@ -75,7 +71,8 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
-  },  {
+  },
+  {
     path: 'registro-uno',
     loadChildren: () => import('./registro-uno/registro-uno.module').then( m => m.RegistroUnoPageModule)
   },

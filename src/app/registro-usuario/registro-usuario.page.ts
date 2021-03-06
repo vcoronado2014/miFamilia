@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { NavigationExtras } from '@angular/router';
 
 import * as moment from 'moment';
@@ -31,6 +32,8 @@ export class RegistroUsuarioPage implements OnInit {
   Mensaje: string;
   estaEditando = false;
   estaAgregandoFamilia = false;
+  //para validarse solo con enrolamiento
+  usaEnrolamiento = false;
 
   constructor(
     private navCtrl: NavController,
@@ -41,12 +44,14 @@ export class RegistroUsuarioPage implements OnInit {
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public acceso: ServicioAcceso,
+    public parametrosApp: ServicioParametrosApp,
   ) { }
 
  
 
   ngOnInit() {
     moment.locale('es');
+    this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params.usuario) {
         //store the temp in data        
@@ -181,7 +186,7 @@ export class RegistroUsuarioPage implements OnInit {
 
   async autentificarse(userName, password){
     //en este caso ya el user name es el email
-    let f = { UserName: userName, Password: password };
+    let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento };
     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Login',
       duration: 10000
