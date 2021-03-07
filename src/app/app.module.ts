@@ -37,6 +37,8 @@ import { ServicioPaginacion } from './services/ServicioPaginacion';
 import { ServicioNotificaciones } from './services/ServicioNotificaciones';
 import { ServicioClaveUnica } from './services/ServicioClaveUnica';
 import { ServicioParametrosApp } from './services/ServicioParametrosApp';
+import { ServicioFirebase } from './services/ServicioFirebase';
+import { ServicioFCM } from './services/ServicioFCM';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** componentes material  */
 import { MatCardModule  } from '@angular/material/card';
@@ -51,6 +53,15 @@ import { MatFormField  } from '@angular/material/form-field/label'; */
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 /* import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'; */
+//firebase
+import { firebaseConfig } from '../environments/firebaseconfig';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+//fcm
+/* import { FCM } from "cordova-plugin-fcm-with-dependecy-updated/ionic"; */
+/* import {FCM} from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx'; */
 
 @NgModule({
   declarations: [
@@ -73,9 +84,15 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(), 
-    AppRoutingModule, BrowserAnimationsModule
+    AppRoutingModule, 
+    BrowserAnimationsModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
+    /* FCM, */
     StatusBar,
     InAppBrowser,
     SplashScreen,
@@ -96,6 +113,8 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     ServicioNotificaciones,
     ServicioClaveUnica,
     ServicioParametrosApp,
+    ServicioFirebase,
+    ServicioFCM,
     LaunchNavigator,
     LocalNotifications,
     BackgroundMode,
