@@ -48,6 +48,7 @@ export class ServicioFCM{
                     //aca crear mensaje web con toast
                     this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
                 })
+
 /*                 this.fcm.onNotification().subscribe((payload:any)=>{
                     if (payload.wasTapped){
                         //recibido en background
@@ -69,7 +70,7 @@ export class ServicioFCM{
                     console.log(payload.notification);
                     //aca crear mensaje web con toast
                     this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
-                })
+                });
             }
         }
 
