@@ -241,7 +241,7 @@ export class CalendarioPage implements OnInit {
 
   logout(){
     this.acceso.logout();
-    this.navCtrl.navigateRoot('login');
+    this.navCtrl.navigateRoot('nuevo-login');
   }
   async mesSelected(item){
     //realizar la llamada para cargar los eventos del mes
@@ -289,36 +289,36 @@ export class CalendarioPage implements OnInit {
         if (this.citasVertical[s].Eventos[t]) {
 
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita') {
-            this.citasVertical[s].Eventos[t].Imagen = 'cita.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'agendar_citas_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada';
           }
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita Web') {
-            this.citasVertical[s].Eventos[t].Imagen = 'cita.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'agendar_citas_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada web';
           }
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Atención Realizada') {
-            this.citasVertical[s].Eventos[t].Imagen = 'diagnostico.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'atenciones_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Atención Realizada';
           }
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco en uso') {
-            this.citasVertical[s].Eventos[t].Imagen = 'farmaco_uso.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
           }
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco Pendiente') {
-            this.citasVertical[s].Eventos[t].Imagen = 'farmaco_pendiente.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
 
           }
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Alimento Entregado') {
-            this.citasVertical[s].Eventos[t].Imagen = 'alimento.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-alimentos_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Entrega de alimento';
           }
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna Administrada') {
-            this.citasVertical[s].Eventos[t].Imagen = 'inmunizacion.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'vacunas_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Inmunización';
           }
           if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna por administrar') {
-            this.citasVertical[s].Eventos[t].Imagen = 'inmunizacion.png';
+            this.citasVertical[s].Eventos[t].Imagen = 'vacunas_p.png';
             this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Vacuna';
           }
         }
@@ -361,36 +361,36 @@ export class CalendarioPage implements OnInit {
         if (this.citasVerticalTodas[s].Eventos[t]) {
 
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'cita.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'agendar_citas_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada';
           }
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita Web') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'cita.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'agendar_citas_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada web';
           }
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Atención Realizada') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'diagnostico.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'atenciones_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Atención Realizada';
           }
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco en uso') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'farmaco_uso.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
           }
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco Pendiente') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'farmaco_pendiente.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
 
           }
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Alimento Entregado') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'alimento.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-alimentos_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Entrega de alimento';
           }
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna Administrada') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'inmunizacion.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'vacunas_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Inmunización';
           }
           if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna por administrar') {
-            this.citasVerticalTodas[s].Eventos[t].Imagen = 'inmunizacion.png';
+            this.citasVerticalTodas[s].Eventos[t].Imagen = 'vacunas_p.png';
             this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Vacuna';
           }
         }

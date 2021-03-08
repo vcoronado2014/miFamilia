@@ -50,6 +50,10 @@ export class ServicioNotificaciones{
                 }
             )
         }
+        else{
+            //web
+            this.utiles.presentToast(titulo + '\r\n' + texto, 'bottom', 10000);
+        }
     }
     notificacionCita(accion, data){
         if (this.utiles.isAppOnDevice()){
@@ -74,37 +78,87 @@ export class ServicioNotificaciones{
         if (localStorage.getItem('UsuarioAps')){
             usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
         }
+        var annoConsultar = 0;
+        var mesConsultar = 0;
         this.citasArr = [];
         var fechaActual = moment();
+        var fechaEvaluar = moment().add(5, 'days');
         var mesActual = {
           mes: fechaActual.month() + 1,
           anno: fechaActual.year()
         };
-        if (usuario != null){
-           this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesActual.mes, mesActual.anno).then((response:any)=>{
-               //aca debemos procesar las citas
-               var todas = JSON.parse(response.data);
-               //aplicamos el primer filtro
-               var nuevas = todas.filter( e => e.Mostrar == true );
-               var fechaActual = moment().format("DD-MM-YYYY");
-               var fechaManana = moment().add(1, 'day').format("DD-MM-YYYY");
-               var total = nuevas.filter(e=> moment(e.FechaCompleta).format("DD-MM-YYYY") == fechaActual || moment(e.FechaCompleta).format("DD-MM-YYYY") == fechaManana);
-               if (total && total.length > 0){
-                 //por cada uno de estos debemos hacer un mensaje
-                 for(var i=0; i < total.length; i++){
-                     var fecha = moment(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
-                     var hora = total[i].Eventos[0].HoraInicioFin; 
-                     var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
-                     var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
-                     var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
-                     var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
-                     //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
-                    this.crearNotificacion(id, titulo, texto);
-                 }
-               }
+        var mesEvaluar = {
+            mes: fechaEvaluar.month() + 1,
+            anno: fechaEvaluar.year()
+        };
+        //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
+        if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno){
+            //es le mismo mes
+            mesConsultar = mesActual.mes;
+            annoConsultar = mesActual.anno;
+        }
+        else{
+            //hay diferencia, por tanto se toma el ultimo mes
+            mesConsultar = mesEvaluar.mes;
+            annoConsultar = mesEvaluar.anno;
+        }
 
-               console.log(this.citasArr[0]);
-           })
+        if (usuario != null){
+            if (this.utiles.isAppOnDevice()){
+                this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response:any)=>{
+                    //aca debemos procesar las citas
+                    var todas = JSON.parse(response.data);
+                    if (todas && todas.length > 0){
+                        //aplicamos el primer filtro
+                        var nuevas = todas.filter(e => e.Mostrar == true);
+                        var total = nuevas.filter(e=> moment(e.FechaCompleta) >= moment() && moment(e.FechaCompleta) <= moment().add(5, 'days'));
+                        if (total && total.length > 0) {
+                            //por cada uno de estos debemos hacer un mensaje
+                            for (var i = 0; i < total.length; i++) {
+                                var fecha = moment(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                var hora = total[i].Eventos[0].HoraInicioFin;
+                                var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                this.crearNotificacion(id, titulo, texto);
+                            }
+                        }
+
+                        console.log(this.citasArr[0]);
+                    }
+
+                })
+            }
+            else{
+                this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response:any)=>{
+                    //aca debemos procesar las citas
+                    var todas =response;
+                    if (todas && todas.length > 0){
+                        //aplicamos el primer filtro
+                        var nuevas = todas.filter(e => e.Mostrar == true);
+                        var total = nuevas.filter(e=> moment(e.FechaCompleta) >= moment() && moment(e.FechaCompleta) <= moment().add(5, 'days'));
+                        if (total && total.length > 0) {
+                            //por cada uno de estos debemos hacer un mensaje
+                            for (var i = 0; i < total.length; i++) {
+                                var fecha = moment(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                var hora = total[i].Eventos[0].HoraInicioFin;
+                                var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                this.crearNotificacion(id, titulo, texto);
+                            }
+                        }
+
+                        console.log(this.citasArr[0]);
+                    }
+
+                })
+            }
+
         }
     }
 

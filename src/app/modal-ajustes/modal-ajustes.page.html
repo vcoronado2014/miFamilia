@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar [style.--background]="miColor">
+  <ion-toolbar color="primary">
     <ion-title class="home">Ajustes {{nombrePaciente}}</ion-title>
     <ion-buttons slot="end" class="pdr10" (click)="dismiss()">
       <ion-icon class="home" slot="icon-only" name="close"></ion-icon>
@@ -10,6 +10,10 @@
 <ion-content class="back-app">
   <!-- la imagen -->
   <ion-card>
+    <ion-card-header>
+     <!--  <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+      <ion-card-title>Mi imagen</ion-card-title>
+    </ion-card-header>
     <ion-card-content>
       <div>
         <img [src]="image" *ngIf="image" />
@@ -25,8 +29,15 @@
       <ion-input  type="file" accept="image/*" (change)="changeListener($event)"></ion-input>
     </ion-item>
   </ion-list>
+  <ion-row class="ion-padding">
+    
+<!--     <button  class="button-registrarse" mat-button
+          color="primary">Cambiar mis datos y/o clave</button> -->
+          <button mat-raised-button color="primary" (click)="abrirEditar()" style="width: 90%; margin-left: 5%; height:36px;background: #3880ff;color:white;" >Cambiar mis datos y/o clave</button>
+  </ion-row>
   <!-- los colores -->
-  <ion-card>
+  <!-- la paleta de colores la comentamos ya que desde aca debería modificar su perfil -->
+<!--   <ion-card>
     <ion-grid>
       <ion-card-content>
         <ion-row>
@@ -41,7 +52,6 @@
           </ion-col>
         </ion-row>
       </ion-card-content>
-      <!-- paleta de colores -->
       <ion-row>
         <ion-col style="background:#330000" (click)="setColor('#330000')">&nbsp;</ion-col>
         <ion-col style="background:#331900" (click)="setColor('#331900')">&nbsp;</ion-col>
@@ -178,6 +188,6 @@
         <ion-col style="background:#FFFFFF" (click)="setColor('#FFFFFF')">&nbsp;</ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
+  </ion-card> -->
 
 </ion-content>

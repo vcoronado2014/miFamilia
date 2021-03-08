@@ -93,12 +93,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
-/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
-/* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
+/* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
 /* harmony import */ var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../modal-operacion-cita/modal-operacion-cita.page */ "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts");
 
 
@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 //modal
 
 let PreTiposatencionPage = class PreTiposatencionPage {
-    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita) {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, parametrosApp) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -122,6 +122,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         this.utiles = utiles;
         this.acceso = acceso;
         this.cita = cita;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.textColor = '#FFFFFF';
         //datos para consultar citas
@@ -147,7 +148,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
     //DEBEMOS VOLVER A UNA PAGINA INICIAL, SI MAL NO RECUERDO SE
     //TRATARIA DE LA PAGINA CALENDARIO
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_6__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
         if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
             if (this.usuarioAps) {
@@ -165,12 +166,13 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
     }
     setFechasInicioFin() {
-        var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__().add(src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].HORAS_FECHA_INICIO, 'hour');
+        //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
+        var fechaIni = moment__WEBPACK_IMPORTED_MODULE_7__().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
         var date = new Date();
         console.log(fechaIni);
         date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
         console.log(date);
-        var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__().add(1, 'month');
+        var fechaTer = moment__WEBPACK_IMPORTED_MODULE_7__().add(1, 'month');
         var dateFin = new Date(fechaTer.year(), fechaTer.month(), fechaTer.date(), 23, 59, 0, 0);
         console.log(fechaTer);
         console.log(dateFin);
@@ -402,7 +404,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         }
     }
     transformDate(value, format) {
-        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_7__["MomentPipe"]();
+        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__["MomentPipe"]();
         return pi.transform(value, format);
     }
     transformDateIso(dateString) {
@@ -453,8 +455,9 @@ PreTiposatencionPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
     { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] },
-    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"] },
-    { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__["ServicioCitas"] }
+    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__["ServicioAcceso"] },
+    { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__["ServicioCitas"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__["ServicioParametrosApp"] }
 ];
 PreTiposatencionPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

@@ -755,7 +755,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'inicio', pathMatch: 'full' },
     {
         path: 'home',
         loadChildren: () => __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule)
@@ -764,10 +764,6 @@ const routes = [
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
-    },
-    {
-        path: 'login',
-        loadChildren: () => __webpack_require__.e(/*! import() | login-login-module */ "login-login-module").then(__webpack_require__.bind(null, /*! ./login/login.module */ "./src/app/login/login.module.ts")).then(m => m.LoginPageModule)
     },
     {
         path: 'antecedentes',
@@ -821,6 +817,30 @@ const routes = [
         path: 'busqueda-avanzada',
         loadChildren: () => Promise.all(/*! import() | busqueda-avanzada-busqueda-avanzada-module */[__webpack_require__.e("default~agenda-disponible-agenda-disponible-module~busqueda-avanzada-busqueda-avanzada-module~cupos-~f71bc473"), __webpack_require__.e("busqueda-avanzada-busqueda-avanzada-module")]).then(__webpack_require__.bind(null, /*! ./busqueda-avanzada/busqueda-avanzada.module */ "./src/app/busqueda-avanzada/busqueda-avanzada.module.ts")).then(m => m.BusquedaAvanzadaPageModule)
     },
+    {
+        path: 'nuevo-login',
+        loadChildren: () => __webpack_require__.e(/*! import() | nuevo-login-nuevo-login-module */ "nuevo-login-nuevo-login-module").then(__webpack_require__.bind(null, /*! ./nuevo-login/nuevo-login.module */ "./src/app/nuevo-login/nuevo-login.module.ts")).then(m => m.NuevoLoginPageModule)
+    },
+    {
+        path: 'inicio',
+        loadChildren: () => __webpack_require__.e(/*! import() | inicio-inicio-module */ "inicio-inicio-module").then(__webpack_require__.bind(null, /*! ./inicio/inicio.module */ "./src/app/inicio/inicio.module.ts")).then(m => m.InicioPageModule)
+    },
+    {
+        path: 'registro-uno',
+        loadChildren: () => __webpack_require__.e(/*! import() | registro-uno-registro-uno-module */ "registro-uno-registro-uno-module").then(__webpack_require__.bind(null, /*! ./registro-uno/registro-uno.module */ "./src/app/registro-uno/registro-uno.module.ts")).then(m => m.RegistroUnoPageModule)
+    },
+    {
+        path: 'recuperar-clave',
+        loadChildren: () => __webpack_require__.e(/*! import() | recuperar-clave-recuperar-clave-module */ "recuperar-clave-recuperar-clave-module").then(__webpack_require__.bind(null, /*! ./recuperar-clave/recuperar-clave.module */ "./src/app/recuperar-clave/recuperar-clave.module.ts")).then(m => m.RecuperarClavePageModule)
+    },
+    {
+        path: 'login-clave-unica',
+        loadChildren: () => __webpack_require__.e(/*! import() | login-clave-unica-login-clave-unica-module */ "login-clave-unica-login-clave-unica-module").then(__webpack_require__.bind(null, /*! ./login-clave-unica/login-clave-unica.module */ "./src/app/login-clave-unica/login-clave-unica.module.ts")).then(m => m.LoginClaveUnicaPageModule)
+    },
+    {
+        path: 'registro-usuario',
+        loadChildren: () => __webpack_require__.e(/*! import() | registro-usuario-registro-usuario-module */ "registro-usuario-registro-usuario-module").then(__webpack_require__.bind(null, /*! ./registro-usuario/registro-usuario.module */ "./src/app/registro-usuario/registro-usuario.module.ts")).then(m => m.RegistroUsuarioPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -866,8 +886,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app/services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
-/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
+/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../app/services/ServicioFCM */ "./src/app/services/ServicioFCM.ts");
 
 
 
@@ -875,74 +897,43 @@ __webpack_require__.r(__webpack_exports__);
 
 //componente para dejar la app en backgroud
 
+
 //servicio de notificaciones para prueba
 
 
+
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, notificacion, backgroundMode, utiles) {
+    constructor(platform, splashScreen, statusBar, notificacion, backgroundMode, utiles, fcmService) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.notificacion = notificacion;
         this.backgroundMode = backgroundMode;
         this.utiles = utiles;
+        this.fcmService = fcmService;
         this.initializeApp();
     }
     //mirar background geolocation
     //https://github.com/mauron85/cordova-plugin-background-geolocation
     initializeApp() {
-        this.platform.ready().then(() => {
+        this.platform.ready().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            //seguimos intentando
-            if (this.utiles.isAppOnDevice()) {
-                //lo comentamos por mientras ya que aparece cierre inesperado.
-                //this.backgroundMode.enable();
-                //this.backgroundMode.disableWebViewOptimizations();
-                this.notificacion.buscarCitas();
-                /*         setInterval(() => {
-                          //aca la logica para sacar las citas
-                          this.notificacion.buscarCitas();
-                        }, environment.TIEMPO_CONSULTA_NOTIFICACIONES); */
-            }
-            //comentamos esto porque no sirvió
-            /*       this.backgroudGeolocation.configure(config).then(()=>{
-                    this.backgroudGeolocation.on(BackgroundGeolocationEvents.location).subscribe((location: BackgroundGeolocationResponse)=>{
-                      var locationstr = localStorage.getItem("location");
-                      if (locationstr == null){
-                        this.arr.push(location);
-                      }
-                      else{
-                        var locationarr = JSON.parse(locationstr);
-                        this.arr = locationarr;
-                      }
-                      localStorage.setItem("location", JSON.stringify(this.arr));
-                      //aca vamos a hacer el llamado
-                      this.notificacion.buscarCitas();
-                    })
-                  })
-                  window.app = this; */
-            //en backgroud
-            /*       if (this.utiles.isAppOnDevice()) {
-            
-                    this.backgroundMode.enable();
-                    this.backgroundMode.disableWebViewOptimizations();
-                    setInterval(() => {
-                      //aca la logica para sacar las citas
-                      this.notificacion.buscarCitas();
-                    }, environment.TIEMPO_CONSULTA_NOTIFICACIONES);
-            
-                  } */
-        });
+            this.notificacion.buscarCitas();
+            yield this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].production);
+            this.fcmService.initFCM();
+            this.fcmService.receiveMessage(true);
+        }));
     }
 };
 AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
-    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_6__["ServicioNotificaciones"] },
+    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__["ServicioNotificaciones"] },
     { type: _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_5__["BackgroundMode"] },
-    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_7__["ServicioUtiles"] }
+    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_8__["ServicioUtiles"] },
+    { type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__["ServicioFCM"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -984,26 +975,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../app/pipes/toCelsius.pipe */ "./src/app/pipes/toCelsius.pipe.ts");
-/* harmony import */ var _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../app/pipes/split.pipe */ "./src/app/pipes/split.pipe.ts");
-/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
-/* harmony import */ var _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../app/pipes/filter.pipe */ "./src/app/pipes/filter.pipe.ts");
-/* harmony import */ var _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
-/* harmony import */ var _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
-/* harmony import */ var _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
-/* harmony import */ var _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./services/ServicioInfoUsuario */ "./src/app/services/ServicioInfoUsuario.ts");
-/* harmony import */ var _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./services/ServicioImagen */ "./src/app/services/ServicioImagen.ts");
-/* harmony import */ var _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/ServicioLaboratorio */ "./src/app/services/ServicioLaboratorio.ts");
-/* harmony import */ var _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
-/* harmony import */ var _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./services/ServicioPaginacion */ "./src/app/services/ServicioPaginacion.ts");
-/* harmony import */ var _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
-/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
-/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
-/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
-/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
-/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../app/pipes/toCelsius.pipe */ "./src/app/pipes/toCelsius.pipe.ts");
+/* harmony import */ var _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../app/pipes/split.pipe */ "./src/app/pipes/split.pipe.ts");
+/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
+/* harmony import */ var _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../app/pipes/filter.pipe */ "./src/app/pipes/filter.pipe.ts");
+/* harmony import */ var _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
+/* harmony import */ var _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
+/* harmony import */ var _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./services/ServicioInfoUsuario */ "./src/app/services/ServicioInfoUsuario.ts");
+/* harmony import */ var _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/ServicioImagen */ "./src/app/services/ServicioImagen.ts");
+/* harmony import */ var _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/ServicioLaboratorio */ "./src/app/services/ServicioLaboratorio.ts");
+/* harmony import */ var _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
+/* harmony import */ var _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./services/ServicioPaginacion */ "./src/app/services/ServicioPaginacion.ts");
+/* harmony import */ var _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
+/* harmony import */ var _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./services/ServicioClaveUnica */ "./src/app/services/ServicioClaveUnica.ts");
+/* harmony import */ var _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
+/* harmony import */ var _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./services/ServicioFCM */ "./src/app/services/ServicioFCM.ts");
+/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../environments/firebaseconfig */ "./src/environments/firebaseconfig.ts");
+/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
+/* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
+/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
 
 
 
@@ -1013,6 +1015,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //nativos
+
 
 
 
@@ -1039,7 +1042,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 /** componentes material  */
+
+
 
 
 
@@ -1050,27 +1058,41 @@ import { MatFormField  } from '@angular/material/form-field/label'; */
 
 
 /* import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'; */
+
+
+
+
+
 let AppModule = class AppModule {
 };
 AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"],
-            _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_18__["CelsiusPipe"],
-            _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_19__["SplitPipe"],
-            _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_20__["MomentPipe"],
-            _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_21__["FilterPipe"],
+            _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__["CelsiusPipe"],
+            _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__["SplitPipe"],
+            _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__["MomentPipe"],
+            _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__["FilterPipe"],
         ],
         entryComponents: [],
         imports: [
             _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
-            _angular_material_card__WEBPACK_IMPORTED_MODULE_32__["MatCardModule"],
-            _angular_material_button__WEBPACK_IMPORTED_MODULE_33__["MatButtonModule"],
-            _angular_material_form_field__WEBPACK_IMPORTED_MODULE_34__["MatFormFieldModule"],
-            _angular_material_select__WEBPACK_IMPORTED_MODULE_35__["MatSelectModule"],
+            _angular_material_card__WEBPACK_IMPORTED_MODULE_36__["MatCardModule"],
+            _angular_material_button__WEBPACK_IMPORTED_MODULE_37__["MatButtonModule"],
+            _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__["MatFormFieldModule"],
+            _angular_material_select__WEBPACK_IMPORTED_MODULE_40__["MatSelectModule"],
+            _angular_material_input__WEBPACK_IMPORTED_MODULE_39__["MatInputModule"],
+            _angular_material_icon__WEBPACK_IMPORTED_MODULE_41__["MatIconModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_31__["BrowserAnimationsModule"]
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"],
+            _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__["AngularFireDatabaseModule"],
+            _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__["AngularFireStorageModule"],
+            _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__["AngularFireMessagingModule"],
+            _angular_fire__WEBPACK_IMPORTED_MODULE_45__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_44__["firebaseConfig"])
         ],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
@@ -1082,18 +1104,21 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"],
             _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"],
             _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"],
-            _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_22__["ServicioUtiles"],
-            _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_23__["ServicioGeo"],
-            _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_24__["ServicioAcceso"],
-            _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_25__["ServicioInfoUsuario"],
-            _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_26__["ServicioImagen"],
-            _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_27__["ServicioLaboratorio"],
-            _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_28__["ServicioCitas"],
-            _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_29__["ServicioPaginacion"],
-            _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_30__["ServicioNotificaciones"],
+            _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"],
+            _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"],
+            _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"],
+            _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"],
+            _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"],
+            _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"],
+            _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"],
+            _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"],
+            _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"],
+            _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"],
+            _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"],
+            _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"],
             _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"],
-            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_36__["LocalNotifications"],
-            _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_37__["BackgroundMode"],
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__["LocalNotifications"],
+            _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__["BackgroundMode"],
             /*  BackgroundGeolocation, */
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
@@ -1303,12 +1328,12 @@ let ServicioAcceso = class ServicioAcceso {
         });
     }
     loginWebDirecto(userInfo) {
-        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password;
+        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento;
         let data = this.httpClient.get(url, {});
         return data;
     }
     loginWebNative(userInfo) {
-        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password;
+        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento;
         let data = this.http.get(url, {}, {});
         return data;
     }
@@ -1925,6 +1950,181 @@ ServicioCitas = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "./src/app/services/ServicioClaveUnica.ts":
+/*!************************************************!*\
+  !*** ./src/app/services/ServicioClaveUnica.ts ***!
+  \************************************************/
+/*! exports provided: ServicioClaveUnica */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServicioClaveUnica", function() { return ServicioClaveUnica; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _ServicioUtiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+
+
+
+
+
+
+let ServicioClaveUnica = class ServicioClaveUnica {
+    constructor(http, httpClient, utiles) {
+        this.http = http;
+        this.httpClient = httpClient;
+        this.utiles = utiles;
+    }
+    //Obtiene el formulario de login
+    getLogin() {
+        let urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ClaveUnicaBefore';
+        let data = this.httpClient.get(urlCorta, { responseType: 'text' });
+        return data;
+    }
+    //obtiene el formulario de login nativo
+    getLoginNative() {
+        let urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ClaveUnicaBefore';
+        let data = this.http.get(urlCorta, {}, {});
+        return data;
+    }
+    postConfiguracionClaveUnica(esProduccion) {
+        const body = JSON.stringify({ EsProduccion: esProduccion });
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ConfiguracionClaveUnica';
+        let httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+        let options = { headers: httpHeaders };
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    postConfiguracionClaveUnicaNative(esProduccion) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body = {
+            "EsProduccion": esProduccion
+        };
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ConfiguracionClaveUnica';
+        this.http.setDataSerializer('json');
+        return this.http.post(url, body, {});
+    }
+};
+ServicioClaveUnica.ctorParameters = () => [
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__["HTTP"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
+    { type: _ServicioUtiles__WEBPACK_IMPORTED_MODULE_5__["ServicioUtiles"] }
+];
+ServicioClaveUnica = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+], ServicioClaveUnica);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/ServicioFCM.ts":
+/*!*****************************************!*\
+  !*** ./src/app/services/ServicioFCM.ts ***!
+  \*****************************************/
+/*! exports provided: ServicioFCM */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServicioFCM", function() { return ServicioFCM; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ServicioUtiles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
+
+
+/* import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx'; */
+
+
+
+let ServicioFCM = class ServicioFCM {
+    constructor(
+    /* public fcm: FCM,  */
+    utiles, fm, notificaciones) {
+        this.utiles = utiles;
+        this.fm = fm;
+        this.notificaciones = notificaciones;
+    }
+    initFCM() {
+        if (this.utiles.isAppOnDevice()) {
+            /*             this.fcm.getToken().then(token => {
+                            console.log('token fcm ' + token);
+                            localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
+                        }) */
+            this.fm.getToken.subscribe((token) => {
+                console.log(token);
+                localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
+            });
+        }
+        else {
+            //web
+            this.fm.getToken.subscribe((token) => {
+                console.log(token);
+                localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
+            });
+        }
+    }
+    receiveMessage(esNotificacion) {
+        if (this.utiles.isAppOnDevice()) {
+            //nativo
+            if (esNotificacion) {
+                this.fm.messages.subscribe((payload) => {
+                    console.log(payload);
+                    console.log(payload.notification);
+                    //aca crear mensaje web con toast
+                    this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
+                });
+                /*                 this.fcm.onNotification().subscribe((payload:any)=>{
+                                    if (payload.wasTapped){
+                                        //recibido en background
+                                        console.log('in background')
+                                        //this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
+                                    }
+                                    else{
+                                        //recibido en foreground
+                                        console.log('in foregorund')
+                                        //this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
+                                    }
+                                }) */
+            }
+        }
+        else {
+            if (esNotificacion) {
+                this.fm.messages.subscribe((payload) => {
+                    console.log(payload);
+                    console.log(payload.notification);
+                    //aca crear mensaje web con toast
+                    this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
+                });
+            }
+        }
+    }
+};
+ServicioFCM.ctorParameters = () => [
+    { type: _ServicioUtiles__WEBPACK_IMPORTED_MODULE_2__["ServicioUtiles"] },
+    { type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__["AngularFireMessaging"] },
+    { type: _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_3__["ServicioNotificaciones"] }
+];
+ServicioFCM = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+], ServicioFCM);
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/ServicioGeo.ts":
 /*!*****************************************!*\
   !*** ./src/app/services/ServicioGeo.ts ***!
@@ -2003,6 +2203,154 @@ let ServicioGeo = class ServicioGeo {
         let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroApp';
         this.http.setDataSerializer('json');
         return this.http.post(url, body, {});
+    }
+    //registro familia
+    postRegistroFamilia(objetoRegistro) {
+        //realizar la llamada post a la api
+        const body = JSON.stringify(objetoRegistro);
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia';
+        let httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+        let options = { headers: httpHeaders };
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    postRegistroFamiliaNative(objetoRegistro) {
+        //realizar la llamada post a la api
+        const headers = new Headers;
+        const body = objetoRegistro;
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia';
+        this.http.setDataSerializer('json');
+        return this.http.post(url, body, {});
+    }
+    getRegistroAppRun(run, idDispositivo) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroApp?Run=' + run + '&IdDispositivo=' + idDispositivo;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    getRegistroAppNativeRun(run, idDispositivo) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroApp?Run=' + run + '&IdDispositivo=' + idDispositivo;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    getRegistroAppCorreoPassword(correo, password) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    getRegistroAppNativeCorreoPassword(correo, password) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    verificaEnrolamiento(run) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Run=' + run;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    verificaEnrolamientoNative(run) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Run=' + run;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    postRecuperarClave(correo) {
+        const body = JSON.stringify({ Correo: correo });
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RecuperarClave';
+        let httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+        let options = { headers: httpHeaders };
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    postRecuperarClaveNative(correo) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body = {
+            "Correo": correo
+        };
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RecuperarClave';
+        this.http.setDataSerializer('json');
+        return this.http.post(url, body, {});
+    }
+    //validacion clave unica
+    getValidacionCU(run, state) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroClaveUnica?Run=' + run + '&State=' + state;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    getValidacionCUNative(run, state) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroClaveUnica?Run=' + run + '&State=' + state;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    postValidacionClaveUnica(run, state) {
+        const body = JSON.stringify({ Run: run, State: state });
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroClaveUnica';
+        let httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+        let options = { headers: httpHeaders };
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    postValidacionClaveUnicaNative(run, state) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body = {
+            "Run": run,
+            "State": state
+        };
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroClaveUnica';
+        this.http.setDataSerializer('json');
+        return this.http.post(url, body, {});
+    }
+    postValidarCorreo(correo) {
+        const body = JSON.stringify({ Correo: correo });
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ValidaCorreo';
+        let httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+        let options = { headers: httpHeaders };
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    postValidarCorreoNative(correo) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body = {
+            "Correo": correo
+        };
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ValidaCorreo';
+        this.http.setDataSerializer('json');
+        return this.http.post(url, body, {});
+    }
+    getParametros(esProduccion) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ParametrosApp?EsProduccion=' + esProduccion;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    getParametrosNative(esProduccion) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ParametrosApp?EsProduccion=' + esProduccion;
+        let data = this.http.get(url, {}, {});
+        return data;
     }
 };
 ServicioGeo.ctorParameters = () => [
@@ -2377,6 +2725,10 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                 foreground: true,
             });
         }
+        else {
+            //web
+            this.utiles.presentToast(titulo + '\r\n' + texto, 'bottom', 10000);
+        }
     }
     notificacionCita(accion, data) {
         if (this.utiles.isAppOnDevice()) {
@@ -2399,36 +2751,81 @@ let ServicioNotificaciones = class ServicioNotificaciones {
         if (localStorage.getItem('UsuarioAps')) {
             usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
         }
+        var annoConsultar = 0;
+        var mesConsultar = 0;
         this.citasArr = [];
         var fechaActual = moment__WEBPACK_IMPORTED_MODULE_4__();
+        var fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
         var mesActual = {
             mes: fechaActual.month() + 1,
             anno: fechaActual.year()
         };
+        var mesEvaluar = {
+            mes: fechaEvaluar.month() + 1,
+            anno: fechaEvaluar.year()
+        };
+        //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
+        if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno) {
+            //es le mismo mes
+            mesConsultar = mesActual.mes;
+            annoConsultar = mesActual.anno;
+        }
+        else {
+            //hay diferencia, por tanto se toma el ultimo mes
+            mesConsultar = mesEvaluar.mes;
+            annoConsultar = mesEvaluar.anno;
+        }
         if (usuario != null) {
-            this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesActual.mes, mesActual.anno).then((response) => {
-                //aca debemos procesar las citas
-                var todas = JSON.parse(response.data);
-                //aplicamos el primer filtro
-                var nuevas = todas.filter(e => e.Mostrar == true);
-                var fechaActual = moment__WEBPACK_IMPORTED_MODULE_4__().format("DD-MM-YYYY");
-                var fechaManana = moment__WEBPACK_IMPORTED_MODULE_4__().add(1, 'day').format("DD-MM-YYYY");
-                var total = nuevas.filter(e => moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta).format("DD-MM-YYYY") == fechaActual || moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta).format("DD-MM-YYYY") == fechaManana);
-                if (total && total.length > 0) {
-                    //por cada uno de estos debemos hacer un mensaje
-                    for (var i = 0; i < total.length; i++) {
-                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
-                        var hora = total[i].Eventos[0].HoraInicioFin;
-                        var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
-                        var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
-                        var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
-                        var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
-                        //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
-                        this.crearNotificacion(id, titulo, texto);
+            if (this.utiles.isAppOnDevice()) {
+                this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response) => {
+                    //aca debemos procesar las citas
+                    var todas = JSON.parse(response.data);
+                    if (todas && todas.length > 0) {
+                        //aplicamos el primer filtro
+                        var nuevas = todas.filter(e => e.Mostrar == true);
+                        var total = nuevas.filter(e => moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days'));
+                        if (total && total.length > 0) {
+                            //por cada uno de estos debemos hacer un mensaje
+                            for (var i = 0; i < total.length; i++) {
+                                var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                var hora = total[i].Eventos[0].HoraInicioFin;
+                                var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                this.crearNotificacion(id, titulo, texto);
+                            }
+                        }
+                        console.log(this.citasArr[0]);
                     }
-                }
-                console.log(this.citasArr[0]);
-            });
+                });
+            }
+            else {
+                this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response) => {
+                    //aca debemos procesar las citas
+                    var todas = response;
+                    if (todas && todas.length > 0) {
+                        //aplicamos el primer filtro
+                        var nuevas = todas.filter(e => e.Mostrar == true);
+                        var total = nuevas.filter(e => moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days'));
+                        if (total && total.length > 0) {
+                            //por cada uno de estos debemos hacer un mensaje
+                            for (var i = 0; i < total.length; i++) {
+                                var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                var hora = total[i].Eventos[0].HoraInicioFin;
+                                var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                this.crearNotificacion(id, titulo, texto);
+                            }
+                        }
+                        console.log(this.citasArr[0]);
+                    }
+                });
+            }
         }
     }
 };
@@ -2534,6 +2931,108 @@ ServicioPaginacion = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "./src/app/services/ServicioParametrosApp.ts":
+/*!***************************************************!*\
+  !*** ./src/app/services/ServicioParametrosApp.ts ***!
+  \***************************************************/
+/*! exports provided: ServicioParametrosApp */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServicioParametrosApp", function() { return ServicioParametrosApp; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+let ServicioParametrosApp = class ServicioParametrosApp {
+    constructor(platform, appVersion, toast, device) {
+        this.platform = platform;
+        this.appVersion = appVersion;
+        this.toast = toast;
+        this.device = device;
+        this.HORAS_FECHA_INICIO = () => {
+            let retorno = 3;
+            if (localStorage.getItem('PARAMETROS_APP')) {
+                let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+                if (elementos && elementos.length > 0) {
+                    let arrRetorno = elementos.find(p => p.Nombre == 'HORAS_FECHA_INICIO');
+                    if (arrRetorno && arrRetorno.Id > 0) {
+                        retorno = parseInt(arrRetorno.Valor);
+                    }
+                }
+            }
+            return retorno;
+        };
+        this.USA_CLAVE_UNICA = () => {
+            let retorno = false;
+            if (localStorage.getItem('PARAMETROS_APP')) {
+                let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+                if (elementos && elementos.length > 0) {
+                    let arrRetorno = elementos.find(p => p.Nombre == 'USA_CLAVE_UNICA');
+                    if (arrRetorno && arrRetorno.Id > 0) {
+                        if (parseInt(arrRetorno.Valor) == 1)
+                            retorno = true;
+                    }
+                }
+            }
+            return retorno;
+        };
+        this.USA_ENTIDAD_CONTRATANTE = () => {
+            let retorno = false;
+            if (localStorage.getItem('PARAMETROS_APP')) {
+                let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+                if (elementos && elementos.length > 0) {
+                    let arrRetorno = elementos.find(p => p.Nombre == 'USA_ENTIDAD_CONTRATANTE');
+                    if (arrRetorno && arrRetorno.Id > 0) {
+                        if (parseInt(arrRetorno.Valor) == 1)
+                            retorno = true;
+                    }
+                }
+            }
+            return retorno;
+        };
+        this.USA_LOGIN_ENROLAMIENTO = () => {
+            let retorno = false;
+            if (localStorage.getItem('PARAMETROS_APP')) {
+                let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+                if (elementos && elementos.length > 0) {
+                    let arrRetorno = elementos.find(p => p.Nombre == 'USA_LOGIN_ENROLAMIENTO');
+                    if (arrRetorno && arrRetorno.Id > 0) {
+                        if (parseInt(arrRetorno.Valor) == 1)
+                            retorno = true;
+                    }
+                }
+            }
+            return retorno;
+        };
+        //inicializamos los valores
+        moment__WEBPACK_IMPORTED_MODULE_5__["locale"]('es');
+    }
+};
+ServicioParametrosApp.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__["AppVersion"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_4__["Device"] }
+];
+ServicioParametrosApp = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+], ServicioParametrosApp);
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/ServicioUtiles.ts":
 /*!********************************************!*\
   !*** ./src/app/services/ServicioUtiles.ts ***!
@@ -2548,20 +3047,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
 
 
 
 
 
+
+
+//servicio
 
 let ServicioUtiles = class ServicioUtiles {
-    constructor(platform, appVersion, toast) {
+    constructor(platform, appVersion, toast, device, servicioGeo) {
         this.platform = platform;
         this.appVersion = appVersion;
         this.toast = toast;
+        this.device = device;
+        this.servicioGeo = servicioGeo;
         this.infoAplicacion = {
             VersionAppName: '',
             VersionNumnber: '',
@@ -2575,7 +3081,7 @@ let ServicioUtiles = class ServicioUtiles {
         };
         this.semanas = [];
         //inicializamos los valores
-        moment__WEBPACK_IMPORTED_MODULE_4__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_5__["locale"]('es');
     }
     isAppOnDevice() {
         if (window.location.port === '8100') {
@@ -2646,7 +3152,7 @@ let ServicioUtiles = class ServicioUtiles {
         return retorno;
     }
     textoBienvenida(nombre) {
-        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__();
+        var fecha = moment__WEBPACK_IMPORTED_MODULE_5__();
         var hrs = fecha.hour();
         var sms = '';
         if (hrs < 12) {
@@ -2782,18 +3288,18 @@ let ServicioUtiles = class ServicioUtiles {
         return arrPages;
     }
     entregaMiImagen() {
-        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
+        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
         if (sessionStorage.getItem('UsuarioAps')) {
             var usuarioAps = JSON.parse(sessionStorage.getItem('UsuarioAps'));
             if (usuarioAps.UrlImagen && usuarioAps.UrlImagen != '') {
                 if (localStorage.getItem('MI_IMAGEN')) {
                     var imagen = localStorage.getItem('MI_IMAGEN');
                     if (imagen != usuarioAps.Color) {
-                        retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].URL_FOTOS + imagen;
+                        retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + imagen;
                     }
                 }
                 else {
-                    retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
+                    retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
                 }
             }
         }
@@ -2813,17 +3319,17 @@ let ServicioUtiles = class ServicioUtiles {
         return retorno;
     }
     entregaImagen(usuarioAps) {
-        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
+        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
         if (usuarioAps) {
             if (usuarioAps.UrlImagen && usuarioAps.UrlImagen != '') {
-                retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
+                retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
             }
         }
         //mostramos solo si tiene imagen valida
         if (retorno.includes('Recursos/logousuario.png')) {
             retorno = '';
         }
-        if (retorno == _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].URL_FOTOS + 'Recursos/') {
+        if (retorno == _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + 'Recursos/') {
             retorno = '';
         }
         return retorno;
@@ -2870,9 +3376,9 @@ let ServicioUtiles = class ServicioUtiles {
         var actual = fechaInicio;
         var fechaInicioSemana = new Date(actual.getFullYear(), actual.getMonth(), actual.getDate(), 0, 0, 0, 0);
         var fechaInicioSemanaH = new Date(actual.getFullYear(), actual.getMonth(), actual.getDate(), 23, 59, 0, 0);
-        var inicioSemanaM = moment__WEBPACK_IMPORTED_MODULE_4__(fechaInicioSemana).add(1, 'day');
+        var inicioSemanaM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioSemana).add(1, 'day');
         console.log(inicioSemanaM.format());
-        var inicioSemanaH = moment__WEBPACK_IMPORTED_MODULE_4__(fechaInicioSemanaH).add(7, 'day');
+        var inicioSemanaH = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioSemanaH).add(7, 'day');
         console.log(inicioSemanaH.format());
         var diff = inicioSemanaH.diff(inicioSemanaM, 'days');
         console.log(diff);
@@ -2889,8 +3395,8 @@ let ServicioUtiles = class ServicioUtiles {
                 //volvemos a procesar fechas locales
                 var fechaInicioLocal = new Date(inicioSemanaM.year(), inicioSemanaM.month(), inicioSemanaM.date(), 0, 0, 0, 0);
                 var fechaTerminoLocal = new Date(inicioSemanaM.year(), inicioSemanaM.month(), inicioSemanaM.date(), 23, 59, 0, 0);
-                var fechaInicioLocalM = moment__WEBPACK_IMPORTED_MODULE_4__(fechaInicioLocal).add(i, 'day');
-                var fechaTerminoLocalM = moment__WEBPACK_IMPORTED_MODULE_4__(fechaTerminoLocal).add(i, 'day');
+                var fechaInicioLocalM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioLocal).add(i, 'day');
+                var fechaTerminoLocalM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaTerminoLocal).add(i, 'day');
                 console.log('inicio local ' + fechaInicioLocalM.format() + ' termino local ' + fechaTerminoLocalM.format());
                 var entidad = {
                     start: fechaInicioLocalM.format(),
@@ -2947,13 +3453,13 @@ let ServicioUtiles = class ServicioUtiles {
         if (arrEventos && arrEventos.length > 0) {
             arrEventos.forEach(evento => {
                 arrCitas.forEach(cita => {
-                    var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_4__(evento.FechaCompleta).format('YYYY-MM-DD');
-                    var fechaCita = moment__WEBPACK_IMPORTED_MODULE_4__(cita.FechaHoraInicio).format('YYYY-MM-DD');
+                    var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_5__(evento.FechaCompleta).format('YYYY-MM-DD');
+                    var fechaCita = moment__WEBPACK_IMPORTED_MODULE_5__(cita.FechaHoraInicio).format('YYYY-MM-DD');
                     if (fechaEvento == fechaCita) {
                         //coinciden hay que agregar eventos
                         var entidadEventoAgregar = {
                             Color: "#FF6666",
-                            HoraInicioFin: moment__WEBPACK_IMPORTED_MODULE_4__(cita.FechaHoraInicio).format('HH:mm'),
+                            HoraInicioFin: moment__WEBPACK_IMPORTED_MODULE_5__(cita.FechaHoraInicio).format('HH:mm'),
                             Imagen: "cita.png",
                             ListaFarmacos: null,
                             NombrePrincipal: "Consulta Médica Web",
@@ -3015,11 +3521,155 @@ let ServicioUtiles = class ServicioUtiles {
         retorno = parseInt(hora.toString() + minutoStr);
         return retorno;
     }
+    encriptar(texto) {
+        return btoa(unescape(encodeURIComponent(texto)));
+    }
+    desencriptar(texto) {
+        return decodeURIComponent(escape(atob(texto)));
+    }
+    //validación de rut
+    Rut(texto) {
+        var largo;
+        var tmpstr = "";
+        for (var i = 0; i < texto.length; i++)
+            if (texto.charAt(i) != ' ' && texto.charAt(i) != '.' && texto.charAt(i) != '-')
+                tmpstr = tmpstr + texto.charAt(i);
+        texto = tmpstr;
+        largo = texto.length;
+        if (largo < 2) {
+            //this.presentToast("Debe ingresar el run completo", "bottom", 5000)
+            return false;
+        }
+        for (var i = 0; i < largo; i++) {
+            if (texto.charAt(i) != "0" && texto.charAt(i) != "1" && texto.charAt(i) != "2" && texto.charAt(i) != "3" && texto.charAt(i) != "4" && texto.charAt(i) != "5" && texto.charAt(i) != "6" && texto.charAt(i) != "7" && texto.charAt(i) != "8" && texto.charAt(i) != "9" && texto.charAt(i) != "k" && texto.charAt(i) != "K") {
+                //this.presentToast("El valor ingresado no corresponde a un R.U.N valido", "bottom", 5000);
+                return false;
+            }
+        }
+        var invertido = "";
+        for (i = (largo - 1), j = 0; i >= 0; i--, j++)
+            invertido = invertido + texto.charAt(i);
+        var dtexto = "";
+        dtexto = dtexto + invertido.charAt(0);
+        dtexto = dtexto + '-';
+        var cnt = 0;
+        for (var i = 1, j = 2; i < largo; i++, j++) {
+            if (cnt == 3) {
+                dtexto = dtexto + '.';
+                j++;
+                dtexto = dtexto + invertido.charAt(i);
+                cnt = 1;
+            }
+            else {
+                dtexto = dtexto + invertido.charAt(i);
+                cnt++;
+            }
+        }
+        invertido = "";
+        for (i = (dtexto.length - 1), j = 0; i >= 0; i--, j++)
+            invertido = invertido + dtexto.charAt(i);
+        //hay que ver que hace esto
+        //window.document.form1.rut.value = invertido.toUpperCase()		
+        if (this.revisarDigito2(texto))
+            return true;
+        return false;
+    }
+    revisarDigito(dvr) {
+        var dv = dvr + "";
+        if (dv != '0' && dv != '1' && dv != '2' && dv != '3' && dv != '4' && dv != '5' && dv != '6' && dv != '7' && dv != '8' && dv != '9' && dv != 'k' && dv != 'K') {
+            //this.presentToast("Debe ingresar un digito verificador valido", "bottom", 5000);
+            return false;
+        }
+        return true;
+    }
+    revisarDigito2(crut) {
+        var rut;
+        var dv = '';
+        var dvi;
+        var largo = crut.length;
+        if (largo < 2) {
+            //this.presentToast("Debe ingresar el run completo", "bottom", 5000)
+            return false;
+        }
+        if (largo > 2)
+            rut = crut.substring(0, largo - 1);
+        else
+            rut = crut.charAt(0);
+        dv = crut.charAt(largo - 1);
+        this.revisarDigito(dv);
+        if (rut == null || dv == null)
+            return 0;
+        var dvr = '0';
+        var suma = 0;
+        var mul = 2;
+        for (var i = rut.length - 1; i >= 0; i--) {
+            suma = suma + rut.charAt(i) * mul;
+            if (mul == 7)
+                mul = 2;
+            else
+                mul++;
+        }
+        var res = suma % 11;
+        if (res == 1)
+            dvr = 'k';
+        else if (res == 0)
+            dvr = '0';
+        else {
+            dvi = 11 - res;
+            dvr = dvi + "";
+        }
+        if (dvr != dv.toLowerCase()) {
+            //this.presentToast("EL run es incorrecto", "bottom", 5000)
+            return false;
+        }
+        return true;
+    }
+    entregaIdDispositivo() {
+        var token = '';
+        if (localStorage.getItem('token_dispositivo')) {
+            token = localStorage.getItem('token_dispositivo');
+        }
+        else {
+            if (this.isAppOnDevice()) {
+                token = this.device.uuid;
+            }
+            else {
+                token = (Math.random() * (1000000 - 1) + 1).toString() + ' web';
+            }
+        }
+        return token;
+    }
+    obtenerParametrosApp(esProduccion) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var strProd = '0';
+            if (esProduccion) {
+                strProd = '1';
+            }
+            if (!this.isAppOnDevice()) {
+                //llamada web
+                this.servicioGeo.getParametros(strProd).subscribe((response) => {
+                    //procesar
+                    console.log(response);
+                    localStorage.setItem('PARAMETROS_APP', JSON.stringify(response));
+                });
+            }
+            else {
+                this.servicioGeo.getParametrosNative(strProd).then((response) => {
+                    //procesar
+                    var data = JSON.parse(response.data);
+                    localStorage.setItem('PARAMETROS_APP', JSON.stringify(data));
+                    console.log(data);
+                });
+            }
+        });
+    }
 };
 ServicioUtiles.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__["AppVersion"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_4__["Device"] },
+    { type: _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__["ServicioGeo"] }
 ];
 ServicioUtiles = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
@@ -3044,10 +3694,10 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
-    URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
-    //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
-    //URL_FOTOS: 'http://190.151.14.101:8065/',
+    //API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
+    //URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
+    API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
+    URL_FOTOS: 'http://190.151.14.101:8065/',
     //API_ENDPOINT: 'http://localhost:27563/Api/',
     //URL_FOTOS: 'http://localhost:27563/',
     API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
@@ -3063,6 +3713,29 @@ const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+
+/***/ }),
+
+/***/ "./src/environments/firebaseconfig.ts":
+/*!********************************************!*\
+  !*** ./src/environments/firebaseconfig.ts ***!
+  \********************************************/
+/*! exports provided: firebaseConfig */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "firebaseConfig", function() { return firebaseConfig; });
+const firebaseConfig = {
+    apiKey: "AIzaSyAkKRvqQ2fq7r8L1a-hG0_A31owEcxbXIM",
+    authDomain: "mifamiliaapp.firebaseapp.com",
+    projectId: "mifamiliaapp",
+    storageBucket: "mifamiliaapp.appspot.com",
+    messagingSenderId: "1034586005863",
+    appId: "1:1034586005863:web:6fa4c50650d31b427d8fc2",
+    measurementId: "G-D5P9RNNYRT"
+};
 
 
 /***/ }),

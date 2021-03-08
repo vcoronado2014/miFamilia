@@ -70,12 +70,12 @@ export class ServicioAcceso{
         });
     }
     loginWebDirecto(userInfo){
-        var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password;
+        var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento;
         let data = this.httpClient.get(url,{});
         return data;
     }
     loginWebNative(userInfo){
-        var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password;
+        var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento;
         let data = this.http.get(url, {}, {});
         return data;
     }

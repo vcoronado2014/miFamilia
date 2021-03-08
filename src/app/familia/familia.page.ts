@@ -1,7 +1,7 @@
 import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController, IonList } from '@ionic/angular';
 //parametros
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { environment } from 'src/environments/environment';
@@ -127,6 +127,15 @@ export class FamiliaPage implements OnInit, DoCheck {
       this.cargarDatosIniciales();
     });
     return await modal.present();
+  }
+  irValidacion() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        estaAgregandoFamilia: true
+      }
+    };
+    this.navCtrl.navigateRoot(['registro-uno'], navigationExtras);
+
   }
 
 }

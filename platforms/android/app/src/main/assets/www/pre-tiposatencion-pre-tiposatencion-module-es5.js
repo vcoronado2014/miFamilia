@@ -179,37 +179,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../../app/services/ServicioAcceso */
     "./src/app/services/ServicioAcceso.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../../app/services/ServicioCitas */
     "./src/app/services/ServicioCitas.ts");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
+    var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
     /* harmony import */
 
 
-    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ../../app/pipes/fecha.pipe */
     "./src/app/pipes/fecha.pipe.ts");
-    /* harmony import */
-
-
-    var src_environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-    /*! src/environments/environment */
-    "./src/environments/environment.ts");
     /* harmony import */
 
 
@@ -219,7 +219,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     var PreTiposatencionPage = /*#__PURE__*/function () {
-      function PreTiposatencionPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita) {
+      function PreTiposatencionPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, parametrosApp) {
         _classCallCheck(this, PreTiposatencionPage);
 
         this.navCtrl = navCtrl;
@@ -231,6 +231,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.utiles = utiles;
         this.acceso = acceso;
         this.cita = cita;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.textColor = '#FFFFFF'; //datos para consultar citas
 
@@ -259,7 +260,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(PreTiposatencionPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_6__["locale"]('es');
+          moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
 
           if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -282,12 +283,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "setFechasInicioFin",
         value: function setFechasInicioFin() {
-          var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__().add(src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].HORAS_FECHA_INICIO, 'hour');
+          //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
+          var fechaIni = moment__WEBPACK_IMPORTED_MODULE_7__().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
           var date = new Date();
           console.log(fechaIni);
           date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
           console.log(date);
-          var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__().add(1, 'month');
+          var fechaTer = moment__WEBPACK_IMPORTED_MODULE_7__().add(1, 'month');
           var dateFin = new Date(fechaTer.year(), fechaTer.month(), fechaTer.date(), 23, 59, 0, 0);
           console.log(fechaTer);
           console.log(dateFin);
@@ -607,7 +609,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "transformDate",
         value: function transformDate(value, format) {
-          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_7__["MomentPipe"]();
+          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__["MomentPipe"]();
           return pi.transform(value, format);
         }
       }, {
@@ -702,9 +704,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
       }, {
-        type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"]
+        type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__["ServicioAcceso"]
       }, {
-        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__["ServicioCitas"]
+        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__["ServicioCitas"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__["ServicioParametrosApp"]
       }];
     };
 

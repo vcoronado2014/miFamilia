@@ -3,6 +3,7 @@ import { NavigationExtras } from '@angular/router';
 import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController, IonItem } from '@ionic/angular';
 
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
 import * as moment from 'moment';
@@ -12,7 +13,6 @@ import { FilterPipe } from '../../app/pipes/filter.pipe';
 import { environment } from 'src/environments/environment';
 //modal
 import { ModalOperacionCitaPage } from '../modal-operacion-cita/modal-operacion-cita.page';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-pre-tiposatencion',
@@ -56,6 +56,7 @@ export class PreTiposatencionPage implements OnInit {
     public utiles: ServicioUtiles,
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
+    public parametrosApp: ServicioParametrosApp
   ) { }
 
   //ACA QUEDÉ EN QUE AL REALIZAR LA OPERACION DE AGENDAMIENTO
@@ -83,7 +84,8 @@ export class PreTiposatencionPage implements OnInit {
 
   }
   setFechasInicioFin(){
-    var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
+    //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
+    var fechaIni = moment().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
     var date = new Date();
     console.log(fechaIni);
     date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0,0,0,0);
