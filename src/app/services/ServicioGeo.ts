@@ -253,5 +253,15 @@ export class ServicioGeo{
     let data = this.http.get(url,{}, {});
     return data;
   }
+  getEntidadContratante(nodId){
+    let url = environment.API_ENDPOINT + 'EntidadContratante?NodId=' + nodId;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  getEntidadContratanteNative(nodId){
+    let url = environment.API_ENDPOINT + 'EntidadContratante?NodId=' + nodId;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
 
 }

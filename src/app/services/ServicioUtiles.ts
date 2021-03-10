@@ -645,4 +645,11 @@ export class ServicioUtiles{
               })
           }
     }
+    entregaTokenFCM(){
+        var token = '';
+        if (localStorage.getItem('TOKEN_FIREBASE_MESSAGE')){
+            token = localStorage.getItem('TOKEN_FIREBASE_MESSAGE');
+        }
+        return token;
+    }
 }

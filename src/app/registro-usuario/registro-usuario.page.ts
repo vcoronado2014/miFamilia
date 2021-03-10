@@ -186,7 +186,7 @@ export class RegistroUsuarioPage implements OnInit {
 
   async autentificarse(userName, password){
     //en este caso ya el user name es el email
-    let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento };
+    let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Login',
       duration: 10000

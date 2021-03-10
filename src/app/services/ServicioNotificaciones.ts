@@ -126,7 +126,7 @@ export class ServicioNotificaciones{
                             }
                         }
 
-                        console.log(this.citasArr[0]);
+                        console.log(nuevas);
                     }
 
                 })
@@ -153,7 +153,7 @@ export class ServicioNotificaciones{
                             }
                         }
 
-                        console.log(this.citasArr[0]);
+                        console.log(nuevas);
                     }
 
                 })

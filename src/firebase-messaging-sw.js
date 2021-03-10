@@ -29,8 +29,16 @@ messaging.onBackgroundMessage(function(payload) {
       body: 'Background Message body.',
       icon: '/firebase-logo.png'
     };
-  
+    //presentToast(notificationTitle, notificationOptions);
     self.registration.showNotification(notificationTitle,
       notificationOptions);
   });
 }
+/* async function presentToast(title, notificationOptions) {
+  const toast = document.createElement('ion-toast');
+  toast.message = title +'\n' + notificationOptions.body;
+  toast.duration = 2000;
+
+  document.body.appendChild(toast);
+  return toast.present();
+} */

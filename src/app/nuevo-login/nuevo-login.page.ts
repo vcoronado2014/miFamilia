@@ -7,6 +7,7 @@ import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
+import { ServicioFCM } from '../../app/services/ServicioFCM';
 import { NavigationExtras } from '@angular/router';
 
 import * as moment from 'moment';
@@ -44,6 +45,7 @@ export class NuevoLoginPage implements OnInit {
     private router: Router,
     public acceso: ServicioAcceso,
     public parametrosApp: ServicioParametrosApp,
+    public fcmService: ServicioFCM,
   ) { }
 
   ngOnInit() {
@@ -153,7 +155,8 @@ export class NuevoLoginPage implements OnInit {
   }
   async autentificarse(userName, password){
     //en este caso ya el user name es el email
-    let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento };
+
+    let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Login',
       duration: 10000
@@ -177,7 +180,34 @@ export class NuevoLoginPage implements OnInit {
         );
       }
     })
+  }
+  setDatosUsuario(retorno, user, userFamilia) {
+    //variable de sessión muy importante para el resto de la app.
+    sessionStorage.setItem("UsuarioAps", user);
+    localStorage.setItem('MI_RUT', retorno.UsuarioAps.Rut);
+    localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres + ' ' + retorno.UsuarioAps.ApellidoPaterno);
+    localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);
+    localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen);
+    //lo vamos a guardar en el local storage para realizar la llamada
+    //en el background
+    localStorage.setItem('UsuarioAps', user);
+    if (retorno.UsuariosFamilia) {
+      //debemos quitar los repetidos según última revisión
+      let hash = {};
+      var familia = retorno.UsuariosFamilia.filter(o => hash[o.Id] ? false : hash[o.Id] = true);
+      retorno.UsuariosFamilia = familia;
+      userFamilia = JSON.stringify(retorno.UsuariosFamilia);
+      //variable de sessión muy importante para el resto de la app.
+      sessionStorage.setItem("UsuariosFamilia", userFamilia);
+    }
 
+
+    this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
+    this.Mensaje = retorno.RespuestaBase.Mensaje;
+
+    this.loggedIn = true;
+/*     this.fcmService.initFCM();
+    this.fcmService.receiveMessage(true); */
   }
   procesarLogin(response, loader){
     var retorno = response;
@@ -189,33 +219,31 @@ export class NuevoLoginPage implements OnInit {
         var userFamilia;
         if (retorno.UsuarioAps){
           user = JSON.stringify(retorno.UsuarioAps);
-          //variable de sessión muy importante para el resto de la app.
-          sessionStorage.setItem("UsuarioAps", user);
-          localStorage.setItem('MI_RUT', retorno.UsuarioAps.Rut);
-          localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres +' ' + retorno.UsuarioAps.ApellidoPaterno);
-          localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);   
-          localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen);
-          //lo vamos a guardar en el local storage para realizar la llamada
-          //en el background
-          localStorage.setItem('UsuarioAps', user); 
-          tieneUsuario = true;               
+          //antes debemos validar si tiene entidad contratante
+          if (user.NodId && this.parametrosApp.USA_ENTIDAD_CONTRATANTE()){
+            //usa entidad contratante y tiene nodo
+            if (retorno.UsuarioAps.EntidadContratante && retorno.UsuarioAps.EntidadContratante.length > 0){
+              //tiene entidad contratante
+              tieneUsuario = true;
+              this.setDatosUsuario(retorno, user, userFamilia);
+              loader.dismiss();
+            }
+            else{
+              //no tiene entidad contratante
+              this.utiles.presentToast("No tiene entidad contratante asociada", "middle", 3000);
+              loader.dismiss();
+              return;
+            }
+          }
+          else {
+            //no usa entidad contratante
+            tieneUsuario = true;
+            this.setDatosUsuario(retorno, user, userFamilia);
+            loader.dismiss();
+          }
+              
         }
-        if (retorno.UsuariosFamilia){
-          //debemos quitar los repetidos según última revisión
-          let hash= {};
-          var familia = retorno.UsuariosFamilia.filter(o => hash[o.Id] ? false : hash[o.Id] = true);
-          retorno.UsuariosFamilia = familia;
-          userFamilia = JSON.stringify(retorno.UsuariosFamilia);
-          //variable de sessión muy importante para el resto de la app.
-          sessionStorage.setItem("UsuariosFamilia", userFamilia);
-        }
 
-
-        this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
-        this.Mensaje = retorno.RespuestaBase.Mensaje;
-
-        this.loggedIn = true;
-        loader.dismiss();
         //si tiene usuario está valido
         if (!tieneUsuario){
           this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
