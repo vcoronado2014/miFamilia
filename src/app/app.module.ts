@@ -57,6 +57,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { FirebaseMessaging } from '@ionic-native/firebase-messaging/ngx';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
     LaunchNavigator,
     LocalNotifications,
     BackgroundMode,
+    FirebaseMessaging,
    /*  BackgroundGeolocation, */
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

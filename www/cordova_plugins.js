@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "cordova-plugin-app-version.AppVersionPlugin",
-      "file": "plugins/cordova-plugin-app-version/www/AppVersionPlugin.js",
-      "pluginId": "cordova-plugin-app-version",
-      "clobbers": [
-        "cordova.getAppVersion"
-      ]
-    },
-    {
       "id": "cordova-plugin-file.DirectoryEntry",
       "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
       "pluginId": "cordova-plugin-file",
@@ -255,11 +247,11 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-inappbrowser.inappbrowser",
-      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-      "pluginId": "cordova-plugin-inappbrowser",
+      "id": "cordova-plugin-app-version.AppVersionPlugin",
+      "file": "plugins/cordova-plugin-app-version/www/AppVersionPlugin.js",
+      "pluginId": "cordova-plugin-app-version",
       "clobbers": [
-        "cordova.InAppBrowser.open"
+        "cordova.getAppVersion"
       ]
     },
     {
@@ -271,42 +263,20 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-geolocation.geolocation",
-      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
-      "pluginId": "cordova-plugin-geolocation",
+      "id": "cordova-plugin-background-mode.BackgroundMode",
+      "file": "plugins/cordova-plugin-background-mode/www/background-mode.js",
+      "pluginId": "cordova-plugin-background-mode",
       "clobbers": [
-        "navigator.geolocation"
+        "cordova.plugins.backgroundMode",
+        "plugin.backgroundMode"
       ]
     },
     {
-      "id": "cordova-plugin-geolocation.PositionError",
-      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-nativegeocoder.NativeGeocoder",
-      "file": "plugins/cordova-plugin-nativegeocoder/www/NativeGeocoder.js",
-      "pluginId": "cordova-plugin-nativegeocoder",
+      "id": "cordova-plugin-badge.Badge",
+      "file": "plugins/cordova-plugin-badge/www/badge.js",
+      "pluginId": "cordova-plugin-badge",
       "clobbers": [
-        "nativegeocoder"
-      ]
-    },
-    {
-      "id": "cordova-plugin-network-information.network",
-      "file": "plugins/cordova-plugin-network-information/www/network.js",
-      "pluginId": "cordova-plugin-network-information",
-      "clobbers": [
-        "navigator.connection",
-        "navigator.network.connection"
-      ]
-    },
-    {
-      "id": "cordova-plugin-network-information.Connection",
-      "file": "plugins/cordova-plugin-network-information/www/Connection.js",
-      "pluginId": "cordova-plugin-network-information",
-      "clobbers": [
-        "Connection"
+        "cordova.plugins.notification.badge"
       ]
     },
     {
@@ -342,27 +312,41 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
-      "clobbers": [
-        "window.StatusBar"
+      "id": "cordova-plugin-firebase-analytics.FirebaseAnalytics",
+      "file": "plugins/cordova-plugin-firebase-analytics/www/FirebaseAnalytics.js",
+      "pluginId": "cordova-plugin-firebase-analytics",
+      "merges": [
+        "cordova.plugins.firebase.analytics"
       ]
     },
     {
-      "id": "cordova-plugin-splashscreen.SplashScreen",
-      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-      "pluginId": "cordova-plugin-splashscreen",
-      "clobbers": [
-        "navigator.splashscreen"
+      "id": "cordova-plugin-firebase-messaging.FirebaseMessaging",
+      "file": "plugins/cordova-plugin-firebase-messaging/www/FirebaseMessaging.js",
+      "pluginId": "cordova-plugin-firebase-messaging",
+      "merges": [
+        "cordova.plugins.firebase.messaging"
       ]
     },
     {
-      "id": "cordova-plugin-ionic-webview.IonicWebView",
-      "file": "plugins/cordova-plugin-ionic-webview/src/www/util.js",
-      "pluginId": "cordova-plugin-ionic-webview",
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
       "clobbers": [
-        "Ionic.WebView"
+        "navigator.geolocation"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
+      "clobbers": [
+        "cordova.InAppBrowser.open"
       ]
     },
     {
@@ -374,11 +358,11 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-badge.Badge",
-      "file": "plugins/cordova-plugin-badge/www/badge.js",
-      "pluginId": "cordova-plugin-badge",
+      "id": "cordova-plugin-ionic-webview.IonicWebView",
+      "file": "plugins/cordova-plugin-ionic-webview/src/www/util.js",
+      "pluginId": "cordova-plugin-ionic-webview",
       "clobbers": [
-        "cordova.plugins.notification.badge"
+        "Ionic.WebView"
       ]
     },
     {
@@ -408,12 +392,28 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-background-mode.BackgroundMode",
-      "file": "plugins/cordova-plugin-background-mode/www/background-mode.js",
-      "pluginId": "cordova-plugin-background-mode",
+      "id": "cordova-plugin-nativegeocoder.NativeGeocoder",
+      "file": "plugins/cordova-plugin-nativegeocoder/www/NativeGeocoder.js",
+      "pluginId": "cordova-plugin-nativegeocoder",
       "clobbers": [
-        "cordova.plugins.backgroundMode",
-        "plugin.backgroundMode"
+        "nativegeocoder"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.network",
+      "file": "plugins/cordova-plugin-network-information/www/network.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "navigator.connection",
+        "navigator.network.connection"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.Connection",
+      "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "Connection"
       ]
     },
     {
@@ -423,27 +423,49 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "cordova.plugins.locationAccuracy"
       ]
+    },
+    {
+      "id": "cordova-plugin-splashscreen.SplashScreen",
+      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+      "pluginId": "cordova-plugin-splashscreen",
+      "clobbers": [
+        "navigator.splashscreen"
+      ]
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
     }
   ];
   module.exports.metadata = {
-    "cordova-plugin-app-version": "0.1.9",
+    "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-advanced-http": "3.0.0",
-    "cordova-plugin-inappbrowser": "4.0.0",
+    "cordova-plugin-androidx": "3.0.0",
+    "cordova-plugin-androidx-adapter": "1.1.3",
+    "cordova-plugin-app-version": "0.1.9",
     "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-background-mode": "0.7.3",
+    "cordova-plugin-badge": "0.8.8",
+    "cordova-plugin-camera": "4.1.0",
+    "cordova-support-android-plugin": "1.0.2",
+    "cordova-support-google-services": "1.4.1",
+    "cordova-plugin-firebase-analytics": "5.0.0",
+    "cordova-plugin-firebase-messaging": "5.0.1",
     "cordova-plugin-geolocation": "4.0.2",
-    "cordova-plugin-add-swift-support": "2.0.2",
+    "cordova-plugin-inappbrowser": "4.0.0",
+    "cordova-plugin-ionic-keyboard": "2.2.0",
+    "cordova-plugin-ionic-webview": "4.2.1",
+    "cordova-plugin-local-notification": "0.9.0-beta.2",
     "cordova-plugin-nativegeocoder": "3.4.1",
     "cordova-plugin-network-information": "2.0.2",
-    "cordova-plugin-camera": "4.1.0",
-    "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-request-location-accuracy": "2.3.0",
     "cordova-plugin-splashscreen": "5.0.2",
-    "cordova-plugin-ionic-webview": "4.2.1",
-    "cordova-plugin-ionic-keyboard": "2.2.0",
-    "cordova-plugin-badge": "0.8.8",
-    "cordova-plugin-local-notification": "0.9.0-beta.2",
-    "cordova-plugin-background-mode": "0.7.3",
-    "cordova-plugin-request-location-accuracy": "2.3.0"
+    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-whitelist": "1.3.3"
   };
 });

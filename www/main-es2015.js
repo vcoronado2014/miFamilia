@@ -1006,6 +1006,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
 /* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
 /* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
+/* harmony import */ var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @ionic-native/firebase-messaging/ngx */ "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
 
 
 
@@ -1058,6 +1059,7 @@ import { MatFormField  } from '@angular/material/form-field/label'; */
 
 
 /* import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'; */
+
 
 
 
@@ -1119,6 +1121,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"],
             _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__["LocalNotifications"],
             _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__["BackgroundMode"],
+            _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__["FirebaseMessaging"],
             /*  BackgroundGeolocation, */
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
@@ -2043,28 +2046,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ServicioUtiles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
 /* harmony import */ var _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
 /* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
+/* harmony import */ var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/firebase-messaging/ngx */ "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
 
 
 /* import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx'; */
 
 
 
+//fcm native
+
 let ServicioFCM = class ServicioFCM {
     constructor(
     /* public fcm: FCM,  */
-    utiles, fm, notificaciones) {
+    utiles, fm, firebaseMessaging, notificaciones) {
         this.utiles = utiles;
         this.fm = fm;
+        this.firebaseMessaging = firebaseMessaging;
         this.notificaciones = notificaciones;
     }
     initFCM() {
         if (this.utiles.isAppOnDevice()) {
-            /*             this.fcm.getToken().then(token => {
-                            console.log('token fcm ' + token);
-                            localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
-                        }) */
-            this.fm.getToken.subscribe((token) => {
-                console.log(token);
+            //native
+            this.firebaseMessaging.requestPermission({ forceShow: true }).then(() => {
+                console.log('push permitido');
+            });
+            //pasaremos apn-string
+            this.firebaseMessaging.getToken().then((token) => {
+                console.log('token native ' + token);
                 localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
             });
         }
@@ -2080,24 +2088,13 @@ let ServicioFCM = class ServicioFCM {
         if (this.utiles.isAppOnDevice()) {
             //nativo
             if (esNotificacion) {
-                this.fm.messages.subscribe((payload) => {
+                //primer plano
+                this.firebaseMessaging.onMessage().subscribe((payload) => {
                     console.log(payload);
-                    console.log(payload.notification);
-                    //aca crear mensaje web con toast
-                    this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
                 });
-                /*                 this.fcm.onNotification().subscribe((payload:any)=>{
-                                    if (payload.wasTapped){
-                                        //recibido en background
-                                        console.log('in background')
-                                        //this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
-                                    }
-                                    else{
-                                        //recibido en foreground
-                                        console.log('in foregorund')
-                                        //this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
-                                    }
-                                }) */
+                this.firebaseMessaging.onBackgroundMessage().subscribe((payload) => {
+                    console.log(payload);
+                });
             }
         }
         else {
@@ -2115,6 +2112,7 @@ let ServicioFCM = class ServicioFCM {
 ServicioFCM.ctorParameters = () => [
     { type: _ServicioUtiles__WEBPACK_IMPORTED_MODULE_2__["ServicioUtiles"] },
     { type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__["AngularFireMessaging"] },
+    { type: _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_5__["FirebaseMessaging"] },
     { type: _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_3__["ServicioNotificaciones"] }
 ];
 ServicioFCM = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -3696,9 +3694,9 @@ const environment = {
     production: false,
     //API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
     //URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
-    API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
+    //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
     URL_FOTOS: 'http://190.151.14.101:8065/',
-    //API_ENDPOINT: 'http://localhost:27563/Api/',
+    API_ENDPOINT: 'http://localhost:27563/Api/',
     //URL_FOTOS: 'http://localhost:27563/',
     API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
     USA_CALENDARIO: false,

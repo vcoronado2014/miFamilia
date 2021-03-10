@@ -28,6 +28,7 @@
     "@ionic-native/camera": "^5.27.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/device": "^5.23.0",
+    "@ionic-native/firebase-messaging": "^5.31.1",
     "@ionic-native/geolocation": "^5.23.0",
     "@ionic-native/http": "^5.24.0",
     "@ionic-native/in-app-browser": "^5.25.0",
@@ -39,18 +40,24 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
-    "cordova-android": "8.1.0",
+    "cordova-android": "^8.1.0",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-advanced-http": "^3.0.0",
+    "cordova-plugin-androidx": "^3.0.0",
+    "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-firebase-analytics": "^5.0.0",
+    "cordova-plugin-firebase-messaging": "^5.0.1",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-inappbrowser": "^4.0.0",
     "cordova-plugin-nativegeocoder": "^3.4.1",
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-request-location-accuracy": "^2.3.0",
+    "cordova-support-android-plugin": "^1.0.2",
+    "cordova-support-google-services": "^1.4.1",
     "firebase": "^8.2.10",
     "moment": "^2.27.0",
     "rxjs": "~6.5.1",
@@ -102,7 +109,9 @@
       "cordova-plugin-geolocation": {},
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
         "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes",
-        "OKHTTP_VERSION": "3.10.0"
+        "OKHTTP_VERSION": "3.10.0",
+        "GOOGLE_API_KEY_FOR_ANDROID": "AIzaSyBxNhJT5Msr4h6K01OHsLKjsMqk1xNu9o8",
+        "GOOGLE_API_KEY_FOR_IOS": "AIzaSyC7ThFFNyQNRwzI_iDEXKJn3pz2BDfXvpY"
       },
       "cordova-plugin-request-location-accuracy": {
         "PLAY_SERVICES_LOCATION_VERSION": "16.+"
@@ -116,7 +125,12 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-background-mode": {}
+      "cordova-plugin-background-mode": {},
+      "cordova-plugin-firebase-messaging": {
+        "FIREBASE_MESSAGING_VERSION": "17.6.+"
+      },
+      "cordova-plugin-androidx": {},
+      "cordova-plugin-androidx-adapter": {}
     }
   }
 }

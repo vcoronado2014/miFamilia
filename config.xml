@@ -111,5 +111,8 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="4.2.1">
         <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
         <variable name="OKHTTP_VERSION" value="3.10.0" />
+        <variable name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyBxNhJT5Msr4h6K01OHsLKjsMqk1xNu9o8" />
+        <variable name="GOOGLE_API_KEY_FOR_IOS" value="AIzaSyC7ThFFNyQNRwzI_iDEXKJn3pz2BDfXvpY" />
     </plugin>
+    <plugin name="cordova-plugin-firebase-messaging" spec="^5.0.1" />
 </widget>

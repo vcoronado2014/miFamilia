@@ -1250,7 +1250,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
     /*! @angular/fire/messaging */
-    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js"); //nativos
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
+    /* harmony import */
+
+
+    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
+    /*! @ionic-native/firebase-messaging/ngx */
+    "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js"); //nativos
     //Pipes
     //servicios
 
@@ -1271,7 +1277,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"], _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__["CelsiusPipe"], _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__["SplitPipe"], _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__["MomentPipe"], _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__["FilterPipe"]],
       entryComponents: [],
       imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_36__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_37__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_40__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_39__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_41__["MatIconModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_45__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_44__["firebaseConfig"])],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__["BackgroundMode"],
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__["BackgroundMode"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__["FirebaseMessaging"],
       /*  BackgroundGeolocation, */
       {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
@@ -2569,17 +2575,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/fire/messaging */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
+    /* harmony import */
+
+
+    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/firebase-messaging/ngx */
+    "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
     /* import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx'; */
+    //fcm native
 
 
     var ServicioFCM = /*#__PURE__*/function () {
       function ServicioFCM(
       /* public fcm: FCM,  */
-      utiles, fm, notificaciones) {
+      utiles, fm, firebaseMessaging, notificaciones) {
         _classCallCheck(this, ServicioFCM);
 
         this.utiles = utiles;
         this.fm = fm;
+        this.firebaseMessaging = firebaseMessaging;
         this.notificaciones = notificaciones;
       }
 
@@ -2587,12 +2601,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "initFCM",
         value: function initFCM() {
           if (this.utiles.isAppOnDevice()) {
-            /*             this.fcm.getToken().then(token => {
-                            console.log('token fcm ' + token);
-                            localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
-                        }) */
-            this.fm.getToken.subscribe(function (token) {
-              console.log(token);
+            //native
+            this.firebaseMessaging.requestPermission({
+              forceShow: true
+            }).then(function () {
+              console.log('push permitido');
+            }); //pasaremos apn-string
+
+            this.firebaseMessaging.getToken().then(function (token) {
+              console.log('token native ' + token);
               localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
             });
           } else {
@@ -2611,24 +2628,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (this.utiles.isAppOnDevice()) {
             //nativo
             if (esNotificacion) {
-              this.fm.messages.subscribe(function (payload) {
+              //primer plano
+              this.firebaseMessaging.onMessage().subscribe(function (payload) {
                 console.log(payload);
-                console.log(payload.notification); //aca crear mensaje web con toast
-
-                _this5.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
               });
-              /*                 this.fcm.onNotification().subscribe((payload:any)=>{
-                                  if (payload.wasTapped){
-                                      //recibido en background
-                                      console.log('in background')
-                                      //this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
-                                  }
-                                  else{
-                                      //recibido en foreground
-                                      console.log('in foregorund')
-                                      //this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
-                                  }
-                              }) */
+              this.firebaseMessaging.onBackgroundMessage().subscribe(function (payload) {
+                console.log(payload);
+              });
             }
           } else {
             if (esNotificacion) {
@@ -2651,6 +2657,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ServicioUtiles__WEBPACK_IMPORTED_MODULE_2__["ServicioUtiles"]
       }, {
         type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__["AngularFireMessaging"]
+      }, {
+        type: _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_5__["FirebaseMessaging"]
       }, {
         type: _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_3__["ServicioNotificaciones"]
       }];
@@ -4904,9 +4912,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       production: false,
       //API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
       //URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
-      API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
+      //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
       URL_FOTOS: 'http://190.151.14.101:8065/',
-      //API_ENDPOINT: 'http://localhost:27563/Api/',
+      API_ENDPOINT: 'http://localhost:27563/Api/',
       //URL_FOTOS: 'http://localhost:27563/',
       API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
       USA_CALENDARIO: false,

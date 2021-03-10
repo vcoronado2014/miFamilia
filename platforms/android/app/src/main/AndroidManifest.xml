@@ -9,21 +9,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="de.appplant.cordova.plugin.background.ForegroundService" />
         <provider android:authorities="${applicationId}.provider" android:exported="false" android:grantUriPermissions="true" android:name="org.apache.cordova.camera.FileProvider">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/camera_provider_paths" />
         </provider>
+        <meta-data android:name="firebase_analytics_collection_enabled" android:value="true" />
+        <meta-data android:name="google_analytics_automatic_screen_reporting_enabled" android:value="true" />
+        <service android:name="by.chemerisuk.cordova.firebase.FirebaseMessagingPluginService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="default" />
         <provider android:authorities="${applicationId}.provider" android:exported="false" android:grantUriPermissions="true" android:name="de.appplant.cordova.plugin.notification.util.AssetProvider">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/localnotification_provider_paths" />
         </provider>
         <receiver android:exported="false" android:name="de.appplant.cordova.plugin.localnotification.TriggerReceiver" />
         <receiver android:exported="false" android:name="de.appplant.cordova.plugin.localnotification.ClearReceiver" />
         <activity android:exported="false" android:launchMode="singleInstance" android:name="de.appplant.cordova.plugin.localnotification.ClickReceiver" android:theme="@android:style/Theme.Translucent" />
-        <service android:name="de.appplant.cordova.plugin.background.ForegroundService" />
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest>
