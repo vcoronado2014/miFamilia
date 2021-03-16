@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder, FormControl, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 //servicios
@@ -45,6 +45,7 @@ export class RegistroUsuarioPage implements OnInit {
     private router: Router,
     public acceso: ServicioAcceso,
     public parametrosApp: ServicioParametrosApp,
+    public alertController: AlertController
   ) { }
 
  
@@ -211,6 +212,35 @@ export class RegistroUsuarioPage implements OnInit {
       }
     })
 
+  }
+  async salirRegistro() {
+    var titulo = '';
+
+    const alert = await this.alertController.create({
+      header: 'Salir del registro',
+      message: '¿Estas seguro de salir del proceso de registro?, esto implica que tengas que volver a validarte con clave única.',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'danger',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          cssClass: 'success',
+          handler: () => {
+            localStorage.removeItem('STATE_CLAVE_UNICA');
+            //aca debemos realizar la operación
+            this.navCtrl.navigateRoot('inicio');
+            //console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
   async onSubmit() {
     if (this.forma.invalid) {

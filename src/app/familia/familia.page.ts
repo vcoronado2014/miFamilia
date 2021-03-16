@@ -80,7 +80,13 @@ export class FamiliaPage implements OnInit, DoCheck {
         this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
         if (this.usuarioAps) {
           this.usuarioAps.UrlImagen = environment.URL_FOTOS + this.usuarioAps.UrlImagen;
-          this.usuarioAps.Parentezco = 'Yo';
+          //this.usuarioAps.Parentezco = 'Yo';
+          if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Id > 0){
+            if (this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA'){
+              this.usuarioAps.Parentezco.Nombre = 'Yo';
+            }
+          }
+          //this.usuarioAps.Parentezco = 'Yo';
         }
       }
       else
@@ -92,7 +98,10 @@ export class FamiliaPage implements OnInit, DoCheck {
         if (this.usuarioApsFamilia.length > 0) {
           for (var s in this.usuarioApsFamilia) {
             this.usuarioApsFamilia[s].UrlImagen = environment.URL_FOTOS + this.usuarioApsFamilia[s].UrlImagen;
-            this.usuarioApsFamilia[s].Parentezco = "No informado";
+            if (!(this.usuarioApsFamilia[s].Parentezco && this.usuarioApsFamilia[s].Parentezco.Id > 0)){
+              this.usuarioApsFamilia[s].Parentezco.Nombre = 'No informado';
+            }
+            //this.usuarioApsFamilia[s].Parentezco = "No informado";
           }
         }
       }

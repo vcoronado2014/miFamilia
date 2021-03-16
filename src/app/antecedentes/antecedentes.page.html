@@ -14,16 +14,9 @@
   </div>
 
   <div style="padding-top: 32px;">
-    <ion-item *ngFor="let item of listadoUsuario" (click)="goToDetails(item)">
-      <ion-avatar slot="start">
-        <img *ngIf="item.UrlImagen != ''" src={{item.UrlImagen}}>
-        <img *ngIf="item.UrlImagen == ''" src="../assets/img/no-imagen.jpg">
-      </ion-avatar>
-      <ion-row style="display: block;">
-        <h3 class="text-avatar">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</h3>
-        <!-- comentado por mientras, hay que ver como sacar el parentezco -->
-        <p class="subtext-avatar">{{item.Parentezco}}</p>
-      </ion-row>
-    </ion-item>
+    <div *ngFor="let item of listadoUsuario" (click)="goToDetails(item)">
+      <!-- poner avatar -->
+      <app-avatar [lines]="inset" [urlImagen] = "item.UrlImagen" [nombreCompleto]="item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno" [parentezco]="item.Parentezco.Nombre"></app-avatar>
+    </div>
   </div>
 </ion-content>

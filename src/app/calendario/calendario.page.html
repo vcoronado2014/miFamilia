@@ -13,32 +13,19 @@
 </ion-header>
 
 <ion-content class="back-app" style="--padding-bottom: 50px !important;">
-  <!-- selección de fecha -->
-<!--     <ion-item class="ion-text-center" lines="none">
-      <ion-icon name="calendar" slot="start"></ion-icon>
-      <ion-select okText="Aceptar" cancelText="Cancelar" (ionChange)="mesSelected($event)" multiple="false" value="{{mesActualSeleccionado}}">
-          <ion-select-option *ngFor="let mes of mesesVertical" [value]="mes.mesNumero">
-            {{mes.mesTexto}}
-          </ion-select-option>
-      </ion-select>
-    </ion-item> -->
-
-
  <div *ngIf="!tiene">
   <div style="position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;" class="ion-padding">
     <p style="display: table-cell; vertical-align: middle">No hay eventos para mostrar  <br>
     <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p>
   </div>
  </div>
+ 
  <div *ngIf="tiene">
+  
   <div *ngFor="let item of citasVerticalTodasTop">
+    
     <ion-grid *ngIf="item.Mostrar">
-      <!-- prueba de material -->
-      <!-- fila fecha superior-->
-      <ion-row>
-        <label class="fecha-card">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</label>
-      </ion-row>
-      <!-- fila items -->
+      <app-card-calendario [fechaActual]="fechaActual" [item]="item"></app-card-calendario>
       <ion-row class="ion-no-padding ion-no-margin row-card">
         <mat-card *ngFor="let evento of item.Eventos" color="light" style="margin-bottom: 8px;">
           <mat-card-header (click)="goToDetalleCita(evento)">
@@ -53,10 +40,11 @@
           </mat-card-header>
           <mat-card-actions *ngIf="revisaEstado(evento)">
             <button color="primary" mat-button *ngIf="revisarCita(evento, 'Anular')[1]" (click)="presentAlertConfirm(botonCancelar, evento)">ANULAR</button>
-            <button color="primary" mat-button *ngIf="revisarCita(evento, 'Confirmar')[0]" (click)="presentAlertConfirm(botonConfirmar, evento)">RESERVAR</button>
+            <button color="primary" mat-button *ngIf="revisarCita(evento, 'Confirmar')[0]" (click)="presentAlertConfirm(botonConfirmar, evento)">CONFIRMAR</button>
           </mat-card-actions>
         </mat-card>
       </ion-row>
+      <hr *ngIf="transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual">
     </ion-grid>
   </div>
   <!-- pruebas con infinite scroll -->

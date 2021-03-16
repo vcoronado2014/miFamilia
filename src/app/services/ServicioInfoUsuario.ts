@@ -106,5 +106,101 @@ export class ServicioInfoUsuario{
     
         return this.http.post(url, body, {});
       }
+
+      //metodos api management
+      getIndicadorValorApi(uspId){
+        const body = JSON.stringify({ UspId: uspId.toString() });
+
+        let url = environment.API_ENDPOINT + 'IndicadorValorApi';
+        let httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+    
+        let options = { headers: httpHeaders };
+    
+        let data = this.httpClient.post(url, body, options);
+        return data;
+      }
+      getIndicadorValorNativeApi(uspId){
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+          "UspId": uspId.toString()
+        };
+    
+        let url = environment.API_ENDPOINT + 'IndicadorValorApi';
+        this.http.setDataSerializer('json');
+    
+    
+        return this.http.post(url, body, {});
+      }
+      getPresionApi(uspId){
+        const body = JSON.stringify({ UspId: uspId.toString() });
+
+        let url = environment.API_ENDPOINT + 'PresionApi';
+        let httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+    
+        let options = { headers: httpHeaders };
+    
+        let data = this.httpClient.post(url, body, options);
+        return data;
+      }
+      getPresionNativeApi(uspId){
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+          "UspId": uspId.toString()
+        };
+    
+        let url = environment.API_ENDPOINT + 'PresionApi';
+        this.http.setDataSerializer('json');
+    
+    
+        return this.http.post(url, body, {});
+      }
+
+      getAlergiasApi(uspId){
+        const body = JSON.stringify({ UspId: uspId.toString() });
+
+        let url = environment.API_ENDPOINT + 'AlergiaApi';
+        let httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+    
+        let options = { headers: httpHeaders };
+    
+        let data = this.httpClient.post(url, body, options);
+        return data;
+      }
+      getAlergiasNativeApi(uspId){
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+          "UspId": uspId.toString()
+        };
+    
+        let url = environment.API_ENDPOINT + 'AlergiaApi';
+        this.http.setDataSerializer('json');
+    
+    
+        return this.http.post(url, body, {});
+      }
     
 }

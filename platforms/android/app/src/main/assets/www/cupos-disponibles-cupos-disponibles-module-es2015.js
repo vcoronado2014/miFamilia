@@ -248,6 +248,9 @@ let CuposDisponiblesPage = class CuposDisponiblesPage {
                     this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response) => {
                         this.procesarRespuestaTotal(response, loader);
                     });
+                    /*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+                              this.procesarRespuestaTotal(response, loader);
+                            }); */
                 }
                 else {
                     //llamada nativa
@@ -255,6 +258,10 @@ let CuposDisponiblesPage = class CuposDisponiblesPage {
                         var respuesta = JSON.parse(response.data);
                         this.procesarRespuestaTotal(respuesta, loader);
                     });
+                    /*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+                              var respuesta = JSON.parse(response.data);
+                              this.procesarRespuestaTotal(respuesta, loader);
+                            }); */
                 }
             }));
         });

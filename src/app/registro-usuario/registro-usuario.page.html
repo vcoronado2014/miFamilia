@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary" mode="ios" style="height: 160px;">
     <ion-buttons slot="start">
-      <ion-back-button [hidden]="estaEditando || estaAgregandoFamilia" defaultHref="/inicio" class="fcw"></ion-back-button>
+      <ion-back-button [hidden]="estaEditando || estaAgregandoFamilia" (click)="salirRegistro()" defaultHref="/" class="fcw"></ion-back-button>
       <ion-back-button [hidden]="!estaEditando" defaultHref="/home" class="fcw"></ion-back-button>
     </ion-buttons>
     <ion-title class="fcw"></ion-title>
@@ -54,8 +54,8 @@
       </ion-row>
       <ion-row>
         <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>Nombre social</mat-label>
-          <input matInput placeholder="Nombre social" formControlName="nombreSocial" name="nombreSocial">
+          <mat-label>Apodo</mat-label>
+          <input matInput placeholder="Apodo" formControlName="nombreSocial" name="nombreSocial">
         </mat-form-field>
       </ion-row>
       <ion-grid>

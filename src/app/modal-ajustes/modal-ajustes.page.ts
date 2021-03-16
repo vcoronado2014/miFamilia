@@ -27,6 +27,7 @@ export class ModalAjustesPage implements OnInit {
   //ACA QUEDE, ESTOY ARMANDO LA PANTALLA DE AJUSTES
   //color
   miColor = '#FF4081';
+  tieneRegistro = false;
   constructor(
     public modalCtrl: ModalController,
     public navParams: NavParams,
@@ -41,6 +42,12 @@ export class ModalAjustesPage implements OnInit {
 
   ngOnInit() {
     //this.miColor = this.utiles.entregaMiColor();
+    if (localStorage.getItem('TIENE_REGISTRO')){
+      if (localStorage.getItem('TIENE_REGISTRO').toLowerCase() == 'true'){
+        this.tieneRegistro = true;
+      }
+
+    }
     this.usuarioAps= JSON.parse(this.navParams.get('usuario'));
     this.image = this.usuarioAps.UrlImagen;
     this.miColor = this.utiles.entregaColor(this.usuarioAps);
@@ -276,7 +283,10 @@ export class ModalAjustesPage implements OnInit {
       });
   }
   abrirEditar(){
-    let registro = null;
+    this.dismiss();
+    this.navCtrl.navigateRoot('contactabilidad');
+    //this.utiles.presentToast("Enviar a la pagina para editar datos de contactabilidad", "bottom", 3000);
+/*     let registro = null;
     if (localStorage.getItem('REGISTRO')){
       registro = JSON.parse(localStorage.getItem('REGISTRO'));
       const navigationExtras: NavigationExtras = {
@@ -288,6 +298,10 @@ export class ModalAjustesPage implements OnInit {
       this.dismiss();
       this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
     }
+    else{
+      this.utiles.presentToast("No puedes editar ya que no te encuentras registrado", "bottom", 3000);
+
+    } */
   }
 
 /*   putColor(){

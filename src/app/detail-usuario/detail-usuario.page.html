@@ -17,7 +17,11 @@
       <ion-card-title class="ion-text-wrap" [style.--color]="miColor">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      Edad: {{usuario.Edad}} años.
+      <ion-item lines="none">
+        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>
+        <ion-badge slot="end">{{usuario.Parentezco.Nombre}}</ion-badge>
+      </ion-item>
+
     </ion-card-content>
   </ion-card> 
   <!-- aca viene la lista de datos personales presion, altura, etc-->

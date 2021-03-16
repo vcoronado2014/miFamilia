@@ -266,6 +266,7 @@ export class AgendaDisponiblePage implements OnInit {
         this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
           this.procesarRespuestaTotal(response, loader);
         });
+
       }
       else {
         //llamada nativa

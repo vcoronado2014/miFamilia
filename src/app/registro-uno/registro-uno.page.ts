@@ -16,6 +16,7 @@ import * as moment from 'moment';
 })
 export class RegistroUnoPage implements OnInit {
   rut;
+  nombre;
   cargando = false;
   registroIncompleto: any;
   //formulario
@@ -43,6 +44,9 @@ export class RegistroUnoPage implements OnInit {
       if (params && params.estaAgregandoFamilia) {
         this.estaAgregandoFamilia = true;
       }
+      if (params && params.nombre){
+        this.nombre = params.nombre;
+      }
     });
     this.cargarForma();
   }
@@ -53,7 +57,8 @@ export class RegistroUnoPage implements OnInit {
   }
 
   volver(){
-    this.navCtrl.navigateRoot('nuevo-login');
+    //this.navCtrl.navigateRoot('nuevo-login');
+    this.navCtrl.navigateRoot('pre-registro-uno');
   }
   //para validar
   get f() { return this.forma.controls; }

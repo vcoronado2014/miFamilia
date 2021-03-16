@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <ion-card>\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      Edad: {{usuario.Edad}} años.\r\n    </ion-card-content>\r\n  </ion-card> \r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list>\r\n    <ion-list-header>\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <ion-card>\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-item lines=\"none\">\r\n        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>\r\n        <ion-badge slot=\"end\">{{usuario.Parentezco.Nombre}}</ion-badge>\r\n      </ion-item>\r\n\r\n    </ion-card-content>\r\n  </ion-card> \r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list>\r\n    <ion-list-header>\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n";
     /***/
   },
 
@@ -181,12 +181,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../../app/services/ServicioAcceso */
-    "./src/app/services/ServicioAcceso.ts"); //parametros
+    "./src/app/services/ServicioAcceso.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts"); //parametros
     //SERVICIOS
 
 
     var DetailUsuarioPage = /*#__PURE__*/function () {
-      function DetailUsuarioPage(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, info, acceso) {
+      function DetailUsuarioPage(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, info, acceso, parametrosApp) {
         _classCallCheck(this, DetailUsuarioPage);
 
         this.navCtrl = navCtrl;
@@ -200,6 +206,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.loading = loading;
         this.info = info;
         this.acceso = acceso;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.indicadorValor = [];
         this.presiones = [];
@@ -219,6 +226,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (params && params.usuario) {
               //store the temp in data
               _this.usuario = JSON.parse(params.usuario);
+
+              if (_this.usuario.Parentezco && _this.usuario.Parentezco.Id > 0) {
+                if (_this.usuario.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA') {
+                  _this.usuario.Parentezco.Nombre = 'Yo';
+                }
+              } else {
+                _this.usuario.Parentezco.Nombre = 'No informado';
+              }
+
               _this.userImagen = _this.usuario.UrlImagen;
               _this.miColor = _this.utiles.entregaColor(_this.usuario);
               console.log(_this.usuario);
@@ -228,78 +244,68 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
         }
       }, {
-        key: "loadData",
-        value: function loadData(uspId) {
-          var _this2 = this;
-
-          this.info.getIndicadorValor(uspId).subscribe(function (response) {
-            _this2.procesarIndicadorValorSinLoader(response);
-          });
-          this.info.getPresion(uspId).subscribe(function (response) {
-            _this2.procesarPresionSinLoader(response);
-          });
-          this.info.getAlergias(uspId).subscribe(function (response) {
-            _this2.procesarAlergiasSinLoader(response);
-          });
-        }
-      }, {
         key: "obtenerInfoUsuario",
         value: function obtenerInfoUsuario(uspId) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-            var _this3 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            var _this2 = this;
 
             var loader;
-            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            return regeneratorRuntime.wrap(function _callee10$(_context10) {
               while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context10.prev = _context10.next) {
                   case 0:
-                    _context6.next = 2;
+                    _context10.next = 2;
                     return this.loading.create({
                       message: 'Obteniendo...<br>Información del usuario',
                       duration: 20000
                     });
 
                   case 2:
-                    loader = _context6.sent;
-                    _context6.next = 5;
+                    loader = _context10.sent;
+                    _context10.next = 5;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-                        var _this4 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+                        var _this3 = this;
 
-                        var loader1, loader2, _loader, _loader2;
+                        var loader1, loader2, _loader, _loader2, _loader3, _loader4, _loader5, _loader6;
 
-                        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                        return regeneratorRuntime.wrap(function _callee9$(_context9) {
                           while (1) {
-                            switch (_context5.prev = _context5.next) {
+                            switch (_context9.prev = _context9.next) {
                               case 0:
                                 if (this.utiles.isAppOnDevice()) {
-                                  _context5.next = 14;
+                                  _context9.next = 28;
                                   break;
                                 }
 
-                                //llamada web
-                                this.info.getIndicadorValor(uspId).subscribe(function (response) {
-                                  _this4.procesarIndicadorValor(response, loader);
+                                if (!this.parametrosApp.USA_API_MANAGEMENT()) {
+                                  _context9.next = 15;
+                                  break;
+                                }
+
+                                //llamada api management
+                                this.info.getIndicadorValorApi(uspId).subscribe(function (response) {
+                                  _this3.procesarIndicadorValor(response, loader);
                                 }); //presion
 
-                                _context5.next = 4;
+                                _context9.next = 5;
                                 return this.loading.create({
                                   message: 'Obteniendo...<br>Presión'
                                 });
 
-                              case 4:
-                                loader1 = _context5.sent;
-                                _context5.next = 7;
+                              case 5:
+                                loader1 = _context9.sent;
+                                _context9.next = 8;
                                 return loader1.present().then(function () {
-                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                    var _this5 = this;
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                    var _this4 = this;
 
                                     return regeneratorRuntime.wrap(function _callee$(_context) {
                                       while (1) {
                                         switch (_context.prev = _context.next) {
                                           case 0:
-                                            this.info.getPresion(uspId).subscribe(function (response) {
-                                              _this5.procesarPresion(response, loader1);
+                                            this.info.getPresionApi(uspId).subscribe(function (response) {
+                                              _this4.procesarPresion(response, loader1);
                                             });
 
                                           case 1:
@@ -311,25 +317,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 7:
-                                _context5.next = 9;
+                              case 8:
+                                _context9.next = 10;
                                 return this.loading.create({
                                   message: 'Obteniendo...<br>Alergias'
                                 });
 
-                              case 9:
-                                loader2 = _context5.sent;
-                                _context5.next = 12;
+                              case 10:
+                                loader2 = _context9.sent;
+                                _context9.next = 13;
                                 return loader2.present().then(function () {
-                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                                    var _this6 = this;
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                                    var _this5 = this;
 
                                     return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                       while (1) {
                                         switch (_context2.prev = _context2.next) {
                                           case 0:
-                                            this.info.getAlergias(uspId).subscribe(function (response) {
-                                              _this6.procesarAlergias(response, loader2);
+                                            this.info.getAlergiasApi(uspId).subscribe(function (response) {
+                                              _this5.procesarAlergias(response, loader2);
                                             });
 
                                           case 1:
@@ -341,34 +347,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 12:
-                                _context5.next = 25;
+                              case 13:
+                                _context9.next = 26;
                                 break;
 
-                              case 14:
-                                //llamada nativa
-                                this.info.getIndicadorValorNative(uspId).then(function (response) {
-                                  _this4.procesarIndicadorValor(JSON.parse(response.data), loader);
+                              case 15:
+                                this.info.getIndicadorValor(uspId).subscribe(function (response) {
+                                  _this3.procesarIndicadorValor(response, loader);
                                 }); //presion
 
-                                _context5.next = 17;
+                                _context9.next = 18;
                                 return this.loading.create({
                                   message: 'Obteniendo...<br>Presión'
                                 });
 
-                              case 17:
-                                _loader = _context5.sent;
-                                _context5.next = 20;
+                              case 18:
+                                _loader = _context9.sent;
+                                _context9.next = 21;
                                 return _loader.present().then(function () {
-                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                                    var _this7 = this;
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                                    var _this6 = this;
 
                                     return regeneratorRuntime.wrap(function _callee3$(_context3) {
                                       while (1) {
                                         switch (_context3.prev = _context3.next) {
                                           case 0:
-                                            this.info.getPresionNative(uspId).then(function (response) {
-                                              _this7.procesarPresion(JSON.parse(response.data), _loader);
+                                            this.info.getPresion(uspId).subscribe(function (response) {
+                                              _this6.procesarPresion(response, _loader);
                                             });
 
                                           case 1:
@@ -380,25 +385,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 20:
-                                _context5.next = 22;
+                              case 21:
+                                _context9.next = 23;
                                 return this.loading.create({
                                   message: 'Obteniendo...<br>Alergias'
                                 });
 
-                              case 22:
-                                _loader2 = _context5.sent;
-                                _context5.next = 25;
+                              case 23:
+                                _loader2 = _context9.sent;
+                                _context9.next = 26;
                                 return _loader2.present().then(function () {
-                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-                                    var _this8 = this;
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                                    var _this7 = this;
 
                                     return regeneratorRuntime.wrap(function _callee4$(_context4) {
                                       while (1) {
                                         switch (_context4.prev = _context4.next) {
                                           case 0:
-                                            this.info.getAlergiasNative(uspId).then(function (response) {
-                                              _this8.procesarAlergias(JSON.parse(response.data), _loader2);
+                                            this.info.getAlergias(uspId).subscribe(function (response) {
+                                              _this7.procesarAlergias(response, _loader2);
                                             });
 
                                           case 1:
@@ -410,21 +415,164 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 25:
+                              case 26:
+                                _context9.next = 53;
+                                break;
+
+                              case 28:
+                                if (!this.parametrosApp.USA_API_MANAGEMENT()) {
+                                  _context9.next = 42;
+                                  break;
+                                }
+
+                                //llamada nativa
+                                this.info.getIndicadorValorNativeApi(uspId).then(function (response) {
+                                  _this3.procesarIndicadorValor(JSON.parse(response.data), loader);
+                                }); //presion
+
+                                _context9.next = 32;
+                                return this.loading.create({
+                                  message: 'Obteniendo...<br>Presión'
+                                });
+
+                              case 32:
+                                _loader3 = _context9.sent;
+                                _context9.next = 35;
+                                return _loader3.present().then(function () {
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                                    var _this8 = this;
+
+                                    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                                      while (1) {
+                                        switch (_context5.prev = _context5.next) {
+                                          case 0:
+                                            this.info.getPresionNativeApi(uspId).then(function (response) {
+                                              _this8.procesarPresion(JSON.parse(response.data), _loader3);
+                                            });
+
+                                          case 1:
+                                          case "end":
+                                            return _context5.stop();
+                                        }
+                                      }
+                                    }, _callee5, this);
+                                  }));
+                                });
+
+                              case 35:
+                                _context9.next = 37;
+                                return this.loading.create({
+                                  message: 'Obteniendo...<br>Alergias'
+                                });
+
+                              case 37:
+                                _loader4 = _context9.sent;
+                                _context9.next = 40;
+                                return _loader4.present().then(function () {
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                                    var _this9 = this;
+
+                                    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                                      while (1) {
+                                        switch (_context6.prev = _context6.next) {
+                                          case 0:
+                                            this.info.getAlergiasNativeApi(uspId).then(function (response) {
+                                              _this9.procesarAlergias(JSON.parse(response.data), _loader4);
+                                            });
+
+                                          case 1:
+                                          case "end":
+                                            return _context6.stop();
+                                        }
+                                      }
+                                    }, _callee6, this);
+                                  }));
+                                });
+
+                              case 40:
+                                _context9.next = 53;
+                                break;
+
+                              case 42:
+                                //llamada nativa
+                                this.info.getIndicadorValorNative(uspId).then(function (response) {
+                                  _this3.procesarIndicadorValor(JSON.parse(response.data), loader);
+                                }); //presion
+
+                                _context9.next = 45;
+                                return this.loading.create({
+                                  message: 'Obteniendo...<br>Presión'
+                                });
+
+                              case 45:
+                                _loader5 = _context9.sent;
+                                _context9.next = 48;
+                                return _loader5.present().then(function () {
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+                                    var _this10 = this;
+
+                                    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                                      while (1) {
+                                        switch (_context7.prev = _context7.next) {
+                                          case 0:
+                                            this.info.getPresionNative(uspId).then(function (response) {
+                                              _this10.procesarPresion(JSON.parse(response.data), _loader5);
+                                            });
+
+                                          case 1:
+                                          case "end":
+                                            return _context7.stop();
+                                        }
+                                      }
+                                    }, _callee7, this);
+                                  }));
+                                });
+
+                              case 48:
+                                _context9.next = 50;
+                                return this.loading.create({
+                                  message: 'Obteniendo...<br>Alergias'
+                                });
+
+                              case 50:
+                                _loader6 = _context9.sent;
+                                _context9.next = 53;
+                                return _loader6.present().then(function () {
+                                  return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+                                    var _this11 = this;
+
+                                    return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                                      while (1) {
+                                        switch (_context8.prev = _context8.next) {
+                                          case 0:
+                                            this.info.getAlergiasNative(uspId).then(function (response) {
+                                              _this11.procesarAlergias(JSON.parse(response.data), _loader6);
+                                            });
+
+                                          case 1:
+                                          case "end":
+                                            return _context8.stop();
+                                        }
+                                      }
+                                    }, _callee8, this);
+                                  }));
+                                });
+
+                              case 53:
                               case "end":
-                                return _context5.stop();
+                                return _context9.stop();
                             }
                           }
-                        }, _callee5, this);
+                        }, _callee9, this);
                       }));
                     });
 
                   case 5:
                   case "end":
-                    return _context6.stop();
+                    return _context10.stop();
                 }
               }
-            }, _callee6, this);
+            }, _callee10, this);
           }));
         }
       }, {
@@ -511,7 +659,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               //todo ok
               for (var s in this.indicadorValor) {
                 //altura
-                if (this.indicadorValor[s].Descripcion == 'Altura') {
+                if (this.indicadorValor[s].Descripcion.includes('Altura') || this.indicadorValor[s].Descripcion.includes('Talla')) {
                   this.valorAltura = this.indicadorValor[s].Valor.toString();
 
                   if (this.indicadorValor[s].fecha == null) {
@@ -522,7 +670,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 } //peso
 
 
-                if (this.indicadorValor[s].Descripcion == 'Peso') {
+                if (this.indicadorValor[s].Descripcion.includes('Peso')) {
                   this.valorPeso = this.indicadorValor[s].Valor.toString();
 
                   if (this.indicadorValor[s].fecha == null) {
@@ -564,59 +712,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           loader.dismiss();
-        }
-      }, {
-        key: "procesarIndicadorValorSinLoader",
-        value: function procesarIndicadorValorSinLoader(data) {
-          this.indicadorValor = data.IndicadorValorUsp;
-
-          if (this.indicadorValor) {
-            if (this.indicadorValor.length > 0) {
-              //todo ok
-              for (var s in this.indicadorValor) {
-                //altura
-                if (this.indicadorValor[s].Descripcion == 'Altura') {
-                  this.valorAltura = this.indicadorValor[s].Valor.toString();
-
-                  if (this.indicadorValor[s].fecha == null) {
-                    this.fechaAltura = 'n/a';
-                  } else {
-                    this.fechaAltura = '3 días';
-                  }
-                } //peso
-
-
-                if (this.indicadorValor[s].Descripcion == 'Peso') {
-                  this.valorPeso = this.indicadorValor[s].Valor.toString();
-
-                  if (this.indicadorValor[s].fecha == null) {
-                    this.fechaPeso = 'n/a';
-                  } else {
-                    this.fechaPeso = '3 días';
-                  }
-                } //IMC
-
-
-                if (this.indicadorValor[s].Descripcion == 'I.M.C.') {
-                  this.valorImc = this.indicadorValor[s].Valor.toString();
-
-                  if (this.indicadorValor[s].fecha == null) {
-                    this.fechaImc = 'n/a';
-                  } else {
-                    this.fechaImc = '3 días';
-                  }
-                }
-              }
-            } else {
-              //llenar con valores predeterminados
-              this.valorAltura = 'No informada';
-              this.fechaAltura = 'No informada';
-              this.valorPeso = 'No informada';
-              this.fechaPeso = 'No informada';
-              this.valorImc = 'No informada';
-              this.fechaImc = 'No informada';
-            }
-          }
         }
         /*   doRefresh(event) {
             console.log('Begin async operation');
@@ -662,6 +757,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _app_services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_5__["ServicioInfoUsuario"]
       }, {
         type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__["ServicioAcceso"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_7__["ServicioParametrosApp"]
       }];
     };
 

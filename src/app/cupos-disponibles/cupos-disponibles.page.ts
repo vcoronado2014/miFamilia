@@ -176,6 +176,9 @@ export class CuposDisponiblesPage implements OnInit {
         this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
           this.procesarRespuestaTotal(response, loader);
         });
+/*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+          this.procesarRespuestaTotal(response, loader);
+        }); */
       }
       else {
         //llamada nativa
@@ -183,6 +186,10 @@ export class CuposDisponiblesPage implements OnInit {
           var respuesta = JSON.parse(response.data);
           this.procesarRespuestaTotal(respuesta, loader);
         });
+/*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+          var respuesta = JSON.parse(response.data);
+          this.procesarRespuestaTotal(respuesta, loader);
+        }); */
       }
     });
   }

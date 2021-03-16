@@ -1,0 +1,8 @@
+      <!-- prueba de material -->
+      <!-- fila fecha superior si es actual la mostramos en negrita-->
+      <ion-row *ngIf="transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual">
+        <label class="fecha-card"><strong>{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>
+      </ion-row>
+      <ion-row *ngIf="transformDate(item.FechaCompleta, 'MMMM') != fechaActual">
+        <label class="fecha-card">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</label>
+      </ion-row>

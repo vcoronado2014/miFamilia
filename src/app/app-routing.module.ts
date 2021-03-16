@@ -87,7 +87,15 @@ const routes: Routes = [
   {
     path: 'registro-usuario',
     loadChildren: () => import('./registro-usuario/registro-usuario.module').then( m => m.RegistroUsuarioPageModule)
+  },  {
+    path: 'pre-registro-uno',
+    loadChildren: () => import('./pre-registro-uno/pre-registro-uno.module').then( m => m.PreRegistroUnoPageModule)
   },
+  {
+    path: 'contactabilidad',
+    loadChildren: () => import('./contactabilidad/contactabilidad.module').then( m => m.ContactabilidadPageModule)
+  },
+
 
 
 ];

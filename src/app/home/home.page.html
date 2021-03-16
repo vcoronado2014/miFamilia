@@ -15,6 +15,13 @@
       <ion-row>
         <h3 class="text-avatar">{{miNombre}}</h3>
         <p class="subtext-avatar">{{miInstitucion}}</p>
+        <!-- EDITAR MI PROPIO REGISTRO -->
+        <ion-item button lines="none" (click)="abrirEditar()" style="--padding-start: 0;">
+          <ion-label>
+            Editar mi registro
+          </ion-label>
+          <ion-icon name="create-outline" slot="end"></ion-icon>
+        </ion-item>
       </ion-row>
     </ion-item>
     <ion-list>
@@ -49,9 +56,9 @@
 <ion-content class="card-background-page-home back-app" id="content">
   <!-- card antecedentes -->
   <ion-grid>
-    <ion-row>
+<!--     <ion-row>
       <label class="text-seleccione">Seleccione una de las siguientes opciones</label>
-    </ion-row>
+    </ion-row> -->
     <ion-row>
       <!-- card antecedentes -->
       <ion-col size="6">

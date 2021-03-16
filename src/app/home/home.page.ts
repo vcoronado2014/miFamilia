@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController } from '@ionic/angular';
+import { NavigationExtras } from '@angular/router';
 
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
@@ -114,6 +115,27 @@ export class HomePage implements OnInit {
   }
   openReservarHoraPage(){
     this.navCtrl.navigateRoot('pre-tiposatencion');
+  }
+  abrirEditar(){
+    let registro = null;
+    if (localStorage.getItem('REGISTRO')){
+      registro = JSON.parse(localStorage.getItem('REGISTRO'));
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          usuario: JSON.stringify(registro),
+          EstaEditando: true
+        }
+      };
+      this.dismiss();
+      this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
+    }
+    else{
+      this.utiles.presentToast("No puedes editar ya que no te encuentras registrado", "bottom", 3000);
+
+    }
+  }
+  dismiss(){
+    this.modalCtrl.dismiss();
   }
   //para procesar citas
   /*

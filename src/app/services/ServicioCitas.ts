@@ -651,6 +651,16 @@ export class ServicioCitas{
         let data = this.http.get(urlCorta, {}, {});
         return data;
     }
+    getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
+        let urlCorta = environment.API_ENDPOINT + 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+        let data = this.httpClient.get(urlCorta,{});
+        return data;
+    }
+    getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
+        let urlCorta = environment.API_ENDPOINT+ 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+        let data = this.http.get(urlCorta, {}, {});
+        return data;
+    }
     //las operaciones pueden ser
     //booked reservar cita
     //confirmed confirmar cita
@@ -677,4 +687,30 @@ export class ServicioCitas{
         let data = this.http.get(urlCorta, {}, {});
         return data;
     }
+    postObtenerTokenManagement(){
+
+        let url = environment.API_ENDPOINT + 'ObtenerDisponibilidadApi';
+        let httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+    
+        let options = { headers: httpHeaders };
+    
+        let data = this.httpClient.post(url, {}, options);
+        return data;
+      }
+      postObtenerTokenManagementNative(){
+        //realizar la llamada post nativa
+        const headers = new Headers;
+    
+        let url = environment.API_ENDPOINT + 'ObtenerDisponibilidadApi';
+        this.http.setDataSerializer('json');
+    
+    
+        return this.http.post(url, {}, {});
+      }
 }

@@ -67,14 +67,25 @@ export class AntecedentesPage implements OnInit {
       }
       //ahora vamos a generar un solo listado de usuarios con los datos que necesitamos
       if (this.usuarioAps) {
-        this.usuarioAps.Parentezco = "Yo";
+        if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Id > 0){
+          if (this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA'){
+            this.usuarioAps.Parentezco.Nombre = 'Yo';
+          }
+        }
+        else{
+          this.usuarioAps.Parentezco.Nombre = 'Yo';
+        }
+        //this.usuarioAps.Parentezco = "Yo";
         this.listadoUsuario.push(this.usuarioAps);
       }
       if (this.usuarioApsFamilia) {
         if (this.usuarioApsFamilia.length > 0) {
           for (var s in this.usuarioApsFamilia) {
             //por mientras el parentezco lo dejamos como no informado.
-            this.usuarioApsFamilia[s].Parentezco = "No informado";
+            if (!(this.usuarioApsFamilia[s].Parentezco && this.usuarioApsFamilia[s].Parentezco.Id > 0)){
+              this.usuarioApsFamilia[s].Parentezco.Nombre = 'No informado';
+            }
+            //this.usuarioApsFamilia[s].Parentezco = "No informado";
             this.listadoUsuario.push(this.usuarioApsFamilia[s]);
           }
         }

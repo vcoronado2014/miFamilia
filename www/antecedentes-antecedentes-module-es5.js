@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <div *ngIf=\"listadoUsuario <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div style=\"padding-top: 32px;\">\r\n    <ion-item *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\r\n      <ion-avatar slot=\"start\">\r\n        <img *ngIf=\"item.UrlImagen != ''\" src={{item.UrlImagen}}>\r\n        <img *ngIf=\"item.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n      </ion-avatar>\r\n      <ion-row style=\"display: block;\">\r\n        <h3 class=\"text-avatar\">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</h3>\r\n        <!-- comentado por mientras, hay que ver como sacar el parentezco -->\r\n        <p class=\"subtext-avatar\">{{item.Parentezco}}</p>\r\n      </ion-row>\r\n    </ion-item>\r\n  </div>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <div *ngIf=\"listadoUsuario <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div style=\"padding-top: 32px;\">\r\n    <div *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\r\n      <!-- poner avatar -->\r\n      <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -86,13 +86,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _antecedentes_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./antecedentes.page */
     "./src/app/antecedentes/antecedentes.page.ts");
+    /* harmony import */
+
+
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../components/components.module */
+    "./src/app/components/components.module.ts");
 
     var AntecedentesPageModule = function AntecedentesPageModule() {
       _classCallCheck(this, AntecedentesPageModule);
     };
 
     AntecedentesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_7__["ComponentsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
         path: '',
         component: _antecedentes_page__WEBPACK_IMPORTED_MODULE_6__["AntecedentesPage"]
       }])],
@@ -254,7 +260,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
                                 if (this.usuarioAps) {
-                                  this.usuarioAps.Parentezco = "Yo";
+                                  if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Id > 0) {
+                                    if (this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA') {
+                                      this.usuarioAps.Parentezco.Nombre = 'Yo';
+                                    }
+                                  } else {
+                                    this.usuarioAps.Parentezco.Nombre = 'Yo';
+                                  } //this.usuarioAps.Parentezco = "Yo";
+
+
                                   this.listadoUsuario.push(this.usuarioAps);
                                 }
 
@@ -262,7 +276,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   if (this.usuarioApsFamilia.length > 0) {
                                     for (s in this.usuarioApsFamilia) {
                                       //por mientras el parentezco lo dejamos como no informado.
-                                      this.usuarioApsFamilia[s].Parentezco = "No informado";
+                                      if (!(this.usuarioApsFamilia[s].Parentezco && this.usuarioApsFamilia[s].Parentezco.Id > 0)) {
+                                        this.usuarioApsFamilia[s].Parentezco.Nombre = 'No informado';
+                                      } //this.usuarioApsFamilia[s].Parentezco = "No informado";
+
+
                                       this.listadoUsuario.push(this.usuarioApsFamilia[s]);
                                     }
                                   }

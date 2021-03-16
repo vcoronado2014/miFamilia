@@ -10,6 +10,7 @@ import { CalendarioPage } from './calendario.page';
 import { TextAvatarModule } from '../../directives/text-avatar/index'
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
     TextAvatarModule,
     MatCardModule,
     MatButtonModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

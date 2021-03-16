@@ -78,7 +78,8 @@ export class CalendarioPage implements OnInit {
   //para infinity scroll
   private topLimit: number = 5;
   private citasVerticalTodasTop: any = [];
-  
+  //para poner la linea en la fecha actual
+  fechaActual = '';
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,     
@@ -102,6 +103,8 @@ export class CalendarioPage implements OnInit {
   
   ngOnInit() {
     moment().locale('es');
+    this.fechaActual = this.transformDate(moment(), 'YYYY-MM-DD');
+    console.log(this.fechaActual);
     //this.miColor = this.utiles.entregaMiColor();
     if (sessionStorage.UsuarioAps) {
       this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -133,9 +136,6 @@ export class CalendarioPage implements OnInit {
     console.log(mesActual);
     //***************************** */
     this.tratamientoMeses();
-    //omplementación antigua
-    //this.cargarEventosMes(mesActual, annoActual);
-    //this.buscarDisponibilidad(new Date());
     //implementacion nueva
     this.cargarTodosLosEventos();
 
@@ -143,13 +143,7 @@ export class CalendarioPage implements OnInit {
   private getTime(date?: Date) {
     return date != null ? new Date(date).getTime() : 0;
   }
-/*   ordenarDesc = function(a, b){
-    var fechaA = moment(a.FechaCompleta).format();
-    var fechaB = moment(b.FechaCompleta).format();
-    //console.log(convertirFe)
-    //return b-a;
-    return fechaA - fechaB;
-  }; */
+
   async cargarTodosLosEventos(){
     //usar citasVerticalTodas
     this.citasVerticalTodas = [];
@@ -186,10 +180,7 @@ export class CalendarioPage implements OnInit {
             //tercera llamada
             this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesPosterior.mes, mesPosterior.anno).subscribe(async (responseTres: any)=>{
               this.citasVerticalTodas = this.citasVerticalTodas.concat(responseTres);
-              //pruebas
-              //this.pruebaProcesar(this.citasVerticalTodas);
               //aca procedemos a procesarlos
-
               this.procesarArregloCitasTodas();
               this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
               //console.log(this.citasVerticalMostrar);
@@ -221,7 +212,7 @@ export class CalendarioPage implements OnInit {
               //aca procesamos
               this.procesarArregloCitasTodas();
               this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
-                            //ahora que tenemos las citas que queremos mostrar
+              //ahora que tenemos las citas que queremos mostrar
               //ordenamos
               this.citasVerticalMostrar.sort((a:any, b:any)=>{ return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta)});
               //guardamos la variable de ordenamiento
@@ -242,38 +233,6 @@ export class CalendarioPage implements OnInit {
   logout(){
     this.acceso.logout();
     this.navCtrl.navigateRoot('nuevo-login');
-  }
-  async mesSelected(item){
-    //realizar la llamada para cargar los eventos del mes
-    console.log(item.detail.value);
-    var arr = item.detail.value.split(',');
-    if (arr){
-      if (arr.length == 2){
-        var mes = arr[0];
-        var anno = arr[1];
-        // setear this.mesActualSeleccionado al mes seleccionado de lo contrario simpre sera el mes actual
-        //this.mesActualSeleccionado = mes;
-        this.mesActualSeleccionado = item.detail.value;
-        let loader = await this.loading.create({
-          message: 'Obteniendo...<br>Información del usuario',
-          duration: 20000
-        });
-    
-        await loader.present().then(async () => {
-          if(!this.utiles.isAppOnDevice()){
-            //llamada web
-            //this.cargarDatosWeb(mes, anno, loader);
-            this.cargarDatosWebN(mes, anno, loader);
-          }
-          else {
-            //llamada nativa
-            this.cargarDatosNativeN(mes, anno, loader);
-          }
-        });
-
-      }
-    }
-         
   }
   procesarArregloCitas(){
     var contador = 0;
@@ -449,78 +408,6 @@ export class CalendarioPage implements OnInit {
 
     }, 500);
   }
-  cargarDatosNative(mesConsultar, annoConsultar, loader){
-    //lo cambiamos para probar el nuevo metodo
-    //this.cita.entregaPorMesNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(async (response: any)=>{
-    this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(async (response: any)=>{
-      //this.procesarIndicadorValor(response, loader);
-      this.citasVertical = JSON.parse(response.data);
-      this.citasVerticalMostrar =this.citasVertical.filter( e => e.Mostrar == true );
-      //aqui procesa citasVertical
-      this.procesarArregloCitas();
-      this.estaCargando = false;
-      //terminamos el loader
-      loader.dismiss();
-      //ESTA INFORMACION ES PARA LLENAR EVENTOS DEL TIPO CALENDARIO
-      if (environment.USA_CALENDARIO) {
-        //ahora traeremos la información adicional
-        let loader1 = await this.loading.create({
-          message: 'Obteniendo...<br>Información del usuario',
-          duration: 20000
-        });
-        await loader1.present().then(async () => {
-          this.cita.getDiagnosticosByUspIdNative(this.usuarioAps.Id);
-          this.citas = this.cita.arregloGeneral;
-          this.eventSource = this.createEventsCalendario();
-          loader1.dismiss();
-          this.estaCargando = false;
-          console.log('esta cargando ' + this.estaCargando);
-        });
-      }
-      //busca disponibilidad
-      if (this.utiles.entregaParametroUsaAgenda()) {
-        //en moment hay que quitar un digito al mes
-        //var fechaInicio = moment([parseInt(annoConsultar), parseInt(mesConsultar)-1, 1]);
-        var fechaD = new Date(parseInt(annoConsultar), parseInt(mesConsultar)-1, 1, 0, 1,0,0);
-       
-
-        var fechaInicio = moment(fechaD);
-        var diasDelMes = fechaInicio.daysInMonth();
-        var fechaT = new Date(parseInt(annoConsultar), parseInt(mesConsultar)-1, diasDelMes, 23, 59,0,0);
-        var fechaTermino = moment(fechaT);
-
-        let loaderDisp = await this.loading.create({
-          message: 'Cargando...<br>disponibilidad',
-          duration: 20000
-        });
-
-        this.cita.getDisponibilidadNative(fechaInicio.format(), fechaTermino.format(), this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).then((response: any) => {
-          this.citasIntegracion = [];
-          var respuesta = JSON.parse(response.data);
-          if (respuesta && respuesta.Mensaje) {
-            //correcto
-            if (respuesta.Mensaje.Detalle.Codigo == 'MSG_CORRECTO') {
-              //ya tiene citas tomadas, hay que enviarlo a otra pagina
-              //la de buscarcitas
-              this.citasIntegracion = respuesta.CitasDisponibles;
-              //hay que reprocesar los elementos
-              if (this.citasIntegracion.length > 0){
-                var nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-                this.utiles.insertaCitasAEventos(this.citasIntegracion, this.citasVertical, nombrePaciente);
-                //volvemos a reprocesar
-                this.procesarArregloCitas();
-              }
-
-            }
-          }
-          this.estaCargando = false;
-          console.log('esta cargando ' + this.estaCargando);
-          loaderDisp.dismiss();
-        });
-      }
-
-    });
-  }
   cargarDatosNativeN(mesConsultar, annoConsultar, loader){
     //lo cambiamos para probar el nuevo metodo
     //this.cita.entregaPorMesNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(async (response: any)=>{
@@ -545,112 +432,6 @@ export class CalendarioPage implements OnInit {
     });
     
   }
-/*   pruebaProcesar(arr){
-    var fechaActual = moment().format("DD-MM-YYYY");
-    var fechaManana = moment().add(1, 'day').format("DD-MM-YYYY");
-
-    var nuevas = arr.filter(e=> e.Mostrar == true);
-    var total = nuevas.filter(e=> moment(e.FechaCompleta).format("DD-MM-YYYY") == fechaActual || moment(e.FechaCompleta).format("DD-MM-YYYY") == fechaManana);
-    if (total && total.length > 0){
-
-    }
-
-  } */
-  cargarDatosWeb(mesConsultar, annoConsultar, loader){
-    //lo comentamos por nueva implementacion
-    //this.cita.entregaPorMes(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).subscribe(async (response: any)=>{
-    this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).subscribe(async (response: any)=>{
-      //this.procesarIndicadorValor(response, loader);
-      this.citasVertical = response;
-      this.citasVerticalMostrar =this.citasVertical.filter( e => e.Mostrar == true );
-      //aqui procesa citasVertical
-      this.procesarArregloCitas();
-      this.estaCargando = false;
-      //terminamos el loader
-      loader.dismiss();
-      //ESTA INFORMACION ES PARA LLENAR EVENTOS DEL TIPO CALENDARIO
-      if (environment.USA_CALENDARIO) {
-        this.estaCargando = true;
-        //ahora traeremos la información adicional
-        let loader1 = await this.loading.create({
-          message: 'Obteniendo...<br>Información del usuario',
-          duration: 20000
-        });
-        await loader1.present().then(async () => {
-          this.cita.getDiagnosticosByUspId(this.usuarioAps.Id);
-          this.citas = this.cita.arregloGeneral;
-          this.eventSource = this.createEventsCalendario();
-          loader1.dismiss();
-          this.estaCargando = false;
-          console.log('esta cargando ' + this.estaCargando);
-        });
-      }
-      //busca disponibilidad
-      if (this.utiles.entregaParametroUsaAgenda()) {
-        this.estaCargando = true;
-        //en moment hay que quitar un digito al mes
-        //var fechaInicio = moment([parseInt(annoConsultar), parseInt(mesConsultar)-1, 1]);
-        var fechaD = new Date(parseInt(annoConsultar), parseInt(mesConsultar)-1, 1, 0, 1,0,0);
-       
-
-        var fechaInicio = moment(fechaD);
-        var diasDelMes = fechaInicio.daysInMonth();
-        var fechaT = new Date(parseInt(annoConsultar), parseInt(mesConsultar)-1, diasDelMes, 23, 59,0,0);
-        var fechaTermino = moment(fechaT);
-
-        let loaderDisp = await this.loading.create({
-          message: 'Cargando...<br>disponibilidad',
-          duration: 20000
-        });
-
-        this.cita.getDisponibilidad(fechaInicio.format(), fechaTermino.format(), this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).subscribe((response: any) => {
-          this.citasIntegracion = [];
-          if (response && response.Mensaje) {
-            //correcto
-            if (response.Mensaje.Detalle.Codigo == 'MSG_CORRECTO') {
-              //ya tiene citas tomadas, hay que enviarlo a otra pagina
-              //la de buscarcitas
-              this.citasIntegracion = response.CitasDisponibles;
-              //hay que reprocesar los elementos
-              if (this.citasIntegracion.length > 0) {
-                var nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-                this.utiles.insertaCitasAEventos(this.citasIntegracion, this.citasVertical, nombrePaciente);
-                //volvemos a reprocesar
-                this.procesarArregloCitas();
-              }
-
-            }
-          }
-          this.estaCargando = false;
-          console.log('esta cargando ' + this.estaCargando);
-          loaderDisp.dismiss();
-        });
-      }
-
-    });
-  }
-  async cargarEventosMes(mesConsultar, annoConsultar){
-    this.estaCargando = true;
-    let loader = await this.loading.create({
-      message: 'Obteniendo...<br>Información del usuario',
-      duration: 20000
-    });
-
-    await loader.present().then(async () => {
-      if (!this.utiles.isAppOnDevice()) {
-        //llamada web
-        //this.cargarDatosWeb(mesConsultar, annoConsultar, loader);
-        this.cargarDatosWebN(mesConsultar, annoConsultar, loader);
-      }
-      else{
-        //llamada nativa
-        this.cargarDatosNativeN(mesConsultar, annoConsultar, loader);
-      }
-    });
-
-
-  }
-  
   tratamientoMeses(){
     this.mesesVertical = [];
     moment.locale('es-es');
@@ -722,41 +503,12 @@ export class CalendarioPage implements OnInit {
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
         }
         this.cargarTodosLosEventos();
-        //this.cargarEventosMes(mesActual, annoActual);
       }
     });
     return await modal.present();
   }
 
-  //para procesar citas
-  //se debe buscar disponibilidad de acuerdo a la fecha que se consulta
-  async buscarDisponibilidad(fecha) {
-    //ACA ME FALTA CONTROLAR LOS MENSAJES
-    var inicio = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 6, 0, 0, 0);
-    var ini = moment(inicio).format();
-    var termino = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 23, 59, 0, 0)
-    var ter = moment(termino).format();
-    let loader = await this.loading.create({
-      message: 'Cargando...<br>disponibilidad',
-      duration: 20000
-    });
 
-    await loader.present().then(async () => {
-      if (!this.utiles.isAppOnDevice()) {
-        //llamada web
-        this.cita.getDisponibilidad(ini, ter, this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).subscribe((response: any) => {
-          this.procesarRespuesta(response, loader);
-        });
-      }
-      else {
-        //llamada nativa
-        this.cita.getDisponibilidadNative(ini, ter, this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).then((response: any) => {
-          var respuesta = JSON.parse(response.data);
-          this.procesarRespuesta(respuesta, loader);
-        });
-      }
-    });
-  }
   procesarRespuesta(data, loader) {
     this.citasIntegracion = [];
     if (data && data.Mensaje) {
@@ -842,7 +594,6 @@ export class CalendarioPage implements OnInit {
         }
         else{
           //llamada nativa
-          //this.cargarDatosNative(mesConsultar, annoConsultar, loader);
           this.cita.getOperacionCitaNative(idCita, idPaciente, accion).then((responseData: any)=>{
             var response = JSON.parse(responseData.data);
             this.procesarRespuestaAgendar(response, loader, accion);
@@ -878,7 +629,6 @@ export class CalendarioPage implements OnInit {
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
         }
         this.cargarTodosLosEventos();
-        //this.cargarEventosMes(mesActual, annoActual);
       }
       else{
         this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);

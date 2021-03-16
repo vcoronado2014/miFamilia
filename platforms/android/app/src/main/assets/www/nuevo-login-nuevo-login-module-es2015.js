@@ -108,8 +108,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
 /* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
 /* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/ServicioFCM */ "./src/app/services/ServicioFCM.ts");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
@@ -121,8 +124,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 let NuevoLoginPage = class NuevoLoginPage {
-    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp) {
+    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device) {
         this.navCtrl = navCtrl;
         this.utiles = utiles;
         this.servicioGeo = servicioGeo;
@@ -132,6 +138,10 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.router = router;
         this.acceso = acceso;
         this.parametrosApp = parametrosApp;
+        this.fcmService = fcmService;
+        this.appVersion = appVersion;
+        this.platform = platform;
+        this.device = device;
         this.hide = true;
         //para validar
         this.patternOnlyLetter = '[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$';
@@ -142,12 +152,12 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.usaEnrolamiento = false;
     }
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_12__["locale"]('es');
         this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
         this.cargarForma();
     }
     abrirAsistente() {
-        this.navCtrl.navigateRoot('registro-uno');
+        this.navCtrl.navigateRoot('pre-registro-uno');
     }
     cargarForma() {
         this.forma = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
@@ -176,6 +186,68 @@ let NuevoLoginPage = class NuevoLoginPage {
                 repetirClave: ''
               })
             } */
+    }
+    crearToken() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var versionAppName;
+            var versionNumber;
+            var plataforma;
+            let loader = yield this.loading.create({
+                message: 'Creando...<br>Token inicial',
+                duration: 2000
+            });
+            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                if (!this.utiles.isAppOnDevice()) {
+                    //web
+                    //guardar local storage
+                    if (!localStorage.getItem('token_dispositivo')) {
+                        //crear token para web
+                        this.tokenDispositivo = (Math.random() * (1000000 - 1) + 1).toString() + ' web';
+                        localStorage.setItem('token_dispositivo', this.tokenDispositivo);
+                    }
+                    else {
+                        this.tokenDispositivo = localStorage.getItem('token_dispositivo');
+                    }
+                    versionAppName = "Mi salud familiar";
+                    versionNumber = "0.0";
+                    plataforma = "Web";
+                    //loader.dismiss();
+                    //otras variables
+                    localStorage.setItem('version_app_name', versionAppName);
+                    localStorage.setItem('version_number', versionNumber);
+                    localStorage.setItem('plataforma', plataforma);
+                }
+                else {
+                    if (this.platform.is('ios')) {
+                        versionAppName = yield this.appVersion.getAppName();
+                        versionNumber = yield this.appVersion.getVersionNumber();
+                        plataforma = "iOS";
+                    }
+                    else if (this.platform.is('android')) {
+                        versionAppName = yield this.appVersion.getAppName();
+                        versionNumber = yield this.appVersion.getVersionNumber();
+                        plataforma = "Android";
+                    }
+                    else if (this.platform.is('mobileweb')) {
+                        versionAppName = "Mi salud familiar";
+                        versionNumber = "0.0";
+                        plataforma = "Web";
+                    }
+                    else {
+                        versionAppName = "Mi salud familiar";
+                        versionNumber = "0.0";
+                        plataforma = "No informado";
+                    }
+                    //crear token para web
+                    this.tokenDispositivo = this.device.uuid;
+                    localStorage.setItem('token_dispositivo', this.tokenDispositivo);
+                    //otras variables
+                    localStorage.setItem('version_app_name', versionAppName);
+                    localStorage.setItem('version_number', versionNumber);
+                    localStorage.setItem('plataforma', plataforma);
+                }
+            }));
+        });
     }
     loguearseRegistro() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -248,7 +320,7 @@ let NuevoLoginPage = class NuevoLoginPage {
     autentificarse(userName, password) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             //en este caso ya el user name es el email
-            let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento };
+            let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
             let loader = yield this.loading.create({
                 message: 'Obteniendo...<br>Login',
                 duration: 10000
@@ -271,6 +343,31 @@ let NuevoLoginPage = class NuevoLoginPage {
             }));
         });
     }
+    setDatosUsuario(retorno, user, userFamilia) {
+        //variable de sessión muy importante para el resto de la app.
+        sessionStorage.setItem("UsuarioAps", user);
+        localStorage.setItem('MI_RUT', retorno.UsuarioAps.Rut);
+        localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres + ' ' + retorno.UsuarioAps.ApellidoPaterno);
+        localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);
+        localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen);
+        //lo vamos a guardar en el local storage para realizar la llamada
+        //en el background
+        localStorage.setItem('UsuarioAps', user);
+        if (retorno.UsuariosFamilia) {
+            //debemos quitar los repetidos según última revisión
+            let hash = {};
+            var familia = retorno.UsuariosFamilia.filter(o => hash[o.Id] ? false : hash[o.Id] = true);
+            retorno.UsuariosFamilia = familia;
+            userFamilia = JSON.stringify(retorno.UsuariosFamilia);
+            //variable de sessión muy importante para el resto de la app.
+            sessionStorage.setItem("UsuariosFamilia", userFamilia);
+        }
+        this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
+        this.Mensaje = retorno.RespuestaBase.Mensaje;
+        this.loggedIn = true;
+        /*     this.fcmService.initFCM();
+            this.fcmService.receiveMessage(true); */
+    }
     procesarLogin(response, loader) {
         var retorno = response;
         let tieneUsuario = false;
@@ -281,35 +378,34 @@ let NuevoLoginPage = class NuevoLoginPage {
                 var userFamilia;
                 if (retorno.UsuarioAps) {
                     user = JSON.stringify(retorno.UsuarioAps);
-                    //variable de sessión muy importante para el resto de la app.
-                    sessionStorage.setItem("UsuarioAps", user);
-                    localStorage.setItem('MI_RUT', retorno.UsuarioAps.Rut);
-                    localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres + ' ' + retorno.UsuarioAps.ApellidoPaterno);
-                    localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);
-                    localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen);
-                    //lo vamos a guardar en el local storage para realizar la llamada
-                    //en el background
-                    localStorage.setItem('UsuarioAps', user);
-                    tieneUsuario = true;
+                    //antes debemos validar si tiene entidad contratante
+                    if (user.NodId && this.parametrosApp.USA_ENTIDAD_CONTRATANTE()) {
+                        //usa entidad contratante y tiene nodo
+                        if (retorno.UsuarioAps.EntidadContratante && retorno.UsuarioAps.EntidadContratante.length > 0) {
+                            //tiene entidad contratante
+                            tieneUsuario = true;
+                            this.setDatosUsuario(retorno, user, userFamilia);
+                            loader.dismiss();
+                        }
+                        else {
+                            //no tiene entidad contratante
+                            this.utiles.presentToast("No tiene entidad contratante asociada", "middle", 3000);
+                            loader.dismiss();
+                            return;
+                        }
+                    }
+                    else {
+                        //no usa entidad contratante
+                        tieneUsuario = true;
+                        this.setDatosUsuario(retorno, user, userFamilia);
+                        loader.dismiss();
+                    }
                 }
-                if (retorno.UsuariosFamilia) {
-                    //debemos quitar los repetidos según última revisión
-                    let hash = {};
-                    var familia = retorno.UsuariosFamilia.filter(o => hash[o.Id] ? false : hash[o.Id] = true);
-                    retorno.UsuariosFamilia = familia;
-                    userFamilia = JSON.stringify(retorno.UsuariosFamilia);
-                    //variable de sessión muy importante para el resto de la app.
-                    sessionStorage.setItem("UsuariosFamilia", userFamilia);
-                }
-                this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
-                this.Mensaje = retorno.RespuestaBase.Mensaje;
-                this.loggedIn = true;
-                loader.dismiss();
                 //si tiene usuario está valido
                 if (!tieneUsuario) {
                     this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
                 }
-                //this.crearToken();
+                this.crearToken();
                 this.irAHome();
             }
             else {
@@ -348,7 +444,11 @@ NuevoLoginPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__["ServicioAcceso"] },
-    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] }
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] },
+    { type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__["ServicioFCM"] },
+    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_10__["AppVersion"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+    { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_11__["Device"] }
 ];
 NuevoLoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

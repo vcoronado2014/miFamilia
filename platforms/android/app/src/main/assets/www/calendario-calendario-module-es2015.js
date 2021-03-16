@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Eventos</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\">\r\n  <!-- selección de fecha -->\r\n<!--     <ion-item class=\"ion-text-center\" lines=\"none\">\r\n      <ion-icon name=\"calendar\" slot=\"start\"></ion-icon>\r\n      <ion-select okText=\"Aceptar\" cancelText=\"Cancelar\" (ionChange)=\"mesSelected($event)\" multiple=\"false\" value=\"{{mesActualSeleccionado}}\">\r\n          <ion-select-option *ngFor=\"let mes of mesesVertical\" [value]=\"mes.mesNumero\">\r\n            {{mes.mesTexto}}\r\n          </ion-select-option>\r\n      </ion-select>\r\n    </ion-item> -->\r\n\r\n\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n <div *ngIf=\"tiene\">\r\n  <div *ngFor=\"let item of citasVerticalTodasTop\">\r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <!-- prueba de material -->\r\n      <!-- fila fecha superior-->\r\n      <ion-row>\r\n        <label class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</label>\r\n      </ion-row>\r\n      <!-- fila items -->\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle>{{evento.DetalleEventoMes.NombrePaciente}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">RESERVAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Eventos</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\">\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle>{{evento.DetalleEventoMes.NombrePaciente}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n");
 
 /***/ }),
 
@@ -33,6 +33,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../directives/text-avatar/index */ "./src/directives/text-avatar/index.ts");
 /* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -54,6 +56,7 @@ CalendarioPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])(
             _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__["TextAvatarModule"],
             _angular_material_card__WEBPACK_IMPORTED_MODULE_8__["MatCardModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButtonModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_10__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                 {
                     path: '',
@@ -78,7 +81,7 @@ CalendarioPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])(
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("/* Set the width to the full container and center the content */\nion-select {\n  width: 100%;\n  justify-content: center;\n}\n/* Set the flex in order to size the text width to its content */\nion-select::part(placeholder),\nion-select::part(text) {\n  flex: 0 0 auto;\n}\n/* Set the placeholder color and opacity */\nion-select::part(placeholder) {\n  color: #20a08a;\n  opacity: 1;\n}\n/*\n * Set the font of the first letter of the placeholder\n * Shadow parts work with pseudo-elements, too!\n * https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements\n */\nion-select::part(placeholder)::first-letter {\n  font-size: 24px;\n  font-weight: 500;\n}\n/* Set the text color */\nion-select::part(text) {\n  color: #545ca7;\n}\n/* Set the icon color and opacity */\nion-select::part(icon) {\n  color: #971e49;\n  opacity: 1;\n}\n.content-card-fav {\n  height: 58px;\n  min-height: 56px;\n}\n.ion-fav-calendar {\n  height: 48px;\n  width: 48px;\n}\n.botonReservar {\n  /*color:#000000DE;\n  font-weight: 20px;*/\n  font: normal normal medium 14px/16px Roboto;\n  letter-spacing: 1.25px;\n  color: #000000DE;\n  text-transform: uppercase;\n  opacity: 1;\n}\n/* estilos para material */\n.example-header-image {\n  background-size: cover;\n  width: 80px;\n  height: 80px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\nmat-card {\n  width: 100%;\n  max-width: 100%;\n  min-width: 100%;\n}\n::ng-dep .mat-card-header-text {\n  width: 100%;\n  margin: 0;\n}\n.hora {\n  font-size: 0.8em;\n}\n.row-card {\n  margin-left: 16px;\n  margin-right: 16px;\n}\n.img-card {\n  width: 80px;\n  float: right;\n  margin: 0;\n  padding: 0;\n  min-width: 80px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FsZW5kYXJpby9GOlxcYXBwX21pZmFtaWxpYV9naXRcXG1pRmFtaWxpYV9wcmUvc3JjXFxhcHBcXGNhbGVuZGFyaW9cXGNhbGVuZGFyaW8ucGFnZS5zY3NzIiwic3JjL2FwcC9jYWxlbmRhcmlvL2NhbGVuZGFyaW8ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLCtEQUFBO0FBQ0E7RUFDSSxXQUFBO0VBRUEsdUJBQUE7QUNBSjtBREdFLGdFQUFBO0FBQ0E7O0VBRUUsY0FBQTtBQ0FKO0FER0UsMENBQUE7QUFDQTtFQUNFLGNBQUE7RUFDQSxVQUFBO0FDQUo7QURHRTs7OztFQUFBO0FBS0E7RUFDRSxlQUFBO0VBQ0EsZ0JBQUE7QUNBSjtBREdFLHVCQUFBO0FBQ0E7RUFDRSxjQUFBO0FDQUo7QURHRSxtQ0FBQTtBQUNBO0VBQ0UsY0FBQTtFQUNBLFVBQUE7QUNBSjtBREVFO0VBQ0UsWUFBQTtFQUNBLGdCQUFBO0FDQ0o7QURDRTtFQUNFLFlBQUE7RUFDQSxXQUFBO0FDRUo7QURBRTtFQUNFO3FCQUFBO0VBRUEsMkNBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSxVQUFBO0FDR0o7QURERSwwQkFBQTtBQUNBO0VBQ0Usc0JBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLG9CQUFBO0tBQUEsaUJBQUE7QUNJSjtBREZFO0VBQ0UsV0FBQTtFQUNBLGVBQUE7RUFDQSxlQUFBO0FDS0o7QURIRTtFQUNFLFdBQUE7RUFDQSxTQUFBO0FDTUo7QURKRTtFQUNFLGdCQUFBO0FDT0o7QURMRTtFQUNFLGlCQUFBO0VBQ0Esa0JBQUE7QUNRSjtBRE5FO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFDQSxTQUFBO0VBQ0EsVUFBQTtFQUNBLGVBQUE7QUNTSiIsImZpbGUiOiJzcmMvYXBwL2NhbGVuZGFyaW8vY2FsZW5kYXJpby5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBTZXQgdGhlIHdpZHRoIHRvIHRoZSBmdWxsIGNvbnRhaW5lciBhbmQgY2VudGVyIHRoZSBjb250ZW50ICovXHJcbmlvbi1zZWxlY3Qge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgXHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICB9XHJcbiAgXHJcbiAgLyogU2V0IHRoZSBmbGV4IGluIG9yZGVyIHRvIHNpemUgdGhlIHRleHQgd2lkdGggdG8gaXRzIGNvbnRlbnQgKi9cclxuICBpb24tc2VsZWN0OjpwYXJ0KHBsYWNlaG9sZGVyKSxcclxuICBpb24tc2VsZWN0OjpwYXJ0KHRleHQpIHtcclxuICAgIGZsZXg6IDAgMCBhdXRvO1xyXG4gIH1cclxuICBcclxuICAvKiBTZXQgdGhlIHBsYWNlaG9sZGVyIGNvbG9yIGFuZCBvcGFjaXR5ICovXHJcbiAgaW9uLXNlbGVjdDo6cGFydChwbGFjZWhvbGRlcikge1xyXG4gICAgY29sb3I6ICMyMGEwOGE7XHJcbiAgICBvcGFjaXR5OiAxO1xyXG4gIH1cclxuICBcclxuICAvKlxyXG4gICAqIFNldCB0aGUgZm9udCBvZiB0aGUgZmlyc3QgbGV0dGVyIG9mIHRoZSBwbGFjZWhvbGRlclxyXG4gICAqIFNoYWRvdyBwYXJ0cyB3b3JrIHdpdGggcHNldWRvLWVsZW1lbnRzLCB0b28hXHJcbiAgICogaHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQ1NTL1BzZXVkby1lbGVtZW50c1xyXG4gICAqL1xyXG4gIGlvbi1zZWxlY3Q6OnBhcnQocGxhY2Vob2xkZXIpOjpmaXJzdC1sZXR0ZXIge1xyXG4gICAgZm9udC1zaXplOiAyNHB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDUwMDtcclxuICB9XHJcbiAgXHJcbiAgLyogU2V0IHRoZSB0ZXh0IGNvbG9yICovXHJcbiAgaW9uLXNlbGVjdDo6cGFydCh0ZXh0KSB7XHJcbiAgICBjb2xvcjogIzU0NWNhNztcclxuICB9XHJcbiAgXHJcbiAgLyogU2V0IHRoZSBpY29uIGNvbG9yIGFuZCBvcGFjaXR5ICovXHJcbiAgaW9uLXNlbGVjdDo6cGFydChpY29uKSB7XHJcbiAgICBjb2xvcjogIzk3MWU0OTtcclxuICAgIG9wYWNpdHk6IDE7XHJcbiAgfVxyXG4gIC5jb250ZW50LWNhcmQtZmF2e1xyXG4gICAgaGVpZ2h0OiA1OHB4O1xyXG4gICAgbWluLWhlaWdodDogNTZweDtcclxuICB9XHJcbiAgLmlvbi1mYXYtY2FsZW5kYXJ7XHJcbiAgICBoZWlnaHQ6IDQ4cHg7XHJcbiAgICB3aWR0aDogNDhweDtcclxuICB9XHJcbiAgLmJvdG9uUmVzZXJ2YXJ7XHJcbiAgICAvKmNvbG9yOiMwMDAwMDBERTtcclxuICAgIGZvbnQtd2VpZ2h0OiAyMHB4OyovXHJcbiAgICBmb250OiBub3JtYWwgbm9ybWFsIG1lZGl1bSAxNHB4LzE2cHggUm9ib3RvO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDEuMjVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwREU7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG4gICAgb3BhY2l0eTogMTtcclxuICB9XHJcbiAgLyogZXN0aWxvcyBwYXJhIG1hdGVyaWFsICovXHJcbiAgLmV4YW1wbGUtaGVhZGVyLWltYWdlIHtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XHJcbiAgICB3aWR0aDogODBweDtcclxuICAgIGhlaWdodDogODBweDtcclxuICAgIG9iamVjdC1maXQ6IGNvdmVyO1xyXG4gIH1cclxuICBtYXQtY2FyZHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgbWF4LXdpZHRoOiAxMDAlO1xyXG4gICAgbWluLXdpZHRoOiAxMDAlO1xyXG4gIH1cclxuICA6Om5nLWRlcCAubWF0LWNhcmQtaGVhZGVyLXRleHR7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIG1hcmdpbjogMDtcclxuICB9XHJcbiAgLmhvcmF7XHJcbiAgICBmb250LXNpemU6IDAuOGVtO1xyXG4gIH1cclxuICAucm93LWNhcmR7XHJcbiAgICBtYXJnaW4tbGVmdDogMTZweDtcclxuICAgIG1hcmdpbi1yaWdodDogMTZweDtcclxuICB9XHJcbiAgLmltZy1jYXJke1xyXG4gICAgd2lkdGg6IDgwcHg7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgICBwYWRkaW5nOiAwO1xyXG4gICAgbWluLXdpZHRoOiA4MHB4O1xyXG4gIH1cclxuICBcclxuIiwiLyogU2V0IHRoZSB3aWR0aCB0byB0aGUgZnVsbCBjb250YWluZXIgYW5kIGNlbnRlciB0aGUgY29udGVudCAqL1xuaW9uLXNlbGVjdCB7XG4gIHdpZHRoOiAxMDAlO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn1cblxuLyogU2V0IHRoZSBmbGV4IGluIG9yZGVyIHRvIHNpemUgdGhlIHRleHQgd2lkdGggdG8gaXRzIGNvbnRlbnQgKi9cbmlvbi1zZWxlY3Q6OnBhcnQocGxhY2Vob2xkZXIpLFxuaW9uLXNlbGVjdDo6cGFydCh0ZXh0KSB7XG4gIGZsZXg6IDAgMCBhdXRvO1xufVxuXG4vKiBTZXQgdGhlIHBsYWNlaG9sZGVyIGNvbG9yIGFuZCBvcGFjaXR5ICovXG5pb24tc2VsZWN0OjpwYXJ0KHBsYWNlaG9sZGVyKSB7XG4gIGNvbG9yOiAjMjBhMDhhO1xuICBvcGFjaXR5OiAxO1xufVxuXG4vKlxuICogU2V0IHRoZSBmb250IG9mIHRoZSBmaXJzdCBsZXR0ZXIgb2YgdGhlIHBsYWNlaG9sZGVyXG4gKiBTaGFkb3cgcGFydHMgd29yayB3aXRoIHBzZXVkby1lbGVtZW50cywgdG9vIVxuICogaHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQ1NTL1BzZXVkby1lbGVtZW50c1xuICovXG5pb24tc2VsZWN0OjpwYXJ0KHBsYWNlaG9sZGVyKTo6Zmlyc3QtbGV0dGVyIHtcbiAgZm9udC1zaXplOiAyNHB4O1xuICBmb250LXdlaWdodDogNTAwO1xufVxuXG4vKiBTZXQgdGhlIHRleHQgY29sb3IgKi9cbmlvbi1zZWxlY3Q6OnBhcnQodGV4dCkge1xuICBjb2xvcjogIzU0NWNhNztcbn1cblxuLyogU2V0IHRoZSBpY29uIGNvbG9yIGFuZCBvcGFjaXR5ICovXG5pb24tc2VsZWN0OjpwYXJ0KGljb24pIHtcbiAgY29sb3I6ICM5NzFlNDk7XG4gIG9wYWNpdHk6IDE7XG59XG5cbi5jb250ZW50LWNhcmQtZmF2IHtcbiAgaGVpZ2h0OiA1OHB4O1xuICBtaW4taGVpZ2h0OiA1NnB4O1xufVxuXG4uaW9uLWZhdi1jYWxlbmRhciB7XG4gIGhlaWdodDogNDhweDtcbiAgd2lkdGg6IDQ4cHg7XG59XG5cbi5ib3RvblJlc2VydmFyIHtcbiAgLypjb2xvcjojMDAwMDAwREU7XG4gIGZvbnQtd2VpZ2h0OiAyMHB4OyovXG4gIGZvbnQ6IG5vcm1hbCBub3JtYWwgbWVkaXVtIDE0cHgvMTZweCBSb2JvdG87XG4gIGxldHRlci1zcGFjaW5nOiAxLjI1cHg7XG4gIGNvbG9yOiAjMDAwMDAwREU7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XG4gIG9wYWNpdHk6IDE7XG59XG5cbi8qIGVzdGlsb3MgcGFyYSBtYXRlcmlhbCAqL1xuLmV4YW1wbGUtaGVhZGVyLWltYWdlIHtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgd2lkdGg6IDgwcHg7XG4gIGhlaWdodDogODBweDtcbiAgb2JqZWN0LWZpdDogY292ZXI7XG59XG5cbm1hdC1jYXJkIHtcbiAgd2lkdGg6IDEwMCU7XG4gIG1heC13aWR0aDogMTAwJTtcbiAgbWluLXdpZHRoOiAxMDAlO1xufVxuXG46Om5nLWRlcCAubWF0LWNhcmQtaGVhZGVyLXRleHQge1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luOiAwO1xufVxuXG4uaG9yYSB7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG59XG5cbi5yb3ctY2FyZCB7XG4gIG1hcmdpbi1sZWZ0OiAxNnB4O1xuICBtYXJnaW4tcmlnaHQ6IDE2cHg7XG59XG5cbi5pbWctY2FyZCB7XG4gIHdpZHRoOiA4MHB4O1xuICBmbG9hdDogcmlnaHQ7XG4gIG1hcmdpbjogMDtcbiAgcGFkZGluZzogMDtcbiAgbWluLXdpZHRoOiA4MHB4O1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("/* Set the width to the full container and center the content */\nion-select {\n  width: 100%;\n  justify-content: center;\n}\n/* Set the flex in order to size the text width to its content */\nion-select::part(placeholder),\nion-select::part(text) {\n  flex: 0 0 auto;\n}\n/* Set the placeholder color and opacity */\nion-select::part(placeholder) {\n  color: #20a08a;\n  opacity: 1;\n}\n/*\n * Set the font of the first letter of the placeholder\n * Shadow parts work with pseudo-elements, too!\n * https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements\n */\nion-select::part(placeholder)::first-letter {\n  font-size: 24px;\n  font-weight: 500;\n}\n/* Set the text color */\nion-select::part(text) {\n  color: #545ca7;\n}\n/* Set the icon color and opacity */\nion-select::part(icon) {\n  color: #971e49;\n  opacity: 1;\n}\n.content-card-fav {\n  height: 58px;\n  min-height: 56px;\n}\n.ion-fav-calendar {\n  height: 48px;\n  width: 48px;\n}\n.botonReservar {\n  /*color:#000000DE;\n  font-weight: 20px;*/\n  font: normal normal medium 14px/16px Roboto;\n  letter-spacing: 1.25px;\n  color: #000000DE;\n  text-transform: uppercase;\n  opacity: 1;\n}\n/* estilos para material */\n.example-header-image {\n  background-size: cover;\n  width: 80px;\n  height: 80px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\nmat-card {\n  width: 100%;\n  max-width: 100%;\n  min-width: 100%;\n}\n::ng-dep .mat-card-header-text {\n  width: 100%;\n  margin: 0;\n}\n.hora {\n  font-size: 0.8em;\n}\n.row-card {\n  margin-left: 16px;\n  margin-right: 16px;\n}\n.img-card {\n  width: 80px;\n  float: right;\n  margin: 0;\n  padding: 0;\n  min-width: 80px;\n}\nhr {\n  margin-top: 0;\n  margin-bottom: 0;\n  border: 0;\n  height: 1px;\n  background-color: rgba(0, 0, 0, 0.12);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2FsZW5kYXJpby9GOlxcYXBwX21pZmFtaWxpYV9naXRcXG1pRmFtaWxpYV9wcmUvc3JjXFxhcHBcXGNhbGVuZGFyaW9cXGNhbGVuZGFyaW8ucGFnZS5zY3NzIiwic3JjL2FwcC9jYWxlbmRhcmlvL2NhbGVuZGFyaW8ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLCtEQUFBO0FBQ0E7RUFDSSxXQUFBO0VBRUEsdUJBQUE7QUNBSjtBREdFLGdFQUFBO0FBQ0E7O0VBRUUsY0FBQTtBQ0FKO0FER0UsMENBQUE7QUFDQTtFQUNFLGNBQUE7RUFDQSxVQUFBO0FDQUo7QURHRTs7OztFQUFBO0FBS0E7RUFDRSxlQUFBO0VBQ0EsZ0JBQUE7QUNBSjtBREdFLHVCQUFBO0FBQ0E7RUFDRSxjQUFBO0FDQUo7QURHRSxtQ0FBQTtBQUNBO0VBQ0UsY0FBQTtFQUNBLFVBQUE7QUNBSjtBREVFO0VBQ0UsWUFBQTtFQUNBLGdCQUFBO0FDQ0o7QURDRTtFQUNFLFlBQUE7RUFDQSxXQUFBO0FDRUo7QURBRTtFQUNFO3FCQUFBO0VBRUEsMkNBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSxVQUFBO0FDR0o7QURERSwwQkFBQTtBQUNBO0VBQ0Usc0JBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLG9CQUFBO0tBQUEsaUJBQUE7QUNJSjtBREZFO0VBQ0UsV0FBQTtFQUNBLGVBQUE7RUFDQSxlQUFBO0FDS0o7QURIRTtFQUNFLFdBQUE7RUFDQSxTQUFBO0FDTUo7QURKRTtFQUNFLGdCQUFBO0FDT0o7QURMRTtFQUNFLGlCQUFBO0VBQ0Esa0JBQUE7QUNRSjtBRE5FO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFDQSxTQUFBO0VBQ0EsVUFBQTtFQUNBLGVBQUE7QUNTSjtBRFBFO0VBQ0UsYUFBQTtFQUNBLGdCQUFBO0VBQ0EsU0FBQTtFQUNBLFdBQUE7RUFDQSxxQ0FBQTtBQ1VKIiwiZmlsZSI6InNyYy9hcHAvY2FsZW5kYXJpby9jYWxlbmRhcmlvLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIFNldCB0aGUgd2lkdGggdG8gdGhlIGZ1bGwgY29udGFpbmVyIGFuZCBjZW50ZXIgdGhlIGNvbnRlbnQgKi9cclxuaW9uLXNlbGVjdCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICBcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIH1cclxuICBcclxuICAvKiBTZXQgdGhlIGZsZXggaW4gb3JkZXIgdG8gc2l6ZSB0aGUgdGV4dCB3aWR0aCB0byBpdHMgY29udGVudCAqL1xyXG4gIGlvbi1zZWxlY3Q6OnBhcnQocGxhY2Vob2xkZXIpLFxyXG4gIGlvbi1zZWxlY3Q6OnBhcnQodGV4dCkge1xyXG4gICAgZmxleDogMCAwIGF1dG87XHJcbiAgfVxyXG4gIFxyXG4gIC8qIFNldCB0aGUgcGxhY2Vob2xkZXIgY29sb3IgYW5kIG9wYWNpdHkgKi9cclxuICBpb24tc2VsZWN0OjpwYXJ0KHBsYWNlaG9sZGVyKSB7XHJcbiAgICBjb2xvcjogIzIwYTA4YTtcclxuICAgIG9wYWNpdHk6IDE7XHJcbiAgfVxyXG4gIFxyXG4gIC8qXHJcbiAgICogU2V0IHRoZSBmb250IG9mIHRoZSBmaXJzdCBsZXR0ZXIgb2YgdGhlIHBsYWNlaG9sZGVyXHJcbiAgICogU2hhZG93IHBhcnRzIHdvcmsgd2l0aCBwc2V1ZG8tZWxlbWVudHMsIHRvbyFcclxuICAgKiBodHRwczovL2RldmVsb3Blci5tb3ppbGxhLm9yZy9lbi1VUy9kb2NzL1dlYi9DU1MvUHNldWRvLWVsZW1lbnRzXHJcbiAgICovXHJcbiAgaW9uLXNlbGVjdDo6cGFydChwbGFjZWhvbGRlcik6OmZpcnN0LWxldHRlciB7XHJcbiAgICBmb250LXNpemU6IDI0cHg7XHJcbiAgICBmb250LXdlaWdodDogNTAwO1xyXG4gIH1cclxuICBcclxuICAvKiBTZXQgdGhlIHRleHQgY29sb3IgKi9cclxuICBpb24tc2VsZWN0OjpwYXJ0KHRleHQpIHtcclxuICAgIGNvbG9yOiAjNTQ1Y2E3O1xyXG4gIH1cclxuICBcclxuICAvKiBTZXQgdGhlIGljb24gY29sb3IgYW5kIG9wYWNpdHkgKi9cclxuICBpb24tc2VsZWN0OjpwYXJ0KGljb24pIHtcclxuICAgIGNvbG9yOiAjOTcxZTQ5O1xyXG4gICAgb3BhY2l0eTogMTtcclxuICB9XHJcbiAgLmNvbnRlbnQtY2FyZC1mYXZ7XHJcbiAgICBoZWlnaHQ6IDU4cHg7XHJcbiAgICBtaW4taGVpZ2h0OiA1NnB4O1xyXG4gIH1cclxuICAuaW9uLWZhdi1jYWxlbmRhcntcclxuICAgIGhlaWdodDogNDhweDtcclxuICAgIHdpZHRoOiA0OHB4O1xyXG4gIH1cclxuICAuYm90b25SZXNlcnZhcntcclxuICAgIC8qY29sb3I6IzAwMDAwMERFO1xyXG4gICAgZm9udC13ZWlnaHQ6IDIwcHg7Ki9cclxuICAgIGZvbnQ6IG5vcm1hbCBub3JtYWwgbWVkaXVtIDE0cHgvMTZweCBSb2JvdG87XHJcbiAgICBsZXR0ZXItc3BhY2luZzogMS4yNXB4O1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxuICAgIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XHJcbiAgICBvcGFjaXR5OiAxO1xyXG4gIH1cclxuICAvKiBlc3RpbG9zIHBhcmEgbWF0ZXJpYWwgKi9cclxuICAuZXhhbXBsZS1oZWFkZXItaW1hZ2Uge1xyXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcclxuICAgIHdpZHRoOiA4MHB4O1xyXG4gICAgaGVpZ2h0OiA4MHB4O1xyXG4gICAgb2JqZWN0LWZpdDogY292ZXI7XHJcbiAgfVxyXG4gIG1hdC1jYXJke1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBtYXgtd2lkdGg6IDEwMCU7XHJcbiAgICBtaW4td2lkdGg6IDEwMCU7XHJcbiAgfVxyXG4gIDo6bmctZGVwIC5tYXQtY2FyZC1oZWFkZXItdGV4dHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgbWFyZ2luOiAwO1xyXG4gIH1cclxuICAuaG9yYXtcclxuICAgIGZvbnQtc2l6ZTogMC44ZW07XHJcbiAgfVxyXG4gIC5yb3ctY2FyZHtcclxuICAgIG1hcmdpbi1sZWZ0OiAxNnB4O1xyXG4gICAgbWFyZ2luLXJpZ2h0OiAxNnB4O1xyXG4gIH1cclxuICAuaW1nLWNhcmR7XHJcbiAgICB3aWR0aDogODBweDtcclxuICAgIGZsb2F0OiByaWdodDtcclxuICAgIG1hcmdpbjogMDtcclxuICAgIHBhZGRpbmc6IDA7XHJcbiAgICBtaW4td2lkdGg6IDgwcHg7XHJcbiAgfVxyXG4gIGhyIHtcclxuICAgIG1hcmdpbi10b3A6IDA7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xyXG4gICAgYm9yZGVyOiAwO1xyXG4gICAgaGVpZ2h0OiAxcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsMCwwLC4xMik7XHJcbiAgfVxyXG4gIFxyXG4iLCIvKiBTZXQgdGhlIHdpZHRoIHRvIHRoZSBmdWxsIGNvbnRhaW5lciBhbmQgY2VudGVyIHRoZSBjb250ZW50ICovXG5pb24tc2VsZWN0IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuXG4vKiBTZXQgdGhlIGZsZXggaW4gb3JkZXIgdG8gc2l6ZSB0aGUgdGV4dCB3aWR0aCB0byBpdHMgY29udGVudCAqL1xuaW9uLXNlbGVjdDo6cGFydChwbGFjZWhvbGRlciksXG5pb24tc2VsZWN0OjpwYXJ0KHRleHQpIHtcbiAgZmxleDogMCAwIGF1dG87XG59XG5cbi8qIFNldCB0aGUgcGxhY2Vob2xkZXIgY29sb3IgYW5kIG9wYWNpdHkgKi9cbmlvbi1zZWxlY3Q6OnBhcnQocGxhY2Vob2xkZXIpIHtcbiAgY29sb3I6ICMyMGEwOGE7XG4gIG9wYWNpdHk6IDE7XG59XG5cbi8qXG4gKiBTZXQgdGhlIGZvbnQgb2YgdGhlIGZpcnN0IGxldHRlciBvZiB0aGUgcGxhY2Vob2xkZXJcbiAqIFNoYWRvdyBwYXJ0cyB3b3JrIHdpdGggcHNldWRvLWVsZW1lbnRzLCB0b28hXG4gKiBodHRwczovL2RldmVsb3Blci5tb3ppbGxhLm9yZy9lbi1VUy9kb2NzL1dlYi9DU1MvUHNldWRvLWVsZW1lbnRzXG4gKi9cbmlvbi1zZWxlY3Q6OnBhcnQocGxhY2Vob2xkZXIpOjpmaXJzdC1sZXR0ZXIge1xuICBmb250LXNpemU6IDI0cHg7XG4gIGZvbnQtd2VpZ2h0OiA1MDA7XG59XG5cbi8qIFNldCB0aGUgdGV4dCBjb2xvciAqL1xuaW9uLXNlbGVjdDo6cGFydCh0ZXh0KSB7XG4gIGNvbG9yOiAjNTQ1Y2E3O1xufVxuXG4vKiBTZXQgdGhlIGljb24gY29sb3IgYW5kIG9wYWNpdHkgKi9cbmlvbi1zZWxlY3Q6OnBhcnQoaWNvbikge1xuICBjb2xvcjogIzk3MWU0OTtcbiAgb3BhY2l0eTogMTtcbn1cblxuLmNvbnRlbnQtY2FyZC1mYXYge1xuICBoZWlnaHQ6IDU4cHg7XG4gIG1pbi1oZWlnaHQ6IDU2cHg7XG59XG5cbi5pb24tZmF2LWNhbGVuZGFyIHtcbiAgaGVpZ2h0OiA0OHB4O1xuICB3aWR0aDogNDhweDtcbn1cblxuLmJvdG9uUmVzZXJ2YXIge1xuICAvKmNvbG9yOiMwMDAwMDBERTtcbiAgZm9udC13ZWlnaHQ6IDIwcHg7Ki9cbiAgZm9udDogbm9ybWFsIG5vcm1hbCBtZWRpdW0gMTRweC8xNnB4IFJvYm90bztcbiAgbGV0dGVyLXNwYWNpbmc6IDEuMjVweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbiAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbiAgb3BhY2l0eTogMTtcbn1cblxuLyogZXN0aWxvcyBwYXJhIG1hdGVyaWFsICovXG4uZXhhbXBsZS1oZWFkZXItaW1hZ2Uge1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuICB3aWR0aDogODBweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBvYmplY3QtZml0OiBjb3Zlcjtcbn1cblxubWF0LWNhcmQge1xuICB3aWR0aDogMTAwJTtcbiAgbWF4LXdpZHRoOiAxMDAlO1xuICBtaW4td2lkdGg6IDEwMCU7XG59XG5cbjo6bmctZGVwIC5tYXQtY2FyZC1oZWFkZXItdGV4dCB7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW46IDA7XG59XG5cbi5ob3JhIHtcbiAgZm9udC1zaXplOiAwLjhlbTtcbn1cblxuLnJvdy1jYXJkIHtcbiAgbWFyZ2luLWxlZnQ6IDE2cHg7XG4gIG1hcmdpbi1yaWdodDogMTZweDtcbn1cblxuLmltZy1jYXJkIHtcbiAgd2lkdGg6IDgwcHg7XG4gIGZsb2F0OiByaWdodDtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xuICBtaW4td2lkdGg6IDgwcHg7XG59XG5cbmhyIHtcbiAgbWFyZ2luLXRvcDogMDtcbiAgbWFyZ2luLWJvdHRvbTogMDtcbiAgYm9yZGVyOiAwO1xuICBoZWlnaHQ6IDFweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjEyKTtcbn0iXX0= */");
 
 /***/ }),
 
@@ -174,6 +177,8 @@ let CalendarioPage = class CalendarioPage {
         //para infinity scroll
         this.topLimit = 5;
         this.citasVerticalTodasTop = [];
+        //para poner la linea en la fecha actual
+        this.fechaActual = '';
     }
     //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
     //OJO HAY VACUNAS CON FECHA PROXIMA 29-11-2020 Y NO VEO QUE APAREZCAN
@@ -181,6 +186,8 @@ let CalendarioPage = class CalendarioPage {
     //UNA FECHA ANTERIOR POR EJEMPLO NO MUESTRA NADA
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_9__().locale('es');
+        this.fechaActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_9__(), 'YYYY-MM-DD');
+        console.log(this.fechaActual);
         //this.miColor = this.utiles.entregaMiColor();
         if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -211,22 +218,12 @@ let CalendarioPage = class CalendarioPage {
         console.log(mesActual);
         //***************************** */
         this.tratamientoMeses();
-        //omplementación antigua
-        //this.cargarEventosMes(mesActual, annoActual);
-        //this.buscarDisponibilidad(new Date());
         //implementacion nueva
         this.cargarTodosLosEventos();
     }
     getTime(date) {
         return date != null ? new Date(date).getTime() : 0;
     }
-    /*   ordenarDesc = function(a, b){
-        var fechaA = moment(a.FechaCompleta).format();
-        var fechaB = moment(b.FechaCompleta).format();
-        //console.log(convertirFe)
-        //return b-a;
-        return fechaA - fechaB;
-      }; */
     cargarTodosLosEventos() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             //usar citasVerticalTodas
@@ -262,8 +259,6 @@ let CalendarioPage = class CalendarioPage {
                             //tercera llamada
                             this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesPosterior.mes, mesPosterior.anno).subscribe((responseTres) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                                 this.citasVerticalTodas = this.citasVerticalTodas.concat(responseTres);
-                                //pruebas
-                                //this.pruebaProcesar(this.citasVerticalTodas);
                                 //aca procedemos a procesarlos
                                 this.procesarArregloCitasTodas();
                                 this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
@@ -315,37 +310,6 @@ let CalendarioPage = class CalendarioPage {
     logout() {
         this.acceso.logout();
         this.navCtrl.navigateRoot('nuevo-login');
-    }
-    mesSelected(item) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //realizar la llamada para cargar los eventos del mes
-            console.log(item.detail.value);
-            var arr = item.detail.value.split(',');
-            if (arr) {
-                if (arr.length == 2) {
-                    var mes = arr[0];
-                    var anno = arr[1];
-                    // setear this.mesActualSeleccionado al mes seleccionado de lo contrario simpre sera el mes actual
-                    //this.mesActualSeleccionado = mes;
-                    this.mesActualSeleccionado = item.detail.value;
-                    let loader = yield this.loading.create({
-                        message: 'Obteniendo...<br>Información del usuario',
-                        duration: 20000
-                    });
-                    yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                        if (!this.utiles.isAppOnDevice()) {
-                            //llamada web
-                            //this.cargarDatosWeb(mes, anno, loader);
-                            this.cargarDatosWebN(mes, anno, loader);
-                        }
-                        else {
-                            //llamada nativa
-                            this.cargarDatosNativeN(mes, anno, loader);
-                        }
-                    }));
-                }
-            }
-        });
     }
     procesarArregloCitas() {
         var contador = 0;
@@ -511,72 +475,6 @@ let CalendarioPage = class CalendarioPage {
             }
         }, 500);
     }
-    cargarDatosNative(mesConsultar, annoConsultar, loader) {
-        //lo cambiamos para probar el nuevo metodo
-        //this.cita.entregaPorMesNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(async (response: any)=>{
-        this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then((response) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //this.procesarIndicadorValor(response, loader);
-            this.citasVertical = JSON.parse(response.data);
-            this.citasVerticalMostrar = this.citasVertical.filter(e => e.Mostrar == true);
-            //aqui procesa citasVertical
-            this.procesarArregloCitas();
-            this.estaCargando = false;
-            //terminamos el loader
-            loader.dismiss();
-            //ESTA INFORMACION ES PARA LLENAR EVENTOS DEL TIPO CALENDARIO
-            if (src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].USA_CALENDARIO) {
-                //ahora traeremos la información adicional
-                let loader1 = yield this.loading.create({
-                    message: 'Obteniendo...<br>Información del usuario',
-                    duration: 20000
-                });
-                yield loader1.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                    this.cita.getDiagnosticosByUspIdNative(this.usuarioAps.Id);
-                    this.citas = this.cita.arregloGeneral;
-                    this.eventSource = this.createEventsCalendario();
-                    loader1.dismiss();
-                    this.estaCargando = false;
-                    console.log('esta cargando ' + this.estaCargando);
-                }));
-            }
-            //busca disponibilidad
-            if (this.utiles.entregaParametroUsaAgenda()) {
-                //en moment hay que quitar un digito al mes
-                //var fechaInicio = moment([parseInt(annoConsultar), parseInt(mesConsultar)-1, 1]);
-                var fechaD = new Date(parseInt(annoConsultar), parseInt(mesConsultar) - 1, 1, 0, 1, 0, 0);
-                var fechaInicio = moment__WEBPACK_IMPORTED_MODULE_9__(fechaD);
-                var diasDelMes = fechaInicio.daysInMonth();
-                var fechaT = new Date(parseInt(annoConsultar), parseInt(mesConsultar) - 1, diasDelMes, 23, 59, 0, 0);
-                var fechaTermino = moment__WEBPACK_IMPORTED_MODULE_9__(fechaT);
-                let loaderDisp = yield this.loading.create({
-                    message: 'Cargando...<br>disponibilidad',
-                    duration: 20000
-                });
-                this.cita.getDisponibilidadNative(fechaInicio.format(), fechaTermino.format(), this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).then((response) => {
-                    this.citasIntegracion = [];
-                    var respuesta = JSON.parse(response.data);
-                    if (respuesta && respuesta.Mensaje) {
-                        //correcto
-                        if (respuesta.Mensaje.Detalle.Codigo == 'MSG_CORRECTO') {
-                            //ya tiene citas tomadas, hay que enviarlo a otra pagina
-                            //la de buscarcitas
-                            this.citasIntegracion = respuesta.CitasDisponibles;
-                            //hay que reprocesar los elementos
-                            if (this.citasIntegracion.length > 0) {
-                                var nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-                                this.utiles.insertaCitasAEventos(this.citasIntegracion, this.citasVertical, nombrePaciente);
-                                //volvemos a reprocesar
-                                this.procesarArregloCitas();
-                            }
-                        }
-                    }
-                    this.estaCargando = false;
-                    console.log('esta cargando ' + this.estaCargando);
-                    loaderDisp.dismiss();
-                });
-            }
-        }));
-    }
     cargarDatosNativeN(mesConsultar, annoConsultar, loader) {
         //lo cambiamos para probar el nuevo metodo
         //this.cita.entregaPorMesNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(async (response: any)=>{
@@ -599,104 +497,6 @@ let CalendarioPage = class CalendarioPage {
                 //aqui procesa citasVertical
                 this.procesarArregloCitas();
                 loader.dismiss();
-            }));
-        });
-    }
-    /*   pruebaProcesar(arr){
-        var fechaActual = moment().format("DD-MM-YYYY");
-        var fechaManana = moment().add(1, 'day').format("DD-MM-YYYY");
-    
-        var nuevas = arr.filter(e=> e.Mostrar == true);
-        var total = nuevas.filter(e=> moment(e.FechaCompleta).format("DD-MM-YYYY") == fechaActual || moment(e.FechaCompleta).format("DD-MM-YYYY") == fechaManana);
-        if (total && total.length > 0){
-    
-        }
-    
-      } */
-    cargarDatosWeb(mesConsultar, annoConsultar, loader) {
-        //lo comentamos por nueva implementacion
-        //this.cita.entregaPorMes(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).subscribe(async (response: any)=>{
-        this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).subscribe((response) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //this.procesarIndicadorValor(response, loader);
-            this.citasVertical = response;
-            this.citasVerticalMostrar = this.citasVertical.filter(e => e.Mostrar == true);
-            //aqui procesa citasVertical
-            this.procesarArregloCitas();
-            this.estaCargando = false;
-            //terminamos el loader
-            loader.dismiss();
-            //ESTA INFORMACION ES PARA LLENAR EVENTOS DEL TIPO CALENDARIO
-            if (src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].USA_CALENDARIO) {
-                this.estaCargando = true;
-                //ahora traeremos la información adicional
-                let loader1 = yield this.loading.create({
-                    message: 'Obteniendo...<br>Información del usuario',
-                    duration: 20000
-                });
-                yield loader1.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                    this.cita.getDiagnosticosByUspId(this.usuarioAps.Id);
-                    this.citas = this.cita.arregloGeneral;
-                    this.eventSource = this.createEventsCalendario();
-                    loader1.dismiss();
-                    this.estaCargando = false;
-                    console.log('esta cargando ' + this.estaCargando);
-                }));
-            }
-            //busca disponibilidad
-            if (this.utiles.entregaParametroUsaAgenda()) {
-                this.estaCargando = true;
-                //en moment hay que quitar un digito al mes
-                //var fechaInicio = moment([parseInt(annoConsultar), parseInt(mesConsultar)-1, 1]);
-                var fechaD = new Date(parseInt(annoConsultar), parseInt(mesConsultar) - 1, 1, 0, 1, 0, 0);
-                var fechaInicio = moment__WEBPACK_IMPORTED_MODULE_9__(fechaD);
-                var diasDelMes = fechaInicio.daysInMonth();
-                var fechaT = new Date(parseInt(annoConsultar), parseInt(mesConsultar) - 1, diasDelMes, 23, 59, 0, 0);
-                var fechaTermino = moment__WEBPACK_IMPORTED_MODULE_9__(fechaT);
-                let loaderDisp = yield this.loading.create({
-                    message: 'Cargando...<br>disponibilidad',
-                    duration: 20000
-                });
-                this.cita.getDisponibilidad(fechaInicio.format(), fechaTermino.format(), this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).subscribe((response) => {
-                    this.citasIntegracion = [];
-                    if (response && response.Mensaje) {
-                        //correcto
-                        if (response.Mensaje.Detalle.Codigo == 'MSG_CORRECTO') {
-                            //ya tiene citas tomadas, hay que enviarlo a otra pagina
-                            //la de buscarcitas
-                            this.citasIntegracion = response.CitasDisponibles;
-                            //hay que reprocesar los elementos
-                            if (this.citasIntegracion.length > 0) {
-                                var nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-                                this.utiles.insertaCitasAEventos(this.citasIntegracion, this.citasVertical, nombrePaciente);
-                                //volvemos a reprocesar
-                                this.procesarArregloCitas();
-                            }
-                        }
-                    }
-                    this.estaCargando = false;
-                    console.log('esta cargando ' + this.estaCargando);
-                    loaderDisp.dismiss();
-                });
-            }
-        }));
-    }
-    cargarEventosMes(mesConsultar, annoConsultar) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            this.estaCargando = true;
-            let loader = yield this.loading.create({
-                message: 'Obteniendo...<br>Información del usuario',
-                duration: 20000
-            });
-            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                if (!this.utiles.isAppOnDevice()) {
-                    //llamada web
-                    //this.cargarDatosWeb(mesConsultar, annoConsultar, loader);
-                    this.cargarDatosWebN(mesConsultar, annoConsultar, loader);
-                }
-                else {
-                    //llamada nativa
-                    this.cargarDatosNativeN(mesConsultar, annoConsultar, loader);
-                }
             }));
         });
     }
@@ -763,40 +563,9 @@ let CalendarioPage = class CalendarioPage {
                         this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
                     }
                     this.cargarTodosLosEventos();
-                    //this.cargarEventosMes(mesActual, annoActual);
                 }
             });
             return yield modal.present();
-        });
-    }
-    //para procesar citas
-    //se debe buscar disponibilidad de acuerdo a la fecha que se consulta
-    buscarDisponibilidad(fecha) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //ACA ME FALTA CONTROLAR LOS MENSAJES
-            var inicio = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 6, 0, 0, 0);
-            var ini = moment__WEBPACK_IMPORTED_MODULE_9__(inicio).format();
-            var termino = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 23, 59, 0, 0);
-            var ter = moment__WEBPACK_IMPORTED_MODULE_9__(termino).format();
-            let loader = yield this.loading.create({
-                message: 'Cargando...<br>disponibilidad',
-                duration: 20000
-            });
-            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                if (!this.utiles.isAppOnDevice()) {
-                    //llamada web
-                    this.cita.getDisponibilidad(ini, ter, this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).subscribe((response) => {
-                        this.procesarRespuesta(response, loader);
-                    });
-                }
-                else {
-                    //llamada nativa
-                    this.cita.getDisponibilidadNative(ini, ter, this.codigoDeis, this.runPaciente, this.serviceType, '', '', 'cita', this.nodId).then((response) => {
-                        var respuesta = JSON.parse(response.data);
-                        this.procesarRespuesta(respuesta, loader);
-                    });
-                }
-            }));
         });
     }
     procesarRespuesta(data, loader) {
@@ -882,7 +651,6 @@ let CalendarioPage = class CalendarioPage {
                     }
                     else {
                         //llamada nativa
-                        //this.cargarDatosNative(mesConsultar, annoConsultar, loader);
                         this.cita.getOperacionCitaNative(idCita, idPaciente, accion).then((responseData) => {
                             var response = JSON.parse(responseData.data);
                             this.procesarRespuestaAgendar(response, loader, accion);
@@ -916,7 +684,6 @@ let CalendarioPage = class CalendarioPage {
                     this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
                 }
                 this.cargarTodosLosEventos();
-                //this.cargarEventosMes(mesActual, annoActual);
             }
             else {
                 this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);
@@ -973,178 +740,6 @@ CalendarioPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./calendario.page.scss */ "./src/app/calendario/calendario.page.scss")).default]
     })
 ], CalendarioPage);
-
-
-
-/***/ }),
-
-/***/ "./src/directives/text-avatar/color-generator.ts":
-/*!*******************************************************!*\
-  !*** ./src/directives/text-avatar/color-generator.ts ***!
-  \*******************************************************/
-/*! exports provided: ColorGenerator */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorGenerator", function() { return ColorGenerator; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-
-
-let ColorGenerator = class ColorGenerator {
-    constructor() {
-        this.COLORS = ['#e57373', '#f06292', '#ba68c8', '#9575cd', '#7986cb', '#64b5f6',
-            '#4fc3f7', '#4dd0e1', '#4db6ac', '#81c784', '#aed581', '#ff8a65', '#d4e157', '#673ab7',
-            '#ffb74d', '#a1887f', '#90a4ae'];
-        console.log('created');
-    }
-    getColor(str) {
-        return this.COLORS[Math.abs(this.toNumber(str)) % this.COLORS.length];
-    }
-    toNumber(str) {
-        let h = 0;
-        for (let i = 0; i < str.length; i++) {
-            h = 31 * h + str.charCodeAt(i);
-            h |= 0; // Convert to 32bit integer
-        }
-        return h;
-    }
-    ;
-};
-ColorGenerator = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
-], ColorGenerator);
-
-
-
-/***/ }),
-
-/***/ "./src/directives/text-avatar/index.ts":
-/*!*********************************************!*\
-  !*** ./src/directives/text-avatar/index.ts ***!
-  \*********************************************/
-/*! exports provided: TextAvatarModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _text_avatar_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text-avatar.module */ "./src/directives/text-avatar/text-avatar.module.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextAvatarModule", function() { return _text_avatar_module__WEBPACK_IMPORTED_MODULE_0__["TextAvatarModule"]; });
-
-
-
-
-/***/ }),
-
-/***/ "./src/directives/text-avatar/text-avatar.module.ts":
-/*!**********************************************************!*\
-  !*** ./src/directives/text-avatar/text-avatar.module.ts ***!
-  \**********************************************************/
-/*! exports provided: TextAvatarModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextAvatarModule", function() { return TextAvatarModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _text_avatar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text-avatar */ "./src/directives/text-avatar/text-avatar.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _color_generator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./color-generator */ "./src/directives/text-avatar/color-generator.ts");
-
-
-
-
-
-let TextAvatarModule = class TextAvatarModule {
-};
-TextAvatarModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"]],
-        declarations: [_text_avatar__WEBPACK_IMPORTED_MODULE_2__["TextAvatarDirective"]],
-        exports: [_text_avatar__WEBPACK_IMPORTED_MODULE_2__["TextAvatarDirective"]],
-        providers: [_color_generator__WEBPACK_IMPORTED_MODULE_4__["ColorGenerator"]]
-    })
-], TextAvatarModule);
-
-
-
-/***/ }),
-
-/***/ "./src/directives/text-avatar/text-avatar.scss":
-/*!*****************************************************!*\
-  !*** ./src/directives/text-avatar/text-avatar.scss ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".u-text-avatar {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  max-width: 46px;\n  max-height: 46px;\n  border-radius: 500px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9kaXJlY3RpdmVzL3RleHQtYXZhdGFyL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGRpcmVjdGl2ZXNcXHRleHQtYXZhdGFyXFx0ZXh0LWF2YXRhci5zY3NzIiwic3JjL2RpcmVjdGl2ZXMvdGV4dC1hdmF0YXIvdGV4dC1hdmF0YXIuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSx1QkFBQTtFQUNBLG1CQUFBO0VBRUEsV0FBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxvQkFBQTtBQ0FGIiwiZmlsZSI6InNyYy9kaXJlY3RpdmVzL3RleHQtYXZhdGFyL3RleHQtYXZhdGFyLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudS10ZXh0LWF2YXRhciB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIC8vIGJhY2tncm91bmQtY29sb3I6IGFudGlxdWV3aGl0ZTtcclxuICB3aWR0aDogMTAwJTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgbWF4LXdpZHRoOiA0NnB4O1xyXG4gIG1heC1oZWlnaHQ6IDQ2cHg7XHJcbiAgYm9yZGVyLXJhZGl1czogNTAwcHg7XHJcbn0iLCIudS10ZXh0LWF2YXRhciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBtYXgtd2lkdGg6IDQ2cHg7XG4gIG1heC1oZWlnaHQ6IDQ2cHg7XG4gIGJvcmRlci1yYWRpdXM6IDUwMHB4O1xufSJdfQ== */");
-
-/***/ }),
-
-/***/ "./src/directives/text-avatar/text-avatar.ts":
-/*!***************************************************!*\
-  !*** ./src/directives/text-avatar/text-avatar.ts ***!
-  \***************************************************/
-/*! exports provided: TextAvatarDirective */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextAvatarDirective", function() { return TextAvatarDirective; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _color_generator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./color-generator */ "./src/directives/text-avatar/color-generator.ts");
-
-
-
-let TextAvatarDirective = class TextAvatarDirective {
-    constructor(colorGenerator) {
-        this.colorGenerator = colorGenerator;
-        this.firstLetter = "";
-        this.styles = {
-            'background-color': "#fff",
-            'color': "#000"
-        };
-    }
-    ngOnChanges(changes) {
-        let text = changes['text'] ? changes['text'].currentValue : null;
-        let color = changes['color'] ? changes['color'].currentValue : null;
-        let textColor = changes['textColor'] ? changes['textColor'].currentValue : this.styles.color;
-        this.firstLetter = this.extractFirstCharacter(text);
-        this.styles = Object.assign(Object.assign({}, this.styles), { 'background-color': this.backgroundColorHexString(color, text), 'color': textColor });
-    }
-    extractFirstCharacter(text) {
-        return text.charAt(0) || '';
-    }
-    backgroundColorHexString(color, text) {
-        return color || this.colorGenerator.getColor(text);
-    }
-};
-TextAvatarDirective.ctorParameters = () => [
-    { type: _color_generator__WEBPACK_IMPORTED_MODULE_2__["ColorGenerator"] }
-];
-Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-], TextAvatarDirective.prototype, "text", void 0);
-Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-], TextAvatarDirective.prototype, "color", void 0);
-Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-], TextAvatarDirective.prototype, "textColor", void 0);
-TextAvatarDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'text-avatar',
-        template: `
-    <div class="u-text-avatar" [ngStyle]="styles">{{ firstLetter }}</div>
-  `,
-        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./text-avatar.scss */ "./src/directives/text-avatar/text-avatar.scss")).default]
-    })
-], TextAvatarDirective);
 
 
 

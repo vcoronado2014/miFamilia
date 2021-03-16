@@ -107,6 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/* import { ServicioGeo } from '../../app/services/ServicioGeo'; */
 
 
 //modal
@@ -148,22 +149,33 @@ let PreTiposatencionPage = class PreTiposatencionPage {
     //DEBEMOS VOLVER A UNA PAGINA INICIAL, SI MAL NO RECUERDO SE
     //TRATARIA DE LA PAGINA CALENDARIO
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
-        if (sessionStorage.UsuarioAps) {
-            this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
-            if (this.usuarioAps) {
-                //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
-                this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
-                this.miColor = this.utiles.entregaColor(this.usuarioAps);
-                this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
-                this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
-                this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
+            //pruebas en el cliente para obtener token desde la api management directamente
+            //por ahora no han funcionado, al precer cors esta bloqueando la petición
+            //this.pruebaToken();
+            //this.buscarToken();
+            if (sessionStorage.UsuarioAps) {
+                this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
+                if (this.usuarioAps) {
+                    //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
+                    this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
+                    this.miColor = this.utiles.entregaColor(this.usuarioAps);
+                    this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
+                    this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
+                    this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
+                }
             }
-        }
-        //creamos tipo atencion inicial
-        this.crearTiposAtencion();
-        this.setFechasInicioFin();
-        this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+            //creamos tipo atencion inicial
+            this.crearTiposAtencion();
+            this.setFechasInicioFin();
+            if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                yield this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+            }
+            else {
+                yield this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+            }
+        });
     }
     setFechasInicioFin() {
         //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
@@ -181,35 +193,6 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         //guardamos las fechas de consulta para después procesarlas
         sessionStorage.setItem('FECHA_INICIO_CONSULTA', this.fechaInicio);
         sessionStorage.setItem('FECHA_TERMINO_CONSULTA', this.fechaTermino);
-    }
-    buscarDisponibilidad_old(start, end, organization, patient, serviceType, tipoOperacion) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //VER COMO CAMBIAMOS EL SETTIMEOUT POR OTRO
-            //MECANISMO QUE MUESTRE CORRECTAMENTE CUANDO
-            //TERMINE LA OPERACION DE DISPONIBILIDAD
-            this.mostrarProgressDisp = true;
-            this.encontroCitasDisp = true;
-            /*     setTimeout(() => {
-                  console.log('Async operation has ended'); */
-            this.mostrarProgressDisp = false;
-            this.encontroCitasDisp = true;
-            this.citas = [];
-            this.citasFiltradas = [];
-            if (!this.utiles.isAppOnDevice()) {
-                //llamada web
-                this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response) => {
-                    this.procesarRespuestaTotalDisp(response);
-                });
-            }
-            else {
-                //llamada nativa
-                this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response) => {
-                    var respuesta = JSON.parse(response.data);
-                    this.procesarRespuestaTotalDisp(respuesta);
-                });
-            }
-            /* }, 5000); */
-        });
     }
     //metodo para obtener disponibilidad y tipos de atención
     //lo comentamos debido a que se usará progress
@@ -234,12 +217,70 @@ let PreTiposatencionPage = class PreTiposatencionPage {
                     this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response) => {
                         this.procesarRespuestaTotal(response, loader);
                     });
+                    /*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+                              this.procesarRespuestaTotal(response, loader);
+                            }); */
                 }
                 else {
                     //llamada nativa
                     this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response) => {
                         var respuesta = JSON.parse(response.data);
                         this.procesarRespuestaTotal(respuesta, loader);
+                    });
+                    /*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+                              var respuesta = JSON.parse(response.data);
+                              this.procesarRespuestaTotal(respuesta, loader);
+                            }); */
+                }
+            }));
+        });
+    }
+    buscarDisponibilidadApi(start, end, organization, patient, serviceType, tipoOperacion) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //ACA ME FALTA CONTROLAR LOS MENSAJES
+            let loader = yield this.loading.create({
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
+                //message: 'Cargando...<br>tipos de atención',
+                duration: 20000
+            });
+            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                //esto lo agregamos para desabilitarlo
+                this.disabledCombo = true;
+                //********************* */
+                this.citas = [];
+                this.citasFiltradas = [];
+                if (!this.utiles.isAppOnDevice()) {
+                    //llamada web
+                    this.cita.postObtenerTokenManagement().subscribe((response) => {
+                        //token
+                        console.log(response);
+                        if (response && response.access_token != '') {
+                            this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId, response.access_token).subscribe((response) => {
+                                this.procesarRespuestaTotal(response, loader);
+                            });
+                        }
+                        else {
+                            this.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
+                            loader.dismiss();
+                        }
+                    });
+                }
+                else {
+                    //llamada nativa
+                    this.cita.postObtenerTokenManagementNative().then((response) => {
+                        var respuesta = JSON.parse(response.data);
+                        if (respuesta && respuesta.access_token != '') {
+                            this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId, respuesta.access_token).then((responseD) => {
+                                var respuestaDisp = JSON.parse(responseD.data);
+                                this.procesarRespuestaTotal(respuestaDisp, loader);
+                            });
+                        }
+                        else {
+                            this.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
+                            loader.dismiss();
+                        }
                     });
                 }
             }));

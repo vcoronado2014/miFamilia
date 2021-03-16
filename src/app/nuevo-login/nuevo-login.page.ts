@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, Platform } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder, FormControl, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 //servicios
@@ -9,6 +9,8 @@ import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { ServicioFCM } from '../../app/services/ServicioFCM';
 import { NavigationExtras } from '@angular/router';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Device } from '@ionic-native/device/ngx';
 
 import * as moment from 'moment';
 
@@ -32,6 +34,7 @@ export class NuevoLoginPage implements OnInit {
   loggedIn: boolean;
   CodigoMensaje: any;
   Mensaje: string;
+  tokenDispositivo;
   //para validarse solo con enrolamiento
   usaEnrolamiento = false;
 
@@ -46,6 +49,9 @@ export class NuevoLoginPage implements OnInit {
     public acceso: ServicioAcceso,
     public parametrosApp: ServicioParametrosApp,
     public fcmService: ServicioFCM,
+    public appVersion: AppVersion,
+    public platform: Platform,
+    public device: Device,
   ) { }
 
   ngOnInit() {
@@ -54,7 +60,7 @@ export class NuevoLoginPage implements OnInit {
     this.cargarForma();
   }
   abrirAsistente(){
-    this.navCtrl.navigateRoot('registro-uno');
+    this.navCtrl.navigateRoot('pre-registro-uno');
   }
   cargarForma(){
     this.forma = new FormGroup({
@@ -84,6 +90,68 @@ export class NuevoLoginPage implements OnInit {
         repetirClave: ''
       })
     } */
+  }
+  async crearToken(){
+    var versionAppName;
+    var versionNumber;
+    var plataforma;
+    let loader = await this.loading.create({
+      message: 'Creando...<br>Token inicial',
+      duration: 2000
+    });
+
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //web
+        //guardar local storage
+        if (!localStorage.getItem('token_dispositivo')) {
+          //crear token para web
+          this.tokenDispositivo = (Math.random() * (1000000 - 1) + 1).toString() + ' web';
+          localStorage.setItem('token_dispositivo', this.tokenDispositivo);
+        }
+        else {
+          this.tokenDispositivo = localStorage.getItem('token_dispositivo');
+        }
+        versionAppName = "Mi salud familiar"
+        versionNumber = "0.0";
+        plataforma = "Web";
+        //loader.dismiss();
+        //otras variables
+        localStorage.setItem('version_app_name', versionAppName);
+        localStorage.setItem('version_number', versionNumber);
+        localStorage.setItem('plataforma', plataforma);
+      }
+      else {
+        if (this.platform.is('ios')){
+          versionAppName = await this.appVersion.getAppName();
+          versionNumber = await this.appVersion.getVersionNumber();
+          plataforma = "iOS";
+        } 
+        else if (this.platform.is('android')){
+          versionAppName = await this.appVersion.getAppName();
+          versionNumber = await this.appVersion.getVersionNumber();
+          plataforma = "Android";
+        }
+        else if (this.platform.is('mobileweb')){
+          versionAppName = "Mi salud familiar"
+          versionNumber = "0.0";
+          plataforma = "Web";
+        }
+        else {
+          versionAppName = "Mi salud familiar"
+          versionNumber = "0.0";
+          plataforma = "No informado";
+        }
+        //crear token para web
+        this.tokenDispositivo = this.device.uuid;
+        localStorage.setItem('token_dispositivo', this.tokenDispositivo);
+        //otras variables
+        localStorage.setItem('version_app_name', versionAppName);
+        localStorage.setItem('version_number', versionNumber);
+        localStorage.setItem('plataforma', plataforma);
+      }
+
+    })
   }
   async loguearseRegistro(){
     let correo = this.forma.controls.email.value;
@@ -248,7 +316,7 @@ export class NuevoLoginPage implements OnInit {
         if (!tieneUsuario){
           this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
         }
-        //this.crearToken();
+        this.crearToken();
         this.irAHome();
       }
       else {

@@ -103,6 +103,13 @@ export class ModalDetalleCitaPage implements OnInit {
       this.miNombre = nombreCompletoUsuario;
       this.miImagen = this.usuarioAps.UrlImagen;
       this.miParentezco = "Yo";
+      if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA'){
+        this.miParentezco = "Yo";
+      }
+      else{
+        this.miParentezco = this.usuarioAps.Parentezco.Nombre;
+      }
+
     }
     else{
       this.miNombre = this.data.DetalleEventoMes.NombrePaciente;
@@ -113,12 +120,18 @@ export class ModalDetalleCitaPage implements OnInit {
           usuariosFamilia.forEach(usu => {
             if (usu.Nombres + ' ' + usu.ApellidoPaterno + ' ' + usu.ApellidoMaterno == this.data.DetalleEventoMes.NombrePaciente){
               this.miImagen = this.utiles.entregaImagen(usu);
+              if (usu.Parentezco && usu.Parentezco.Id > 0){
+                this.miParentezco = usu.Parentezco.Nombre;
+              }
+              else{
+                this.miParentezco = 'No informado';
+              }
             }
           });
         }
       }
       
-      this.miParentezco = "No informado";
+      //this.miParentezco = "No informado";
     } 
 
     var prev = (this.data.DetalleEventoMes.DescripcionPrincipal).split('-');

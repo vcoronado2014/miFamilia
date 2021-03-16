@@ -227,17 +227,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ../../app/services/ServicioFCM */
+    "./src/app/services/ServicioFCM.ts");
+    /* harmony import */
+
+
+    var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! @ionic-native/app-version/ngx */
+    "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! @ionic-native/device/ngx */
+    "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__); //servicios
+    var moment__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_12__); //servicios
 
 
     var NuevoLoginPage = /*#__PURE__*/function () {
-      function NuevoLoginPage(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp) {
+      function NuevoLoginPage(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device) {
         _classCallCheck(this, NuevoLoginPage);
 
         this.navCtrl = navCtrl;
@@ -249,6 +267,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.router = router;
         this.acceso = acceso;
         this.parametrosApp = parametrosApp;
+        this.fcmService = fcmService;
+        this.appVersion = appVersion;
+        this.platform = platform;
+        this.device = device;
         this.hide = true; //para validar
 
         this.patternOnlyLetter = "[a-zA-Z\xC0-\xFF\xF1\xD1]+(s*[a-zA-Z\xC0-\xFF\xF1\xD1]*)*[a-zA-Z\xC0-\xFF\xF1\xD1 ]+$";
@@ -262,14 +284,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(NuevoLoginPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+          moment__WEBPACK_IMPORTED_MODULE_12__["locale"]('es');
           this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
           this.cargarForma();
         }
       }, {
         key: "abrirAsistente",
         value: function abrirAsistente() {
-          this.navCtrl.navigateRoot('registro-uno');
+          this.navCtrl.navigateRoot('pre-registro-uno');
         }
       }, {
         key: "cargarForma",
@@ -302,35 +324,164 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         }
       }, {
-        key: "loguearseRegistro",
-        value: function loguearseRegistro() {
+        key: "crearToken",
+        value: function crearToken() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
             var _this = this;
 
-            var correo, password, loader;
+            var versionAppName, versionNumber, plataforma, loader;
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
+                    _context2.next = 2;
+                    return this.loading.create({
+                      message: 'Creando...<br>Token inicial',
+                      duration: 2000
+                    });
+
+                  case 2:
+                    loader = _context2.sent;
+                    _context2.next = 5;
+                    return loader.present().then(function () {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                          while (1) {
+                            switch (_context.prev = _context.next) {
+                              case 0:
+                                if (this.utiles.isAppOnDevice()) {
+                                  _context.next = 10;
+                                  break;
+                                }
+
+                                //web
+                                //guardar local storage
+                                if (!localStorage.getItem('token_dispositivo')) {
+                                  //crear token para web
+                                  this.tokenDispositivo = (Math.random() * (1000000 - 1) + 1).toString() + ' web';
+                                  localStorage.setItem('token_dispositivo', this.tokenDispositivo);
+                                } else {
+                                  this.tokenDispositivo = localStorage.getItem('token_dispositivo');
+                                }
+
+                                versionAppName = "Mi salud familiar";
+                                versionNumber = "0.0";
+                                plataforma = "Web"; //loader.dismiss();
+                                //otras variables
+
+                                localStorage.setItem('version_app_name', versionAppName);
+                                localStorage.setItem('version_number', versionNumber);
+                                localStorage.setItem('plataforma', plataforma);
+                                _context.next = 36;
+                                break;
+
+                              case 10:
+                                if (!this.platform.is('ios')) {
+                                  _context.next = 20;
+                                  break;
+                                }
+
+                                _context.next = 13;
+                                return this.appVersion.getAppName();
+
+                              case 13:
+                                versionAppName = _context.sent;
+                                _context.next = 16;
+                                return this.appVersion.getVersionNumber();
+
+                              case 16:
+                                versionNumber = _context.sent;
+                                plataforma = "iOS";
+                                _context.next = 31;
+                                break;
+
+                              case 20:
+                                if (!this.platform.is('android')) {
+                                  _context.next = 30;
+                                  break;
+                                }
+
+                                _context.next = 23;
+                                return this.appVersion.getAppName();
+
+                              case 23:
+                                versionAppName = _context.sent;
+                                _context.next = 26;
+                                return this.appVersion.getVersionNumber();
+
+                              case 26:
+                                versionNumber = _context.sent;
+                                plataforma = "Android";
+                                _context.next = 31;
+                                break;
+
+                              case 30:
+                                if (this.platform.is('mobileweb')) {
+                                  versionAppName = "Mi salud familiar";
+                                  versionNumber = "0.0";
+                                  plataforma = "Web";
+                                } else {
+                                  versionAppName = "Mi salud familiar";
+                                  versionNumber = "0.0";
+                                  plataforma = "No informado";
+                                }
+
+                              case 31:
+                                //crear token para web
+                                this.tokenDispositivo = this.device.uuid;
+                                localStorage.setItem('token_dispositivo', this.tokenDispositivo); //otras variables
+
+                                localStorage.setItem('version_app_name', versionAppName);
+                                localStorage.setItem('version_number', versionNumber);
+                                localStorage.setItem('plataforma', plataforma);
+
+                              case 36:
+                              case "end":
+                                return _context.stop();
+                            }
+                          }
+                        }, _callee, this);
+                      }));
+                    });
+
+                  case 5:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
+        }
+      }, {
+        key: "loguearseRegistro",
+        value: function loguearseRegistro() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            var _this2 = this;
+
+            var correo, password, loader;
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
                     correo = this.forma.controls.email.value;
                     password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : ''; //ahora guardamos
 
-                    _context2.next = 4;
+                    _context4.next = 4;
                     return this.loading.create({
                       message: 'Creando...<br>Registro',
                       duration: 20000
                     });
 
                   case 4:
-                    loader = _context2.sent;
-                    _context2.next = 7;
+                    loader = _context4.sent;
+                    _context4.next = 7;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                        var _this2 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                        var _this3 = this;
 
-                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
                           while (1) {
-                            switch (_context.prev = _context.next) {
+                            switch (_context3.prev = _context3.next) {
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
@@ -342,9 +493,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                       loader.dismiss();
                                       var registro = JSON.parse(localStorage.getItem('REGISTRO'));
 
-                                      _this2.autentificarse(registro.Run, password);
+                                      _this3.autentificarse(registro.Run, password);
                                     } else {
-                                      _this2.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+                                      _this3.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
                                     }
                                   });
                                 } else {
@@ -358,38 +509,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                       loader.dismiss();
                                       var registro = JSON.parse(localStorage.getItem('REGISTRO'));
 
-                                      _this2.autentificarse(registro.Run, password);
+                                      _this3.autentificarse(registro.Run, password);
                                     } else {
-                                      _this2.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+                                      _this3.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
                                     }
                                   });
                                 }
 
                               case 1:
                               case "end":
-                                return _context.stop();
+                                return _context3.stop();
                             }
                           }
-                        }, _callee, this);
+                        }, _callee3, this);
                       }));
                     });
 
                   case 7:
                   case "end":
-                    return _context2.stop();
+                    return _context4.stop();
                 }
               }
-            }, _callee2, this);
+            }, _callee4, this);
           }));
         }
       }, {
         key: "loguearseEnrolamiento",
         value: function loguearseEnrolamiento() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
             var run, password;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context5.prev = _context5.next) {
                   case 0:
                     run = this.forma.controls.run.value;
                     password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
@@ -398,26 +549,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 4:
                   case "end":
-                    return _context3.stop();
+                    return _context5.stop();
                 }
               }
-            }, _callee3, this);
+            }, _callee5, this);
           }));
         }
       }, {
         key: "onSubmit",
         value: function onSubmit() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
               while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context6.prev = _context6.next) {
                   case 0:
                     if (!this.forma.invalid) {
-                      _context4.next = 2;
+                      _context6.next = 2;
                       break;
                     }
 
-                    return _context4.abrupt("return");
+                    return _context6.abrupt("return");
 
                   case 2:
                     if (this.usaEnrolamiento) {
@@ -430,76 +581,108 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 3:
                   case "end":
-                    return _context4.stop();
+                    return _context6.stop();
                 }
               }
-            }, _callee4, this);
+            }, _callee6, this);
           }));
         }
       }, {
         key: "autentificarse",
         value: function autentificarse(userName, password) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-            var _this3 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            var _this4 = this;
 
             var f, loader;
-            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            return regeneratorRuntime.wrap(function _callee8$(_context8) {
               while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context8.prev = _context8.next) {
                   case 0:
                     //en este caso ya el user name es el email
                     f = {
                       UserName: userName,
                       Password: password,
-                      UsaEnrolamiento: this.usaEnrolamiento
+                      UsaEnrolamiento: this.usaEnrolamiento,
+                      TokenFCM: this.utiles.entregaTokenFCM()
                     };
-                    _context6.next = 3;
+                    _context8.next = 3;
                     return this.loading.create({
                       message: 'Obteniendo...<br>Login',
                       duration: 10000
                     });
 
                   case 3:
-                    loader = _context6.sent;
-                    _context6.next = 6;
+                    loader = _context8.sent;
+                    _context8.next = 6;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-                        var _this4 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+                        var _this5 = this;
 
-                        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                        return regeneratorRuntime.wrap(function _callee7$(_context7) {
                           while (1) {
-                            switch (_context5.prev = _context5.next) {
+                            switch (_context7.prev = _context7.next) {
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.acceso.loginWebDirecto(f).subscribe(function (response) {
-                                    _this4.procesarLogin(response, loader);
+                                    _this5.procesarLogin(response, loader);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.acceso.loginWebNative(f).then(function (response) {
-                                    _this4.procesarLogin(JSON.parse(response.data), loader);
+                                    _this5.procesarLogin(JSON.parse(response.data), loader);
                                   }, function (error) {
-                                    _this4.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
+                                    _this5.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
                                   });
                                 }
 
                               case 1:
                               case "end":
-                                return _context5.stop();
+                                return _context7.stop();
                             }
                           }
-                        }, _callee5, this);
+                        }, _callee7, this);
                       }));
                     });
 
                   case 6:
                   case "end":
-                    return _context6.stop();
+                    return _context8.stop();
                 }
               }
-            }, _callee6, this);
+            }, _callee8, this);
           }));
+        }
+      }, {
+        key: "setDatosUsuario",
+        value: function setDatosUsuario(retorno, user, userFamilia) {
+          //variable de sessión muy importante para el resto de la app.
+          sessionStorage.setItem("UsuarioAps", user);
+          localStorage.setItem('MI_RUT', retorno.UsuarioAps.Rut);
+          localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres + ' ' + retorno.UsuarioAps.ApellidoPaterno);
+          localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);
+          localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen); //lo vamos a guardar en el local storage para realizar la llamada
+          //en el background
+
+          localStorage.setItem('UsuarioAps', user);
+
+          if (retorno.UsuariosFamilia) {
+            //debemos quitar los repetidos según última revisión
+            var hash = {};
+            var familia = retorno.UsuariosFamilia.filter(function (o) {
+              return hash[o.Id] ? false : hash[o.Id] = true;
+            });
+            retorno.UsuariosFamilia = familia;
+            userFamilia = JSON.stringify(retorno.UsuariosFamilia); //variable de sessión muy importante para el resto de la app.
+
+            sessionStorage.setItem("UsuariosFamilia", userFamilia);
+          }
+
+          this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
+          this.Mensaje = retorno.RespuestaBase.Mensaje;
+          this.loggedIn = true;
+          /*     this.fcmService.initFCM();
+              this.fcmService.receiveMessage(true); */
         }
       }, {
         key: "procesarLogin",
@@ -514,41 +697,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               var userFamilia;
 
               if (retorno.UsuarioAps) {
-                user = JSON.stringify(retorno.UsuarioAps); //variable de sessión muy importante para el resto de la app.
+                user = JSON.stringify(retorno.UsuarioAps); //antes debemos validar si tiene entidad contratante
 
-                sessionStorage.setItem("UsuarioAps", user);
-                localStorage.setItem('MI_RUT', retorno.UsuarioAps.Rut);
-                localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres + ' ' + retorno.UsuarioAps.ApellidoPaterno);
-                localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);
-                localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen); //lo vamos a guardar en el local storage para realizar la llamada
-                //en el background
+                if (user.NodId && this.parametrosApp.USA_ENTIDAD_CONTRATANTE()) {
+                  //usa entidad contratante y tiene nodo
+                  if (retorno.UsuarioAps.EntidadContratante && retorno.UsuarioAps.EntidadContratante.length > 0) {
+                    //tiene entidad contratante
+                    tieneUsuario = true;
+                    this.setDatosUsuario(retorno, user, userFamilia);
+                    loader.dismiss();
+                  } else {
+                    //no tiene entidad contratante
+                    this.utiles.presentToast("No tiene entidad contratante asociada", "middle", 3000);
+                    loader.dismiss();
+                    return;
+                  }
+                } else {
+                  //no usa entidad contratante
+                  tieneUsuario = true;
+                  this.setDatosUsuario(retorno, user, userFamilia);
+                  loader.dismiss();
+                }
+              } //si tiene usuario está valido
 
-                localStorage.setItem('UsuarioAps', user);
-                tieneUsuario = true;
-              }
-
-              if (retorno.UsuariosFamilia) {
-                //debemos quitar los repetidos según última revisión
-                var hash = {};
-                var familia = retorno.UsuariosFamilia.filter(function (o) {
-                  return hash[o.Id] ? false : hash[o.Id] = true;
-                });
-                retorno.UsuariosFamilia = familia;
-                userFamilia = JSON.stringify(retorno.UsuariosFamilia); //variable de sessión muy importante para el resto de la app.
-
-                sessionStorage.setItem("UsuariosFamilia", userFamilia);
-              }
-
-              this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
-              this.Mensaje = retorno.RespuestaBase.Mensaje;
-              this.loggedIn = true;
-              loader.dismiss(); //si tiene usuario está valido
 
               if (!tieneUsuario) {
                 this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
-              } //this.crearToken();
+              }
 
-
+              this.crearToken();
               this.irAHome();
             } else {
               this.loggedIn = false;
@@ -607,6 +784,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__["ServicioAcceso"]
       }, {
         type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"]
+      }, {
+        type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__["ServicioFCM"]
+      }, {
+        type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_10__["AppVersion"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
+      }, {
+        type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_11__["Device"]
       }];
     };
 

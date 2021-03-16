@@ -475,6 +475,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar/avatar.component.html":
+  /*!***********************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar/avatar.component.html ***!
+    \***********************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsAvatarAvatarComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<ion-item [lines]=\"lines\">\n  <!-- poner avatar -->\n  <ion-avatar slot=\"start\">\n    <img *ngIf=\"urlImagen != ''\" src={{urlImagen}}>\n    <img *ngIf=\"urlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n  </ion-avatar>\n  <ion-row style=\"display: block;\">\n    <h3 class=\"text-avatar\">{{nombreCompleto}}</h3>\n    <p class=\"subtext-avatar\">{{parentezco}}</p>\n  </ion-row>\n</ion-item>\n\n\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/card-calendario/card-calendario.component.html":
+  /*!*****************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/card-calendario/card-calendario.component.html ***!
+    \*****************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsCardCalendarioCardCalendarioComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n        <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n      </ion-row>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'MMMM') != fechaActual\">\n        <label class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</label>\n      </ion-row>";
+    /***/
+  },
+
+  /***/
   "./src/app/app-routing.module.ts":
   /*!***************************************!*\
     !*** ./src/app/app-routing.module.ts ***!
@@ -580,7 +620,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | ordenes-ordenes-module */
-        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
         /*! ./ordenes/ordenes.module */
         "./src/app/ordenes/ordenes.module.ts")).then(function (m) {
           return m.OrdenesPageModule;
@@ -591,7 +631,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | modal-examenes-modal-examenes-module */
-        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("common"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null,
         /*! ./modal-examenes/modal-examenes.module */
         "./src/app/modal-examenes/modal-examenes.module.ts")).then(function (m) {
           return m.ModalExamenesPageModule;
@@ -738,6 +778,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /*! ./registro-usuario/registro-usuario.module */
         "./src/app/registro-usuario/registro-usuario.module.ts")).then(function (m) {
           return m.RegistroUsuarioPageModule;
+        });
+      }
+    }, {
+      path: 'pre-registro-uno',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | pre-registro-uno-pre-registro-uno-module */
+        "pre-registro-uno-pre-registro-uno-module").then(__webpack_require__.bind(null,
+        /*! ./pre-registro-uno/pre-registro-uno.module */
+        "./src/app/pre-registro-uno/pre-registro-uno.module.ts")).then(function (m) {
+          return m.PreRegistroUnoPageModule;
+        });
+      }
+    }, {
+      path: 'contactabilidad',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | contactabilidad-contactabilidad-module */
+        "contactabilidad-contactabilidad-module").then(__webpack_require__.bind(null,
+        /*! ./contactabilidad/contactabilidad.module */
+        "./src/app/contactabilidad/contactabilidad.module.ts")).then(function (m) {
+          return m.ContactabilidadPageModule;
         });
       }
     }];
@@ -1256,7 +1318,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
     /*! @ionic-native/firebase-messaging/ngx */
-    "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js"); //nativos
+    "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
+    /*! ./components/components.module */
+    "./src/app/components/components.module.ts"); //nativos
     //Pipes
     //servicios
 
@@ -1276,7 +1344,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"], _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__["CelsiusPipe"], _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__["SplitPipe"], _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__["MomentPipe"], _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__["FilterPipe"]],
       entryComponents: [],
-      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_36__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_37__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_40__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_39__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_41__["MatIconModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_45__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_44__["firebaseConfig"])],
+      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_36__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_37__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_40__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_39__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_41__["MatIconModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_50__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_45__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_44__["firebaseConfig"])],
       providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__["BackgroundMode"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__["FirebaseMessaging"],
       /*  BackgroundGeolocation, */
       {
@@ -1285,6 +1353,344 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"]]
     })], AppModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/avatar/avatar.component.scss":
+  /*!*********************************************************!*\
+    !*** ./src/app/components/avatar/avatar.component.scss ***!
+    \*********************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsAvatarAvatarComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".text-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.15px;\n  color: #000000DE;\n  font-size: 1em;\n  margin-bottom: 0;\n}\n\n.subtext-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.25px;\n  color: #00000099;\n  font-size: 0.875em;\n  margin-bottom: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXIvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxjb21wb25lbnRzXFxhdmF0YXJcXGF2YXRhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXIvYXZhdGFyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0FDQ0o7O0FEQ0U7RUFDRSxxQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0FDRUoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2F2YXRhci9hdmF0YXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGV4dC1hdmF0YXJ7XHJcbiAgICBmb250LWZhbWlseTogJ1JvYm90byc7XHJcbiAgICBsZXR0ZXItc3BhY2luZzogMC4xNXB4O1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxuICAgIGZvbnQtc2l6ZTogMWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB9XHJcbiAgLnN1YnRleHQtYXZhdGFye1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMjVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwOTk7XHJcbiAgICBmb250LXNpemU6IDAuODc1ZW07XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xyXG4gIH0iLCIudGV4dC1hdmF0YXIge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMTVweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbiAgZm9udC1zaXplOiAxZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59XG5cbi5zdWJ0ZXh0LWF2YXRhciB7XG4gIGZvbnQtZmFtaWx5OiBcIlJvYm90b1wiO1xuICBsZXR0ZXItc3BhY2luZzogMC4yNXB4O1xuICBjb2xvcjogIzAwMDAwMDk5O1xuICBmb250LXNpemU6IDAuODc1ZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/avatar/avatar.component.ts":
+  /*!*******************************************************!*\
+    !*** ./src/app/components/avatar/avatar.component.ts ***!
+    \*******************************************************/
+
+  /*! exports provided: AvatarComponent */
+
+  /***/
+  function srcAppComponentsAvatarAvatarComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AvatarComponent", function () {
+      return AvatarComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+    var AvatarComponent = /*#__PURE__*/function () {
+      function AvatarComponent() {
+        _classCallCheck(this, AvatarComponent);
+
+        //inset: solo la parte del texto y no avatar full: todo none: ninguna
+        this.lines = 'none';
+      }
+
+      _createClass(AvatarComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return AvatarComponent;
+    }();
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "urlImagen", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "nombreCompleto", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "parentezco", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "lines", void 0);
+    AvatarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-avatar',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./avatar.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar/avatar.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./avatar.component.scss */
+      "./src/app/components/avatar/avatar.component.scss"))["default"]]
+    })], AvatarComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/card-calendario/card-calendario.component.scss":
+  /*!***************************************************************************!*\
+    !*** ./src/app/components/card-calendario/card-calendario.component.scss ***!
+    \***************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsCardCalendarioCardCalendarioComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "/* Set the width to the full container and center the content */\nion-select {\n  width: 100%;\n  justify-content: center;\n}\n/* Set the flex in order to size the text width to its content */\nion-select::part(placeholder),\nion-select::part(text) {\n  flex: 0 0 auto;\n}\n/* Set the placeholder color and opacity */\nion-select::part(placeholder) {\n  color: #20a08a;\n  opacity: 1;\n}\n/*\n * Set the font of the first letter of the placeholder\n * Shadow parts work with pseudo-elements, too!\n * https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements\n */\nion-select::part(placeholder)::first-letter {\n  font-size: 24px;\n  font-weight: 500;\n}\n/* Set the text color */\nion-select::part(text) {\n  color: #545ca7;\n}\n/* Set the icon color and opacity */\nion-select::part(icon) {\n  color: #971e49;\n  opacity: 1;\n}\n.content-card-fav {\n  height: 58px;\n  min-height: 56px;\n}\n.ion-fav-calendar {\n  height: 48px;\n  width: 48px;\n}\n.botonReservar {\n  /*color:#000000DE;\n  font-weight: 20px;*/\n  font: normal normal medium 14px/16px Roboto;\n  letter-spacing: 1.25px;\n  color: #000000DE;\n  text-transform: uppercase;\n  opacity: 1;\n}\n/* estilos para material */\n.example-header-image {\n  background-size: cover;\n  width: 80px;\n  height: 80px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\nmat-card {\n  width: 100%;\n  max-width: 100%;\n  min-width: 100%;\n}\n::ng-dep .mat-card-header-text {\n  width: 100%;\n  margin: 0;\n}\n.hora {\n  font-size: 0.8em;\n}\n.row-card {\n  margin-left: 16px;\n  margin-right: 16px;\n}\n.img-card {\n  width: 80px;\n  float: right;\n  margin: 0;\n  padding: 0;\n  min-width: 80px;\n}\nhr {\n  margin-top: 0;\n  margin-bottom: 0;\n  border: 0;\n  height: 1px;\n  background-color: rgba(0, 0, 0, 0.12);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jYXJkLWNhbGVuZGFyaW8vRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxjb21wb25lbnRzXFxjYXJkLWNhbGVuZGFyaW9cXGNhcmQtY2FsZW5kYXJpby5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9jYXJkLWNhbGVuZGFyaW8vY2FyZC1jYWxlbmRhcmlvLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLCtEQUFBO0FBQ0E7RUFDSSxXQUFBO0VBRUEsdUJBQUE7QUNBSjtBREdFLGdFQUFBO0FBQ0E7O0VBRUUsY0FBQTtBQ0FKO0FER0UsMENBQUE7QUFDQTtFQUNFLGNBQUE7RUFDQSxVQUFBO0FDQUo7QURHRTs7OztFQUFBO0FBS0E7RUFDRSxlQUFBO0VBQ0EsZ0JBQUE7QUNBSjtBREdFLHVCQUFBO0FBQ0E7RUFDRSxjQUFBO0FDQUo7QURHRSxtQ0FBQTtBQUNBO0VBQ0UsY0FBQTtFQUNBLFVBQUE7QUNBSjtBREVFO0VBQ0UsWUFBQTtFQUNBLGdCQUFBO0FDQ0o7QURDRTtFQUNFLFlBQUE7RUFDQSxXQUFBO0FDRUo7QURBRTtFQUNFO3FCQUFBO0VBRUEsMkNBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSxVQUFBO0FDR0o7QURERSwwQkFBQTtBQUNBO0VBQ0Usc0JBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLG9CQUFBO0tBQUEsaUJBQUE7QUNJSjtBREZFO0VBQ0UsV0FBQTtFQUNBLGVBQUE7RUFDQSxlQUFBO0FDS0o7QURIRTtFQUNFLFdBQUE7RUFDQSxTQUFBO0FDTUo7QURKRTtFQUNFLGdCQUFBO0FDT0o7QURMRTtFQUNFLGlCQUFBO0VBQ0Esa0JBQUE7QUNRSjtBRE5FO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFDQSxTQUFBO0VBQ0EsVUFBQTtFQUNBLGVBQUE7QUNTSjtBRFBFO0VBQ0UsYUFBQTtFQUNBLGdCQUFBO0VBQ0EsU0FBQTtFQUNBLFdBQUE7RUFDQSxxQ0FBQTtBQ1VKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9jYXJkLWNhbGVuZGFyaW8vY2FyZC1jYWxlbmRhcmlvLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogU2V0IHRoZSB3aWR0aCB0byB0aGUgZnVsbCBjb250YWluZXIgYW5kIGNlbnRlciB0aGUgY29udGVudCAqL1xyXG5pb24tc2VsZWN0IHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gIFxyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgfVxyXG4gIFxyXG4gIC8qIFNldCB0aGUgZmxleCBpbiBvcmRlciB0byBzaXplIHRoZSB0ZXh0IHdpZHRoIHRvIGl0cyBjb250ZW50ICovXHJcbiAgaW9uLXNlbGVjdDo6cGFydChwbGFjZWhvbGRlciksXHJcbiAgaW9uLXNlbGVjdDo6cGFydCh0ZXh0KSB7XHJcbiAgICBmbGV4OiAwIDAgYXV0bztcclxuICB9XHJcbiAgXHJcbiAgLyogU2V0IHRoZSBwbGFjZWhvbGRlciBjb2xvciBhbmQgb3BhY2l0eSAqL1xyXG4gIGlvbi1zZWxlY3Q6OnBhcnQocGxhY2Vob2xkZXIpIHtcclxuICAgIGNvbG9yOiAjMjBhMDhhO1xyXG4gICAgb3BhY2l0eTogMTtcclxuICB9XHJcbiAgXHJcbiAgLypcclxuICAgKiBTZXQgdGhlIGZvbnQgb2YgdGhlIGZpcnN0IGxldHRlciBvZiB0aGUgcGxhY2Vob2xkZXJcclxuICAgKiBTaGFkb3cgcGFydHMgd29yayB3aXRoIHBzZXVkby1lbGVtZW50cywgdG9vIVxyXG4gICAqIGh0dHBzOi8vZGV2ZWxvcGVyLm1vemlsbGEub3JnL2VuLVVTL2RvY3MvV2ViL0NTUy9Qc2V1ZG8tZWxlbWVudHNcclxuICAgKi9cclxuICBpb24tc2VsZWN0OjpwYXJ0KHBsYWNlaG9sZGVyKTo6Zmlyc3QtbGV0dGVyIHtcclxuICAgIGZvbnQtc2l6ZTogMjRweDtcclxuICAgIGZvbnQtd2VpZ2h0OiA1MDA7XHJcbiAgfVxyXG4gIFxyXG4gIC8qIFNldCB0aGUgdGV4dCBjb2xvciAqL1xyXG4gIGlvbi1zZWxlY3Q6OnBhcnQodGV4dCkge1xyXG4gICAgY29sb3I6ICM1NDVjYTc7XHJcbiAgfVxyXG4gIFxyXG4gIC8qIFNldCB0aGUgaWNvbiBjb2xvciBhbmQgb3BhY2l0eSAqL1xyXG4gIGlvbi1zZWxlY3Q6OnBhcnQoaWNvbikge1xyXG4gICAgY29sb3I6ICM5NzFlNDk7XHJcbiAgICBvcGFjaXR5OiAxO1xyXG4gIH1cclxuICAuY29udGVudC1jYXJkLWZhdntcclxuICAgIGhlaWdodDogNThweDtcclxuICAgIG1pbi1oZWlnaHQ6IDU2cHg7XHJcbiAgfVxyXG4gIC5pb24tZmF2LWNhbGVuZGFye1xyXG4gICAgaGVpZ2h0OiA0OHB4O1xyXG4gICAgd2lkdGg6IDQ4cHg7XHJcbiAgfVxyXG4gIC5ib3RvblJlc2VydmFye1xyXG4gICAgLypjb2xvcjojMDAwMDAwREU7XHJcbiAgICBmb250LXdlaWdodDogMjBweDsqL1xyXG4gICAgZm9udDogbm9ybWFsIG5vcm1hbCBtZWRpdW0gMTRweC8xNnB4IFJvYm90bztcclxuICAgIGxldHRlci1zcGFjaW5nOiAxLjI1cHg7XHJcbiAgICBjb2xvcjogIzAwMDAwMERFO1xyXG4gICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcclxuICAgIG9wYWNpdHk6IDE7XHJcbiAgfVxyXG4gIC8qIGVzdGlsb3MgcGFyYSBtYXRlcmlhbCAqL1xyXG4gIC5leGFtcGxlLWhlYWRlci1pbWFnZSB7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xyXG4gICAgd2lkdGg6IDgwcHg7XHJcbiAgICBoZWlnaHQ6IDgwcHg7XHJcbiAgICBvYmplY3QtZml0OiBjb3ZlcjtcclxuICB9XHJcbiAgbWF0LWNhcmR7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIG1heC13aWR0aDogMTAwJTtcclxuICAgIG1pbi13aWR0aDogMTAwJTtcclxuICB9XHJcbiAgOjpuZy1kZXAgLm1hdC1jYXJkLWhlYWRlci10ZXh0e1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgfVxyXG4gIC5ob3Jhe1xyXG4gICAgZm9udC1zaXplOiAwLjhlbTtcclxuICB9XHJcbiAgLnJvdy1jYXJke1xyXG4gICAgbWFyZ2luLWxlZnQ6IDE2cHg7XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDE2cHg7XHJcbiAgfVxyXG4gIC5pbWctY2FyZHtcclxuICAgIHdpZHRoOiA4MHB4O1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG4gICAgbWFyZ2luOiAwO1xyXG4gICAgcGFkZGluZzogMDtcclxuICAgIG1pbi13aWR0aDogODBweDtcclxuICB9XHJcbiAgaHIge1xyXG4gICAgbWFyZ2luLXRvcDogMDtcclxuICAgIG1hcmdpbi1ib3R0b206IDA7XHJcbiAgICBib3JkZXI6IDA7XHJcbiAgICBoZWlnaHQ6IDFweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwwLDAsLjEyKTtcclxuICB9IiwiLyogU2V0IHRoZSB3aWR0aCB0byB0aGUgZnVsbCBjb250YWluZXIgYW5kIGNlbnRlciB0aGUgY29udGVudCAqL1xuaW9uLXNlbGVjdCB7XG4gIHdpZHRoOiAxMDAlO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn1cblxuLyogU2V0IHRoZSBmbGV4IGluIG9yZGVyIHRvIHNpemUgdGhlIHRleHQgd2lkdGggdG8gaXRzIGNvbnRlbnQgKi9cbmlvbi1zZWxlY3Q6OnBhcnQocGxhY2Vob2xkZXIpLFxuaW9uLXNlbGVjdDo6cGFydCh0ZXh0KSB7XG4gIGZsZXg6IDAgMCBhdXRvO1xufVxuXG4vKiBTZXQgdGhlIHBsYWNlaG9sZGVyIGNvbG9yIGFuZCBvcGFjaXR5ICovXG5pb24tc2VsZWN0OjpwYXJ0KHBsYWNlaG9sZGVyKSB7XG4gIGNvbG9yOiAjMjBhMDhhO1xuICBvcGFjaXR5OiAxO1xufVxuXG4vKlxuICogU2V0IHRoZSBmb250IG9mIHRoZSBmaXJzdCBsZXR0ZXIgb2YgdGhlIHBsYWNlaG9sZGVyXG4gKiBTaGFkb3cgcGFydHMgd29yayB3aXRoIHBzZXVkby1lbGVtZW50cywgdG9vIVxuICogaHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQ1NTL1BzZXVkby1lbGVtZW50c1xuICovXG5pb24tc2VsZWN0OjpwYXJ0KHBsYWNlaG9sZGVyKTo6Zmlyc3QtbGV0dGVyIHtcbiAgZm9udC1zaXplOiAyNHB4O1xuICBmb250LXdlaWdodDogNTAwO1xufVxuXG4vKiBTZXQgdGhlIHRleHQgY29sb3IgKi9cbmlvbi1zZWxlY3Q6OnBhcnQodGV4dCkge1xuICBjb2xvcjogIzU0NWNhNztcbn1cblxuLyogU2V0IHRoZSBpY29uIGNvbG9yIGFuZCBvcGFjaXR5ICovXG5pb24tc2VsZWN0OjpwYXJ0KGljb24pIHtcbiAgY29sb3I6ICM5NzFlNDk7XG4gIG9wYWNpdHk6IDE7XG59XG5cbi5jb250ZW50LWNhcmQtZmF2IHtcbiAgaGVpZ2h0OiA1OHB4O1xuICBtaW4taGVpZ2h0OiA1NnB4O1xufVxuXG4uaW9uLWZhdi1jYWxlbmRhciB7XG4gIGhlaWdodDogNDhweDtcbiAgd2lkdGg6IDQ4cHg7XG59XG5cbi5ib3RvblJlc2VydmFyIHtcbiAgLypjb2xvcjojMDAwMDAwREU7XG4gIGZvbnQtd2VpZ2h0OiAyMHB4OyovXG4gIGZvbnQ6IG5vcm1hbCBub3JtYWwgbWVkaXVtIDE0cHgvMTZweCBSb2JvdG87XG4gIGxldHRlci1zcGFjaW5nOiAxLjI1cHg7XG4gIGNvbG9yOiAjMDAwMDAwREU7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XG4gIG9wYWNpdHk6IDE7XG59XG5cbi8qIGVzdGlsb3MgcGFyYSBtYXRlcmlhbCAqL1xuLmV4YW1wbGUtaGVhZGVyLWltYWdlIHtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgd2lkdGg6IDgwcHg7XG4gIGhlaWdodDogODBweDtcbiAgb2JqZWN0LWZpdDogY292ZXI7XG59XG5cbm1hdC1jYXJkIHtcbiAgd2lkdGg6IDEwMCU7XG4gIG1heC13aWR0aDogMTAwJTtcbiAgbWluLXdpZHRoOiAxMDAlO1xufVxuXG46Om5nLWRlcCAubWF0LWNhcmQtaGVhZGVyLXRleHQge1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luOiAwO1xufVxuXG4uaG9yYSB7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG59XG5cbi5yb3ctY2FyZCB7XG4gIG1hcmdpbi1sZWZ0OiAxNnB4O1xuICBtYXJnaW4tcmlnaHQ6IDE2cHg7XG59XG5cbi5pbWctY2FyZCB7XG4gIHdpZHRoOiA4MHB4O1xuICBmbG9hdDogcmlnaHQ7XG4gIG1hcmdpbjogMDtcbiAgcGFkZGluZzogMDtcbiAgbWluLXdpZHRoOiA4MHB4O1xufVxuXG5ociB7XG4gIG1hcmdpbi10b3A6IDA7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIGJvcmRlcjogMDtcbiAgaGVpZ2h0OiAxcHg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC4xMik7XG59Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/card-calendario/card-calendario.component.ts":
+  /*!*************************************************************************!*\
+    !*** ./src/app/components/card-calendario/card-calendario.component.ts ***!
+    \*************************************************************************/
+
+  /*! exports provided: CardCalendarioComponent */
+
+  /***/
+  function srcAppComponentsCardCalendarioCardCalendarioComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "CardCalendarioComponent", function () {
+      return CardCalendarioComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../../app/pipes/fecha.pipe */
+    "./src/app/pipes/fecha.pipe.ts");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! moment */
+    "./node_modules/moment/moment.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+    /* harmony import */
+
+
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../../../app/services/ServicioUtiles */
+    "./src/app/services/ServicioUtiles.ts"); //moment
+
+
+    var CardCalendarioComponent = /*#__PURE__*/function () {
+      function CardCalendarioComponent(navCtrl, toast, modalCtrl, platform, menu, alertController, utiles) {
+        _classCallCheck(this, CardCalendarioComponent);
+
+        this.navCtrl = navCtrl;
+        this.toast = toast;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.menu = menu;
+        this.alertController = alertController;
+        this.utiles = utiles;
+        this.item = {
+          Mostrar: false,
+          FechaCompleta: '',
+          NumeroDia: ''
+        };
+      }
+
+      _createClass(CardCalendarioComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          moment__WEBPACK_IMPORTED_MODULE_4__().locale('es');
+        }
+      }, {
+        key: "transformDate",
+        value: function transformDate(value, format) {
+          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_2__["MomentPipe"]();
+          return pi.transform(value, format);
+        }
+      }, {
+        key: "revisaEstado",
+        value: function revisaEstado(item) {
+          var retorno = false;
+
+          if (item.DetalleEventoMes) {
+            if (item.DetalleEventoMes.Estado) {
+              if (item.DetalleEventoMes.Estado != undefined && item.DetalleEventoMes.Estado != '') {
+                retorno = true;
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }]);
+
+      return CardCalendarioComponent;
+    }();
+
+    CardCalendarioComponent.ctorParameters = function () {
+      return [{
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"]
+      }, {
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_5__["ServicioUtiles"]
+      }];
+    };
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], CardCalendarioComponent.prototype, "item", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], CardCalendarioComponent.prototype, "fechaActual", void 0);
+    CardCalendarioComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-card-calendario',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./card-calendario.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/card-calendario/card-calendario.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./card-calendario.component.scss */
+      "./src/app/components/card-calendario/card-calendario.component.scss"))["default"]]
+    })], CardCalendarioComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/components.module.ts":
+  /*!*************************************************!*\
+    !*** ./src/app/components/components.module.ts ***!
+    \*************************************************/
+
+  /*! exports provided: ComponentsModule */
+
+  /***/
+  function srcAppComponentsComponentsModuleTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ComponentsModule", function () {
+      return ComponentsModule;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../../directives/text-avatar/index */
+    "./src/directives/text-avatar/index.ts");
+    /* harmony import */
+
+
+    var _angular_material_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @angular/material/card */
+    "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
+    /* harmony import */
+
+
+    var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! @angular/material/button */
+    "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
+    /* harmony import */
+
+
+    var _card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ./card-calendario/card-calendario.component */
+    "./src/app/components/card-calendario/card-calendario.component.ts");
+    /* harmony import */
+
+
+    var _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ./avatar/avatar.component */
+    "./src/app/components/avatar/avatar.component.ts");
+
+    var ComponentsModule = function ComponentsModule() {
+      _classCallCheck(this, ComponentsModule);
+    };
+
+    ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_5__["TextAvatarModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButtonModule"]],
+      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"]]
+    })], ComponentsModule);
     /***/
   },
 
@@ -1629,14 +2035,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "loginWebDirecto",
         value: function loginWebDirecto(userInfo) {
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento;
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
           var data = this.httpClient.get(url, {});
           return data;
         }
       }, {
         key: "loginWebNative",
         value: function loginWebNative(userInfo) {
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento;
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
+          ;
           var data = this.http.get(url, {}, {});
           return data;
         }
@@ -2338,6 +2745,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidad' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
           var data = this.http.get(urlCorta, {}, {});
           return data;
+        }
+      }, {
+        key: "getDisponibilidadApi",
+        value: function getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token) {
+          var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+          var data = this.httpClient.get(urlCorta, {});
+          return data;
+        }
+      }, {
+        key: "getDisponibilidadApiNative",
+        value: function getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId, token) {
+          var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+          var data = this.http.get(urlCorta, {}, {});
+          return data;
         } //las operaciones pueden ser
         //booked reservar cita
         //confirmed confirmar cita
@@ -2372,6 +2793,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'CitaWeb' + '?start=' + start + '&end=' + end + '&estado=' + estado + '&idPaciente=' + idPaciente;
           var data = this.http.get(urlCorta, {}, {});
           return data;
+        }
+      }, {
+        key: "postObtenerTokenManagement",
+        value: function postObtenerTokenManagement() {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, {}, options);
+          return data;
+        }
+      }, {
+        key: "postObtenerTokenManagementNative",
+        value: function postObtenerTokenManagementNative() {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, {}, {});
         }
       }]);
 
@@ -2560,25 +3007,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ServicioUtiles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! moment */
+    "./node_modules/moment/moment.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+    /* harmony import */
+
+
+    var _ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./ServicioUtiles */
     "./src/app/services/ServicioUtiles.ts");
     /* harmony import */
 
 
-    var _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./ServicioNotificaciones */
     "./src/app/services/ServicioNotificaciones.ts");
     /* harmony import */
 
 
-    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/fire/messaging */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
     /* harmony import */
 
 
-    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @ionic-native/firebase-messaging/ngx */
     "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
     /* import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx'; */
@@ -2595,9 +3052,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.fm = fm;
         this.firebaseMessaging = firebaseMessaging;
         this.notificaciones = notificaciones;
-      }
+      } //vamos a hacer que el token dure 3 días
+
 
       _createClass(ServicioFCM, [{
+        key: "verificaTokenSession",
+        value: function verificaTokenSession() {
+          var retorno = false;
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_2__();
+
+          if (localStorage.getItem('TOKEN_FIREBASE_MESSAGE') && localStorage.getItem('DATE_TOKEN_FIREBASE_MESSAGE')) {
+            //tiene token
+            var fechaToken = moment__WEBPACK_IMPORTED_MODULE_2__(localStorage.getItem('DATE_TOKEN_FIREBASE_MESSAGE'));
+
+            if (fechaToken.isValid()) {
+              var difDays = fechaActual.diff(fechaToken, 'days');
+
+              if (difDays <= 3) {
+                retorno = true;
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }, {
         key: "initFCM",
         value: function initFCM() {
           if (this.utiles.isAppOnDevice()) {
@@ -2608,16 +3087,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               console.log('push permitido');
             }); //pasaremos apn-string
 
-            this.firebaseMessaging.getToken().then(function (token) {
-              console.log('token native ' + token);
-              localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
-            });
+            if (this.verificaTokenSession() == false) {
+              this.firebaseMessaging.getToken().then(function (token) {
+                console.log('token native ' + token);
+                var fecha = moment__WEBPACK_IMPORTED_MODULE_2__().format('YYYY-MM-DD HH:mm');
+                localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
+                localStorage.setItem('DATE_TOKEN_FIREBASE_MESSAGE', fecha);
+              });
+            } else {
+              console.log('token native ' + localStorage.getItem('TOKEN_FIREBASE_MESSAGE'));
+            }
           } else {
             //web
-            this.fm.getToken.subscribe(function (token) {
-              console.log(token);
-              localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
-            });
+            if (this.verificaTokenSession() == false) {
+              this.fm.getToken.subscribe(function (token) {
+                console.log('token WEB ' + token);
+                var fecha = moment__WEBPACK_IMPORTED_MODULE_2__().format('YYYY-MM-DD HH:mm');
+                localStorage.setItem('TOKEN_FIREBASE_MESSAGE', token);
+                localStorage.setItem('DATE_TOKEN_FIREBASE_MESSAGE', fecha);
+              });
+            } else {
+              console.log('token WEB ' + localStorage.getItem('TOKEN_FIREBASE_MESSAGE'));
+            }
           }
         }
       }, {
@@ -2625,25 +3116,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function receiveMessage(esNotificacion) {
           var _this5 = this;
 
-          if (this.utiles.isAppOnDevice()) {
-            //nativo
-            if (esNotificacion) {
-              //primer plano
-              this.firebaseMessaging.onMessage().subscribe(function (payload) {
-                console.log(payload);
-              });
-              this.firebaseMessaging.onBackgroundMessage().subscribe(function (payload) {
-                console.log(payload);
-              });
-            }
-          } else {
-            if (esNotificacion) {
-              this.fm.messages.subscribe(function (payload) {
-                console.log(payload);
-                console.log(payload.notification); //aca crear mensaje web con toast
+          if (this.verificaTokenSession()) {
+            if (this.utiles.isAppOnDevice()) {
+              //nativo
+              if (esNotificacion) {
+                //primer plano
+                this.firebaseMessaging.onMessage().subscribe(function (payload) {
+                  console.log(payload);
+                });
+                this.firebaseMessaging.onBackgroundMessage().subscribe(function (payload) {
+                  console.log(payload);
+                });
+              }
+            } else {
+              if (esNotificacion) {
+                //aca me recibe cuando esta solo en segundo plano
+                this.fm.messages.subscribe(function (payload) {
+                  console.log(payload);
+                  console.log(payload.notification); //aca crear mensaje web con toast
 
-                _this5.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
-              });
+                  _this5.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
+                });
+                /*                     this.fm.onBackgroundMessage(function(payload:any){
+                                        this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
+                                    }) */
+              }
             }
           }
         }
@@ -2654,13 +3151,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     ServicioFCM.ctorParameters = function () {
       return [{
-        type: _ServicioUtiles__WEBPACK_IMPORTED_MODULE_2__["ServicioUtiles"]
+        type: _ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
       }, {
-        type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_4__["AngularFireMessaging"]
+        type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_5__["AngularFireMessaging"]
       }, {
-        type: _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_5__["FirebaseMessaging"]
+        type: _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_6__["FirebaseMessaging"]
       }, {
-        type: _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_3__["ServicioNotificaciones"]
+        type: _ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_4__["ServicioNotificaciones"]
       }];
     };
 
@@ -3321,6 +3818,103 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Alergia';
           this.http.setDataSerializer('json');
           return this.http.post(url, body, {});
+        } //metodos api management
+
+      }, {
+        key: "getIndicadorValorApi",
+        value: function getIndicadorValorApi(uspId) {
+          var body = JSON.stringify({
+            UspId: uspId.toString()
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'IndicadorValorApi';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "getIndicadorValorNativeApi",
+        value: function getIndicadorValorNativeApi(uspId) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "UspId": uspId.toString()
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'IndicadorValorApi';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
+        }
+      }, {
+        key: "getPresionApi",
+        value: function getPresionApi(uspId) {
+          var body = JSON.stringify({
+            UspId: uspId.toString()
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'PresionApi';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "getPresionNativeApi",
+        value: function getPresionNativeApi(uspId) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "UspId": uspId.toString()
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'PresionApi';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
+        }
+      }, {
+        key: "getAlergiasApi",
+        value: function getAlergiasApi(uspId) {
+          var body = JSON.stringify({
+            UspId: uspId.toString()
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AlergiaApi';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "getAlergiasNativeApi",
+        value: function getAlergiasNativeApi(uspId) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "UspId": uspId.toString()
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AlergiaApi';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
         }
       }]);
 
@@ -3679,7 +4273,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
                   }
 
-                  console.log(_this6.citasArr[0]);
+                  console.log(nuevas);
                 }
               });
             } else {
@@ -3710,7 +4304,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
                   }
 
-                  console.log(_this6.citasArr[0]);
+                  console.log(nuevas);
                 }
               });
             }
@@ -4011,6 +4605,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (elementos && elementos.length > 0) {
             var arrRetorno = elementos.find(function (p) {
               return p.Nombre == 'USA_LOGIN_ENROLAMIENTO';
+            });
+
+            if (arrRetorno && arrRetorno.Id > 0) {
+              if (parseInt(arrRetorno.Valor) == 1) retorno = true;
+            }
+          }
+        }
+
+        return retorno;
+      };
+
+      this.USA_API_MANAGEMENT = function () {
+        var retorno = false;
+
+        if (localStorage.getItem('PARAMETROS_APP')) {
+          var elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+
+          if (elementos && elementos.length > 0) {
+            var arrRetorno = elementos.find(function (p) {
+              return p.Nombre == 'USA_API_MANAGEMENT';
             });
 
             if (arrRetorno && arrRetorno.Id > 0) {
@@ -4862,6 +5476,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }, _callee3, this);
           }));
         }
+      }, {
+        key: "entregaTokenFCM",
+        value: function entregaTokenFCM() {
+          var token = '';
+
+          if (localStorage.getItem('TOKEN_FIREBASE_MESSAGE')) {
+            token = localStorage.getItem('TOKEN_FIREBASE_MESSAGE');
+          }
+
+          return token;
+        }
       }]);
 
       return ServicioUtiles;
@@ -4882,6 +5507,280 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     ServicioUtiles = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], ServicioUtiles);
+    /***/
+  },
+
+  /***/
+  "./src/directives/text-avatar/color-generator.ts":
+  /*!*******************************************************!*\
+    !*** ./src/directives/text-avatar/color-generator.ts ***!
+    \*******************************************************/
+
+  /*! exports provided: ColorGenerator */
+
+  /***/
+  function srcDirectivesTextAvatarColorGeneratorTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ColorGenerator", function () {
+      return ColorGenerator;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+    var ColorGenerator = /*#__PURE__*/function () {
+      function ColorGenerator() {
+        _classCallCheck(this, ColorGenerator);
+
+        this.COLORS = ['#e57373', '#f06292', '#ba68c8', '#9575cd', '#7986cb', '#64b5f6', '#4fc3f7', '#4dd0e1', '#4db6ac', '#81c784', '#aed581', '#ff8a65', '#d4e157', '#673ab7', '#ffb74d', '#a1887f', '#90a4ae'];
+        console.log('created');
+      }
+
+      _createClass(ColorGenerator, [{
+        key: "getColor",
+        value: function getColor(str) {
+          return this.COLORS[Math.abs(this.toNumber(str)) % this.COLORS.length];
+        }
+      }, {
+        key: "toNumber",
+        value: function toNumber(str) {
+          var h = 0;
+
+          for (var i = 0; i < str.length; i++) {
+            h = 31 * h + str.charCodeAt(i);
+            h |= 0; // Convert to 32bit integer
+          }
+
+          return h;
+        }
+      }]);
+
+      return ColorGenerator;
+    }();
+
+    ColorGenerator = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], ColorGenerator);
+    /***/
+  },
+
+  /***/
+  "./src/directives/text-avatar/index.ts":
+  /*!*********************************************!*\
+    !*** ./src/directives/text-avatar/index.ts ***!
+    \*********************************************/
+
+  /*! exports provided: TextAvatarModule */
+
+  /***/
+  function srcDirectivesTextAvatarIndexTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */
+
+
+    var _text_avatar_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./text-avatar.module */
+    "./src/directives/text-avatar/text-avatar.module.ts");
+    /* harmony reexport (safe) */
+
+
+    __webpack_require__.d(__webpack_exports__, "TextAvatarModule", function () {
+      return _text_avatar_module__WEBPACK_IMPORTED_MODULE_0__["TextAvatarModule"];
+    });
+    /***/
+
+  },
+
+  /***/
+  "./src/directives/text-avatar/text-avatar.module.ts":
+  /*!**********************************************************!*\
+    !*** ./src/directives/text-avatar/text-avatar.module.ts ***!
+    \**********************************************************/
+
+  /*! exports provided: TextAvatarModule */
+
+  /***/
+  function srcDirectivesTextAvatarTextAvatarModuleTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "TextAvatarModule", function () {
+      return TextAvatarModule;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _text_avatar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./text-avatar */
+    "./src/directives/text-avatar/text-avatar.ts");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    /* harmony import */
+
+
+    var _color_generator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./color-generator */
+    "./src/directives/text-avatar/color-generator.ts");
+
+    var TextAvatarModule = function TextAvatarModule() {
+      _classCallCheck(this, TextAvatarModule);
+    };
+
+    TextAvatarModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"]],
+      declarations: [_text_avatar__WEBPACK_IMPORTED_MODULE_2__["TextAvatarDirective"]],
+      exports: [_text_avatar__WEBPACK_IMPORTED_MODULE_2__["TextAvatarDirective"]],
+      providers: [_color_generator__WEBPACK_IMPORTED_MODULE_4__["ColorGenerator"]]
+    })], TextAvatarModule);
+    /***/
+  },
+
+  /***/
+  "./src/directives/text-avatar/text-avatar.scss":
+  /*!*****************************************************!*\
+    !*** ./src/directives/text-avatar/text-avatar.scss ***!
+    \*****************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcDirectivesTextAvatarTextAvatarScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".u-text-avatar {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  max-width: 46px;\n  max-height: 46px;\n  border-radius: 500px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9kaXJlY3RpdmVzL3RleHQtYXZhdGFyL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGRpcmVjdGl2ZXNcXHRleHQtYXZhdGFyXFx0ZXh0LWF2YXRhci5zY3NzIiwic3JjL2RpcmVjdGl2ZXMvdGV4dC1hdmF0YXIvdGV4dC1hdmF0YXIuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSx1QkFBQTtFQUNBLG1CQUFBO0VBRUEsV0FBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxvQkFBQTtBQ0FGIiwiZmlsZSI6InNyYy9kaXJlY3RpdmVzL3RleHQtYXZhdGFyL3RleHQtYXZhdGFyLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudS10ZXh0LWF2YXRhciB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIC8vIGJhY2tncm91bmQtY29sb3I6IGFudGlxdWV3aGl0ZTtcclxuICB3aWR0aDogMTAwJTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgbWF4LXdpZHRoOiA0NnB4O1xyXG4gIG1heC1oZWlnaHQ6IDQ2cHg7XHJcbiAgYm9yZGVyLXJhZGl1czogNTAwcHg7XHJcbn0iLCIudS10ZXh0LWF2YXRhciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBtYXgtd2lkdGg6IDQ2cHg7XG4gIG1heC1oZWlnaHQ6IDQ2cHg7XG4gIGJvcmRlci1yYWRpdXM6IDUwMHB4O1xufSJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/directives/text-avatar/text-avatar.ts":
+  /*!***************************************************!*\
+    !*** ./src/directives/text-avatar/text-avatar.ts ***!
+    \***************************************************/
+
+  /*! exports provided: TextAvatarDirective */
+
+  /***/
+  function srcDirectivesTextAvatarTextAvatarTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "TextAvatarDirective", function () {
+      return TextAvatarDirective;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _color_generator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./color-generator */
+    "./src/directives/text-avatar/color-generator.ts");
+
+    var TextAvatarDirective = /*#__PURE__*/function () {
+      function TextAvatarDirective(colorGenerator) {
+        _classCallCheck(this, TextAvatarDirective);
+
+        this.colorGenerator = colorGenerator;
+        this.firstLetter = "";
+        this.styles = {
+          'background-color': "#fff",
+          'color': "#000"
+        };
+      }
+
+      _createClass(TextAvatarDirective, [{
+        key: "ngOnChanges",
+        value: function ngOnChanges(changes) {
+          var text = changes['text'] ? changes['text'].currentValue : null;
+          var color = changes['color'] ? changes['color'].currentValue : null;
+          var textColor = changes['textColor'] ? changes['textColor'].currentValue : this.styles.color;
+          this.firstLetter = this.extractFirstCharacter(text);
+          this.styles = Object.assign(Object.assign({}, this.styles), {
+            'background-color': this.backgroundColorHexString(color, text),
+            'color': textColor
+          });
+        }
+      }, {
+        key: "extractFirstCharacter",
+        value: function extractFirstCharacter(text) {
+          return text.charAt(0) || '';
+        }
+      }, {
+        key: "backgroundColorHexString",
+        value: function backgroundColorHexString(color, text) {
+          return color || this.colorGenerator.getColor(text);
+        }
+      }]);
+
+      return TextAvatarDirective;
+    }();
+
+    TextAvatarDirective.ctorParameters = function () {
+      return [{
+        type: _color_generator__WEBPACK_IMPORTED_MODULE_2__["ColorGenerator"]
+      }];
+    };
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], TextAvatarDirective.prototype, "text", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], TextAvatarDirective.prototype, "color", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], TextAvatarDirective.prototype, "textColor", void 0);
+    TextAvatarDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'text-avatar',
+      template: "\n    <div class=\"u-text-avatar\" [ngStyle]=\"styles\">{{ firstLetter }}</div>\n  ",
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./text-avatar.scss */
+      "./src/directives/text-avatar/text-avatar.scss"))["default"]]
+    })], TextAvatarDirective);
     /***/
   },
 
@@ -4914,7 +5813,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       //URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
       //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
       URL_FOTOS: 'http://190.151.14.101:8065/',
-      API_ENDPOINT: 'http://localhost:27563/Api/',
+      //API_ENDPOINT: 'http://localhost:27563/Api/',
+      API_ENDPOINT: 'http://localhost:1960/Api/',
+      //API_ENDPOINT: 'https://10.211.55.5:45456/Api/',
       //URL_FOTOS: 'http://localhost:27563/',
       API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
       USA_CALENDARIO: false,

@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 
 import { ModalDetalleCitaPage } from './modal-detalle-cita.page';
 import { MatButtonModule } from '@angular/material/button'
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button'
     FormsModule,
     IonicModule,
     MatButtonModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

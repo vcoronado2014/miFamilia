@@ -58,6 +58,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { FirebaseMessaging } from '@ionic-native/firebase-messaging/ngx';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { FirebaseMessaging } from '@ionic-native/firebase-messaging/ngx';
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(), 
-    AppRoutingModule, 
+    AppRoutingModule,
+    ComponentsModule, 
     BrowserAnimationsModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,

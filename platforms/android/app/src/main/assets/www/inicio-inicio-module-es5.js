@@ -305,7 +305,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "abrirPrimerosPasos",
         value: function abrirPrimerosPasos() {
-          this.navCtrl.navigateRoot('registro-uno');
+          this.navCtrl.navigateRoot('pre-registro-uno');
         }
       }, {
         key: "irARegistro",

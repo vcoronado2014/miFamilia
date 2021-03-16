@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioInfoUsuario } from '../../app/services/ServicioInfoUsuario';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 
 @Component({
   selector: 'app-detail-usuario',
@@ -44,6 +45,7 @@ export class DetailUsuarioPage implements OnInit {
     public loading: LoadingController,
     public info: ServicioInfoUsuario,
     public acceso: ServicioAcceso,
+    public parametrosApp: ServicioParametrosApp
   ) { 
 
   }
@@ -56,22 +58,19 @@ export class DetailUsuarioPage implements OnInit {
         //store the temp in data
         
         this.usuario = JSON.parse(params.usuario);
+        if (this.usuario.Parentezco && this.usuario.Parentezco.Id > 0){
+          if (this.usuario.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA'){
+            this.usuario.Parentezco.Nombre = 'Yo';
+          }
+        }
+        else{
+          this.usuario.Parentezco.Nombre = 'No informado';
+        }
         this.userImagen = this.usuario.UrlImagen;
         this.miColor = this.utiles.entregaColor(this.usuario);
         console.log(this.usuario);
         this.obtenerInfoUsuario(this.usuario.Id);
       }
-    });
-  }
-  loadData(uspId){
-    this.info.getIndicadorValor(uspId).subscribe((response: any)=>{
-      this.procesarIndicadorValorSinLoader(response);
-    });
-    this.info.getPresion(uspId).subscribe((response: any)=>{
-      this.procesarPresionSinLoader(response);
-    });
-    this.info.getAlergias(uspId).subscribe((response: any)=>{
-      this.procesarAlergiasSinLoader(response);
     });
   }
   async obtenerInfoUsuario(uspId){
@@ -83,56 +82,112 @@ export class DetailUsuarioPage implements OnInit {
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.info.getIndicadorValor(uspId).subscribe((response: any)=>{
-          this.procesarIndicadorValor(response, loader);
-        });
-        //presion
-        let loader1 = await this.loading.create({
-          message: 'Obteniendo...<br>Presión',
-          
-        });
-        await loader1.present().then(async () => {
-          this.info.getPresion(uspId).subscribe((response: any)=>{
-            this.procesarPresion(response, loader1);
+        if (this.parametrosApp.USA_API_MANAGEMENT()){
+          //llamada api management
+          this.info.getIndicadorValorApi(uspId).subscribe((response: any)=>{
+            this.procesarIndicadorValor(response, loader);
           });
-        });
-        //alergias
-        let loader2 = await this.loading.create({
-          message: 'Obteniendo...<br>Alergias',
-          
-        });
-        await loader2.present().then(async () => {
-          this.info.getAlergias(uspId).subscribe((response: any)=>{
-            this.procesarAlergias(response, loader2);
-          });
-        });
+          //presion
+          let loader1 = await this.loading.create({
+            message: 'Obteniendo...<br>Presión',
 
+          });
+          await loader1.present().then(async () => {
+            this.info.getPresionApi(uspId).subscribe((response: any) => {
+              this.procesarPresion(response, loader1);
+            });
+          });
+          //alergias
+          let loader2 = await this.loading.create({
+            message: 'Obteniendo...<br>Alergias',
+
+          });
+          await loader2.present().then(async () => {
+            this.info.getAlergiasApi(uspId).subscribe((response: any) => {
+              this.procesarAlergias(response, loader2);
+            });
+          });
+        }
+        else{
+          this.info.getIndicadorValor(uspId).subscribe((response: any)=>{
+            this.procesarIndicadorValor(response, loader);
+          });
+          //presion
+          let loader1 = await this.loading.create({
+            message: 'Obteniendo...<br>Presión',
+            
+          });
+          await loader1.present().then(async () => {
+            this.info.getPresion(uspId).subscribe((response: any)=>{
+              this.procesarPresion(response, loader1);
+            });
+          });
+          //alergias
+          let loader2 = await this.loading.create({
+            message: 'Obteniendo...<br>Alergias',
+            
+          });
+          await loader2.present().then(async () => {
+            this.info.getAlergias(uspId).subscribe((response: any)=>{
+              this.procesarAlergias(response, loader2);
+            });
+          });
+        }
       }
       else{
-        //llamada nativa
-        this.info.getIndicadorValorNative(uspId).then((response: any)=>{
-          this.procesarIndicadorValor(JSON.parse(response.data), loader);
-        });
-        //presion
-        let loader1 = await this.loading.create({
-          message: 'Obteniendo...<br>Presión',
-          
-        });
-        await loader1.present().then(async () => {
-          this.info.getPresionNative(uspId).then((response: any)=>{
-            this.procesarPresion(JSON.parse(response.data), loader1);
+        if (this.parametrosApp.USA_API_MANAGEMENT()){
+          //llamada nativa
+          this.info.getIndicadorValorNativeApi(uspId).then((response: any) => {
+            this.procesarIndicadorValor(JSON.parse(response.data), loader);
           });
-        });
-        //alergias
-        let loader2 = await this.loading.create({
-          message: 'Obteniendo...<br>Alergias',
-          
-        });
-        await loader2.present().then(async () => {
-          this.info.getAlergiasNative(uspId).then((response: any)=>{
-            this.procesarAlergias(JSON.parse(response.data), loader2);
+          //presion
+          let loader1 = await this.loading.create({
+            message: 'Obteniendo...<br>Presión',
+
           });
-        });
+          await loader1.present().then(async () => {
+            this.info.getPresionNativeApi(uspId).then((response: any) => {
+              this.procesarPresion(JSON.parse(response.data), loader1);
+            });
+          });
+          //alergias
+          let loader2 = await this.loading.create({
+            message: 'Obteniendo...<br>Alergias',
+
+          });
+          await loader2.present().then(async () => {
+            this.info.getAlergiasNativeApi(uspId).then((response: any) => {
+              this.procesarAlergias(JSON.parse(response.data), loader2);
+            });
+          });
+        }
+        else{
+          //llamada nativa
+          this.info.getIndicadorValorNative(uspId).then((response: any) => {
+            this.procesarIndicadorValor(JSON.parse(response.data), loader);
+          });
+          //presion
+          let loader1 = await this.loading.create({
+            message: 'Obteniendo...<br>Presión',
+
+          });
+          await loader1.present().then(async () => {
+            this.info.getPresionNative(uspId).then((response: any) => {
+              this.procesarPresion(JSON.parse(response.data), loader1);
+            });
+          });
+          //alergias
+          let loader2 = await this.loading.create({
+            message: 'Obteniendo...<br>Alergias',
+
+          });
+          await loader2.present().then(async () => {
+            this.info.getAlergiasNative(uspId).then((response: any) => {
+              this.procesarAlergias(JSON.parse(response.data), loader2);
+            });
+          });
+        }
+
       }
     });
   }
@@ -210,7 +265,7 @@ export class DetailUsuarioPage implements OnInit {
         //todo ok
         for (var s in this.indicadorValor) {
           //altura
-          if (this.indicadorValor[s].Descripcion == 'Altura') {
+          if (this.indicadorValor[s].Descripcion.includes('Altura') || this.indicadorValor[s].Descripcion.includes('Talla')) {
             this.valorAltura = this.indicadorValor[s].Valor.toString();
             if (this.indicadorValor[s].fecha == null) {
               this.fechaAltura = 'n/a';
@@ -220,7 +275,7 @@ export class DetailUsuarioPage implements OnInit {
             }
           }
           //peso
-          if (this.indicadorValor[s].Descripcion == 'Peso') {
+          if (this.indicadorValor[s].Descripcion.includes('Peso')) {
             this.valorPeso = this.indicadorValor[s].Valor.toString();
             if (this.indicadorValor[s].fecha == null) {
               this.fechaPeso = 'n/a';
@@ -263,57 +318,6 @@ export class DetailUsuarioPage implements OnInit {
       this.fechaImc = 'No informada';
     }
     loader.dismiss();
-  }
-  procesarIndicadorValorSinLoader(data){
-    this.indicadorValor = data.IndicadorValorUsp;
-    if (this.indicadorValor) {
-      if (this.indicadorValor.length > 0) {
-        //todo ok
-        for (var s in this.indicadorValor) {
-          //altura
-          if (this.indicadorValor[s].Descripcion == 'Altura') {
-            this.valorAltura = this.indicadorValor[s].Valor.toString();
-            if (this.indicadorValor[s].fecha == null) {
-              this.fechaAltura = 'n/a';
-            }
-            else {
-              this.fechaAltura = '3 días';
-            }
-          }
-          //peso
-          if (this.indicadorValor[s].Descripcion == 'Peso') {
-            this.valorPeso = this.indicadorValor[s].Valor.toString();
-            if (this.indicadorValor[s].fecha == null) {
-              this.fechaPeso = 'n/a';
-            }
-            else {
-              this.fechaPeso = '3 días';
-            }
-          }
-          //IMC
-          if (this.indicadorValor[s].Descripcion == 'I.M.C.') {
-            this.valorImc = this.indicadorValor[s].Valor.toString();
-            if (this.indicadorValor[s].fecha == null) {
-              this.fechaImc = 'n/a';
-            }
-            else {
-              this.fechaImc = '3 días';
-            }
-          }
-        }
-
-      }
-      else {
-        //llenar con valores predeterminados
-        this.valorAltura = 'No informada';
-        this.fechaAltura = 'No informada';
-        this.valorPeso = 'No informada';
-        this.fechaPeso = 'No informada';
-        this.valorImc = 'No informada';
-        this.fechaImc = 'No informada';
-      }
-    }
-    
   }
 /*   doRefresh(event) {
     console.log('Begin async operation');

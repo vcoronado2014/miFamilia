@@ -107,7 +107,7 @@ export class InicioPage implements OnInit {
     this.navCtrl.navigateRoot('nuevo-login');
   }
   abrirPrimerosPasos(){
-    this.navCtrl.navigateRoot('registro-uno');
+    this.navCtrl.navigateRoot('pre-registro-uno');
   }
   irARegistro(registroIncompleto){
     //enviar registroIncompleto

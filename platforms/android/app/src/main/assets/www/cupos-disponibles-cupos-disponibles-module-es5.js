@@ -382,6 +382,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe(function (response) {
                                     _this2.procesarRespuestaTotal(response, loader);
                                   });
+                                  /*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+                                            this.procesarRespuestaTotal(response, loader);
+                                          }); */
                                 } else {
                                   //llamada nativa
                                   this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then(function (response) {
@@ -389,6 +392,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                                     _this2.procesarRespuestaTotal(respuesta, loader);
                                   });
+                                  /*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+                                            var respuesta = JSON.parse(response.data);
+                                            this.procesarRespuestaTotal(respuesta, loader);
+                                          }); */
                                 }
 
                               case 3:

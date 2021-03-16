@@ -75,5 +75,19 @@ export class ServicioParametrosApp{
         } 
         return retorno;
     }
+    USA_API_MANAGEMENT = ()=>{
+        let retorno = false;
+        if (localStorage.getItem('PARAMETROS_APP')){
+            let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+            if (elementos && elementos.length > 0){
+                let arrRetorno = elementos.find(p=>p.Nombre == 'USA_API_MANAGEMENT');
+                if (arrRetorno && arrRetorno.Id > 0){
+                    if (parseInt(arrRetorno.Valor) == 1)
+                    retorno = true;
+                }
+            }
+        } 
+        return retorno;
+    }
     
 }
