@@ -713,4 +713,45 @@ export class ServicioCitas{
     
         return this.http.post(url, {}, {});
       }
+      entregaPorMesNuevoApi(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        const body = JSON.stringify({
+            UspId: uspId.toString(),
+            IdRyf: idRyf.toString(),
+            NodId: nodId.toString(),
+            NumeroMes: numeroMes.toString(),
+            AnnoConsulta: annoConsulta.toString()
+        });
+
+        let url = environment.API_ENDPOINT + 'MesNuevoApi';
+        let httpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+        let options = { headers: httpHeaders };
+
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    entregaPorMesNuevoApiNative(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+            "UspId": uspId.toString(),
+            "IdRyf": idRyf.toString(),
+            "NodId": nodId.toString(),
+            "NumeroMes": numeroMes.toString(),
+            "AnnoConsulta": annoConsulta.toString()
+        };
+
+        let url = environment.API_ENDPOINT + 'MesNuevoApi';
+        this.http.setDataSerializer('json');
+
+
+        return this.http.post(url, body, {});
+    }
 }

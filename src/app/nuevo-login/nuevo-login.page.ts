@@ -37,6 +37,16 @@ export class NuevoLoginPage implements OnInit {
   tokenDispositivo;
   //para validarse solo con enrolamiento
   usaEnrolamiento = false;
+  //PARA REGISTRAR EL MOVIMIENTO DE INGRESO
+  objetoEntrada = {
+    VersionAppName: '',
+    Plataforma: '',
+    Token: '',
+    VersionAppNumber: '',
+    Fecha: new Date(),
+    TipoOperacion: '0',
+    Id: '0'
+  };
 
   constructor(
     private navCtrl: NavController,
@@ -152,6 +162,48 @@ export class NuevoLoginPage implements OnInit {
       }
 
     })
+  }
+  async registrarEntrada(){
+    //variable de session que identifica el ingreso
+    if (!sessionStorage.getItem('RSS_ID')){
+      this.objetoEntrada.VersionAppName = localStorage.getItem('version_app_name');
+      this.objetoEntrada.Plataforma = localStorage.getItem('plataforma');
+      this.objetoEntrada.VersionAppNumber = localStorage.getItem('version_number');
+      this.objetoEntrada.Token = localStorage.getItem('token_dispositivo');
+      this.objetoEntrada.Fecha = new Date();
+      //GUARDAMOS EN LA SESSION PARA OCUPARLO DESPUES
+      sessionStorage.setItem('ENTRADA', JSON.stringify(this.objetoEntrada));
+      let loader = await this.loading.create({
+        message: 'Creando...<br>registro de sessión',
+        duration: 2000
+      });
+
+      await loader.present().then(async () => {
+        if (!this.utiles.isAppOnDevice()) {
+          //web
+          this.servicioGeo.postIngreso(this.objetoEntrada).subscribe((data: any) => {
+            if (data){
+              if (data.Id > 0){
+                //guardamos el identificador del registro para procesarlo despues
+                sessionStorage.setItem("RSS_ID", data.Id);
+  
+              }
+            }
+            loader.dismiss();
+          });
+        }
+        else {
+          //dispositivo
+          this.servicioGeo.postIngresoNative(this.objetoEntrada).then(response => {
+            let respuesta = JSON.parse(response.data);
+            sessionStorage.setItem("RSS_ID", respuesta.Id);
+            loader.dismiss();
+          });
+        }
+      });
+
+
+    }
   }
   async loguearseRegistro(){
     let correo = this.forma.controls.email.value;
@@ -317,6 +369,8 @@ export class NuevoLoginPage implements OnInit {
           this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
         }
         this.crearToken();
+        //guardamos el registro de session
+        this.registrarEntrada();
         this.irAHome();
       }
       else {

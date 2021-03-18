@@ -253,15 +253,93 @@ export class ServicioGeo{
     let data = this.http.get(url,{}, {});
     return data;
   }
-/*   getEntidadContratante(nodId){
-    let url = environment.API_ENDPOINT + 'EntidadContratante?NodId=' + nodId;
-    let data = this.httpClient.get(url,{});
+
+  //LLAMADAS PARA CONTROLAR EL INICIO Y TERMINO DE LA SESSION EN LA APP
+  postIngreso(objetoEntrada) {
+    //realizar la llamada post a la api
+    const body = JSON.stringify(
+      {
+        "IdDispositivo": objetoEntrada.Token,
+        "VersionAppName": objetoEntrada.VersionAppName,
+        "Plataforma": objetoEntrada.Plataforma,
+        "VersionAppNumber": objetoEntrada.VersionAppNumber,
+        "TipoOperacion": objetoEntrada.TipoOperacion,
+        "Id": objetoEntrada.Id != null ? objetoEntrada.Id.toString() : '0',
+      });
+
+    let url = environment.API_ENDPOINT + 'RegistroSession';
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+    httpHeaders.set('Access-Control-Allow-Origin', '*');
+    httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+    let options = { headers: httpHeaders };
+
+    let data = this.httpClient.post(url, body, options);
     return data;
+
   }
-  getEntidadContratanteNative(nodId){
-    let url = environment.API_ENDPOINT + 'EntidadContratante?NodId=' + nodId;
-    let data = this.http.get(url,{}, {});
+  postIngresoNative(objetoEntrada){
+    //realizar la llamada post nativa
+    const headers = new Headers;
+    const body =
+    {
+      "IdDispositivo": objetoEntrada.Token,
+      "VersionAppName": objetoEntrada.VersionAppName,
+      "Plataforma": objetoEntrada.Plataforma,
+      "VersionAppNumber": objetoEntrada.VersionAppNumber,
+      "TipoOperacion": objetoEntrada.TipoOperacion,
+      "Id": objetoEntrada.Id != null ? objetoEntrada.Id.toString() : '0',
+    };
+
+    let url = environment.API_ENDPOINT + 'RegistroSession';
+    this.http.setDataSerializer('json');
+
+
+    return this.http.post(url, body, {});
+  }
+
+  postMovimientoApp(rssId, modulo) {
+    //realizar la llamada post a la api
+    const body = JSON.stringify(
+      {
+        "RssId": rssId,
+        "NombreModulo": modulo
+      });
+
+    let url = environment.API_ENDPOINT + 'MovimientosApp';
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+    httpHeaders.set('Access-Control-Allow-Origin', '*');
+    httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+    let options = { headers: httpHeaders };
+
+    let data = this.httpClient.post(url, body, options);
     return data;
-  } */
+
+  }
+  postMovimientoAppNative(rssId, modulo){
+    //realizar la llamada post nativa
+    const headers = new Headers;
+    const body =
+    {
+      "RssId": rssId,
+      "NombreModulo": modulo,
+    };
+
+    let url = environment.API_ENDPOINT + 'MovimientosApp';
+    this.http.setDataSerializer('json');
+
+
+    return this.http.post(url, body, {});
+  }
+
 
 }

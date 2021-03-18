@@ -645,6 +645,24 @@ export class ServicioUtiles{
               })
           }
     }
+    //para registrar los movimientos
+    async registrarMovimiento(rssId, modulo){
+        if (!this.isAppOnDevice()) {
+            //llamada web
+            this.servicioGeo.postMovimientoApp(rssId, modulo).subscribe((response: any) => {
+                //procesar
+                console.log('Movimiento registrado ' + modulo + ' Id: ' + response);
+            })
+        }
+        else{
+            //llamada nativa
+            this.servicioGeo.postMovimientoAppNative(rssId, modulo).then((response: any) => {
+                //procesar
+                var data = JSON.parse(response.data);
+                console.log('Movimiento registrado ' + modulo + ' Id: ' + data);
+            })
+        }
+    }
     entregaTokenFCM(){
         var token = '';
         if (localStorage.getItem('TOKEN_FIREBASE_MESSAGE')){

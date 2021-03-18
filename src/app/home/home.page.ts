@@ -5,6 +5,7 @@ import { NavigationExtras } from '@angular/router';
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
+import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { environment } from 'src/environments/environment';
 
 
@@ -31,6 +32,16 @@ export class HomePage implements OnInit {
   //tiene disponibilidad
   tieneCitaVigente = false;
   usaAgenda = false;
+  //para registrar la salida
+  objetoEntrada = {
+    VersionAppName: '',
+    Plataforma: '',
+    Token: '',
+    VersionAppNumber: '',
+    Fecha: new Date(),
+    TipoOperacion: '1',
+    Id: '0'
+  };
   //ESTOY TRABAJANDO EN LA DISPONIBILIDAD
   //HAY UNA VARIABLE DE SESXSION LLAMADA OPERACION
   //QUE SE ACTUALIZA SI ENCUENTRA O NO DISPONIBILIDAD
@@ -46,6 +57,7 @@ export class HomePage implements OnInit {
     public utiles: ServicioUtiles,
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
+    public servicioGeo: ServicioGeo,
 
   ) {}
 
@@ -110,6 +122,8 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot('calendario');
   }
   logout(){
+    //aca debemos registrar el fin de la session
+    this.registrarSalida();
     this.acceso.logout();
     this.navCtrl.navigateRoot('nuevo-login');
   }
@@ -136,6 +150,42 @@ export class HomePage implements OnInit {
   }
   dismiss(){
     this.modalCtrl.dismiss();
+  }
+  async registrarSalida(){
+    //variable de session que identifica el ingreso
+    if (sessionStorage.getItem('RSS_ID')){
+      this.objetoEntrada.VersionAppName = localStorage.getItem('version_app_name');
+      this.objetoEntrada.Plataforma = localStorage.getItem('plataforma');
+      this.objetoEntrada.VersionAppNumber = localStorage.getItem('version_number');
+      this.objetoEntrada.Token = localStorage.getItem('token_dispositivo');
+      this.objetoEntrada.Fecha = new Date();
+      this.objetoEntrada.Id = sessionStorage.getItem("RSS_ID");
+      this.objetoEntrada.TipoOperacion = '1';
+      let loader = await this.loading.create({
+        message: 'Creando...<br>registro de sessión',
+        duration: 2000
+      });
+
+      await loader.present().then(async () => {
+        if (!this.utiles.isAppOnDevice()) {
+          //web
+          this.servicioGeo.postIngreso(this.objetoEntrada).subscribe((data: any) => {
+            console.log(data);
+            loader.dismiss();
+          });
+        }
+        else {
+          //dispositivo
+          this.servicioGeo.postIngresoNative(this.objetoEntrada).then(response => {
+            let respuesta = JSON.parse(response.data);
+            console.log(respuesta);
+            loader.dismiss();
+          });
+        }
+      });
+
+
+    }
   }
   //para procesar citas
   /*

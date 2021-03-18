@@ -89,5 +89,19 @@ export class ServicioParametrosApp{
         } 
         return retorno;
     }
+    USA_LOG_MODULOS = ()=>{
+        let retorno = false;
+        if (localStorage.getItem('PARAMETROS_APP')){
+            let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+            if (elementos && elementos.length > 0){
+                let arrRetorno = elementos.find(p=>p.Nombre == 'USA_LOG_MODULOS');
+                if (arrRetorno && arrRetorno.Id > 0){
+                    if (parseInt(arrRetorno.Valor) == 1)
+                    retorno = true;
+                }
+            }
+        } 
+        return retorno;
+    }
     
 }

@@ -4,6 +4,7 @@ import { NavController, ToastController, Platform, ModalController, LoadingContr
 
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 
 @Component({
   selector: 'app-antecedentes',
@@ -26,11 +27,17 @@ export class AntecedentesPage implements OnInit {
     public menu:MenuController,
     public utiles: ServicioUtiles,
     public acceso: ServicioAcceso,
+    public parametrosApp: ServicioParametrosApp
   ) { }
 
   ngOnInit() {
     //this.miColor = this.utiles.entregaMiColor();
     //this.miColor = this.utiles.entregaColor(this.usuarioAps);
+    if (sessionStorage.getItem("RSS_ID")){
+      if (this.parametrosApp.USA_LOG_MODULOS()){
+        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'ANTECEDENTES');
+      }
+    }
     this.cargarDatosInciales();
   }
   async cargarDatosInciales(){
@@ -97,6 +104,7 @@ export class AntecedentesPage implements OnInit {
   ionViewWillEnter() {
     //si existen cambios se setean nuevamente
     //this.miColor = this.utiles.entregaMiColor();
+    console.log('will enter');
     this.miColor = this.utiles.entregaColor(this.usuarioAps);
   }
   goToDetails(usuario) {

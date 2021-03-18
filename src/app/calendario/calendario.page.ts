@@ -7,6 +7,7 @@ import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioInfoUsuario } from '../../app/services/ServicioInfoUsuario';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { environment } from 'src/environments/environment';
 //moment
 import * as moment from 'moment';
@@ -94,6 +95,7 @@ export class CalendarioPage implements OnInit {
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
     private alertController: AlertController,
+    public parametrosApp: ServicioParametrosApp
   ) { }
 
   //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
@@ -103,6 +105,13 @@ export class CalendarioPage implements OnInit {
   
   ngOnInit() {
     moment().locale('es');
+    //registramos movimiento
+    if (sessionStorage.getItem("RSS_ID")){
+      if (this.parametrosApp.USA_LOG_MODULOS()){
+        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'CALENDARIO');
+      }
+      
+    }
     this.fechaActual = this.transformDate(moment(), 'YYYY-MM-DD');
     console.log(this.fechaActual);
     //this.miColor = this.utiles.entregaMiColor();
@@ -136,12 +145,73 @@ export class CalendarioPage implements OnInit {
     console.log(mesActual);
     //***************************** */
     this.tratamientoMeses();
+    //prueba de implementacion api management
+    //this.cargarTodosLosEventosApi();
     //implementacion nueva
-    this.cargarTodosLosEventos();
+    if (this.parametrosApp.USA_API_MANAGEMENT()){
+      this.cargarTodosLosEventosApi();
+    }
+    else{
+      this.cargarTodosLosEventos();
+    }
+
 
   }
   private getTime(date?: Date) {
     return date != null ? new Date(date).getTime() : 0;
+  }
+  async cargarTodosLosEventosApi(){
+    //usar citasVerticalTodas
+    this.citasVerticalTodas = [];
+    this.citasVerticalMostrar = [];
+    var fechaActual = moment();
+
+    var mesActual = {
+      mes: fechaActual.month() + 1,
+      anno: fechaActual.year()
+    };
+
+    let loader = await this.loading.create({
+      message: 'Obteniendo...<br>Información del usuario api',
+      duration: 20000
+    });
+
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //llamada web
+        this.cita.entregaPorMesNuevoApi(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).subscribe(async (response: any)=>{
+          this.citasVerticalTodas = response;
+          this.procesarArregloCitasTodas();
+          this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
+          this.citasVerticalMostrar.sort((a:any, b:any)=>{ return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta)});
+          //guardamos la variable de ordenamiento
+          sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
+          //creamos top limit al nuevo arreglo de citas
+          this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+          console.log(this.citasVerticalTodasTop);
+          loader.dismiss();
+        });
+      }
+      else{
+        //llamada nativa
+        this.cita.entregaPorMesNuevoApiNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).then(async (response: any) => {
+          this.citasVerticalTodas = JSON.parse(response.data);
+          //aca procesamos
+          this.procesarArregloCitasTodas();
+          this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
+          //ahora que tenemos las citas que queremos mostrar
+          //ordenamos
+          this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta) });
+          //guardamos la variable de ordenamiento
+          sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
+          //creamos top limit al nuevo arreglo de citas
+          this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+          console.log(this.citasVerticalTodasTop);
+          loader.dismiss();
+        });
+      }
+    }); 
+
   }
 
   async cargarTodosLosEventos(){
@@ -502,7 +572,13 @@ export class CalendarioPage implements OnInit {
         else if (accion === 'cancelled'){
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
         }
-        this.cargarTodosLosEventos();
+        if (this.parametrosApp.USA_API_MANAGEMENT()){
+          this.cargarTodosLosEventosApi();
+        }
+        else{
+          this.cargarTodosLosEventos();
+        }
+        
       }
     });
     return await modal.present();
@@ -628,7 +704,13 @@ export class CalendarioPage implements OnInit {
         else if (accion === 'cancelled'){
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
         }
-        this.cargarTodosLosEventos();
+        if (this.parametrosApp.USA_API_MANAGEMENT()){
+          this.cargarTodosLosEventosApi();
+        }
+        else{
+          this.cargarTodosLosEventos();
+        }
+        
       }
       else{
         this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);

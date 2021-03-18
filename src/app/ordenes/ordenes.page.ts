@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioLaboratorio } from '../../app/services/ServicioLaboratorio';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 //modal
 import { ModalExamenesPage } from '../modal-examenes/modal-examenes.page';
 //moment
@@ -36,10 +37,16 @@ export class OrdenesPage implements OnInit {
     public loading: LoadingController,
     private lab: ServicioLaboratorio,
     public acceso: ServicioAcceso,
+    public parametrosApp: ServicioParametrosApp
   ) { }
 
   ngOnInit() {
     moment.locale('es');
+    if (sessionStorage.getItem("RSS_ID")){
+      if (this.parametrosApp.USA_LOG_MODULOS()){
+        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
+      }
+    }
     this.loadInicio();
   }
   async loadInicio(){
