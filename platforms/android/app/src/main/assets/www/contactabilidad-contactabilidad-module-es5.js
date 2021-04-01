@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Contactabilidad</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\" style=\"margin-top: 20px;\">\n    <form [formGroup]=\"forma\" novalidate>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre social</mat-label>\n          <input matInput placeholder=\"Nombre social\" formControlName=\"nombreSocial\" name=\"nombreSocial\" required>\n          <mat-error [hidden]=\"!(f.nombreSocial.errors && f.nombreSocial.errors.required)\">Nombre social requerido</mat-error>\n          <mat-hint align=\"start\"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>\n        </mat-form-field>\n      </ion-row>\n      <h3 class=\"mt-40\">Datos de contacto</h3>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\" required>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Teléfono</mat-label>\n          <input matInput placeholder=\"+569XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n          <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- boton de registrarse -->\n      <ion-row>\n        <button  [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">TERMINAR</button>\n      </ion-row>\n    </form>\n  \n  </div>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Contactabilidad</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n  <div [hidden]=\"estaCargando\" class=\"ion-padding\" style=\"margin-top: 20px;\">\n    <form [formGroup]=\"forma\" novalidate>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre social</mat-label>\n          <input matInput placeholder=\"Nombre social\" formControlName=\"nombreSocial\" name=\"nombreSocial\" required>\n          <mat-error [hidden]=\"!(f.nombreSocial.errors && f.nombreSocial.errors.required)\">Nombre social requerido</mat-error>\n          <mat-hint align=\"start\"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>\n        </mat-form-field>\n      </ion-row>\n      <h3 class=\"mt-40\">Datos de contacto</h3>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\" required>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Teléfono</mat-label>\n          <input matInput placeholder=\"+569XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n          <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- boton de registrarse -->\n      <ion-row>\n        <button  [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSumbit()\" mat-raised-button\n          color=\"accent\">TERMINAR</button>\n      </ion-row>\n    </form>\n  \n  </div>\n</ion-content>\n";
     /***/
   },
 
@@ -110,13 +110,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _contactabilidad_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ./contactabilidad.page */
     "./src/app/contactabilidad/contactabilidad.page.ts");
+    /* harmony import */
+
+
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! ../components/components.module */
+    "./src/app/components/components.module.ts");
 
     var ContactabilidadPageModule = function ContactabilidadPageModule() {
       _classCallCheck(this, ContactabilidadPageModule);
     };
 
     ContactabilidadPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_6__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_7__["MatInputModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild([{
+      imports: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_6__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_7__["MatInputModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_11__["ComponentsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild([{
         path: '',
         component: _contactabilidad_page__WEBPACK_IMPORTED_MODULE_10__["ContactabilidadPage"]
       }])],
@@ -248,13 +254,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.patternOnlyLetter = "[a-zA-Z\xC0-\xFF\xF1\xD1]+(s*[a-zA-Z\xC0-\xFF\xF1\xD1]*)*[a-zA-Z\xC0-\xFF\xF1\xD1 ]+$";
         this.expCelular = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/gm;
         this.expPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/gm;
-        this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
+        this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm; //variable para obtener el registro del usuario
+
+        this.registro = null;
+        this.estaCargando = false;
+        this.tituloProgress = '';
       }
 
       _createClass(ContactabilidadPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es'); //cargamos la forma
+          moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es'); //obtenemos el registro
+
+          if (localStorage.getItem('REGISTRO')) {
+            this.registro = JSON.parse(localStorage.getItem('REGISTRO'));
+          } //cargamos la forma
+
 
           this.cargarForma();
         }
@@ -265,7 +280,269 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'nombreSocial': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
             'email': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern(this.expEmail)]),
             'telefono': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern(this.expCelular)])
-          });
+          }); //precargar los datos del usuario.
+
+          if (this.registro && this.registro != null) {
+            this.forma.setValue({
+              nombreSocial: this.registro.Apodo,
+              email: this.registro.CorreoElectronico,
+              telefono: this.registro.TelefonoContacto ? this.registro.TelefonoContacto : ''
+            });
+          }
+        }
+      }, {
+        key: "onSumbit",
+        value: function onSumbit() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var _this = this;
+
+            var loader, email, nombreSocial, telefono, run;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return this.loading.create({
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null,
+                      //message: 'Cargando...<br>tipos de atención',
+                      duration: 2000
+                    });
+
+                  case 2:
+                    loader = _context2.sent;
+                    this.estaCargando = true;
+                    this.tituloProgress = 'Actualizando datos de contacto'; //variables a enviar
+
+                    email = this.forma.controls.email ? this.forma.controls.email.value : '';
+                    nombreSocial = this.forma.controls.nombreSocial ? this.forma.controls.nombreSocial.value : '';
+                    telefono = this.forma.controls.telefono ? this.forma.controls.telefono.value : '';
+                    run = this.registro.Run.replace('-', '');
+                    _context2.next = 11;
+                    return loader.present().then(function () {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                        var _this2 = this;
+
+                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                          while (1) {
+                            switch (_context.prev = _context.next) {
+                              case 0:
+                                if (!this.utiles.isAppOnDevice()) {
+                                  //llamada web
+                                  this.servicioGeo.postInformarPersona(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').subscribe(function (response) {
+                                    //procesar respuesta
+                                    var datos = response;
+
+                                    _this2.procesarRespuesta(datos, loader, nombreSocial, telefono);
+                                  });
+                                } else {
+                                  //llamada nativa
+                                  this.servicioGeo.postInformarPersonaNative(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').then(function (response) {
+                                    //procesar respuesta
+                                    var datos = JSON.parse(response.data);
+
+                                    _this2.procesarRespuesta(datos, loader, nombreSocial, telefono);
+                                  });
+                                }
+
+                              case 1:
+                              case "end":
+                                return _context.stop();
+                            }
+                          }
+                        }, _callee, this);
+                      }));
+                    });
+
+                  case 11:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
+        }
+      }, {
+        key: "procesarRespuesta",
+        value: function procesarRespuesta(data, loading, nombreSocial, telefono) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            var _this3 = this;
+
+            var correctoRayen, correctoRyf, fechaNac, loader;
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    if (!data) {
+                      _context4.next = 48;
+                      break;
+                    }
+
+                    if (!data.InformarPersonaResponse) {
+                      _context4.next = 42;
+                      break;
+                    }
+
+                    if (!data.InformarPersonaResponse.RespuestaBase) {
+                      _context4.next = 36;
+                      break;
+                    }
+
+                    //acá trae info de rayen y de ryf
+                    //ojo que debemos actualizar igual el registro, al menos con el telefono y el apodo
+                    //ya que el email es de autentificacion y no se puede cambiar
+                    correctoRayen = false;
+                    correctoRyf = false;
+
+                    if (data.InformarPersonaResponse.RespuestaBase.Rayen) {
+                      if (data.InformarPersonaResponse.RespuestaBase.Rayen.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
+                        correctoRayen = true;
+                        console.log('actualizado rayen');
+                      }
+                    }
+
+                    if (data.InformarPersonaResponse.RespuestaBase.Ryf) {
+                      if (data.InformarPersonaResponse.RespuestaBase.Ryf.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
+                        correctoRyf = true;
+                        console.log('actualizado ryf');
+                      }
+                    }
+
+                    if (!(correctoRyf || correctoRayen)) {
+                      _context4.next = 32;
+                      break;
+                    }
+
+                    this.estaCargando = false;
+                    this.tituloProgress = '';
+                    loading.dismiss(); //this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+
+                    fechaNac = moment__WEBPACK_IMPORTED_MODULE_9__();
+
+                    if (this.registro.FechaNacimiento) {
+                      fechaNac = moment__WEBPACK_IMPORTED_MODULE_9__(this.registro.FechaNacimiento);
+                    } //ahora actualizar el registro
+
+
+                    this.registro.Apodo = nombreSocial;
+                    this.registro.TelefonoContacto = telefono; //valores por defecto
+
+                    this.registro.Id = this.registro.Id.toString();
+                    this.registro.Activo = this.registro.Activo.toString();
+                    this.registro.DiaNacimiento = fechaNac.date().toString();
+                    this.registro.MesNacimiento = (fechaNac.month() + 1).toString();
+                    this.registro.AnioNacimiento = fechaNac.year().toString();
+                    this.registro.Eliminado = this.registro.Eliminado.toString();
+                    this.registro.ModoRegistro = this.registro.ModoRegistro.toString();
+                    this.registro.FechaBaja = null;
+                    _context4.next = 25;
+                    return this.loading.create({
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null,
+                      duration: 2000
+                    });
+
+                  case 25:
+                    loader = _context4.sent;
+                    this.estaCargando = true;
+                    this.tituloProgress = 'Actualizando datos de registro';
+                    _context4.next = 30;
+                    return loader.present().then(function () {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                        var _this4 = this;
+
+                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                          while (1) {
+                            switch (_context3.prev = _context3.next) {
+                              case 0:
+                                if (!this.utiles.isAppOnDevice()) {
+                                  //llamada web
+                                  this.servicioGeo.postRegistroFamilia(this.registro).subscribe(function (data) {
+                                    var respuesta = data;
+                                    localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                                    loader.dismiss();
+                                    _this4.estaCargando = false;
+
+                                    _this4.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+                                  }, function (error) {
+                                    loader.dismiss();
+                                    _this4.estaCargando = false;
+
+                                    _this4.utiles.presentToast(error, 'bottom', 2000);
+                                  });
+                                } else {
+                                  //llamada nativa
+                                  this.servicioGeo.postRegistroFamiliaNative(this.registro).then(function (data) {
+                                    var respuesta = JSON.parse(data.data);
+                                    localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                                    loader.dismiss();
+                                    _this4.estaCargando = false;
+
+                                    _this4.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+                                  })["catch"](function (error) {
+                                    loader.dismiss();
+                                    _this4.estaCargando = false;
+
+                                    _this4.utiles.presentToast(error, 'bottom', 2000);
+                                  });
+                                }
+
+                              case 1:
+                              case "end":
+                                return _context3.stop();
+                            }
+                          }
+                        }, _callee3, this);
+                      }));
+                    });
+
+                  case 30:
+                    _context4.next = 34;
+                    break;
+
+                  case 32:
+                    this.estaCargando = false;
+                    loading.dismiss();
+
+                  case 34:
+                    _context4.next = 40;
+                    break;
+
+                  case 36:
+                    this.estaCargando = false;
+                    loading.dismiss();
+                    this.tituloProgress = '';
+                    this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+
+                  case 40:
+                    _context4.next = 46;
+                    break;
+
+                  case 42:
+                    this.estaCargando = false;
+                    loading.dismiss();
+                    this.tituloProgress = '';
+                    this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+
+                  case 46:
+                    _context4.next = 52;
+                    break;
+
+                  case 48:
+                    this.estaCargando = false;
+                    loading.dismiss();
+                    this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+                    this.tituloProgress = '';
+
+                  case 52:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          }));
         }
       }, {
         key: "f",

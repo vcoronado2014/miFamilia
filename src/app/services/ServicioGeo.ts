@@ -340,6 +340,59 @@ export class ServicioGeo{
 
     return this.http.post(url, body, {});
   }
+  getMovimientos(cantidadDias, idDispositivo){
+    let url = environment.API_ENDPOINT + 'MovimientosApp?CantidadDias=' + cantidadDias + '&IdDispositivo=' + idDispositivo;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  getMovimientosNative(cantidadDias, idDispositivo){
+    let url = environment.API_ENDPOINT + 'MovimientosApp?CantidadDias=' + cantidadDias + '&IdDispositivo=' + idDispositivo;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  //para informar persona
+  postInformarPersona(run, nombreSocial, email, numeroTelefono, etiquetaTelefono) {
+    //realizar la llamada post a la api
+    const body = JSON.stringify(
+      {
+        "Run": run,
+        "NombreSocial": nombreSocial,
+        "Email": email,
+        "NumeroTelefono": numeroTelefono,
+        "EtiquetaTelefono": etiquetaTelefono
+      });
+
+    let url = environment.API_ENDPOINT + 'InformarPersona';
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    });
+    httpHeaders.set('Access-Control-Allow-Origin', '*');
+    httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+    let options = { headers: httpHeaders };
+
+    let data = this.httpClient.post(url, body, options);
+    return data;
+
+  }
+  postInformarPersonaNative(run, nombreSocial, email, numeroTelefono, etiquetaTelefono){
+    //realizar la llamada post nativa
+    const headers = new Headers;
+    const body =
+    {
+      "Run": run,
+      "NombreSocial": nombreSocial,
+      "Email": email,
+      "NumeroTelefono": numeroTelefono,
+      "EtiquetaTelefono": etiquetaTelefono
+    };
+
+    let url = environment.API_ENDPOINT + 'InformarPersona';
+    this.http.setDataSerializer('json');
 
 
+    return this.http.post(url, body, {});
+  }
 }

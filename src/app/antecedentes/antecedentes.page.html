@@ -9,11 +9,13 @@
 </ion-header>
 
 <ion-content class="back-app">
-  <div *ngIf="listadoUsuario <= 0" style="padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;"><p>No hay antecedentes para mostrar  <br>
+  <app-progress [mostrar]="estaCargando" titulo="Buscando antecedentes"></app-progress>
+
+  <div [hidden]="estaCargando" *ngIf="listadoUsuario <= 0" style="padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;"><p>No hay antecedentes para mostrar  <br>
     <ion-icon name="information-circle" style="font-size: 60px;"></ion-icon></p>
   </div>
 
-  <div style="padding-top: 32px;">
+  <div style="padding-top: 32px;" [hidden]="estaCargando">
     <div *ngFor="let item of listadoUsuario" (click)="goToDetails(item)">
       <!-- poner avatar -->
       <app-avatar [lines]="inset" [urlImagen] = "item.UrlImagen" [nombreCompleto]="item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno" [parentezco]="item.Parentezco.Nombre"></app-avatar>

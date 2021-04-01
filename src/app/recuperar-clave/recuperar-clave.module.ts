@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { RecuperarClavePage } from './recuperar-clave.page';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { RecuperarClavePage } from './recuperar-clave.page';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

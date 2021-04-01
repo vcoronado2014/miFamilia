@@ -8,7 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding" style="margin-top: 20px;">
+  <app-progress [mostrar]="estaCargando" [titulo]="tituloProgress"></app-progress>
+  <div [hidden]="estaCargando" class="ion-padding" style="margin-top: 20px;">
     <form [formGroup]="forma" novalidate>
       <ion-row>
         <mat-form-field appearance="outline" style="width: 100%;">
@@ -37,7 +38,7 @@
       </ion-row>
       <!-- boton de registrarse -->
       <ion-row>
-        <button  [disabled]="forma.invalid" class="button-registrarse" (click)="onSubmit()" mat-raised-button
+        <button  [disabled]="forma.invalid" class="button-registrarse" (click)="onSumbit()" mat-raised-button
           color="accent">TERMINAR</button>
       </ion-row>
     </form>

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ordenes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<ion-card *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <ion-item lines=\"none\" #myList>\r\n      <ion-avatar slot=\"start\">\r\n        <text-avatar [text]=\"item.NombreUsuario\" [color]=\"item.Color\" [textColor]=\"textColor\"></text-avatar>\r\n      </ion-avatar>\r\n      <ion-label class=\"ion-text-wrap\">{{ item.NombreUsuario }}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n      <!-- <ion-icon name=\"time\" slot=\"end\"></ion-icon> -->\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>  \r\n<!-- NO HAY ORDENES -->\r\n<div *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay órdenes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ordenes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando exámenes\"></app-progress>\r\n\r\n<ion-card [hidden]=\"estaCargando\" *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <ion-item lines=\"none\" #myList>\r\n      <ion-avatar slot=\"start\">\r\n        <text-avatar [text]=\"item.NombreUsuario\" [color]=\"item.Color\" [textColor]=\"textColor\"></text-avatar>\r\n      </ion-avatar>\r\n      <ion-label class=\"ion-text-wrap\">{{ item.NombreUsuario }}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n      <!-- <ion-icon name=\"time\" slot=\"end\"></ion-icon> -->\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>  \r\n<!-- NO HAY ORDENES -->\r\n<div [hidden]=\"estaCargando\" *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay órdenes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -31,6 +31,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _ordenes_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ordenes.page */ "./src/app/ordenes/ordenes.page.ts");
 /* harmony import */ var _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../directives/text-avatar/index */ "./src/directives/text-avatar/index.ts");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -48,6 +50,7 @@ OrdenesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
             _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__["TextAvatarModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_8__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                 {
                     path: '',
@@ -93,9 +96,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
 /* harmony import */ var _app_services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioLaboratorio */ "./src/app/services/ServicioLaboratorio.ts");
 /* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
-/* harmony import */ var _modal_examenes_modal_examenes_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../modal-examenes/modal-examenes.page */ "./src/app/modal-examenes/modal-examenes.page.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var _modal_examenes_modal_examenes_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../modal-examenes/modal-examenes.page */ "./src/app/modal-examenes/modal-examenes.page.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
 
 
 
@@ -105,12 +109,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 //modal
 
 //moment
 
 let OrdenesPage = class OrdenesPage {
-    constructor(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, lab, acceso) {
+    constructor(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, lab, acceso, parametrosApp) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -122,13 +127,20 @@ let OrdenesPage = class OrdenesPage {
         this.loading = loading;
         this.lab = lab;
         this.acceso = acceso;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.textColor = '#FFFFFF';
         //tiene registros
         this.tiene = true;
+        this.estaCargando = false;
     }
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_8__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+        /*     if (sessionStorage.getItem("RSS_ID")){
+              if (this.parametrosApp.USA_LOG_MODULOS()){
+                this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
+              }
+            } */
         this.loadInicio();
     }
     loadInicio() {
@@ -144,9 +156,16 @@ let OrdenesPage = class OrdenesPage {
             }
             if (this.usuarioAps) {
                 this.miColor = this.utiles.entregaColor(this.usuarioAps);
+                //original
+                /*       let loader = await this.loading.create({
+                        message: 'Obteniendo...<br>Órdenes del usuario',
+                        duration: 20000
+                      }); */
+                this.estaCargando = true;
                 let loader = yield this.loading.create({
-                    message: 'Obteniendo...<br>Órdenes del usuario',
-                    duration: 20000
+                    cssClass: 'loading-vacio',
+                    showBackdrop: false,
+                    spinner: null,
                 });
                 yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                     if (!this.utiles.isAppOnDevice()) {
@@ -169,7 +188,7 @@ let OrdenesPage = class OrdenesPage {
         var listado = data;
         if (listado) {
             for (var s in listado) {
-                let fecha = moment__WEBPACK_IMPORTED_MODULE_8__(listado[s].FechaRegistro).format('DD-MM-YYYY');
+                let fecha = moment__WEBPACK_IMPORTED_MODULE_9__(listado[s].FechaRegistro).format('DD-MM-YYYY');
                 listado[s].Fecha = fecha;
             }
             //ahora asignamos la variable
@@ -180,11 +199,12 @@ let OrdenesPage = class OrdenesPage {
             console.log(this.listadoOrdenes);
         }
         loader.dismiss();
+        this.estaCargando = false;
     }
     ordenSelected(item) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalCtrl.create({
-                component: _modal_examenes_modal_examenes_page__WEBPACK_IMPORTED_MODULE_7__["ModalExamenesPage"],
+                component: _modal_examenes_modal_examenes_page__WEBPACK_IMPORTED_MODULE_8__["ModalExamenesPage"],
                 componentProps: {
                     'orden': JSON.stringify(item)
                 }
@@ -208,7 +228,8 @@ OrdenesPage.ctorParameters = () => [
     { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__["ServicioUtiles"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
     { type: _app_services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_5__["ServicioLaboratorio"] },
-    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__["ServicioAcceso"] }
+    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__["ServicioAcceso"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_7__["ServicioParametrosApp"] }
 ];
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('myList', { read: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonItem"] })

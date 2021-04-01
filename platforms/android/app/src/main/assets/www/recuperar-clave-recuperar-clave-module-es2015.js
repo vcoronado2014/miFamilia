@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/nuevo-login\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Recuperar contraseña</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-padding\">\n  <ion-row class=\"texto-1 mt-32\">\n    Ingresa tu correo electrónico, te enviaremos un correo con tu contraseña, recuerda revisar de igual manera los spam o correo no deseado.\n  </ion-row>\n  <form [formGroup]=\"forma\" novalidate>\n      <ion-row class=\"mt-32\">\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"Correo electrónico\" formControlName=\"correo\" name=\"correo\" required>\n          <mat-error *ngIf=\"f.correo.errors && f.correo.errors.required\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.correo.errors && f.correo.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row class=\"mt-32\">\n        <button [disabled]=\"forma.invalid\" mat-flat-button color=\"primary\" style=\"width: 90%; margin-left: 5%;\"\n          (click)=\"submit()\">CONTINUAR</button>\n      </ion-row>\n  </form>\n\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/nuevo-login\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Recuperar contraseña</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"ion-padding\">\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Recuperando clave\"></app-progress>\n  <ion-row [hidden]=\"estaCargando\" class=\"texto-1 mt-32\">\n    Ingresa tu correo electrónico, te enviaremos un correo con tu contraseña, recuerda revisar de igual manera los spam o correo no deseado.\n  </ion-row>\n  <form [hidden]=\"estaCargando\" [formGroup]=\"forma\" novalidate>\n      <ion-row class=\"mt-32\">\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"Correo electrónico\" formControlName=\"correo\" name=\"correo\" required>\n          <mat-error *ngIf=\"f.correo.errors && f.correo.errors.required\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.correo.errors && f.correo.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row class=\"mt-32\">\n        <button [disabled]=\"forma.invalid\" mat-flat-button color=\"primary\" style=\"width: 90%; margin-left: 5%;\"\n          (click)=\"submit()\">CONTINUAR</button>\n      </ion-row>\n  </form>\n\n</ion-content>");
 
 /***/ }),
 
@@ -35,6 +35,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
 /* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
 /* harmony import */ var _recuperar_clave_page__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./recuperar-clave.page */ "./src/app/recuperar-clave/recuperar-clave.page.ts");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -61,6 +63,7 @@ RecuperarClavePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
             _angular_material_input__WEBPACK_IMPORTED_MODULE_8__["MatInputModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButtonModule"],
             _angular_material_icon__WEBPACK_IMPORTED_MODULE_10__["MatIconModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_12__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                 {
                     path: '',
@@ -120,6 +123,7 @@ let RecuperarClavePage = class RecuperarClavePage {
         this.loading = loading;
         this.formBuilder = formBuilder;
         this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
+        this.estaCargando = false;
     }
     ngOnInit() {
         this.cargarForma();
@@ -139,9 +143,16 @@ let RecuperarClavePage = class RecuperarClavePage {
                 this.utiles.presentToast('Debe ingresar un correo', 'middle', 2000);
                 return;
             }
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Verificando...<br>correo',
+                  duration: 10000
+                }); */
+            this.estaCargando = true;
             let loader = yield this.loading.create({
-                message: 'Verificando...<br>correo',
-                duration: 10000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
@@ -149,14 +160,16 @@ let RecuperarClavePage = class RecuperarClavePage {
                     this.servicioGeo.postRecuperarClave(correo).subscribe((response) => {
                         if (response.CodigoMensaje == 0) {
                             //aca todo ok
-                            this.utiles.presentToast(response.Mensaje, 'middle', 3000);
+                            this.utiles.presentToast(response.Mensaje, 'bottom', 3000);
                             loader.dismiss();
+                            this.estaCargando = false;
                             //llevar a login
                             this.abrirLogin();
                         }
                         else {
-                            this.utiles.presentToast(response.Mensaje, 'middle', 3000);
+                            this.utiles.presentToast(response.Mensaje, 'bottom', 3000);
                             loader.dismiss();
+                            this.estaCargando = false;
                         }
                     });
                 }
@@ -166,17 +179,20 @@ let RecuperarClavePage = class RecuperarClavePage {
                         let respuesta = JSON.parse(response.data);
                         if (respuesta.CodigoMensaje == 0) {
                             //aca todo ok
-                            this.utiles.presentToast(respuesta.Mensaje, 'middle', 3000);
+                            this.utiles.presentToast(respuesta.Mensaje, 'bottom', 3000);
                             loader.dismiss();
+                            this.estaCargando = false;
                             //llevar a login
                             this.abrirLogin();
                         }
                         else {
-                            this.utiles.presentToast(respuesta.Mensaje, 'middle', 3000);
+                            this.utiles.presentToast(respuesta.Mensaje, 'bottom', 3000);
                             loader.dismiss();
+                            this.estaCargando = false;
                         }
                     }, (error) => {
                         loader.dismiss();
+                        this.estaCargando = false;
                         this.utiles.presentToast('Ocurrió un error de verificación', 'bottom', 4000);
                     });
                 }

@@ -39,6 +39,7 @@ import { ServicioClaveUnica } from './services/ServicioClaveUnica';
 import { ServicioParametrosApp } from './services/ServicioParametrosApp';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServicioFCM } from './services/ServicioFCM';
+import { ServicioNotificacionesLocales } from './services/ServicioNotificacionesLocales';
 /** componentes material  */
 import { MatCardModule  } from '@angular/material/card';
 import { MatButtonModule  } from '@angular/material/button';
@@ -108,6 +109,7 @@ import { ComponentsModule } from './components/components.module';
     ServicioCitas,
     ServicioPaginacion,
     ServicioNotificaciones,
+    ServicioNotificacionesLocales,
     ServicioClaveUnica,
     ServicioParametrosApp,
     ServicioFCM,

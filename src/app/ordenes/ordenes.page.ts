@@ -25,6 +25,7 @@ export class OrdenesPage implements OnInit {
   tiene = true;
   public listadoOrdenes;
   public usuarioAps;
+  estaCargando = false;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -42,11 +43,11 @@ export class OrdenesPage implements OnInit {
 
   ngOnInit() {
     moment.locale('es');
-    if (sessionStorage.getItem("RSS_ID")){
+/*     if (sessionStorage.getItem("RSS_ID")){
       if (this.parametrosApp.USA_LOG_MODULOS()){
         this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
       }
-    }
+    } */
     this.loadInicio();
   }
   async loadInicio(){
@@ -61,9 +62,16 @@ export class OrdenesPage implements OnInit {
     }
     if (this.usuarioAps){
       this.miColor = this.utiles.entregaColor(this.usuarioAps);
-      let loader = await this.loading.create({
+      //original
+/*       let loader = await this.loading.create({
         message: 'Obteniendo...<br>Órdenes del usuario',
         duration: 20000
+      }); */
+      this.estaCargando = true;
+      let loader = await this.loading.create({
+        cssClass: 'loading-vacio',
+        showBackdrop: false,
+        spinner:null,
       });
 
       await loader.present().then(async () => {
@@ -97,6 +105,7 @@ export class OrdenesPage implements OnInit {
       console.log(this.listadoOrdenes);
     }
     loader.dismiss();
+    this.estaCargando = false;
   }
 
   async ordenSelected(item){

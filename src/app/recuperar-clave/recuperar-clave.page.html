@@ -10,10 +10,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-row class="texto-1 mt-32">
+  <app-progress [mostrar]="estaCargando" titulo="Recuperando clave"></app-progress>
+  <ion-row [hidden]="estaCargando" class="texto-1 mt-32">
     Ingresa tu correo electrónico, te enviaremos un correo con tu contraseña, recuerda revisar de igual manera los spam o correo no deseado.
   </ion-row>
-  <form [formGroup]="forma" novalidate>
+  <form [hidden]="estaCargando" [formGroup]="forma" novalidate>
       <ion-row class="mt-32">
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>Correo electrónico</mat-label>

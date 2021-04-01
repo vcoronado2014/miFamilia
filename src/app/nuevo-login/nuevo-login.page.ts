@@ -14,6 +14,10 @@ import { Device } from '@ionic-native/device/ngx';
 
 import * as moment from 'moment';
 
+
+//estoy implementando progress bar
+//aca hay que controlar cuando no hay internet
+
 @Component({
   selector: 'app-nuevo-login',
   templateUrl: './nuevo-login.page.html',
@@ -47,6 +51,9 @@ export class NuevoLoginPage implements OnInit {
     TipoOperacion: '0',
     Id: '0'
   };
+  //para progress bar
+  estaCargando = false;
+
 
   constructor(
     private navCtrl: NavController,
@@ -105,9 +112,16 @@ export class NuevoLoginPage implements OnInit {
     var versionAppName;
     var versionNumber;
     var plataforma;
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Creando...<br>Token inicial',
       duration: 2000
+    }); */
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner:null,
     });
 
     await loader.present().then(async () => {
@@ -130,6 +144,8 @@ export class NuevoLoginPage implements OnInit {
         localStorage.setItem('version_app_name', versionAppName);
         localStorage.setItem('version_number', versionNumber);
         localStorage.setItem('plataforma', plataforma);
+        loader.dismiss();
+        this.estaCargando = false;
       }
       else {
         if (this.platform.is('ios')){
@@ -159,6 +175,8 @@ export class NuevoLoginPage implements OnInit {
         localStorage.setItem('version_app_name', versionAppName);
         localStorage.setItem('version_number', versionNumber);
         localStorage.setItem('plataforma', plataforma);
+        loader.dismiss();
+        this.estaCargando = false;
       }
 
     })
@@ -173,9 +191,16 @@ export class NuevoLoginPage implements OnInit {
       this.objetoEntrada.Fecha = new Date();
       //GUARDAMOS EN LA SESSION PARA OCUPARLO DESPUES
       sessionStorage.setItem('ENTRADA', JSON.stringify(this.objetoEntrada));
-      let loader = await this.loading.create({
+      //original
+/*       let loader = await this.loading.create({
         message: 'Creando...<br>registro de sessión',
         duration: 2000
+      }); */
+      this.estaCargando = true;
+      let loader = await this.loading.create({
+        cssClass: 'loading-vacio',
+        showBackdrop: false,
+        spinner:null,
       });
 
       await loader.present().then(async () => {
@@ -190,6 +215,7 @@ export class NuevoLoginPage implements OnInit {
               }
             }
             loader.dismiss();
+            this.estaCargando = false;
           });
         }
         else {
@@ -198,6 +224,7 @@ export class NuevoLoginPage implements OnInit {
             let respuesta = JSON.parse(response.data);
             sessionStorage.setItem("RSS_ID", respuesta.Id);
             loader.dismiss();
+            this.estaCargando = false;
           });
         }
       });
@@ -210,9 +237,16 @@ export class NuevoLoginPage implements OnInit {
     let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
 
     //ahora guardamos
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Creando...<br>Registro',
       duration: 20000
+    }); */
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner:null,
     });
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
@@ -229,6 +263,9 @@ export class NuevoLoginPage implements OnInit {
           }
           else{
             this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+            this.estaCargando = false;
+            loader.dismiss();
+            return;
           }
 
         })
@@ -246,6 +283,9 @@ export class NuevoLoginPage implements OnInit {
           }
           else{
             this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+            this.estaCargando = false;
+            loader.dismiss();
+            return;
           }
 
         })
@@ -254,6 +294,7 @@ export class NuevoLoginPage implements OnInit {
   }
 
   async loguearseEnrolamiento(){
+    this.estaCargando = true;
     let run = this.forma.controls.run.value;
     let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
     localStorage.setItem('TIENE_REGISTRO', 'false');
@@ -277,16 +318,29 @@ export class NuevoLoginPage implements OnInit {
     //en este caso ya el user name es el email
 
     let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Login',
       duration: 10000
+    }); */
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner:null,
     });
+
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
         this.acceso.loginWebDirecto(f).subscribe((response: any)=>{
           this.procesarLogin(response, loader);
+        },
+        (error)=>{
+          loader.dismiss();
+          this.estaCargando = false;
+          return;
         });
       }
       else{
@@ -296,6 +350,9 @@ export class NuevoLoginPage implements OnInit {
         },
         (error)=>{
           this.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
+          this.estaCargando = false;
+          loader.dismiss();
+          return;
         }
         );
       }
@@ -347,11 +404,13 @@ export class NuevoLoginPage implements OnInit {
               tieneUsuario = true;
               this.setDatosUsuario(retorno, user, userFamilia);
               loader.dismiss();
+              this.estaCargando = false;
             }
             else{
               //no tiene entidad contratante
               this.utiles.presentToast("No tiene entidad contratante asociada", "middle", 3000);
               loader.dismiss();
+              this.estaCargando = false;
               return;
             }
           }
@@ -360,6 +419,7 @@ export class NuevoLoginPage implements OnInit {
             tieneUsuario = true;
             this.setDatosUsuario(retorno, user, userFamilia);
             loader.dismiss();
+            this.estaCargando = false;
           }
               
         }
@@ -379,7 +439,9 @@ export class NuevoLoginPage implements OnInit {
         this.Mensaje = retorno.RespuestaBase.Mensaje;
         this.loggedIn = true;
         loader.dismiss();
+        this.estaCargando = false;
         this.utiles.presentToast(this.Mensaje, 'middle', 4000);
+        return;
       }
 
     }
@@ -389,8 +451,10 @@ export class NuevoLoginPage implements OnInit {
       this.CodigoMensaje = 1000;
       this.Mensaje = 'Error de llamada Http;';
       this.loggedIn = true;
+      this.estaCargando = false;
       loader.dismiss();
       this.utiles.presentToast(this.Mensaje, 'middle', 4000);
+      return;
     }
   }
   irAHome(){

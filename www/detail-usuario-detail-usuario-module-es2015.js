@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <ion-card>\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-item lines=\"none\">\r\n        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>\r\n        <ion-badge slot=\"end\">{{usuario.Parentezco.Nombre}}</ion-badge>\r\n      </ion-item>\r\n\r\n    </ion-card-content>\r\n  </ion-card> \r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list>\r\n    <ion-list-header>\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <!-- progress -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando información del usuario\"></app-progress>\r\n  <ion-card [hidden]=\"estaCargando\">\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-item lines=\"none\">\r\n        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>\r\n        <ion-badge slot=\"end\">{{usuario.Parentezco.Nombre}}</ion-badge>\r\n      </ion-item>\r\n\r\n    </ion-card-content>\r\n  </ion-card> \r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-list-header>\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -30,6 +30,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _detail_usuario_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./detail-usuario.page */ "./src/app/detail-usuario/detail-usuario.page.ts");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -45,6 +47,7 @@ DetailUsuarioPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_7__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                 {
                     path: '',
@@ -120,6 +123,8 @@ let DetailUsuarioPage = class DetailUsuarioPage {
         this.presiones = [];
         this.alergias = [];
         this.cargando = false;
+        //para controlar componente progess
+        this.estaCargando = false;
     }
     //ARREGLAR TEMAS DE COLORES Y URL CUANDO SON VARIOS MIEMBROS DE LA FAMILIA
     ngOnInit() {
@@ -146,10 +151,19 @@ let DetailUsuarioPage = class DetailUsuarioPage {
     }
     obtenerInfoUsuario(uspId) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Obteniendo...<br>Información del usuario',
+                  duration: 20000
+                }); */
             let loader = yield this.loading.create({
-                message: 'Obteniendo...<br>Información del usuario',
-                duration: 20000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
+                //message: 'Cargando...<br>tipos de atención',
+                duration: 2000
             });
+            this.estaCargando = true;
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
                     //llamada web
@@ -159,17 +173,32 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(response, loader);
                         });
                         //presion
+                        //original
+                        /*           let loader1 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Presión',
+                                  }); */
                         let loader1 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Presión',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
+                        this.estaCargando = true;
                         yield loader1.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getPresionApi(uspId).subscribe((response) => {
                                 this.procesarPresion(response, loader1);
                             });
                         }));
                         //alergias
+                        //original
+                        /*           let loader2 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Alergias',
+                        
+                                  }); */
+                        this.estaCargando = true;
                         let loader2 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Alergias',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
                         yield loader2.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getAlergiasApi(uspId).subscribe((response) => {
@@ -182,18 +211,34 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(response, loader);
                         });
                         //presion
+                        //original
+                        /*           let loader1 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Presión',
+                                    
+                                  }); */
                         let loader1 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Presión',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
+                        this.estaCargando = true;
                         yield loader1.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getPresion(uspId).subscribe((response) => {
                                 this.procesarPresion(response, loader1);
                             });
                         }));
                         //alergias
+                        //original
+                        /*           let loader2 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Alergias',
+                                    
+                                  }); */
                         let loader2 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Alergias',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
+                        this.estaCargando = true;
                         yield loader2.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getAlergias(uspId).subscribe((response) => {
                                 this.procesarAlergias(response, loader2);
@@ -208,18 +253,34 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(JSON.parse(response.data), loader);
                         });
                         //presion
+                        //original
+                        /*           let loader1 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Presión',
+                        
+                                  }); */
                         let loader1 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Presión',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
+                        this.estaCargando = true;
                         yield loader1.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getPresionNativeApi(uspId).then((response) => {
                                 this.procesarPresion(JSON.parse(response.data), loader1);
                             });
                         }));
                         //alergias
+                        //original
+                        /*           let loader2 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Alergias',
+                        
+                                  }); */
                         let loader2 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Alergias',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
+                        this.estaCargando = true;
                         yield loader2.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getAlergiasNativeApi(uspId).then((response) => {
                                 this.procesarAlergias(JSON.parse(response.data), loader2);
@@ -232,18 +293,34 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(JSON.parse(response.data), loader);
                         });
                         //presion
+                        //original
+                        /*           let loader1 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Presión',
+                        
+                                  }); */
                         let loader1 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Presión',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
+                        this.estaCargando = true;
                         yield loader1.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getPresionNative(uspId).then((response) => {
                                 this.procesarPresion(JSON.parse(response.data), loader1);
                             });
                         }));
                         //alergias
+                        //original
+                        /*           let loader2 = await this.loading.create({
+                                    message: 'Obteniendo...<br>Alergias',
+                        
+                                  }); */
                         let loader2 = yield this.loading.create({
-                            message: 'Obteniendo...<br>Alergias',
+                            cssClass: 'loading-vacio',
+                            showBackdrop: false,
+                            spinner: null
                         });
+                        this.estaCargando = true;
                         yield loader2.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                             this.info.getAlergiasNative(uspId).then((response) => {
                                 this.procesarAlergias(JSON.parse(response.data), loader2);
@@ -265,6 +342,7 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             }
         }
         loader.dismiss();
+        this.estaCargando = false;
     }
     procesarAlergiasSinLoader(data) {
         this.alergias = data.AlergiasUsp;
@@ -296,6 +374,7 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             this.fechaPresion = 'N/A';
         }
         loader.dismiss();
+        this.estaCargando = false;
     }
     procesarPresionSinLoader(data) {
         this.presiones = data.PresionesUsp;
@@ -377,6 +456,8 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             this.fechaImc = 'No informada';
         }
         loader.dismiss();
+        //para progress
+        this.estaCargando = false;
     }
     /*   doRefresh(event) {
         console.log('Begin async operation');

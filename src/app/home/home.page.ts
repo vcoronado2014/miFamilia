@@ -1,11 +1,13 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController } from '@ionic/angular';
+import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController, IonSlides } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
 
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
+import { ServicioNotificacionesLocales } from '../../app/services/ServicioNotificacionesLocales';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { environment } from 'src/environments/environment';
 
 
@@ -15,7 +17,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  
+  @ViewChild('mySlider', { static: true }) slides: IonSlides;
+
+  //nuevo slide
+  slideOpts = {
+    initialSlide: 0,
+    speed: 500,
+    pager: true
+  };
+
   usuarioAps;
   miColor = '#FF4081';
   miImagen;
@@ -42,11 +52,18 @@ export class HomePage implements OnInit {
     TipoOperacion: '1',
     Id: '0'
   };
-  //ESTOY TRABAJANDO EN LA DISPONIBILIDAD
-  //HAY UNA VARIABLE DE SESXSION LLAMADA OPERACION
-  //QUE SE ACTUALIZA SI ENCUENTRA O NO DISPONIBILIDAD
-  //PARA LLAMAR A BUSCARDISPONIBILIDAD O BUSCARCITAS DEL PACIENTE
+
   pushes: any = [];
+  //para progress bar
+  estaCargando = false;
+  //procesar los items del menu
+  itemsMenu = [];
+  //notificaciones
+  //ESTOY CONSTRUYENDO LAS NOTIFICACIONES LOCALES
+  //ME FALTA MOSTRAR EL SLIDE EN LA PARTE INFERIOR DEL ICONO DE
+  //NOTIFICACIONES
+  notificaciones = [];
+  muestraNotificaciones = false;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -58,7 +75,8 @@ export class HomePage implements OnInit {
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
     public servicioGeo: ServicioGeo,
-
+    public parametrosApp: ServicioParametrosApp,
+    public servicioNotLocales: ServicioNotificacionesLocales,
   ) {}
 
   ngOnInit() {
@@ -79,6 +97,9 @@ export class HomePage implements OnInit {
     this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
     this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
     this.usaAgenda = this.utiles.entregaParametroUsaAgenda();
+    this.buscarLogMovimientos();
+    //notificaciones locales
+    this.obtenerNotificaciones();
 /*     if (this.utiles.entregaParametroUsaAgenda()){
       this.buscarDisponibilidad();
     } */
@@ -113,12 +134,28 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot('familia');
   }  
   openAntePage(){
+    if (sessionStorage.getItem("RSS_ID")){
+      if (this.parametrosApp.USA_LOG_MODULOS()){
+        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'ANTECEDENTES');
+      }
+    }
     this.navCtrl.navigateRoot('antecedentes');
   }
   openOrdenesPage(){
+    if (sessionStorage.getItem("RSS_ID")){
+      if (this.parametrosApp.USA_LOG_MODULOS()){
+        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
+      }
+    }
     this.navCtrl.navigateRoot('ordenes');
   }
   openCalendarioPage(){
+    //registramos movimiento
+    if (sessionStorage.getItem("RSS_ID")) {
+      if (this.parametrosApp.USA_LOG_MODULOS()) {
+        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'CALENDARIO');
+      }
+    }
     this.navCtrl.navigateRoot('calendario');
   }
   logout(){
@@ -187,6 +224,75 @@ export class HomePage implements OnInit {
 
     }
   }
+  //para obtener los movimientos en la app
+  async buscarLogMovimientos(){
+    var idDispositivo = localStorage.getItem('token_dispositivo');
+    var cantidadDias = this.parametrosApp.DIAS_LOG_MODULOS();
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
+    });
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //llamada web
+        this.servicioGeo.getMovimientos(cantidadDias, idDispositivo).subscribe((response: any) => {
+            //procesar
+            this.itemsMenu = this.utiles.entregaArregloHome(response);
+            console.log(this.itemsMenu);
+            loader.dismiss();
+            this.estaCargando = false;
+        })
+    }
+    else{
+        //llamada nativa
+        this.servicioGeo.getMovimientosNative(cantidadDias, idDispositivo).then((response: any) => {
+            //procesar
+            var data = JSON.parse(response.data);
+            this.itemsMenu = this.utiles.entregaArregloHome(data);
+            console.log(this.itemsMenu);
+            loader.dismiss();
+            this.estaCargando = false;
+        })
+    }
+    });
+
+  }
+  openGenerico(modulo){
+    var pageName = modulo.toLowerCase();
+    if (modulo == 'EXAMENES'){
+      pageName = 'ordenes';
+    }
+    //registramos movimiento
+    if (sessionStorage.getItem("RSS_ID")) {
+      if (this.parametrosApp.USA_LOG_MODULOS()) {
+        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), modulo.toUpperCase());
+      }
+    }
+    this.navCtrl.navigateRoot(pageName);
+  }
+  //notificaciones
+  async obtenerNotificaciones(){
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
+    });
+    await loader.present().then(async () => {
+      this.notificaciones = this.servicioNotLocales.getAll();
+      console.log(this.notificaciones);
+      this.estaCargando = false;
+    })
+    
+  }
+
+  openItemPage(modulo){
+    this.openGenerico(modulo);
+  }
+
+
   //para procesar citas
   /*
   async buscarDisponibilidad(){
@@ -239,4 +345,22 @@ export class HomePage implements OnInit {
   }
   */
 
+  mostrarNotificaciones(mostrar){
+    this.slides.slideTo(0);
+    if (this.muestraNotificaciones == true && mostrar == true){
+      this.muestraNotificaciones = false;
+      return;
+    }
+    if (this.muestraNotificaciones == false && mostrar == true){
+      this.muestraNotificaciones = true;
+    }
+  }
+  moverSlide(indice){
+    if (indice < this.notificaciones.length -1){
+      this.slides.slideNext();
+    }
+    else{
+      this.slides.slidePrev();
+    }
+  }
 }

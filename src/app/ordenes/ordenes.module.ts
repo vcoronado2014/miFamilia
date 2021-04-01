@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 
 import { OrdenesPage } from './ordenes.page';
 import { TextAvatarModule } from '../../directives/text-avatar/index'
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { TextAvatarModule } from '../../directives/text-avatar/index'
     FormsModule,
     IonicModule,
     TextAvatarModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

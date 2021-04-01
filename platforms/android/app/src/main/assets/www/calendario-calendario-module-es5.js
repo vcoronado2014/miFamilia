@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Eventos</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\">\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle>{{evento.DetalleEventoMes.NombrePaciente}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Calendario</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\">\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando calendario\"></app-progress>\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\" [anioActual]=\"anioActual\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle class=\"ion-text-capitalize\">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n";
     /***/
   },
 
@@ -215,29 +215,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var src_environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts");
+    /* harmony import */
+
+
+    var src_environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! src/environments/environment */
     "./src/environments/environment.ts");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
+    var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
     /* harmony import */
 
 
-    var _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ../modal-detalle-cita/modal-detalle-cita.page */
     "./src/app/modal-detalle-cita/modal-detalle-cita.page.ts");
     /* harmony import */
 
 
-    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ../../app/pipes/fecha.pipe */
     "./src/app/pipes/fecha.pipe.ts"); //parametros
     //SERVICIOS
@@ -246,7 +252,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     var CalendarioPage = /*#__PURE__*/function () {
-      function CalendarioPage(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, info, acceso, cita, alertController) {
+      function CalendarioPage(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, info, acceso, cita, alertController, parametrosApp) {
         _classCallCheck(this, CalendarioPage);
 
         this.navCtrl = navCtrl;
@@ -262,6 +268,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.acceso = acceso;
         this.cita = cita;
         this.alertController = alertController;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.tiene = true;
         this.textColor = '#FFFFFF';
@@ -302,6 +309,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.citasVerticalTodasTop = []; //para poner la linea en la fecha actual
 
         this.fechaActual = '';
+        this.anioActual = '';
       } //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
       //OJO HAY VACUNAS CON FECHA PROXIMA 29-11-2020 Y NO VEO QUE APAREZCAN
       //CUANDO SELECCIONAS EL COMBO DE FECHA Y LUEGO VUELVES A SELECCIONAR 
@@ -311,8 +319,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(CalendarioPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_9__().locale('es');
-          this.fechaActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_9__(), 'YYYY-MM-DD');
+          moment__WEBPACK_IMPORTED_MODULE_10__().locale('es');
+          this.fechaActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY-MM-DD');
+          this.anioActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY');
           console.log(this.fechaActual); //this.miColor = this.utiles.entregaMiColor();
 
           if (sessionStorage.UsuarioAps) {
@@ -320,7 +329,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (this.usuarioAps) {
               this.miColor = this.utiles.entregaColor(this.usuarioAps);
-              this.usuarioAps.UrlImagen = src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].URL_FOTOS + this.usuarioAps.UrlImagen;
+              this.usuarioAps.UrlImagen = src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].URL_FOTOS + this.usuarioAps.UrlImagen;
               this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
               this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
               this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
@@ -328,7 +337,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } //mes seleccionado
 
 
-          this.mesActualSeleccionado = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1 + ',' + moment__WEBPACK_IMPORTED_MODULE_9__().year(); //this.mesActualSeleccionado = moment().month() + 1;
+          this.mesActualSeleccionado = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1 + ',' + moment__WEBPACK_IMPORTED_MODULE_10__().year(); //this.mesActualSeleccionado = moment().month() + 1;
 
           console.log('formato de mes seleccionado ===> ' + this.mesActualSeleccionado); //revisar estos parametros ya que estan en el otro codigo en el oninit
 
@@ -340,14 +349,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.anio = new Date().getFullYear(); //estos parametros estan en el ready
           //lamada para citas vertical
 
-          var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__().year();
-          var mesActual = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1; //var mesActual = this.mesActualSeleccionado;
+          var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
+          var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1; //var mesActual = this.mesActualSeleccionado;
 
           console.log(mesActual); //***************************** */
 
-          this.tratamientoMeses(); //implementacion nueva
+          this.tratamientoMeses(); //prueba de implementacion api management
+          //this.cargarTodosLosEventosApi();
+          //implementacion nueva
 
-          this.cargarTodosLosEventos();
+          if (this.parametrosApp.USA_API_MANAGEMENT()) {
+            this.cargarTodosLosEventosApi();
+          } else {
+            this.cargarTodosLosEventos();
+          }
         }
       }, {
         key: "getTime",
@@ -355,22 +370,158 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return date != null ? new Date(date).getTime() : 0;
         }
       }, {
-        key: "cargarTodosLosEventos",
-        value: function cargarTodosLosEventos() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+        key: "cargarTodosLosEventosApi",
+        value: function cargarTodosLosEventosApi() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
             var _this = this;
 
-            var fechaActual, fechaAnterior, fechaPosterior, mesAnterior, mesActual, mesPosterior, loader;
-            return regeneratorRuntime.wrap(function _callee8$(_context8) {
+            var fechaActual, mesActual, loader;
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
               while (1) {
-                switch (_context8.prev = _context8.next) {
+                switch (_context4.prev = _context4.next) {
                   case 0:
                     //usar citasVerticalTodas
                     this.citasVerticalTodas = [];
                     this.citasVerticalMostrar = [];
-                    fechaActual = moment__WEBPACK_IMPORTED_MODULE_9__();
-                    fechaAnterior = moment__WEBPACK_IMPORTED_MODULE_9__().subtract(1, 'month');
-                    fechaPosterior = moment__WEBPACK_IMPORTED_MODULE_9__().add(1, 'month');
+                    fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+                    mesActual = {
+                      mes: fechaActual.month() + 1,
+                      anno: fechaActual.year()
+                    }; //original
+
+                    /*     let loader = await this.loading.create({
+                          message: 'Obteniendo...<br>Información del usuario api',
+                          duration: 20000
+                        }); */
+
+                    _context4.next = 6;
+                    return this.loading.create({
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null,
+                      //message: 'Cargando...<br>tipos de atención',
+                      duration: 2000
+                    });
+
+                  case 6:
+                    loader = _context4.sent;
+                    this.estaCargando = true;
+                    _context4.next = 10;
+                    return loader.present().then(function () {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                        var _this2 = this;
+
+                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                          while (1) {
+                            switch (_context3.prev = _context3.next) {
+                              case 0:
+                                if (!this.utiles.isAppOnDevice()) {
+                                  //llamada web
+                                  this.cita.entregaPorMesNuevoApi(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).subscribe(function (response) {
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                      var _this3 = this;
+
+                                      return regeneratorRuntime.wrap(function _callee$(_context) {
+                                        while (1) {
+                                          switch (_context.prev = _context.next) {
+                                            case 0:
+                                              this.citasVerticalTodas = response;
+                                              this.procesarArregloCitasTodas();
+                                              this.citasVerticalMostrar = this.citasVerticalTodas.filter(function (e) {
+                                                return e.Mostrar == true;
+                                              });
+                                              this.citasVerticalMostrar.sort(function (a, b) {
+                                                return _this3.getTime(b.FechaCompleta) - _this3.getTime(a.FechaCompleta);
+                                              }); //guardamos la variable de ordenamiento
+
+                                              sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
+
+                                              this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+                                              console.log(this.citasVerticalTodasTop);
+                                              loader.dismiss();
+                                              this.estaCargando = false;
+
+                                            case 9:
+                                            case "end":
+                                              return _context.stop();
+                                          }
+                                        }
+                                      }, _callee, this);
+                                    }));
+                                  });
+                                } else {
+                                  //llamada nativa
+                                  this.cita.entregaPorMesNuevoApiNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).then(function (response) {
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                                      var _this4 = this;
+
+                                      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                                        while (1) {
+                                          switch (_context2.prev = _context2.next) {
+                                            case 0:
+                                              this.citasVerticalTodas = JSON.parse(response.data); //aca procesamos
+
+                                              this.procesarArregloCitasTodas();
+                                              this.citasVerticalMostrar = this.citasVerticalTodas.filter(function (e) {
+                                                return e.Mostrar == true;
+                                              }); //ahora que tenemos las citas que queremos mostrar
+                                              //ordenamos
+
+                                              this.citasVerticalMostrar.sort(function (a, b) {
+                                                return _this4.getTime(b.FechaCompleta) - _this4.getTime(a.FechaCompleta);
+                                              }); //guardamos la variable de ordenamiento
+
+                                              sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
+
+                                              this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+                                              console.log(this.citasVerticalTodasTop);
+                                              loader.dismiss();
+                                              this.estaCargando = false;
+
+                                            case 9:
+                                            case "end":
+                                              return _context2.stop();
+                                          }
+                                        }
+                                      }, _callee2, this);
+                                    }));
+                                  });
+                                }
+
+                              case 1:
+                              case "end":
+                                return _context3.stop();
+                            }
+                          }
+                        }, _callee3, this);
+                      }));
+                    });
+
+                  case 10:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          }));
+        }
+      }, {
+        key: "cargarTodosLosEventos",
+        value: function cargarTodosLosEventos() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+            var _this5 = this;
+
+            var fechaActual, fechaAnterior, fechaPosterior, mesAnterior, mesActual, mesPosterior, loader;
+            return regeneratorRuntime.wrap(function _callee12$(_context12) {
+              while (1) {
+                switch (_context12.prev = _context12.next) {
+                  case 0:
+                    //usar citasVerticalTodas
+                    this.citasVerticalTodas = [];
+                    this.citasVerticalMostrar = [];
+                    fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+                    fechaAnterior = moment__WEBPACK_IMPORTED_MODULE_10__().subtract(1, 'month');
+                    fechaPosterior = moment__WEBPACK_IMPORTED_MODULE_10__().add(1, 'month');
                     mesAnterior = {
                       mes: fechaAnterior.month() + 1,
                       anno: fechaAnterior.year()
@@ -382,53 +533,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     mesPosterior = {
                       mes: fechaPosterior.month() + 1,
                       anno: fechaPosterior.year()
-                    };
-                    _context8.next = 10;
+                    }; //original
+
+                    /*     let loader = await this.loading.create({
+                          message: 'Obteniendo...<br>Información del usuario',
+                          duration: 20000
+                        }); */
+
+                    _context12.next = 10;
                     return this.loading.create({
-                      message: 'Obteniendo...<br>Información del usuario',
-                      duration: 20000
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null,
+                      //message: 'Cargando...<br>tipos de atención',
+                      duration: 2000
                     });
 
                   case 10:
-                    loader = _context8.sent;
-                    _context8.next = 13;
+                    loader = _context12.sent;
+                    this.estaCargando = true;
+                    _context12.next = 14;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-                        var _this2 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this5, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+                        var _this6 = this;
 
-                        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                        return regeneratorRuntime.wrap(function _callee11$(_context11) {
                           while (1) {
-                            switch (_context7.prev = _context7.next) {
+                            switch (_context11.prev = _context11.next) {
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesAnterior.mes, mesAnterior.anno).subscribe(function (response) {
-                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                                      var _this3 = this;
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+                                      var _this7 = this;
 
-                                      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                                      return regeneratorRuntime.wrap(function _callee7$(_context7) {
                                         while (1) {
-                                          switch (_context3.prev = _context3.next) {
+                                          switch (_context7.prev = _context7.next) {
                                             case 0:
                                               this.citasVerticalTodas = response; //segunda llamada
 
                                               this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).subscribe(function (responseDos) {
-                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                                                  var _this4 = this;
+                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                                                  var _this8 = this;
 
-                                                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                                                  return regeneratorRuntime.wrap(function _callee6$(_context6) {
                                                     while (1) {
-                                                      switch (_context2.prev = _context2.next) {
+                                                      switch (_context6.prev = _context6.next) {
                                                         case 0:
                                                           this.citasVerticalTodas = this.citasVerticalTodas.concat(responseDos); //tercera llamada
 
                                                           this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesPosterior.mes, mesPosterior.anno).subscribe(function (responseTres) {
-                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                                              var _this5 = this;
+                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this8, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                                                              var _this9 = this;
 
-                                                              return regeneratorRuntime.wrap(function _callee$(_context) {
+                                                              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                                                                 while (1) {
-                                                                  switch (_context.prev = _context.next) {
+                                                                  switch (_context5.prev = _context5.next) {
                                                                     case 0:
                                                                       this.citasVerticalTodas = this.citasVerticalTodas.concat(responseTres); //aca procedemos a procesarlos
 
@@ -440,7 +601,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       //ordenamos
 
                                                                       this.citasVerticalMostrar.sort(function (a, b) {
-                                                                        return _this5.getTime(b.FechaCompleta) - _this5.getTime(a.FechaCompleta);
+                                                                        return _this9.getTime(b.FechaCompleta) - _this9.getTime(a.FechaCompleta);
                                                                       }); //guardamos la variable de ordenamiento
 
                                                                       sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
@@ -448,65 +609,66 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
                                                                       console.log(this.citasVerticalTodasTop);
                                                                       loader.dismiss();
+                                                                      this.estaCargando = false;
 
-                                                                    case 8:
+                                                                    case 9:
                                                                     case "end":
-                                                                      return _context.stop();
+                                                                      return _context5.stop();
                                                                   }
                                                                 }
-                                                              }, _callee, this);
+                                                              }, _callee5, this);
                                                             }));
                                                           });
 
                                                         case 2:
                                                         case "end":
-                                                          return _context2.stop();
+                                                          return _context6.stop();
                                                       }
                                                     }
-                                                  }, _callee2, this);
+                                                  }, _callee6, this);
                                                 }));
                                               });
 
                                             case 2:
                                             case "end":
-                                              return _context3.stop();
+                                              return _context7.stop();
                                           }
                                         }
-                                      }, _callee3, this);
+                                      }, _callee7, this);
                                     }));
                                   });
                                 } else {
                                   //llamada nativa
                                   this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesAnterior.mes, mesAnterior.anno).then(function (response) {
-                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-                                      var _this6 = this;
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+                                      var _this10 = this;
 
-                                      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                                      return regeneratorRuntime.wrap(function _callee10$(_context10) {
                                         while (1) {
-                                          switch (_context6.prev = _context6.next) {
+                                          switch (_context10.prev = _context10.next) {
                                             case 0:
                                               this.citasVerticalTodas = JSON.parse(response.data); //segunda llamada
 
                                               this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).then(function (responseDos) {
-                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-                                                  var _this7 = this;
+                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this10, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+                                                  var _this11 = this;
 
                                                   var dataDos;
-                                                  return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                                                  return regeneratorRuntime.wrap(function _callee9$(_context9) {
                                                     while (1) {
-                                                      switch (_context5.prev = _context5.next) {
+                                                      switch (_context9.prev = _context9.next) {
                                                         case 0:
                                                           dataDos = JSON.parse(responseDos.data);
                                                           this.citasVerticalTodas = this.citasVerticalTodas.concat(dataDos); //tercera llamada
 
                                                           this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesPosterior.mes, mesPosterior.anno).then(function (responseTres) {
-                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-                                                              var _this8 = this;
+                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this11, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+                                                              var _this12 = this;
 
                                                               var dataTres;
-                                                              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                                                              return regeneratorRuntime.wrap(function _callee8$(_context8) {
                                                                 while (1) {
-                                                                  switch (_context4.prev = _context4.next) {
+                                                                  switch (_context8.prev = _context8.next) {
                                                                     case 0:
                                                                       dataTres = JSON.parse(responseTres.data);
                                                                       this.citasVerticalTodas = this.citasVerticalTodas.concat(dataTres); //aca procesamos
@@ -518,7 +680,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       //ordenamos
 
                                                                       this.citasVerticalMostrar.sort(function (a, b) {
-                                                                        return _this8.getTime(b.FechaCompleta) - _this8.getTime(a.FechaCompleta);
+                                                                        return _this12.getTime(b.FechaCompleta) - _this12.getTime(a.FechaCompleta);
                                                                       }); //guardamos la variable de ordenamiento
 
                                                                       sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
@@ -526,50 +688,51 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
                                                                       console.log(this.citasVerticalTodasTop);
                                                                       loader.dismiss();
+                                                                      this.estaCargando = false;
 
-                                                                    case 9:
+                                                                    case 10:
                                                                     case "end":
-                                                                      return _context4.stop();
+                                                                      return _context8.stop();
                                                                   }
                                                                 }
-                                                              }, _callee4, this);
+                                                              }, _callee8, this);
                                                             }));
                                                           });
 
                                                         case 3:
                                                         case "end":
-                                                          return _context5.stop();
+                                                          return _context9.stop();
                                                       }
                                                     }
-                                                  }, _callee5, this);
+                                                  }, _callee9, this);
                                                 }));
                                               });
 
                                             case 2:
                                             case "end":
-                                              return _context6.stop();
+                                              return _context10.stop();
                                           }
                                         }
-                                      }, _callee6, this);
+                                      }, _callee10, this);
                                     }));
                                   });
                                 }
 
                               case 1:
                               case "end":
-                                return _context7.stop();
+                                return _context11.stop();
                             }
                           }
-                        }, _callee7, this);
+                        }, _callee11, this);
                       }));
                     });
 
-                  case 13:
+                  case 14:
                   case "end":
-                    return _context8.stop();
+                    return _context12.stop();
                 }
               }
-            }, _callee8, this);
+            }, _callee12, this);
           }));
         }
       }, {
@@ -586,8 +749,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           for (var s in this.citasVertical) {
             for (var t in this.citasVertical[s].Eventos) {
               var fechaHora = this.citasVertical[s].Eventos[t].DetalleEventoMes.FechaHora;
-              var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_9__(fechaHora, 'YYYY-MM-DD').toDate();
-              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_9__().toDate();
+              var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
+              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
               console.log('Evento: ' + fechaEvento);
               console.log('Hoy:' + fechaHoy);
               contador++;
@@ -668,8 +831,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           for (var s in this.citasVerticalTodas) {
             for (var t in this.citasVerticalTodas[s].Eventos) {
               var fechaHora = this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.FechaHora;
-              var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_9__(fechaHora, 'YYYY-MM-DD').toDate();
-              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_9__().toDate();
+              var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
+              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
               console.log('Evento: ' + fechaEvento);
               console.log('Hoy:' + fechaHoy);
               contador++;
@@ -746,25 +909,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "ordenar",
         value: function ordenar() {
-          var _this9 = this;
+          var _this13 = this;
 
           if (sessionStorage.getItem('ORDEN_EVENTOS')) {
             var orden = sessionStorage.getItem('ORDEN_EVENTOS');
 
             if (orden == 'descendente') {
               this.citasVerticalTodasTop.sort(function (a, b) {
-                return _this9.getTime(a.FechaCompleta) - _this9.getTime(b.FechaCompleta);
+                return _this13.getTime(a.FechaCompleta) - _this13.getTime(b.FechaCompleta);
               });
               sessionStorage.setItem('ORDEN_EVENTOS', 'ascendente');
             } else {
               this.citasVerticalTodasTop.sort(function (a, b) {
-                return _this9.getTime(b.FechaCompleta) - _this9.getTime(a.FechaCompleta);
+                return _this13.getTime(b.FechaCompleta) - _this13.getTime(a.FechaCompleta);
               });
               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
             }
           } else {
             this.citasVerticalTodasTop.sort(function (a, b) {
-              return _this9.getTime(b.FechaCompleta) - _this9.getTime(a.FechaCompleta);
+              return _this13.getTime(b.FechaCompleta) - _this13.getTime(a.FechaCompleta);
             });
             sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
           }
@@ -772,15 +935,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "loadData",
         value: function loadData(event) {
-          var _this10 = this;
+          var _this14 = this;
 
           setTimeout(function () {
             //console.log('Done');
-            _this10.topLimit += 5;
-            _this10.citasVerticalTodasTop = _this10.citasVerticalMostrar.slice(0, _this10.topLimit);
+            _this14.topLimit += 5;
+            _this14.citasVerticalTodasTop = _this14.citasVerticalMostrar.slice(0, _this14.topLimit);
             event.target.complete(); //aplicamos disabled si la cantidad de registros es la misma que el total
 
-            if (_this10.citasVerticalTodasTop.length == _this10.citasVerticalMostrar.length) {
+            if (_this14.citasVerticalTodasTop.length == _this14.citasVerticalMostrar.length) {
               event.target.disabled = true;
             }
           }, 500);
@@ -788,24 +951,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "cargarDatosNativeN",
         value: function cargarDatosNativeN(mesConsultar, annoConsultar, loader) {
-          var _this11 = this;
+          var _this15 = this;
 
           //lo cambiamos para probar el nuevo metodo
           //this.cita.entregaPorMesNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(async (response: any)=>{
           this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(function (response) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this11, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
-              var _this12 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this15, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
+              var _this16 = this;
 
               var consultaMes;
-              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+              return regeneratorRuntime.wrap(function _callee14$(_context14) {
                 while (1) {
-                  switch (_context10.prev = _context10.next) {
+                  switch (_context14.prev = _context14.next) {
                     case 0:
                       consultaMes = this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(function (response) {
-                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this12, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
-                          return regeneratorRuntime.wrap(function _callee9$(_context9) {
+                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this16, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+                          return regeneratorRuntime.wrap(function _callee13$(_context13) {
                             while (1) {
-                              switch (_context9.prev = _context9.next) {
+                              switch (_context13.prev = _context13.next) {
                                 case 0:
                                   this.citasVertical = JSON.parse(response.data);
                                   this.citasVerticalMostrar = this.citasVertical.filter(function (e) {
@@ -817,39 +980,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                                 case 4:
                                 case "end":
-                                  return _context9.stop();
+                                  return _context13.stop();
                               }
                             }
-                          }, _callee9, this);
+                          }, _callee13, this);
                         }));
                       });
 
                     case 1:
                     case "end":
-                      return _context10.stop();
+                      return _context14.stop();
                   }
                 }
-              }, _callee10, this);
+              }, _callee14, this);
             }));
           });
         }
       }, {
         key: "cargarDatosWebN",
         value: function cargarDatosWebN(mesConsultar, annoConsultar, loader) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
-            var _this13 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
+            var _this17 = this;
 
             var consultaMes;
-            return regeneratorRuntime.wrap(function _callee12$(_context12) {
+            return regeneratorRuntime.wrap(function _callee16$(_context16) {
               while (1) {
-                switch (_context12.prev = _context12.next) {
+                switch (_context16.prev = _context16.next) {
                   case 0:
                     //ACA NO SE REALIZA LA CONSULTA A INETGRACIÓN PARA MOSTRAR O MEZCLAR LAS CITAS, YA QUE EL SP TRAE LA INFO DE LAS CITAS WEB
                     consultaMes = this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this13, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
-                        return regeneratorRuntime.wrap(function _callee11$(_context11) {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this17, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
+                        return regeneratorRuntime.wrap(function _callee15$(_context15) {
                           while (1) {
-                            switch (_context11.prev = _context11.next) {
+                            switch (_context15.prev = _context15.next) {
                               case 0:
                                 this.citasVertical = response;
                                 this.citasVerticalMostrar = this.citasVertical.filter(function (e) {
@@ -861,38 +1024,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                               case 4:
                               case "end":
-                                return _context11.stop();
+                                return _context15.stop();
                             }
                           }
-                        }, _callee11, this);
+                        }, _callee15, this);
                       }));
                     });
 
                   case 1:
                   case "end":
-                    return _context12.stop();
+                    return _context16.stop();
                 }
               }
-            }, _callee12, this);
+            }, _callee16, this);
           }));
         }
       }, {
         key: "tratamientoMeses",
         value: function tratamientoMeses() {
           this.mesesVertical = [];
-          moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es-es');
-          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_9__();
-          var fechaMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_9__().subtract(1, 'month');
-          var fechaMasUnMes = moment__WEBPACK_IMPORTED_MODULE_9__().add(1, 'month');
-          var mesActualNumero = moment__WEBPACK_IMPORTED_MODULE_9__(fechaActual).month() + 1;
-          var mesMenosUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMenosUnMes).month() + 1;
-          var mesMasUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMasUnMes).month() + 1;
-          var mesActualStr = moment__WEBPACK_IMPORTED_MODULE_9__(fechaActual).format("MMMM").toUpperCase();
-          var mesMenosUnMesStr = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMenosUnMes).format("MMMM").toUpperCase();
-          var mesMasUnMesStr = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMasUnMes).format("MMMM").toUpperCase();
-          var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__(fechaActual).format("YYYY");
-          var annoMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMenosUnMes).format("YYYY");
-          var annoMasUnMes = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMasUnMes).format("YYYY"); //ahora tenemos los años, meses podemos construir el arreglo.
+          moment__WEBPACK_IMPORTED_MODULE_10__["locale"]('es-es');
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+          var fechaMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_10__().subtract(1, 'month');
+          var fechaMasUnMes = moment__WEBPACK_IMPORTED_MODULE_10__().add(1, 'month');
+          var mesActualNumero = moment__WEBPACK_IMPORTED_MODULE_10__(fechaActual).month() + 1;
+          var mesMenosUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMenosUnMes).month() + 1;
+          var mesMasUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMasUnMes).month() + 1;
+          var mesActualStr = moment__WEBPACK_IMPORTED_MODULE_10__(fechaActual).format("MMMM").toUpperCase();
+          var mesMenosUnMesStr = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMenosUnMes).format("MMMM").toUpperCase();
+          var mesMasUnMesStr = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMasUnMes).format("MMMM").toUpperCase();
+          var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__(fechaActual).format("YYYY");
+          var annoMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMenosUnMes).format("YYYY");
+          var annoMasUnMes = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMasUnMes).format("YYYY"); //ahora tenemos los años, meses podemos construir el arreglo.
 
           var entidadActual = {
             mesNumero: mesActualNumero + ',' + annoActual,
@@ -925,17 +1088,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "goToDetalleCita",
         value: function goToDetalleCita(evento) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
-            var _this14 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee17() {
+            var _this18 = this;
 
             var modal;
-            return regeneratorRuntime.wrap(function _callee13$(_context13) {
+            return regeneratorRuntime.wrap(function _callee17$(_context17) {
               while (1) {
-                switch (_context13.prev = _context13.next) {
+                switch (_context17.prev = _context17.next) {
                   case 0:
-                    _context13.next = 2;
+                    _context17.next = 2;
                     return this.modalCtrl.create({
-                      component: _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_10__["ModalDetalleCitaPage"],
+                      component: _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_11__["ModalDetalleCitaPage"],
                       componentProps: {
                         'evento': JSON.stringify(evento),
                         'usuario': JSON.stringify(this.usuarioAps)
@@ -943,43 +1106,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 2:
-                    modal = _context13.sent;
+                    modal = _context17.sent;
                     modal.onDidDismiss().then(function (data) {
                       if (data.data && data.data.accion) {
                         var accion = data.data.accion; //console.log(accion);
                         //obtenemos la pagina actual
                         //actualizar
 
-                        var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__().year();
-                        var mesActual = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1; //var mesActual = this.mesActualSeleccionado;
+                        var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
+                        var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1; //var mesActual = this.mesActualSeleccionado;
                         //console.log(mesActual);
                         //***************************** */
 
-                        _this14.tratamientoMeses();
+                        _this18.tratamientoMeses();
 
                         if (accion === 'booked') {
-                          _this14.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
+                          _this18.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
                         } else if (accion === 'confirmed') {
-                          _this14.utiles.presentToast('Cita confirmada con éxito!!', 'bottom', 3000);
+                          _this18.utiles.presentToast('Cita confirmada con éxito!!', 'bottom', 3000);
                         } else if (accion === 'cancelled') {
-                          _this14.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
+                          _this18.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
                         }
 
-                        _this14.cargarTodosLosEventos();
+                        if (_this18.parametrosApp.USA_API_MANAGEMENT()) {
+                          _this18.cargarTodosLosEventosApi();
+                        } else {
+                          _this18.cargarTodosLosEventos();
+                        }
                       }
                     });
-                    _context13.next = 6;
+                    _context17.next = 6;
                     return modal.present();
 
                   case 6:
-                    return _context13.abrupt("return", _context13.sent);
+                    return _context17.abrupt("return", _context17.sent);
 
                   case 7:
                   case "end":
-                    return _context13.stop();
+                    return _context17.stop();
                 }
               }
-            }, _callee13, this);
+            }, _callee17, this);
           }));
         }
       }, {
@@ -1026,16 +1193,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "presentAlertConfirm",
         value: function presentAlertConfirm(boton, evento) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
-            var _this15 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee18() {
+            var _this19 = this;
 
             var titulo, alert;
-            return regeneratorRuntime.wrap(function _callee14$(_context14) {
+            return regeneratorRuntime.wrap(function _callee18$(_context18) {
               while (1) {
-                switch (_context14.prev = _context14.next) {
+                switch (_context18.prev = _context18.next) {
                   case 0:
                     titulo = '';
-                    _context14.next = 3;
+                    _context18.next = 3;
                     return this.alertController.create({
                       header: boton.Titulo,
                       message: boton.Alert,
@@ -1051,92 +1218,92 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         cssClass: 'success',
                         handler: function handler() {
                           //aca debemos realizar la operación
-                          _this15.accionCita(boton, evento);
+                          _this19.accionCita(boton, evento);
                         }
                       }]
                     });
 
                   case 3:
-                    alert = _context14.sent;
-                    _context14.next = 6;
+                    alert = _context18.sent;
+                    _context18.next = 6;
                     return alert.present();
 
                   case 6:
                   case "end":
-                    return _context14.stop();
+                    return _context18.stop();
                 }
               }
-            }, _callee14, this);
+            }, _callee18, this);
           }));
         }
       }, {
         key: "accionCita",
         value: function accionCita(boton, evento) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
-            var _this16 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee20() {
+            var _this20 = this;
 
             var idPaciente, idCita, accion, loader;
-            return regeneratorRuntime.wrap(function _callee16$(_context16) {
+            return regeneratorRuntime.wrap(function _callee20$(_context20) {
               while (1) {
-                switch (_context16.prev = _context16.next) {
+                switch (_context20.prev = _context20.next) {
                   case 0:
                     if (!(evento.DetalleEventoMes.Estado && evento.DetalleEventoMes.Estado != '')) {
-                      _context16.next = 9;
+                      _context20.next = 9;
                       break;
                     }
 
                     idPaciente = this.usuarioAps.Rut;
                     idCita = evento.DetalleEventoMes.IdElemento;
                     accion = boton.Operacion;
-                    _context16.next = 6;
+                    _context20.next = 6;
                     return this.loading.create({
                       message: 'Procesado...<br>Información',
                       duration: 20000
                     });
 
                   case 6:
-                    loader = _context16.sent;
-                    _context16.next = 9;
+                    loader = _context20.sent;
+                    _context20.next = 9;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this16, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
-                        var _this17 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this20, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
+                        var _this21 = this;
 
                         var retorno;
-                        return regeneratorRuntime.wrap(function _callee15$(_context15) {
+                        return regeneratorRuntime.wrap(function _callee19$(_context19) {
                           while (1) {
-                            switch (_context15.prev = _context15.next) {
+                            switch (_context19.prev = _context19.next) {
                               case 0:
                                 retorno = null;
 
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.cita.getOperacionCita(idCita, idPaciente, accion).subscribe(function (response) {
-                                    _this17.procesarRespuestaAgendar(response, loader, accion);
+                                    _this21.procesarRespuestaAgendar(response, loader, accion);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.cita.getOperacionCitaNative(idCita, idPaciente, accion).then(function (responseData) {
                                     var response = JSON.parse(responseData.data);
 
-                                    _this17.procesarRespuestaAgendar(response, loader, accion);
+                                    _this21.procesarRespuestaAgendar(response, loader, accion);
                                   });
                                 }
 
                               case 2:
                               case "end":
-                                return _context15.stop();
+                                return _context19.stop();
                             }
                           }
-                        }, _callee15, this);
+                        }, _callee19, this);
                       }));
                     });
 
                   case 9:
                   case "end":
-                    return _context16.stop();
+                    return _context20.stop();
                 }
               }
-            }, _callee16, this);
+            }, _callee20, this);
           }));
         }
       }, {
@@ -1150,8 +1317,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
               retorno = data; //actualizar la pagina
 
-              var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__().year();
-              var mesActual = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1; //var mesActual = this.mesActualSeleccionado;
+              var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
+              var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1; //var mesActual = this.mesActualSeleccionado;
 
               console.log(mesActual); //***************************** */
 
@@ -1165,7 +1332,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
               }
 
-              this.cargarTodosLosEventos();
+              if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                this.cargarTodosLosEventosApi();
+              } else {
+                this.cargarTodosLosEventos();
+              }
             } else {
               this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);
             }
@@ -1200,7 +1371,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "transformDate",
         value: function transformDate(value, format) {
-          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_11__["MomentPipe"]();
+          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_12__["MomentPipe"]();
           return pi.transform(value, format);
         }
       }]);
@@ -1235,6 +1406,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__["ServicioCitas"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"]
       }];
     };
 

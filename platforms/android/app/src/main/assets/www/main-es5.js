@@ -510,7 +510,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n        <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n      </ion-row>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'MMMM') != fechaActual\">\n        <label class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</label>\n      </ion-row>";
+    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n        <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n      </ion-row>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/item-home/item-home.component.html":
+  /*!*****************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/item-home/item-home.component.html ***!
+    \*****************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsItemHomeItemHomeComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<mat-card style=\"padding: 0;\" (click)=\"openGenerico(modulo)\">\n  <img class={{classImagen}} src={{rutaImagen}}>\n  <mat-card-header style=\"padding-left: 16px;\">\n      <mat-card-title style=\"padding-top: 16px;\" class=\"ion-text-capitalize\">{{modulo.toLowerCase()}}</mat-card-title>\n  </mat-card-header>\n</mat-card>\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress/progress.component.html":
+  /*!***************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress/progress.component.html ***!
+    \***************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsProgressProgressComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "  <!-- progress bar -->\n  <div class=\"centrado\" [hidden]=\"!mostrar\">\n      <ion-label class=\"titulo-item-2\">{{titulo}}</ion-label>\n      <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\n  </div>";
     /***/
   },
 
@@ -800,6 +840,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /*! ./contactabilidad/contactabilidad.module */
         "./src/app/contactabilidad/contactabilidad.module.ts")).then(function (m) {
           return m.ContactabilidadPageModule;
+        });
+      }
+    }, {
+      path: 'interconsultas',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | interconsultas-interconsultas-module */
+        "interconsultas-interconsultas-module").then(__webpack_require__.bind(null,
+        /*! ./interconsultas/interconsultas.module */
+        "./src/app/interconsultas/interconsultas.module.ts")).then(function (m) {
+          return m.InterconsultasPageModule;
         });
       }
     }];
@@ -1238,91 +1289,97 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_material_card__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(
+    var _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(
+    /*! ./services/ServicioNotificacionesLocales */
+    "./src/app/services/ServicioNotificacionesLocales.ts");
+    /* harmony import */
+
+
+    var _angular_material_card__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
     /*! @angular/material/card */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
     /* harmony import */
 
 
-    var _angular_material_button__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
+    var _angular_material_button__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
     /*! @angular/material/button */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
     /* harmony import */
 
 
-    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
+    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
     /*! @angular/material/form-field */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
     /* harmony import */
 
 
-    var _angular_material_input__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
+    var _angular_material_input__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
     /*! @angular/material/input */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
     /* harmony import */
 
 
-    var _angular_material_select__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
+    var _angular_material_select__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
     /*! @angular/material/select */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
     /* harmony import */
 
 
-    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
+    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
     /*! @angular/material/icon */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
     /* harmony import */
 
 
-    var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
+    var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
     /*! @ionic-native/local-notifications/ngx */
     "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
+    var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
     /*! @ionic-native/background-mode/ngx */
     "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
+    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
     /*! ../environments/firebaseconfig */
     "./src/environments/firebaseconfig.ts");
     /* harmony import */
 
 
-    var _angular_fire__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
+    var _angular_fire__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
     /*! @angular/fire */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
     /* harmony import */
 
 
-    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
+    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
     /*! @angular/fire/database */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
     /* harmony import */
 
 
-    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
+    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
     /*! @angular/fire/storage */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
     /* harmony import */
 
 
-    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
+    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
     /*! @angular/fire/messaging */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
     /* harmony import */
 
 
-    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
+    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
     /*! @ionic-native/firebase-messaging/ngx */
     "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _components_components_module__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
     /*! ./components/components.module */
     "./src/app/components/components.module.ts"); //nativos
     //Pipes
@@ -1344,8 +1401,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"], _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__["CelsiusPipe"], _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__["SplitPipe"], _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__["MomentPipe"], _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__["FilterPipe"]],
       entryComponents: [],
-      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_36__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_37__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_40__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_39__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_41__["MatIconModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_50__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_46__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_47__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_48__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_45__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_44__["firebaseConfig"])],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_42__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_43__["BackgroundMode"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_49__["FirebaseMessaging"],
+      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_41__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_42__["MatIconModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_51__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_46__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__["firebaseConfig"])],
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_43__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_44__["BackgroundMode"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__["FirebaseMessaging"],
       /*  BackgroundGeolocation, */
       {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
@@ -1590,6 +1647,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], CardCalendarioComponent.prototype, "item", void 0);
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], CardCalendarioComponent.prototype, "fechaActual", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], CardCalendarioComponent.prototype, "anioActual", void 0);
     CardCalendarioComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-card-calendario',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
@@ -1681,16 +1739,259 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ./avatar/avatar.component */
     "./src/app/components/avatar/avatar.component.ts");
+    /* harmony import */
+
+
+    var _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! ./progress/progress.component */
+    "./src/app/components/progress/progress.component.ts");
+    /* harmony import */
+
+
+    var _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! ./item-home/item-home.component */
+    "./src/app/components/item-home/item-home.component.ts");
 
     var ComponentsModule = function ComponentsModule() {
       _classCallCheck(this, ComponentsModule);
     };
 
     ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"]],
+      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_5__["TextAvatarModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButtonModule"]],
-      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"]]
+      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"]]
     })], ComponentsModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/item-home/item-home.component.scss":
+  /*!***************************************************************!*\
+    !*** ./src/app/components/item-home/item-home.component.scss ***!
+    \***************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsItemHomeItemHomeComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaXRlbS1ob21lL2l0ZW0taG9tZS5jb21wb25lbnQuc2NzcyJ9 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/item-home/item-home.component.ts":
+  /*!*************************************************************!*\
+    !*** ./src/app/components/item-home/item-home.component.ts ***!
+    \*************************************************************/
+
+  /*! exports provided: ItemHomeComponent */
+
+  /***/
+  function srcAppComponentsItemHomeItemHomeComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ItemHomeComponent", function () {
+      return ItemHomeComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../app/services/ServicioUtiles */
+    "./src/app/services/ServicioUtiles.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts");
+
+    var ItemHomeComponent = /*#__PURE__*/function () {
+      function ItemHomeComponent(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, parametrosApp) {
+        _classCallCheck(this, ItemHomeComponent);
+
+        this.navCtrl = navCtrl;
+        this.toast = toast;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.loading = loading;
+        this.menu = menu;
+        this.utiles = utiles;
+        this.parametrosApp = parametrosApp;
+      }
+
+      _createClass(ItemHomeComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }, {
+        key: "openGenerico",
+        value: function openGenerico(modulo) {
+          var pageName = modulo.toLowerCase();
+
+          if (modulo == 'EXAMENES') {
+            pageName = 'ordenes';
+          } //registramos movimiento
+
+
+          if (sessionStorage.getItem("RSS_ID")) {
+            if (this.parametrosApp.USA_LOG_MODULOS()) {
+              this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), modulo.toUpperCase());
+            }
+          }
+
+          this.navCtrl.navigateRoot(pageName);
+        }
+      }, {
+        key: "openItemPage",
+        value: function openItemPage(modulo) {
+          this.openGenerico(modulo);
+        }
+      }]);
+
+      return ItemHomeComponent;
+    }();
+
+    ItemHomeComponent.ctorParameters = function () {
+      return [{
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"]
+      }, {
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__["ServicioParametrosApp"]
+      }];
+    };
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ItemHomeComponent.prototype, "modulo", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ItemHomeComponent.prototype, "classImagen", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ItemHomeComponent.prototype, "rutaImagen", void 0);
+    ItemHomeComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-item-home',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./item-home.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/item-home/item-home.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./item-home.component.scss */
+      "./src/app/components/item-home/item-home.component.scss"))["default"]]
+    })], ItemHomeComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/progress/progress.component.scss":
+  /*!*************************************************************!*\
+    !*** ./src/app/components/progress/progress.component.scss ***!
+    \*************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsProgressProgressComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".centrado {\n  text-align: center;\n  width: 100%;\n  height: 10%;\n  position: absolute;\n  top: 45%;\n  padding-left: 60px;\n  padding-right: 60px;\n}\n\n.titulo-item-2 {\n  font-size: 16px;\n  color: #000000DE;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wcm9ncmVzcy9GOlxcYXBwX21pZmFtaWxpYV9naXRcXG1pRmFtaWxpYV9wcmUvc3JjXFxhcHBcXGNvbXBvbmVudHNcXHByb2dyZXNzXFxwcm9ncmVzcy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9wcm9ncmVzcy9wcm9ncmVzcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLFdBQUE7RUFDQSxrQkFBQTtFQUNBLFFBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0FDQ0o7O0FEQ0E7RUFDSSxlQUFBO0VBQ0EsZ0JBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcHJvZ3Jlc3MvcHJvZ3Jlc3MuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2VudHJhZG97XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICB3aWR0aDogMTAwJTsgICAgICAgXHJcbiAgICBoZWlnaHQ6IDEwJTtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDo0NSU7ICBcclxuICAgIHBhZGRpbmctbGVmdDogNjBweDtcclxuICAgIHBhZGRpbmctcmlnaHQ6IDYwcHg7ICAgICAgICAgXHJcbn1cclxuLnRpdHVsby1pdGVtLTJ7XHJcbiAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICBjb2xvcjogIzAwMDAwMERFO1xyXG59IiwiLmNlbnRyYWRvIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMCU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiA0NSU7XG4gIHBhZGRpbmctbGVmdDogNjBweDtcbiAgcGFkZGluZy1yaWdodDogNjBweDtcbn1cblxuLnRpdHVsby1pdGVtLTIge1xuICBmb250LXNpemU6IDE2cHg7XG4gIGNvbG9yOiAjMDAwMDAwREU7XG59Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/progress/progress.component.ts":
+  /*!***********************************************************!*\
+    !*** ./src/app/components/progress/progress.component.ts ***!
+    \***********************************************************/
+
+  /*! exports provided: ProgressComponent */
+
+  /***/
+  function srcAppComponentsProgressProgressComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ProgressComponent", function () {
+      return ProgressComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+    var ProgressComponent = /*#__PURE__*/function () {
+      function ProgressComponent() {
+        _classCallCheck(this, ProgressComponent);
+
+        this.mostrar = false;
+      }
+
+      _createClass(ProgressComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return ProgressComponent;
+    }();
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ProgressComponent.prototype, "mostrar", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ProgressComponent.prototype, "titulo", void 0);
+    ProgressComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-progress',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./progress.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress/progress.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./progress.component.scss */
+      "./src/app/components/progress/progress.component.scss"))["default"]]
+    })], ProgressComponent);
     /***/
   },
 
@@ -2820,6 +3121,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.http.setDataSerializer('json');
           return this.http.post(url, {}, {});
         }
+      }, {
+        key: "entregaPorMesNuevoApi",
+        value: function entregaPorMesNuevoApi(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+          var body = JSON.stringify({
+            UspId: uspId.toString(),
+            IdRyf: idRyf.toString(),
+            NodId: nodId.toString(),
+            NumeroMes: numeroMes.toString(),
+            AnnoConsulta: annoConsulta.toString()
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoApi';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "entregaPorMesNuevoApiNative",
+        value: function entregaPorMesNuevoApiNative(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "UspId": uspId.toString(),
+            "IdRyf": idRyf.toString(),
+            "NodId": nodId.toString(),
+            "NumeroMes": numeroMes.toString(),
+            "AnnoConsulta": annoConsulta.toString()
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoApi';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
+        }
       }]);
 
       return ServicioCitas;
@@ -3489,6 +3830,141 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ParametrosApp?EsProduccion=' + esProduccion;
           var data = this.http.get(url, {}, {});
           return data;
+        } //LLAMADAS PARA CONTROLAR EL INICIO Y TERMINO DE LA SESSION EN LA APP
+
+      }, {
+        key: "postIngreso",
+        value: function postIngreso(objetoEntrada) {
+          //realizar la llamada post a la api
+          var body = JSON.stringify({
+            "IdDispositivo": objetoEntrada.Token,
+            "VersionAppName": objetoEntrada.VersionAppName,
+            "Plataforma": objetoEntrada.Plataforma,
+            "VersionAppNumber": objetoEntrada.VersionAppNumber,
+            "TipoOperacion": objetoEntrada.TipoOperacion,
+            "Id": objetoEntrada.Id != null ? objetoEntrada.Id.toString() : '0'
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroSession';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "postIngresoNative",
+        value: function postIngresoNative(objetoEntrada) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "IdDispositivo": objetoEntrada.Token,
+            "VersionAppName": objetoEntrada.VersionAppName,
+            "Plataforma": objetoEntrada.Plataforma,
+            "VersionAppNumber": objetoEntrada.VersionAppNumber,
+            "TipoOperacion": objetoEntrada.TipoOperacion,
+            "Id": objetoEntrada.Id != null ? objetoEntrada.Id.toString() : '0'
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroSession';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
+        }
+      }, {
+        key: "postMovimientoApp",
+        value: function postMovimientoApp(rssId, modulo) {
+          //realizar la llamada post a la api
+          var body = JSON.stringify({
+            "RssId": rssId,
+            "NombreModulo": modulo
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MovimientosApp';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "postMovimientoAppNative",
+        value: function postMovimientoAppNative(rssId, modulo) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "RssId": rssId,
+            "NombreModulo": modulo
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MovimientosApp';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
+        }
+      }, {
+        key: "getMovimientos",
+        value: function getMovimientos(cantidadDias, idDispositivo) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MovimientosApp?CantidadDias=' + cantidadDias + '&IdDispositivo=' + idDispositivo;
+          var data = this.httpClient.get(url, {});
+          return data;
+        }
+      }, {
+        key: "getMovimientosNative",
+        value: function getMovimientosNative(cantidadDias, idDispositivo) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MovimientosApp?CantidadDias=' + cantidadDias + '&IdDispositivo=' + idDispositivo;
+          var data = this.http.get(url, {}, {});
+          return data;
+        } //para informar persona
+
+      }, {
+        key: "postInformarPersona",
+        value: function postInformarPersona(run, nombreSocial, email, numeroTelefono, etiquetaTelefono) {
+          //realizar la llamada post a la api
+          var body = JSON.stringify({
+            "Run": run,
+            "NombreSocial": nombreSocial,
+            "Email": email,
+            "NumeroTelefono": numeroTelefono,
+            "EtiquetaTelefono": etiquetaTelefono
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'InformarPersona';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "postInformarPersonaNative",
+        value: function postInformarPersonaNative(run, nombreSocial, email, numeroTelefono, etiquetaTelefono) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "Run": run,
+            "NombreSocial": nombreSocial,
+            "Email": email,
+            "NumeroTelefono": numeroTelefono,
+            "EtiquetaTelefono": etiquetaTelefono
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'InformarPersona';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
         }
       }]);
 
@@ -4143,13 +4619,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../../app/services/ServicioCitas */
-    "./src/app/services/ServicioCitas.ts"); //notificaciones locales
+    "./src/app/services/ServicioCitas.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts"); //notificaciones locales
     //utiles
     //citas
 
 
     var ServicioNotificaciones = /*#__PURE__*/function () {
-      function ServicioNotificaciones(platform, appVersion, toast, localNotifications, utiles, citas) {
+      function ServicioNotificaciones(platform, appVersion, toast, localNotifications, utiles, citas, parametrosApp) {
         _classCallCheck(this, ServicioNotificaciones);
 
         this.platform = platform;
@@ -4158,7 +4640,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.localNotifications = localNotifications;
         this.utiles = utiles;
         this.citas = citas;
-        this.citasArr = []; //inicializamos los valores
+        this.parametrosApp = parametrosApp;
+        this.citasArr = [];
+        this.vacunasCovid = []; //inicializamos los valores
 
         moment__WEBPACK_IMPORTED_MODULE_4__["locale"]('es');
       }
@@ -4246,67 +4730,133 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (usuario != null) {
             if (this.utiles.isAppOnDevice()) {
-              this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
-                //aca debemos procesar las citas
-                var todas = JSON.parse(response.data);
+              if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                this.citas.entregaPorMesNuevoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
+                  //aca debemos procesar las citas
+                  var todas = JSON.parse(response.data);
 
-                if (todas && todas.length > 0) {
-                  //aplicamos el primer filtro
-                  var nuevas = todas.filter(function (e) {
-                    return e.Mostrar == true;
-                  });
-                  var total = nuevas.filter(function (e) {
-                    return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
-                  });
+                  if (todas && todas.length > 0) {
+                    //aplicamos el primer filtro
+                    var nuevas = todas.filter(function (e) {
+                      return e.Mostrar == true;
+                    });
+                    var total = nuevas.filter(function (e) {
+                      return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+                    });
 
-                  if (total && total.length > 0) {
-                    //por cada uno de estos debemos hacer un mensaje
-                    for (var i = 0; i < total.length; i++) {
-                      var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
-                      var hora = total[i].Eventos[0].HoraInicioFin;
-                      var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
-                      var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
-                      var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
-                      var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                    if (total && total.length > 0) {
+                      //por cada uno de estos debemos hacer un mensaje
+                      for (var i = 0; i < total.length; i++) {
+                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = total[i].Eventos[0].HoraInicioFin;
+                        var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                        var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                        var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                      _this6.crearNotificacion(id, titulo, texto);
+                        _this6.crearNotificacion(id, titulo, texto);
+                      }
                     }
-                  }
 
-                  console.log(nuevas);
-                }
-              });
+                    console.log(nuevas);
+                  }
+                });
+              } else {
+                this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
+                  //aca debemos procesar las citas
+                  var todas = JSON.parse(response.data);
+
+                  if (todas && todas.length > 0) {
+                    //aplicamos el primer filtro
+                    var nuevas = todas.filter(function (e) {
+                      return e.Mostrar == true;
+                    });
+                    var total = nuevas.filter(function (e) {
+                      return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+                    });
+
+                    if (total && total.length > 0) {
+                      //por cada uno de estos debemos hacer un mensaje
+                      for (var i = 0; i < total.length; i++) {
+                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = total[i].Eventos[0].HoraInicioFin;
+                        var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                        var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                        var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+
+                        _this6.crearNotificacion(id, titulo, texto);
+                      }
+                    }
+
+                    console.log(nuevas);
+                  }
+                });
+              }
             } else {
-              this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
-                //aca debemos procesar las citas
-                var todas = response;
+              if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                this.citas.entregaPorMesNuevoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
+                  //aca debemos procesar las citas
+                  var todas = response;
 
-                if (todas && todas.length > 0) {
-                  //aplicamos el primer filtro
-                  var nuevas = todas.filter(function (e) {
-                    return e.Mostrar == true;
-                  });
-                  var total = nuevas.filter(function (e) {
-                    return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
-                  });
+                  if (todas && todas.length > 0) {
+                    //aplicamos el primer filtro
+                    var nuevas = todas.filter(function (e) {
+                      return e.Mostrar == true;
+                    });
+                    var total = nuevas.filter(function (e) {
+                      return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+                    });
 
-                  if (total && total.length > 0) {
-                    //por cada uno de estos debemos hacer un mensaje
-                    for (var i = 0; i < total.length; i++) {
-                      var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
-                      var hora = total[i].Eventos[0].HoraInicioFin;
-                      var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
-                      var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
-                      var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
-                      var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                    if (total && total.length > 0) {
+                      //por cada uno de estos debemos hacer un mensaje
+                      for (var i = 0; i < total.length; i++) {
+                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = total[i].Eventos[0].HoraInicioFin;
+                        var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                        var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                        var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                      _this6.crearNotificacion(id, titulo, texto);
+                        _this6.crearNotificacion(id, titulo, texto);
+                      }
                     }
-                  }
 
-                  console.log(nuevas);
-                }
-              });
+                    console.log(nuevas);
+                  }
+                });
+              } else {
+                this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
+                  //aca debemos procesar las citas
+                  var todas = response;
+
+                  if (todas && todas.length > 0) {
+                    //aplicamos el primer filtro
+                    var nuevas = todas.filter(function (e) {
+                      return e.Mostrar == true;
+                    });
+                    var total = nuevas.filter(function (e) {
+                      return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+                    });
+
+                    if (total && total.length > 0) {
+                      //por cada uno de estos debemos hacer un mensaje
+                      for (var i = 0; i < total.length; i++) {
+                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = total[i].Eventos[0].HoraInicioFin;
+                        var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                        var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                        var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+
+                        _this6.crearNotificacion(id, titulo, texto);
+                      }
+                    }
+
+                    console.log(nuevas);
+                  }
+                });
+              }
             }
           }
         }
@@ -4328,10 +4878,188 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_6__["ServicioUtiles"]
       }, {
         type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__["ServicioCitas"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"]
       }];
     };
 
     ServicioNotificaciones = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], ServicioNotificaciones);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/ServicioNotificacionesLocales.ts":
+  /*!***********************************************************!*\
+    !*** ./src/app/services/ServicioNotificacionesLocales.ts ***!
+    \***********************************************************/
+
+  /*! exports provided: ServicioNotificacionesLocales */
+
+  /***/
+  function srcAppServicesServicioNotificacionesLocalesTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ServicioNotificacionesLocales", function () {
+      return ServicioNotificacionesLocales;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/app-version/ngx */
+    "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! moment */
+    "./node_modules/moment/moment.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+    /* harmony import */
+
+
+    var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/local-notifications/ngx */
+    "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ../../app/services/ServicioUtiles */
+    "./src/app/services/ServicioUtiles.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../../app/services/ServicioCitas */
+    "./src/app/services/ServicioCitas.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts"); //notificaciones locales
+    //utiles
+    //citas
+
+
+    var ServicioNotificacionesLocales = /*#__PURE__*/function () {
+      function ServicioNotificacionesLocales(platform, appVersion, toast, localNotifications, utiles, citas, parametrosApp) {
+        _classCallCheck(this, ServicioNotificacionesLocales);
+
+        this.platform = platform;
+        this.appVersion = appVersion;
+        this.toast = toast;
+        this.localNotifications = localNotifications;
+        this.utiles = utiles;
+        this.citas = citas;
+        this.parametrosApp = parametrosApp; //inicializamos los valores
+
+        moment__WEBPACK_IMPORTED_MODULE_4__["locale"]('es');
+      } //busqueda de notificaciones locales
+      //definiremos las vacunas covid como notificaciones locales
+
+
+      _createClass(ServicioNotificacionesLocales, [{
+        key: "getAll",
+        value: function getAll() {
+          var lista = [];
+          var indice = 0; //local storage
+
+          if (localStorage.getItem('UsuarioAps')) {
+            var usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+
+            if (usuario && usuario.VacunasCovid) {
+              if (usuario.VacunasCovid.length > 0) {
+                usuario.VacunasCovid.forEach(function (element) {
+                  var entidad = {
+                    Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                    Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                    Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                    Id: element.Id,
+                    Indice: indice
+                  };
+                  lista.push(entidad);
+                  indice++;
+                });
+              }
+            }
+          } //session storage
+
+
+          if (sessionStorage.getItem('UsuariosFamilia')) {
+            var usuarios = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+
+            if (usuarios && usuarios.length > 0) {
+              usuarios.forEach(function (usuario) {
+                if (usuario && usuario.VacunasCovid.length > 0) {
+                  usuario.VacunasCovid.forEach(function (element) {
+                    var entidad = {
+                      Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                      Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                      Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                      Id: element.Id,
+                      Indice: indice
+                    };
+                    lista.push(entidad);
+                    indice++;
+                  });
+                }
+              });
+            }
+          }
+
+          return lista;
+        }
+      }]);
+
+      return ServicioNotificacionesLocales;
+    }();
+
+    ServicioNotificacionesLocales.ctorParameters = function () {
+      return [{
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
+      }, {
+        type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__["AppVersion"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
+      }, {
+        type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"]
+      }, {
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_6__["ServicioUtiles"]
+      }, {
+        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__["ServicioCitas"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"]
+      }];
+    };
+
+    ServicioNotificacionesLocales = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], ServicioNotificacionesLocales);
     /***/
   },
 
@@ -4629,6 +5357,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (arrRetorno && arrRetorno.Id > 0) {
               if (parseInt(arrRetorno.Valor) == 1) retorno = true;
+            }
+          }
+        }
+
+        return retorno;
+      };
+
+      this.USA_LOG_MODULOS = function () {
+        var retorno = false;
+
+        if (localStorage.getItem('PARAMETROS_APP')) {
+          var elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+
+          if (elementos && elementos.length > 0) {
+            var arrRetorno = elementos.find(function (p) {
+              return p.Nombre == 'USA_LOG_MODULOS';
+            });
+
+            if (arrRetorno && arrRetorno.Id > 0) {
+              if (parseInt(arrRetorno.Valor) == 1) retorno = true;
+            }
+          }
+        }
+
+        return retorno;
+      };
+
+      this.DIAS_LOG_MODULOS = function () {
+        var retorno = 3;
+
+        if (localStorage.getItem('PARAMETROS_APP')) {
+          var elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+
+          if (elementos && elementos.length > 0) {
+            var arrRetorno = elementos.find(function (p) {
+              return p.Nombre == 'DIAS_LOG_MODULOS';
+            });
+
+            if (arrRetorno && arrRetorno.Id > 0) {
+              retorno = parseInt(arrRetorno.Valor);
             }
           }
         }
@@ -5475,6 +6243,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             }, _callee3, this);
           }));
+        } //para registrar los movimientos
+
+      }, {
+        key: "registrarMovimiento",
+        value: function registrarMovimiento(rssId, modulo) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    if (!this.isAppOnDevice()) {
+                      //llamada web
+                      this.servicioGeo.postMovimientoApp(rssId, modulo).subscribe(function (response) {
+                        //procesar
+                        console.log('Movimiento registrado ' + modulo + ' Id: ' + response);
+                      });
+                    } else {
+                      //llamada nativa
+                      this.servicioGeo.postMovimientoAppNative(rssId, modulo).then(function (response) {
+                        //procesar
+                        var data = JSON.parse(response.data);
+                        console.log('Movimiento registrado ' + modulo + ' Id: ' + data);
+                      });
+                    }
+
+                  case 1:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          }));
         }
       }, {
         key: "entregaTokenFCM",
@@ -5486,6 +6286,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           return token;
+        } //proceso que entrega un arreglo de elementos para la pagina home
+        //ya vienen ordenados, hay que setear algunas propiedades de estilos
+        //y otras cosas
+
+      }, {
+        key: "entregaArregloHome",
+        value: function entregaArregloHome(data) {
+          var arr = [];
+
+          if (data && data.length > 0) {
+            data.forEach(function (elemento) {
+              //primero los 2 más favoritos
+              if (elemento.Orden == 1 || elemento.Orden == 2) {
+                elemento.Favorito = true;
+              } else {
+                elemento.Favorito = false;
+              } //segundo las imagenes
+
+
+              if (elemento.NombreModulo == 'CALENDARIO') {
+                elemento.Imagen = './assets/imgs_nuevas/calendario-01.png';
+              } else if (elemento.NombreModulo == 'ANTECEDENTES') {
+                elemento.Imagen = './assets/imgs_nuevas/antecedentes.png';
+              } else if (elemento.NombreModulo == 'EXAMENES') {
+                elemento.Imagen = './assets/imgs_nuevas/examenes-de-salud.png';
+              } else if (elemento.NombreModulo == 'INTERCONSULTAS') {
+                elemento.Imagen = './assets/imgs_nuevas/interconsulta.png';
+              } //tercero la clase de la imagen
+
+
+              elemento.ClaseImagen = 'imgs-home';
+              arr.push(elemento);
+            });
+          }
+
+          return arr;
         }
       }]);
 
@@ -5811,10 +6647,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       production: false,
       //API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
       //URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
-      //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
+      API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
       URL_FOTOS: 'http://190.151.14.101:8065/',
       //API_ENDPOINT: 'http://localhost:27563/Api/',
-      API_ENDPOINT: 'http://localhost:1960/Api/',
+      //API_ENDPOINT: 'http://localhost:1960/Api/',
       //API_ENDPOINT: 'https://10.211.55.5:45456/Api/',
       //URL_FOTOS: 'http://localhost:27563/',
       API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',

@@ -56,3 +56,32 @@
   font-size: 0.875em;
   margin-bottom: 0;
 }
+.badge-notificaciones{
+  --padding-top: 3px;
+  --padding-end: 4px;
+  --padding-bottom: 4px;
+  --padding-start: 4px;
+  border-radius: 16px;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+.slides-back{
+  background: #5133A5;
+  text-align: left;
+}
+.titulo-slide{
+  color: #F4F2FA;
+  font-size: 1em;
+  text-align: left;
+}
+.subtitulo-slide{
+  color: #AFA0D5;
+  text-align: left;
+}
+.boton{
+  float: right;
+}
+.swiper-pagination-bullet-active {
+  background: white;
+}

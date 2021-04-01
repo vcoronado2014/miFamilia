@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Contactabilidad</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\" style=\"margin-top: 20px;\">\n    <form [formGroup]=\"forma\" novalidate>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre social</mat-label>\n          <input matInput placeholder=\"Nombre social\" formControlName=\"nombreSocial\" name=\"nombreSocial\" required>\n          <mat-error [hidden]=\"!(f.nombreSocial.errors && f.nombreSocial.errors.required)\">Nombre social requerido</mat-error>\n          <mat-hint align=\"start\"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>\n        </mat-form-field>\n      </ion-row>\n      <h3 class=\"mt-40\">Datos de contacto</h3>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\" required>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Teléfono</mat-label>\n          <input matInput placeholder=\"+569XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n          <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- boton de registrarse -->\n      <ion-row>\n        <button  [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">TERMINAR</button>\n      </ion-row>\n    </form>\n  \n  </div>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Contactabilidad</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n  <div [hidden]=\"estaCargando\" class=\"ion-padding\" style=\"margin-top: 20px;\">\n    <form [formGroup]=\"forma\" novalidate>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre social</mat-label>\n          <input matInput placeholder=\"Nombre social\" formControlName=\"nombreSocial\" name=\"nombreSocial\" required>\n          <mat-error [hidden]=\"!(f.nombreSocial.errors && f.nombreSocial.errors.required)\">Nombre social requerido</mat-error>\n          <mat-hint align=\"start\"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>\n        </mat-form-field>\n      </ion-row>\n      <h3 class=\"mt-40\">Datos de contacto</h3>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\" required>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Teléfono</mat-label>\n          <input matInput placeholder=\"+569XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n          <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- boton de registrarse -->\n      <ion-row>\n        <button  [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSumbit()\" mat-raised-button\n          color=\"accent\">TERMINAR</button>\n      </ion-row>\n    </form>\n  \n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -34,6 +34,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
 /* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
 /* harmony import */ var _contactabilidad_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./contactabilidad.page */ "./src/app/contactabilidad/contactabilidad.page.ts");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -58,6 +60,7 @@ ContactabilidadPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorat
             _angular_material_input__WEBPACK_IMPORTED_MODULE_7__["MatInputModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
             _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_11__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild([
                 {
                     path: '',
@@ -135,9 +138,17 @@ let ContactabilidadPage = class ContactabilidadPage {
         this.expCelular = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/gm;
         this.expPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/gm;
         this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
+        //variable para obtener el registro del usuario
+        this.registro = null;
+        this.estaCargando = false;
+        this.tituloProgress = '';
     }
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+        //obtenemos el registro
+        if (localStorage.getItem('REGISTRO')) {
+            this.registro = JSON.parse(localStorage.getItem('REGISTRO'));
+        }
         //cargamos la forma
         this.cargarForma();
     }
@@ -146,6 +157,160 @@ let ContactabilidadPage = class ContactabilidadPage {
             'nombreSocial': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
             'email': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern(this.expEmail)]),
             'telefono': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern(this.expCelular)]),
+        });
+        //precargar los datos del usuario.
+        if (this.registro && this.registro != null) {
+            this.forma.setValue({
+                nombreSocial: this.registro.Apodo,
+                email: this.registro.CorreoElectronico,
+                telefono: this.registro.TelefonoContacto ? this.registro.TelefonoContacto : '',
+            });
+        }
+    }
+    onSumbit() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            let loader = yield this.loading.create({
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
+                //message: 'Cargando...<br>tipos de atención',
+                duration: 2000
+            });
+            this.estaCargando = true;
+            this.tituloProgress = 'Actualizando datos de contacto';
+            //variables a enviar
+            let email = this.forma.controls.email ? this.forma.controls.email.value : '';
+            let nombreSocial = this.forma.controls.nombreSocial ? this.forma.controls.nombreSocial.value : '';
+            let telefono = this.forma.controls.telefono ? this.forma.controls.telefono.value : '';
+            let run = this.registro.Run.replace('-', '');
+            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                if (!this.utiles.isAppOnDevice()) {
+                    //llamada web
+                    this.servicioGeo.postInformarPersona(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').subscribe((response) => {
+                        //procesar respuesta
+                        var datos = response;
+                        this.procesarRespuesta(datos, loader, nombreSocial, telefono);
+                    });
+                }
+                else {
+                    //llamada nativa
+                    this.servicioGeo.postInformarPersonaNative(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').then((response) => {
+                        //procesar respuesta
+                        var datos = JSON.parse(response.data);
+                        this.procesarRespuesta(datos, loader, nombreSocial, telefono);
+                    });
+                }
+            }));
+        });
+    }
+    procesarRespuesta(data, loading, nombreSocial, telefono) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //primero evaluamos la respuesta
+            if (data) {
+                if (data.InformarPersonaResponse) {
+                    if (data.InformarPersonaResponse.RespuestaBase) {
+                        //acá trae info de rayen y de ryf
+                        //ojo que debemos actualizar igual el registro, al menos con el telefono y el apodo
+                        //ya que el email es de autentificacion y no se puede cambiar
+                        let correctoRayen = false;
+                        let correctoRyf = false;
+                        if (data.InformarPersonaResponse.RespuestaBase.Rayen) {
+                            if (data.InformarPersonaResponse.RespuestaBase.Rayen.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
+                                correctoRayen = true;
+                                console.log('actualizado rayen');
+                            }
+                        }
+                        if (data.InformarPersonaResponse.RespuestaBase.Ryf) {
+                            if (data.InformarPersonaResponse.RespuestaBase.Ryf.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
+                                correctoRyf = true;
+                                console.log('actualizado ryf');
+                            }
+                        }
+                        if (correctoRyf || correctoRayen) {
+                            this.estaCargando = false;
+                            this.tituloProgress = '';
+                            loading.dismiss();
+                            //this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+                            var fechaNac = moment__WEBPACK_IMPORTED_MODULE_9__();
+                            if (this.registro.FechaNacimiento) {
+                                fechaNac = moment__WEBPACK_IMPORTED_MODULE_9__(this.registro.FechaNacimiento);
+                            }
+                            //ahora actualizar el registro
+                            this.registro.Apodo = nombreSocial;
+                            this.registro.TelefonoContacto = telefono;
+                            //valores por defecto
+                            this.registro.Id = this.registro.Id.toString();
+                            this.registro.Activo = this.registro.Activo.toString();
+                            this.registro.DiaNacimiento = fechaNac.date().toString();
+                            this.registro.MesNacimiento = (fechaNac.month() + 1).toString();
+                            this.registro.AnioNacimiento = fechaNac.year().toString();
+                            this.registro.Eliminado = this.registro.Eliminado.toString();
+                            this.registro.ModoRegistro = this.registro.ModoRegistro.toString();
+                            this.registro.FechaBaja = null;
+                            let loader = yield this.loading.create({
+                                cssClass: 'loading-vacio',
+                                showBackdrop: false,
+                                spinner: null,
+                                duration: 2000
+                            });
+                            this.estaCargando = true;
+                            this.tituloProgress = 'Actualizando datos de registro';
+                            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                                if (!this.utiles.isAppOnDevice()) {
+                                    //llamada web
+                                    this.servicioGeo.postRegistroFamilia(this.registro).subscribe((data) => {
+                                        let respuesta = data;
+                                        localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                                        loader.dismiss();
+                                        this.estaCargando = false;
+                                        this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+                                    }, error => {
+                                        loader.dismiss();
+                                        this.estaCargando = false;
+                                        this.utiles.presentToast(error, 'bottom', 2000);
+                                    });
+                                }
+                                else {
+                                    //llamada nativa
+                                    this.servicioGeo.postRegistroFamiliaNative(this.registro).then((data) => {
+                                        let respuesta = JSON.parse(data.data);
+                                        localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                                        loader.dismiss();
+                                        this.estaCargando = false;
+                                        this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+                                    }).catch(error => {
+                                        loader.dismiss();
+                                        this.estaCargando = false;
+                                        this.utiles.presentToast(error, 'bottom', 2000);
+                                    });
+                                }
+                            }));
+                        }
+                        else {
+                            this.estaCargando = false;
+                            loading.dismiss();
+                        }
+                    }
+                    else {
+                        this.estaCargando = false;
+                        loading.dismiss();
+                        this.tituloProgress = '';
+                        this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+                    }
+                }
+                else {
+                    this.estaCargando = false;
+                    loading.dismiss();
+                    this.tituloProgress = '';
+                    this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+                }
+            }
+            else {
+                this.estaCargando = false;
+                loading.dismiss();
+                this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+                this.tituloProgress = '';
+            }
         });
     }
     get f() { return this.forma.controls; }

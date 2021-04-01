@@ -18,6 +18,8 @@ export class AntecedentesPage implements OnInit {
   public usuarioApsFamilia=[];
   public listadoUsuario=[];
 
+  estaCargando = false;
+
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -33,17 +35,24 @@ export class AntecedentesPage implements OnInit {
   ngOnInit() {
     //this.miColor = this.utiles.entregaMiColor();
     //this.miColor = this.utiles.entregaColor(this.usuarioAps);
-    if (sessionStorage.getItem("RSS_ID")){
+/*     if (sessionStorage.getItem("RSS_ID")){
       if (this.parametrosApp.USA_LOG_MODULOS()){
         this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'ANTECEDENTES');
       }
-    }
+    } */
     this.cargarDatosInciales();
   }
   async cargarDatosInciales(){
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Cargando...<br>información',
       duration: 20000
+    }); */
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
     });
 
     await loader.present().then(async () => {
@@ -98,6 +107,7 @@ export class AntecedentesPage implements OnInit {
         }
       }
       loader.dismiss();
+      this.estaCargando = false;
     });
 
   }

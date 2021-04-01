@@ -23,6 +23,10 @@ export class ContactabilidadPage implements OnInit {
   expCelular = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/gm;
   expPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/gm;
   expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
+  //variable para obtener el registro del usuario
+  registro = null;
+  estaCargando = false;
+  tituloProgress = '';
 
   constructor(
     private navCtrl: NavController,
@@ -39,6 +43,10 @@ export class ContactabilidadPage implements OnInit {
 
   ngOnInit() {
     moment.locale('es');
+    //obtenemos el registro
+    if (localStorage.getItem('REGISTRO')){
+      this.registro = JSON.parse(localStorage.getItem('REGISTRO'));
+    }
     //cargamos la forma
     this.cargarForma();
   }
@@ -48,6 +56,164 @@ export class ContactabilidadPage implements OnInit {
       'email': new FormControl('', [Validators.required, Validators.pattern(this.expEmail)]),
       'telefono': new FormControl('', [Validators.pattern(this.expCelular)]),
     });
+    //precargar los datos del usuario.
+    if (this.registro && this.registro != null){
+      this.forma.setValue({
+        nombreSocial: this.registro.Apodo,
+        email: this.registro.CorreoElectronico,
+        telefono: this.registro.TelefonoContacto ?  this.registro.TelefonoContacto : '',
+      })
+    }
+
+  }
+  async onSumbit(){
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
+      //message: 'Cargando...<br>tipos de atención',
+      duration: 2000
+    });
+    this.estaCargando =true;
+    this.tituloProgress = 'Actualizando datos de contacto';
+
+    //variables a enviar
+    let email = this.forma.controls.email ? this.forma.controls.email.value : '';
+    let nombreSocial = this.forma.controls.nombreSocial ? this.forma.controls.nombreSocial.value : '';
+    let telefono = this.forma.controls.telefono ? this.forma.controls.telefono.value : '';
+    let run = this.registro.Run.replace('-', '');
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //llamada web
+        this.servicioGeo.postInformarPersona(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').subscribe((response: any)=>{
+          //procesar respuesta
+          var datos = response;
+          this.procesarRespuesta(datos, loader, nombreSocial, telefono);
+
+        })
+      }
+      else {
+        //llamada nativa
+        this.servicioGeo.postInformarPersonaNative(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').then((response:any)=>{
+          //procesar respuesta
+          var datos = JSON.parse(response.data);
+          this.procesarRespuesta(datos, loader, nombreSocial, telefono);
+
+        })
+      }
+    });
+  }
+  async procesarRespuesta(data, loading, nombreSocial, telefono){
+    //primero evaluamos la respuesta
+    if (data){
+      if (data.InformarPersonaResponse){
+        if (data.InformarPersonaResponse.RespuestaBase){
+          //acá trae info de rayen y de ryf
+          //ojo que debemos actualizar igual el registro, al menos con el telefono y el apodo
+          //ya que el email es de autentificacion y no se puede cambiar
+          let correctoRayen = false;
+          let correctoRyf = false;
+          if (data.InformarPersonaResponse.RespuestaBase.Rayen){
+            if (data.InformarPersonaResponse.RespuestaBase.Rayen.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA'){
+              correctoRayen = true;
+              console.log('actualizado rayen');
+            }
+          }
+          if (data.InformarPersonaResponse.RespuestaBase.Ryf) {
+            if (data.InformarPersonaResponse.RespuestaBase.Ryf.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
+              correctoRyf = true;
+              console.log('actualizado ryf');
+            }
+          }
+          if (correctoRyf || correctoRayen){
+            this.estaCargando = false;
+            this.tituloProgress = '';
+            loading.dismiss();
+            //this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+            var fechaNac = moment();
+            if (this.registro.FechaNacimiento){
+              fechaNac = moment(this.registro.FechaNacimiento);
+            }
+            //ahora actualizar el registro
+            this.registro.Apodo = nombreSocial;
+            this.registro.TelefonoContacto = telefono;
+            //valores por defecto
+            this.registro.Id = this.registro.Id.toString();
+            this.registro.Activo = this.registro.Activo.toString();
+            this.registro.DiaNacimiento = fechaNac.date().toString();
+            this.registro.MesNacimiento = (fechaNac.month() + 1).toString();
+            this.registro.AnioNacimiento = fechaNac.year().toString();
+            this.registro.Eliminado = this.registro.Eliminado.toString();
+            this.registro.ModoRegistro = this.registro.ModoRegistro.toString();
+            this.registro.FechaBaja = null;
+
+            let loader = await this.loading.create({
+              cssClass: 'loading-vacio',
+              showBackdrop: false,
+              spinner: null,
+              duration: 2000
+            });
+            this.estaCargando =true;
+            this.tituloProgress = 'Actualizando datos de registro';
+            await loader.present().then(async () => {
+              if (!this.utiles.isAppOnDevice()) {
+                //llamada web
+                this.servicioGeo.postRegistroFamilia(this.registro).subscribe((data)=>{
+                  let respuesta = data;
+                  localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                  loader.dismiss();
+                  this.estaCargando = false;
+                  this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+                },
+                error=>{
+                  loader.dismiss();
+                  this.estaCargando = false;
+                  this.utiles.presentToast(error, 'bottom', 2000);
+                });
+              }
+              else{
+                //llamada nativa
+                this.servicioGeo.postRegistroFamiliaNative(this.registro).then((data)=>{
+                  let respuesta = JSON.parse(data.data);
+                  localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                  loader.dismiss();
+                  this.estaCargando = false;
+                  this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
+
+                }).catch(error =>{
+                  loader.dismiss();
+                  this.estaCargando = false;
+                  this.utiles.presentToast(error, 'bottom', 2000);
+                });
+              }
+            });
+
+          }
+          else{
+            this.estaCargando = false;
+            loading.dismiss();
+          }
+        }
+        else{
+          this.estaCargando = false;
+          loading.dismiss();
+          this.tituloProgress = '';
+          this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+        }
+      }
+      else{
+        this.estaCargando = false;
+        loading.dismiss();
+        this.tituloProgress = '';
+        this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+      }
+    }
+    else{
+      this.estaCargando = false;
+      loading.dismiss();
+      this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
+      this.tituloProgress = '';
+    }
   }
 
   get f() { return this.forma.controls; }

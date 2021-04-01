@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { ContactabilidadPage } from './contactabilidad.page';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ContactabilidadPage } from './contactabilidad.page';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

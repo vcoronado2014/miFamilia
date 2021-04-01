@@ -14,6 +14,7 @@ import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp'
 @Injectable()
 export class ServicioNotificaciones{
     citasArr = [];
+    vacunasCovid = [];
 
     constructor(
         public platform : Platform,

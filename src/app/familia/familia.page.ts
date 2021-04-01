@@ -23,6 +23,7 @@ export class FamiliaPage implements OnInit, DoCheck {
   public usuarioAps;
   public usuarioApsFamilia=[];
   public listadoUsuario=[];
+  estaCargando = false;
 
   @ViewChild('myList', {read: IonList}) list: IonList;
   constructor(
@@ -67,11 +68,18 @@ export class FamiliaPage implements OnInit, DoCheck {
 
   async cargarDatosIniciales(){
     this.listadoUsuario = [];
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Información del usuario',
       duration: 20000
+    }); */
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
     });
-
+    
     await loader.present().then(async () => {
       //cargamos mi color
       this.miColor = this.utiles.entregaMiColor();
@@ -120,6 +128,7 @@ export class FamiliaPage implements OnInit, DoCheck {
         this.hayInfo = false;
       }
       loader.dismiss();
+      this.estaCargando = false;
     });
   }
 

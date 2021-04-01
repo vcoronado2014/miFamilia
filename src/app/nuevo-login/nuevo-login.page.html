@@ -1,8 +1,10 @@
 <ion-content class="ion-padding">
-  <div class="row mt-24">
+  <app-progress [mostrar]="estaCargando" titulo="Estamos ingresando a la app"></app-progress>
+
+  <div [hidden]="estaCargando" class="row mt-24">
     <img src="../../assets/imgs_nuevas/login.png" alt="asistente"/>
   </div>
-  <form [formGroup]="forma" novalidate>
+  <form [hidden]="estaCargando" [formGroup]="forma" novalidate>
     <ion-row class="ion-no-margin ion-no-padding mt-80">
       <!-- solo para enrolamiento -->
       <mat-form-field appearance="outline" style="width: 100%;" [hidden]="usaEnrolamiento == false">
@@ -28,10 +30,10 @@
       <button mat-raised-button color="primary" style="width: 90%; margin-left: 5%; height:36px;" (click)="onSubmit()">INICIAR SESION</button>
     </ion-row>
   </form>
-  <ion-row class="mt-36" [hidden]="usaEnrolamiento">
+  <ion-row [hidden]="estaCargando" class="mt-36" [hidden]="usaEnrolamiento">
     <a mat-button routerLink="." color="primary" class="ion-text-center" style="width: 100%;" (click)="irRecuperarClave()">¿Olvidaste tu contraseña?</a>
   </ion-row>
-  <ion-grid class="ion-no-padding mt-36">
+  <ion-grid [hidden]="estaCargando" class="ion-no-padding mt-36">
     <ion-row>
       <ion-col class="ion-text-center texto-1" style="margin-top:8px;">
         ¿No tienes cuenta?

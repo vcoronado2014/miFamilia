@@ -20,6 +20,7 @@ export class CardCalendarioComponent implements OnInit {
     NumeroDia: '',
   };
   @Input() fechaActual;
+  @Input() anioActual;
 
 
   constructor(

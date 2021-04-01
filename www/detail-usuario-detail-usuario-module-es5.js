@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <ion-card>\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-item lines=\"none\">\r\n        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>\r\n        <ion-badge slot=\"end\">{{usuario.Parentezco.Nombre}}</ion-badge>\r\n      </ion-item>\r\n\r\n    </ion-card-content>\r\n  </ion-card> \r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list>\r\n    <ion-list-header>\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <!-- progress -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando información del usuario\"></app-progress>\r\n  <ion-card [hidden]=\"estaCargando\">\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-item lines=\"none\">\r\n        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>\r\n        <ion-badge slot=\"end\">{{usuario.Parentezco.Nombre}}</ion-badge>\r\n      </ion-item>\r\n\r\n    </ion-card-content>\r\n  </ion-card> \r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-list-header>\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n";
     /***/
   },
 
@@ -86,13 +86,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _detail_usuario_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./detail-usuario.page */
     "./src/app/detail-usuario/detail-usuario.page.ts");
+    /* harmony import */
+
+
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../components/components.module */
+    "./src/app/components/components.module.ts");
 
     var DetailUsuarioPageModule = function DetailUsuarioPageModule() {
       _classCallCheck(this, DetailUsuarioPageModule);
     };
 
     DetailUsuarioPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_7__["ComponentsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
         path: '',
         component: _detail_usuario_page__WEBPACK_IMPORTED_MODULE_6__["DetailUsuarioPage"]
       }])],
@@ -211,7 +217,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.indicadorValor = [];
         this.presiones = [];
         this.alergias = [];
-        this.cargando = false;
+        this.cargando = false; //para controlar componente progess
+
+        this.estaCargando = false;
       } //ARREGLAR TEMAS DE COLORES Y URL CUANDO SON VARIOS MIEMBROS DE LA FAMILIA
 
 
@@ -256,13 +264,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     _context10.next = 2;
                     return this.loading.create({
-                      message: 'Obteniendo...<br>Información del usuario',
-                      duration: 20000
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null,
+                      //message: 'Cargando...<br>tipos de atención',
+                      duration: 2000
                     });
 
                   case 2:
                     loader = _context10.sent;
-                    _context10.next = 5;
+                    this.estaCargando = true;
+                    _context10.next = 6;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
                         var _this3 = this;
@@ -274,12 +286,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             switch (_context9.prev = _context9.next) {
                               case 0:
                                 if (this.utiles.isAppOnDevice()) {
-                                  _context9.next = 28;
+                                  _context9.next = 32;
                                   break;
                                 }
 
                                 if (!this.parametrosApp.USA_API_MANAGEMENT()) {
-                                  _context9.next = 15;
+                                  _context9.next = 17;
                                   break;
                                 }
 
@@ -287,15 +299,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 this.info.getIndicadorValorApi(uspId).subscribe(function (response) {
                                   _this3.procesarIndicadorValor(response, loader);
                                 }); //presion
+                                //original
+
+                                /*           let loader1 = await this.loading.create({
+                                            message: 'Obteniendo...<br>Presión',
+                                          }); */
 
                                 _context9.next = 5;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Presión'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
                               case 5:
                                 loader1 = _context9.sent;
-                                _context9.next = 8;
+                                this.estaCargando = true;
+                                _context9.next = 9;
                                 return loader1.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                                     var _this4 = this;
@@ -317,15 +337,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 8:
-                                _context9.next = 10;
+                              case 9:
+                                //alergias
+                                //original
+
+                                /*           let loader2 = await this.loading.create({
+                                            message: 'Obteniendo...<br>Alergias',
+                                
+                                          }); */
+                                this.estaCargando = true;
+                                _context9.next = 12;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Alergias'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
-                              case 10:
+                              case 12:
                                 loader2 = _context9.sent;
-                                _context9.next = 13;
+                                _context9.next = 15;
                                 return loader2.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
                                     var _this5 = this;
@@ -347,23 +377,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 13:
-                                _context9.next = 26;
+                              case 15:
+                                _context9.next = 30;
                                 break;
 
-                              case 15:
+                              case 17:
                                 this.info.getIndicadorValor(uspId).subscribe(function (response) {
                                   _this3.procesarIndicadorValor(response, loader);
                                 }); //presion
+                                //original
 
-                                _context9.next = 18;
+                                /*           let loader1 = await this.loading.create({
+                                            message: 'Obteniendo...<br>Presión',
+                                            
+                                          }); */
+
+                                _context9.next = 20;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Presión'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
-                              case 18:
+                              case 20:
                                 _loader = _context9.sent;
-                                _context9.next = 21;
+                                this.estaCargando = true;
+                                _context9.next = 24;
                                 return _loader.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
                                     var _this6 = this;
@@ -385,15 +424,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 21:
-                                _context9.next = 23;
+                              case 24:
+                                _context9.next = 26;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Alergias'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
-                              case 23:
+                              case 26:
                                 _loader2 = _context9.sent;
-                                _context9.next = 26;
+                                this.estaCargando = true;
+                                _context9.next = 30;
                                 return _loader2.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                                     var _this7 = this;
@@ -415,13 +457,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 26:
-                                _context9.next = 53;
+                              case 30:
+                                _context9.next = 61;
                                 break;
 
-                              case 28:
+                              case 32:
                                 if (!this.parametrosApp.USA_API_MANAGEMENT()) {
-                                  _context9.next = 42;
+                                  _context9.next = 48;
                                   break;
                                 }
 
@@ -429,15 +471,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 this.info.getIndicadorValorNativeApi(uspId).then(function (response) {
                                   _this3.procesarIndicadorValor(JSON.parse(response.data), loader);
                                 }); //presion
+                                //original
 
-                                _context9.next = 32;
+                                /*           let loader1 = await this.loading.create({
+                                            message: 'Obteniendo...<br>Presión',
+                                
+                                          }); */
+
+                                _context9.next = 36;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Presión'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
-                              case 32:
+                              case 36:
                                 _loader3 = _context9.sent;
-                                _context9.next = 35;
+                                this.estaCargando = true;
+                                _context9.next = 40;
                                 return _loader3.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
                                     var _this8 = this;
@@ -459,15 +510,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 35:
-                                _context9.next = 37;
+                              case 40:
+                                _context9.next = 42;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Alergias'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
-                              case 37:
+                              case 42:
                                 _loader4 = _context9.sent;
-                                _context9.next = 40;
+                                this.estaCargando = true;
+                                _context9.next = 46;
                                 return _loader4.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
                                     var _this9 = this;
@@ -489,24 +543,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 40:
-                                _context9.next = 53;
+                              case 46:
+                                _context9.next = 61;
                                 break;
 
-                              case 42:
+                              case 48:
                                 //llamada nativa
                                 this.info.getIndicadorValorNative(uspId).then(function (response) {
                                   _this3.procesarIndicadorValor(JSON.parse(response.data), loader);
                                 }); //presion
+                                //original
 
-                                _context9.next = 45;
+                                /*           let loader1 = await this.loading.create({
+                                            message: 'Obteniendo...<br>Presión',
+                                
+                                          }); */
+
+                                _context9.next = 51;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Presión'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
-                              case 45:
+                              case 51:
                                 _loader5 = _context9.sent;
-                                _context9.next = 48;
+                                this.estaCargando = true;
+                                _context9.next = 55;
                                 return _loader5.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
                                     var _this10 = this;
@@ -528,15 +591,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 48:
-                                _context9.next = 50;
+                              case 55:
+                                _context9.next = 57;
                                 return this.loading.create({
-                                  message: 'Obteniendo...<br>Alergias'
+                                  cssClass: 'loading-vacio',
+                                  showBackdrop: false,
+                                  spinner: null
                                 });
 
-                              case 50:
+                              case 57:
                                 _loader6 = _context9.sent;
-                                _context9.next = 53;
+                                this.estaCargando = true;
+                                _context9.next = 61;
                                 return _loader6.present().then(function () {
                                   return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
                                     var _this11 = this;
@@ -558,7 +624,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   }));
                                 });
 
-                              case 53:
+                              case 61:
                               case "end":
                                 return _context9.stop();
                             }
@@ -567,7 +633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 5:
+                  case 6:
                   case "end":
                     return _context10.stop();
                 }
@@ -589,6 +655,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           loader.dismiss();
+          this.estaCargando = false;
         }
       }, {
         key: "procesarAlergiasSinLoader",
@@ -625,6 +692,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           loader.dismiss();
+          this.estaCargando = false;
         }
       }, {
         key: "procesarPresionSinLoader",
@@ -711,7 +779,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.fechaImc = 'No informada';
           }
 
-          loader.dismiss();
+          loader.dismiss(); //para progress
+
+          this.estaCargando = false;
         }
         /*   doRefresh(event) {
             console.log('Begin async operation');

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <div *ngIf=\"listadoUsuario <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div style=\"padding-top: 32px;\">\r\n    <div *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\r\n      <!-- poner avatar -->\r\n      <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando antecedentes\"></app-progress>\r\n\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div style=\"padding-top: 32px;\" [hidden]=\"estaCargando\">\r\n    <div *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\r\n      <!-- poner avatar -->\r\n      <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -91,13 +91,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
 /* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+
 
 
 
 
 
 let AntecedentesPage = class AntecedentesPage {
-    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso) {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, parametrosApp) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -106,20 +108,34 @@ let AntecedentesPage = class AntecedentesPage {
         this.menu = menu;
         this.utiles = utiles;
         this.acceso = acceso;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.usuarioApsFamilia = [];
         this.listadoUsuario = [];
+        this.estaCargando = false;
     }
     ngOnInit() {
         //this.miColor = this.utiles.entregaMiColor();
         //this.miColor = this.utiles.entregaColor(this.usuarioAps);
+        /*     if (sessionStorage.getItem("RSS_ID")){
+              if (this.parametrosApp.USA_LOG_MODULOS()){
+                this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'ANTECEDENTES');
+              }
+            } */
         this.cargarDatosInciales();
     }
     cargarDatosInciales() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Cargando...<br>información',
+                  duration: 20000
+                }); */
+            this.estaCargando = true;
             let loader = yield this.loading.create({
-                message: 'Cargando...<br>información',
-                duration: 20000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (sessionStorage.UsuarioAps) {
@@ -170,12 +186,14 @@ let AntecedentesPage = class AntecedentesPage {
                     }
                 }
                 loader.dismiss();
+                this.estaCargando = false;
             }));
         });
     }
     ionViewWillEnter() {
         //si existen cambios se setean nuevamente
         //this.miColor = this.utiles.entregaMiColor();
+        console.log('will enter');
         this.miColor = this.utiles.entregaColor(this.usuarioAps);
     }
     goToDetails(usuario) {
@@ -199,7 +217,8 @@ AntecedentesPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
     { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] },
-    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"] }
+    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__["ServicioParametrosApp"] }
 ];
 AntecedentesPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

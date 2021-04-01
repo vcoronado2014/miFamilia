@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding\">\n  <div class=\"row mt-24\">\n    <img src=\"../../assets/imgs_nuevas/login.png\" alt=\"asistente\"/>\n  </div>\n  <form [formGroup]=\"forma\" novalidate>\n    <ion-row class=\"ion-no-margin ion-no-padding mt-80\">\n      <!-- solo para enrolamiento -->\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento == false\">\n        <mat-label>Run</mat-label>\n        <input matInput placeholder=\"125458524\" formControlName=\"run\" name=\"run\">\n        <mat-error [hidden]=\"usaEnrolamiento == false\">Run requerido</mat-error>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento\">\n        <mat-label>Correo electrónico</mat-label>\n        <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\">\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo requerido</mat-error>\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo inválido</mat-error>\n      </mat-form-field>\n  \n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n        <mat-label>Contraseña</mat-label>\n        <input matInput placeholder=\"Clave\" type=\"password\" name=\"clave\" formControlName=\"clave\" required>\n        <mat-error [hidden]=\"!(f.clave.errors && f.clave.errors.required)\">Clave requerida</mat-error>\n      </mat-form-field>\n    </ion-row>\n    <ion-row class=\"ion-no-padding ion-no-margin mt-40\">\n      <button mat-raised-button color=\"primary\" style=\"width: 90%; margin-left: 5%; height:36px;\" (click)=\"onSubmit()\">INICIAR SESION</button>\n    </ion-row>\n  </form>\n  <ion-row class=\"mt-36\" [hidden]=\"usaEnrolamiento\">\n    <a mat-button routerLink=\".\" color=\"primary\" class=\"ion-text-center\" style=\"width: 100%;\" (click)=\"irRecuperarClave()\">¿Olvidaste tu contraseña?</a>\n  </ion-row>\n  <ion-grid class=\"ion-no-padding mt-36\">\n    <ion-row>\n      <ion-col class=\"ion-text-center texto-1\" style=\"margin-top:8px;\">\n        ¿No tienes cuenta?\n      </ion-col>\n      <ion-col>\n        <button (click)=\"abrirAsistente()\" mat-button color=\"primary\">REGISTRATE</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding\">\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Estamos ingresando a la app\"></app-progress>\n\n  <div [hidden]=\"estaCargando\" class=\"row mt-24\">\n    <img src=\"../../assets/imgs_nuevas/login.png\" alt=\"asistente\"/>\n  </div>\n  <form [hidden]=\"estaCargando\" [formGroup]=\"forma\" novalidate>\n    <ion-row class=\"ion-no-margin ion-no-padding mt-80\">\n      <!-- solo para enrolamiento -->\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento == false\">\n        <mat-label>Run</mat-label>\n        <input matInput placeholder=\"125458524\" formControlName=\"run\" name=\"run\">\n        <mat-error [hidden]=\"usaEnrolamiento == false\">Run requerido</mat-error>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento\">\n        <mat-label>Correo electrónico</mat-label>\n        <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\">\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo requerido</mat-error>\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo inválido</mat-error>\n      </mat-form-field>\n  \n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n        <mat-label>Contraseña</mat-label>\n        <input matInput placeholder=\"Clave\" type=\"password\" name=\"clave\" formControlName=\"clave\" required>\n        <mat-error [hidden]=\"!(f.clave.errors && f.clave.errors.required)\">Clave requerida</mat-error>\n      </mat-form-field>\n    </ion-row>\n    <ion-row class=\"ion-no-padding ion-no-margin mt-40\">\n      <button mat-raised-button color=\"primary\" style=\"width: 90%; margin-left: 5%; height:36px;\" (click)=\"onSubmit()\">INICIAR SESION</button>\n    </ion-row>\n  </form>\n  <ion-row [hidden]=\"estaCargando\" class=\"mt-36\" [hidden]=\"usaEnrolamiento\">\n    <a mat-button routerLink=\".\" color=\"primary\" class=\"ion-text-center\" style=\"width: 100%;\" (click)=\"irRecuperarClave()\">¿Olvidaste tu contraseña?</a>\n  </ion-row>\n  <ion-grid [hidden]=\"estaCargando\" class=\"ion-no-padding mt-36\">\n    <ion-row>\n      <ion-col class=\"ion-text-center texto-1\" style=\"margin-top:8px;\">\n        ¿No tienes cuenta?\n      </ion-col>\n      <ion-col>\n        <button (click)=\"abrirAsistente()\" mat-button color=\"primary\">REGISTRATE</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n");
 
 /***/ }),
 
@@ -35,6 +35,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
 /* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -61,6 +63,7 @@ NuevoLoginPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])(
             _angular_material_input__WEBPACK_IMPORTED_MODULE_9__["MatInputModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_10__["MatButtonModule"],
             _angular_material_icon__WEBPACK_IMPORTED_MODULE_11__["MatIconModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_12__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                 {
                     path: '',
@@ -127,6 +130,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//estoy implementando progress bar
+//aca hay que controlar cuando no hay internet
 let NuevoLoginPage = class NuevoLoginPage {
     constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device) {
         this.navCtrl = navCtrl;
@@ -150,6 +155,18 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
         //para validarse solo con enrolamiento
         this.usaEnrolamiento = false;
+        //PARA REGISTRAR EL MOVIMIENTO DE INGRESO
+        this.objetoEntrada = {
+            VersionAppName: '',
+            Plataforma: '',
+            Token: '',
+            VersionAppNumber: '',
+            Fecha: new Date(),
+            TipoOperacion: '0',
+            Id: '0'
+        };
+        //para progress bar
+        this.estaCargando = false;
     }
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_12__["locale"]('es');
@@ -192,9 +209,16 @@ let NuevoLoginPage = class NuevoLoginPage {
             var versionAppName;
             var versionNumber;
             var plataforma;
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Creando...<br>Token inicial',
+                  duration: 2000
+                }); */
+            this.estaCargando = true;
             let loader = yield this.loading.create({
-                message: 'Creando...<br>Token inicial',
-                duration: 2000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
@@ -216,6 +240,8 @@ let NuevoLoginPage = class NuevoLoginPage {
                     localStorage.setItem('version_app_name', versionAppName);
                     localStorage.setItem('version_number', versionNumber);
                     localStorage.setItem('plataforma', plataforma);
+                    loader.dismiss();
+                    this.estaCargando = false;
                 }
                 else {
                     if (this.platform.is('ios')) {
@@ -245,8 +271,59 @@ let NuevoLoginPage = class NuevoLoginPage {
                     localStorage.setItem('version_app_name', versionAppName);
                     localStorage.setItem('version_number', versionNumber);
                     localStorage.setItem('plataforma', plataforma);
+                    loader.dismiss();
+                    this.estaCargando = false;
                 }
             }));
+        });
+    }
+    registrarEntrada() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //variable de session que identifica el ingreso
+            if (!sessionStorage.getItem('RSS_ID')) {
+                this.objetoEntrada.VersionAppName = localStorage.getItem('version_app_name');
+                this.objetoEntrada.Plataforma = localStorage.getItem('plataforma');
+                this.objetoEntrada.VersionAppNumber = localStorage.getItem('version_number');
+                this.objetoEntrada.Token = localStorage.getItem('token_dispositivo');
+                this.objetoEntrada.Fecha = new Date();
+                //GUARDAMOS EN LA SESSION PARA OCUPARLO DESPUES
+                sessionStorage.setItem('ENTRADA', JSON.stringify(this.objetoEntrada));
+                //original
+                /*       let loader = await this.loading.create({
+                        message: 'Creando...<br>registro de sessión',
+                        duration: 2000
+                      }); */
+                this.estaCargando = true;
+                let loader = yield this.loading.create({
+                    cssClass: 'loading-vacio',
+                    showBackdrop: false,
+                    spinner: null,
+                });
+                yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                    if (!this.utiles.isAppOnDevice()) {
+                        //web
+                        this.servicioGeo.postIngreso(this.objetoEntrada).subscribe((data) => {
+                            if (data) {
+                                if (data.Id > 0) {
+                                    //guardamos el identificador del registro para procesarlo despues
+                                    sessionStorage.setItem("RSS_ID", data.Id);
+                                }
+                            }
+                            loader.dismiss();
+                            this.estaCargando = false;
+                        });
+                    }
+                    else {
+                        //dispositivo
+                        this.servicioGeo.postIngresoNative(this.objetoEntrada).then(response => {
+                            let respuesta = JSON.parse(response.data);
+                            sessionStorage.setItem("RSS_ID", respuesta.Id);
+                            loader.dismiss();
+                            this.estaCargando = false;
+                        });
+                    }
+                }));
+            }
         });
     }
     loguearseRegistro() {
@@ -254,9 +331,16 @@ let NuevoLoginPage = class NuevoLoginPage {
             let correo = this.forma.controls.email.value;
             let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
             //ahora guardamos
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Creando...<br>Registro',
+                  duration: 20000
+                }); */
+            this.estaCargando = true;
             let loader = yield this.loading.create({
-                message: 'Creando...<br>Registro',
-                duration: 20000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
@@ -272,6 +356,9 @@ let NuevoLoginPage = class NuevoLoginPage {
                         }
                         else {
                             this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+                            this.estaCargando = false;
+                            loader.dismiss();
+                            return;
                         }
                     });
                 }
@@ -288,6 +375,9 @@ let NuevoLoginPage = class NuevoLoginPage {
                         }
                         else {
                             this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+                            this.estaCargando = false;
+                            loader.dismiss();
+                            return;
                         }
                     });
                 }
@@ -296,6 +386,7 @@ let NuevoLoginPage = class NuevoLoginPage {
     }
     loguearseEnrolamiento() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.estaCargando = true;
             let run = this.forma.controls.run.value;
             let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
             localStorage.setItem('TIENE_REGISTRO', 'false');
@@ -321,15 +412,26 @@ let NuevoLoginPage = class NuevoLoginPage {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             //en este caso ya el user name es el email
             let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Obteniendo...<br>Login',
+                  duration: 10000
+                }); */
+            this.estaCargando = true;
             let loader = yield this.loading.create({
-                message: 'Obteniendo...<br>Login',
-                duration: 10000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
                     //llamada web
                     this.acceso.loginWebDirecto(f).subscribe((response) => {
                         this.procesarLogin(response, loader);
+                    }, (error) => {
+                        loader.dismiss();
+                        this.estaCargando = false;
+                        return;
                     });
                 }
                 else {
@@ -338,6 +440,9 @@ let NuevoLoginPage = class NuevoLoginPage {
                         this.procesarLogin(JSON.parse(response.data), loader);
                     }, (error) => {
                         this.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
+                        this.estaCargando = false;
+                        loader.dismiss();
+                        return;
                     });
                 }
             }));
@@ -386,11 +491,13 @@ let NuevoLoginPage = class NuevoLoginPage {
                             tieneUsuario = true;
                             this.setDatosUsuario(retorno, user, userFamilia);
                             loader.dismiss();
+                            this.estaCargando = false;
                         }
                         else {
                             //no tiene entidad contratante
                             this.utiles.presentToast("No tiene entidad contratante asociada", "middle", 3000);
                             loader.dismiss();
+                            this.estaCargando = false;
                             return;
                         }
                     }
@@ -399,6 +506,7 @@ let NuevoLoginPage = class NuevoLoginPage {
                         tieneUsuario = true;
                         this.setDatosUsuario(retorno, user, userFamilia);
                         loader.dismiss();
+                        this.estaCargando = false;
                     }
                 }
                 //si tiene usuario está valido
@@ -406,6 +514,8 @@ let NuevoLoginPage = class NuevoLoginPage {
                     this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
                 }
                 this.crearToken();
+                //guardamos el registro de session
+                this.registrarEntrada();
                 this.irAHome();
             }
             else {
@@ -414,7 +524,9 @@ let NuevoLoginPage = class NuevoLoginPage {
                 this.Mensaje = retorno.RespuestaBase.Mensaje;
                 this.loggedIn = true;
                 loader.dismiss();
+                this.estaCargando = false;
                 this.utiles.presentToast(this.Mensaje, 'middle', 4000);
+                return;
             }
         }
         else {
@@ -423,8 +535,10 @@ let NuevoLoginPage = class NuevoLoginPage {
             this.CodigoMensaje = 1000;
             this.Mensaje = 'Error de llamada Http;';
             this.loggedIn = true;
+            this.estaCargando = false;
             loader.dismiss();
             this.utiles.presentToast(this.Mensaje, 'middle', 4000);
+            return;
         }
     }
     irAHome() {

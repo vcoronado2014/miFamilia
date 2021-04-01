@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <div *ngIf=\"listadoUsuario <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div style=\"padding-top: 32px;\">\r\n    <div *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\r\n      <!-- poner avatar -->\r\n      <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando antecedentes\"></app-progress>\r\n\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div style=\"padding-top: 32px;\" [hidden]=\"estaCargando\">\r\n    <div *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\r\n      <!-- poner avatar -->\r\n      <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -176,9 +176,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../../app/services/ServicioAcceso */
     "./src/app/services/ServicioAcceso.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts");
 
     var AntecedentesPage = /*#__PURE__*/function () {
-      function AntecedentesPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso) {
+      function AntecedentesPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, parametrosApp) {
         _classCallCheck(this, AntecedentesPage);
 
         this.navCtrl = navCtrl;
@@ -189,9 +195,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.menu = menu;
         this.utiles = utiles;
         this.acceso = acceso;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.usuarioApsFamilia = [];
         this.listadoUsuario = [];
+        this.estaCargando = false;
       }
 
       _createClass(AntecedentesPage, [{
@@ -199,6 +207,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function ngOnInit() {
           //this.miColor = this.utiles.entregaMiColor();
           //this.miColor = this.utiles.entregaColor(this.usuarioAps);
+
+          /*     if (sessionStorage.getItem("RSS_ID")){
+                if (this.parametrosApp.USA_LOG_MODULOS()){
+                  this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'ANTECEDENTES');
+                }
+              } */
           this.cargarDatosInciales();
         }
       }, {
@@ -212,15 +226,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    _context2.next = 2;
+                    //original
+
+                    /*     let loader = await this.loading.create({
+                          message: 'Cargando...<br>información',
+                          duration: 20000
+                        }); */
+                    this.estaCargando = true;
+                    _context2.next = 3;
                     return this.loading.create({
-                      message: 'Cargando...<br>información',
-                      duration: 20000
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null
                     });
 
-                  case 2:
+                  case 3:
                     loader = _context2.sent;
-                    _context2.next = 5;
+                    _context2.next = 6;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                         var s;
@@ -287,8 +309,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 }
 
                                 loader.dismiss();
+                                this.estaCargando = false;
 
-                              case 5:
+                              case 6:
                               case "end":
                                 return _context.stop();
                             }
@@ -297,7 +320,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 5:
+                  case 6:
                   case "end":
                     return _context2.stop();
                 }
@@ -310,6 +333,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function ionViewWillEnter() {
           //si existen cambios se setean nuevamente
           //this.miColor = this.utiles.entregaMiColor();
+          console.log('will enter');
           this.miColor = this.utiles.entregaColor(this.usuarioAps);
         }
       }, {
@@ -350,6 +374,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
       }, {
         type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__["ServicioParametrosApp"]
       }];
     };
 

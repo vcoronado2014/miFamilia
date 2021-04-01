@@ -20,17 +20,15 @@
     <ion-item lines="none">
       <!-- poner avatar -->
       <app-avatar [urlImagen] = "miImagen" [nombreCompleto]="miNombre" [parentezco]="miParentezco"></app-avatar>
-<!--       <ion-avatar slot="start">
-        <img *ngIf="miImagen != ''" src={{miImagen}}>
-        <img *ngIf="miImagen == ''" src="../assets/img/no-imagen.jpg">
-      </ion-avatar>
-      <ion-row style="display: block;">
-        <h3 class="text-avatar">{{miNombre}}</h3>
-        <p class="subtext-avatar">{{miParentezco}}</p>
-      </ion-row> -->
     </ion-item>
   </ion-list>
   <ion-list>
+    <!-- Vacunas administradas y por administrar -->
+    <ion-item
+      *ngIf="data.DetalleEventoMes.Subtitulo == 'Vacuna Administrada' || data.DetalleEventoMes.Subtitulo == 'Vacuna por administrar'">
+      <ion-label>Dosis</ion-label>
+      <ion-label class="ion-text-capitalize ion-text-wrap">{{data.DetalleEventoMes.DescripcionSecundaria}}</ion-label>
+    </ion-item>
     <ion-item>
       <ion-label>Fecha</ion-label>
       <ion-label class="ion-text-wrap">{{data.DetalleEventoMes.FechaHora}}</ion-label>

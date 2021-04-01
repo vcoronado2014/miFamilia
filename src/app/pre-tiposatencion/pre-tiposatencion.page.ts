@@ -122,13 +122,13 @@ export class PreTiposatencionPage implements OnInit {
       cssClass: 'loading-vacio',
       showBackdrop: false,
       spinner:null,
-      //message: 'Cargando...<br>tipos de atención',
-      duration: 20000
     });
 
     await loader.present().then(async () => {
       //esto lo agregamos para desabilitarlo
       this.disabledCombo = true;
+      //lo agregamos para mostrar la info de buscando disponibilidad
+      this.mostrarProgress = true;
       //********************* */
       this.citas = [];
       this.citasFiltradas = [];
@@ -160,13 +160,12 @@ export class PreTiposatencionPage implements OnInit {
       cssClass: 'loading-vacio',
       showBackdrop: false,
       spinner:null,
-      //message: 'Cargando...<br>tipos de atención',
-      duration: 20000
     });
 
     await loader.present().then(async () => {
       //esto lo agregamos para desabilitarlo
       this.disabledCombo = true;
+      this.mostrarProgressDisp = true;
       //********************* */
       this.citas = [];
       this.citasFiltradas = [];
@@ -265,6 +264,7 @@ export class PreTiposatencionPage implements OnInit {
         //hay que ver si es necesario o no
         loader.dismiss();
         this.disabledCombo = false;
+        this.mostrarProgressDisp = false;
       }
       else{
         this.idComboSeleccionado = 0;
@@ -273,6 +273,7 @@ export class PreTiposatencionPage implements OnInit {
         this.citasFiltradas = [];
         loader.dismiss();
         this.disabledCombo = false;
+        this.mostrarProgressDisp = false;
       }
       //error
     }

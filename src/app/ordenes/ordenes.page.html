@@ -9,7 +9,9 @@
 
 <ion-content class="back-app">
 <!--SI HAY ORDENES -->
-<ion-card *ngFor="let item of listadoOrdenes" (click)="ordenSelected(item)">
+<app-progress [mostrar]="estaCargando" titulo="Cargando exámenes"></app-progress>
+
+<ion-card [hidden]="estaCargando" *ngFor="let item of listadoOrdenes" (click)="ordenSelected(item)">
   <ion-card-content>
     <ion-item lines="none" #myList>
       <ion-avatar slot="start">
@@ -36,7 +38,7 @@
   </ion-card-content>
 </ion-card>  
 <!-- NO HAY ORDENES -->
-<div *ngIf="tiene == false" style="position: relative; height: 100vh;">
+<div [hidden]="estaCargando" *ngIf="tiene == false" style="position: relative; height: 100vh;">
   <div style="position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;">
     <p style="display: table-cell; vertical-align: middle">No hay órdenes para mostrar  <br>
     <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p>

@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { CardCalendarioComponent } from './card-calendario/card-calendario.component'
 import { AvatarComponent } from './avatar/avatar.component'
+import { ProgressComponent } from './progress/progress.component'
+import { ItemHomeComponent } from './item-home/item-home.component'
 
 
 
@@ -15,6 +17,8 @@ import { AvatarComponent } from './avatar/avatar.component'
   declarations: [
     CardCalendarioComponent,
     AvatarComponent,
+    ProgressComponent,
+    ItemHomeComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,9 @@ import { AvatarComponent } from './avatar/avatar.component'
   ],
   exports: [
     CardCalendarioComponent,
-    AvatarComponent
+    AvatarComponent,
+    ProgressComponent,
+    ItemHomeComponent,
   ]
 })
 export class ComponentsModule { }

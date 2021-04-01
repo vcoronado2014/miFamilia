@@ -5,7 +5,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" class="fcw"></ion-back-button>
     </ion-buttons>
-    <ion-title class="fcw">Eventos</ion-title>
+    <ion-title class="fcw">Calendario</ion-title>
     <ion-buttons slot="end" (click)="ordenar()" style="padding-right: 16px;">
       <ion-icon class="fcw" slot="icon-only" name="swap-vertical"></ion-icon>&nbsp;Ordenar
     </ion-buttons>
@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content class="back-app" style="--padding-bottom: 50px !important;">
+<app-progress [mostrar]="estaCargando" titulo="Cargando calendario"></app-progress>
  <div *ngIf="!tiene">
   <div style="position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;" class="ion-padding">
     <p style="display: table-cell; vertical-align: middle">No hay eventos para mostrar  <br>
@@ -25,14 +26,14 @@
   <div *ngFor="let item of citasVerticalTodasTop">
     
     <ion-grid *ngIf="item.Mostrar">
-      <app-card-calendario [fechaActual]="fechaActual" [item]="item"></app-card-calendario>
+      <app-card-calendario [fechaActual]="fechaActual" [item]="item" [anioActual]="anioActual"></app-card-calendario>
       <ion-row class="ion-no-padding ion-no-margin row-card">
         <mat-card *ngFor="let evento of item.Eventos" color="light" style="margin-bottom: 8px;">
           <mat-card-header (click)="goToDetalleCita(evento)">
             
               <mat-card-subtitle class="hora">{{evento.HoraInicioFin}}</mat-card-subtitle>
               <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>
-              <mat-card-subtitle>{{evento.DetalleEventoMes.NombrePaciente}}</mat-card-subtitle>
+              <mat-card-subtitle class="ion-text-capitalize">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>
             
             <div class="img-card">
               <img class="example-header-image" src="./assets/img/{{evento.Imagen}}">

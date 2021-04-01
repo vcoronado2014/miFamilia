@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header class=\"back-app\">\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ajustes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" color=\"danger\">\r\n    <ion-fab-button (click)=\"irValidacion()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n  <!-- si no hay registros -->\r\n  <div *ngIf=\"hayInfo == false\" style=\"padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay familiares para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n  <!-- si hay registros -->\r\n  <div *ngIf=\"listadoUsuario.length > 0\" style=\"padding-top: 32px;\">\r\n      <div *ngFor=\"let item of listadoUsuario\" (click)=\"openModalAjustes(item)\">\r\n        <!-- poner avatar -->\r\n        <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n      </div>\r\n  </div>\r\n  <!-- ESQUELETON -->\r\n  <div *ngIf=\"listadoUsuario.length == 0\">\r\n    <ion-list>\r\n      <ion-item>\r\n        <ion-avatar slot=\"start\">\r\n          <ion-skeleton-text animated></ion-skeleton-text>\r\n        </ion-avatar>\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-avatar slot=\"start\">\r\n          <ion-skeleton-text animated></ion-skeleton-text>\r\n        </ion-avatar>\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-item>\r\n    </ion-list> \r\n  </div>\r\n\r\n\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header class=\"back-app\">\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ajustes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" color=\"danger\">\r\n    <ion-fab-button (click)=\"irValidacion()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando familia\"></app-progress>\r\n  <!-- si no hay registros -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"hayInfo == false\" style=\"padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay familiares para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n  <!-- si hay registros -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario.length > 0\" style=\"padding-top: 32px;\">\r\n      <div *ngFor=\"let item of listadoUsuario\" (click)=\"openModalAjustes(item)\">\r\n        <!-- poner avatar -->\r\n        <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n      </div>\r\n  </div>\r\n  <!-- comentamos el esqueleton por implementación de progress bar-->\r\n  <!-- ESQUELETON -->\r\n<!--   <div *ngIf=\"listadoUsuario.length == 0\">\r\n    <ion-list>\r\n      <ion-item>\r\n        <ion-avatar slot=\"start\">\r\n          <ion-skeleton-text animated></ion-skeleton-text>\r\n        </ion-avatar>\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-avatar slot=\"start\">\r\n          <ion-skeleton-text animated></ion-skeleton-text>\r\n        </ion-avatar>\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-item>\r\n    </ion-list> \r\n  </div> -->\r\n\r\n\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -219,6 +219,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.hayInfo = true;
         this.usuarioApsFamilia = [];
         this.listadoUsuario = [];
+        this.estaCargando = false;
       }
 
       _createClass(FamiliaPage, [{
@@ -265,16 +266,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    this.listadoUsuario = [];
-                    _context2.next = 3;
+                    this.listadoUsuario = []; //original
+
+                    /*     let loader = await this.loading.create({
+                          message: 'Obteniendo...<br>Información del usuario',
+                          duration: 20000
+                        }); */
+
+                    this.estaCargando = true;
+                    _context2.next = 4;
                     return this.loading.create({
-                      message: 'Obteniendo...<br>Información del usuario',
-                      duration: 20000
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null
                     });
 
-                  case 3:
+                  case 4:
                     loader = _context2.sent;
-                    _context2.next = 6;
+                    _context2.next = 7;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                         var s;
@@ -339,8 +348,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 }
 
                                 loader.dismiss();
+                                this.estaCargando = false;
 
-                              case 7:
+                              case 8:
                               case "end":
                                 return _context.stop();
                             }
@@ -349,7 +359,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 6:
+                  case 7:
                   case "end":
                     return _context2.stop();
                 }

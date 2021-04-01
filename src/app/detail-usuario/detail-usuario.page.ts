@@ -33,6 +33,8 @@ export class DetailUsuarioPage implements OnInit {
   public cargando = false;
   public userImagen;
   public title;
+  //para controlar componente progess
+  estaCargando = false;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -74,10 +76,19 @@ export class DetailUsuarioPage implements OnInit {
     });
   }
   async obtenerInfoUsuario(uspId){
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Información del usuario',
       duration: 20000
+    }); */
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
+      //message: 'Cargando...<br>tipos de atención',
+      duration: 2000
     });
+    this.estaCargando =true;
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
@@ -88,19 +99,32 @@ export class DetailUsuarioPage implements OnInit {
             this.procesarIndicadorValor(response, loader);
           });
           //presion
-          let loader1 = await this.loading.create({
+          //original
+/*           let loader1 = await this.loading.create({
             message: 'Obteniendo...<br>Presión',
-
+          }); */
+          let loader1 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
+          this.estaCargando =true;
           await loader1.present().then(async () => {
             this.info.getPresionApi(uspId).subscribe((response: any) => {
               this.procesarPresion(response, loader1);
             });
           });
           //alergias
-          let loader2 = await this.loading.create({
+          //original
+/*           let loader2 = await this.loading.create({
             message: 'Obteniendo...<br>Alergias',
 
+          }); */
+          this.estaCargando = true;
+          let loader2 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
           await loader2.present().then(async () => {
             this.info.getAlergiasApi(uspId).subscribe((response: any) => {
@@ -113,20 +137,34 @@ export class DetailUsuarioPage implements OnInit {
             this.procesarIndicadorValor(response, loader);
           });
           //presion
-          let loader1 = await this.loading.create({
+          //original
+/*           let loader1 = await this.loading.create({
             message: 'Obteniendo...<br>Presión',
             
+          }); */
+          let loader1 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
+          this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresion(uspId).subscribe((response: any)=>{
               this.procesarPresion(response, loader1);
             });
           });
           //alergias
-          let loader2 = await this.loading.create({
+          //original
+/*           let loader2 = await this.loading.create({
             message: 'Obteniendo...<br>Alergias',
             
+          }); */
+          let loader2 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
+          this.estaCargando = true;
           await loader2.present().then(async () => {
             this.info.getAlergias(uspId).subscribe((response: any)=>{
               this.procesarAlergias(response, loader2);
@@ -141,20 +179,34 @@ export class DetailUsuarioPage implements OnInit {
             this.procesarIndicadorValor(JSON.parse(response.data), loader);
           });
           //presion
-          let loader1 = await this.loading.create({
+          //original
+/*           let loader1 = await this.loading.create({
             message: 'Obteniendo...<br>Presión',
 
+          }); */
+          let loader1 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
+          this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresionNativeApi(uspId).then((response: any) => {
               this.procesarPresion(JSON.parse(response.data), loader1);
             });
           });
           //alergias
-          let loader2 = await this.loading.create({
+          //original
+/*           let loader2 = await this.loading.create({
             message: 'Obteniendo...<br>Alergias',
 
+          }); */
+          let loader2 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
+          this.estaCargando = true;
           await loader2.present().then(async () => {
             this.info.getAlergiasNativeApi(uspId).then((response: any) => {
               this.procesarAlergias(JSON.parse(response.data), loader2);
@@ -167,20 +219,34 @@ export class DetailUsuarioPage implements OnInit {
             this.procesarIndicadorValor(JSON.parse(response.data), loader);
           });
           //presion
-          let loader1 = await this.loading.create({
+          //original
+/*           let loader1 = await this.loading.create({
             message: 'Obteniendo...<br>Presión',
 
+          }); */
+          let loader1 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
+          this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresionNative(uspId).then((response: any) => {
               this.procesarPresion(JSON.parse(response.data), loader1);
             });
           });
           //alergias
-          let loader2 = await this.loading.create({
+          //original
+/*           let loader2 = await this.loading.create({
             message: 'Obteniendo...<br>Alergias',
 
+          }); */
+          let loader2 = await this.loading.create({
+            cssClass: 'loading-vacio',
+            showBackdrop: false,
+            spinner: null
           });
+          this.estaCargando = true;
           await loader2.present().then(async () => {
             this.info.getAlergiasNative(uspId).then((response: any) => {
               this.procesarAlergias(JSON.parse(response.data), loader2);
@@ -202,6 +268,7 @@ export class DetailUsuarioPage implements OnInit {
     }
 
     loader.dismiss();
+    this.estaCargando = false;
   }
   procesarAlergiasSinLoader(data){
     this.alergias = data.AlergiasUsp;
@@ -234,6 +301,7 @@ export class DetailUsuarioPage implements OnInit {
       this.fechaPresion = 'N/A';
     }
     loader.dismiss();
+    this.estaCargando = false;
   }
   procesarPresionSinLoader(data){
     this.presiones = data.PresionesUsp;
@@ -318,6 +386,8 @@ export class DetailUsuarioPage implements OnInit {
       this.fechaImc = 'No informada';
     }
     loader.dismiss();
+    //para progress
+    this.estaCargando = false;
   }
 /*   doRefresh(event) {
     console.log('Begin async operation');

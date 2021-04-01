@@ -11,7 +11,9 @@
 <!--   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher> -->
-  <ion-card>
+  <!-- progress -->
+  <app-progress [mostrar]="estaCargando" titulo="Buscando información del usuario"></app-progress>
+  <ion-card [hidden]="estaCargando">
     <img *ngIf="usuario.UrlImagen != ''" src={{usuario.UrlImagen}} style="width: 100%;" />
     <ion-card-header>
       <ion-card-title class="ion-text-wrap" [style.--color]="miColor">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>
@@ -25,7 +27,7 @@
     </ion-card-content>
   </ion-card> 
   <!-- aca viene la lista de datos personales presion, altura, etc-->
-  <ion-list>
+  <ion-list [hidden]="estaCargando">
     <ion-item>
       <ion-icon name="pulse" slot="start"></ion-icon>
       <ion-label>Presión</ion-label>
@@ -49,7 +51,7 @@
 
   </ion-list>
   <!-- aca poner el listado de alergias --> 
-  <ion-list>
+  <ion-list [hidden]="estaCargando">
     <ion-list-header>
       <h5>{{title}}</h5>
     </ion-list-header>

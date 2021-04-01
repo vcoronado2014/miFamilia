@@ -670,4 +670,41 @@ export class ServicioUtiles{
         }
         return token;
     }
+    //proceso que entrega un arreglo de elementos para la pagina home
+    //ya vienen ordenados, hay que setear algunas propiedades de estilos
+    //y otras cosas
+    entregaArregloHome(data){
+        var arr = [];
+
+        if (data && data.length > 0){
+            data.forEach(elemento => {
+                //primero los 2 más favoritos
+                if (elemento.Orden == 1 || elemento.Orden == 2){
+                    elemento.Favorito = true;
+                }
+                else{
+                    elemento.Favorito = false;
+                }
+                //segundo las imagenes
+                if (elemento.NombreModulo == 'CALENDARIO'){
+                    elemento.Imagen = './assets/imgs_nuevas/calendario-01.png';
+                }
+                else if (elemento.NombreModulo == 'ANTECEDENTES'){
+                    elemento.Imagen = './assets/imgs_nuevas/antecedentes.png';
+                }
+                else if (elemento.NombreModulo == 'EXAMENES'){
+                    elemento.Imagen = './assets/imgs_nuevas/examenes-de-salud.png';
+                }
+                else if (elemento.NombreModulo == 'INTERCONSULTAS'){
+                    elemento.Imagen = './assets/imgs_nuevas/interconsulta.png';
+                }
+                //tercero la clase de la imagen
+                elemento.ClaseImagen = 'imgs-home';
+                arr.push(elemento);
+            });
+        }
+
+        return arr;
+
+    }
 }

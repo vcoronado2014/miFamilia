@@ -103,5 +103,18 @@ export class ServicioParametrosApp{
         } 
         return retorno;
     }
+    DIAS_LOG_MODULOS = ()=>{
+        let retorno = 3;
+        if (localStorage.getItem('PARAMETROS_APP')){
+            let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+            if (elementos && elementos.length > 0){
+                let arrRetorno = elementos.find(p=>p.Nombre == 'DIAS_LOG_MODULOS');
+                if (arrRetorno && arrRetorno.Id > 0){
+                    retorno = parseInt(arrRetorno.Valor);
+                }
+            }
+        } 
+        return retorno;
+    }
     
 }

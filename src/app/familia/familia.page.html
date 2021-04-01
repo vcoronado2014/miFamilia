@@ -13,19 +13,21 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <app-progress [mostrar]="estaCargando" titulo="Buscando familia"></app-progress>
   <!-- si no hay registros -->
-  <div *ngIf="hayInfo == false" style="padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;"><p>No hay familiares para mostrar  <br>
+  <div [hidden]="estaCargando" *ngIf="hayInfo == false" style="padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;"><p>No hay familiares para mostrar  <br>
     <ion-icon name="information-circle" style="font-size: 60px;"></ion-icon></p>
   </div>
   <!-- si hay registros -->
-  <div *ngIf="listadoUsuario.length > 0" style="padding-top: 32px;">
+  <div [hidden]="estaCargando" *ngIf="listadoUsuario.length > 0" style="padding-top: 32px;">
       <div *ngFor="let item of listadoUsuario" (click)="openModalAjustes(item)">
         <!-- poner avatar -->
         <app-avatar [lines]="inset" [urlImagen] = "item.UrlImagen" [nombreCompleto]="item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno" [parentezco]="item.Parentezco.Nombre"></app-avatar>
       </div>
   </div>
+  <!-- comentamos el esqueleton por implementación de progress bar-->
   <!-- ESQUELETON -->
-  <div *ngIf="listadoUsuario.length == 0">
+<!--   <div *ngIf="listadoUsuario.length == 0">
     <ion-list>
       <ion-item>
         <ion-avatar slot="start">
@@ -40,7 +42,7 @@
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-item>
     </ion-list> 
-  </div>
+  </div> -->
 
 
 </ion-content>

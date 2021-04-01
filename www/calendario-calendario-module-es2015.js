@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Eventos</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\">\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle>{{evento.DetalleEventoMes.NombrePaciente}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Calendario</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\">\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando calendario\"></app-progress>\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\" [anioActual]=\"anioActual\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle class=\"ion-text-capitalize\">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n");
 
 /***/ }),
 
@@ -103,11 +103,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioInfoUsuario */ "./src/app/services/ServicioInfoUsuario.ts");
 /* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
 /* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../modal-detalle-cita/modal-detalle-cita.page */ "./src/app/modal-detalle-cita/modal-detalle-cita.page.ts");
-/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../modal-detalle-cita/modal-detalle-cita.page */ "./src/app/modal-detalle-cita/modal-detalle-cita.page.ts");
+/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
 
 
 
@@ -119,13 +120,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 //moment
 
 //modal
 
 
 let CalendarioPage = class CalendarioPage {
-    constructor(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, info, acceso, cita, alertController) {
+    constructor(navCtrl, toast, modalCtrl, platform, menu, activatedRoute, router, utiles, loading, info, acceso, cita, alertController, parametrosApp) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -139,6 +141,7 @@ let CalendarioPage = class CalendarioPage {
         this.acceso = acceso;
         this.cita = cita;
         this.alertController = alertController;
+        this.parametrosApp = parametrosApp;
         this.miColor = '#FF4081';
         this.tiene = true;
         this.textColor = '#FFFFFF';
@@ -179,28 +182,30 @@ let CalendarioPage = class CalendarioPage {
         this.citasVerticalTodasTop = [];
         //para poner la linea en la fecha actual
         this.fechaActual = '';
+        this.anioActual = '';
     }
     //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
     //OJO HAY VACUNAS CON FECHA PROXIMA 29-11-2020 Y NO VEO QUE APAREZCAN
     //CUANDO SELECCIONAS EL COMBO DE FECHA Y LUEGO VUELVES A SELECCIONAR 
     //UNA FECHA ANTERIOR POR EJEMPLO NO MUESTRA NADA
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_9__().locale('es');
-        this.fechaActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_9__(), 'YYYY-MM-DD');
+        moment__WEBPACK_IMPORTED_MODULE_10__().locale('es');
+        this.fechaActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY-MM-DD');
+        this.anioActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY');
         console.log(this.fechaActual);
         //this.miColor = this.utiles.entregaMiColor();
         if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
             if (this.usuarioAps) {
                 this.miColor = this.utiles.entregaColor(this.usuarioAps);
-                this.usuarioAps.UrlImagen = src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].URL_FOTOS + this.usuarioAps.UrlImagen;
+                this.usuarioAps.UrlImagen = src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].URL_FOTOS + this.usuarioAps.UrlImagen;
                 this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
                 this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
                 this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
             }
         }
         //mes seleccionado
-        this.mesActualSeleccionado = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1 + ',' + moment__WEBPACK_IMPORTED_MODULE_9__().year();
+        this.mesActualSeleccionado = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1 + ',' + moment__WEBPACK_IMPORTED_MODULE_10__().year();
         //this.mesActualSeleccionado = moment().month() + 1;
         console.log('formato de mes seleccionado ===> ' + this.mesActualSeleccionado);
         //revisar estos parametros ya que estan en el otro codigo en el oninit
@@ -212,26 +217,95 @@ let CalendarioPage = class CalendarioPage {
         this.anio = new Date().getFullYear();
         //estos parametros estan en el ready
         //lamada para citas vertical
-        var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__().year();
-        var mesActual = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1;
+        var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
+        var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1;
         //var mesActual = this.mesActualSeleccionado;
         console.log(mesActual);
         //***************************** */
         this.tratamientoMeses();
+        //prueba de implementacion api management
+        //this.cargarTodosLosEventosApi();
         //implementacion nueva
-        this.cargarTodosLosEventos();
+        if (this.parametrosApp.USA_API_MANAGEMENT()) {
+            this.cargarTodosLosEventosApi();
+        }
+        else {
+            this.cargarTodosLosEventos();
+        }
     }
     getTime(date) {
         return date != null ? new Date(date).getTime() : 0;
+    }
+    cargarTodosLosEventosApi() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //usar citasVerticalTodas
+            this.citasVerticalTodas = [];
+            this.citasVerticalMostrar = [];
+            var fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+            var mesActual = {
+                mes: fechaActual.month() + 1,
+                anno: fechaActual.year()
+            };
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Obteniendo...<br>Información del usuario api',
+                  duration: 20000
+                }); */
+            let loader = yield this.loading.create({
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
+                //message: 'Cargando...<br>tipos de atención',
+                duration: 2000
+            });
+            this.estaCargando = true;
+            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                if (!this.utiles.isAppOnDevice()) {
+                    //llamada web
+                    this.cita.entregaPorMesNuevoApi(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).subscribe((response) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                        this.citasVerticalTodas = response;
+                        this.procesarArregloCitasTodas();
+                        this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
+                        this.citasVerticalMostrar.sort((a, b) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta); });
+                        //guardamos la variable de ordenamiento
+                        sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
+                        //creamos top limit al nuevo arreglo de citas
+                        this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+                        console.log(this.citasVerticalTodasTop);
+                        loader.dismiss();
+                        this.estaCargando = false;
+                    }));
+                }
+                else {
+                    //llamada nativa
+                    this.cita.entregaPorMesNuevoApiNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).then((response) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                        this.citasVerticalTodas = JSON.parse(response.data);
+                        //aca procesamos
+                        this.procesarArregloCitasTodas();
+                        this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
+                        //ahora que tenemos las citas que queremos mostrar
+                        //ordenamos
+                        this.citasVerticalMostrar.sort((a, b) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta); });
+                        //guardamos la variable de ordenamiento
+                        sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
+                        //creamos top limit al nuevo arreglo de citas
+                        this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+                        console.log(this.citasVerticalTodasTop);
+                        loader.dismiss();
+                        this.estaCargando = false;
+                    }));
+                }
+            }));
+        });
     }
     cargarTodosLosEventos() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             //usar citasVerticalTodas
             this.citasVerticalTodas = [];
             this.citasVerticalMostrar = [];
-            var fechaActual = moment__WEBPACK_IMPORTED_MODULE_9__();
-            var fechaAnterior = moment__WEBPACK_IMPORTED_MODULE_9__().subtract(1, 'month');
-            var fechaPosterior = moment__WEBPACK_IMPORTED_MODULE_9__().add(1, 'month');
+            var fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+            var fechaAnterior = moment__WEBPACK_IMPORTED_MODULE_10__().subtract(1, 'month');
+            var fechaPosterior = moment__WEBPACK_IMPORTED_MODULE_10__().add(1, 'month');
             var mesAnterior = {
                 mes: fechaAnterior.month() + 1,
                 anno: fechaAnterior.year()
@@ -244,10 +318,19 @@ let CalendarioPage = class CalendarioPage {
                 mes: fechaPosterior.month() + 1,
                 anno: fechaPosterior.year()
             };
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Obteniendo...<br>Información del usuario',
+                  duration: 20000
+                }); */
             let loader = yield this.loading.create({
-                message: 'Obteniendo...<br>Información del usuario',
-                duration: 20000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
+                //message: 'Cargando...<br>tipos de atención',
+                duration: 2000
             });
+            this.estaCargando = true;
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
                     //llamada web
@@ -272,6 +355,7 @@ let CalendarioPage = class CalendarioPage {
                                 this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
                                 console.log(this.citasVerticalTodasTop);
                                 loader.dismiss();
+                                this.estaCargando = false;
                             }));
                         }));
                     }));
@@ -300,6 +384,7 @@ let CalendarioPage = class CalendarioPage {
                                 this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
                                 console.log(this.citasVerticalTodasTop);
                                 loader.dismiss();
+                                this.estaCargando = false;
                             }));
                         }));
                     }));
@@ -316,8 +401,8 @@ let CalendarioPage = class CalendarioPage {
         for (var s in this.citasVertical) {
             for (var t in this.citasVertical[s].Eventos) {
                 var fechaHora = (this.citasVertical[s].Eventos[t].DetalleEventoMes.FechaHora);
-                var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_9__(fechaHora, 'YYYY-MM-DD').toDate();
-                var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_9__().toDate();
+                var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
+                var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
                 console.log('Evento: ' + fechaEvento);
                 console.log('Hoy:' + fechaHoy);
                 contador++;
@@ -383,8 +468,8 @@ let CalendarioPage = class CalendarioPage {
         for (var s in this.citasVerticalTodas) {
             for (var t in this.citasVerticalTodas[s].Eventos) {
                 var fechaHora = (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.FechaHora);
-                var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_9__(fechaHora, 'YYYY-MM-DD').toDate();
-                var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_9__().toDate();
+                var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
+                var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
                 console.log('Evento: ' + fechaEvento);
                 console.log('Hoy:' + fechaHoy);
                 contador++;
@@ -502,19 +587,19 @@ let CalendarioPage = class CalendarioPage {
     }
     tratamientoMeses() {
         this.mesesVertical = [];
-        moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es-es');
-        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_9__();
-        var fechaMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_9__().subtract(1, 'month');
-        var fechaMasUnMes = moment__WEBPACK_IMPORTED_MODULE_9__().add(1, 'month');
-        var mesActualNumero = moment__WEBPACK_IMPORTED_MODULE_9__(fechaActual).month() + 1;
-        var mesMenosUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMenosUnMes).month() + 1;
-        var mesMasUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMasUnMes).month() + 1;
-        var mesActualStr = moment__WEBPACK_IMPORTED_MODULE_9__(fechaActual).format("MMMM").toUpperCase();
-        var mesMenosUnMesStr = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMenosUnMes).format("MMMM").toUpperCase();
-        var mesMasUnMesStr = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMasUnMes).format("MMMM").toUpperCase();
-        var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__(fechaActual).format("YYYY");
-        var annoMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMenosUnMes).format("YYYY");
-        var annoMasUnMes = moment__WEBPACK_IMPORTED_MODULE_9__(fechaMasUnMes).format("YYYY");
+        moment__WEBPACK_IMPORTED_MODULE_10__["locale"]('es-es');
+        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+        var fechaMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_10__().subtract(1, 'month');
+        var fechaMasUnMes = moment__WEBPACK_IMPORTED_MODULE_10__().add(1, 'month');
+        var mesActualNumero = moment__WEBPACK_IMPORTED_MODULE_10__(fechaActual).month() + 1;
+        var mesMenosUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMenosUnMes).month() + 1;
+        var mesMasUnMesNumero = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMasUnMes).month() + 1;
+        var mesActualStr = moment__WEBPACK_IMPORTED_MODULE_10__(fechaActual).format("MMMM").toUpperCase();
+        var mesMenosUnMesStr = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMenosUnMes).format("MMMM").toUpperCase();
+        var mesMasUnMesStr = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMasUnMes).format("MMMM").toUpperCase();
+        var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__(fechaActual).format("YYYY");
+        var annoMenosUnMes = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMenosUnMes).format("YYYY");
+        var annoMasUnMes = moment__WEBPACK_IMPORTED_MODULE_10__(fechaMasUnMes).format("YYYY");
         //ahora tenemos los años, meses podemos construir el arreglo.
         var entidadActual = { mesNumero: mesActualNumero + ',' + annoActual, mesTexto: mesActualStr, anno: annoActual };
         var entidadMenos = { mesNumero: mesMenosUnMesNumero + ',' + annoMenosUnMes, mesTexto: mesMenosUnMesStr, anno: annoMenosUnMes };
@@ -535,7 +620,7 @@ let CalendarioPage = class CalendarioPage {
             //this.list.closeSlidingItems();
             //this.navCtrl.push(DetailCitasPage, {evento:evento, usuario: this.usuarioAps});
             const modal = yield this.modalCtrl.create({
-                component: _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_10__["ModalDetalleCitaPage"],
+                component: _modal_detalle_cita_modal_detalle_cita_page__WEBPACK_IMPORTED_MODULE_11__["ModalDetalleCitaPage"],
                 componentProps: {
                     'evento': JSON.stringify(evento),
                     'usuario': JSON.stringify(this.usuarioAps)
@@ -547,8 +632,8 @@ let CalendarioPage = class CalendarioPage {
                     //console.log(accion);
                     //obtenemos la pagina actual
                     //actualizar
-                    var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__().year();
-                    var mesActual = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1;
+                    var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
+                    var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1;
                     //var mesActual = this.mesActualSeleccionado;
                     //console.log(mesActual);
                     //***************************** */
@@ -562,7 +647,12 @@ let CalendarioPage = class CalendarioPage {
                     else if (accion === 'cancelled') {
                         this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
                     }
-                    this.cargarTodosLosEventos();
+                    if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                        this.cargarTodosLosEventosApi();
+                    }
+                    else {
+                        this.cargarTodosLosEventos();
+                    }
                 }
             });
             return yield modal.present();
@@ -668,8 +758,8 @@ let CalendarioPage = class CalendarioPage {
                 //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
                 retorno = data;
                 //actualizar la pagina
-                var annoActual = moment__WEBPACK_IMPORTED_MODULE_9__().year();
-                var mesActual = moment__WEBPACK_IMPORTED_MODULE_9__().month() + 1;
+                var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
+                var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1;
                 //var mesActual = this.mesActualSeleccionado;
                 console.log(mesActual);
                 //***************************** */
@@ -683,7 +773,12 @@ let CalendarioPage = class CalendarioPage {
                 else if (accion === 'cancelled') {
                     this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
                 }
-                this.cargarTodosLosEventos();
+                if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                    this.cargarTodosLosEventosApi();
+                }
+                else {
+                    this.cargarTodosLosEventos();
+                }
             }
             else {
                 this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);
@@ -711,7 +806,7 @@ let CalendarioPage = class CalendarioPage {
         return retorno;
     }
     transformDate(value, format) {
-        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_11__["MomentPipe"]();
+        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_12__["MomentPipe"]();
         return pi.transform(value, format);
     }
 };
@@ -728,7 +823,8 @@ CalendarioPage.ctorParameters = () => [
     { type: _app_services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_5__["ServicioInfoUsuario"] },
     { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__["ServicioAcceso"] },
     { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__["ServicioCitas"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] }
 ];
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('myList', { read: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonItem"] })

@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/calendario\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Reserva de horas</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <!-- combo de reserva de horas -->\r\n    <mat-form-field appearance=\"outline\" class=\"field-tipo-atencion\">\r\n      <mat-label>Tipo atención</mat-label>\r\n      <mat-select [disabled]=\"disabledCombo\" [(ngModel)]=\"comboSeleccionado\" (selectionChange)=\"buscarCitas($event)\">\r\n        <mat-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n  \r\n  <!-- progress bar -->\r\n  <div class=\"centrado\" [hidden]=\"!mostrarProgress\">\r\n  <!-- <div class=\"centrado\"> -->\r\n    <ion-label class=\"titulo-item-2\">Buscando citas</ion-label>\r\n    <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n  </div>\r\n  <!-- progress bar buscando tipos de atencion  -->\r\n  <div class=\"centradoDisp\" [hidden]=\"!mostrarProgressDisp\">\r\n    <!-- <div class=\"centrado\"> -->\r\n    <ion-label class=\"titulo-item-2\">Buscando tipos atención</ion-label>\r\n    <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n  </div>\r\n  <!-- resultados -->\r\n  <div *ngIf=\"encontroCitas\">\r\n    <div class=\"ion-padding-start ion-padding-end\">\r\n      <h6 class=\"titulo-item\">\r\n        Citas más próximas\r\n      </h6>\r\n      <p class=\"ion-text-wrap texto-item\">\r\n        A continuación se listan los cupos disponibles más próximos.\r\n      </p>\r\n    </div>\r\n    <div class=\"ion-padding\">\r\n      <ion-grid class=\"ion-no-padding\" *ngFor=\"let cita of citasFiltradas\">\r\n        <ion-row class=\"ion-padding-bottom ion-padding-top linea-item\" *ngIf=\"cita.indice <= 3\" (click)=\"citaSelected(cita)\">\r\n          <ion-col size=\"9\" class=\"texto-item ion-text-capitalize\">\r\n            {{cita.Servicio.Nombre}}\r\n          </ion-col>\r\n          <ion-col size=\"3\" class=\"titulo-hora ion-text-end\">\r\n            {{transformDateIso(cita.FechaHoraInicio)}}\r\n          </ion-col>\r\n          <ion-col size=\"12\" class=\"titulo-fecha\" class=\"ion-text-capitalize\">\r\n            {{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}\r\n          </ion-col>\r\n          <ion-col class=\"texto-item ion-text-capitalize\">\r\n            {{cita.NombresMedico.toLowerCase()}} {{cita.ApellidosMedico.toLowerCase()}}\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    <!--pie de búsqueda -->\r\n    <div class=\"pl-24 pr-24\">\r\n      <p class=\"ion-text-wrap texto-item ion-text-left\">\r\n        Si no te sirven los cupos propuesto prueba con la búsqueda avanzada.\r\n      </p>\r\n    </div>\r\n    <!-- boton busqueda avanzada -->\r\n    <div class=\"ion-padding-top\">\r\n      <ion-button expand=\"full\" fill=\"clear\" (click)=\"openBusquedaAvanzada()\">BÚSQUEDA AVANZADA</ion-button>\r\n    </div>\r\n\r\n  </div>\r\n  <div *ngIf=\"!encontroCitas && mostrarProgress == false && citasFiltradas.length > 0\" class=\"ion-padding-start ion-padding-end centrado\">\r\n    <ion-label class=\"ion-text-center no-encontrado\">No existen cupos con los criterios ingresados</ion-label>\r\n  </div>\r\n\r\n\r\n  \r\n\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/calendario\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Reserva de horas</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <!-- combo de reserva de horas -->\r\n    <mat-form-field appearance=\"outline\" class=\"field-tipo-atencion\">\r\n      <mat-label>Tipo atención</mat-label>\r\n      <mat-select [disabled]=\"disabledCombo\" [(ngModel)]=\"comboSeleccionado\" (selectionChange)=\"buscarCitas($event)\">\r\n        <mat-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n  \r\n  <!-- progress bar -->\r\n<!--   <div class=\"centrado\" [hidden]=\"!mostrarProgress\">\r\n    <ion-label class=\"titulo-item-2\">Buscando citas</ion-label>\r\n    <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n  </div> -->\r\n  <app-progress [mostrar]=\"mostrarProgress\" titulo=\"Buscando citas\"></app-progress>\r\n  <!-- progress bar buscando tipos de atencion  -->\r\n<!--   <div class=\"centradoDisp\" [hidden]=\"!mostrarProgressDisp\">\r\n    <ion-label class=\"titulo-item-2\">Buscando tipos atención</ion-label>\r\n    <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n  </div> -->\r\n  <app-progress [mostrar]=\"mostrarProgressDisp\" titulo=\"Buscando tipos atención\"></app-progress>\r\n  <!-- resultados -->\r\n  <div *ngIf=\"encontroCitas\">\r\n    <div class=\"ion-padding-start ion-padding-end\">\r\n      <h6 class=\"titulo-item\">\r\n        Citas más próximas\r\n      </h6>\r\n      <p class=\"ion-text-wrap texto-item\">\r\n        A continuación se listan los cupos disponibles más próximos.\r\n      </p>\r\n    </div>\r\n    <div class=\"ion-padding\">\r\n      <ion-grid class=\"ion-no-padding\" *ngFor=\"let cita of citasFiltradas\">\r\n        <ion-row class=\"ion-padding-bottom ion-padding-top linea-item\" *ngIf=\"cita.indice <= 3\" (click)=\"citaSelected(cita)\">\r\n          <ion-col size=\"9\" class=\"texto-item ion-text-capitalize\">\r\n            {{cita.Servicio.Nombre}}\r\n          </ion-col>\r\n          <ion-col size=\"3\" class=\"titulo-hora ion-text-end\">\r\n            {{transformDateIso(cita.FechaHoraInicio)}}\r\n          </ion-col>\r\n          <ion-col size=\"12\" class=\"titulo-fecha\" class=\"ion-text-capitalize\">\r\n            {{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}\r\n          </ion-col>\r\n          <ion-col class=\"texto-item ion-text-capitalize\">\r\n            {{cita.NombresMedico.toLowerCase()}} {{cita.ApellidosMedico.toLowerCase()}}\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </div>\r\n    <!--pie de búsqueda -->\r\n    <div class=\"pl-24 pr-24\">\r\n      <p class=\"ion-text-wrap texto-item ion-text-left\">\r\n        Si no te sirven los cupos propuesto prueba con la búsqueda avanzada.\r\n      </p>\r\n    </div>\r\n    <!-- boton busqueda avanzada -->\r\n    <div class=\"ion-padding-top\">\r\n      <ion-button expand=\"full\" fill=\"clear\" (click)=\"openBusquedaAvanzada()\">BÚSQUEDA AVANZADA</ion-button>\r\n    </div>\r\n\r\n  </div>\r\n  <div *ngIf=\"!encontroCitas && mostrarProgress == false && citasFiltradas.length > 0\" class=\"ion-padding-start ion-padding-end centrado\">\r\n    <ion-label class=\"ion-text-center no-encontrado\">No existen cupos con los criterios ingresados</ion-label>\r\n  </div>\r\n\r\n\r\n  \r\n\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -98,13 +98,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_material_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/material/select */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
+    /* harmony import */
+
+
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ../components/components.module */
+    "./src/app/components/components.module.ts");
 
     var PreTiposatencionPageModule = function PreTiposatencionPageModule() {
       _classCallCheck(this, PreTiposatencionPageModule);
     };
 
     PreTiposatencionPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_7__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_8__["MatSelectModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_7__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_8__["MatSelectModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_9__["ComponentsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
         path: '',
         component: _pre_tiposatencion_page__WEBPACK_IMPORTED_MODULE_6__["PreTiposatencionPage"]
       }])],
@@ -349,9 +355,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
-                      spinner: null,
-                      //message: 'Cargando...<br>tipos de atención',
-                      duration: 20000
+                      spinner: null
                     });
 
                   case 2:
@@ -366,7 +370,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             switch (_context2.prev = _context2.next) {
                               case 0:
                                 //esto lo agregamos para desabilitarlo
-                                this.disabledCombo = true; //********************* */
+                                this.disabledCombo = true; //lo agregamos para mostrar la info de buscando disponibilidad
+
+                                this.mostrarProgress = true; //********************* */
 
                                 this.citas = [];
                                 this.citasFiltradas = [];
@@ -392,7 +398,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                           }); */
                                 }
 
-                              case 4:
+                              case 5:
                               case "end":
                                 return _context2.stop();
                             }
@@ -424,9 +430,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
-                      spinner: null,
-                      //message: 'Cargando...<br>tipos de atención',
-                      duration: 20000
+                      spinner: null
                     });
 
                   case 2:
@@ -441,7 +445,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             switch (_context4.prev = _context4.next) {
                               case 0:
                                 //esto lo agregamos para desabilitarlo
-                                this.disabledCombo = true; //********************* */
+                                this.disabledCombo = true;
+                                this.mostrarProgressDisp = true; //********************* */
 
                                 this.citas = [];
                                 this.citasFiltradas = [];
@@ -481,7 +486,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   });
                                 }
 
-                              case 4:
+                              case 5:
                               case "end":
                                 return _context4.stop();
                             }
@@ -565,6 +570,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               loader.dismiss();
               this.disabledCombo = false;
+              this.mostrarProgressDisp = false;
             } else {
               this.idComboSeleccionado = 0;
               this.tiposAtencion = [];
@@ -572,6 +578,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               this.citasFiltradas = [];
               loader.dismiss();
               this.disabledCombo = false;
+              this.mostrarProgressDisp = false;
             } //error
 
           }

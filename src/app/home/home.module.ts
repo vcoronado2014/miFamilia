@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     IonicModule,
     MatCardModule,
     MatButtonModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'contactabilidad',
     loadChildren: () => import('./contactabilidad/contactabilidad.module').then( m => m.ContactabilidadPageModule)
   },
+  {
+    path: 'interconsultas',
+    loadChildren: () => import('./interconsultas/interconsultas.module').then( m => m.InterconsultasPageModule)
+  },
 
 
 

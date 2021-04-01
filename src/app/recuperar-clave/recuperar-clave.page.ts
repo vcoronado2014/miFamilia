@@ -14,6 +14,7 @@ import { NavigationExtras } from '@angular/router';
 export class RecuperarClavePage implements OnInit {
   forma: FormGroup;
   expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
+  estaCargando = false;
   constructor(
     private navCtrl: NavController,
     public utiles: ServicioUtiles,
@@ -40,10 +41,16 @@ export class RecuperarClavePage implements OnInit {
       this.utiles.presentToast('Debe ingresar un correo', 'middle', 2000);
       return;
     }
-    
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Verificando...<br>correo',
       duration: 10000
+    }); */
+    this.estaCargando = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner:null,
     });
 
     await loader.present().then(async () => {
@@ -52,14 +59,16 @@ export class RecuperarClavePage implements OnInit {
         this.servicioGeo.postRecuperarClave(correo).subscribe((response: any)=>{
           if (response.CodigoMensaje == 0){
             //aca todo ok
-            this.utiles.presentToast(response.Mensaje, 'middle', 3000);
+            this.utiles.presentToast(response.Mensaje, 'bottom', 3000);
             loader.dismiss();
+            this.estaCargando = false;
             //llevar a login
             this.abrirLogin();
           }
           else{
-            this.utiles.presentToast(response.Mensaje, 'middle', 3000);
+            this.utiles.presentToast(response.Mensaje, 'bottom', 3000);
             loader.dismiss();
+            this.estaCargando = false;
           }
         });
       }
@@ -69,18 +78,21 @@ export class RecuperarClavePage implements OnInit {
           let respuesta = JSON.parse(response.data);
           if (respuesta.CodigoMensaje == 0){
             //aca todo ok
-            this.utiles.presentToast(respuesta.Mensaje, 'middle', 3000);
+            this.utiles.presentToast(respuesta.Mensaje, 'bottom', 3000);
             loader.dismiss();
+            this.estaCargando = false;
             //llevar a login
             this.abrirLogin();
           }
           else{
-            this.utiles.presentToast(respuesta.Mensaje, 'middle', 3000);
+            this.utiles.presentToast(respuesta.Mensaje, 'bottom', 3000);
             loader.dismiss();
+            this.estaCargando = false;
           }
         },
         (error)=>{
           loader.dismiss();
+          this.estaCargando = false;
           this.utiles.presentToast('Ocurrió un error de verificación', 'bottom', 4000);
         }
         );

@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { PreTiposatencionPage } from './pre-tiposatencion.page';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
     IonicModule,
     MatFormFieldModule,
     MatSelectModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

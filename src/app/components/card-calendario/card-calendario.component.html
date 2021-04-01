@@ -4,5 +4,6 @@
         <label class="fecha-card"><strong>{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>
       </ion-row>
       <ion-row *ngIf="transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual">
-        <label class="fecha-card">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</label>
+        <label *ngIf="transformDate(item.FechaCompleta, 'YYYY') != anioActual" class="fecha-card">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>
+        <label *ngIf="transformDate(item.FechaCompleta, 'YYYY') == anioActual" class="fecha-card">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} </label>
       </ion-row>
