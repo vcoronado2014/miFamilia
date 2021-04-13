@@ -10,6 +10,8 @@ import { CardCalendarioComponent } from './card-calendario/card-calendario.compo
 import { AvatarComponent } from './avatar/avatar.component'
 import { ProgressComponent } from './progress/progress.component'
 import { ItemHomeComponent } from './item-home/item-home.component'
+import { AvatarSimpleComponent } from './avatar-simple/avatar-simple.component'
+import { PaginaMensajesComponent } from './pagina-mensajes/pagina-mensajes.component'
 
 
 
@@ -17,8 +19,10 @@ import { ItemHomeComponent } from './item-home/item-home.component'
   declarations: [
     CardCalendarioComponent,
     AvatarComponent,
+    AvatarSimpleComponent,
     ProgressComponent,
     ItemHomeComponent,
+    PaginaMensajesComponent,
   ],
   imports: [
     CommonModule,
@@ -31,8 +35,10 @@ import { ItemHomeComponent } from './item-home/item-home.component'
   exports: [
     CardCalendarioComponent,
     AvatarComponent,
+    AvatarSimpleComponent,
     ProgressComponent,
     ItemHomeComponent,
+    PaginaMensajesComponent,
   ]
 })
 export class ComponentsModule { }

@@ -269,6 +269,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "ngOnInit",
         value: function ngOnInit() {
           var tieneValidacionCU = false; //primero validamos si usa clave unica
+          //por ahora esta deshabilitado hasta que alguien quiera
+          //implementar, pero será por su cuenta
 
           if (this.parametrosApp.USA_CLAVE_UNICA()) {
             if (localStorage.getItem('STATE_CLAVE_UNICA')) {
@@ -305,7 +307,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "abrirPrimerosPasos",
         value: function abrirPrimerosPasos() {
-          this.navCtrl.navigateRoot('pre-registro-uno');
+          var navigationExtras = {
+            queryParams: {
+              modulo: 'inicio'
+            }
+          };
+          this.navCtrl.navigateRoot(['pre-registro-uno'], navigationExtras);
         }
       }, {
         key: "irARegistro",

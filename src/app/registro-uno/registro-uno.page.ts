@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 //servicios
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
+import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { NavigationExtras } from '@angular/router';
 
 import * as moment from 'moment';
@@ -16,20 +17,31 @@ import * as moment from 'moment';
 })
 export class RegistroUnoPage implements OnInit {
   rut;
-  nombre;
+  nombre = '';
   cargando = false;
   registroIncompleto: any;
   //formulario
   forma: FormGroup;
+  //expresiones regulares
+  expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
   //rut = new FormControl('', [Validators.required, this.runValidator]);
   //por defecto dejamos el tipo movimiento en 1 solicitud de login
   //despues lo podemos recibir como parametro para cambiarlo
   tipoMovimiento = '1';
   estaAgregandoFamilia = false;
+  paginaAnterior = 'inicio';
+  //para mostrar la pagina de mensajes
+  muestraMensaje = false;
+  objetoMensaje ={
+    irA: 'inicio',
+    titulo: '',
+    contenido: ''
+  }
   constructor(
     private navCtrl: NavController,
     public utiles: ServicioUtiles,
     public servicioGeo: ServicioGeo,
+    public parametros: ServicioParametrosApp,
     public loading: LoadingController,
     private formBuilder: FormBuilder,
     public activatedRoute: ActivatedRoute,
@@ -47,22 +59,47 @@ export class RegistroUnoPage implements OnInit {
       if (params && params.nombre){
         this.nombre = params.nombre;
       }
+      if (params && params.modulo) {
+        this.paginaAnterior = params.modulo;
+      }
     });
     this.cargarForma();
   }
   cargarForma(){
     this.forma = new FormGroup({
-      'run': new FormControl('', [Validators.required])      
+      'run': new FormControl('', [Validators.required]),
+      'email': new FormControl('', [Validators.required, Validators.pattern(this.expEmail)]),      
+      'fechaNacimiento': new FormControl('', [Validators.required]),
     },{ validators: this.RunValidator });
   }
 
   volver(){
     //this.navCtrl.navigateRoot('nuevo-login');
-    this.navCtrl.navigateRoot('pre-registro-uno');
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        modulo: 'inicio',
+        nombre: this.nombre
+      }
+    }
+    this.navCtrl.navigateRoot(['pre-registro-uno'], navigationExtras);
   }
   //para validar
   get f() { return this.forma.controls; }
+  async verificaRegistroPrueba(){
+    if (this.forma.invalid) {
+      return;
+    }
+    let run = this.forma.controls.run.value;
+    let idDispositivo = this.utiles.entregaIdDispositivo();
+    let fechaNac = moment(this.forma.controls.fechaNacimiento.value);
+    let fechaNacStr = fechaNac.format('DD-MM-YYYY');
+    console.log('run registro uno ' + run);
+    console.log('idispositivo registro uno ' + idDispositivo);
+    console.log('fecha nac registro uno ' + fechaNac);
+    console.log('fecha nac registro uno str ' + fechaNacStr);
+  }
   async verificaRegistro(){
+    
     let run = this.forma.controls.run;
     let idDispositivo = this.utiles.entregaIdDispositivo();
 
@@ -78,7 +115,6 @@ export class RegistroUnoPage implements OnInit {
         //llamada web
         this.servicioGeo.getRegistroAppRun(run.value, idDispositivo).subscribe((response:any)=>{
           //procesar
-          //this.procesarInfo(response, loader);
           this.procesarRespuestaRegistro(response, loader);
         })
       }
@@ -242,8 +278,36 @@ export class RegistroUnoPage implements OnInit {
     else {
       //aca definitivamente debemos enviarlo a clave única
       loader.dismiss();
-      console.log('clave unica');
-      this.irAClaveUnica();
+      //no debemos enviarlo a clave unica, debemos validar el mensaje
+      //en base a la respuesta del mensaje realizar acciones
+      if (this.parametros.USA_CLAVE_UNICA()) {
+        console.log('clave unica');
+        this.irAClaveUnica();
+      }
+      else{
+        this.muestraMensaje = true;
+        
+        //debemos revisar la respuesta, pondremos una pagina intermedia
+        //para procesar la respuesta
+        //levantar pagina mensajes
+        //registro de menor de edad
+        if (usuarioAps.RespuestaBase.CodigoMensaje == 8){
+          this.objetoMensaje.irA = this.paginaAnterior;
+          this.objetoMensaje.titulo = 'Menor de edad';
+          this.objetoMensaje.contenido = 'No puedes registrarte ya que eres menor de edad y el registro para esta aplicación es sólo para mayores.';
+        }
+        else if (usuarioAps.RespuestaBase.CodigoMensaje == 1){
+          this.objetoMensaje.irA = this.paginaAnterior;
+          this.objetoMensaje.titulo = 'Run no encontrado';
+          this.objetoMensaje.contenido = 'Por el momento no cuentas con registros de salud en la Red pública, el run digitado no ha sido encontrado.';
+        }
+        else{
+          this.objetoMensaje.irA = this.paginaAnterior;
+          this.objetoMensaje.titulo = 'Mensaje';
+          this.objetoMensaje.contenido = usuarioAps.RespuestaBase.Mensaje;
+        }
+      }
+
     }
   }
 

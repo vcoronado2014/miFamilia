@@ -12,7 +12,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+import { MatDatepickerModule  } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatNativeDateModule } from '@angular/material/core';
+
 import { RegistroUnoPage } from './registro-uno.page';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -25,6 +30,10 @@ import { RegistroUnoPage } from './registro-uno.page';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatExpansionModule,
+    MatNativeDateModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

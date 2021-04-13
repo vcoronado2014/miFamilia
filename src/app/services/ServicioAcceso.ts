@@ -44,7 +44,7 @@ export class ServicioAcceso{
                     if (retorno.UsuariosFamilia){
                       userFamilia = JSON.stringify(retorno.UsuariosFamilia);
                       //variable de sessión muy importante para el resto de la app.
-                      sessionStorage.setItem("UsuariosFamilia", userFamilia);
+                      localStorage.setItem("UsuariosFamilia", userFamilia);
                     }
     
     
@@ -84,6 +84,8 @@ export class ServicioAcceso{
 
     logout(): void {
         sessionStorage.clear();
+        //limpiamos eventos locales
+        localStorage.removeItem('NOTIFICACIONES_LOCALES_EVENTOS');
 
         this.username = '';
         this.loggedIn = false;

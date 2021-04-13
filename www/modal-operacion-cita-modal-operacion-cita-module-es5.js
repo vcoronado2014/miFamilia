@@ -62,13 +62,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./modal-operacion-cita.page */
     "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts");
+    /* harmony import */
+
+
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ../components/components.module */
+    "./src/app/components/components.module.ts");
 
     var ModalOperacionCitaPageModule = function ModalOperacionCitaPageModule() {
       _classCallCheck(this, ModalOperacionCitaPageModule);
     };
 
     ModalOperacionCitaPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_7__["ComponentsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
         path: '',
         component: _modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_6__["ModalOperacionCitaPage"]
       }])],

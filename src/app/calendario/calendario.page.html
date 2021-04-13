@@ -12,8 +12,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="back-app" style="--padding-bottom: 50px !important;">
-<app-progress [mostrar]="estaCargando" titulo="Cargando calendario"></app-progress>
+<ion-content class="back-app" style="--padding-bottom: 50px !important;" #content>
+<app-progress [mostrar]="estaCargando" [titulo]="tituloLoading"></app-progress>
  <div *ngIf="!tiene">
   <div style="position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;" class="ion-padding">
     <p style="display: table-cell; vertical-align: middle">No hay eventos para mostrar  <br>
@@ -23,12 +23,12 @@
  
  <div *ngIf="tiene">
   
-  <div *ngFor="let item of citasVerticalTodasTop">
+  <div [hidden]="estaCargando" *ngFor="let item of citasVerticalTodasTop">
     
     <ion-grid *ngIf="item.Mostrar">
       <app-card-calendario [fechaActual]="fechaActual" [item]="item" [anioActual]="anioActual"></app-card-calendario>
       <ion-row class="ion-no-padding ion-no-margin row-card">
-        <mat-card *ngFor="let evento of item.Eventos" color="light" style="margin-bottom: 8px;">
+        <mat-card *ngFor="let evento of item.Eventos" color="light" style="margin-bottom: 8px;" id="myListCard">
           <mat-card-header (click)="goToDetalleCita(evento)">
             
               <mat-card-subtitle class="hora">{{evento.HoraInicioFin}}</mat-card-subtitle>
@@ -56,7 +56,7 @@
  </div>
 </ion-content>
 <!-- este es el fab para abrir reservar horas -->
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="estaCargando">
   <ion-button color="secondary" (click)="openReservarHoraPage()" shape="round" style="--color:black;">
     <ion-icon slot="start" name="add-outline" class="botonReservar" style="font-size: 16px;"></ion-icon>
     <span class="botonReservar">RESERVAR HORA</span>

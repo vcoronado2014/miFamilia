@@ -61,6 +61,9 @@ export class ModalDetalleCitaPage implements OnInit {
   miImagen;
   miNombre;
   miParentezco;
+  //para procesar
+  estaCargando = false;
+  tituloLoading = '';
 
   constructor(
     public modalCtrl: ModalController,
@@ -113,9 +116,11 @@ export class ModalDetalleCitaPage implements OnInit {
     }
     else{
       this.miNombre = this.data.DetalleEventoMes.NombrePaciente;
+      //obtenemos al usuario que corresponde
+      //this.usuarioAps = this.utiles.entregaUsuarioNombre(this.miNombre);
       //this.miImagen = this.utiles.entregaImagen(this.usuarioAps);
-      if (sessionStorage.getItem('UsuariosFamilia')){
-        var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+      if (localStorage.getItem('UsuariosFamilia')){
+        var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
         if (usuariosFamilia && usuariosFamilia.length > 0){
           usuariosFamilia.forEach(usu => {
             if (usu.Nombres + ' ' + usu.ApellidoPaterno + ' ' + usu.ApellidoMaterno == this.data.DetalleEventoMes.NombrePaciente){
@@ -197,7 +202,10 @@ export class ModalDetalleCitaPage implements OnInit {
     //esto hacemos para obtener los datos de la cita y del paciente
     if (this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web' && this.data.DetalleEventoMes.Estado != ''){
       this.cita.IdCita = this.data.DetalleEventoMes.IdElemento;
-      this.cita.IdPaciente = this.usuarioAps.Rut;
+      //aca obtenemos el run del paciente
+      let usuarioCita = this.utiles.entregaUsuarioNombre(this.data.DetalleEventoMes.NombrePaciente);
+      //this.cita.IdPaciente = this.usuarioAps.Rut;
+      this.cita.IdPaciente = usuarioCita.Rut;
       this.cita.Estado = this.data.DetalleEventoMes.Estado;
       if (this.cita.Estado == 'proposed'){
         this.titulo = 'Reserva de horas';
@@ -298,10 +306,18 @@ export class ModalDetalleCitaPage implements OnInit {
     var idCita = this.cita.IdCita;
     var accion = boton.Operacion;
 
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Procesado...<br>Información',
       duration: 20000
+    }); */
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
     });
+    this.estaCargando =true;
+    this.tituloLoading = 'Procesando cita';
 
     await loader.present().then(async () => {
       var retorno = null;
@@ -327,6 +343,14 @@ export class ModalDetalleCitaPage implements OnInit {
       if (data.Mensaje.Codigo == 'correcto'){
         //todo bien
         //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
+        if (accion == 'cancelled'){
+          //si la cita es cnacelada hay que quitarla de notificaciones locales
+          //obtenemos el id dde la cita
+          if (data.CitasDisponibles && data.CitasDisponibles.length == 1){
+            let idCita = data.CitasDisponibles[0].IdCita;
+            this.utiles.removeCitaNotificacionesLocales(idCita);
+          }
+        }
         retorno = data;
       }
       else{
@@ -338,6 +362,8 @@ export class ModalDetalleCitaPage implements OnInit {
       this.utiles.presentToast('Error en la operación', 'middle', 2000);
     }
     loader.dismiss();
+    this.estaCargando = false;
+    this.tituloLoading = '';
     //ACA SE DEBE ACTUALIZAR LA PAGINA DE AGENDA DISPONIBLE.
     this.modalCtrl.dismiss(
       {

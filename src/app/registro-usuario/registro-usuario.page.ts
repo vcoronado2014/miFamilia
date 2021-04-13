@@ -145,7 +145,7 @@ export class RegistroUsuarioPage implements OnInit {
           retorno.UsuariosFamilia = familia;
           userFamilia = JSON.stringify(retorno.UsuariosFamilia);
           //variable de sessión muy importante para el resto de la app.
-          sessionStorage.setItem("UsuariosFamilia", userFamilia);
+          localStorage.setItem("UsuariosFamilia", userFamilia);
         }
 
 

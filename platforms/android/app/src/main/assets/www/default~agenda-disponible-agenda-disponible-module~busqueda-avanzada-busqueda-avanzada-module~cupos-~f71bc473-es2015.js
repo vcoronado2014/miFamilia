@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"home\">{{titulo}}</ion-title>\r\n    <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n      <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding back-app\">\r\n  <!-- <h4>Datos para {{titulo}}</h4> -->\r\n  <ion-list class=\"ion-padding-bottom\">\r\n    <ion-item>\r\n      <ion-label>\r\n        <h5 class=\"label-info\">FECHA</h5>\r\n        <!-- <p class=\"ion-text-wrap detalle-label-info\">{{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}</p> -->\r\n        <p class=\"ion-text-wrap detalle-label-info\">\r\n          <span style=\"text-transform: capitalize;\">{{transformDate(cita.FechaHoraInicio, 'dddd')}}</span>,  {{transformDate(cita.FechaHoraInicio, 'D')}} de \r\n          {{transformDate(cita.FechaHoraInicio, 'MMMM')}} {{transformDate(cita.FechaHoraInicio, 'YYYY')}}\r\n        </p>\r\n      </ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>\r\n        <h5 class=\"label-info\">HORA</h5>\r\n        <p class=\"ion-text-wrap detalle-label-info\">{{transformDateIso(cita.FechaHoraInicio)}}</p>\r\n      </ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>\r\n        <h5 class=\"label-info\">PROFESIONAL</h5>\r\n        <p class=\"ion-text-wrap detalle-label-info\">{{cita.NombresMedico}}  {{cita.ApellidosMedico}}</p>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n  <div class=\"ion-padding-top\">\r\n    <!--boton cancelar -->\r\n    <ion-button *ngIf=\"botonCancelar.Visible\" (click)=\"presentAlertConfirm(botonCancelar)\" [color]=\"botonCancelar.Color\">\r\n      {{botonCancelar.Titulo}}</ion-button>\r\n    <!--boton reservar -->\r\n    <ion-button *ngIf=\"botonReservar.Visible\" (click)=\"presentAlertConfirm(botonReservar)\" [color]=\"botonReservar.Color\">\r\n      {{botonReservar.Titulo}}</ion-button>\r\n    <!--boton confirmar -->\r\n    <ion-button *ngIf=\"botonConfirmar.Visible\" (click)=\"presentAlertConfirm(botonConfirmar)\"\r\n      [color]=\"botonConfirmar.Color\">\r\n      {{botonConfirmar.Titulo}}</ion-button>\r\n  </div>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"home\">{{titulo}}</ion-title>\r\n    <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n      <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding back-app\">\r\n  <!-- <h4>Datos para {{titulo}}</h4> -->\r\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloLoading\"></app-progress>\r\n  <div [hidden]=\"estaCargando\">\r\n    <ion-list class=\"ion-padding-bottom\">\r\n      <ion-item>\r\n        <ion-label>\r\n          <h5 class=\"label-info\">FECHA</h5>\r\n          <!-- <p class=\"ion-text-wrap detalle-label-info\">{{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}</p> -->\r\n          <p class=\"ion-text-wrap detalle-label-info\">\r\n            <span style=\"text-transform: capitalize;\">{{transformDate(cita.FechaHoraInicio, 'dddd')}}</span>,  {{transformDate(cita.FechaHoraInicio, 'D')}} de \r\n            {{transformDate(cita.FechaHoraInicio, 'MMMM')}} {{transformDate(cita.FechaHoraInicio, 'YYYY')}}\r\n          </p>\r\n        </ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>\r\n          <h5 class=\"label-info\">HORA</h5>\r\n          <p class=\"ion-text-wrap detalle-label-info\">{{transformDateIso(cita.FechaHoraInicio)}}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>\r\n          <h5 class=\"label-info\">PROFESIONAL</h5>\r\n          <p class=\"ion-text-wrap detalle-label-info\">{{cita.NombresMedico}}  {{cita.ApellidosMedico}}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n    </ion-list>\r\n    <div class=\"ion-padding-top\">\r\n      <!--boton cancelar -->\r\n      <ion-button *ngIf=\"botonCancelar.Visible\" (click)=\"presentAlertConfirm(botonCancelar)\" [color]=\"botonCancelar.Color\">\r\n        {{botonCancelar.Titulo}}</ion-button>\r\n      <!--boton reservar -->\r\n      <ion-button *ngIf=\"botonReservar.Visible\" (click)=\"presentAlertConfirm(botonReservar)\" [color]=\"botonReservar.Color\">\r\n        {{botonReservar.Titulo}}</ion-button>\r\n      <!--boton confirmar -->\r\n      <ion-button *ngIf=\"botonConfirmar.Visible\" (click)=\"presentAlertConfirm(botonConfirmar)\"\r\n        [color]=\"botonConfirmar.Color\">\r\n        {{botonConfirmar.Titulo}}</ion-button>\r\n    </div>\r\n  </div>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -92,6 +92,9 @@ let ModalOperacionCitaPage = class ModalOperacionCitaPage {
             Color: 'danger',
             Alert: '¿Está seguro de anular la cita?'
         };
+        //para procesar
+        this.estaCargando = false;
+        this.tituloLoading = '';
     }
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
@@ -148,10 +151,18 @@ let ModalOperacionCitaPage = class ModalOperacionCitaPage {
             var idPaciente = this.cita.IdPaciente;
             var idCita = this.cita.IdCita;
             var accion = boton.Operacion;
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Procesado...<br>Información',
+                  duration: 20000
+                }); */
             let loader = yield this.loading.create({
-                message: 'Procesado...<br>Información',
-                duration: 20000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
+            this.estaCargando = true;
+            this.tituloLoading = 'Procesando cita';
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 var retorno = null;
                 if (!this.utiles.isAppOnDevice()) {
@@ -178,6 +189,8 @@ let ModalOperacionCitaPage = class ModalOperacionCitaPage {
                 //booked, confirmed, cancelled
                 //todo bien
                 //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
+                this.estaCargando = false;
+                this.tituloLoading = '';
                 if (accion === 'booked') {
                     this.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
                 }
@@ -195,6 +208,8 @@ let ModalOperacionCitaPage = class ModalOperacionCitaPage {
         }
         else {
             //error en la operacion
+            this.estaCargando = false;
+            this.tituloLoading = '';
             this.utiles.presentToast('Error en la operación', 'middle', 2000);
         }
         loader.dismiss();

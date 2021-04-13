@@ -1,18 +1,21 @@
-<ion-content class="ion-padding">
-  <ion-row class="mt-24">
+<ion-content [ngClass]="{'ion-no-padding':muestraMensaje, 'ion-padding': muestraMensaje == false }">
+  <ion-row class="mt-24" [hidden]="muestraMensaje">
     <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="volver()">
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
   </ion-row>
-  <ion-row class="mt-52">
-    <h1>Hola, {{nombre}}, un gusto en conocerte</h1> 
-  </ion-row>
-  <ion-row>
-    <p class="texto-1">A continuación procederemos a verificar si ya tienes cuenta activa, para esto necesitamos que ingreses tu RUN.</p>
-    
-  </ion-row>
-  <form [formGroup]="forma" novalidate>
-      <ion-row class="mt-32">
+  <div [hidden]="muestraMensaje">
+    <ion-row class="mt-40">
+      <h1>Hola, {{nombre}}, un gusto en conocerte</h1>
+    </ion-row>
+    <ion-row>
+      <p class="texto-1">A continuación procederemos a verificar si ya tienes cuenta activa y existen datos clínicos, para esto necesitamos que
+        ingreses tu RUN, fecha de nacimiento y correo electrónico.</p>
+  
+    </ion-row>
+    <form [formGroup]="forma" novalidate>
+      <!-- run -->
+      <ion-row class="mt-16">
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>Run (Sin puntos y con guión)</mat-label>
           <input matInput placeholder="12535301-1" formControlName="run" name="run" required>
@@ -20,10 +23,33 @@
           <mat-error *ngIf="f.run.errors && f.run.errors.runInvalido == false">Rut inválido</mat-error>
         </mat-form-field>
       </ion-row>
-      <ion-row class="mt-32">
-        <button [disabled]="forma.invalid" mat-flat-button color="primary" style="width: 90%; margin-left: 5%;"
-          (click)="verificaRegistro()">CONTINUAR</button>
+      <!-- fecha nacimiento -->
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Seleccione fecha nacimiento</mat-label>
+          <input matInput [matDatepicker]="datepicker"  formControlName="fechaNacimiento" name="fechaNacimiento" required>
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+          </mat-datepicker>
+          <mat-error *ngIf="f.fechaNacimiento.errors && f.fechaNacimiento.errors.required">Fecha nac requerida</mat-error>
+        </mat-form-field>
       </ion-row>
-  </form>
+      <ion-row>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput placeholder="ejemplo@gmail.com" formControlName="email" name="email" required>
+          <mat-error [hidden]="!(f.email.errors && f.email.errors.required)">Correo requerido</mat-error>
+          <mat-error [hidden]="!(f.email.errors && f.email.errors.pattern)">Correo inválido</mat-error>
+        </mat-form-field>
+      </ion-row>
+      <ion-row class="mt-24">
+        <button [disabled]="forma.invalid" mat-flat-button color="primary" style="width: 90%; margin-left: 5%;"
+          (click)="verificaRegistroPrueba()">CONTINUAR</button>
+      </ion-row>
+    </form>
+  </div>
+  <div [hidden]="!muestraMensaje">
+    <app-pagina-mensajes [titulo]="objetoMensaje.titulo" [contenido]="objetoMensaje.contenido" [irA]="objetoMensaje.irA"></app-pagina-mensajes>
+  </div>
 
 </ion-content>

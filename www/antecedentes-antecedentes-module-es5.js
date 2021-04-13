@@ -269,8 +269,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 } //manejo de los usuarios de la familia
 
 
-                                if (sessionStorage.UsuariosFamilia) {
-                                  this.usuarioApsFamilia = JSON.parse(sessionStorage.UsuariosFamilia);
+                                if (localStorage.UsuariosFamilia) {
+                                  this.usuarioApsFamilia = JSON.parse(localStorage.UsuariosFamilia);
 
                                   if (this.usuarioApsFamilia.length > 0) {
                                     for (s in this.usuarioApsFamilia) {

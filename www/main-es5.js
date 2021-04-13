@@ -475,6 +475,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar-simple/avatar-simple.component.html":
+  /*!*************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar-simple/avatar-simple.component.html ***!
+    \*************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsAvatarSimpleAvatarSimpleComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n  <ion-row style=\"display: block;\">\n    <h3 class=\"text-avatar\">{{nombreCompleto}}</h3>\n    <p class=\"subtext-avatar\">{{parentezco}}</p>\n  </ion-row>\n\n";
+    /***/
+  },
+
+  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar/avatar.component.html":
   /*!***********************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar/avatar.component.html ***!
@@ -510,7 +530,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n        <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n      </ion-row>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>";
+    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>";
     /***/
   },
 
@@ -531,6 +551,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     __webpack_exports__["default"] = "<mat-card style=\"padding: 0;\" (click)=\"openGenerico(modulo)\">\n  <img class={{classImagen}} src={{rutaImagen}}>\n  <mat-card-header style=\"padding-left: 16px;\">\n      <mat-card-title style=\"padding-top: 16px;\" class=\"ion-text-capitalize\">{{modulo.toLowerCase()}}</mat-card-title>\n  </mat-card-header>\n</mat-card>\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/pagina-mensajes/pagina-mensajes.component.html":
+  /*!*****************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/pagina-mensajes/pagina-mensajes.component.html ***!
+    \*****************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsPaginaMensajesPaginaMensajesComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"centrado ion-no-padding\">\r\n    <h1>{{titulo}}</h1>\r\n    <p class=\"texto-1 ion-text-left\">{{contenido}}</p>\r\n    <!-- boton volver -->\r\n    <div class=\"row mt-32\">\r\n        <button mat-raised-button color=\"primary\" style=\"width: 100%;\" class=\"boton\" (click)=\"volver()\">VOLVER</button>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -853,6 +893,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.InterconsultasPageModule;
         });
       }
+    }, {
+      path: 'ajustes-familia',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | ajustes-familia-ajustes-familia-module */
+        "ajustes-familia-ajustes-familia-module").then(__webpack_require__.bind(null,
+        /*! ./ajustes-familia/ajustes-familia.module */
+        "./src/app/ajustes-familia/ajustes-familia.module.ts")).then(function (m) {
+          return m.AjustesFamiliaPageModule;
+        });
+      }
+    }, {
+      path: 'seleccion-usuario',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | seleccion-usuario-seleccion-usuario-module */
+        "seleccion-usuario-seleccion-usuario-module").then(__webpack_require__.bind(null,
+        /*! ./seleccion-usuario/seleccion-usuario.module */
+        "./src/app/seleccion-usuario/seleccion-usuario.module.ts")).then(function (m) {
+          return m.SeleccionUsuarioPageModule;
+        });
+      }
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -998,8 +1060,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   switch (_context.prev = _context.next) {
                     case 0:
                       this.statusBar.styleDefault();
-                      this.splashScreen.hide();
-                      this.notificacion.buscarCitas();
+                      this.splashScreen.hide(); //this.notificacion.buscarCitas();
+
+                      this.notificacion.buscarCitasTodas();
                       _context.next = 5;
                       return this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].production);
 
@@ -1319,69 +1382,87 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_material_select__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
+    var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
+    /*! @angular/material/datepicker */
+    "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/datepicker.js");
+    /* harmony import */
+
+
+    var _angular_material_select__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
     /*! @angular/material/select */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
     /* harmony import */
 
 
-    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
+    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
     /*! @angular/material/icon */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
     /* harmony import */
 
 
-    var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
+    var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
     /*! @ionic-native/local-notifications/ngx */
     "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
+    var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
     /*! @ionic-native/background-mode/ngx */
     "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
+    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
     /*! ../environments/firebaseconfig */
     "./src/environments/firebaseconfig.ts");
     /* harmony import */
 
 
-    var _angular_fire__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
+    var _angular_fire__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
     /*! @angular/fire */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
     /* harmony import */
 
 
-    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
+    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
     /*! @angular/fire/database */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
     /* harmony import */
 
 
-    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
+    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
     /*! @angular/fire/storage */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
     /* harmony import */
 
 
-    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
+    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
     /*! @angular/fire/messaging */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
     /* harmony import */
 
 
-    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
+    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
     /*! @ionic-native/firebase-messaging/ngx */
     "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _components_components_module__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(
     /*! ./components/components.module */
-    "./src/app/components/components.module.ts"); //nativos
+    "./src/app/components/components.module.ts");
+    /* harmony import */
+
+
+    var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(
+    /*! @angular/material-moment-adapter */
+    "./node_modules/@angular/material-moment-adapter/__ivy_ngcc__/fesm2015/material-moment-adapter.js");
+    /* harmony import */
+
+
+    var _angular_material_core__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(
+    /*! @angular/material/core */
+    "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js"); //nativos
     //Pipes
     //servicios
 
@@ -1392,6 +1473,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     import { MatFormField  } from '@angular/material/form-field/label'; */
 
     /* import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'; */
+    //material datepicker
 
 
     var AppModule = function AppModule() {
@@ -1401,15 +1483,104 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"], _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__["CelsiusPipe"], _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__["SplitPipe"], _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__["MomentPipe"], _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__["FilterPipe"]],
       entryComponents: [],
-      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_41__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_42__["MatIconModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_51__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_46__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__["firebaseConfig"])],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_43__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_44__["BackgroundMode"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__["FirebaseMessaging"],
+      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__["MatIconModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__["MatDatepickerModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_52__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_47__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__["firebaseConfig"])],
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_45__["BackgroundMode"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__["FirebaseMessaging"],
       /*  BackgroundGeolocation, */
       {
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"],
+        useValue: 'es-CL'
+      }, {
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["DateAdapter"],
+        useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MomentDateAdapter"],
+        deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
+      }, {
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_FORMATS"],
+        useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_FORMATS"]
+      }, {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
       }],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"]]
     })], AppModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/avatar-simple/avatar-simple.component.scss":
+  /*!***********************************************************************!*\
+    !*** ./src/app/components/avatar-simple/avatar-simple.component.scss ***!
+    \***********************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsAvatarSimpleAvatarSimpleComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".text-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.15px;\n  color: #000000DE;\n  font-size: 1em;\n  margin-bottom: 0;\n}\n\n.subtext-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.25px;\n  color: #00000099;\n  font-size: 0.875em;\n  margin-bottom: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2ltcGxlL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcY29tcG9uZW50c1xcYXZhdGFyLXNpbXBsZVxcYXZhdGFyLXNpbXBsZS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2ltcGxlL2F2YXRhci1zaW1wbGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxxQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQUFBO0VBQ0EsZ0JBQUE7QUNDSjs7QURDRTtFQUNFLHFCQUFBO0VBQ0Esc0JBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyLXNpbXBsZS9hdmF0YXItc2ltcGxlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRleHQtYXZhdGFye1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMTVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwREU7XHJcbiAgICBmb250LXNpemU6IDFlbTtcclxuICAgIG1hcmdpbi1ib3R0b206IDA7XHJcbiAgfVxyXG4gIC5zdWJ0ZXh0LWF2YXRhcntcclxuICAgIGZvbnQtZmFtaWx5OiAnUm9ib3RvJztcclxuICAgIGxldHRlci1zcGFjaW5nOiAwLjI1cHg7XHJcbiAgICBjb2xvcjogIzAwMDAwMDk5O1xyXG4gICAgZm9udC1zaXplOiAwLjg3NWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB9IiwiLnRleHQtYXZhdGFyIHtcbiAgZm9udC1mYW1pbHk6IFwiUm9ib3RvXCI7XG4gIGxldHRlci1zcGFjaW5nOiAwLjE1cHg7XG4gIGNvbG9yOiAjMDAwMDAwREU7XG4gIGZvbnQtc2l6ZTogMWVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufVxuXG4uc3VidGV4dC1hdmF0YXIge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMjVweDtcbiAgY29sb3I6ICMwMDAwMDA5OTtcbiAgZm9udC1zaXplOiAwLjg3NWVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufSJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/avatar-simple/avatar-simple.component.ts":
+  /*!*********************************************************************!*\
+    !*** ./src/app/components/avatar-simple/avatar-simple.component.ts ***!
+    \*********************************************************************/
+
+  /*! exports provided: AvatarSimpleComponent */
+
+  /***/
+  function srcAppComponentsAvatarSimpleAvatarSimpleComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AvatarSimpleComponent", function () {
+      return AvatarSimpleComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+    var AvatarSimpleComponent = /*#__PURE__*/function () {
+      function AvatarSimpleComponent() {
+        _classCallCheck(this, AvatarSimpleComponent);
+      }
+
+      _createClass(AvatarSimpleComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return AvatarSimpleComponent;
+    }();
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarSimpleComponent.prototype, "nombreCompleto", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarSimpleComponent.prototype, "parentezco", void 0);
+    AvatarSimpleComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-avatar-simple',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./avatar-simple.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar-simple/avatar-simple.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./avatar-simple.component.scss */
+      "./src/app/components/avatar-simple/avatar-simple.component.scss"))["default"]]
+    })], AvatarSimpleComponent);
     /***/
   },
 
@@ -1751,15 +1922,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./item-home/item-home.component */
     "./src/app/components/item-home/item-home.component.ts");
+    /* harmony import */
+
+
+    var _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    /*! ./avatar-simple/avatar-simple.component */
+    "./src/app/components/avatar-simple/avatar-simple.component.ts");
+    /* harmony import */
+
+
+    var _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! ./pagina-mensajes/pagina-mensajes.component */
+    "./src/app/components/pagina-mensajes/pagina-mensajes.component.ts");
 
     var ComponentsModule = function ComponentsModule() {
       _classCallCheck(this, ComponentsModule);
     };
 
     ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"]],
+      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_5__["TextAvatarModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButtonModule"]],
-      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"]]
+      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"]]
     })], ComponentsModule);
     /***/
   },
@@ -1911,6 +2094,131 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /*! ./item-home.component.scss */
       "./src/app/components/item-home/item-home.component.scss"))["default"]]
     })], ItemHomeComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/pagina-mensajes/pagina-mensajes.component.scss":
+  /*!***************************************************************************!*\
+    !*** ./src/app/components/pagina-mensajes/pagina-mensajes.component.scss ***!
+    \***************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsPaginaMensajesPaginaMensajesComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".centrado {\n  text-align: center;\n  width: 100%;\n  height: 50%;\n  position: absolute;\n  top: 25%;\n  padding-left: 60px;\n  padding-right: 60px;\n}\n\n.titulo-item-2 {\n  font-size: 16px;\n  color: #000000DE;\n}\n\n.mt-32 {\n  margin-top: 32px;\n}\n\n.texto-1 {\n  font-size: 1.3em;\n  color: #575657;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmEtbWVuc2FqZXMvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxjb21wb25lbnRzXFxwYWdpbmEtbWVuc2FqZXNcXHBhZ2luYS1tZW5zYWplcy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmEtbWVuc2FqZXMvcGFnaW5hLW1lbnNhamVzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQUE7RUFDQSxXQUFBO0VBQ0EsV0FBQTtFQUNBLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7QUNDSjs7QURDQTtFQUNJLGVBQUE7RUFDQSxnQkFBQTtBQ0VKOztBREFBO0VBQ0ksZ0JBQUE7QUNHSjs7QUREQTtFQUNJLGdCQUFBO0VBQ0EsY0FBQTtBQ0lKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmEtbWVuc2FqZXMvcGFnaW5hLW1lbnNhamVzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNlbnRyYWRve1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgd2lkdGg6IDEwMCU7ICAgICAgIFxyXG4gICAgaGVpZ2h0OiA1MCU7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICB0b3A6MjUlOyAgXHJcbiAgICBwYWRkaW5nLWxlZnQ6IDYwcHg7XHJcbiAgICBwYWRkaW5nLXJpZ2h0OiA2MHB4OyAgICAgICAgIFxyXG59XHJcbi50aXR1bG8taXRlbS0ye1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxufVxyXG4ubXQtMzJ7XHJcbiAgICBtYXJnaW4tdG9wOiAzMnB4O1xyXG59XHJcbi50ZXh0by0xe1xyXG4gICAgZm9udC1zaXplOiAxLjNlbTtcclxuICAgIGNvbG9yOiAjNTc1NjU3O1xyXG4gICAgXHJcbn0iLCIuY2VudHJhZG8ge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDUwJTtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDI1JTtcbiAgcGFkZGluZy1sZWZ0OiA2MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA2MHB4O1xufVxuXG4udGl0dWxvLWl0ZW0tMiB7XG4gIGZvbnQtc2l6ZTogMTZweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbn1cblxuLm10LTMyIHtcbiAgbWFyZ2luLXRvcDogMzJweDtcbn1cblxuLnRleHRvLTEge1xuICBmb250LXNpemU6IDEuM2VtO1xuICBjb2xvcjogIzU3NTY1Nztcbn0iXX0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/pagina-mensajes/pagina-mensajes.component.ts":
+  /*!*************************************************************************!*\
+    !*** ./src/app/components/pagina-mensajes/pagina-mensajes.component.ts ***!
+    \*************************************************************************/
+
+  /*! exports provided: PaginaMensajesComponent */
+
+  /***/
+  function srcAppComponentsPaginaMensajesPaginaMensajesComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "PaginaMensajesComponent", function () {
+      return PaginaMensajesComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../app/services/ServicioUtiles */
+    "./src/app/services/ServicioUtiles.ts");
+
+    var PaginaMensajesComponent = /*#__PURE__*/function () {
+      function PaginaMensajesComponent(navCtrl, toast, modalCtrl, platform, loading, menu, utiles) {
+        _classCallCheck(this, PaginaMensajesComponent);
+
+        this.navCtrl = navCtrl;
+        this.toast = toast;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.loading = loading;
+        this.menu = menu;
+        this.utiles = utiles;
+        this.irA = 'inicio';
+      }
+
+      _createClass(PaginaMensajesComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }, {
+        key: "volver",
+        value: function volver() {
+          console.log('volver');
+          this.navCtrl.navigateRoot(this.irA);
+        }
+      }]);
+
+      return PaginaMensajesComponent;
+    }();
+
+    PaginaMensajesComponent.ctorParameters = function () {
+      return [{
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"]
+      }, {
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
+      }];
+    };
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], PaginaMensajesComponent.prototype, "titulo", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], PaginaMensajesComponent.prototype, "contenido", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], PaginaMensajesComponent.prototype, "irA", void 0);
+    PaginaMensajesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-pagina-mensajes',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./pagina-mensajes.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/pagina-mensajes/pagina-mensajes.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./pagina-mensajes.component.scss */
+      "./src/app/components/pagina-mensajes/pagina-mensajes.component.scss"))["default"]]
+    })], PaginaMensajesComponent);
     /***/
   },
 
@@ -2313,7 +2621,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 if (retorno.UsuariosFamilia) {
                   userFamilia = JSON.stringify(retorno.UsuariosFamilia); //variable de sessión muy importante para el resto de la app.
 
-                  sessionStorage.setItem("UsuariosFamilia", userFamilia);
+                  localStorage.setItem("UsuariosFamilia", userFamilia);
                 }
 
                 _this2.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
@@ -2351,7 +2659,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "logout",
         value: function logout() {
-          sessionStorage.clear();
+          sessionStorage.clear(); //limpiamos eventos locales
+
+          localStorage.removeItem('NOTIFICACIONES_LOCALES_EVENTOS');
           this.username = '';
           this.loggedIn = false;
         }
@@ -3047,17 +3357,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var data = this.http.get(urlCorta, {}, {});
           return data;
         }
+        /*     getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
+                let urlCorta = environment.API_ENDPOINT + 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+                let data = this.httpClient.get(urlCorta,{});
+                return data;
+            }
+            getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
+                let urlCorta = environment.API_ENDPOINT+ 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+                let data = this.http.get(urlCorta, {}, {});
+                return data;
+            } */
+
       }, {
         key: "getDisponibilidadApi",
-        value: function getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token) {
-          var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+        value: function getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId) {
+          var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
           var data = this.httpClient.get(urlCorta, {});
           return data;
         }
       }, {
         key: "getDisponibilidadApiNative",
-        value: function getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId, token) {
-          var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+        value: function getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId) {
+          var urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
           var data = this.http.get(urlCorta, {}, {});
           return data;
         } //las operaciones pueden ser
@@ -3158,6 +3479,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             "AnnoConsulta": annoConsulta.toString()
           };
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoApi';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
+        } //estos metodos entregan los eventos para las notificaciones
+
+      }, {
+        key: "entregaPorMesNuevoLivianoApi",
+        value: function entregaPorMesNuevoLivianoApi(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+          var body = JSON.stringify({
+            UspId: uspId.toString(),
+            IdRyf: idRyf.toString(),
+            NodId: nodId.toString(),
+            NumeroMes: numeroMes.toString(),
+            AnnoConsulta: annoConsulta.toString()
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoLivianoApi';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "entregaPorMesNuevoLivianoApiNative",
+        value: function entregaPorMesNuevoLivianoApiNative(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "UspId": uspId.toString(),
+            "IdRyf": idRyf.toString(),
+            "NodId": nodId.toString(),
+            "NumeroMes": numeroMes.toString(),
+            "AnnoConsulta": annoConsulta.toString()
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoLivianoApi';
           this.http.setDataSerializer('json');
           return this.http.post(url, body, {});
         }
@@ -3965,6 +4327,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'InformarPersona';
           this.http.setDataSerializer('json');
           return this.http.post(url, body, {});
+        } //contactabilidad
+
+      }, {
+        key: "getContactabilidad",
+        value: function getContactabilidad(run) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Contactabilidad?run=' + run;
+          var data = this.httpClient.get(url, {});
+          return data;
+        }
+      }, {
+        key: "getContactabilidadNative",
+        value: function getContactabilidadNative(run) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Contactabilidad?run=' + run;
+          var data = this.http.get(url, {}, {});
+          return data;
         }
       }]);
 
@@ -4645,6 +5022,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.vacunasCovid = []; //inicializamos los valores
 
         moment__WEBPACK_IMPORTED_MODULE_4__["locale"]('es');
+        localStorage.removeItem('NOTIFICACIONES_LOCALES_EVENTOS');
       }
 
       _createClass(ServicioNotificaciones, [{
@@ -4760,6 +5138,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     console.log(nuevas);
                   }
+                })["catch"](function (error) {
+                  console.log(error.message);
+
+                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               } else {
                 this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
@@ -4791,6 +5173,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     console.log(nuevas);
                   }
+                })["catch"](function (error) {
+                  console.log(error.message);
+
+                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               }
             } else {
@@ -4824,6 +5210,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     console.log(nuevas);
                   }
+                }, function (error) {
+                  console.log(error.message);
+
+                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               } else {
                 this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
@@ -4855,10 +5245,308 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     console.log(nuevas);
                   }
+                }, function (error) {
+                  console.log(error.message);
+
+                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               }
             }
           }
+        }
+      }, {
+        key: "agregarEntidadLocal",
+        value: function agregarEntidadLocal(titulo, nombreCompleto, indice, id, contenido) {
+          var entidad = {
+            Titulo: titulo,
+            Subtitulo: nombreCompleto,
+            Contenido: contenido,
+            Id: id,
+            Indice: indice
+          };
+
+          if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            //SI YA EXISTE HACEMOS PUSH
+            var eventoEsta = false;
+            var lista = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')); //primero revisamos que el evento no este ya agregado
+
+            var evento = lista.filter(function (p) {
+              return p.Contenido == contenido;
+            });
+
+            if (evento && evento.length > 0) {
+              eventoEsta = true;
+            }
+
+            if (eventoEsta == false) {
+              lista.push(entidad);
+              localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(lista));
+            }
+          } else {
+            var _lista = [];
+
+            _lista.push(entidad);
+
+            localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(_lista));
+          }
+        }
+      }, {
+        key: "buscarCitasTodas",
+        value: function buscarCitasTodas() {
+          var _this7 = this;
+
+          var indice = 1000;
+          var usuario = null;
+
+          if (localStorage.getItem('UsuarioAps')) {
+            usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+          }
+
+          var annoConsultar = 0;
+          var mesConsultar = 0;
+          this.citasArr = [];
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_4__();
+          var fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+          var mesActual = {
+            mes: fechaActual.month() + 1,
+            anno: fechaActual.year()
+          };
+          var mesEvaluar = {
+            mes: fechaEvaluar.month() + 1,
+            anno: fechaEvaluar.year()
+          }; //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
+
+          if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno) {
+            //es le mismo mes
+            mesConsultar = mesActual.mes;
+            annoConsultar = mesActual.anno;
+          } else {
+            //hay diferencia, por tanto se toma el ultimo mes
+            mesConsultar = mesEvaluar.mes;
+            annoConsultar = mesEvaluar.anno;
+          }
+
+          if (usuario != null) {
+            if (this.utiles.isAppOnDevice()) {
+              //llamada nativa
+              if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                this.citas.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
+                  //aca debemos procesar las citas
+                  var todas = JSON.parse(response.data);
+
+                  if (todas && todas.length > 0) {
+                    for (var i = 0; i < todas.length; i++) {
+                      if (todas[i].Eventos && todas[i].Eventos.length > 0) {
+                        //foreach a LOS EVENTOS
+                        for (var s = 0; s < todas[i].Eventos.length; s++) {
+                          var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                          var hora = todas[i].Eventos[s].HoraInicioFin;
+                          var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                          var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                          var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                          var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+
+                          _this7.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
+
+                          indice++;
+
+                          _this7.crearNotificacion(id, titulo, texto);
+                        }
+                      }
+                    }
+                  }
+                })["catch"](function (error) {
+                  console.log(error.message);
+
+                  _this7.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                });
+              } else {
+                this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
+                  //aca debemos procesar las citas
+                  var todas = JSON.parse(response.data);
+
+                  if (todas && todas.length > 0) {
+                    //aplicamos el primer filtro
+                    var nuevas = todas.filter(function (e) {
+                      return e.Mostrar == true;
+                    });
+                    var total = nuevas.filter(function (e) {
+                      return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+                    });
+
+                    if (total && total.length > 0) {
+                      //por cada uno de estos debemos hacer un mensaje
+                      for (var i = 0; i < total.length; i++) {
+                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = total[i].Eventos[0].HoraInicioFin;
+                        var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                        var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                        var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+
+                        _this7.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
+
+                        indice++;
+
+                        _this7.crearNotificacion(id, titulo, texto);
+                      }
+                    }
+
+                    console.log(nuevas);
+                  }
+                })["catch"](function (error) {
+                  console.log(error.message);
+
+                  _this7.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                });
+              }
+            } else {
+              //llamada web
+              if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                this.citas.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
+                  var todas = response;
+
+                  if (todas && todas.length > 0) {
+                    for (var i = 0; i < todas.length; i++) {
+                      if (todas[i].Eventos && todas[i].Eventos.length > 0) {
+                        //foreach a LOS EVENTOS
+                        for (var s = 0; s < todas[i].Eventos.length; s++) {
+                          var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                          var hora = todas[i].Eventos[s].HoraInicioFin;
+                          var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                          var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                          var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                          var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+
+                          _this7.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
+
+                          indice++;
+
+                          _this7.crearNotificacion(id, titulo, texto);
+                        }
+                      }
+                    }
+                  }
+                });
+              } else {
+                this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
+                  //aca debemos procesar las citas
+                  var todas = response;
+
+                  if (todas && todas.length > 0) {
+                    //aplicamos el primer filtro
+                    var nuevas = todas.filter(function (e) {
+                      return e.Mostrar == true;
+                    });
+                    var total = nuevas.filter(function (e) {
+                      return moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+                    });
+
+                    if (total && total.length > 0) {
+                      //por cada uno de estos debemos hacer un mensaje
+                      for (var i = 0; i < total.length; i++) {
+                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = total[i].Eventos[0].HoraInicioFin;
+                        var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                        var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                        var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+
+                        _this7.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
+
+                        indice++;
+
+                        _this7.crearNotificacion(id, titulo, texto);
+                      }
+                    }
+
+                    console.log(nuevas);
+                  }
+                }, function (error) {
+                  console.log(error.message);
+
+                  _this7.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                });
+              }
+            }
+          }
+        }
+      }, {
+        key: "construyeNotificaciones",
+        value: function construyeNotificaciones(todas) {
+          var arr = [];
+          var indice = 1;
+
+          if (localStorage.getItem('UsuarioAps')) {
+            var usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+
+            if (usuario && usuario.VacunasCovid) {
+              if (usuario.VacunasCovid.length > 0) {
+                usuario.VacunasCovid.forEach(function (element) {
+                  var entidad = {
+                    Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                    Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                    Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                    Id: element.Id,
+                    Indice: indice
+                  };
+                  arr.push(entidad);
+                  indice++;
+                });
+              }
+            }
+          } //local storage
+
+
+          if (localStorage.getItem('UsuariosFamilia')) {
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+
+            if (usuarios && usuarios.length > 0) {
+              usuarios.forEach(function (usuario) {
+                if (usuario && usuario.VacunasCovid.length > 0) {
+                  usuario.VacunasCovid.forEach(function (element) {
+                    var entidad = {
+                      Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                      Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                      Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                      Id: element.Id,
+                      Indice: indice
+                    };
+                    arr.push(entidad);
+                    indice++;
+                  });
+                }
+              });
+            }
+          }
+
+          if (todas && todas.length > 0) {
+            for (var i = 0; i < todas.length; i++) {
+              if (todas[i].Eventos && todas[i].Eventos.length > 0) {
+                //foreach a LOS EVENTOS
+                for (var s = 0; s < todas[i].Eventos.length; s++) {
+                  var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                  var hora = todas[i].Eventos[s].HoraInicioFin;
+                  var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                  var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                  var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                  var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+
+                  var entidad = {
+                    Titulo: titulo,
+                    Subtitulo: todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
+                    Contenido: texto,
+                    Id: id,
+                    Indice: indice
+                  };
+                  arr.push(entidad);
+                  indice++;
+                }
+              }
+            }
+          }
+
+          return arr;
         }
       }]);
 
@@ -5009,11 +5697,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 });
               }
             }
-          } //session storage
+          } //local storage
 
 
-          if (sessionStorage.getItem('UsuariosFamilia')) {
-            var usuarios = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+          if (localStorage.getItem('UsuariosFamilia')) {
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
 
             if (usuarios && usuarios.length > 0) {
               usuarios.forEach(function (usuario) {
@@ -5032,9 +5720,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
               });
             }
+          } //estas son nottificaciones que se obtuvieron de los eventos
+
+
+          if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+
+            if (listaEventos != null && listaEventos.length > 0) {
+              listaEventos.forEach(function (evento) {
+                evento.Indice = indice;
+                lista.push(evento);
+                indice++;
+              });
+            }
           }
 
           return lista;
+        }
+      }, {
+        key: "removeCita",
+        value: function removeCita(idCita) {
+          if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+
+            if (listaEventos != null && listaEventos.length > 0) {
+              var listaSinElemento = listaEventos.filter(function (p) {
+                return p.Id != idCita;
+              }); //esta es la nueva lista
+
+              if (listaSinElemento && listaSinElemento.length > 0) {
+                localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(listaSinElemento));
+              }
+            }
+          }
         }
       }]);
 
@@ -5534,7 +6252,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "procesarRespuestaMapa",
         value: function procesarRespuestaMapa(objeto) {
-          var _this7 = this;
+          var _this8 = this;
 
           //lo cambiamos a local storage para hacerlo más global
           //y no consultar tantas veces para ocupar la api
@@ -5550,8 +6268,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaCom) {
-                    _this7.comuna = element.long_name;
-                    localStorage.setItem('comuna', _this7.comuna);
+                    _this8.comuna = element.long_name;
+                    localStorage.setItem('comuna', _this8.comuna);
                   }
 
                   var busquedaReg = element.types.find(function (ele) {
@@ -5559,8 +6277,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaReg) {
-                    _this7.region = element.long_name;
-                    localStorage.setItem('region', _this7.region);
+                    _this8.region = element.long_name;
+                    localStorage.setItem('region', _this8.region);
                   }
 
                   var busquedaProv = element.types.find(function (ele) {
@@ -5568,8 +6286,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaProv) {
-                    _this7.provincia = element.long_name;
-                    localStorage.setItem('provincia', _this7.provincia);
+                    _this8.provincia = element.long_name;
+                    localStorage.setItem('provincia', _this8.provincia);
                   }
 
                   var busquedaPais = element.types.find(function (ele) {
@@ -5577,8 +6295,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaPais) {
-                    _this7.pais = element.long_name;
-                    localStorage.setItem('pais', _this7.pais);
+                    _this8.pais = element.long_name;
+                    localStorage.setItem('pais', _this8.pais);
                   }
                 });
               }
@@ -6322,6 +7040,165 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           return arr;
+        }
+      }, {
+        key: "actualizarContactabilidad",
+        value: function actualizarContactabilidad(contactabilidad) {
+          //buscamos al usuario en local sttorage   
+          if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+
+            if (usu) {
+              if (usu.Rut == contactabilidad.Run) {
+                usu.Contactabilidad = contactabilidad;
+                localStorage.setItem('UsuarioAps', JSON.stringify(usu));
+              }
+            }
+          }
+
+          if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+
+            if (usuarios && usuarios.length > 0) {
+              for (var i = 0; i < usuarios.length; i++) {
+                if (usuarios[i].Rut == contactabilidad.Run) {
+                  usuarios[i].Contactabilidad = contactabilidad;
+                  existe = true;
+                }
+              }
+            }
+
+            if (existe) {
+              localStorage.setItem('UsuariosFamilia', JSON.stringify(usuarios));
+            }
+          }
+        } //entrega true si tiene familia asociada
+
+      }, {
+        key: "tieneFamilia",
+        value: function tieneFamilia() {
+          var retorno = false;
+
+          if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+
+            if (usuarios && usuarios.length > 0) {
+              retorno = true;
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "entregaUsuario",
+        value: function entregaUsuario(id) {
+          //buscamos al usuario en local sttorage
+          var usuario = null;
+
+          if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+
+            if (usu) {
+              if (usu.Id == id) {
+                usuario = usu;
+              }
+            }
+          }
+
+          if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+
+            if (usuarios && usuarios.length > 0) {
+              for (var i = 0; i < usuarios.length; i++) {
+                if (usuarios[i].Id == id) {
+                  usuario = usuarios[i];
+                }
+              }
+            }
+          }
+
+          return usuario;
+        }
+      }, {
+        key: "entregaUsuarioNombre",
+        value: function entregaUsuarioNombre(nombre) {
+          //buscamos al usuario en local sttorage
+          var usuario = null;
+
+          if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+
+            if (usu) {
+              var nombreComparar = usu.Nombres + ' ' + usu.ApellidoPaterno + ' ' + usu.ApellidoMaterno;
+
+              if (nombreComparar.toUpperCase() == nombre.toUpperCase()) {
+                usuario = usu;
+              }
+            }
+          }
+
+          if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+
+            if (usuarios && usuarios.length > 0) {
+              for (var i = 0; i < usuarios.length; i++) {
+                var _nombreComparar = usuarios[i].Nombres + ' ' + usuarios[i].ApellidoPaterno + ' ' + usuarios[i].ApellidoMaterno;
+
+                if (_nombreComparar.toUpperCase() == nombre.toUpperCase()) {
+                  usuario = usuarios[i];
+                }
+              }
+            }
+          }
+
+          return usuario;
+        }
+      }, {
+        key: "entregaArregloUsuarios",
+        value: function entregaArregloUsuarios() {
+          var arr = [];
+
+          if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+
+            if (usu) {
+              arr.push(usu);
+            }
+          }
+
+          if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+
+            if (usuarios && usuarios.length > 0) {
+              for (var i = 0; i < usuarios.length; i++) {
+                arr.push(usuarios[i]);
+              }
+            }
+          }
+
+          return arr;
+        }
+      }, {
+        key: "removeCitaNotificacionesLocales",
+        value: function removeCitaNotificacionesLocales(idCita) {
+          if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+
+            if (listaEventos != null && listaEventos.length > 0) {
+              var listaSinElemento = listaEventos.filter(function (p) {
+                return p.Id != idCita;
+              }); //esta es la nueva lista
+
+              if (listaSinElemento && listaSinElemento.length > 0) {
+                localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(listaSinElemento));
+              }
+            }
+          }
         }
       }]);
 

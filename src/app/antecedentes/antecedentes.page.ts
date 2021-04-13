@@ -71,8 +71,8 @@ export class AntecedentesPage implements OnInit {
       }
       
       //manejo de los usuarios de la familia
-      if (sessionStorage.UsuariosFamilia) {
-        this.usuarioApsFamilia = JSON.parse(sessionStorage.UsuariosFamilia);
+      if (localStorage.UsuariosFamilia) {
+        this.usuarioApsFamilia = JSON.parse(localStorage.UsuariosFamilia);
         if (this.usuarioApsFamilia.length > 0){
           for(var s in this.usuarioApsFamilia){
             this.usuarioApsFamilia[s].UrlImagen = this.utiles.entregaImagen(this.usuarioApsFamilia[s]);

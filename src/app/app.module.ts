@@ -45,6 +45,7 @@ import { MatCardModule  } from '@angular/material/card';
 import { MatButtonModule  } from '@angular/material/button';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatInputModule  } from '@angular/material/input';
+import { MatDatepickerModule  } from '@angular/material/datepicker';
 import { MatSelectModule  } from '@angular/material/select'
 import { MatIconModule  } from '@angular/material/icon';
 /* import { MatSelectModule  } from '@angular/material/select';
@@ -60,6 +61,13 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { FirebaseMessaging } from '@ionic-native/firebase-messaging/ngx';
 import { ComponentsModule } from './components/components.module';
+//material datepicker
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -79,6 +87,7 @@ import { ComponentsModule } from './components/components.module';
     MatSelectModule,
     MatInputModule,
     MatIconModule,
+    MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(), 
@@ -117,7 +126,14 @@ import { ComponentsModule } from './components/components.module';
     LocalNotifications,
     BackgroundMode,
     FirebaseMessaging,
-   /*  BackgroundGeolocation, */
+    /*  BackgroundGeolocation, */
+    { provide: MAT_DATE_LOCALE, useValue: 'es-CL' },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar color="primary" mode="ios" style="height: 160px;">
+<ion-header class="back-app">
+  <ion-toolbar color="primary" mode="md" style="height: 160px;">
     <ion-buttons slot="start">
       <ion-back-button [hidden]="estaEditando || estaAgregandoFamilia" (click)="salirRegistro()" defaultHref="/" class="fcw"></ion-back-button>
       <ion-back-button [hidden]="!estaEditando" defaultHref="/home" class="fcw"></ion-back-button>
@@ -11,11 +11,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-fab vertical="top" horizontal="start" slot="fixed" style="top:-30px" [hidden]="!estaEditando">
+<!--   <ion-fab vertical="top" horizontal="start" slot="fixed" style="top:-30px" [hidden]="!estaEditando">
     <ion-fab-button color="danger">
       <ion-icon name="create"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
   <ion-fab vertical="top" horizontal="center" slot="fixed" style="top:-40px;margin-left: -110px; color: white;">
     <h5 style="font-size: 18px;">{{nombreMostrar}}</h5>
   </ion-fab>

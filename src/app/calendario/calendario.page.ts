@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController, IonItem, AlertController } from '@ionic/angular';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController, IonItem, AlertController, IonContent } from '@ionic/angular';
 //parametros
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioInfoUsuario } from '../../app/services/ServicioInfoUsuario';
@@ -14,6 +15,7 @@ import * as moment from 'moment';
 //modal
 import { ModalDetalleCitaPage } from '../modal-detalle-cita/modal-detalle-cita.page';
 import { MomentPipe } from '../../app/pipes/fecha.pipe';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-calendario',
@@ -74,14 +76,18 @@ export class CalendarioPage implements OnInit {
     Alert: '¿Anular la reserva de cita?'
   }
   @ViewChild('myList', { read: IonItem }) list: IonItem;
+  @ViewChild('myListCard', { read: MatCard }) listCarda: MatCard;
+  @ViewChild('content', { static: true }) content: IonContent;
   //para controlar el cargando
   estaCargando = false;
+  tituloLoading = '';
   //para infinity scroll
   private topLimit: number = 5;
   private citasVerticalTodasTop: any = [];
   //para poner la linea en la fecha actual
   fechaActual = '';
   anioActual = '';
+  scrollTo = null;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -179,6 +185,7 @@ export class CalendarioPage implements OnInit {
       duration: 2000
     });
     this.estaCargando =true;
+    this.tituloLoading = 'Obteniendo calendario';
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
@@ -195,6 +202,15 @@ export class CalendarioPage implements OnInit {
           console.log(this.citasVerticalTodasTop);
           loader.dismiss();
           this.estaCargando = false;
+          this.tituloLoading = '';
+          this.scrollListVisible();
+        },error =>{
+          console.log(error.message);
+          this.estaCargando = false;
+          this.tituloLoading = '';
+          loader.dismiss();
+          this.tiene = false;
+          this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
         });
       }
       else {
@@ -214,6 +230,14 @@ export class CalendarioPage implements OnInit {
           console.log(this.citasVerticalTodasTop);
           loader.dismiss();
           this.estaCargando = false;
+          this.tituloLoading = '';
+        }).catch(error =>{
+          console.log(error.message);
+          this.estaCargando = false;
+          this.tituloLoading = '';
+          loader.dismiss();
+          this.tiene = false;
+          this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
         });
       }
     });
@@ -252,6 +276,7 @@ export class CalendarioPage implements OnInit {
       duration: 2000
     });
     this.estaCargando =true;
+    this.tituloLoading = 'Cargando calendario';
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
@@ -278,6 +303,7 @@ export class CalendarioPage implements OnInit {
               console.log(this.citasVerticalTodasTop);
               loader.dismiss();
               this.estaCargando = false;
+              this.tituloLoading = '';
             });
           });
         });
@@ -307,6 +333,7 @@ export class CalendarioPage implements OnInit {
               console.log(this.citasVerticalTodasTop);
               loader.dismiss();
               this.estaCargando = false;
+              this.tituloLoading = '';
             });
           });
         });
@@ -394,6 +421,13 @@ export class CalendarioPage implements OnInit {
   procesarArregloCitasTodas() {
     var contador = 0;
     for (var s in this.citasVerticalTodas) {
+      var fechaActual = moment();
+      var fechaEvento1 = moment(this.citasVerticalTodas[s].FechaCompleta);
+      var dif = fechaActual.diff(fechaEvento1);
+      if (dif < 0){
+        dif = dif *-1;
+      }
+      this.citasVerticalTodas[s].DiferenciaFechas = dif;
       for (var t in this.citasVerticalTodas[s].Eventos) {
         var fechaHora = (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.FechaHora);
         var fechaEvento = moment(fechaHora, 'YYYY-MM-DD').toDate();
@@ -480,6 +514,7 @@ export class CalendarioPage implements OnInit {
       this.citasVerticalTodasTop.sort((a: any, b: any) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta) });
       sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
     }
+    this.scrollListVisible();
   }
   loadData(event) {
     setTimeout(() => {
@@ -667,14 +702,25 @@ export class CalendarioPage implements OnInit {
   }
   async accionCita(boton, evento) {
     if (evento.DetalleEventoMes.Estado && evento.DetalleEventoMes.Estado != '') {
-      var idPaciente = this.usuarioAps.Rut;
+      //aca buscamos al paciente por el nombre
+      let usuarioCita = this.utiles.entregaUsuarioNombre(evento.DetalleEventoMes.NombrePaciente);
+      //var idPaciente = this.usuarioAps.Rut;
+      var idPaciente = usuarioCita.Rut;
       var idCita = evento.DetalleEventoMes.IdElemento;
       var accion = boton.Operacion;
-
-      let loader = await this.loading.create({
+      //original
+/*       let loader = await this.loading.create({
         message: 'Procesado...<br>Información',
         duration: 20000
+      }); */
+      let loader = await this.loading.create({
+        cssClass: 'loading-vacio',
+        showBackdrop: false,
+        spinner: null,
+        duration: 2000
       });
+      this.estaCargando =true;
+      this.tituloLoading = 'Obteniendo respuesta';
 
       await loader.present().then(async () => {
         var retorno = null;
@@ -710,7 +756,8 @@ export class CalendarioPage implements OnInit {
         console.log(mesActual);
         //***************************** */
         this.tratamientoMeses();
-
+        this.estaCargando = false;
+        this.tituloLoading = '';
         if (accion === 'booked') {
           this.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
         }
@@ -718,6 +765,12 @@ export class CalendarioPage implements OnInit {
           this.utiles.presentToast('Cita confirmada con éxito!!', 'bottom', 3000);
         }
         else if (accion === 'cancelled') {
+          //si la cita es cnacelada hay que quitarla de notificaciones locales
+          //obtenemos el id dde la cita
+          if (data.CitasDisponibles && data.CitasDisponibles.length == 1){
+            let idCita = data.CitasDisponibles[0].IdCita;
+            this.utiles.removeCitaNotificacionesLocales(idCita);
+          }
           this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
         }
         if (this.parametrosApp.USA_API_MANAGEMENT()) {
@@ -729,18 +782,37 @@ export class CalendarioPage implements OnInit {
 
       }
       else {
+        this.estaCargando = false;
+        this.tituloLoading = '';
         this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);
       }
     }
     else {
       //error en la operacion
+      this.estaCargando = false;
+      this.tituloLoading = '';
       this.utiles.presentToast('Error en la operación', 'middle', 2000);
     }
     loader.dismiss();
   }
   //abrir pagina de reservar hora
   openReservarHoraPage() {
-    this.navCtrl.navigateRoot('pre-tiposatencion');
+    var tieneFamilia = this.utiles.tieneFamilia();
+    //si tiene familia hay que enviarlo a la pagina de los miembros de la familia
+    if (tieneFamilia){
+      this.navCtrl.navigateRoot('seleccion-usuario');
+    }
+    else{
+      //si no tiene hay que enviarlo a buscar disponibilidad directo
+      //pasando id
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          Id: this.usuarioAps.Id
+        }
+      };
+      this.navCtrl.navigateRoot(['pre-tiposatencion'], navigationExtras);
+    }
+    
   }
   revisaEstado(item) {
     var retorno = false;
@@ -758,4 +830,56 @@ export class CalendarioPage implements OnInit {
     return pi.transform(value, format);
   }
 
+  hasMin = function(attrib) {
+    return (this.length && this.reduce(function(prev, curr){ 
+        return prev[attrib] < curr[attrib] ? prev : curr; 
+    })) || null;
+ }
+  determinaFechaMasCercana(){
+    var fechaActual = moment();
+    if (this.citasVerticalTodasTop && this.citasVerticalTodasTop.length > 0){
+      for(var i=0; i < this.citasVerticalTodasTop.length; i++){
+        var fechaEvento = moment(this.citasVerticalTodasTop[i].FechaCompleta);
+        var dif = fechaActual.diff(fechaEvento);
+        if (dif < 0){
+          dif = dif *-1;
+        }
+        this.citasVerticalTodasTop[i].DiferenciaFechas = dif;
+/*         console.log(dif);
+        console.log(this.citasVerticalTodasTop[i]); */
+      }
+
+    }
+  }
+
+
+  finder(cmp, arr, attr) {
+    var val = arr[0][attr];
+    for(var i=1;i<arr.length;i++) {
+        val = cmp(val, arr[i][attr])
+    }
+    return val;
+  }
+
+  scrollListVisible() {
+    //this.determinaFechaMasCercana();
+    setTimeout(() => {
+      var min = this.finder(Math.min, this.citasVerticalTodasTop, 'DiferenciaFechas');
+      if (min) {
+        var entidad = this.citasVerticalTodasTop.filter(p => p.DiferenciaFechas == min)[0];
+        if (entidad) {
+          //var elemento = this.min();
+          console.log(min);
+          console.log(entidad);
+          let yOffset = document.getElementById(entidad.DiferenciaFechas.toString()).offsetTop;
+          if (yOffset != null){
+            this.content.scrollToPoint(0, yOffset, 600);
+          }
+        }
+
+      }
+    }, 1000);
+
+
+  }
 }

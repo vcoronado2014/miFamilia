@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" class="fcw"></ion-back-button>
     </ion-buttons>
-    <ion-title class="fcw">Ajustes</ion-title>
+    <ion-title class="fcw">Configurar familia</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,30 +19,28 @@
     <ion-icon name="information-circle" style="font-size: 60px;"></ion-icon></p>
   </div>
   <!-- si hay registros -->
-  <div [hidden]="estaCargando" *ngIf="listadoUsuario.length > 0" style="padding-top: 32px;">
-      <div *ngFor="let item of listadoUsuario" (click)="openModalAjustes(item)">
-        <!-- poner avatar -->
+  <!-- lo cambiamos ya que pincharemos en el icono del avatar para cambiar la imagen -->
+<!--   <div [hidden]="estaCargando" *ngIf="listadoUsuario.length > 0" style="padding-top: 32px;">
+      <div *ngFor="let item of listadoUsuario" (click)="irAjustes(item)">
         <app-avatar [lines]="inset" [urlImagen] = "item.UrlImagen" [nombreCompleto]="item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno" [parentezco]="item.Parentezco.Nombre"></app-avatar>
       </div>
-  </div>
-  <!-- comentamos el esqueleton por implementación de progress bar-->
-  <!-- ESQUELETON -->
-<!--   <div *ngIf="listadoUsuario.length == 0">
-    <ion-list>
-      <ion-item>
-        <ion-avatar slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-avatar>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-item>
-      <ion-item>
-        <ion-avatar slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-avatar>
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-item>
-    </ion-list> 
   </div> -->
+  <div [hidden]="estaCargando" *ngIf="listadoUsuario.length > 0" style="padding-top: 32px;">
+    <div *ngFor="let item of listadoUsuario">
+      <ion-item lines="inset">
+        <!-- poner avatar -->
+        <ion-avatar slot="start" (click)="irAjustes(item)">
+          <img *ngIf="item.UrlImagen != ''" src={{item.UrlImagen}}>
+          <img *ngIf="item.UrlImagen == ''" src="../assets/img/no-imagen.jpg">
+        </ion-avatar>
+        <ion-row style="display: block;" (click)="abrirContactabilidad(item)">
+          <h3 class="text-avatar">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</h3>
+          <p class="subtext-avatar">{{item.Parentezco.Nombre}}</p>
+        </ion-row>
+      </ion-item>
+    </div>
+  </div>
 
+  
 
 </ion-content>

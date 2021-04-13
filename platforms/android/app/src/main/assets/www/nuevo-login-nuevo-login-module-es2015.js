@@ -174,7 +174,12 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.cargarForma();
     }
     abrirAsistente() {
-        this.navCtrl.navigateRoot('pre-registro-uno');
+        const navigationExtras = {
+            queryParams: {
+                modulo: 'nuevo-login'
+            }
+        };
+        this.navCtrl.navigateRoot(['pre-registro-uno'], navigationExtras);
     }
     cargarForma() {
         this.forma = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
@@ -465,7 +470,7 @@ let NuevoLoginPage = class NuevoLoginPage {
             retorno.UsuariosFamilia = familia;
             userFamilia = JSON.stringify(retorno.UsuariosFamilia);
             //variable de sessión muy importante para el resto de la app.
-            sessionStorage.setItem("UsuariosFamilia", userFamilia);
+            localStorage.setItem("UsuariosFamilia", userFamilia);
         }
         this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
         this.Mensaje = retorno.RespuestaBase.Mensaje;

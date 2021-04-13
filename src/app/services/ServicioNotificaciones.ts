@@ -27,6 +27,7 @@ export class ServicioNotificaciones{
     ){
       //inicializamos los valores
       moment.locale('es');
+      localStorage.removeItem('NOTIFICACIONES_LOCALES_EVENTOS');
   
     }
     lanzarNotificacionPrueba(){
@@ -133,6 +134,9 @@ export class ServicioNotificaciones{
                             console.log(nuevas);
                         }
 
+                    }).catch(error=>{
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     })
                 }
                 else {
@@ -160,6 +164,9 @@ export class ServicioNotificaciones{
                             console.log(nuevas);
                         }
 
+                    }).catch(error=>{
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     })
                 }
             }
@@ -189,6 +196,9 @@ export class ServicioNotificaciones{
                             console.log(nuevas);
                         }
 
+                    }, error=>{
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     })
                 }
                 else {
@@ -216,11 +226,275 @@ export class ServicioNotificaciones{
                             console.log(nuevas);
                         }
 
+                    },error=>{
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     })
                 }
             }
 
         }
+    }
+    private agregarEntidadLocal(titulo, nombreCompleto, indice, id, contenido){
+
+        let entidad = {
+            Titulo: titulo,
+            Subtitulo: nombreCompleto,
+            Contenido: contenido,
+            Id: id,
+            Indice: indice
+        }
+        if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')){
+            //SI YA EXISTE HACEMOS PUSH
+            var eventoEsta = false;
+            let lista = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            //primero revisamos que el evento no este ya agregado
+            let evento = lista.filter(p=>p.Contenido == contenido);
+            if (evento && evento.length > 0){
+                eventoEsta = true;
+            }
+            if (eventoEsta == false) {
+                lista.push(entidad);
+                localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(lista));
+            }
+        }
+        else{
+            let lista = [];
+            lista.push(entidad);
+            localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(lista));
+        }
+    }
+    buscarCitasTodas(){
+        var indice = 1000;
+        var usuario = null;
+        if (localStorage.getItem('UsuarioAps')){
+            usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+        }
+        var annoConsultar = 0;
+        var mesConsultar = 0;
+        this.citasArr = [];
+        var fechaActual = moment();
+        var fechaEvaluar = moment().add(5, 'days');
+        var mesActual = {
+          mes: fechaActual.month() + 1,
+          anno: fechaActual.year()
+        };
+        var mesEvaluar = {
+            mes: fechaEvaluar.month() + 1,
+            anno: fechaEvaluar.year()
+        };
+        //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
+        if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno){
+            //es le mismo mes
+            mesConsultar = mesActual.mes;
+            annoConsultar = mesActual.anno;
+        }
+        else{
+            //hay diferencia, por tanto se toma el ultimo mes
+            mesConsultar = mesEvaluar.mes;
+            annoConsultar = mesEvaluar.anno;
+        }
+        if (usuario != null){
+            if (this.utiles.isAppOnDevice()){
+                //llamada nativa
+                if (this.parametrosApp.USA_API_MANAGEMENT()){
+                    this.citas.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response: any) => {
+                        //aca debemos procesar las citas
+                        var todas = JSON.parse(response.data);
+
+                        if (todas && todas.length > 0) {
+                            for (var i = 0; i < todas.length; i++){
+                                if (todas[i].Eventos && todas[i].Eventos.length > 0){
+                                    //foreach a LOS EVENTOS
+                                    for(var s = 0; s < todas[i].Eventos.length; s++){
+                                        var fecha = moment(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                        var hora = todas[i].Eventos[s].HoraInicioFin;
+                                        var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                                        var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                                        var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                                        var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                        //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                        this.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
+                                            indice, id, texto);
+                                        indice++;
+                                        this.crearNotificacion(id, titulo, texto);
+                                    }
+                                }
+                            }
+                        }
+
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                    })
+                }
+                else{
+                    this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response: any) => {
+                        //aca debemos procesar las citas
+                        var todas = JSON.parse(response.data);
+                        if (todas && todas.length > 0) {
+                            //aplicamos el primer filtro
+                            var nuevas = todas.filter(e => e.Mostrar == true);
+                            var total = nuevas.filter(e => moment(e.FechaCompleta) >= moment() && moment(e.FechaCompleta) <= moment().add(5, 'days'));
+                            if (total && total.length > 0) {
+                                //por cada uno de estos debemos hacer un mensaje
+                                for (var i = 0; i < total.length; i++) {
+                                    var fecha = moment(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                    var hora = total[i].Eventos[0].HoraInicioFin;
+                                    var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                    var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                    var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                    var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                    //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                    this.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente,
+                                        indice, id, texto);
+                                    indice++;
+                                    this.crearNotificacion(id, titulo, texto);
+                                }
+                            }
+
+                            console.log(nuevas);
+                        }
+
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                    })
+                }
+            }
+            else{
+                //llamada web
+                if (this.parametrosApp.USA_API_MANAGEMENT()){
+                    this.citas.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response: any) => {
+                        var todas = response;
+                        if (todas && todas.length > 0) {
+                            for (var i = 0; i < todas.length; i++){
+                                if (todas[i].Eventos && todas[i].Eventos.length > 0){
+                                    //foreach a LOS EVENTOS
+                                    for(var s = 0; s < todas[i].Eventos.length; s++){
+                                        var fecha = moment(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                        var hora = todas[i].Eventos[s].HoraInicioFin;
+                                        var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                                        var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                                        var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                                        var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                        //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                        this.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
+                                            indice, id, texto);
+                                        indice++;
+                                        this.crearNotificacion(id, titulo, texto);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+                else{
+                    this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response: any) => {
+                        //aca debemos procesar las citas
+                        var todas = response;
+                        if (todas && todas.length > 0) {
+                            //aplicamos el primer filtro
+                            var nuevas = todas.filter(e => e.Mostrar == true);
+                            var total = nuevas.filter(e => moment(e.FechaCompleta) >= moment() && moment(e.FechaCompleta) <= moment().add(5, 'days'));
+                            if (total && total.length > 0) {
+                                //por cada uno de estos debemos hacer un mensaje
+                                for (var i = 0; i < total.length; i++) {
+                                    var fecha = moment(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                    var hora = total[i].Eventos[0].HoraInicioFin;
+                                    var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                    var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                    var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                    var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                    //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                    this.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente,
+                                        indice, id, texto);
+                                    indice++;
+                                    this.crearNotificacion(id, titulo, texto);
+                                }
+                            }
+
+                            console.log(nuevas);
+                        }
+
+                    },error=>{
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                    })
+                }
+            }
+        }
+    }
+    construyeNotificaciones(todas){
+        var arr = [];
+        var indice = 1;
+        if (localStorage.getItem('UsuarioAps')){
+            var usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+            if (usuario && usuario.VacunasCovid){
+                if (usuario.VacunasCovid.length > 0){
+                    usuario.VacunasCovid.forEach(element => {
+                        let entidad = {
+                            Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                            Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                            Contenido: 'Tienes aplicada esta dosis el día ' + moment(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                            Id: element.Id,
+                            Indice: indice
+                        }
+                        arr.push(entidad);
+                        indice++;
+                    });
+                }
+
+            }
+        }
+        //local storage
+        if (localStorage.getItem('UsuariosFamilia')){
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0){
+                usuarios.forEach(usuario => {
+                    if (usuario && usuario.VacunasCovid.length > 0){
+                        usuario.VacunasCovid.forEach(element => {
+                            let entidad = {
+                                Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                                Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                                Contenido: 'Tienes aplicada esta dosis el día ' + moment(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                                Id: element.Id,
+                                Indice: indice
+                            }
+                            arr.push(entidad);
+                            indice++;
+                        });
+                    }
+                })
+            }
+        }
+        if (todas && todas.length > 0) {
+            for (var i = 0; i < todas.length; i++){
+                if (todas[i].Eventos && todas[i].Eventos.length > 0){
+                    //foreach a LOS EVENTOS
+                    for(var s = 0; s < todas[i].Eventos.length; s++){
+                        var fecha = moment(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = todas[i].Eventos[s].HoraInicioFin;
+                        var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                        var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                        var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                        //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                        let entidad = {
+                            Titulo: titulo,
+                            Subtitulo: todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
+                            Contenido: texto,
+                            Id: id,
+                            Indice: indice
+                        }
+                        arr.push(entidad);
+                        indice++;
+
+                    }
+                }
+            }
+        }
+        return arr;
     }
 
 }

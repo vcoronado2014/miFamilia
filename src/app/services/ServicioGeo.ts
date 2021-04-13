@@ -395,4 +395,15 @@ export class ServicioGeo{
 
     return this.http.post(url, body, {});
   }
+  //contactabilidad
+  getContactabilidad(run){
+    let url = environment.API_ENDPOINT + 'Contactabilidad?run=' + run;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  getContactabilidadNative(run){
+    let url = environment.API_ENDPOINT + 'Contactabilidad?run=' + run;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
 }

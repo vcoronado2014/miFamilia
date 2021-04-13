@@ -77,7 +77,12 @@ export class NuevoLoginPage implements OnInit {
     this.cargarForma();
   }
   abrirAsistente(){
-    this.navCtrl.navigateRoot('pre-registro-uno');
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        modulo: 'nuevo-login'
+      }
+    }
+    this.navCtrl.navigateRoot(['pre-registro-uno'], navigationExtras);
   }
   cargarForma(){
     this.forma = new FormGroup({
@@ -375,7 +380,7 @@ export class NuevoLoginPage implements OnInit {
       retorno.UsuariosFamilia = familia;
       userFamilia = JSON.stringify(retorno.UsuariosFamilia);
       //variable de sessión muy importante para el resto de la app.
-      sessionStorage.setItem("UsuariosFamilia", userFamilia);
+      localStorage.setItem("UsuariosFamilia", userFamilia);
     }
 
 

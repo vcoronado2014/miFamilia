@@ -99,6 +99,14 @@ const routes: Routes = [
     path: 'interconsultas',
     loadChildren: () => import('./interconsultas/interconsultas.module').then( m => m.InterconsultasPageModule)
   },
+  {
+    path: 'ajustes-familia',
+    loadChildren: () => import('./ajustes-familia/ajustes-familia.module').then( m => m.AjustesFamiliaPageModule)
+  },
+  {
+    path: 'seleccion-usuario',
+    loadChildren: () => import('./seleccion-usuario/seleccion-usuario.module').then( m => m.SeleccionUsuarioPageModule)
+  },
 
 
 

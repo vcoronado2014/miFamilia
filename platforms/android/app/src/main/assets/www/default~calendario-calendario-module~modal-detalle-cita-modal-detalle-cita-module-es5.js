@@ -21,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"home\">{{data.DetalleEventoMes.Titulo}}</ion-title>\r\n    <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n      <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <div>\r\n\t\t<img src=\"./assets/img/{{data.Imagen}}\" style=\"width:100%\">\r\n  </div>\r\n  <!-- aca debe ir el avatar -->\r\n  <ion-list>\r\n    <ion-item lines=\"none\">\r\n      <ion-label class=\"ion-text-wrap titulo-evento\">{{data.DetalleEventoMes.DescripcionPrincipal}}&nbsp;{{dosis}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <!-- poner avatar -->\r\n      <app-avatar [urlImagen] = \"miImagen\" [nombreCompleto]=\"miNombre\" [parentezco]=\"miParentezco\"></app-avatar>\r\n    </ion-item>\r\n  </ion-list>\r\n  <ion-list>\r\n    <!-- Vacunas administradas y por administrar -->\r\n    <ion-item\r\n      *ngIf=\"data.DetalleEventoMes.Subtitulo == 'Vacuna Administrada' || data.DetalleEventoMes.Subtitulo == 'Vacuna por administrar'\">\r\n      <ion-label>Dosis</ion-label>\r\n      <ion-label class=\"ion-text-capitalize ion-text-wrap\">{{data.DetalleEventoMes.DescripcionSecundaria}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Fecha</ion-label>\r\n      <ion-label class=\"ion-text-wrap\">{{data.DetalleEventoMes.FechaHora}}</ion-label>\r\n    </ion-item>\r\n    <!-- proxima cita -->\r\n    <ion-item *ngIf=\"data.DetalleEventoMes.Subtitulo == 'Próxima Cita' || data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web'\">\r\n      <ion-label>Profesional</ion-label>\r\n      <ion-label class=\"ion-text-capitalize ion-text-wrap\">{{profesional.toLowerCase()}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Establecimiento</ion-label>\r\n      <ion-label class=\"ion-text-capitalize ion-text-wrap\">{{data.DetalleEventoMes.Lugar.toLowerCase()}}  </ion-label>\r\n    </ion-item>\r\n    <!-- tiene farmacos -->\r\n    <div *ngIf=\"farmacos\">\r\n\t\t\t<h3 id =\"tituloPrescripcion\" *ngIf=\"farmacos.length == 0\" margin text-center style=\"font-size: 1.9rem; padding:7px;\"></h3>\r\n\t\t\t<h3 id =\"tituloPrescripcion\" *ngIf=\"farmacos.length > 0\" margin text-center [ngStyle]=\"{'background-color': data.Color}\" style=\"color:#fff; font-size: 1.9rem; padding:7px;\">{{title}}</h3>\r\n    </div>\r\n\t\t\t<ion-item *ngFor='let item of farmacos' class=\"ion-no-padding ion-no-margin\">\t\t\t\t\r\n\t\t\t\t<ion-icon item-start><i class=\"care-pill pill\"></i></ion-icon>\r\n\t\t\t\t<p text-wrap class=\"medic\">{{ split(item.DescripcionPrincipal,\":\",0) }}</p>\r\n\t\t\t\t<p text-wrap class=\"medic down\">{{ split(item.DescripcionPrincipal,\":\",1) }}</p>\t\t\r\n\t\t\t</ion-item>\r\n\t\t<!-- </ion-list> -->\r\n  </ion-list>\r\n  <ion-row class=\"ion-padding-top ion-padding-start\" *ngIf=\"data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web' && data.DetalleEventoMes.Estado != ''\">\r\n      <button *ngIf=\"botonConfirmar.Visible\" (click)=\"presentAlertConfirm(botonConfirmar)\" mat-raised-button color=\"primary\" style=\"margin-right: 16px;\">{{botonConfirmar.Titulo}}</button>\r\n      <button  *ngIf=\"botonReservar.Visible\" (click)=\"presentAlertConfirm(botonReservar)\" mat-raised-button color=\"primary\" style=\"margin-right: 16px;\">{{botonReservar.Titulo}}</button>\r\n      <button *ngIf=\"botonCancelar.Visible\" (click)=\"presentAlertConfirm(botonCancelar)\" mat-stroked-button color=\"primary\">{{botonCancelar.Titulo}}</button>\r\n  </ion-row>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"home\">{{data.DetalleEventoMes.Titulo}}</ion-title>\r\n    <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n      <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloLoading\"></app-progress>\r\n  <div [hidden]=\"estaCargando\">\r\n    <div>\r\n      <img src=\"./assets/img/{{data.Imagen}}\" style=\"width:100%\">\r\n    </div>\r\n    <!-- aca debe ir el avatar -->\r\n    <ion-list>\r\n      <ion-item lines=\"none\">\r\n        <ion-label class=\"ion-text-wrap titulo-evento\">{{data.DetalleEventoMes.DescripcionPrincipal}}&nbsp;{{dosis}}</ion-label>\r\n      </ion-item>\r\n      <ion-item lines=\"none\">\r\n        <!-- poner avatar -->\r\n        <app-avatar [urlImagen] = \"miImagen\" [nombreCompleto]=\"miNombre\" [parentezco]=\"miParentezco\"></app-avatar>\r\n      </ion-item>\r\n    </ion-list>\r\n    <ion-list>\r\n      <!-- Vacunas administradas y por administrar -->\r\n      <ion-item\r\n        *ngIf=\"data.DetalleEventoMes.Subtitulo == 'Vacuna Administrada' || data.DetalleEventoMes.Subtitulo == 'Vacuna por administrar'\">\r\n        <ion-label>Dosis</ion-label>\r\n        <ion-label class=\"ion-text-capitalize ion-text-wrap\">{{data.DetalleEventoMes.DescripcionSecundaria}}</ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>Fecha</ion-label>\r\n        <ion-label class=\"ion-text-wrap\">{{data.DetalleEventoMes.FechaHora}}</ion-label>\r\n      </ion-item>\r\n      <!-- proxima cita -->\r\n      <ion-item *ngIf=\"data.DetalleEventoMes.Subtitulo == 'Próxima Cita' || data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web'\">\r\n        <ion-label>Profesional</ion-label>\r\n        <ion-label class=\"ion-text-capitalize ion-text-wrap\">{{profesional.toLowerCase()}}</ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>Establecimiento</ion-label>\r\n        <ion-label class=\"ion-text-capitalize ion-text-wrap\">{{data.DetalleEventoMes.Lugar.toLowerCase()}}  </ion-label>\r\n      </ion-item>\r\n      <!-- tiene farmacos -->\r\n      <div *ngIf=\"farmacos\">\r\n        <h3 id =\"tituloPrescripcion\" *ngIf=\"farmacos.length == 0\" margin text-center style=\"font-size: 1.9rem; padding:7px;\"></h3>\r\n        <h3 id =\"tituloPrescripcion\" *ngIf=\"farmacos.length > 0\" margin text-center [ngStyle]=\"{'background-color': data.Color}\" style=\"color:#fff; font-size: 1.9rem; padding:7px;\">{{title}}</h3>\r\n      </div>\r\n        <ion-item *ngFor='let item of farmacos' class=\"ion-no-padding ion-no-margin\">\t\t\t\t\r\n          <ion-icon item-start><i class=\"care-pill pill\"></i></ion-icon>\r\n          <p text-wrap class=\"medic\">{{ split(item.DescripcionPrincipal,\":\",0) }}</p>\r\n          <p text-wrap class=\"medic down\">{{ split(item.DescripcionPrincipal,\":\",1) }}</p>\t\t\r\n        </ion-item>\r\n      <!-- </ion-list> -->\r\n    </ion-list>\r\n    <ion-row class=\"ion-padding-top ion-padding-start\" *ngIf=\"data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web' && data.DetalleEventoMes.Estado != ''\">\r\n        <button *ngIf=\"botonConfirmar.Visible\" (click)=\"presentAlertConfirm(botonConfirmar)\" mat-raised-button color=\"primary\" style=\"margin-right: 16px;\">{{botonConfirmar.Titulo}}</button>\r\n        <button  *ngIf=\"botonReservar.Visible\" (click)=\"presentAlertConfirm(botonReservar)\" mat-raised-button color=\"primary\" style=\"margin-right: 16px;\">{{botonReservar.Titulo}}</button>\r\n        <button *ngIf=\"botonCancelar.Visible\" (click)=\"presentAlertConfirm(botonCancelar)\" mat-stroked-button color=\"primary\">{{botonCancelar.Titulo}}</button>\r\n    </ion-row>\r\n  </div>\r\n\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -162,7 +162,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           Operacion: 'cancelled',
           Color: 'danger',
           Alert: '¿Está seguro de anular la cita?'
-        };
+        }; //para procesar
+
+        this.estaCargando = false;
+        this.tituloLoading = '';
       } //QUEDE ACA POR MIENTRARS, ESTOY TRABAJANDO EN LOS ESTILOS
 
 
@@ -202,10 +205,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               this.miParentezco = this.usuarioAps.Parentezco.Nombre;
             }
           } else {
-            this.miNombre = this.data.DetalleEventoMes.NombrePaciente; //this.miImagen = this.utiles.entregaImagen(this.usuarioAps);
+            this.miNombre = this.data.DetalleEventoMes.NombrePaciente; //obtenemos al usuario que corresponde
+            //this.usuarioAps = this.utiles.entregaUsuarioNombre(this.miNombre);
+            //this.miImagen = this.utiles.entregaImagen(this.usuarioAps);
 
-            if (sessionStorage.getItem('UsuariosFamilia')) {
-              var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+            if (localStorage.getItem('UsuariosFamilia')) {
+              var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
 
               if (usuariosFamilia && usuariosFamilia.length > 0) {
                 usuariosFamilia.forEach(function (usu) {
@@ -299,8 +304,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
           if (this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web' && this.data.DetalleEventoMes.Estado != '') {
-            this.cita.IdCita = this.data.DetalleEventoMes.IdElemento;
-            this.cita.IdPaciente = this.usuarioAps.Rut;
+            this.cita.IdCita = this.data.DetalleEventoMes.IdElemento; //aca obtenemos el run del paciente
+
+            var usuarioCita = this.utiles.entregaUsuarioNombre(this.data.DetalleEventoMes.NombrePaciente); //this.cita.IdPaciente = this.usuarioAps.Rut;
+
+            this.cita.IdPaciente = usuarioCita.Rut;
             this.cita.Estado = this.data.DetalleEventoMes.Estado;
 
             if (this.cita.Estado == 'proposed') {
@@ -442,16 +450,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   case 0:
                     idPaciente = this.cita.IdPaciente;
                     idCita = this.cita.IdCita;
-                    accion = boton.Operacion;
+                    accion = boton.Operacion; //original
+
+                    /*     let loader = await this.loading.create({
+                          message: 'Procesado...<br>Información',
+                          duration: 20000
+                        }); */
+
                     _context3.next = 5;
                     return this.loading.create({
-                      message: 'Procesado...<br>Información',
-                      duration: 20000
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null
                     });
 
                   case 5:
                     loader = _context3.sent;
-                    _context3.next = 8;
+                    this.estaCargando = true;
+                    this.tituloLoading = 'Procesando cita';
+                    _context3.next = 10;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
                         var _this4 = this;
@@ -487,7 +504,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       }));
                     });
 
-                  case 8:
+                  case 10:
                   case "end":
                     return _context3.stop();
                 }
@@ -504,6 +521,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (data.Mensaje.Codigo == 'correcto') {
               //todo bien
               //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
+              if (accion == 'cancelled') {
+                //si la cita es cnacelada hay que quitarla de notificaciones locales
+                //obtenemos el id dde la cita
+                if (data.CitasDisponibles && data.CitasDisponibles.length == 1) {
+                  var idCita = data.CitasDisponibles[0].IdCita;
+                  this.utiles.removeCitaNotificacionesLocales(idCita);
+                }
+              }
+
               retorno = data;
             } else {
               this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);
@@ -513,7 +539,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.utiles.presentToast('Error en la operación', 'middle', 2000);
           }
 
-          loader.dismiss(); //ACA SE DEBE ACTUALIZAR LA PAGINA DE AGENDA DISPONIBLE.
+          loader.dismiss();
+          this.estaCargando = false;
+          this.tituloLoading = ''; //ACA SE DEBE ACTUALIZAR LA PAGINA DE AGENDA DISPONIBLE.
 
           this.modalCtrl.dismiss({
             retorno: retorno,

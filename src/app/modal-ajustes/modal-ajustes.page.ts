@@ -119,7 +119,7 @@ export class ModalAjustesPage implements OnInit {
                 }
                 else{
                   //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                   if (usuariosFamilia && usuariosFamilia.length > 0){
                     usuariosFamilia.forEach(usuario => {
                       if (usuario.Id == uspId){
@@ -127,7 +127,7 @@ export class ModalAjustesPage implements OnInit {
                         usuario.UrlImagen =  data;                      }
                     });
                     //ahora serializamos y cambiamos
-                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                    localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                   }
                 }
                   
@@ -161,7 +161,7 @@ export class ModalAjustesPage implements OnInit {
                 }
                 else{
                   //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                   if (usuariosFamilia && usuariosFamilia.length > 0){
                     usuariosFamilia.forEach(usuario => {
                       if (usuario.Id == uspId){
@@ -169,7 +169,7 @@ export class ModalAjustesPage implements OnInit {
                       }
                     });
                     //ahora serializamos y cambiamos
-                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                    localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                   }
                 }                  
     
@@ -215,7 +215,7 @@ export class ModalAjustesPage implements OnInit {
                 }
                 else{
                   //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                   if (usuariosFamilia && usuariosFamilia.length > 0){
                     usuariosFamilia.forEach(usuario => {
                       if (usuario.Id == uspId){
@@ -223,7 +223,7 @@ export class ModalAjustesPage implements OnInit {
                       }
                     });
                     //ahora serializamos y cambiamos
-                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                    localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                   }
                 }
                   
@@ -256,7 +256,7 @@ export class ModalAjustesPage implements OnInit {
                 }
                 else{
                   //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                  var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                  var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                   if (usuariosFamilia && usuariosFamilia.length > 0){
                     usuariosFamilia.forEach(usuario => {
                       if (usuario.Id == uspId){
@@ -264,7 +264,7 @@ export class ModalAjustesPage implements OnInit {
                       }
                     });
                     //ahora serializamos y cambiamos
-                    sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                    localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                   }
                 }
                   
@@ -284,24 +284,15 @@ export class ModalAjustesPage implements OnInit {
   }
   abrirEditar(){
     this.dismiss();
-    this.navCtrl.navigateRoot('contactabilidad');
-    //this.utiles.presentToast("Enviar a la pagina para editar datos de contactabilidad", "bottom", 3000);
-/*     let registro = null;
-    if (localStorage.getItem('REGISTRO')){
-      registro = JSON.parse(localStorage.getItem('REGISTRO'));
-      const navigationExtras: NavigationExtras = {
-        queryParams: {
-          usuario: JSON.stringify(registro),
-          EstaEditando: true
-        }
-      };
-      this.dismiss();
-      this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
-    }
-    else{
-      this.utiles.presentToast("No puedes editar ya que no te encuentras registrado", "bottom", 3000);
-
-    } */
+    //debemos pasar al usuario 
+    let query = {
+      usuario: null
+    };
+    query = { usuario: JSON.stringify(this.usuarioAps) }
+    const navigationExtras: NavigationExtras = {
+      queryParams: query
+    };
+    this.navCtrl.navigateRoot(['contactabilidad'], navigationExtras);
   }
 
 /*   putColor(){

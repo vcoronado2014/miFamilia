@@ -13,7 +13,12 @@
   </ion-refresher> -->
   <!-- progress -->
   <app-progress [mostrar]="estaCargando" titulo="Buscando información del usuario"></app-progress>
-  <ion-card [hidden]="estaCargando">
+  <!-- lo cambiamos por la card -->
+  <ion-item lines="none" [hidden]="estaCargando" style="padding-top: 15px;">
+    <!-- poner avatar -->
+    <app-avatar [urlImagen] = "usuario.UrlImagen" [nombreCompleto]="usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno" [parentezco]="usuario.Parentezco.Nombre"></app-avatar>
+  </ion-item>
+<!--   <ion-card [hidden]="estaCargando">
     <img *ngIf="usuario.UrlImagen != ''" src={{usuario.UrlImagen}} style="width: 100%;" />
     <ion-card-header>
       <ion-card-title class="ion-text-wrap" [style.--color]="miColor">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>
@@ -25,7 +30,7 @@
       </ion-item>
 
     </ion-card-content>
-  </ion-card> 
+  </ion-card>  -->
   <!-- aca viene la lista de datos personales presion, altura, etc-->
   <ion-list [hidden]="estaCargando">
     <ion-item>
@@ -52,7 +57,7 @@
   </ion-list>
   <!-- aca poner el listado de alergias --> 
   <ion-list [hidden]="estaCargando">
-    <ion-list-header>
+    <ion-list-header *ngIf="alergias && alergias.length > 0">
       <h5>{{title}}</h5>
     </ion-list-header>
     <ion-item *ngFor="let item of alergias" class ="lista-alergias">

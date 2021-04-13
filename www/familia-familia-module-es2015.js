@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ajustes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" color=\"danger\">\r\n    <ion-fab-button (click)=\"irValidacion()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando familia\"></app-progress>\r\n  <!-- si no hay registros -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"hayInfo == false\" style=\"padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay familiares para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n  <!-- si hay registros -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario.length > 0\" style=\"padding-top: 32px;\">\r\n      <div *ngFor=\"let item of listadoUsuario\" (click)=\"openModalAjustes(item)\">\r\n        <!-- poner avatar -->\r\n        <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n      </div>\r\n  </div>\r\n  <!-- comentamos el esqueleton por implementación de progress bar-->\r\n  <!-- ESQUELETON -->\r\n<!--   <div *ngIf=\"listadoUsuario.length == 0\">\r\n    <ion-list>\r\n      <ion-item>\r\n        <ion-avatar slot=\"start\">\r\n          <ion-skeleton-text animated></ion-skeleton-text>\r\n        </ion-avatar>\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-avatar slot=\"start\">\r\n          <ion-skeleton-text animated></ion-skeleton-text>\r\n        </ion-avatar>\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-item>\r\n    </ion-list> \r\n  </div> -->\r\n\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Configurar familia</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" color=\"danger\">\r\n    <ion-fab-button (click)=\"irValidacion()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando familia\"></app-progress>\r\n  <!-- si no hay registros -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"hayInfo == false\" style=\"padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay familiares para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n  <!-- si hay registros -->\r\n  <!-- lo cambiamos ya que pincharemos en el icono del avatar para cambiar la imagen -->\r\n<!--   <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario.length > 0\" style=\"padding-top: 32px;\">\r\n      <div *ngFor=\"let item of listadoUsuario\" (click)=\"irAjustes(item)\">\r\n        <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\r\n      </div>\r\n  </div> -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario.length > 0\" style=\"padding-top: 32px;\">\r\n    <div *ngFor=\"let item of listadoUsuario\">\r\n      <ion-item lines=\"inset\">\r\n        <!-- poner avatar -->\r\n        <ion-avatar slot=\"start\" (click)=\"irAjustes(item)\">\r\n          <img *ngIf=\"item.UrlImagen != ''\" src={{item.UrlImagen}}>\r\n          <img *ngIf=\"item.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n        </ion-avatar>\r\n        <ion-row style=\"display: block;\" (click)=\"abrirContactabilidad(item)\">\r\n          <h3 class=\"text-avatar\">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</h3>\r\n          <p class=\"subtext-avatar\">{{item.Parentezco.Nombre}}</p>\r\n        </ion-row>\r\n      </ion-item>\r\n    </div>\r\n  </div>\r\n\r\n  \r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -187,8 +187,8 @@ let FamiliaPage = class FamiliaPage {
                 else
                     this.usuarioAps = { Nombres: '', PrimerApellido: '', SegundoApellido: '', UrlImagen: '' };
                 //manejo de los usuarios de la familia
-                if (sessionStorage.UsuariosFamilia) {
-                    this.usuarioApsFamilia = JSON.parse(sessionStorage.UsuariosFamilia);
+                if (localStorage.UsuariosFamilia) {
+                    this.usuarioApsFamilia = JSON.parse(localStorage.UsuariosFamilia);
                     if (this.usuarioApsFamilia.length > 0) {
                         for (var s in this.usuarioApsFamilia) {
                             this.usuarioApsFamilia[s].UrlImagen = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].URL_FOTOS + this.usuarioApsFamilia[s].UrlImagen;
@@ -218,6 +218,7 @@ let FamiliaPage = class FamiliaPage {
             }));
         });
     }
+    //cambiado por irAjustes
     openModalAjustes(item) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalCtrl.create({
@@ -239,6 +240,25 @@ let FamiliaPage = class FamiliaPage {
             }
         };
         this.navCtrl.navigateRoot(['registro-uno'], navigationExtras);
+    }
+    irAjustes(item) {
+        const navigationExtras = {
+            queryParams: {
+                usuario: JSON.stringify(item)
+            }
+        };
+        this.navCtrl.navigateRoot(['ajustes-familia'], navigationExtras);
+    }
+    abrirContactabilidad(item) {
+        //debemos pasar al usuario 
+        let query = {
+            usuario: null
+        };
+        query = { usuario: JSON.stringify(item) };
+        const navigationExtras = {
+            queryParams: query
+        };
+        this.navCtrl.navigateRoot(['contactabilidad'], navigationExtras);
     }
 };
 FamiliaPage.ctorParameters = () => [

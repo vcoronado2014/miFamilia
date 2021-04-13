@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-menu side=\"start\" menuId=\"first\" contentId=\"content\">\r\n  <ion-header>\r\n    <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n    <ion-toolbar color=\"primary\">\r\n      <!-- <ion-title class=\"fcw\">Menu</ion-title> -->\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-content class=\"back-app\">\r\n    <!-- menu avatar -->\r\n    <ion-item lines=\"none\">\r\n      <ion-avatar slot=\"start\">\r\n        <img *ngIf = \"miImagen != ''\" src={{miImagen}}>\r\n        <img *ngIf = \"miImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n      </ion-avatar>\r\n      <ion-row>\r\n        <h3 class=\"text-avatar\">{{miNombre}}</h3>\r\n        <p class=\"subtext-avatar\">{{miInstitucion}}</p>\r\n        <!-- EDITAR MI PROPIO REGISTRO -->\r\n        <ion-item button lines=\"none\" (click)=\"abrirEditar()\" style=\"--padding-start: 0;\">\r\n          <ion-label>\r\n            Editar mi registro\r\n          </ion-label>\r\n          <ion-icon name=\"create-outline\" slot=\"end\"></ion-icon>\r\n        </ion-item>\r\n      </ion-row>\r\n    </ion-item>\r\n    <ion-list>\r\n      <ion-item *ngFor=\"let p of pages\" (click)=\"openPage(p)\" button lines=\"none\">\r\n        <ion-icon name={{p.icon}} slot=\"start\"></ion-icon>\r\n        <ion-label>\r\n          {{p.title}}\r\n        </ion-label>\r\n      </ion-item>\r\n      <!-- cerrar sesión -->\r\n      <ion-item button lines=\"none\" (click)=\"logout()\">\r\n        <ion-icon name=\"close\" slot=\"start\"></ion-icon>\r\n        <ion-label>\r\n          Cerrar sesión\r\n        </ion-label>\r\n      </ion-item>\r\n\r\n    </ion-list>\r\n\r\n  </ion-content>\r\n</ion-menu>\r\n\r\n<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button class=\"home\"></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"home\">Mi salud familiar</ion-title>\r\n    <!-- icono de notificaciones -->\r\n    <ion-buttons slot=\"end\"  style=\"padding-right: 16px;\" [hidden]=\"notificaciones.length == 0\" (click)=\"mostrarNotificaciones(true)\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"notifications\"></ion-icon>\r\n      <ion-badge slot=\"end\" color=\"danger\" class=\"badge-notificaciones\">{{notificaciones.length}}</ion-badge>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"card-background-page-home back-app\" id=\"content\">\r\n  <!-- notificaciones -->\r\n  <!-- <ion-row [hidden]=\"muestraNotificaciones == false\"> -->\r\n    <ion-slides [hidden]=\"muestraNotificaciones == false\" pager=\"true\" [options]=\"slideOpts\" #mySlider class=\"slides-back ion-padding\">\r\n      <ion-slide *ngFor=\"let info of notificaciones\" style=\"margin:5px;\">\r\n        <div class=\"slide\">\r\n          <h5 class=\"titulo-slide\">{{info.Titulo}}</h5>\r\n          <h6 class=\"titulo-slide\">{{info.Subtitulo}}</h6>\r\n          <p class=\"subtitulo-slide\">{{info.Contenido}}</p>\r\n          <button mat-raised-button color=\"accent\" class=\"boton\" (click)=\"moverSlide(info.Indice)\">SIGUIENTE</button>\r\n        </div>\r\n      </ion-slide>\r\n    </ion-slides>\r\n  <!-- </ion-row> -->\r\n  <!-- card antecedentes -->\r\n  <ion-grid>\r\n<!--     <ion-row>\r\n      <label class=\"text-seleccione\">Seleccione una de las siguientes opciones</label>\r\n    </ion-row> -->\r\n    <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando preferencias\"></app-progress>\r\n\r\n    <ion-row [hidden]=\"estaCargando\" class=\"ion-padding-top\">\r\n      <ion-col size=\"6\" *ngFor=\"let modulo of itemsMenu\">\r\n        <app-item-home [modulo]=\"modulo.NombreModulo\" [classImagen]=\"modulo.ClaseImagen\" [rutaImagen]=\"modulo.Imagen\"></app-item-home>\r\n      </ion-col>\r\n        <!--\r\n        <ion-col size=\"6\">\r\n          <mat-card style=\"padding: 0;\" (click)=\"openAntePage()\">\r\n          <img class=\"imgs-home\" src=\"./assets/imgs_nuevas/antecedentes.png\">\r\n          <mat-card-header style=\"padding-left: 16px;\">\r\n              <mat-card-title style=\"padding-top: 16px;\">Antecedentes</mat-card-title>\r\n          </mat-card-header>\r\n        </mat-card>\r\n      </ion-col> -->\r\n      <!-- card exámenes -->\r\n<!--       <ion-col size=\"6\">\r\n        <mat-card style=\"padding: 0;\" (click)=\"openOrdenesPage()\">\r\n          <img class=\"imgs-home\" src=\"./assets/imgs_nuevas/examenes-de-salud.png\">\r\n          <mat-card-header style=\"padding-left: 16px;\">\r\n              <mat-card-title style=\"padding-top: 16px;\">Exámenes</mat-card-title>\r\n          </mat-card-header>\r\n        </mat-card>\r\n      </ion-col> -->\r\n      <!-- card calendario -->\r\n<!--       <ion-col size=\"6\">\r\n        <mat-card style=\"padding: 0;\" (click)=\"openCalendarioPage()\">\r\n          <img class=\"imgs-home\" src=\"./assets/imgs_nuevas/calendario-01.png\">\r\n          <mat-card-header style=\"padding-left: 16px;\">\r\n              <mat-card-title style=\"padding-top: 16px;\">Calendario</mat-card-title>\r\n          </mat-card-header>\r\n        </mat-card>\r\n      </ion-col> -->\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-menu side=\"start\" menuId=\"first\" contentId=\"content\">\r\n  <ion-header>\r\n    <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n    <ion-toolbar color=\"primary\">\r\n      <!-- <ion-title class=\"fcw\">Menu</ion-title> -->\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-content class=\"back-app\">\r\n    <!-- menu avatar -->\r\n    <ion-item lines=\"none\">\r\n      <ion-avatar slot=\"start\">\r\n        <img *ngIf = \"miImagen != ''\" src={{miImagen}}>\r\n        <img *ngIf = \"miImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n      </ion-avatar>\r\n      <ion-row>\r\n        <h3 class=\"text-avatar\">{{miNombre}}</h3>\r\n        <p class=\"subtext-avatar\">{{miInstitucion}}</p>\r\n        <!-- EDITAR MI PROPIO REGISTRO -->\r\n<!--         <ion-item button lines=\"none\" (click)=\"abrirEditar()\" style=\"--padding-start: 0;\">\r\n          <ion-label>\r\n            Editar mi registro\r\n          </ion-label>\r\n          <ion-icon name=\"create-outline\" slot=\"end\"></ion-icon>\r\n        </ion-item> -->\r\n      </ion-row>\r\n    </ion-item>\r\n    <ion-list>\r\n      <ion-item *ngFor=\"let p of pages\" (click)=\"openPage(p)\" button lines=\"none\">\r\n        <ion-icon name={{p.icon}} slot=\"start\"></ion-icon>\r\n        <ion-label>\r\n          {{p.title}}\r\n        </ion-label>\r\n      </ion-item>\r\n      <!-- ajustes de la cuenta -->\r\n      <ion-item button lines=\"none\" (click)=\"abrirEditar()\">\r\n        <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n        <ion-label>\r\n          Ajustes de la cuenta\r\n        </ion-label>\r\n      </ion-item>\r\n      <!-- cerrar sesión -->\r\n      <ion-item button lines=\"none\" (click)=\"logout()\">\r\n        <ion-icon name=\"close\" slot=\"start\"></ion-icon>\r\n        <ion-label>\r\n          Cerrar sesión\r\n        </ion-label>\r\n      </ion-item>\r\n\r\n    </ion-list>\r\n\r\n  </ion-content>\r\n</ion-menu>\r\n\r\n<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button class=\"home\"></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"home\">Mi salud familiar</ion-title>\r\n    <!-- icono de notificaciones -->\r\n    <ion-buttons slot=\"end\"  style=\"padding-right: 16px;\" [hidden]=\"estaCargandoNotificaciones == false\">\r\n      <ion-spinner color=\"light\"></ion-spinner>\r\n    </ion-buttons>\r\n    <ion-buttons slot=\"end\"  style=\"padding-right: 16px;\" [hidden]=\"estaCargandoNotificaciones && notificaciones.length == 0\" (click)=\"mostrarNotificaciones(true)\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"notifications\"></ion-icon>\r\n      <ion-badge slot=\"end\" color=\"danger\" class=\"badge-notificaciones\">{{notificaciones.length}}</ion-badge>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"card-background-page-home back-app\" id=\"content\">\r\n  <!-- notificaciones -->\r\n  <!-- <ion-row [hidden]=\"muestraNotificaciones == false\"> -->\r\n    <ion-slides [hidden]=\"muestraNotificaciones == false\" pager=\"true\" [options]=\"slideOpts\" #mySlider class=\"slides-back ion-padding\">\r\n      <ion-slide *ngFor=\"let info of notificaciones\" style=\"margin:5px;\">\r\n        <div class=\"slide\">\r\n          <h5 class=\"titulo-slide\">{{info.Titulo}}</h5>\r\n          <h6 class=\"titulo-slide\">{{info.Subtitulo}}</h6>\r\n          <p class=\"subtitulo-slide\">{{info.Contenido}}</p>\r\n          <button mat-raised-button color=\"accent\" class=\"boton\" (click)=\"moverSlide(info.Indice)\">SIGUIENTE</button>\r\n        </div>\r\n      </ion-slide>\r\n    </ion-slides>\r\n  <!-- </ion-row> -->\r\n  <!-- card antecedentes -->\r\n  <ion-grid>\r\n<!--     <ion-row>\r\n      <label class=\"text-seleccione\">Seleccione una de las siguientes opciones</label>\r\n    </ion-row> -->\r\n    <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando preferencias\"></app-progress>\r\n\r\n    <ion-row [hidden]=\"estaCargando\" class=\"ion-padding-top\">\r\n      <ion-col size=\"6\" *ngFor=\"let modulo of itemsMenu\">\r\n        <app-item-home [modulo]=\"modulo.NombreModulo\" [classImagen]=\"modulo.ClaseImagen\" [rutaImagen]=\"modulo.Imagen\"></app-item-home>\r\n      </ion-col>\r\n        <!--\r\n        <ion-col size=\"6\">\r\n          <mat-card style=\"padding: 0;\" (click)=\"openAntePage()\">\r\n          <img class=\"imgs-home\" src=\"./assets/imgs_nuevas/antecedentes.png\">\r\n          <mat-card-header style=\"padding-left: 16px;\">\r\n              <mat-card-title style=\"padding-top: 16px;\">Antecedentes</mat-card-title>\r\n          </mat-card-header>\r\n        </mat-card>\r\n      </ion-col> -->\r\n      <!-- card exámenes -->\r\n<!--       <ion-col size=\"6\">\r\n        <mat-card style=\"padding: 0;\" (click)=\"openOrdenesPage()\">\r\n          <img class=\"imgs-home\" src=\"./assets/imgs_nuevas/examenes-de-salud.png\">\r\n          <mat-card-header style=\"padding-left: 16px;\">\r\n              <mat-card-title style=\"padding-top: 16px;\">Exámenes</mat-card-title>\r\n          </mat-card-header>\r\n        </mat-card>\r\n      </ion-col> -->\r\n      <!-- card calendario -->\r\n<!--       <ion-col size=\"6\">\r\n        <mat-card style=\"padding: 0;\" (click)=\"openCalendarioPage()\">\r\n          <img class=\"imgs-home\" src=\"./assets/imgs_nuevas/calendario-01.png\">\r\n          <mat-card-header style=\"padding-left: 16px;\">\r\n              <mat-card-title style=\"padding-top: 16px;\">Calendario</mat-card-title>\r\n          </mat-card-header>\r\n        </mat-card>\r\n      </ion-col> -->\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>");
 
 /***/ }),
 
@@ -99,8 +99,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
 /* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
 /* harmony import */ var _app_services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioNotificacionesLocales */ "./src/app/services/ServicioNotificacionesLocales.ts");
-/* harmony import */ var _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
-/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
+/* harmony import */ var _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
 
 
 
@@ -109,9 +112,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+//moment
 
 let HomePage = class HomePage {
-    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, servicioGeo, parametrosApp, servicioNotLocales) {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, servicioGeo, parametrosApp, servicioNotLocales, servNotificaciones) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -124,6 +130,7 @@ let HomePage = class HomePage {
         this.servicioGeo = servicioGeo;
         this.parametrosApp = parametrosApp;
         this.servicioNotLocales = servicioNotLocales;
+        this.servNotificaciones = servNotificaciones;
         //nuevo slide
         this.slideOpts = {
             initialSlide: 0,
@@ -154,6 +161,7 @@ let HomePage = class HomePage {
         this.pushes = [];
         //para progress bar
         this.estaCargando = false;
+        this.estaCargandoNotificaciones = false;
         //procesar los items del menu
         this.itemsMenu = [];
         //notificaciones
@@ -164,6 +172,7 @@ let HomePage = class HomePage {
         this.muestraNotificaciones = false;
     }
     ngOnInit() {
+        moment__WEBPACK_IMPORTED_MODULE_10__["locale"]('es');
         //this.miColor = this.utiles.entregaMiColor();
         this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
         this.miColor = this.utiles.entregaColor(this.usuarioAps);
@@ -183,7 +192,9 @@ let HomePage = class HomePage {
         this.usaAgenda = this.utiles.entregaParametroUsaAgenda();
         this.buscarLogMovimientos();
         //notificaciones locales
-        this.obtenerNotificaciones();
+        //this.obtenerNotificaciones();
+        //ACA ESTOY TRABAJANDO HAY UN ERROR EN API MANAGEMENT
+        this.obtenerNotificacionesApi();
         /*     if (this.utiles.entregaParametroUsaAgenda()){
               this.buscarDisponibilidad();
             } */
@@ -260,7 +271,7 @@ let HomePage = class HomePage {
                     EstaEditando: true
                 }
             };
-            this.dismiss();
+            //this.dismiss();
             this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
         }
         else {
@@ -317,26 +328,39 @@ let HomePage = class HomePage {
                 spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                if (!this.utiles.isAppOnDevice()) {
-                    //llamada web
-                    this.servicioGeo.getMovimientos(cantidadDias, idDispositivo).subscribe((response) => {
-                        //procesar
-                        this.itemsMenu = this.utiles.entregaArregloHome(response);
-                        console.log(this.itemsMenu);
-                        loader.dismiss();
-                        this.estaCargando = false;
-                    });
+                //si ya se encuentra no es necesario volverlo a cargar
+                if (sessionStorage.getItem('LOG_MOVIMIENTOS')) {
+                    this.itemsMenu = JSON.parse(sessionStorage.getItem('LOG_MOVIMIENTOS'));
+                    console.log(this.itemsMenu);
+                    loader.dismiss();
+                    this.estaCargando = false;
                 }
                 else {
-                    //llamada nativa
-                    this.servicioGeo.getMovimientosNative(cantidadDias, idDispositivo).then((response) => {
-                        //procesar
-                        var data = JSON.parse(response.data);
-                        this.itemsMenu = this.utiles.entregaArregloHome(data);
-                        console.log(this.itemsMenu);
-                        loader.dismiss();
-                        this.estaCargando = false;
-                    });
+                    if (!this.utiles.isAppOnDevice()) {
+                        //llamada web
+                        this.servicioGeo.getMovimientos(cantidadDias, idDispositivo).subscribe((response) => {
+                            //procesar
+                            this.itemsMenu = this.utiles.entregaArregloHome(response);
+                            //lo guardaremos en una variable de sesión para que no 
+                            //se carge constantemente, según ultima observación de 
+                            //juan moran
+                            sessionStorage.setItem('LOG_MOVIMIENTOS', JSON.stringify(this.itemsMenu));
+                            console.log(this.itemsMenu);
+                            loader.dismiss();
+                            this.estaCargando = false;
+                        });
+                    }
+                    else {
+                        //llamada nativa
+                        this.servicioGeo.getMovimientosNative(cantidadDias, idDispositivo).then((response) => {
+                            //procesar
+                            var data = JSON.parse(response.data);
+                            this.itemsMenu = this.utiles.entregaArregloHome(data);
+                            console.log(this.itemsMenu);
+                            loader.dismiss();
+                            this.estaCargando = false;
+                        });
+                    }
                 }
             }));
         });
@@ -358,15 +382,89 @@ let HomePage = class HomePage {
     obtenerNotificaciones() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.estaCargando = true;
+            this.estaCargandoNotificaciones = true;
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',
                 showBackdrop: false,
                 spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                this.notificaciones = this.servicioNotLocales.getAll();
-                console.log(this.notificaciones);
+                this.notificaciones = yield this.servicioNotLocales.getAll();
+                //console.log(this.notificaciones);
                 this.estaCargando = false;
+                this.estaCargandoNotificaciones = false;
+            }));
+        });
+    }
+    obtenerNotificacionesApi() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.estaCargando = true;
+            this.estaCargandoNotificaciones = true;
+            let loader = yield this.loading.create({
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
+            });
+            var usuario = null;
+            if (localStorage.getItem('UsuarioAps')) {
+                usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+            }
+            var annoConsultar = 0;
+            var mesConsultar = 0;
+            var fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+            var fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_10__().add(5, 'days');
+            var mesActual = {
+                mes: fechaActual.month() + 1,
+                anno: fechaActual.year()
+            };
+            var mesEvaluar = {
+                mes: fechaEvaluar.month() + 1,
+                anno: fechaEvaluar.year()
+            };
+            //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
+            if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno) {
+                //es le mismo mes
+                mesConsultar = mesActual.mes;
+                annoConsultar = mesActual.anno;
+            }
+            else {
+                //hay diferencia, por tanto se toma el ultimo mes
+                mesConsultar = mesEvaluar.mes;
+                annoConsultar = mesEvaluar.anno;
+            }
+            yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                if (!this.utiles.isAppOnDevice()) {
+                    //llamada web
+                    this.cita.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response) => {
+                        var data = response;
+                        console.log(data);
+                        this.notificaciones = this.servNotificaciones.construyeNotificaciones(data);
+                        this.estaCargando = false;
+                        this.loading.dismiss();
+                        this.estaCargandoNotificaciones = false;
+                    }, error => {
+                        console.log(error.message);
+                        this.estaCargando = false;
+                        this.loading.dismiss();
+                        this.estaCargandoNotificaciones = false;
+                    });
+                }
+                else {
+                    //llamada native
+                    this.cita.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response) => {
+                        var data = JSON.parse(response.data);
+                        console.log(data);
+                        this.notificaciones = this.servNotificaciones.construyeNotificaciones(data);
+                        this.estaCargando = false;
+                        this.loading.dismiss();
+                        this.estaCargandoNotificaciones = false;
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.estaCargando = false;
+                        this.loading.dismiss();
+                        this.estaCargandoNotificaciones = false;
+                    });
+                }
             }));
         });
     }
@@ -435,11 +533,13 @@ let HomePage = class HomePage {
         }
     }
     moverSlide(indice) {
-        if (indice < this.notificaciones.length - 1) {
+        if (indice <= this.notificaciones.length - 1) {
             this.slides.slideNext();
         }
         else {
-            this.slides.slidePrev();
+            //this.slides.slidePrev();
+            //lo volvemos al inicio
+            this.slides.slideTo(0);
         }
     }
 };
@@ -453,9 +553,10 @@ HomePage.ctorParameters = () => [
     { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] },
     { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"] },
     { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__["ServicioCitas"] },
-    { type: _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__["ServicioGeo"] },
-    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] },
-    { type: _app_services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_6__["ServicioNotificacionesLocales"] }
+    { type: _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__["ServicioGeo"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_9__["ServicioParametrosApp"] },
+    { type: _app_services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_6__["ServicioNotificacionesLocales"] },
+    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__["ServicioNotificaciones"] }
 ];
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mySlider', { static: true })

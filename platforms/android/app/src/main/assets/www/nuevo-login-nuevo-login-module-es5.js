@@ -311,7 +311,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "abrirAsistente",
         value: function abrirAsistente() {
-          this.navCtrl.navigateRoot('pre-registro-uno');
+          var navigationExtras = {
+            queryParams: {
+              modulo: 'nuevo-login'
+            }
+          };
+          this.navCtrl.navigateRoot(['pre-registro-uno'], navigationExtras);
         }
       }, {
         key: "cargarForma",
@@ -828,7 +833,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             retorno.UsuariosFamilia = familia;
             userFamilia = JSON.stringify(retorno.UsuariosFamilia); //variable de sessión muy importante para el resto de la app.
 
-            sessionStorage.setItem("UsuariosFamilia", userFamilia);
+            localStorage.setItem("UsuariosFamilia", userFamilia);
           }
 
           this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;

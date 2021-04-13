@@ -45,6 +45,9 @@ export class ModalOperacionCitaPage implements OnInit {
     Alert: '¿Está seguro de anular la cita?'
   }
   public titulo;
+  //para procesar
+  estaCargando = false;
+  tituloLoading = '';
   constructor(
     public modalCtrl: ModalController,
     public navParams: NavParams,
@@ -117,10 +120,18 @@ export class ModalOperacionCitaPage implements OnInit {
     var idCita = this.cita.IdCita;
     var accion = boton.Operacion;
 
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Procesado...<br>Información',
       duration: 20000
+    }); */
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
     });
+    this.estaCargando =true;
+    this.tituloLoading = 'Procesando cita';
 
     await loader.present().then(async () => {
       var retorno = null;
@@ -149,6 +160,9 @@ export class ModalOperacionCitaPage implements OnInit {
         //booked, confirmed, cancelled
         //todo bien
         //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
+        this.estaCargando = false;
+        this.tituloLoading = '';
+
         if (accion === 'booked'){
           this.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
         }
@@ -166,6 +180,8 @@ export class ModalOperacionCitaPage implements OnInit {
     }
     else{
       //error en la operacion
+      this.estaCargando = false;
+      this.tituloLoading = '';
       this.utiles.presentToast('Error en la operación', 'middle', 2000);
     }
     loader.dismiss();

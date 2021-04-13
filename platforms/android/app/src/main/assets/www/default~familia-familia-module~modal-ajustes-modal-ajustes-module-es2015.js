@@ -145,7 +145,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                 }
                                 else {
                                     //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                                    var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                                    var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                                     if (usuariosFamilia && usuariosFamilia.length > 0) {
                                         usuariosFamilia.forEach(usuario => {
                                             if (usuario.Id == uspId) {
@@ -154,7 +154,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                             }
                                         });
                                         //ahora serializamos y cambiamos
-                                        sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                                        localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                                     }
                                 }
                             }
@@ -186,7 +186,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                 }
                                 else {
                                     //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                                    var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                                    var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                                     if (usuariosFamilia && usuariosFamilia.length > 0) {
                                         usuariosFamilia.forEach(usuario => {
                                             if (usuario.Id == uspId) {
@@ -194,7 +194,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                             }
                                         });
                                         //ahora serializamos y cambiamos
-                                        sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                                        localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                                     }
                                 }
                             }
@@ -238,7 +238,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                 }
                                 else {
                                     //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                                    var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                                    var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                                     if (usuariosFamilia && usuariosFamilia.length > 0) {
                                         usuariosFamilia.forEach(usuario => {
                                             if (usuario.Id == uspId) {
@@ -246,7 +246,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                             }
                                         });
                                         //ahora serializamos y cambiamos
-                                        sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                                        localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                                     }
                                 }
                             }
@@ -277,7 +277,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                 }
                                 else {
                                     //si no es el mismo hay que buscarlo en la lista de familia y cambiarlo
-                                    var usuariosFamilia = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+                                    var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
                                     if (usuariosFamilia && usuariosFamilia.length > 0) {
                                         usuariosFamilia.forEach(usuario => {
                                             if (usuario.Id == uspId) {
@@ -285,7 +285,7 @@ let ModalAjustesPage = class ModalAjustesPage {
                                             }
                                         });
                                         //ahora serializamos y cambiamos
-                                        sessionStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
+                                        localStorage.setItem('UsuariosFamilia', JSON.stringify(usuariosFamilia));
                                     }
                                 }
                             }
@@ -302,24 +302,15 @@ let ModalAjustesPage = class ModalAjustesPage {
     }
     abrirEditar() {
         this.dismiss();
-        this.navCtrl.navigateRoot('contactabilidad');
-        //this.utiles.presentToast("Enviar a la pagina para editar datos de contactabilidad", "bottom", 3000);
-        /*     let registro = null;
-            if (localStorage.getItem('REGISTRO')){
-              registro = JSON.parse(localStorage.getItem('REGISTRO'));
-              const navigationExtras: NavigationExtras = {
-                queryParams: {
-                  usuario: JSON.stringify(registro),
-                  EstaEditando: true
-                }
-              };
-              this.dismiss();
-              this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
-            }
-            else{
-              this.utiles.presentToast("No puedes editar ya que no te encuentras registrado", "bottom", 3000);
-        
-            } */
+        //debemos pasar al usuario 
+        let query = {
+            usuario: null
+        };
+        query = { usuario: JSON.stringify(this.usuarioAps) };
+        const navigationExtras = {
+            queryParams: query
+        };
+        this.navCtrl.navigateRoot(['contactabilidad'], navigationExtras);
     }
 };
 ModalAjustesPage.ctorParameters = () => [

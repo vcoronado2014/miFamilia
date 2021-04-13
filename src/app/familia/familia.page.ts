@@ -101,8 +101,8 @@ export class FamiliaPage implements OnInit, DoCheck {
         this.usuarioAps = { Nombres: '', PrimerApellido: '', SegundoApellido: '', UrlImagen: '' };
 
       //manejo de los usuarios de la familia
-      if (sessionStorage.UsuariosFamilia) {
-        this.usuarioApsFamilia = JSON.parse(sessionStorage.UsuariosFamilia);
+      if (localStorage.UsuariosFamilia) {
+        this.usuarioApsFamilia = JSON.parse(localStorage.UsuariosFamilia);
         if (this.usuarioApsFamilia.length > 0) {
           for (var s in this.usuarioApsFamilia) {
             this.usuarioApsFamilia[s].UrlImagen = environment.URL_FOTOS + this.usuarioApsFamilia[s].UrlImagen;
@@ -132,6 +132,7 @@ export class FamiliaPage implements OnInit, DoCheck {
     });
   }
 
+  //cambiado por irAjustes
   async openModalAjustes(item){
     const modal = await this.modalCtrl.create(
       {
@@ -154,6 +155,25 @@ export class FamiliaPage implements OnInit, DoCheck {
     };
     this.navCtrl.navigateRoot(['registro-uno'], navigationExtras);
 
+  }
+  irAjustes(item){
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        usuario: JSON.stringify(item)
+      }
+    };
+    this.navCtrl.navigateRoot(['ajustes-familia'], navigationExtras);
+  }
+  abrirContactabilidad(item){
+    //debemos pasar al usuario 
+    let query = {
+      usuario: null
+    };
+    query = { usuario: JSON.stringify(item) }
+    const navigationExtras: NavigationExtras = {
+      queryParams: query
+    };
+    this.navCtrl.navigateRoot(['contactabilidad'], navigationExtras);
   }
 
 }

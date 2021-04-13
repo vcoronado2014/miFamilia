@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController, IonItem } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
@@ -58,6 +59,8 @@ export class PreTiposatencionPage implements OnInit {
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
     public parametrosApp: ServicioParametrosApp,
+    public activatedRoute: ActivatedRoute,
+    private router: Router,
     /* public global: ServicioGeo */
   ) { }
 
@@ -68,11 +71,36 @@ export class PreTiposatencionPage implements OnInit {
 
   async ngOnInit() {
     moment.locale('es');
-    //pruebas en el cliente para obtener token desde la api management directamente
-    //por ahora no han funcionado, al precer cors esta bloqueando la petición
-    //this.pruebaToken();
-    //this.buscarToken();
-    if (sessionStorage.UsuarioAps) {
+    //debemos recibir por parametro al usuario que le conseguiremos la hora
+    this.activatedRoute.queryParams.subscribe(async params => {
+      if (params && params.Id) {
+        //this.estaAgregandoFamilia = true;
+        this.usuarioAps = this.utiles.entregaUsuario(params.Id);
+        if (this.usuarioAps != null) {
+          this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
+          this.miColor = this.utiles.entregaColor(this.usuarioAps);
+          this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
+          this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
+          this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
+          //creamos tipo atencion inicial
+          this.crearTiposAtencion();
+          this.setFechasInicioFin();
+          if (this.parametrosApp.USA_API_MANAGEMENT()) {
+            await this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+          }
+          else {
+            await this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+          }
+        }
+        else{
+          this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
+        }
+      }
+      else{
+        this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
+      }
+    });
+/*     if (sessionStorage.UsuarioAps) {
       this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
       if (this.usuarioAps) {
         //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
@@ -82,16 +110,8 @@ export class PreTiposatencionPage implements OnInit {
         this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
         this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
       }
-    }
-    //creamos tipo atencion inicial
-    this.crearTiposAtencion();
-    this.setFechasInicioFin();
-    if (this.parametrosApp.USA_API_MANAGEMENT()){
-      await this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
-    }
-    else{
-      await this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
-    }
+    } */
+
   }
   setFechasInicioFin(){
     //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
@@ -171,34 +191,27 @@ export class PreTiposatencionPage implements OnInit {
       this.citasFiltradas = [];
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.cita.postObtenerTokenManagement().subscribe((response: any)=>{
-          //token
-          console.log(response);
-          if (response && response.access_token != ''){
-            this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId, response.access_token).subscribe((response: any)=>{
-              this.procesarRespuestaTotal(response, loader);
-            });
-          }
-          else{
-            this.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
-            loader.dismiss();
-          }
+        this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any) => {
+          this.procesarRespuestaTotal(response, loader);
+        },error=>{
+          console.log(error.message);
+          loader.dismiss();
+          this.disabledCombo = false;
+          this.mostrarProgressDisp = false;
+          this.utiles.presentToast('Se ha producido un error al obtener disponibilidad', 'bottom', 2000);
         });
       }
       else {
         //llamada nativa
-        this.cita.postObtenerTokenManagementNative().then((response: any)=>{
-          var respuesta = JSON.parse(response.data);
-          if (respuesta && respuesta.access_token != ''){
-            this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId, respuesta.access_token).then((responseD: any)=>{
-              var respuestaDisp = JSON.parse(responseD.data);
-              this.procesarRespuestaTotal(respuestaDisp, loader);
-            });
-          }
-          else{
-            this.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
-            loader.dismiss();
-          }
+        this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((responseD: any) => {
+          var respuestaDisp = JSON.parse(responseD.data);
+          this.procesarRespuestaTotal(respuestaDisp, loader);
+        }).catch(error=>{
+          console.log(error.message);
+          loader.dismiss();
+          this.disabledCombo = false;
+          this.mostrarProgressDisp = false;
+          this.utiles.presentToast('Se ha producido un error al obtener disponibilidad', 'bottom', 2000);
         });
       }
     });

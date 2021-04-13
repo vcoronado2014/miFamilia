@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Calendario</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\">\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando calendario\"></app-progress>\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\" [anioActual]=\"anioActual\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle class=\"ion-text-capitalize\">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Calendario</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\" #content>\r\n<app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloLoading\"></app-progress>\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div [hidden]=\"estaCargando\" *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\" [anioActual]=\"anioActual\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\" id=\"myListCard\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle class=\"ion-text-capitalize\">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" [hidden]=\"estaCargando\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n";
     /***/
   },
 
@@ -245,7 +245,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ../../app/pipes/fecha.pipe */
-    "./src/app/pipes/fecha.pipe.ts"); //parametros
+    "./src/app/pipes/fecha.pipe.ts");
+    /* harmony import */
+
+
+    var _angular_material_card__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! @angular/material/card */
+    "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js"); //parametros
     //SERVICIOS
     //moment
     //modal
@@ -303,13 +309,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           Alert: '¿Anular la reserva de cita?'
         }; //para controlar el cargando
 
-        this.estaCargando = false; //para infinity scroll
+        this.estaCargando = false;
+        this.tituloLoading = ''; //para infinity scroll
 
         this.topLimit = 5;
         this.citasVerticalTodasTop = []; //para poner la linea en la fecha actual
 
         this.fechaActual = '';
         this.anioActual = '';
+        this.scrollTo = null;
+
+        this.hasMin = function (attrib) {
+          return this.length && this.reduce(function (prev, curr) {
+            return prev[attrib] < curr[attrib] ? prev : curr;
+          }) || null;
+        };
       } //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
       //OJO HAY VACUNAS CON FECHA PROXIMA 29-11-2020 Y NO VEO QUE APAREZCAN
       //CUANDO SELECCIONAS EL COMBO DE FECHA Y LUEGO VUELVES A SELECCIONAR 
@@ -406,7 +420,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 6:
                     loader = _context4.sent;
                     this.estaCargando = true;
-                    _context4.next = 10;
+                    this.tituloLoading = 'Obteniendo calendario';
+                    _context4.next = 11;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
                         var _this2 = this;
@@ -440,14 +455,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                               console.log(this.citasVerticalTodasTop);
                                               loader.dismiss();
                                               this.estaCargando = false;
+                                              this.tituloLoading = '';
+                                              this.scrollListVisible();
 
-                                            case 9:
+                                            case 11:
                                             case "end":
                                               return _context.stop();
                                           }
                                         }
                                       }, _callee, this);
                                     }));
+                                  }, function (error) {
+                                    console.log(error.message);
+                                    _this2.estaCargando = false;
+                                    _this2.tituloLoading = '';
+                                    loader.dismiss();
+                                    _this2.tiene = false;
+
+                                    _this2.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
                                   });
                                 } else {
                                   //llamada nativa
@@ -477,14 +502,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                               console.log(this.citasVerticalTodasTop);
                                               loader.dismiss();
                                               this.estaCargando = false;
+                                              this.tituloLoading = '';
 
-                                            case 9:
+                                            case 10:
                                             case "end":
                                               return _context2.stop();
                                           }
                                         }
                                       }, _callee2, this);
                                     }));
+                                  })["catch"](function (error) {
+                                    console.log(error.message);
+                                    _this2.estaCargando = false;
+                                    _this2.tituloLoading = '';
+                                    loader.dismiss();
+                                    _this2.tiene = false;
+
+                                    _this2.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
                                   });
                                 }
 
@@ -497,7 +531,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 10:
+                  case 11:
                   case "end":
                     return _context4.stop();
                 }
@@ -552,7 +586,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 10:
                     loader = _context12.sent;
                     this.estaCargando = true;
-                    _context12.next = 14;
+                    this.tituloLoading = 'Cargando calendario';
+                    _context12.next = 15;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this5, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
                         var _this6 = this;
@@ -610,8 +645,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       console.log(this.citasVerticalTodasTop);
                                                                       loader.dismiss();
                                                                       this.estaCargando = false;
+                                                                      this.tituloLoading = '';
 
-                                                                    case 9:
+                                                                    case 10:
                                                                     case "end":
                                                                       return _context5.stop();
                                                                   }
@@ -689,8 +725,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       console.log(this.citasVerticalTodasTop);
                                                                       loader.dismiss();
                                                                       this.estaCargando = false;
+                                                                      this.tituloLoading = '';
 
-                                                                    case 10:
+                                                                    case 11:
                                                                     case "end":
                                                                       return _context8.stop();
                                                                   }
@@ -727,7 +764,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 14:
+                  case 15:
                   case "end":
                     return _context12.stop();
                 }
@@ -829,6 +866,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var contador = 0;
 
           for (var s in this.citasVerticalTodas) {
+            var fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+            var fechaEvento1 = moment__WEBPACK_IMPORTED_MODULE_10__(this.citasVerticalTodas[s].FechaCompleta);
+            var dif = fechaActual.diff(fechaEvento1);
+
+            if (dif < 0) {
+              dif = dif * -1;
+            }
+
+            this.citasVerticalTodas[s].DiferenciaFechas = dif;
+
             for (var t in this.citasVerticalTodas[s].Eventos) {
               var fechaHora = this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.FechaHora;
               var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
@@ -931,6 +978,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
             sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
           }
+
+          this.scrollListVisible();
         }
       }, {
         key: "loadData",
@@ -1242,28 +1291,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee20() {
             var _this20 = this;
 
-            var idPaciente, idCita, accion, loader;
+            var usuarioCita, idPaciente, idCita, accion, loader;
             return regeneratorRuntime.wrap(function _callee20$(_context20) {
               while (1) {
                 switch (_context20.prev = _context20.next) {
                   case 0:
                     if (!(evento.DetalleEventoMes.Estado && evento.DetalleEventoMes.Estado != '')) {
-                      _context20.next = 9;
+                      _context20.next = 12;
                       break;
                     }
 
-                    idPaciente = this.usuarioAps.Rut;
+                    //aca buscamos al paciente por el nombre
+                    usuarioCita = this.utiles.entregaUsuarioNombre(evento.DetalleEventoMes.NombrePaciente); //var idPaciente = this.usuarioAps.Rut;
+
+                    idPaciente = usuarioCita.Rut;
                     idCita = evento.DetalleEventoMes.IdElemento;
-                    accion = boton.Operacion;
-                    _context20.next = 6;
+                    accion = boton.Operacion; //original
+
+                    /*       let loader = await this.loading.create({
+                            message: 'Procesado...<br>Información',
+                            duration: 20000
+                          }); */
+
+                    _context20.next = 7;
                     return this.loading.create({
-                      message: 'Procesado...<br>Información',
-                      duration: 20000
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null,
+                      duration: 2000
                     });
 
-                  case 6:
+                  case 7:
                     loader = _context20.sent;
-                    _context20.next = 9;
+                    this.estaCargando = true;
+                    this.tituloLoading = 'Obteniendo respuesta';
+                    _context20.next = 12;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this20, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
                         var _this21 = this;
@@ -1298,7 +1360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 9:
+                  case 12:
                   case "end":
                     return _context20.stop();
                 }
@@ -1323,12 +1385,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               console.log(mesActual); //***************************** */
 
               this.tratamientoMeses();
+              this.estaCargando = false;
+              this.tituloLoading = '';
 
               if (accion === 'booked') {
                 this.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
               } else if (accion === 'confirmed') {
                 this.utiles.presentToast('Cita confirmada con éxito!!', 'bottom', 3000);
               } else if (accion === 'cancelled') {
+                //si la cita es cnacelada hay que quitarla de notificaciones locales
+                //obtenemos el id dde la cita
+                if (data.CitasDisponibles && data.CitasDisponibles.length == 1) {
+                  var idCita = data.CitasDisponibles[0].IdCita;
+                  this.utiles.removeCitaNotificacionesLocales(idCita);
+                }
+
                 this.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
               }
 
@@ -1338,10 +1409,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 this.cargarTodosLosEventos();
               }
             } else {
+              this.estaCargando = false;
+              this.tituloLoading = '';
               this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);
             }
           } else {
             //error en la operacion
+            this.estaCargando = false;
+            this.tituloLoading = '';
             this.utiles.presentToast('Error en la operación', 'middle', 2000);
           }
 
@@ -1351,7 +1426,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "openReservarHoraPage",
         value: function openReservarHoraPage() {
-          this.navCtrl.navigateRoot('pre-tiposatencion');
+          var tieneFamilia = this.utiles.tieneFamilia(); //si tiene familia hay que enviarlo a la pagina de los miembros de la familia
+
+          if (tieneFamilia) {
+            this.navCtrl.navigateRoot('seleccion-usuario');
+          } else {
+            //si no tiene hay que enviarlo a buscar disponibilidad directo
+            //pasando id
+            var navigationExtras = {
+              queryParams: {
+                Id: this.usuarioAps.Id
+              }
+            };
+            this.navCtrl.navigateRoot(['pre-tiposatencion'], navigationExtras);
+          }
         }
       }, {
         key: "revisaEstado",
@@ -1373,6 +1461,64 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function transformDate(value, format) {
           var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_12__["MomentPipe"]();
           return pi.transform(value, format);
+        }
+      }, {
+        key: "determinaFechaMasCercana",
+        value: function determinaFechaMasCercana() {
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_10__();
+
+          if (this.citasVerticalTodasTop && this.citasVerticalTodasTop.length > 0) {
+            for (var i = 0; i < this.citasVerticalTodasTop.length; i++) {
+              var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(this.citasVerticalTodasTop[i].FechaCompleta);
+              var dif = fechaActual.diff(fechaEvento);
+
+              if (dif < 0) {
+                dif = dif * -1;
+              }
+
+              this.citasVerticalTodasTop[i].DiferenciaFechas = dif;
+              /*         console.log(dif);
+                      console.log(this.citasVerticalTodasTop[i]); */
+            }
+          }
+        }
+      }, {
+        key: "finder",
+        value: function finder(cmp, arr, attr) {
+          var val = arr[0][attr];
+
+          for (var i = 1; i < arr.length; i++) {
+            val = cmp(val, arr[i][attr]);
+          }
+
+          return val;
+        }
+      }, {
+        key: "scrollListVisible",
+        value: function scrollListVisible() {
+          var _this22 = this;
+
+          //this.determinaFechaMasCercana();
+          setTimeout(function () {
+            var min = _this22.finder(Math.min, _this22.citasVerticalTodasTop, 'DiferenciaFechas');
+
+            if (min) {
+              var entidad = _this22.citasVerticalTodasTop.filter(function (p) {
+                return p.DiferenciaFechas == min;
+              })[0];
+
+              if (entidad) {
+                //var elemento = this.min();
+                console.log(min);
+                console.log(entidad);
+                var yOffset = document.getElementById(entidad.DiferenciaFechas.toString()).offsetTop;
+
+                if (yOffset != null) {
+                  _this22.content.scrollToPoint(0, yOffset, 600);
+                }
+              }
+            }
+          }, 1000);
         }
       }]);
 
@@ -1414,6 +1560,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('myList', {
       read: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonItem"]
     })], CalendarioPage.prototype, "list", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('myListCard', {
+      read: _angular_material_card__WEBPACK_IMPORTED_MODULE_13__["MatCard"]
+    })], CalendarioPage.prototype, "listCarda", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('content', {
+      "static": true
+    })], CalendarioPage.prototype, "content", void 0);
     CalendarioPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-calendario',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(

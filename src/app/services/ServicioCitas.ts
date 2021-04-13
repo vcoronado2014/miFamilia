@@ -651,13 +651,23 @@ export class ServicioCitas{
         let data = this.http.get(urlCorta, {}, {});
         return data;
     }
-    getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
+/*     getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
         let urlCorta = environment.API_ENDPOINT + 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
         let data = this.httpClient.get(urlCorta,{});
         return data;
     }
     getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
         let urlCorta = environment.API_ENDPOINT+ 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+        let data = this.http.get(urlCorta, {}, {});
+        return data;
+    } */
+    getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId){
+        let urlCorta = environment.API_ENDPOINT + 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
+        let data = this.httpClient.get(urlCorta,{});
+        return data;
+    }
+    getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId){
+        let urlCorta = environment.API_ENDPOINT+ 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
         let data = this.http.get(urlCorta, {}, {});
         return data;
     }
@@ -749,6 +759,48 @@ export class ServicioCitas{
         };
 
         let url = environment.API_ENDPOINT + 'MesNuevoApi';
+        this.http.setDataSerializer('json');
+
+
+        return this.http.post(url, body, {});
+    }
+    //estos metodos entregan los eventos para las notificaciones
+    entregaPorMesNuevoLivianoApi(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        const body = JSON.stringify({
+            UspId: uspId.toString(),
+            IdRyf: idRyf.toString(),
+            NodId: nodId.toString(),
+            NumeroMes: numeroMes.toString(),
+            AnnoConsulta: annoConsulta.toString()
+        });
+
+        let url = environment.API_ENDPOINT + 'MesNuevoLivianoApi';
+        let httpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+
+        let options = { headers: httpHeaders };
+
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    entregaPorMesNuevoLivianoApiNative(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+            "UspId": uspId.toString(),
+            "IdRyf": idRyf.toString(),
+            "NodId": nodId.toString(),
+            "NumeroMes": numeroMes.toString(),
+            "AnnoConsulta": annoConsulta.toString()
+        };
+
+        let url = environment.API_ENDPOINT + 'MesNuevoLivianoApi';
         this.http.setDataSerializer('json');
 
 

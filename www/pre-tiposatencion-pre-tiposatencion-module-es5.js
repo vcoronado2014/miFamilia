@@ -179,47 +179,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../../app/services/ServicioUtiles */
     "./src/app/services/ServicioUtiles.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../../app/services/ServicioParametrosApp */
     "./src/app/services/ServicioParametrosApp.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../../app/services/ServicioAcceso */
     "./src/app/services/ServicioAcceso.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../../app/services/ServicioCitas */
     "./src/app/services/ServicioCitas.ts");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+    var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
     /* harmony import */
 
 
-    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ../../app/pipes/fecha.pipe */
     "./src/app/pipes/fecha.pipe.ts");
     /* harmony import */
 
 
-    var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ../modal-operacion-cita/modal-operacion-cita.page */
     "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts");
     /* import { ServicioGeo } from '../../app/services/ServicioGeo'; */
@@ -227,7 +233,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     var PreTiposatencionPage = /*#__PURE__*/function () {
-      function PreTiposatencionPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, parametrosApp) {
+      function PreTiposatencionPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, parametrosApp, activatedRoute, router) {
         _classCallCheck(this, PreTiposatencionPage);
 
         this.navCtrl = navCtrl;
@@ -240,6 +246,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.acceso = acceso;
         this.cita = cita;
         this.parametrosApp = parametrosApp;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
         this.miColor = '#FF4081';
         this.textColor = '#FFFFFF'; //datos para consultar citas
 
@@ -268,67 +276,111 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(PreTiposatencionPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-            return regeneratorRuntime.wrap(function _callee$(_context) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var _this = this;
+
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
-                switch (_context.prev = _context.next) {
+                switch (_context2.prev = _context2.next) {
                   case 0:
-                    moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es'); //pruebas en el cliente para obtener token desde la api management directamente
-                    //por ahora no han funcionado, al precer cors esta bloqueando la petición
-                    //this.pruebaToken();
-                    //this.buscarToken();
+                    moment__WEBPACK_IMPORTED_MODULE_8__["locale"]('es'); //debemos recibir por parametro al usuario que le conseguiremos la hora
 
-                    if (sessionStorage.UsuarioAps) {
-                      this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
+                    this.activatedRoute.queryParams.subscribe(function (params) {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                          while (1) {
+                            switch (_context.prev = _context.next) {
+                              case 0:
+                                if (!(params && params.Id)) {
+                                  _context.next = 22;
+                                  break;
+                                }
 
-                      if (this.usuarioAps) {
-                        //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
-                        this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
-                        this.miColor = this.utiles.entregaColor(this.usuarioAps);
-                        this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
-                        this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
-                        this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
-                      }
-                    } //creamos tipo atencion inicial
+                                //this.estaAgregandoFamilia = true;
+                                this.usuarioAps = this.utiles.entregaUsuario(params.Id);
 
+                                if (!(this.usuarioAps != null)) {
+                                  _context.next = 19;
+                                  break;
+                                }
 
-                    this.crearTiposAtencion();
-                    this.setFechasInicioFin();
+                                this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
+                                this.miColor = this.utiles.entregaColor(this.usuarioAps);
+                                this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
+                                this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
+                                this.nodId = this.usuarioAps.ConfiguracionNodo.NodId; //creamos tipo atencion inicial
 
-                    if (!this.parametrosApp.USA_API_MANAGEMENT()) {
-                      _context.next = 9;
-                      break;
-                    }
+                                this.crearTiposAtencion();
+                                this.setFechasInicioFin();
 
-                    _context.next = 7;
-                    return this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+                                if (!this.parametrosApp.USA_API_MANAGEMENT()) {
+                                  _context.next = 15;
+                                  break;
+                                }
 
-                  case 7:
-                    _context.next = 11;
-                    break;
+                                _context.next = 13;
+                                return this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
 
-                  case 9:
-                    _context.next = 11;
-                    return this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+                              case 13:
+                                _context.next = 17;
+                                break;
 
-                  case 11:
+                              case 15:
+                                _context.next = 17;
+                                return this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+
+                              case 17:
+                                _context.next = 20;
+                                break;
+
+                              case 19:
+                                this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
+
+                              case 20:
+                                _context.next = 23;
+                                break;
+
+                              case 22:
+                                this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
+
+                              case 23:
+                              case "end":
+                                return _context.stop();
+                            }
+                          }
+                        }, _callee, this);
+                      }));
+                    });
+                    /*     if (sessionStorage.UsuarioAps) {
+                          this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
+                          if (this.usuarioAps) {
+                            //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
+                            this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
+                            this.miColor = this.utiles.entregaColor(this.usuarioAps);
+                            this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
+                            this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
+                            this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
+                          }
+                        } */
+
+                  case 2:
                   case "end":
-                    return _context.stop();
+                    return _context2.stop();
                 }
               }
-            }, _callee, this);
+            }, _callee2, this);
           }));
         }
       }, {
         key: "setFechasInicioFin",
         value: function setFechasInicioFin() {
           //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
-          var fechaIni = moment__WEBPACK_IMPORTED_MODULE_7__().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
+          var fechaIni = moment__WEBPACK_IMPORTED_MODULE_8__().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
           var date = new Date();
           console.log(fechaIni);
           date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
           console.log(date);
-          var fechaTer = moment__WEBPACK_IMPORTED_MODULE_7__().add(1, 'month');
+          var fechaTer = moment__WEBPACK_IMPORTED_MODULE_8__().add(1, 'month');
           var dateFin = new Date(fechaTer.year(), fechaTer.month(), fechaTer.date(), 23, 59, 0, 0);
           console.log(fechaTer);
           console.log(dateFin);
@@ -343,15 +395,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "buscarDisponibilidad",
         value: function buscarDisponibilidad(start, end, organization, patient, serviceType, tipoOperacion) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-            var _this = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            var _this2 = this;
 
             var loader;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context4.prev = _context4.next) {
                   case 0:
-                    _context3.next = 2;
+                    _context4.next = 2;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
@@ -359,15 +411,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 2:
-                    loader = _context3.sent;
-                    _context3.next = 5;
+                    loader = _context4.sent;
+                    _context4.next = 5;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                        var _this2 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                        var _this3 = this;
 
-                        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
                           while (1) {
-                            switch (_context2.prev = _context2.next) {
+                            switch (_context3.prev = _context3.next) {
                               case 0:
                                 //esto lo agregamos para desabilitarlo
                                 this.disabledCombo = true; //lo agregamos para mostrar la info de buscando disponibilidad
@@ -380,7 +432,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe(function (response) {
-                                    _this2.procesarRespuestaTotal(response, loader);
+                                    _this3.procesarRespuestaTotal(response, loader);
                                   });
                                   /*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
                                             this.procesarRespuestaTotal(response, loader);
@@ -390,7 +442,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then(function (response) {
                                     var respuesta = JSON.parse(response.data);
 
-                                    _this2.procesarRespuestaTotal(respuesta, loader);
+                                    _this3.procesarRespuestaTotal(respuesta, loader);
                                   });
                                   /*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
                                             var respuesta = JSON.parse(response.data);
@@ -400,33 +452,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                               case 5:
                               case "end":
-                                return _context2.stop();
+                                return _context3.stop();
                             }
                           }
-                        }, _callee2, this);
+                        }, _callee3, this);
                       }));
                     });
 
                   case 5:
                   case "end":
-                    return _context3.stop();
+                    return _context4.stop();
                 }
               }
-            }, _callee3, this);
+            }, _callee4, this);
           }));
         }
       }, {
         key: "buscarDisponibilidadApi",
         value: function buscarDisponibilidadApi(start, end, organization, patient, serviceType, tipoOperacion) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-            var _this3 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            var _this4 = this;
 
             var loader;
-            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
               while (1) {
-                switch (_context5.prev = _context5.next) {
+                switch (_context6.prev = _context6.next) {
                   case 0:
-                    _context5.next = 2;
+                    _context6.next = 2;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
@@ -434,15 +486,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 2:
-                    loader = _context5.sent;
-                    _context5.next = 5;
+                    loader = _context6.sent;
+                    _context6.next = 5;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-                        var _this4 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                        var _this5 = this;
 
-                        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                        return regeneratorRuntime.wrap(function _callee5$(_context5) {
                           while (1) {
-                            switch (_context4.prev = _context4.next) {
+                            switch (_context5.prev = _context5.next) {
                               case 0:
                                 //esto lo agregamos para desabilitarlo
                                 this.disabledCombo = true;
@@ -453,54 +505,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
-                                  this.cita.postObtenerTokenManagement().subscribe(function (response) {
-                                    //token
-                                    console.log(response);
+                                  this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe(function (response) {
+                                    _this5.procesarRespuestaTotal(response, loader);
+                                  }, function (error) {
+                                    console.log(error.message);
+                                    loader.dismiss();
+                                    _this5.disabledCombo = false;
+                                    _this5.mostrarProgressDisp = false;
 
-                                    if (response && response.access_token != '') {
-                                      _this4.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, _this4.nodId, response.access_token).subscribe(function (response) {
-                                        _this4.procesarRespuestaTotal(response, loader);
-                                      });
-                                    } else {
-                                      _this4.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
-
-                                      loader.dismiss();
-                                    }
+                                    _this5.utiles.presentToast('Se ha producido un error al obtener disponibilidad', 'bottom', 2000);
                                   });
                                 } else {
                                   //llamada nativa
-                                  this.cita.postObtenerTokenManagementNative().then(function (response) {
-                                    var respuesta = JSON.parse(response.data);
+                                  this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then(function (responseD) {
+                                    var respuestaDisp = JSON.parse(responseD.data);
 
-                                    if (respuesta && respuesta.access_token != '') {
-                                      _this4.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, _this4.nodId, respuesta.access_token).then(function (responseD) {
-                                        var respuestaDisp = JSON.parse(responseD.data);
+                                    _this5.procesarRespuestaTotal(respuestaDisp, loader);
+                                  })["catch"](function (error) {
+                                    console.log(error.message);
+                                    loader.dismiss();
+                                    _this5.disabledCombo = false;
+                                    _this5.mostrarProgressDisp = false;
 
-                                        _this4.procesarRespuestaTotal(respuestaDisp, loader);
-                                      });
-                                    } else {
-                                      _this4.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
-
-                                      loader.dismiss();
-                                    }
+                                    _this5.utiles.presentToast('Se ha producido un error al obtener disponibilidad', 'bottom', 2000);
                                   });
                                 }
 
                               case 5:
                               case "end":
-                                return _context4.stop();
+                                return _context5.stop();
                             }
                           }
-                        }, _callee4, this);
+                        }, _callee5, this);
                       }));
                     });
 
                   case 5:
                   case "end":
-                    return _context5.stop();
+                    return _context6.stop();
                 }
               }
-            }, _callee5, this);
+            }, _callee6, this);
           }));
         } //metodo para procesar la respuesta
 
@@ -586,7 +631,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "indexarCitas",
         value: function indexarCitas() {
-          var _this5 = this;
+          var _this6 = this;
 
           //el tipo de atencion seleccionado
           this.citasFiltradas = [];
@@ -594,11 +639,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (this.citas && this.citas.length > 0) {
             this.citas.forEach(function (cita) {
-              if (cita.TipoAtencion == _this5.comboSeleccionado) {
+              if (cita.TipoAtencion == _this6.comboSeleccionado) {
                 //esta filtrando
                 cita.indice = indice;
 
-                _this5.citasFiltradas.push(cita);
+                _this6.citasFiltradas.push(cita);
 
                 indice++;
               }
@@ -631,7 +676,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "agregarTiposAtencion",
         value: function agregarTiposAtencion(tipos) {
-          var _this6 = this;
+          var _this7 = this;
 
           var contador = 1;
 
@@ -643,7 +688,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 Selected: false
               }; //tipos.push(entidadTipo);
 
-              _this6.tiposAtencion.push(entidadTipo);
+              _this7.tiposAtencion.push(entidadTipo);
 
               contador++;
             });
@@ -655,11 +700,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "seleccionarItemCombo",
         value: function seleccionarItemCombo() {
-          var _this7 = this;
+          var _this8 = this;
 
           if (this.comboSeleccionado && this.tiposAtencion) {
             this.tiposAtencion.forEach(function (tipo) {
-              if (tipo.Texto == _this7.comboSeleccionado) {
+              if (tipo.Texto == _this8.comboSeleccionado) {
                 tipo.Selected = true;
               } else {
                 tipo.Selected = false;
@@ -672,7 +717,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "buscarCitas",
         value: function buscarCitas(event) {
-          var _this8 = this;
+          var _this9 = this;
 
           //este lo cambiamos para el control mat-select
           //if (event.detail.value){
@@ -686,19 +731,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             setTimeout(function () {
               console.log('Async operation has ended'); //event.target.complete();
 
-              _this8.mostrarProgress = false; //this.encontroCitas = true;
+              _this9.mostrarProgress = false; //this.encontroCitas = true;
               //si existen citas hay que deshabilitar el control
 
-              _this8.disabledCombo = true;
+              _this9.disabledCombo = true;
 
-              _this8.indexarCitas();
+              _this9.indexarCitas();
             }, 2000);
           }
         }
       }, {
         key: "transformDate",
         value: function transformDate(value, format) {
-          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__["MomentPipe"]();
+          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__["MomentPipe"]();
           return pi.transform(value, format);
         }
       }, {
@@ -721,21 +766,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "citaSelected",
         value: function citaSelected(item) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-            var _this9 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+            var _this10 = this;
 
             var modal;
-            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            return regeneratorRuntime.wrap(function _callee7$(_context7) {
               while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context7.prev = _context7.next) {
                   case 0:
                     if (item) {
                       this.itemSelected = item;
                     }
 
-                    _context6.next = 3;
+                    _context7.next = 3;
                     return this.modalCtrl.create({
-                      component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__["ModalOperacionCitaPage"],
+                      component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__["ModalOperacionCitaPage"],
                       componentProps: {
                         'cita': JSON.stringify(item),
                         'operacion': 'reservar'
@@ -743,28 +788,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 3:
-                    modal = _context6.sent;
+                    modal = _context7.sent;
                     modal.onDidDismiss().then(function (data) {
                       if (data.data && data.data.accion) {
                         var accion = data.data.accion; //obtenemos la pagina actual
                         //aca debemos revisar a donde nos vamos
 
-                        _this9.navCtrl.navigateRoot('calendario'); //console.log(accion);        
+                        _this10.navCtrl.navigateRoot('calendario'); //console.log(accion);        
 
                       }
                     });
-                    _context6.next = 7;
+                    _context7.next = 7;
                     return modal.present();
 
                   case 7:
-                    return _context6.abrupt("return", _context6.sent);
+                    return _context7.abrupt("return", _context7.sent);
 
                   case 8:
                   case "end":
-                    return _context6.stop();
+                    return _context7.stop();
                 }
               }
-            }, _callee6, this);
+            }, _callee7, this);
           }));
         }
       }, {
@@ -791,13 +836,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"]
       }, {
-        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__["ServicioUtiles"]
       }, {
-        type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__["ServicioAcceso"]
+        type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__["ServicioAcceso"]
       }, {
-        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__["ServicioCitas"]
+        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__["ServicioCitas"]
       }, {
-        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__["ServicioParametrosApp"]
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__["ServicioParametrosApp"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }];
     };
 

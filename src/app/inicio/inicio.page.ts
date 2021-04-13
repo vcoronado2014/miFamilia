@@ -81,6 +81,8 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     let tieneValidacionCU = false;
     //primero validamos si usa clave unica
+    //por ahora esta deshabilitado hasta que alguien quiera
+    //implementar, pero será por su cuenta
     if (this.parametrosApp.USA_CLAVE_UNICA()) {
       if (localStorage.getItem('STATE_CLAVE_UNICA')) {
         let stateClaveUnica = localStorage.getItem('STATE_CLAVE_UNICA');
@@ -107,7 +109,12 @@ export class InicioPage implements OnInit {
     this.navCtrl.navigateRoot('nuevo-login');
   }
   abrirPrimerosPasos(){
-    this.navCtrl.navigateRoot('pre-registro-uno');
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        modulo: 'inicio'
+      }
+    }
+    this.navCtrl.navigateRoot(['pre-registro-uno'], navigationExtras);
   }
   irARegistro(registroIncompleto){
     //enviar registroIncompleto

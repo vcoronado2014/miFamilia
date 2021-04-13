@@ -95,14 +95,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
-/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
-/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
-/* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
-/* harmony import */ var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../modal-operacion-cita/modal-operacion-cita.page */ "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
+/* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
+/* harmony import */ var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../modal-operacion-cita/modal-operacion-cita.page */ "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts");
+
 
 
 
@@ -116,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
 //modal
 
 let PreTiposatencionPage = class PreTiposatencionPage {
-    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, parametrosApp) {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, parametrosApp, activatedRoute, router) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -127,6 +129,8 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         this.acceso = acceso;
         this.cita = cita;
         this.parametrosApp = parametrosApp;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
         this.miColor = '#FF4081';
         this.textColor = '#FFFFFF';
         //datos para consultar citas
@@ -153,41 +157,57 @@ let PreTiposatencionPage = class PreTiposatencionPage {
     //TRATARIA DE LA PAGINA CALENDARIO
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
-            //pruebas en el cliente para obtener token desde la api management directamente
-            //por ahora no han funcionado, al precer cors esta bloqueando la petición
-            //this.pruebaToken();
-            //this.buscarToken();
-            if (sessionStorage.UsuarioAps) {
-                this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
-                if (this.usuarioAps) {
+            moment__WEBPACK_IMPORTED_MODULE_8__["locale"]('es');
+            //debemos recibir por parametro al usuario que le conseguiremos la hora
+            this.activatedRoute.queryParams.subscribe((params) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                if (params && params.Id) {
+                    //this.estaAgregandoFamilia = true;
+                    this.usuarioAps = this.utiles.entregaUsuario(params.Id);
+                    if (this.usuarioAps != null) {
+                        this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
+                        this.miColor = this.utiles.entregaColor(this.usuarioAps);
+                        this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
+                        this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
+                        this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
+                        //creamos tipo atencion inicial
+                        this.crearTiposAtencion();
+                        this.setFechasInicioFin();
+                        if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                            yield this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+                        }
+                        else {
+                            yield this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
+                        }
+                    }
+                    else {
+                        this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
+                    }
+                }
+                else {
+                    this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
+                }
+            }));
+            /*     if (sessionStorage.UsuarioAps) {
+                  this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
+                  if (this.usuarioAps) {
                     //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
                     this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
                     this.miColor = this.utiles.entregaColor(this.usuarioAps);
                     this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
                     this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
                     this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
-                }
-            }
-            //creamos tipo atencion inicial
-            this.crearTiposAtencion();
-            this.setFechasInicioFin();
-            if (this.parametrosApp.USA_API_MANAGEMENT()) {
-                yield this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
-            }
-            else {
-                yield this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
-            }
+                  }
+                } */
         });
     }
     setFechasInicioFin() {
         //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
-        var fechaIni = moment__WEBPACK_IMPORTED_MODULE_7__().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
+        var fechaIni = moment__WEBPACK_IMPORTED_MODULE_8__().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
         var date = new Date();
         console.log(fechaIni);
         date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
         console.log(date);
-        var fechaTer = moment__WEBPACK_IMPORTED_MODULE_7__().add(1, 'month');
+        var fechaTer = moment__WEBPACK_IMPORTED_MODULE_8__().add(1, 'month');
         var dateFin = new Date(fechaTer.year(), fechaTer.month(), fechaTer.date(), 23, 59, 0, 0);
         console.log(fechaTer);
         console.log(dateFin);
@@ -255,34 +275,27 @@ let PreTiposatencionPage = class PreTiposatencionPage {
                 this.citasFiltradas = [];
                 if (!this.utiles.isAppOnDevice()) {
                     //llamada web
-                    this.cita.postObtenerTokenManagement().subscribe((response) => {
-                        //token
-                        console.log(response);
-                        if (response && response.access_token != '') {
-                            this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId, response.access_token).subscribe((response) => {
-                                this.procesarRespuestaTotal(response, loader);
-                            });
-                        }
-                        else {
-                            this.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
-                            loader.dismiss();
-                        }
+                    this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response) => {
+                        this.procesarRespuestaTotal(response, loader);
+                    }, error => {
+                        console.log(error.message);
+                        loader.dismiss();
+                        this.disabledCombo = false;
+                        this.mostrarProgressDisp = false;
+                        this.utiles.presentToast('Se ha producido un error al obtener disponibilidad', 'bottom', 2000);
                     });
                 }
                 else {
                     //llamada nativa
-                    this.cita.postObtenerTokenManagementNative().then((response) => {
-                        var respuesta = JSON.parse(response.data);
-                        if (respuesta && respuesta.access_token != '') {
-                            this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId, respuesta.access_token).then((responseD) => {
-                                var respuestaDisp = JSON.parse(responseD.data);
-                                this.procesarRespuestaTotal(respuestaDisp, loader);
-                            });
-                        }
-                        else {
-                            this.utiles.presentToast("Error al obtener token, contacte al administrador", "bottom", 2000);
-                            loader.dismiss();
-                        }
+                    this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((responseD) => {
+                        var respuestaDisp = JSON.parse(responseD.data);
+                        this.procesarRespuestaTotal(respuestaDisp, loader);
+                    }).catch(error => {
+                        console.log(error.message);
+                        loader.dismiss();
+                        this.disabledCombo = false;
+                        this.mostrarProgressDisp = false;
+                        this.utiles.presentToast('Se ha producido un error al obtener disponibilidad', 'bottom', 2000);
                     });
                 }
             }));
@@ -449,7 +462,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         }
     }
     transformDate(value, format) {
-        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__["MomentPipe"]();
+        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__["MomentPipe"]();
         return pi.transform(value, format);
     }
     transformDateIso(dateString) {
@@ -470,7 +483,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
                 this.itemSelected = item;
             }
             const modal = yield this.modalCtrl.create({
-                component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__["ModalOperacionCitaPage"],
+                component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__["ModalOperacionCitaPage"],
                 componentProps: {
                     'cita': JSON.stringify(item),
                     'operacion': 'reservar'
@@ -499,10 +512,12 @@ PreTiposatencionPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
-    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] },
-    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__["ServicioAcceso"] },
-    { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__["ServicioCitas"] },
-    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__["ServicioParametrosApp"] }
+    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__["ServicioUtiles"] },
+    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_6__["ServicioAcceso"] },
+    { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_7__["ServicioCitas"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_5__["ServicioParametrosApp"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
 ];
 PreTiposatencionPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

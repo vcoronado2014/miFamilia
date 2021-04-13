@@ -22,6 +22,7 @@ export class PreRegistroUnoPage implements OnInit {
   forma: FormGroup;
   tipoMovimiento = '1';
   estaAgregandoFamilia = false;
+  paginaAnterior = 'nuevo-login';
 
   constructor(
     private navCtrl: NavController,
@@ -39,6 +40,12 @@ export class PreRegistroUnoPage implements OnInit {
       if (params && params.estaAgregandoFamilia) {
         this.estaAgregandoFamilia = true;
       }
+      if (params && params.modulo) {
+        this.paginaAnterior = params.modulo;
+      }
+      if (params && params.nombre) {
+        this.nombre = params.nombre;
+      }
     });
     this.cargarForma();
   }
@@ -46,17 +53,29 @@ export class PreRegistroUnoPage implements OnInit {
     this.forma = new FormGroup({
       'nombre': new FormControl('', [Validators.required])      
     });
+    if (this.nombre && this.nombre != ''){
+      //agregamos el elemento a la forma
+      this.forma.setValue({
+        nombre: this.nombre
+      })
+    }
   }
 
   volver(){
-    this.navCtrl.navigateRoot('nuevo-login');
+    if (this.paginaAnterior){
+      this.navCtrl.navigateRoot(this.paginaAnterior);
+    }
+    else{
+      this.navCtrl.navigateRoot('nuevo-login');
+    }
   }
   //para validar
   get f() { return this.forma.controls; }
   irRegistroUno(){
     const navigationExtras: NavigationExtras = {
       queryParams: {
-        nombre: this.forma.controls.nombre.value
+        nombre: this.forma.controls.nombre.value,
+        modulo: this.paginaAnterior
       }
     };
     this.navCtrl.navigateRoot(['registro-uno'], navigationExtras);

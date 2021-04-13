@@ -40,7 +40,8 @@ export class AppComponent {
     this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.notificacion.buscarCitas();
+      //this.notificacion.buscarCitas();
+      this.notificacion.buscarCitasTodas();
       await this.utiles.obtenerParametrosApp(environment.production);
       this.fcmService.initFCM();
       this.fcmService.receiveMessage(true);

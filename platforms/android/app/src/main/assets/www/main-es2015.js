@@ -738,6 +738,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar-simple/avatar-simple.component.html":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar-simple/avatar-simple.component.html ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n  <ion-row style=\"display: block;\">\n    <h3 class=\"text-avatar\">{{nombreCompleto}}</h3>\n    <p class=\"subtext-avatar\">{{parentezco}}</p>\n  </ion-row>\n\n");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar/avatar.component.html":
 /*!***********************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar/avatar.component.html ***!
@@ -760,7 +773,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n        <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n      </ion-row>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>");
+/* harmony default export */ __webpack_exports__["default"] = ("      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>");
 
 /***/ }),
 
@@ -774,6 +787,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<mat-card style=\"padding: 0;\" (click)=\"openGenerico(modulo)\">\n  <img class={{classImagen}} src={{rutaImagen}}>\n  <mat-card-header style=\"padding-left: 16px;\">\n      <mat-card-title style=\"padding-top: 16px;\" class=\"ion-text-capitalize\">{{modulo.toLowerCase()}}</mat-card-title>\n  </mat-card-header>\n</mat-card>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/pagina-mensajes/pagina-mensajes.component.html":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/pagina-mensajes/pagina-mensajes.component.html ***!
+  \*****************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"centrado ion-no-padding\">\r\n    <h1>{{titulo}}</h1>\r\n    <p class=\"texto-1 ion-text-left\">{{contenido}}</p>\r\n    <!-- boton volver -->\r\n    <div class=\"row mt-32\">\r\n        <button mat-raised-button color=\"primary\" style=\"width: 100%;\" class=\"boton\" (click)=\"volver()\">VOLVER</button>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -905,6 +931,14 @@ const routes = [
         path: 'interconsultas',
         loadChildren: () => __webpack_require__.e(/*! import() | interconsultas-interconsultas-module */ "interconsultas-interconsultas-module").then(__webpack_require__.bind(null, /*! ./interconsultas/interconsultas.module */ "./src/app/interconsultas/interconsultas.module.ts")).then(m => m.InterconsultasPageModule)
     },
+    {
+        path: 'ajustes-familia',
+        loadChildren: () => __webpack_require__.e(/*! import() | ajustes-familia-ajustes-familia-module */ "ajustes-familia-ajustes-familia-module").then(__webpack_require__.bind(null, /*! ./ajustes-familia/ajustes-familia.module */ "./src/app/ajustes-familia/ajustes-familia.module.ts")).then(m => m.AjustesFamiliaPageModule)
+    },
+    {
+        path: 'seleccion-usuario',
+        loadChildren: () => __webpack_require__.e(/*! import() | seleccion-usuario-seleccion-usuario-module */ "seleccion-usuario-seleccion-usuario-module").then(__webpack_require__.bind(null, /*! ./seleccion-usuario/seleccion-usuario.module */ "./src/app/seleccion-usuario/seleccion-usuario.module.ts")).then(m => m.SeleccionUsuarioPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -983,7 +1017,8 @@ let AppComponent = class AppComponent {
         this.platform.ready().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            this.notificacion.buscarCitas();
+            //this.notificacion.buscarCitas();
+            this.notificacion.buscarCitasTodas();
             yield this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].production);
             this.fcmService.initFCM();
             this.fcmService.receiveMessage(true);
@@ -1062,17 +1097,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
 /* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
 /* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
-/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
-/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
-/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../environments/firebaseconfig */ "./src/environments/firebaseconfig.ts");
-/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
-/* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
-/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
-/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
-/* harmony import */ var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @ionic-native/firebase-messaging/ngx */ "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/components.module */ "./src/app/components/components.module.ts");
+/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @angular/material/datepicker */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/datepicker.js");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../environments/firebaseconfig */ "./src/environments/firebaseconfig.ts");
+/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
+/* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
+/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
+/* harmony import */ var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @ionic-native/firebase-messaging/ngx */ "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/components.module */ "./src/app/components/components.module.ts");
+/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @angular/material-moment-adapter */ "./node_modules/@angular/material-moment-adapter/__ivy_ngcc__/fesm2015/material-moment-adapter.js");
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js");
 
 
 
@@ -1120,6 +1158,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* import { MatSelectModule  } from '@angular/material/select';
 import { MatFormField  } from '@angular/material/form-field/form-field';
 import { MatFormField  } from '@angular/material/form-field/label'; */
@@ -1131,6 +1170,9 @@ import { MatFormField  } from '@angular/material/form-field/label'; */
 
 
 
+
+
+//material datepicker
 
 
 let AppModule = class AppModule {
@@ -1151,19 +1193,20 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"],
             _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"],
-            _angular_material_select__WEBPACK_IMPORTED_MODULE_41__["MatSelectModule"],
+            _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"],
             _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"],
-            _angular_material_icon__WEBPACK_IMPORTED_MODULE_42__["MatIconModule"],
+            _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__["MatIconModule"],
+            _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__["MatDatepickerModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"],
-            _components_components_module__WEBPACK_IMPORTED_MODULE_51__["ComponentsModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_52__["ComponentsModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"],
-            _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__["AngularFireDatabaseModule"],
-            _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__["AngularFireStorageModule"],
-            _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__["AngularFireMessagingModule"],
-            _angular_fire__WEBPACK_IMPORTED_MODULE_46__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__["firebaseConfig"])
+            _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__["AngularFireDatabaseModule"],
+            _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__["AngularFireStorageModule"],
+            _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__["AngularFireMessagingModule"],
+            _angular_fire__WEBPACK_IMPORTED_MODULE_47__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__["firebaseConfig"])
         ],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
@@ -1189,15 +1232,71 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"],
             _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"],
             _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"],
-            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_43__["LocalNotifications"],
-            _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_44__["BackgroundMode"],
-            _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__["FirebaseMessaging"],
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__["LocalNotifications"],
+            _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_45__["BackgroundMode"],
+            _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__["FirebaseMessaging"],
             /*  BackgroundGeolocation, */
+            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"], useValue: 'es-CL' },
+            {
+                provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["DateAdapter"],
+                useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MomentDateAdapter"],
+                deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
+            },
+            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_FORMATS"], useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_FORMATS"] },
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"]]
     })
 ], AppModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/avatar-simple/avatar-simple.component.scss":
+/*!***********************************************************************!*\
+  !*** ./src/app/components/avatar-simple/avatar-simple.component.scss ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".text-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.15px;\n  color: #000000DE;\n  font-size: 1em;\n  margin-bottom: 0;\n}\n\n.subtext-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.25px;\n  color: #00000099;\n  font-size: 0.875em;\n  margin-bottom: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2ltcGxlL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcY29tcG9uZW50c1xcYXZhdGFyLXNpbXBsZVxcYXZhdGFyLXNpbXBsZS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2ltcGxlL2F2YXRhci1zaW1wbGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxxQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQUFBO0VBQ0EsZ0JBQUE7QUNDSjs7QURDRTtFQUNFLHFCQUFBO0VBQ0Esc0JBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyLXNpbXBsZS9hdmF0YXItc2ltcGxlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRleHQtYXZhdGFye1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMTVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwREU7XHJcbiAgICBmb250LXNpemU6IDFlbTtcclxuICAgIG1hcmdpbi1ib3R0b206IDA7XHJcbiAgfVxyXG4gIC5zdWJ0ZXh0LWF2YXRhcntcclxuICAgIGZvbnQtZmFtaWx5OiAnUm9ib3RvJztcclxuICAgIGxldHRlci1zcGFjaW5nOiAwLjI1cHg7XHJcbiAgICBjb2xvcjogIzAwMDAwMDk5O1xyXG4gICAgZm9udC1zaXplOiAwLjg3NWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB9IiwiLnRleHQtYXZhdGFyIHtcbiAgZm9udC1mYW1pbHk6IFwiUm9ib3RvXCI7XG4gIGxldHRlci1zcGFjaW5nOiAwLjE1cHg7XG4gIGNvbG9yOiAjMDAwMDAwREU7XG4gIGZvbnQtc2l6ZTogMWVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufVxuXG4uc3VidGV4dC1hdmF0YXIge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMjVweDtcbiAgY29sb3I6ICMwMDAwMDA5OTtcbiAgZm9udC1zaXplOiAwLjg3NWVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufSJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/components/avatar-simple/avatar-simple.component.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/avatar-simple/avatar-simple.component.ts ***!
+  \*********************************************************************/
+/*! exports provided: AvatarSimpleComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AvatarSimpleComponent", function() { return AvatarSimpleComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+
+let AvatarSimpleComponent = class AvatarSimpleComponent {
+    constructor() { }
+    ngOnInit() { }
+};
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], AvatarSimpleComponent.prototype, "nombreCompleto", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], AvatarSimpleComponent.prototype, "parentezco", void 0);
+AvatarSimpleComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-avatar-simple',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./avatar-simple.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/avatar-simple/avatar-simple.component.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./avatar-simple.component.scss */ "./src/app/components/avatar-simple/avatar-simple.component.scss")).default]
+    })
+], AvatarSimpleComponent);
 
 
 
@@ -1384,6 +1483,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./avatar/avatar.component */ "./src/app/components/avatar/avatar.component.ts");
 /* harmony import */ var _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./progress/progress.component */ "./src/app/components/progress/progress.component.ts");
 /* harmony import */ var _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./item-home/item-home.component */ "./src/app/components/item-home/item-home.component.ts");
+/* harmony import */ var _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./avatar-simple/avatar-simple.component */ "./src/app/components/avatar-simple/avatar-simple.component.ts");
+/* harmony import */ var _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pagina-mensajes/pagina-mensajes.component */ "./src/app/components/pagina-mensajes/pagina-mensajes.component.ts");
+
+
 
 
 
@@ -1403,8 +1506,10 @@ ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         declarations: [
             _card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"],
             _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"],
+            _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"],
             _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"],
             _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"],
+            _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"],
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -1417,8 +1522,10 @@ ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         exports: [
             _card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"],
             _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"],
+            _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"],
             _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"],
             _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"],
+            _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"],
         ]
     })
 ], ComponentsModule);
@@ -1515,6 +1622,84 @@ ItemHomeComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./item-home.component.scss */ "./src/app/components/item-home/item-home.component.scss")).default]
     })
 ], ItemHomeComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/pagina-mensajes/pagina-mensajes.component.scss":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/pagina-mensajes/pagina-mensajes.component.scss ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".centrado {\n  text-align: center;\n  width: 100%;\n  height: 50%;\n  position: absolute;\n  top: 25%;\n  padding-left: 60px;\n  padding-right: 60px;\n}\n\n.titulo-item-2 {\n  font-size: 16px;\n  color: #000000DE;\n}\n\n.mt-32 {\n  margin-top: 32px;\n}\n\n.texto-1 {\n  font-size: 1.3em;\n  color: #575657;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmEtbWVuc2FqZXMvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxjb21wb25lbnRzXFxwYWdpbmEtbWVuc2FqZXNcXHBhZ2luYS1tZW5zYWplcy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmEtbWVuc2FqZXMvcGFnaW5hLW1lbnNhamVzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQUE7RUFDQSxXQUFBO0VBQ0EsV0FBQTtFQUNBLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7QUNDSjs7QURDQTtFQUNJLGVBQUE7RUFDQSxnQkFBQTtBQ0VKOztBREFBO0VBQ0ksZ0JBQUE7QUNHSjs7QUREQTtFQUNJLGdCQUFBO0VBQ0EsY0FBQTtBQ0lKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmEtbWVuc2FqZXMvcGFnaW5hLW1lbnNhamVzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNlbnRyYWRve1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgd2lkdGg6IDEwMCU7ICAgICAgIFxyXG4gICAgaGVpZ2h0OiA1MCU7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICB0b3A6MjUlOyAgXHJcbiAgICBwYWRkaW5nLWxlZnQ6IDYwcHg7XHJcbiAgICBwYWRkaW5nLXJpZ2h0OiA2MHB4OyAgICAgICAgIFxyXG59XHJcbi50aXR1bG8taXRlbS0ye1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxufVxyXG4ubXQtMzJ7XHJcbiAgICBtYXJnaW4tdG9wOiAzMnB4O1xyXG59XHJcbi50ZXh0by0xe1xyXG4gICAgZm9udC1zaXplOiAxLjNlbTtcclxuICAgIGNvbG9yOiAjNTc1NjU3O1xyXG4gICAgXHJcbn0iLCIuY2VudHJhZG8ge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDUwJTtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDI1JTtcbiAgcGFkZGluZy1sZWZ0OiA2MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA2MHB4O1xufVxuXG4udGl0dWxvLWl0ZW0tMiB7XG4gIGZvbnQtc2l6ZTogMTZweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbn1cblxuLm10LTMyIHtcbiAgbWFyZ2luLXRvcDogMzJweDtcbn1cblxuLnRleHRvLTEge1xuICBmb250LXNpemU6IDEuM2VtO1xuICBjb2xvcjogIzU3NTY1Nztcbn0iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/components/pagina-mensajes/pagina-mensajes.component.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/components/pagina-mensajes/pagina-mensajes.component.ts ***!
+  \*************************************************************************/
+/*! exports provided: PaginaMensajesComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaginaMensajesComponent", function() { return PaginaMensajesComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+
+
+
+
+let PaginaMensajesComponent = class PaginaMensajesComponent {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles) {
+        this.navCtrl = navCtrl;
+        this.toast = toast;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.loading = loading;
+        this.menu = menu;
+        this.utiles = utiles;
+        this.irA = 'inicio';
+    }
+    ngOnInit() { }
+    volver() {
+        console.log('volver');
+        this.navCtrl.navigateRoot(this.irA);
+    }
+};
+PaginaMensajesComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
+    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] }
+];
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], PaginaMensajesComponent.prototype, "titulo", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], PaginaMensajesComponent.prototype, "contenido", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], PaginaMensajesComponent.prototype, "irA", void 0);
+PaginaMensajesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-pagina-mensajes',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./pagina-mensajes.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/pagina-mensajes/pagina-mensajes.component.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./pagina-mensajes.component.scss */ "./src/app/components/pagina-mensajes/pagina-mensajes.component.scss")).default]
+    })
+], PaginaMensajesComponent);
 
 
 
@@ -1747,7 +1932,7 @@ let ServicioAcceso = class ServicioAcceso {
                     if (retorno.UsuariosFamilia) {
                         userFamilia = JSON.stringify(retorno.UsuariosFamilia);
                         //variable de sessión muy importante para el resto de la app.
-                        sessionStorage.setItem("UsuariosFamilia", userFamilia);
+                        localStorage.setItem("UsuariosFamilia", userFamilia);
                     }
                     this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
                     this.Mensaje = retorno.RespuestaBase.Mensaje;
@@ -1783,6 +1968,8 @@ let ServicioAcceso = class ServicioAcceso {
     }
     logout() {
         sessionStorage.clear();
+        //limpiamos eventos locales
+        localStorage.removeItem('NOTIFICACIONES_LOCALES_EVENTOS');
         this.username = '';
         this.loggedIn = false;
     }
@@ -2354,13 +2541,23 @@ let ServicioCitas = class ServicioCitas {
         let data = this.http.get(urlCorta, {}, {});
         return data;
     }
-    getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token) {
-        let urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+    /*     getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
+            let urlCorta = environment.API_ENDPOINT + 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+            let data = this.httpClient.get(urlCorta,{});
+            return data;
+        }
+        getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId, token){
+            let urlCorta = environment.API_ENDPOINT+ 'ObtenerDisponibilidadApi' +'?start=' + start + '&end=' + end + '&organization='+ organization + '&patient=' + patient + '&serviceType='+ serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+            let data = this.http.get(urlCorta, {}, {});
+            return data;
+        } */
+    getDisponibilidadApi(start, end, organization, patient, serviceType, status, count, operacion, nodId) {
+        let urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
         let data = this.httpClient.get(urlCorta, {});
         return data;
     }
-    getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId, token) {
-        let urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId + '&token=' + token;
+    getDisponibilidadApiNative(start, end, organization, patient, serviceType, status, count, operacion, nodId) {
+        let urlCorta = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerDisponibilidadApi' + '?start=' + start + '&end=' + end + '&organization=' + organization + '&patient=' + patient + '&serviceType=' + serviceType + '&status=' + status + '&count=' + count + '&operacion=' + operacion + '&nodId=' + nodId;
         let data = this.http.get(urlCorta, {}, {});
         return data;
     }
@@ -2441,6 +2638,41 @@ let ServicioCitas = class ServicioCitas {
             "AnnoConsulta": annoConsulta.toString()
         };
         let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoApi';
+        this.http.setDataSerializer('json');
+        return this.http.post(url, body, {});
+    }
+    //estos metodos entregan los eventos para las notificaciones
+    entregaPorMesNuevoLivianoApi(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        const body = JSON.stringify({
+            UspId: uspId.toString(),
+            IdRyf: idRyf.toString(),
+            NodId: nodId.toString(),
+            NumeroMes: numeroMes.toString(),
+            AnnoConsulta: annoConsulta.toString()
+        });
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoLivianoApi';
+        let httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+        let options = { headers: httpHeaders };
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    entregaPorMesNuevoLivianoApiNative(uspId, idRyf, nodId, numeroMes, annoConsulta) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body = {
+            "UspId": uspId.toString(),
+            "IdRyf": idRyf.toString(),
+            "NodId": nodId.toString(),
+            "NumeroMes": numeroMes.toString(),
+            "AnnoConsulta": annoConsulta.toString()
+        };
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'MesNuevoLivianoApi';
         this.http.setDataSerializer('json');
         return this.http.post(url, body, {});
     }
@@ -3007,6 +3239,17 @@ let ServicioGeo = class ServicioGeo {
         this.http.setDataSerializer('json');
         return this.http.post(url, body, {});
     }
+    //contactabilidad
+    getContactabilidad(run) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Contactabilidad?run=' + run;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    getContactabilidadNative(run) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Contactabilidad?run=' + run;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
 };
 ServicioGeo.ctorParameters = () => [
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__["HTTP"] },
@@ -3437,6 +3680,7 @@ let ServicioNotificaciones = class ServicioNotificaciones {
         this.vacunasCovid = [];
         //inicializamos los valores
         moment__WEBPACK_IMPORTED_MODULE_4__["locale"]('es');
+        localStorage.removeItem('NOTIFICACIONES_LOCALES_EVENTOS');
     }
     lanzarNotificacionPrueba() {
         if (this.utiles.isAppOnDevice()) {
@@ -3532,6 +3776,9 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                             }
                             console.log(nuevas);
                         }
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
                 else {
@@ -3557,6 +3804,9 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                             }
                             console.log(nuevas);
                         }
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
             }
@@ -3584,6 +3834,9 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                             }
                             console.log(nuevas);
                         }
+                    }, error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
                 else {
@@ -3609,10 +3862,261 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                             }
                             console.log(nuevas);
                         }
+                    }, error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
             }
         }
+    }
+    agregarEntidadLocal(titulo, nombreCompleto, indice, id, contenido) {
+        let entidad = {
+            Titulo: titulo,
+            Subtitulo: nombreCompleto,
+            Contenido: contenido,
+            Id: id,
+            Indice: indice
+        };
+        if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            //SI YA EXISTE HACEMOS PUSH
+            var eventoEsta = false;
+            let lista = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            //primero revisamos que el evento no este ya agregado
+            let evento = lista.filter(p => p.Contenido == contenido);
+            if (evento && evento.length > 0) {
+                eventoEsta = true;
+            }
+            if (eventoEsta == false) {
+                lista.push(entidad);
+                localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(lista));
+            }
+        }
+        else {
+            let lista = [];
+            lista.push(entidad);
+            localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(lista));
+        }
+    }
+    buscarCitasTodas() {
+        var indice = 1000;
+        var usuario = null;
+        if (localStorage.getItem('UsuarioAps')) {
+            usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+        }
+        var annoConsultar = 0;
+        var mesConsultar = 0;
+        this.citasArr = [];
+        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_4__();
+        var fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days');
+        var mesActual = {
+            mes: fechaActual.month() + 1,
+            anno: fechaActual.year()
+        };
+        var mesEvaluar = {
+            mes: fechaEvaluar.month() + 1,
+            anno: fechaEvaluar.year()
+        };
+        //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
+        if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno) {
+            //es le mismo mes
+            mesConsultar = mesActual.mes;
+            annoConsultar = mesActual.anno;
+        }
+        else {
+            //hay diferencia, por tanto se toma el ultimo mes
+            mesConsultar = mesEvaluar.mes;
+            annoConsultar = mesEvaluar.anno;
+        }
+        if (usuario != null) {
+            if (this.utiles.isAppOnDevice()) {
+                //llamada nativa
+                if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                    this.citas.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response) => {
+                        //aca debemos procesar las citas
+                        var todas = JSON.parse(response.data);
+                        if (todas && todas.length > 0) {
+                            for (var i = 0; i < todas.length; i++) {
+                                if (todas[i].Eventos && todas[i].Eventos.length > 0) {
+                                    //foreach a LOS EVENTOS
+                                    for (var s = 0; s < todas[i].Eventos.length; s++) {
+                                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                        var hora = todas[i].Eventos[s].HoraInicioFin;
+                                        var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                                        var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                                        var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                                        var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                        //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                        this.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                                        indice++;
+                                        this.crearNotificacion(id, titulo, texto);
+                                    }
+                                }
+                            }
+                        }
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                    });
+                }
+                else {
+                    this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response) => {
+                        //aca debemos procesar las citas
+                        var todas = JSON.parse(response.data);
+                        if (todas && todas.length > 0) {
+                            //aplicamos el primer filtro
+                            var nuevas = todas.filter(e => e.Mostrar == true);
+                            var total = nuevas.filter(e => moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days'));
+                            if (total && total.length > 0) {
+                                //por cada uno de estos debemos hacer un mensaje
+                                for (var i = 0; i < total.length; i++) {
+                                    var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                    var hora = total[i].Eventos[0].HoraInicioFin;
+                                    var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                    var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                    var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                    var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                    //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                    this.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                                    indice++;
+                                    this.crearNotificacion(id, titulo, texto);
+                                }
+                            }
+                            console.log(nuevas);
+                        }
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                    });
+                }
+            }
+            else {
+                //llamada web
+                if (this.parametrosApp.USA_API_MANAGEMENT()) {
+                    this.citas.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response) => {
+                        var todas = response;
+                        if (todas && todas.length > 0) {
+                            for (var i = 0; i < todas.length; i++) {
+                                if (todas[i].Eventos && todas[i].Eventos.length > 0) {
+                                    //foreach a LOS EVENTOS
+                                    for (var s = 0; s < todas[i].Eventos.length; s++) {
+                                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                        var hora = todas[i].Eventos[s].HoraInicioFin;
+                                        var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                                        var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                                        var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                                        var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                        //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                        this.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                                        indice++;
+                                        this.crearNotificacion(id, titulo, texto);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+                else {
+                    this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response) => {
+                        //aca debemos procesar las citas
+                        var todas = response;
+                        if (todas && todas.length > 0) {
+                            //aplicamos el primer filtro
+                            var nuevas = todas.filter(e => e.Mostrar == true);
+                            var total = nuevas.filter(e => moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) >= moment__WEBPACK_IMPORTED_MODULE_4__() && moment__WEBPACK_IMPORTED_MODULE_4__(e.FechaCompleta) <= moment__WEBPACK_IMPORTED_MODULE_4__().add(5, 'days'));
+                            if (total && total.length > 0) {
+                                //por cada uno de estos debemos hacer un mensaje
+                                for (var i = 0; i < total.length; i++) {
+                                    var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(total[i].Eventos[0].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                                    var hora = total[i].Eventos[0].HoraInicioFin;
+                                    var lugar = total[i].Eventos[0].DetalleEventoMes.Lugar;
+                                    var id = total[i].Eventos[0].DetalleEventoMes.IdElemento;
+                                    var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
+                                    var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                                    //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                                    this.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                                    indice++;
+                                    this.crearNotificacion(id, titulo, texto);
+                                }
+                            }
+                            console.log(nuevas);
+                        }
+                    }, error => {
+                        console.log(error.message);
+                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                    });
+                }
+            }
+        }
+    }
+    construyeNotificaciones(todas) {
+        var arr = [];
+        var indice = 1;
+        if (localStorage.getItem('UsuarioAps')) {
+            var usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+            if (usuario && usuario.VacunasCovid) {
+                if (usuario.VacunasCovid.length > 0) {
+                    usuario.VacunasCovid.forEach(element => {
+                        let entidad = {
+                            Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                            Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                            Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                            Id: element.Id,
+                            Indice: indice
+                        };
+                        arr.push(entidad);
+                        indice++;
+                    });
+                }
+            }
+        }
+        //local storage
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0) {
+                usuarios.forEach(usuario => {
+                    if (usuario && usuario.VacunasCovid.length > 0) {
+                        usuario.VacunasCovid.forEach(element => {
+                            let entidad = {
+                                Titulo: element.DescripcionDosis + ' ' + element.DescripcionVacuna,
+                                Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
+                                Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
+                                Id: element.Id,
+                                Indice: indice
+                            };
+                            arr.push(entidad);
+                            indice++;
+                        });
+                    }
+                });
+            }
+        }
+        if (todas && todas.length > 0) {
+            for (var i = 0; i < todas.length; i++) {
+                if (todas[i].Eventos && todas[i].Eventos.length > 0) {
+                    //foreach a LOS EVENTOS
+                    for (var s = 0; s < todas[i].Eventos.length; s++) {
+                        var fecha = moment__WEBPACK_IMPORTED_MODULE_4__(todas[i].Eventos[s].DetalleEventoMes.FechaHora).format("DD-MM-YYYY");
+                        var hora = todas[i].Eventos[s].HoraInicioFin;
+                        var lugar = todas[i].Eventos[s].DetalleEventoMes.Lugar;
+                        var id = todas[i].Eventos[s].DetalleEventoMes.IdElemento;
+                        var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
+                        var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar;
+                        //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
+                        let entidad = {
+                            Titulo: titulo,
+                            Subtitulo: todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
+                            Contenido: texto,
+                            Id: id,
+                            Indice: indice
+                        };
+                        arr.push(entidad);
+                        indice++;
+                    }
+                }
+            }
+        }
+        return arr;
     }
 };
 ServicioNotificaciones.ctorParameters = () => [
@@ -3700,9 +4204,9 @@ let ServicioNotificacionesLocales = class ServicioNotificacionesLocales {
                 }
             }
         }
-        //session storage
-        if (sessionStorage.getItem('UsuariosFamilia')) {
-            var usuarios = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+        //local storage
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
             if (usuarios && usuarios.length > 0) {
                 usuarios.forEach(usuario => {
                     if (usuario && usuario.VacunasCovid.length > 0) {
@@ -3721,7 +4225,30 @@ let ServicioNotificacionesLocales = class ServicioNotificacionesLocales {
                 });
             }
         }
+        //estas son nottificaciones que se obtuvieron de los eventos
+        if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            if (listaEventos != null && listaEventos.length > 0) {
+                listaEventos.forEach(evento => {
+                    evento.Indice = indice;
+                    lista.push(evento);
+                    indice++;
+                });
+            }
+        }
         return lista;
+    }
+    removeCita(idCita) {
+        if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            if (listaEventos != null && listaEventos.length > 0) {
+                let listaSinElemento = listaEventos.filter(p => p.Id != idCita);
+                //esta es la nueva lista
+                if (listaSinElemento && listaSinElemento.length > 0) {
+                    localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(listaSinElemento));
+                }
+            }
+        }
     }
 };
 ServicioNotificacionesLocales.ctorParameters = () => [
@@ -4660,6 +5187,126 @@ let ServicioUtiles = class ServicioUtiles {
             });
         }
         return arr;
+    }
+    actualizarContactabilidad(contactabilidad) {
+        //buscamos al usuario en local sttorage   
+        if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+            if (usu) {
+                if (usu.Rut == contactabilidad.Run) {
+                    usu.Contactabilidad = contactabilidad;
+                    localStorage.setItem('UsuarioAps', JSON.stringify(usu));
+                }
+            }
+        }
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0) {
+                for (var i = 0; i < usuarios.length; i++) {
+                    if (usuarios[i].Rut == contactabilidad.Run) {
+                        usuarios[i].Contactabilidad = contactabilidad;
+                        existe = true;
+                    }
+                }
+            }
+            if (existe) {
+                localStorage.setItem('UsuariosFamilia', JSON.stringify(usuarios));
+            }
+        }
+    }
+    //entrega true si tiene familia asociada
+    tieneFamilia() {
+        var retorno = false;
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0) {
+                retorno = true;
+            }
+        }
+        return retorno;
+    }
+    entregaUsuario(id) {
+        //buscamos al usuario en local sttorage
+        let usuario = null;
+        if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+            if (usu) {
+                if (usu.Id == id) {
+                    usuario = usu;
+                }
+            }
+        }
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0) {
+                for (var i = 0; i < usuarios.length; i++) {
+                    if (usuarios[i].Id == id) {
+                        usuario = usuarios[i];
+                    }
+                }
+            }
+        }
+        return usuario;
+    }
+    entregaUsuarioNombre(nombre) {
+        //buscamos al usuario en local sttorage
+        let usuario = null;
+        if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+            if (usu) {
+                let nombreComparar = usu.Nombres + ' ' + usu.ApellidoPaterno + ' ' + usu.ApellidoMaterno;
+                if (nombreComparar.toUpperCase() == nombre.toUpperCase()) {
+                    usuario = usu;
+                }
+            }
+        }
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0) {
+                for (var i = 0; i < usuarios.length; i++) {
+                    let nombreComparar = usuarios[i].Nombres + ' ' + usuarios[i].ApellidoPaterno + ' ' + usuarios[i].ApellidoMaterno;
+                    if (nombreComparar.toUpperCase() == nombre.toUpperCase()) {
+                        usuario = usuarios[i];
+                    }
+                }
+            }
+        }
+        return usuario;
+    }
+    entregaArregloUsuarios() {
+        var arr = [];
+        if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+            if (usu) {
+                arr.push(usu);
+            }
+        }
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0) {
+                for (var i = 0; i < usuarios.length; i++) {
+                    arr.push(usuarios[i]);
+                }
+            }
+        }
+        return arr;
+    }
+    removeCitaNotificacionesLocales(idCita) {
+        if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')) {
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            if (listaEventos != null && listaEventos.length > 0) {
+                let listaSinElemento = listaEventos.filter(p => p.Id != idCita);
+                //esta es la nueva lista
+                if (listaSinElemento && listaSinElemento.length > 0) {
+                    localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(listaSinElemento));
+                }
+            }
+        }
     }
 };
 ServicioUtiles.ctorParameters = () => [

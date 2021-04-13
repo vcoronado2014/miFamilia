@@ -707,4 +707,130 @@ export class ServicioUtiles{
         return arr;
 
     }
+
+    actualizarContactabilidad(contactabilidad){
+        //buscamos al usuario en local sttorage   
+        if (localStorage.getItem('UsuarioAps')){
+          var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+          if (usu){
+            if (usu.Rut == contactabilidad.Run){
+              usu.Contactabilidad = contactabilidad;
+              localStorage.setItem('UsuarioAps', JSON.stringify(usu));
+            }
+          }
+        }
+        if (localStorage.getItem('UsuariosFamilia')){
+          var existe = false;
+          var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+          if (usuarios && usuarios.length > 0){
+            for(var i=0; i < usuarios.length; i++){
+              if (usuarios[i].Rut == contactabilidad.Run){
+                usuarios[i].Contactabilidad = contactabilidad;
+                existe = true;
+              }
+            }
+          }
+          if (existe){
+            localStorage.setItem('UsuariosFamilia', JSON.stringify(usuarios));
+          }
+        }
+    
+      }
+
+    //entrega true si tiene familia asociada
+    tieneFamilia() {
+        var retorno = false;
+        if (localStorage.getItem('UsuariosFamilia')){
+          var existe = false;
+          var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+          if (usuarios && usuarios.length > 0){
+            retorno = true;
+          }
+        }
+        return retorno;
+    }
+
+    entregaUsuario(id){
+        //buscamos al usuario en local sttorage
+        let usuario = null;   
+        if (localStorage.getItem('UsuarioAps')){
+          var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+          if (usu){
+            if (usu.Id == id){
+              usuario = usu;
+            }
+          }
+        }
+        if (localStorage.getItem('UsuariosFamilia')){
+          var existe = false;
+          var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+          if (usuarios && usuarios.length > 0){
+            for(var i=0; i < usuarios.length; i++){
+              if (usuarios[i].Id == id){
+                usuario = usuarios[i];
+              }
+            }
+          }
+        }
+        return usuario;
+    
+      }
+      entregaUsuarioNombre(nombre){
+        //buscamos al usuario en local sttorage
+        let usuario = null;   
+        if (localStorage.getItem('UsuarioAps')){
+          var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+          if (usu){
+            let nombreComparar = usu.Nombres + ' ' + usu.ApellidoPaterno + ' ' + usu.ApellidoMaterno;
+            if (nombreComparar.toUpperCase() == nombre.toUpperCase()){
+              usuario = usu;
+            }
+          }
+        }
+        if (localStorage.getItem('UsuariosFamilia')){
+          var existe = false;
+          var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+          if (usuarios && usuarios.length > 0){
+            for(var i=0; i < usuarios.length; i++){
+              let nombreComparar = usuarios[i].Nombres + ' ' + usuarios[i].ApellidoPaterno + ' ' + usuarios[i].ApellidoMaterno;
+              if (nombreComparar.toUpperCase() == nombre.toUpperCase()){
+                usuario = usuarios[i];
+              }
+            }
+          }
+        }
+        return usuario;
+    
+      }
+    entregaArregloUsuarios() {
+        var arr = [];
+        if (localStorage.getItem('UsuarioAps')) {
+            var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
+            if (usu) {
+                arr.push(usu);
+            }
+        }
+        if (localStorage.getItem('UsuariosFamilia')) {
+            var existe = false;
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
+            if (usuarios && usuarios.length > 0) {
+                for (var i = 0; i < usuarios.length; i++) {
+                    arr.push(usuarios[i]);
+                }
+            }
+        }
+        return arr;
+    }
+    removeCitaNotificacionesLocales(idCita){
+        if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')){
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            if (listaEventos != null && listaEventos.length > 0){
+                let listaSinElemento = listaEventos.filter(p=>p.Id != idCita);
+                //esta es la nueva lista
+                if (listaSinElemento && listaSinElemento.length > 0){
+                    localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(listaSinElemento));
+                }
+            }
+        }
+    } 
 }

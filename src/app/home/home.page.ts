@@ -6,10 +6,12 @@ import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioCitas } from '../../app/services/ServicioCitas';
 import { ServicioNotificacionesLocales } from '../../app/services/ServicioNotificacionesLocales';
+import { ServicioNotificaciones } from '../../app/services/ServicioNotificaciones';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { environment } from 'src/environments/environment';
-
+//moment
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -56,6 +58,7 @@ export class HomePage implements OnInit {
   pushes: any = [];
   //para progress bar
   estaCargando = false;
+  estaCargandoNotificaciones = false;
   //procesar los items del menu
   itemsMenu = [];
   //notificaciones
@@ -77,9 +80,11 @@ export class HomePage implements OnInit {
     public servicioGeo: ServicioGeo,
     public parametrosApp: ServicioParametrosApp,
     public servicioNotLocales: ServicioNotificacionesLocales,
+    public servNotificaciones: ServicioNotificaciones,
   ) {}
 
   ngOnInit() {
+    moment.locale('es');
     //this.miColor = this.utiles.entregaMiColor();
     this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
     this.miColor = this.utiles.entregaColor(this.usuarioAps);
@@ -99,7 +104,9 @@ export class HomePage implements OnInit {
     this.usaAgenda = this.utiles.entregaParametroUsaAgenda();
     this.buscarLogMovimientos();
     //notificaciones locales
-    this.obtenerNotificaciones();
+    //this.obtenerNotificaciones();
+    //ACA ESTOY TRABAJANDO HAY UN ERROR EN API MANAGEMENT
+    this.obtenerNotificacionesApi();
 /*     if (this.utiles.entregaParametroUsaAgenda()){
       this.buscarDisponibilidad();
     } */
@@ -177,7 +184,7 @@ export class HomePage implements OnInit {
           EstaEditando: true
         }
       };
-      this.dismiss();
+      //this.dismiss();
       this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
     }
     else{
@@ -235,27 +242,40 @@ export class HomePage implements OnInit {
       spinner: null,
     });
     await loader.present().then(async () => {
-      if (!this.utiles.isAppOnDevice()) {
-        //llamada web
-        this.servicioGeo.getMovimientos(cantidadDias, idDispositivo).subscribe((response: any) => {
+      //si ya se encuentra no es necesario volverlo a cargar
+      if (sessionStorage.getItem('LOG_MOVIMIENTOS')){
+        this.itemsMenu = JSON.parse(sessionStorage.getItem('LOG_MOVIMIENTOS'));
+        console.log(this.itemsMenu);
+        loader.dismiss();
+        this.estaCargando = false;
+      }
+      else {
+        if (!this.utiles.isAppOnDevice()) {
+          //llamada web
+          this.servicioGeo.getMovimientos(cantidadDias, idDispositivo).subscribe((response: any) => {
             //procesar
             this.itemsMenu = this.utiles.entregaArregloHome(response);
+            //lo guardaremos en una variable de sesión para que no 
+            //se carge constantemente, según ultima observación de 
+            //juan moran
+            sessionStorage.setItem('LOG_MOVIMIENTOS', JSON.stringify(this.itemsMenu));
             console.log(this.itemsMenu);
             loader.dismiss();
             this.estaCargando = false;
-        })
-    }
-    else{
-        //llamada nativa
-        this.servicioGeo.getMovimientosNative(cantidadDias, idDispositivo).then((response: any) => {
+          })
+        }
+        else {
+          //llamada nativa
+          this.servicioGeo.getMovimientosNative(cantidadDias, idDispositivo).then((response: any) => {
             //procesar
             var data = JSON.parse(response.data);
             this.itemsMenu = this.utiles.entregaArregloHome(data);
             console.log(this.itemsMenu);
             loader.dismiss();
             this.estaCargando = false;
-        })
-    }
+          })
+        }
+      }
     });
 
   }
@@ -275,17 +295,91 @@ export class HomePage implements OnInit {
   //notificaciones
   async obtenerNotificaciones(){
     this.estaCargando = true;
+    this.estaCargandoNotificaciones = true;
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
       spinner: null,
     });
     await loader.present().then(async () => {
-      this.notificaciones = this.servicioNotLocales.getAll();
-      console.log(this.notificaciones);
+      this.notificaciones = await this.servicioNotLocales.getAll();
+      //console.log(this.notificaciones);
       this.estaCargando = false;
+      this.estaCargandoNotificaciones = false;
     })
     
+  }
+
+  async obtenerNotificacionesApi(){
+    this.estaCargando = true;
+    this.estaCargandoNotificaciones = true;
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner: null,
+    });
+    var usuario = null;
+    if (localStorage.getItem('UsuarioAps')){
+        usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+    }
+    var annoConsultar = 0;
+    var mesConsultar = 0;
+    var fechaActual = moment();
+    var fechaEvaluar = moment().add(5, 'days');
+    var mesActual = {
+      mes: fechaActual.month() + 1,
+      anno: fechaActual.year()
+    };
+    var mesEvaluar = {
+        mes: fechaEvaluar.month() + 1,
+        anno: fechaEvaluar.year()
+    };
+    //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
+    if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno){
+        //es le mismo mes
+        mesConsultar = mesActual.mes;
+        annoConsultar = mesActual.anno;
+    }
+    else{
+        //hay diferencia, por tanto se toma el ultimo mes
+        mesConsultar = mesEvaluar.mes;
+        annoConsultar = mesEvaluar.anno;
+    }
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //llamada web
+        this.cita.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response:any)=>{
+          var data = response;
+          console.log(data);
+          this.notificaciones = this.servNotificaciones.construyeNotificaciones(data);
+          this.estaCargando = false;
+          this.loading.dismiss();
+          this.estaCargandoNotificaciones = false;
+        }, error =>{
+          console.log(error.message);
+          this.estaCargando = false;
+          this.loading.dismiss();
+          this.estaCargandoNotificaciones = false;
+        })
+      }
+      else{
+        //llamada native
+        this.cita.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response:any)=>{
+          var data = JSON.parse(response.data);
+          console.log(data);
+          this.notificaciones = this.servNotificaciones.construyeNotificaciones(data);
+          this.estaCargando = false;
+          this.loading.dismiss();
+          this.estaCargandoNotificaciones = false;
+        }).catch(error=>{
+          console.log(error.message);
+          this.estaCargando = false;
+          this.loading.dismiss();
+          this.estaCargandoNotificaciones = false;
+        })
+      }
+    });
+
   }
 
   openItemPage(modulo){
@@ -356,11 +450,13 @@ export class HomePage implements OnInit {
     }
   }
   moverSlide(indice){
-    if (indice < this.notificaciones.length -1){
+    if (indice <= this.notificaciones.length -1){
       this.slides.slideNext();
     }
     else{
-      this.slides.slidePrev();
+      //this.slides.slidePrev();
+      //lo volvemos al inicio
+      this.slides.slideTo(0);
     }
   }
 }

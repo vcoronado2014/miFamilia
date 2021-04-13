@@ -52,9 +52,9 @@ export class ServicioNotificacionesLocales{
 
             }
         }
-        //session storage
-        if (sessionStorage.getItem('UsuariosFamilia')){
-            var usuarios = JSON.parse(sessionStorage.getItem('UsuariosFamilia'));
+        //local storage
+        if (localStorage.getItem('UsuariosFamilia')){
+            var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
             if (usuarios && usuarios.length > 0){
                 usuarios.forEach(usuario => {
                     if (usuario && usuario.VacunasCovid.length > 0){
@@ -73,6 +73,29 @@ export class ServicioNotificacionesLocales{
                 })
             }
         }
+        //estas son nottificaciones que se obtuvieron de los eventos
+         if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')){
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            if (listaEventos != null && listaEventos.length > 0){
+                listaEventos.forEach(evento => {
+                    evento.Indice = indice;
+                    lista.push(evento);
+                    indice++;
+                });
+            }
+        } 
         return lista;
+    }
+    removeCita(idCita){
+        if (localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS')){
+            var listaEventos = JSON.parse(localStorage.getItem('NOTIFICACIONES_LOCALES_EVENTOS'));
+            if (listaEventos != null && listaEventos.length > 0){
+                let listaSinElemento = listaEventos.filter(p=>p.Id != idCita);
+                //esta es la nueva lista
+                if (listaSinElemento && listaSinElemento.length > 0){
+                    localStorage.setItem('NOTIFICACIONES_LOCALES_EVENTOS', JSON.stringify(listaSinElemento));
+                }
+            }
+        }
     }
 }

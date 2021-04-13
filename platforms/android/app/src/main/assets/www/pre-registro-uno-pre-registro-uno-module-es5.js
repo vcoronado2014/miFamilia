@@ -238,6 +238,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.cargando = false;
         this.tipoMovimiento = '1';
         this.estaAgregandoFamilia = false;
+        this.paginaAnterior = 'nuevo-login';
       }
 
       _createClass(PreRegistroUnoPage, [{
@@ -250,6 +251,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (params && params.estaAgregandoFamilia) {
               _this.estaAgregandoFamilia = true;
             }
+
+            if (params && params.modulo) {
+              _this.paginaAnterior = params.modulo;
+            }
+
+            if (params && params.nombre) {
+              _this.nombre = params.nombre;
+            }
           });
           this.cargarForma();
         }
@@ -259,11 +268,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.forma = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
             'nombre': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required])
           });
+
+          if (this.nombre && this.nombre != '') {
+            //agregamos el elemento a la forma
+            this.forma.setValue({
+              nombre: this.nombre
+            });
+          }
         }
       }, {
         key: "volver",
         value: function volver() {
-          this.navCtrl.navigateRoot('nuevo-login');
+          if (this.paginaAnterior) {
+            this.navCtrl.navigateRoot(this.paginaAnterior);
+          } else {
+            this.navCtrl.navigateRoot('nuevo-login');
+          }
         } //para validar
 
       }, {
@@ -271,7 +291,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function irRegistroUno() {
           var navigationExtras = {
             queryParams: {
-              nombre: this.forma.controls.nombre.value
+              nombre: this.forma.controls.nombre.value,
+              modulo: this.paginaAnterior
             }
           };
           this.navCtrl.navigateRoot(['registro-uno'], navigationExtras);
