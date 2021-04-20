@@ -69,7 +69,8 @@ export class ServicioAcceso{
             }
         });
     }
-    loginWebDirecto(userInfo){
+    //cambiado por la otra api
+/*     loginWebDirecto(userInfo){
         var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + 
         '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
         let data = this.httpClient.get(url,{});
@@ -77,6 +78,18 @@ export class ServicioAcceso{
     }
     loginWebNative(userInfo){
         var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + 
+        '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;;
+        let data = this.http.get(url, {}, {});
+        return data;
+    } */
+    loginWebDirecto(userInfo){
+        var url = environment.API_ENDPOINT + 'AutentificacionApp?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + 
+        '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
+        let data = this.httpClient.get(url,{});
+        return data;
+    }
+    loginWebNative(userInfo){
+        var url = environment.API_ENDPOINT + 'AutentificacionApp?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + 
         '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;;
         let data = this.http.get(url, {}, {});
         return data;

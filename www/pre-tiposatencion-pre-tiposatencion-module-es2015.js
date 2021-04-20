@@ -151,10 +151,9 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         //para el progress de buscar diponibilidad
         this.mostrarProgressDisp = false;
         this.encontroCitasDisp = false;
+        //idconsultar
+        this.idConsultar = 0;
     }
-    //ACA QUEDÉ EN QUE AL REALIZAR LA OPERACION DE AGENDAMIENTO
-    //DEBEMOS VOLVER A UNA PAGINA INICIAL, SI MAL NO RECUERDO SE
-    //TRATARIA DE LA PAGINA CALENDARIO
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             moment__WEBPACK_IMPORTED_MODULE_8__["locale"]('es');
@@ -162,6 +161,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
             this.activatedRoute.queryParams.subscribe((params) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (params && params.Id) {
                     //this.estaAgregandoFamilia = true;
+                    this.idConsultar = params.Id;
                     this.usuarioAps = this.utiles.entregaUsuario(params.Id);
                     if (this.usuarioAps != null) {
                         this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
@@ -362,6 +362,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
                 loader.dismiss();
                 this.disabledCombo = false;
                 this.mostrarProgressDisp = false;
+                this.mostrarProgress = false;
             }
             else {
                 this.idComboSeleccionado = 0;
@@ -371,6 +372,7 @@ let PreTiposatencionPage = class PreTiposatencionPage {
                 loader.dismiss();
                 this.disabledCombo = false;
                 this.mostrarProgressDisp = false;
+                this.mostrarProgress = false;
             }
             //error
         }
@@ -502,7 +504,12 @@ let PreTiposatencionPage = class PreTiposatencionPage {
         });
     }
     openBusquedaAvanzada() {
-        this.navCtrl.navigateRoot('busqueda-avanzada');
+        const navigationExtras = {
+            queryParams: {
+                Id: this.idConsultar
+            }
+        };
+        this.navCtrl.navigateRoot(['busqueda-avanzada'], navigationExtras);
     }
 };
 PreTiposatencionPage.ctorParameters = () => [

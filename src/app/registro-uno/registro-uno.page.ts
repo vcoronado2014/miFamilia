@@ -85,7 +85,8 @@ export class RegistroUnoPage implements OnInit {
   }
   //para validar
   get f() { return this.forma.controls; }
-  async verificaRegistroPrueba(){
+
+  async verificaRegistroCompleto(){
     if (this.forma.invalid) {
       return;
     }
@@ -97,7 +98,38 @@ export class RegistroUnoPage implements OnInit {
     console.log('idispositivo registro uno ' + idDispositivo);
     console.log('fecha nac registro uno ' + fechaNac);
     console.log('fecha nac registro uno str ' + fechaNacStr);
+
+    this.cargando = true;
+    let loader = await this.loading.create({
+      message: 'Verificando...<br>Registro',
+      duration: 3000
+    });
+
+    //primero validamos nuevamente si cuenta con registro dentro de la app por run
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //llamada web
+        this.servicioGeo.getRegistroAppRun(run, idDispositivo).subscribe((response:any)=>{
+          //procesar
+          this.procesarRespuestaRegistroCompleto(response, loader);
+        })
+      }
+      else{
+        //llamada nativa
+        this.servicioGeo.getRegistroAppNativeRun(run, idDispositivo).then((response:any)=>{
+          var data = JSON.parse(response.data);
+          this.procesarRespuestaRegistroCompleto(data, loader);
+        },
+        (error)=>{
+          this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+          loader.dismiss();
+        }
+        );
+      }
+    });
+
   }
+
   async verificaRegistro(){
     
     let run = this.forma.controls.run;
@@ -133,8 +165,49 @@ export class RegistroUnoPage implements OnInit {
     });
 
   }
+
   abrirLogin(){
     this.navCtrl.navigateRoot('nuevo-login');
+  }
+  procesarRespuestaRegistroCompleto(registro, loader){
+    if (registro && registro != null){
+      //verificamos si tiene su registro completo
+      var tieneCorreo = !(registro.CorreoElectronico == null || registro.CorreoElectronico == "" || registro.CorreoElectronico == undefined);
+      var tienePassword = !(registro.Password == null || registro.Password == "" || registro.Password == undefined);
+      var tieneRun = !(registro.Run == null || registro.Run == "" || registro.Run == undefined);
+      var tieneUsuario = !(registro.NombreUsuario == null || registro.NombreUsuario == "" || registro.NombreUsuario == undefined);
+      if (tieneCorreo && tienePassword && tieneRun && tieneUsuario){
+        //tiene registro completo, enviarlo a la pagina de login
+        this.utiles.presentToast('Usted ya tiene registro', 'middle', 5000);
+        loader.dismiss();
+        if (this.estaAgregandoFamilia == false){
+          this.abrirLogin();
+        }
+        else{
+          //si esta agregando familia hay que crear lo que corresponde y avisar al
+          //usuario que fue creado o no exito
+          console.log('ESTA AGREGANDO FAMILIA');
+        }
+        
+      }
+      else{
+        //su registro esta incompleto, derivarlo a la pagina de registro de la app
+        this.registroIncompleto = registro;
+        //pasar como parametro el registro incompleto a la otra pantalla para que pueda completarlo
+        //******* LLAMAR A LA PAGINA DE REGISTRO  *************/
+        this.utiles.presentToast('Su registro está incompleto', 'middle', 5000);
+        loader.dismiss();
+        this.irARegistro(this.estaAgregandoFamilia);
+      }
+    }
+    else{
+      //no tiene registro, llamar a la api para buscarlo en rayen
+      loader.dismiss();
+      //llamamos a enrolamiento
+      this.verficarEnrolamientoRayenCompleto();
+      //console.log('Buscarlo en rayen');
+
+    }
   }
   procesarRespuestaRegistro(registro, loader){
     if (registro && registro != null){
@@ -242,10 +315,50 @@ export class RegistroUnoPage implements OnInit {
     })
 
   }
+
+  async verficarEnrolamientoRayenCompleto(){
+    let run = this.forma.controls.run.value;
+    let fechaNac = moment(this.forma.controls.fechaNacimiento.value);
+    let fechaNacStr = fechaNac.format('DD-MM-YYYY');
+    let email = this.forma.controls.email.value;
+
+    this.cargando = true;
+    let loader = await this.loading.create({
+      message: 'Verificando...<br>Registro',
+      duration: 3000
+    });
+
+    await loader.present().then(async () => {
+      if (!this.utiles.isAppOnDevice()) {
+        //llamada web
+        this.servicioGeo.verificaEnrolamientoCompleto(run, fechaNacStr, email).subscribe((response:any)=>{
+          //procesar
+          console.log(response);
+          this.procesaRespuestaEnrolamiento(response, loader);
+        })
+      }
+      else{
+        //llamada nativa
+        this.servicioGeo.verificaEnrolamientoCompletoNative(run, fechaNacStr, email).then((response:any)=>{
+          var data = JSON.parse(response.data);
+          console.log(data);
+          this.procesaRespuestaEnrolamiento(data, loader);
+        },
+        (error)=>{
+          this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+          loader.dismiss();
+        }
+        );
+      }
+    })
+
+  }
+
   procesaRespuestaEnrolamiento(usuarioAps, loader){
     if (usuarioAps.RespuestaBase.CodigoMensaje == 0){
       let usuario = usuarioAps.UsuarioAps;
-      this.registroIncompleto = {
+      let preRegistro = usuarioAps.PreRegistro;
+/*       this.registroIncompleto = {
         Activo: 1,
         Apellidos: usuario.ApellidoPaterno == null ? '' : usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno == null ? '': usuario.ApellidoMaterno,
         Apodo: "",
@@ -270,10 +383,20 @@ export class RegistroUnoPage implements OnInit {
         Provincia: localStorage.getItem("provincia"),
         Run: this.utiles.insertarGuion(usuario.Rut),
         TelefonoContacto: ''
-      }
+      } */
       loader.dismiss();
       //acá estamos ok deberíamos mandarlo a que complete su fomrulario
-      this.irARegistro(this.estaAgregandoFamilia);
+      //this.irARegistro(this.estaAgregandoFamilia);
+      //ya no vamos directamente al registro, guardamos los datos de validación en el backend
+      //en la table de pre-registro
+      //lo redirigimos a la pagina de login y le informamos que revise su correo electrónico
+      this.muestraMensaje = true;
+      //this.objetoMensaje.irA = this.paginaAnterior;
+      this.objetoMensaje.irA = 'inicio';
+      this.objetoMensaje.titulo = 'Registro en la app mi familia';
+      this.objetoMensaje.contenido = usuarioAps.RespuestaBase.Mensaje;
+      //aca debemos guardar el preregistro
+      localStorage.setItem('PRE-REGISTRO', JSON.stringify(preRegistro));
     }
     else {
       //aca definitivamente debemos enviarlo a clave única
@@ -295,6 +418,26 @@ export class RegistroUnoPage implements OnInit {
           this.objetoMensaje.irA = this.paginaAnterior;
           this.objetoMensaje.titulo = 'Menor de edad';
           this.objetoMensaje.contenido = 'No puedes registrarte ya que eres menor de edad y el registro para esta aplicación es sólo para mayores.';
+        }
+        else if (usuarioAps.RespuestaBase.CodigoMensaje == 9){
+          this.objetoMensaje.irA = this.paginaAnterior;
+          this.objetoMensaje.titulo = 'Fecha nacimiento no coincide';
+          this.objetoMensaje.contenido = 'La fecha de nacimiento ingresada no coincide con nuestros registros, revísela e inténtelo nuevamente.';
+        }
+        else if (usuarioAps.RespuestaBase.CodigoMensaje == 10){
+          this.objetoMensaje.irA = this.paginaAnterior;
+          this.objetoMensaje.titulo = 'Email no coincide';
+          this.objetoMensaje.contenido = 'El email ingresado no coincide con nuestros registros, revíselo e inténtelo nuevamente.';
+        }
+        else if (usuarioAps.RespuestaBase.CodigoMensaje == 11){
+          this.objetoMensaje.irA = this.paginaAnterior;
+          this.objetoMensaje.titulo = 'Sin datos de contacto';
+          this.objetoMensaje.contenido = 'No cuentas con datos de contacto, te sugerimos actualizarlos en tu centro de salud.';
+        }
+        else if (usuarioAps.RespuestaBase.CodigoMensaje == 12) {
+          this.objetoMensaje.irA = this.paginaAnterior;
+          this.objetoMensaje.titulo = 'Establecimiento sin permisos';
+          this.objetoMensaje.contenido = 'El establecimiento en el cual te encuentras inscrito no tiene permisos para usar la aplicacion.';
         }
         else if (usuarioAps.RespuestaBase.CodigoMensaje == 1){
           this.objetoMensaje.irA = this.paginaAnterior;

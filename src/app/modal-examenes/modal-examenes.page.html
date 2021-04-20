@@ -10,12 +10,15 @@
 <ion-content class="back-app">
   <!-- HAY EXAMENES -->
   <ion-list *ngIf="tiene">
-    <ion-item #myList lines="none">
-      <ion-avatar slot="start">
+    
+      <app-avatar [lines]="none" [urlImagen] = "orden.UrlImagen" 
+      [nombreCompleto]="orden.NombreUsuario" 
+      [parentezco]="orden.Parentezco"></app-avatar>
+<!-- <ion-item #myList lines="none">      <ion-avatar slot="start">
         <text-avatar [text]="orden.NombreUsuario" [color]="orden.Color" [textColor]="textColor"></text-avatar>
       </ion-avatar>
-      <ion-label>{{orden.NombreUsuario}}</ion-label>
-    </ion-item>
+      <ion-label>{{orden.NombreUsuario}}</ion-label>    </ion-item> -->
+
     <ion-list-header lines="inset" mode="md">
       <ion-label><strong>Nº Órden: {{oalaId}}</strong></ion-label>
       <ion-badge color="secondary" class="ion-margin-end">{{ fechaOrden }}</ion-badge>

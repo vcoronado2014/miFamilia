@@ -773,7 +773,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>");
+/* harmony default export */ __webpack_exports__["default"] = ("      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\" style=\"font-size: 1.3em;\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/content-slide/content-slide.component.html":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/content-slide/content-slide.component.html ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<h5 class=\"titulo-slide\">{{titulo}}</h5>\r\n<h6 class=\"titulo-slide\">{{subTitulo}}</h6>\r\n<p class=\"subtitulo-slide\">{{contenido}}</p>\r\n<!-- mostrar dependiendo si modulo es distinto de null -->\r\n<!-- <button [hidden]=\"modulo == null\" mat-stroked-button color=\"accent\" (click)=\"openGenerico(modulo)\">Ir...</button> -->");
 
 /***/ }),
 
@@ -861,11 +874,11 @@ const routes = [
     },
     {
         path: 'ordenes',
-        loadChildren: () => Promise.all(/*! import() | ordenes-ordenes-module */[__webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null, /*! ./ordenes/ordenes.module */ "./src/app/ordenes/ordenes.module.ts")).then(m => m.OrdenesPageModule)
+        loadChildren: () => Promise.all(/*! import() | ordenes-ordenes-module */[__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null, /*! ./ordenes/ordenes.module */ "./src/app/ordenes/ordenes.module.ts")).then(m => m.OrdenesPageModule)
     },
     {
         path: 'modal-examenes',
-        loadChildren: () => Promise.all(/*! import() | modal-examenes-modal-examenes-module */[__webpack_require__.e("common"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null, /*! ./modal-examenes/modal-examenes.module */ "./src/app/modal-examenes/modal-examenes.module.ts")).then(m => m.ModalExamenesPageModule)
+        loadChildren: () => Promise.all(/*! import() | modal-examenes-modal-examenes-module */[__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null, /*! ./modal-examenes/modal-examenes.module */ "./src/app/modal-examenes/modal-examenes.module.ts")).then(m => m.ModalExamenesPageModule)
     },
     {
         path: 'calendario',
@@ -938,6 +951,22 @@ const routes = [
     {
         path: 'seleccion-usuario',
         loadChildren: () => __webpack_require__.e(/*! import() | seleccion-usuario-seleccion-usuario-module */ "seleccion-usuario-seleccion-usuario-module").then(__webpack_require__.bind(null, /*! ./seleccion-usuario/seleccion-usuario.module */ "./src/app/seleccion-usuario/seleccion-usuario.module.ts")).then(m => m.SeleccionUsuarioPageModule)
+    },
+    {
+        path: 'validacion-factor',
+        loadChildren: () => __webpack_require__.e(/*! import() | validacion-factor-validacion-factor-module */ "validacion-factor-validacion-factor-module").then(__webpack_require__.bind(null, /*! ./validacion-factor/validacion-factor.module */ "./src/app/validacion-factor/validacion-factor.module.ts")).then(m => m.ValidacionFactorPageModule)
+    },
+    {
+        path: 'asociar-familia',
+        loadChildren: () => __webpack_require__.e(/*! import() | asociar-familia-asociar-familia-module */ "asociar-familia-asociar-familia-module").then(__webpack_require__.bind(null, /*! ./asociar-familia/asociar-familia.module */ "./src/app/asociar-familia/asociar-familia.module.ts")).then(m => m.AsociarFamiliaPageModule)
+    },
+    {
+        path: 'quitar-familia',
+        loadChildren: () => __webpack_require__.e(/*! import() | quitar-familia-quitar-familia-module */ "quitar-familia-quitar-familia-module").then(__webpack_require__.bind(null, /*! ./quitar-familia/quitar-familia.module */ "./src/app/quitar-familia/quitar-familia.module.ts")).then(m => m.QuitarFamiliaPageModule)
+    },
+    {
+        path: 'pre-ordenes',
+        loadChildren: () => __webpack_require__.e(/*! import() | pre-ordenes-pre-ordenes-module */ "pre-ordenes-pre-ordenes-module").then(__webpack_require__.bind(null, /*! ./pre-ordenes/pre-ordenes.module */ "./src/app/pre-ordenes/pre-ordenes.module.ts")).then(m => m.PreOrdenesPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -1020,6 +1049,7 @@ let AppComponent = class AppComponent {
             //this.notificacion.buscarCitas();
             this.notificacion.buscarCitasTodas();
             yield this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].production);
+            yield this.utiles.crearTokenPlano();
             this.fcmService.initFCM();
             this.fcmService.receiveMessage(true);
         }));
@@ -1485,6 +1515,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./item-home/item-home.component */ "./src/app/components/item-home/item-home.component.ts");
 /* harmony import */ var _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./avatar-simple/avatar-simple.component */ "./src/app/components/avatar-simple/avatar-simple.component.ts");
 /* harmony import */ var _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pagina-mensajes/pagina-mensajes.component */ "./src/app/components/pagina-mensajes/pagina-mensajes.component.ts");
+/* harmony import */ var _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./content-slide/content-slide.component */ "./src/app/components/content-slide/content-slide.component.ts");
+
 
 
 
@@ -1510,6 +1542,7 @@ ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"],
             _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"],
             _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"],
+            _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"],
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -1526,9 +1559,90 @@ ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"],
             _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"],
             _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"],
+            _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"],
         ]
     })
 ], ComponentsModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/content-slide/content-slide.component.scss":
+/*!***********************************************************************!*\
+  !*** ./src/app/components/content-slide/content-slide.component.scss ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".titulo-slide {\n  color: #F4F2FA;\n  font-size: 1em;\n  text-align: left;\n}\n\n.subtitulo-slide {\n  color: #AFA0D5;\n  text-align: left;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jb250ZW50LXNsaWRlL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcY29tcG9uZW50c1xcY29udGVudC1zbGlkZVxcY29udGVudC1zbGlkZS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9jb250ZW50LXNsaWRlL2NvbnRlbnQtc2xpZGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0FDQ0o7O0FEQ0U7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvY29udGVudC1zbGlkZS9jb250ZW50LXNsaWRlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdHVsby1zbGlkZXtcclxuICAgIGNvbG9yOiAjRjRGMkZBO1xyXG4gICAgZm9udC1zaXplOiAxZW07XHJcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIH1cclxuICAuc3VidGl0dWxvLXNsaWRle1xyXG4gICAgY29sb3I6ICNBRkEwRDU7XHJcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIH0iLCIudGl0dWxvLXNsaWRlIHtcbiAgY29sb3I6ICNGNEYyRkE7XG4gIGZvbnQtc2l6ZTogMWVtO1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xufVxuXG4uc3VidGl0dWxvLXNsaWRlIHtcbiAgY29sb3I6ICNBRkEwRDU7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG59Il19 */");
+
+/***/ }),
+
+/***/ "./src/app/components/content-slide/content-slide.component.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/content-slide/content-slide.component.ts ***!
+  \*********************************************************************/
+/*! exports provided: ContentSlideComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContentSlideComponent", function() { return ContentSlideComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+
+
+
+
+
+let ContentSlideComponent = class ContentSlideComponent {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, parametrosApp) {
+        this.navCtrl = navCtrl;
+        this.toast = toast;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.loading = loading;
+        this.menu = menu;
+        this.utiles = utiles;
+        this.parametrosApp = parametrosApp;
+    }
+    ngOnInit() { }
+};
+ContentSlideComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
+    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__["ServicioParametrosApp"] }
+];
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], ContentSlideComponent.prototype, "modulo", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], ContentSlideComponent.prototype, "titulo", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], ContentSlideComponent.prototype, "subTitulo", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], ContentSlideComponent.prototype, "contenido", void 0);
+ContentSlideComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-content-slide',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./content-slide.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/content-slide/content-slide.component.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./content-slide.component.scss */ "./src/app/components/content-slide/content-slide.component.scss")).default]
+    })
+], ContentSlideComponent);
 
 
 
@@ -1582,7 +1696,7 @@ let ItemHomeComponent = class ItemHomeComponent {
     openGenerico(modulo) {
         var pageName = modulo.toLowerCase();
         if (modulo == 'EXAMENES') {
-            pageName = 'ordenes';
+            pageName = 'pre-ordenes';
         }
         //registramos movimiento
         if (sessionStorage.getItem("RSS_ID")) {
@@ -1953,14 +2067,27 @@ let ServicioAcceso = class ServicioAcceso {
             }
         });
     }
+    //cambiado por la otra api
+    /*     loginWebDirecto(userInfo){
+            var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
+            '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
+            let data = this.httpClient.get(url,{});
+            return data;
+        }
+        loginWebNative(userInfo){
+            var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
+            '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;;
+            let data = this.http.get(url, {}, {});
+            return data;
+        } */
     loginWebDirecto(userInfo) {
-        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
+        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AutentificacionApp?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
             '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
         let data = this.httpClient.get(url, {});
         return data;
     }
     loginWebNative(userInfo) {
-        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
+        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AutentificacionApp?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
             '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
         ;
         let data = this.http.get(url, {}, {});
@@ -2945,12 +3072,12 @@ let ServicioGeo = class ServicioGeo {
         return data;
     }
     getRegistroApp(idDispositivo) {
-        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroApp?IdDispositivo=' + idDispositivo;
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerRegistroApp?IdDispositivo=' + idDispositivo;
         let data = this.httpClient.get(url, {});
         return data;
     }
     getRegistroAppNative(idDispositivo) {
-        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroApp?IdDispositivo=' + idDispositivo;
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerRegistroApp?IdDispositivo=' + idDispositivo;
         let data = this.http.get(url, {}, {});
         return data;
     }
@@ -3247,6 +3374,48 @@ let ServicioGeo = class ServicioGeo {
     }
     getContactabilidadNative(run) {
         let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Contactabilidad?run=' + run;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    //validaciones para el registro de usuario
+    verificaEnrolamientoCompleto(run, fechaNacimiento, email) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Run=' + run + '&FechaNacimiento=' + fechaNacimiento + '&Email=' + email;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    verificaEnrolamientoCompletoNative(run, fechaNacimiento, email) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Run=' + run + '&FechaNacimiento=' + fechaNacimiento + '&Email=' + email;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    validaCodigo(id, codigo, operacion) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ValidarCodigo?Id=' + id.toString() + '&Codigo=' + codigo + '&Operacion=' + operacion;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    validaCodigoNative(id, codigo, operacion) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ValidarCodigo?Id=' + id.toString() + '&Codigo=' + codigo + '&Operacion=' + operacion;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    //actualiza los datos de la familia
+    actualizaFamilia(uspsIds, uspIdTitular) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular;
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    actualizaFamiliaNative(uspsIds, uspIdTitular) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular;
+        let data = this.http.get(url, {}, {});
+        return data;
+    }
+    quitarFamilia(uspsIds, uspIdTitular) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular + '&Operacion=quitar';
+        let data = this.httpClient.get(url, {});
+        return data;
+    }
+    quitarFamiliaNative(uspsIds, uspIdTitular) {
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular + '&Operacion=quitar';
         let data = this.http.get(url, {}, {});
         return data;
     }
@@ -4062,7 +4231,8 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                             Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
                             Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
                             Id: element.Id,
-                            Indice: indice
+                            Indice: indice,
+                            IrA: null
                         };
                         arr.push(entidad);
                         indice++;
@@ -4082,7 +4252,8 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                                 Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
                                 Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
                                 Id: element.Id,
-                                Indice: indice
+                                Indice: indice,
+                                IrA: null
                             };
                             arr.push(entidad);
                             indice++;
@@ -4108,13 +4279,30 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                             Subtitulo: todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
                             Contenido: texto,
                             Id: id,
-                            Indice: indice
+                            Indice: indice,
+                            IrA: null
                         };
                         arr.push(entidad);
                         indice++;
                     }
                 }
             }
+        }
+        //familia por aceptar
+        if (localStorage.getItem('FAMILIA-POR-ACEPTAR')) {
+            let arrFam = JSON.parse(localStorage.getItem('FAMILIA-POR-ACEPTAR'));
+            arrFam.forEach(familia => {
+                let entidad = {
+                    Titulo: 'Miembro de la familia',
+                    Subtitulo: familia.NombreCompleto,
+                    Contenido: 'Tienes a ' + familia.NombreCompleto + ' que podrías aceptar y ver su información de salud',
+                    Id: familia.Id,
+                    Indice: indice,
+                    IrA: 'asociar-familia'
+                };
+                arr.push(entidad);
+                indice++;
+            });
         }
         return arr;
     }
@@ -4479,6 +4667,19 @@ let ServicioParametrosApp = class ServicioParametrosApp {
             }
             return retorno;
         };
+        this.URL_ACEPTA_CONDICIONES = () => {
+            let retorno = '#';
+            if (localStorage.getItem('PARAMETROS_APP')) {
+                let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+                if (elementos && elementos.length > 0) {
+                    let arrRetorno = elementos.find(p => p.Nombre == 'URL_ACEPTA_CONDICIONES');
+                    if (arrRetorno && arrRetorno.Id > 0) {
+                        retorno = arrRetorno.Valor;
+                    }
+                }
+            }
+            return retorno;
+        };
         //inicializamos los valores
         moment__WEBPACK_IMPORTED_MODULE_5__["locale"]('es');
     }
@@ -4688,6 +4889,26 @@ let ServicioUtiles = class ServicioUtiles {
         }
         return usaAgenda;
     }
+    tieneFamiliaAceptada() {
+        var retorno = false;
+        if (localStorage.getItem('FAMILIA-ACEPTADA')) {
+            var fam = JSON.parse(localStorage.getItem('FAMILIA-ACEPTADA'));
+            if (fam && fam.length > 0) {
+                retorno = true;
+            }
+        }
+        return retorno;
+    }
+    tieneFamiliaRechazada() {
+        var retorno = false;
+        if (localStorage.getItem('FAMILIA-RECHAZADA')) {
+            var fam = JSON.parse(localStorage.getItem('FAMILIA-RECHAZADA'));
+            if (fam && fam.length > 0) {
+                retorno = true;
+            }
+        }
+        return retorno;
+    }
     entregaMenuPages() {
         var usaAgenda = this.entregaParametroUsaAgenda();
         var arrPages = [];
@@ -4695,60 +4916,38 @@ let ServicioUtiles = class ServicioUtiles {
             title: 'Configurar familia',
             visible: true,
             icon: 'settings',
-            src: 'familia'
+            src: '#',
+            esSubMenu: false
         };
         arrPages.push(pagUno);
-        /* comentada  */
-        /*         var pagDos = {
-                    title: 'Calendario',
-                    visible: true,
-                    segment:'calendario/:this.usuarioAps',
-                    icon: 'calendar'
-                };
-                arrPages.push(pagDos); */
-        //la dejamos en home por mientras, hasta tener el acepto condiciones
+        //ahora los submenus de configurar familia
+        //simepre y cuando tenga familia aceptada
+        if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
+            var pagQuitarIntegrantes = {
+                title: 'Desactivar/Activar',
+                visible: true,
+                icon: 'person',
+                src: 'quitar-familia',
+                esSubMenu: true
+            };
+            arrPages.push(pagQuitarIntegrantes);
+        }
+        var pagConfigContacto = {
+            title: 'Datos de contacto/avatar',
+            visible: true,
+            icon: 'share',
+            src: 'familia',
+            esSubMenu: true
+        };
+        arrPages.push(pagConfigContacto);
         var pagDos = {
             title: 'Términos y condiciones',
             visible: true,
             src: 'home',
-            icon: 'link'
+            icon: 'link',
+            esSubMenu: false
         };
         arrPages.push(pagDos);
-        //comentada
-        /*
-        var pagTres = {
-            title: 'Familia',
-            visible: true,
-            icon: 'people',
-            src: 'familia'
-        };
-        arrPages.push(pagTres);
-        */
-        /*         var pagCuatro = {
-                    title: 'Ajustes',
-                    visible: true,
-                    icon: 'heart',
-                    src: 'familia'
-                }
-                arrPages.push(pagCuatro); */
-        //ya no va en el menu
-        //verificamos si usa o no agendamiento remoto
-        /*         if (usaAgenda){
-                    var pagCinco = {
-                        title: 'Cupos disponibles',
-                        visible: true,
-                        icon: 'medkit',
-                        src: 'pre-tiposatencion'
-                    }
-                    arrPages.push(pagCinco);
-                    var pagSeis = {
-                        title: 'Mis Citas',
-                        visible: true,
-                        icon: 'medkit',
-                        src: 'agenda-disponible'
-                    }
-                    arrPages.push(pagSeis);
-                } */
         return arrPages;
     }
     entregaMiImagen() {
@@ -5170,16 +5369,16 @@ let ServicioUtiles = class ServicioUtiles {
                 }
                 //segundo las imagenes
                 if (elemento.NombreModulo == 'CALENDARIO') {
-                    elemento.Imagen = './assets/imgs_nuevas/calendario-01.png';
+                    elemento.Imagen = './assets/imgs_svg/calendario-01.svg';
                 }
                 else if (elemento.NombreModulo == 'ANTECEDENTES') {
-                    elemento.Imagen = './assets/imgs_nuevas/antecedentes.png';
+                    elemento.Imagen = './assets/imgs_svg/antecedentes.svg';
                 }
                 else if (elemento.NombreModulo == 'EXAMENES') {
-                    elemento.Imagen = './assets/imgs_nuevas/examenes-de-salud.png';
+                    elemento.Imagen = './assets/imgs_svg/examenes-de-salud.svg';
                 }
                 else if (elemento.NombreModulo == 'INTERCONSULTAS') {
-                    elemento.Imagen = './assets/imgs_nuevas/interconsulta.png';
+                    elemento.Imagen = './assets/imgs_svg/interconsulta_desactivado.svg';
                 }
                 //tercero la clase de la imagen
                 elemento.ClaseImagen = 'imgs-home';
@@ -5307,6 +5506,66 @@ let ServicioUtiles = class ServicioUtiles {
                 }
             }
         }
+    }
+    //entrega y setea los parametros de token y otros
+    crearTokenPlano() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var entidad = {
+                tokenDispositivo: '',
+                versionAppName: '',
+                versionNumber: '',
+                plataforma: ''
+            };
+            if (!this.isAppOnDevice()) {
+                //web
+                //guardar local storage
+                if (!localStorage.getItem('token_dispositivo')) {
+                    //crear token para web
+                    entidad.tokenDispositivo = (Math.random() * (1000000 - 1) + 1).toString() + ' web';
+                    localStorage.setItem('token_dispositivo', entidad.tokenDispositivo);
+                }
+                else {
+                    entidad.tokenDispositivo = localStorage.getItem('token_dispositivo');
+                }
+                entidad.versionAppName = "Mi salud familiar";
+                entidad.versionNumber = "0.0";
+                entidad.plataforma = "Web";
+                //loader.dismiss();
+                //otras variables
+                localStorage.setItem('version_app_name', entidad.versionAppName);
+                localStorage.setItem('version_number', entidad.versionNumber);
+                localStorage.setItem('plataforma', entidad.plataforma);
+            }
+            else {
+                if (this.platform.is('ios')) {
+                    entidad.versionAppName = yield this.appVersion.getAppName();
+                    entidad.versionNumber = yield this.appVersion.getVersionNumber();
+                    entidad.plataforma = "iOS";
+                }
+                else if (this.platform.is('android')) {
+                    entidad.versionAppName = yield this.appVersion.getAppName();
+                    entidad.versionNumber = yield this.appVersion.getVersionNumber();
+                    entidad.plataforma = "Android";
+                }
+                else if (this.platform.is('mobileweb')) {
+                    entidad.versionAppName = "Mi salud familiar";
+                    entidad.versionNumber = "0.0";
+                    entidad.plataforma = "Web";
+                }
+                else {
+                    entidad.versionAppName = "Mi salud familiar";
+                    entidad.versionNumber = "0.0";
+                    entidad.plataforma = "No informado";
+                }
+                //crear token para web
+                var tokenDispositivo = this.device.uuid;
+                localStorage.setItem('token_dispositivo', tokenDispositivo);
+                //otras variables
+                localStorage.setItem('version_app_name', entidad.versionAppName);
+                localStorage.setItem('version_number', entidad.versionNumber);
+                localStorage.setItem('plataforma', entidad.plataforma);
+            }
+        });
     }
 };
 ServicioUtiles.ctorParameters = () => [

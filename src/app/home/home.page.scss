@@ -84,4 +84,30 @@
 }
 .swiper-pagination-bullet-active {
   background: white;
+  opacity: 1;
+}
+ion-slide{
+  display: block;
+  background: #5133A5;
+  text-align: left;
+  min-height: 200px;
+}
+ion-slides{
+  --bullet-background: yellow;
+  --bullet-background-active: #ff4081;
+  --opacity: 1;
+}
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 100%;
+  opacity: 1;
+}
+.slide-content-padding{
+  padding: 16px 16px 0px 16px;
+  margin-bottom: 5px;
+}
+.slide-buttons-padding{
+  padding: 0px 16px 16px 16px;
 }

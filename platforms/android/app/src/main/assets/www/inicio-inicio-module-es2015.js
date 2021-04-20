@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content fullscreen scroll-y=\"false\">\n  <ion-slides pager=\"true\" [options]=\"slideOpts\" #mySlider>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/img/examenes-de-salud.png\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">INFORMACIÓN SINCRONIZADA CON SU ESTABLECIMIENTO DE SALUD</h1>\n          <p class=\"mt-32 ion-text-center\">REVISE SUS <strong>ANTECEDENTES DE SALUD</strong> Y <strong>RESULTADOS DE EXÁMENES </strong> REGISTRADOS EN EL ESTABLECIMIENTO EN EL QUE SE ATIENDE REGULARMENTE</p>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"slides.slideNext()\">SIGUIENTE</button>\n          </div>          \n        </div>\n      </div>\n    </ion-slide>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/img/calendario-01.png\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">CALENDARIO CON LOS EVENTOS DE SALUD</h1>\n          <p class=\"mt-32 ion-text-center\">\n            ACCEDA A UN CALENDARIO CON LOS EVENTOS RELEVANTES DE SU RELACIÓN CON SU ESTABLECIMIENTO DE SALUD: \n             <strong> ATENCIONES, RETIRO DE MEDICAMENTOS, RETIRO DE ALIMENTOS Y VACUNAS</strong>\n          </p>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"slides.slideNext()\">SIGUIENTE</button>\n          </div>\n        </div>\n      </div>\n    </ion-slide>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/img/interconsulta.png\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">SEGUIMIENTO DE INTERCONSULTAS</h1>\n          <p class=\"mt-32 ion-text-center\">\n            VISUALICE EL SEGUIMIENTO DE LAS <strong>SOLICITUDES DE INTERCONSULTA </strong> \n            ENTRE SU ESTABLECIMIENTO DE ATENCIÓN PRIMARIA Y EL NIVEL SECUNDARIO (HOSPITALES)\n          </p>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"slides.slideNext()\">SIGUIENTE</button>\n          </div>\n        </div>\n      </div>\n    </ion-slide>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/img/agendar_citas.png\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">RESERVA DE HORAS</h1>\n          <p class=\"mt-32 ion-text-center\">\n            <strong>RESERVE O CANCELE EN LÍNEA </strong> \n             SUS PROXIMAS CITAS EN EL ESTABLECIMIENTO DE SALUD\n          </p>\n          <div class=\"row mt-32\">\n            <button mat-stroked-button color=\"primary\" class=\"boton\" (click)=\"abrirLogin()\">TENGO CUENTA</button>\n          </div>\n          <div class=\"row mt-32\">\n            <hr>\n          </div>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"abrirPrimerosPasos()\">REGISTRARME</button>\n          </div>\n        </div>\n      </div>\n    </ion-slide>\n\n  </ion-slides>\n</ion-content>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content fullscreen scroll-y=\"false\">\n  <ion-slides pager=\"true\" [options]=\"slideOpts\" #mySlider>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/imgs_svg/examenes-de-salud.svg\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">INFORMACIÓN SINCRONIZADA CON SU ESTABLECIMIENTO DE SALUD</h1>\n          <p class=\"mt-32 ion-text-center\">REVISE SUS <strong>ANTECEDENTES DE SALUD</strong> Y <strong>RESULTADOS DE EXÁMENES </strong> REGISTRADOS EN EL ESTABLECIMIENTO EN EL QUE SE ATIENDE REGULARMENTE</p>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"slides.slideNext()\">SIGUIENTE</button>\n          </div>          \n        </div>\n      </div>\n    </ion-slide>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/imgs_svg/calendario-01.svg\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">CALENDARIO CON LOS EVENTOS DE SALUD</h1>\n          <p class=\"mt-32 ion-text-center\">\n            ACCEDA A UN CALENDARIO CON LOS EVENTOS RELEVANTES DE SU RELACIÓN CON SU ESTABLECIMIENTO DE SALUD: \n             <strong> ATENCIONES, RETIRO DE MEDICAMENTOS, RETIRO DE ALIMENTOS Y VACUNAS</strong>\n          </p>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"slides.slideNext()\">SIGUIENTE</button>\n          </div>\n        </div>\n      </div>\n    </ion-slide>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/imgs_svg/interconsulta_desactivado.svg\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">SEGUIMIENTO DE INTERCONSULTAS</h1>\n          <p class=\"mt-32 ion-text-center\">\n            VISUALICE EL SEGUIMIENTO DE LAS <strong>SOLICITUDES DE INTERCONSULTA </strong> \n            ENTRE SU ESTABLECIMIENTO DE ATENCIÓN PRIMARIA Y EL NIVEL SECUNDARIO (HOSPITALES)\n          </p>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"slides.slideNext()\">SIGUIENTE</button>\n          </div>\n        </div>\n      </div>\n    </ion-slide>\n    <ion-slide>\n      <div class=\"slide\">\n        <div class=\"row\">\n          <img src=\"../../assets/imgs_svg/agendar_citas.svg\" alt=\"asistente\" />\n        </div>\n        <div class=\"ion-padding\">\n          <h1 class=\"mt-16 ion-text-center font-title\">RESERVA DE HORAS</h1>\n          <p class=\"mt-32 ion-text-center\">\n            <strong>RESERVE O CANCELE EN LÍNEA </strong> \n             SUS PROXIMAS CITAS EN EL ESTABLECIMIENTO DE SALUD\n          </p>\n          <div class=\"row mt-32\">\n            <button mat-stroked-button color=\"primary\" class=\"boton\" (click)=\"abrirLogin()\">TENGO CUENTA</button>\n          </div>\n          <div class=\"row mt-32\">\n            <hr>\n          </div>\n          <div class=\"row mt-32\">\n            <button mat-raised-button color=\"primary\" class=\"boton\" (click)=\"abrirPrimerosPasos()\">REGISTRARME</button>\n          </div>\n        </div>\n      </div>\n    </ion-slide>\n\n  </ion-slides>\n</ion-content>\n\n");
 
 /***/ }),
 
@@ -109,6 +109,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//ojo que cuando llegamos a la pantalla de registro se esta marcando 
+//en la tabla prg_pre_registro_app el elemento con estado 1 cuando debería seguir en estado 0
+//revisar
+//OJO AL COMPLETAR EL REGISTRO NO SE GUARDA LA FECHA DE NACIMIENTO EN LA TABLA RAP_REGISTR_APP
+//HAY QUE GUARDARLO
 let InicioPage = class InicioPage {
     constructor(navCtrl, toast, modalCtrl, platform, route, router, geolocation, device, appVersion, loading, utiles, servicioGeo, acceso, parametrosApp) {
         this.navCtrl = navCtrl;
@@ -200,6 +205,9 @@ let InicioPage = class InicioPage {
             };
             this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
         }
+    }
+    abrirValidacionFactor() {
+        this.navCtrl.navigateRoot('validacion-factor');
     }
     procesarRespuestaCU(registros, loader, run, state) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -417,6 +425,11 @@ let InicioPage = class InicioPage {
             //limpiamos local storage
             this.limpiarRegistro();
             loader.dismiss();
+            let tieneRegistroPendiente = this.validaPreRegistro();
+            if (tieneRegistroPendiente) {
+                //si tiene registro pendiente se envía a la página de autentificación
+                this.abrirValidacionFactor();
+            }
         }
         else {
             //pasa a la pantalla login solo si tiene sus datos completos
@@ -518,6 +531,17 @@ let InicioPage = class InicioPage {
         }
         return retorno;
         //console.log(this.pais + ' ' + this.region);
+    }
+    //verificacion de pre-registro
+    validaPreRegistro() {
+        var retorno = false;
+        if (localStorage.getItem('PRE-REGISTRO')) {
+            this.preRegistro = JSON.parse(localStorage.getItem('PRE-REGISTRO'));
+            if (this.preRegistro.Id > 0) {
+                retorno = true;
+            }
+        }
+        return retorno;
     }
 };
 InicioPage.ctorParameters = () => [

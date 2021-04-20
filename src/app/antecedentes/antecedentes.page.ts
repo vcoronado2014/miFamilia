@@ -43,11 +43,6 @@ export class AntecedentesPage implements OnInit {
     this.cargarDatosInciales();
   }
   async cargarDatosInciales(){
-    //original
-/*     let loader = await this.loading.create({
-      message: 'Cargando...<br>información',
-      duration: 20000
-    }); */
     this.estaCargando = true;
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',

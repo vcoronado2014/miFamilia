@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\" style=\"height: 160px;\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button [hidden]=\"estaEditando || estaAgregandoFamilia\" (click)=\"salirRegistro()\" defaultHref=\"/\" class=\"fcw\"></ion-back-button>\n      <ion-back-button [hidden]=\"!estaEditando\" defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\"></ion-title>\n    \n  </ion-toolbar>\n  \n</ion-header>\n\n<ion-content>\n<!--   <ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\" style=\"top:-30px\" [hidden]=\"!estaEditando\">\n    <ion-fab-button color=\"danger\">\n      <ion-icon name=\"create\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab> -->\n  <ion-fab vertical=\"top\" horizontal=\"center\" slot=\"fixed\" style=\"top:-40px;margin-left: -110px; color: white;\">\n    <h5 style=\"font-size: 18px;\">{{nombreMostrar}}</h5>\n  </ion-fab>\n  <div class=\"ion-padding\" style=\"margin-top: 20px;\">\n    <form [formGroup]=\"forma\" novalidate>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Run</mat-label>\n          <input matInput placeholder=\"12535301-1\" formControlName=\"run\" name=\"run\" required>\n          <mat-error [hidden]=\"!(f.run.errors && f.run.errors.required)\">Run requerido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\" (blur)=\"validarCorreo($event)\" required>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre</mat-label>\n          <input matInput placeholder=\"Nombre\" formControlName=\"nombre\" name=\"nombre\" required>\n          <mat-error [hidden]=\"!(f.nombre.errors && f.nombre.errors.required)\">Nombre requerido</mat-error>\n          <mat-error [hidden]=\"!(f.nombre.errors && f.nombre.errors.pattern)\">Sólo letras</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Apellido</mat-label>\n          <input matInput placeholder=\"Apellido\" formControlName=\"apellido\" name=\"apellido\" required>\n          <mat-error [hidden]=\"!(f.apellido.errors && f.apellido.errors.required)\">Apellido requerido</mat-error>\n          <mat-error [hidden]=\"!(f.apellido.errors && f.apellido.errors.pattern)\">Sólo letras</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Apodo</mat-label>\n          <input matInput placeholder=\"Apodo\" formControlName=\"nombreSocial\" name=\"nombreSocial\">\n        </mat-form-field>\n      </ion-row>\n      <ion-grid>\n        <ion-row class=\"ion-no-padding ion-no-margin\">\n          <ion-col size=\"6\" class=\"ion-no-padding ion-no-margin\">\n            <!-- telefono -->\n            <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n              <mat-label>Teléfono</mat-label>\n              <input matInput placeholder=\"+569XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n              <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n            </mat-form-field>\n          </ion-col>\n          <ion-col size=\"6\" class=\"ion-no-padding ion-no-margin\">\n            <!-- genero -->\n            <mat-form-field appearance=\"outline\" style=\"width: 98%; padding-left: 2%;\">\n              <mat-label>Género</mat-label>\n              <mat-select formControlName=\"genero\" name=\"genero\" required>\n                <mat-option value=\"-1\">Seleccione</mat-option>\n                <mat-option value=\"0\">Hombre</mat-option>\n                <mat-option value=\"1\">Mujer</mat-option>\n                <mat-option value=\"2\">No definido</mat-option>\n              </mat-select>\n            </mat-form-field>\n          </ion-col>\n  \n        </ion-row>\n      </ion-grid>\n      <!-- info clave -->\n      <ion-row [hidden]=\"!estaEditando\">\n        <strong>Llene estos campos sólo si desea cambiar su clave, de lo contrario déjelos vacíos.</strong>\n      </ion-row>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Clave</mat-label>\n          <input matInput placeholder=\"Clave\" type=\"password\" name=\"clave\" formControlName=\"clave\">\n          <mat-error [hidden]=\"!(f.clave.errors && f.clave.errors.required && estaEditando)\">Clave requerida</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Repetir clave</mat-label>\n          <input matInput placeholder=\"Repetir clave\" type=\"password\" name=\"repetirClave\" formControlName=\"repetirClave\">\n          <mat-error [hidden]=\"!(f.repetirClave.errors && f.repetirClave.errors.required && estaEditando)\">Repita clave requerido</mat-error>\n          <mat-error [hidden]=\"!(f.repetirClave.errors && f.repetirClave.errors.clavesIguales == false && estaEditando)\">Las claves deben\n            coincidir</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- boton de registrarse -->\n      <ion-row>\n        <button [hidden]=\"estaEditando\" [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">REGISTRARSE</button>\n        <button [hidden]=\"!estaEditando\" [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">GUARDAR CAMBIOS</button>\n      </ion-row>\n      <ion-row [hidden]=\"estaEditando\" class=\"ion-padding-top\">\n        <p class=\"ion-padding-start\">Al hacer clic en \"Registrarte\", aceptas nuestras Condiciones de uso de la aplicación.\n        </p>\n      </ion-row>\n    </form>\n  \n  </div>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <!-- <ion-toolbar color=\"primary\" mode=\"md\" style=\"height: 160px;\"> -->\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button [hidden]=\"estaEditando || estaAgregandoFamilia\" (click)=\"salirRegistro()\" defaultHref=\"/\" class=\"fcw\"></ion-back-button>\n      <ion-back-button [hidden]=\"!estaEditando\" defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">{{nombreMostrar}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div [hidden]=\"estaCargando\">\n    <!--   <ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\" style=\"top:-30px\" [hidden]=\"!estaEditando\">\n      <ion-fab-button color=\"danger\">\n        <ion-icon name=\"create\"></ion-icon>\n      </ion-fab-button>\n    </ion-fab> -->\n<!--     <ion-fab vertical=\"top\" horizontal=\"center\" slot=\"fixed\" style=\"top:-40px;margin-left: -110px; color: white;\">\n      <h5 style=\"font-size: 18px;\">{{nombreMostrar}}</h5>\n    </ion-fab> -->\n    <!-- <div class=\"ion-padding\" style=\"margin-top: 20px;\"> -->\n    <div class=\"ion-padding\">\n      <form [formGroup]=\"forma\" novalidate>\n        <ion-row>\n          <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n            <mat-label>Run</mat-label>\n            <input matInput placeholder=\"12535301-1\" formControlName=\"run\" name=\"run\" required>\n            <mat-error [hidden]=\"!(f.run.errors && f.run.errors.required)\">Run requerido</mat-error>\n          </mat-form-field>\n        </ion-row>\n        <ion-row>\n          <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n            <mat-label>Correo electrónico</mat-label>\n            <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\"\n              (blur)=\"validarCorreo($event)\" required>\n            <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error>\n            <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n          </mat-form-field>\n        </ion-row>\n        <ion-row>\n          <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n            <mat-label>Nombre</mat-label>\n            <input #nombreId=\"matInput\" matInput placeholder=\"Nombre\" formControlName=\"nombre\" name=\"nombre\" required>\n            <mat-error [hidden]=\"!(f.nombre.errors && f.nombre.errors.required)\">Nombre requerido</mat-error>\n            <mat-error [hidden]=\"!(f.nombre.errors && f.nombre.errors.pattern)\">Sólo letras</mat-error>\n          </mat-form-field>\n        </ion-row>\n        <ion-row>\n          <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n            <mat-label>Apellido</mat-label>\n            <input matInput placeholder=\"Apellido\" formControlName=\"apellido\" name=\"apellido\" required>\n            <mat-error [hidden]=\"!(f.apellido.errors && f.apellido.errors.required)\">Apellido requerido</mat-error>\n            <mat-error [hidden]=\"!(f.apellido.errors && f.apellido.errors.pattern)\">Sólo letras</mat-error>\n          </mat-form-field>\n        </ion-row>\n        <ion-row>\n          <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n            <mat-label>Apodo</mat-label>\n            <input matInput placeholder=\"Apodo\" formControlName=\"nombreSocial\" name=\"nombreSocial\">\n          </mat-form-field>\n        </ion-row>\n        <ion-grid>\n          <ion-row class=\"ion-no-padding ion-no-margin\">\n            <ion-col size=\"6\" class=\"ion-no-padding ion-no-margin\">\n              <!-- telefono -->\n              <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n                <mat-label>Teléfono</mat-label>\n                <input matInput placeholder=\"9XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n                <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n              </mat-form-field>\n            </ion-col>\n            <ion-col size=\"6\" class=\"ion-no-padding ion-no-margin\">\n              <!-- genero -->\n              <mat-form-field appearance=\"outline\" style=\"width: 98%; padding-left: 2%;\">\n                <mat-label>Género</mat-label>\n                <mat-select formControlName=\"genero\" name=\"genero\" required>\n                  <mat-option value=\"-1\">Seleccione</mat-option>\n                  <mat-option value=\"0\">Hombre</mat-option>\n                  <mat-option value=\"1\">Mujer</mat-option>\n                  <mat-option value=\"2\">No definido</mat-option>\n                </mat-select>\n              </mat-form-field>\n            </ion-col>\n  \n          </ion-row>\n        </ion-grid>\n        <!-- info clave -->\n        <ion-row [hidden]=\"!estaEditando\">\n          <strong>Llene estos campos sólo si desea cambiar su clave, de lo contrario déjelos vacíos.</strong>\n        </ion-row>\n        <ion-row>\n          <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n            <mat-label>Clave</mat-label>\n            <input matInput placeholder=\"Clave\" type=\"password\" name=\"clave\" formControlName=\"clave\">\n            <mat-error [hidden]=\"!(f.clave.errors && f.clave.errors.required && estaEditando)\">Clave requerida</mat-error>\n          </mat-form-field>\n        </ion-row>\n        <ion-row>\n          <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n            <mat-label>Repetir clave</mat-label>\n            <input matInput placeholder=\"Repetir clave\" type=\"password\" name=\"repetirClave\"\n              formControlName=\"repetirClave\">\n            <mat-error [hidden]=\"!(f.repetirClave.errors && f.repetirClave.errors.required && estaEditando)\">Repita clave\n              requerido</mat-error>\n            <mat-error\n              [hidden]=\"!(f.repetirClave.errors && f.repetirClave.errors.clavesIguales == false && estaEditando)\">Las\n              claves deben\n              coincidir</mat-error>\n          </mat-form-field>\n        </ion-row>\n        <!-- check para EL ACEPTA CONDICIONES -->\n        <ion-grid [hidden]=\"estaEditando\">\n          <ion-row>\n            <ion-col size=\"10\">\n              <ion-item lines=\"none\" style=\"--ion-item-background: transparent;\">\n                <ion-label style=\"word-wrap: break-word;font-size: 0.9em;white-space: break-spaces;\">Acepto condiciones de servicio</ion-label>\n                <!-- <ion-toggle [(ngModel)]=\"aceptaCondiciones\" (ionChange)=\"onChangeAcepta($event)\" mode=\"ios\"></ion-toggle> -->\n                <ion-toggle name=\"aceptaCondiciones\" formControlName=\"aceptaCondiciones\" (ionChange)=\"onChangeAcepta($event)\" mode=\"ios\"></ion-toggle>\n              </ion-item> \n            </ion-col>\n            <ion-col size=\"2\">\n              <ion-icon color=\"primary\" name=\"document-text\" style=\"font-size: 2.5em; float: right;\" (click)=\"abrirPDF()\"></ion-icon>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n        <!-- boton de registrarse -->\n        <ion-row>\n          <button [hidden]=\"estaEditando\" [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSubmit()\"\n            mat-raised-button color=\"accent\">REGISTRARSE</button>\n          <button [hidden]=\"!estaEditando\" [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSubmit()\"\n            mat-raised-button color=\"accent\">GUARDAR CAMBIOS</button>\n        </ion-row>\n        <!-- lo comentamos por mientras -->\n<!--         <ion-row [hidden]=\"estaEditando\" class=\"ion-padding-top\">\n          <p class=\"ion-padding-start\">Al hacer clic en \"Registrarte\", aceptas nuestras Condiciones de uso de la\n            aplicación.\n          </p>\n        </ion-row> -->\n      </form>\n  \n    </div>\n  </div>\n  <!-- componente loading -->\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloLoading\"></app-progress>\n\n</ion-content>");
 
 /***/ }),
 
@@ -34,6 +34,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
 /* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
 /* harmony import */ var _registro_usuario_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./registro-usuario.page */ "./src/app/registro-usuario/registro-usuario.page.ts");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -58,6 +60,7 @@ RegistroUsuarioPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorat
             _angular_material_input__WEBPACK_IMPORTED_MODULE_7__["MatInputModule"],
             _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
             _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__["MatIconModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_11__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild([
                 {
                     path: '',
@@ -135,10 +138,14 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
         this.expCelular = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/gm;
         this.expPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/gm;
         this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
+        this.expAceptaCondiciones = true;
         this.estaEditando = false;
         this.estaAgregandoFamilia = false;
         //para validarse solo con enrolamiento
         this.usaEnrolamiento = false;
+        //para el progressbar
+        this.estaCargando = false;
+        this.tituloLoading = '';
         this.EmailIgualesValidator = (fg) => {
             const clave = fg.get('clave').value;
             const claveR = fg.get('repetirClave').value;
@@ -148,9 +155,13 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
             return clave !== null && claveR !== null && clave != claveR ? null : null;
         };
     }
+    //ESTOY TRABAJANDO EN EL REGISTRO
+    //ACA SE DEBE AGREGAR EL CHECK DE ACEPTO DE CONDICIONES
+    //Y EL LINK DEL ARCHIVO CORRESPONDIENTE
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
         this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
+        this.rutaAceptoCondiciones = this.parametrosApp.URL_ACEPTA_CONDICIONES();
         this.activatedRoute.queryParams.subscribe(params => {
             if (params && params.usuario) {
                 //store the temp in data        
@@ -164,10 +175,18 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                 if (params.estaAgregandoFamilia && params.estaAgregandoFamilia != null) {
                     this.estaAgregandoFamilia = true;
                 }
+                if (!this.estaEditando) {
+                    this.nombreMostrar = 'Nuevo registro';
+                }
                 //cargamos la forma
                 this.cargarForma();
             }
         });
+    }
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.nombreInput.focus();
+        }, 1000);
     }
     cargarForma() {
         this.forma = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
@@ -178,6 +197,7 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
             'nombreSocial': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(100)]),
             'telefono': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern(this.expCelular)]),
             'genero': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](),
+            'aceptaCondiciones': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](true, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].requiredTrue]),
             'clave': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(10)]),
             'repetirClave': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(10)])
         }, { validators: this.EmailIgualesValidator });
@@ -191,6 +211,7 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                 nombreSocial: this.registro.Apodo.trimStart(),
                 telefono: this.registro.TelefonoContacto ? this.registro.TelefonoContacto : '',
                 genero: sexo,
+                aceptaCondiciones: true,
                 clave: '',
                 repetirClave: ''
             });
@@ -198,6 +219,13 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
             if (this.estaEditando) {
                 this.forma.get('clave').clearValidators();
                 this.forma.get('repetirClave').clearValidators();
+            }
+            else {
+                //esto no esta claro, yo creo que siempre debería estar deshabilitado
+                //ya que viene del pre-registro y la edición no debería cambiar tampoco 
+                //estos datos.
+                this.forma.controls['run'].disable();
+                this.forma.controls['email'].disable();
             }
             /*       if (this.estaEditando){
                     //desactivar algunas cosas
@@ -236,10 +264,21 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                     //variable de sessión muy importante para el resto de la app.
                     localStorage.setItem("UsuariosFamilia", userFamilia);
                 }
+                if (retorno.FamiliaPorAceptar && retorno.FamiliaPorAceptar.length >= 0) {
+                    localStorage.setItem('FAMILIA-POR-ACEPTAR', JSON.stringify(retorno.FamiliaPorAceptar));
+                }
+                if (retorno.FamiliaAceptada && retorno.FamiliaAceptada.length >= 0) {
+                    localStorage.setItem('FAMILIA-ACEPTADA', JSON.stringify(retorno.FamiliaAceptada));
+                }
+                if (retorno.FamiliaRechazada && retorno.FamiliaRechazada.length >= 0) {
+                    localStorage.setItem('FAMILIA-RECHAZADA', JSON.stringify(retorno.FamiliaRechazada));
+                }
                 this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
                 this.Mensaje = retorno.RespuestaBase.Mensaje;
                 this.loggedIn = true;
                 loader.dismiss();
+                this.estaCargando = false;
+                this.tituloLoading = '';
                 //si tiene usuario está valido
                 if (!tieneUsuario) {
                     this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
@@ -253,6 +292,8 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                 this.Mensaje = retorno.RespuestaBase.Mensaje;
                 this.loggedIn = true;
                 loader.dismiss();
+                this.estaCargando = false;
+                this.tituloLoading = '';
                 this.utiles.presentToast(this.Mensaje, 'middle', 4000);
             }
         }
@@ -263,6 +304,8 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
             this.Mensaje = 'Error de llamada Http;';
             this.loggedIn = true;
             loader.dismiss();
+            this.estaCargando = false;
+            this.tituloLoading = '';
             this.utiles.presentToast(this.Mensaje, 'middle', 4000);
         }
     }
@@ -273,15 +316,28 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             //en este caso ya el user name es el email
             let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
+            //original
+            /*     let loader = await this.loading.create({
+                  message: 'Obteniendo...<br>Login',
+                  duration: 10000
+                }); */
+            this.estaCargando = true;
+            this.tituloLoading = 'Autentificándose';
             let loader = yield this.loading.create({
-                message: 'Obteniendo...<br>Login',
-                duration: 10000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
                     //llamada web
                     this.acceso.loginWebDirecto(f).subscribe((response) => {
                         this.procesarLogin(response, loader);
+                    }, error => {
+                        console.log(error.message);
+                        loader.dismiss();
+                        this.estaCargando = false;
+                        this.tituloLoading = '';
                     });
                 }
                 else {
@@ -289,6 +345,10 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                     this.acceso.loginWebNative(f).then((response) => {
                         this.procesarLogin(JSON.parse(response.data), loader);
                     }, (error) => {
+                        console.log(error.message);
+                        loader.dismiss();
+                        this.estaCargando = false;
+                        this.tituloLoading = '';
                         this.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
                     });
                 }
@@ -298,32 +358,39 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
     salirRegistro() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             var titulo = '';
-            const alert = yield this.alertController.create({
-                header: 'Salir del registro',
-                message: '¿Estas seguro de salir del proceso de registro?, esto implica que tengas que volver a validarte con clave única.',
-                buttons: [
-                    {
-                        text: 'No',
-                        role: 'cancel',
-                        cssClass: 'danger',
-                        handler: (blah) => {
-                            console.log('Confirm Cancel: blah');
-                        }
-                    }, {
-                        text: 'Si',
-                        cssClass: 'success',
-                        handler: () => {
-                            localStorage.removeItem('STATE_CLAVE_UNICA');
-                            //aca debemos realizar la operación
-                            this.navCtrl.navigateRoot('inicio');
-                            //console.log('Confirm Okay');
-                        }
-                    }
-                ]
-            });
-            yield alert.present();
+            this.navCtrl.navigateRoot('inicio');
         });
     }
+    //original
+    /*   async salirRegistro() {
+        var titulo = '';
+    
+        const alert = await this.alertController.create({
+          header: 'Salir del registro',
+          message: '¿Estas seguro de salir del proceso de registro?, esto implica que tengas que volver a validarte con clave única.',
+          buttons: [
+            {
+              text: 'No',
+              role: 'cancel',
+              cssClass: 'danger',
+              handler: (blah) => {
+                console.log('Confirm Cancel: blah');
+              }
+            }, {
+              text: 'Si',
+              cssClass: 'success',
+              handler: () => {
+                localStorage.removeItem('STATE_CLAVE_UNICA');
+                //aca debemos realizar la operación
+                this.navCtrl.navigateRoot('inicio');
+                //console.log('Confirm Okay');
+              }
+            }
+          ]
+        });
+    
+        await alert.present();
+      } */
     onSubmit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             if (this.forma.invalid) {
@@ -384,9 +451,17 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                 }
             }
             //ahora guardamos
+            //original
+            /*     let loader = await this.loading.create({
+                  message: this.estaEditando ? 'Modificando...<br>Registro' : 'Creando...<br>Registro',
+                  duration: 20000
+                }); */
+            this.estaCargando = true;
+            this.tituloLoading = 'Guardando el registro en la app';
             let loader = yield this.loading.create({
-                message: this.estaEditando ? 'Modificando...<br>Registro' : 'Creando...<br>Registro',
-                duration: 20000
+                cssClass: 'loading-vacio',
+                showBackdrop: false,
+                spinner: null,
             });
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 if (!this.utiles.isAppOnDevice()) {
@@ -396,6 +471,9 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                         localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
                         localStorage.setItem('TIENE_REGISTRO', 'true');
                         loader.dismiss();
+                        //progress bar
+                        this.estaCargando = false;
+                        this.tituloLoading = '';
                         if (localStorage.getItem('STATE_CLAVE_UNICA')) {
                             var state = localStorage.getItem('STATE_CLAVE_UNICA');
                             //ACA HAY QUE HACER EL PROCESO DE ELIMINACION DEL REGISTRO Y LUEGO CONTINUAR
@@ -412,6 +490,12 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                                 console.log('ESTA AGREGANDO FAMILIA');
                             }
                             else {
+                                //si tiene pre-registro, hay que eliminarlo
+                                if (localStorage.getItem('PRE-REGISTRO')) {
+                                    localStorage.removeItem('PRE-REGISTRO');
+                                }
+                                console.log('autentificarse');
+                                //lo comentamos por mientras
                                 this.autentificarse(entidadRegistro.Run, entidadRegistro.Password);
                             }
                         }
@@ -424,6 +508,9 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                         localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
                         localStorage.setItem('TIENE_REGISTRO', 'true');
                         loader.dismiss();
+                        //progress bar
+                        this.estaCargando = false;
+                        this.tituloLoading = '';
                         if (localStorage.getItem('STATE_CLAVE_UNICA')) {
                             var state = localStorage.getItem('STATE_CLAVE_UNICA');
                             //ACA HAY QUE HACER EL PROCESO DE ELIMINACION DEL REGISTRO Y LUEGO CONTINUAR
@@ -440,6 +527,12 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
                                 console.log('ESTA AGREGANDO FAMILIA');
                             }
                             else {
+                                //si tiene pre-registro, hay que eliminarlo
+                                if (localStorage.getItem('PRE-REGISTRO')) {
+                                    localStorage.removeItem('PRE-REGISTRO');
+                                }
+                                console.log('autentificarse');
+                                //lo comentamos por mientras
                                 this.autentificarse(entidadRegistro.Run, entidadRegistro.Password);
                             }
                         }
@@ -528,6 +621,14 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
             }));
         });
     }
+    onChangeAcepta(event) {
+        if (event.detail) {
+            //this.aceptaCondiciones = event.detail.checked;
+            if (event.detail.checked == false) {
+                this.utiles.presentToast("Para continuar debe aceptar las condiciones del servicio, puede revisar las condiciones haciendo click en el ícono al costado derecho del check.", "middle", 3000);
+            }
+        }
+    }
     get f() { return this.forma.controls; }
 };
 RegistroUsuarioPage.ctorParameters = () => [
@@ -542,6 +643,9 @@ RegistroUsuarioPage.ctorParameters = () => [
     { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
 ];
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('nombreId', { static: true })
+], RegistroUsuarioPage.prototype, "nombreInput", void 0);
 RegistroUsuarioPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-registro-usuario',

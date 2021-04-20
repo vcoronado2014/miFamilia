@@ -27,7 +27,7 @@ export class ItemHomeComponent implements OnInit {
   openGenerico(modulo){
     var pageName = modulo.toLowerCase();
     if (modulo == 'EXAMENES'){
-      pageName = 'ordenes';
+      pageName = 'pre-ordenes';
     }
     //registramos movimiento
     if (sessionStorage.getItem("RSS_ID")) {

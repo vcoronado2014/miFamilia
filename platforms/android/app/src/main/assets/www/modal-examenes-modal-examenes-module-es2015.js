@@ -18,6 +18,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 /* harmony import */ var _modal_examenes_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modal-examenes.page */ "./src/app/modal-examenes/modal-examenes.page.ts");
 /* harmony import */ var _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../directives/text-avatar/index */ "./src/directives/text-avatar/index.ts");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
+
 
 
 
@@ -35,6 +37,7 @@ ModalExamenesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
             _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__["TextAvatarModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_8__["ComponentsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                 {
                     path: '',

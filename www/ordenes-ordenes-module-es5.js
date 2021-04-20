@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ordenes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando exámenes\"></app-progress>\r\n\r\n<ion-card [hidden]=\"estaCargando\" *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <ion-item lines=\"none\" #myList>\r\n      <ion-avatar slot=\"start\">\r\n        <text-avatar [text]=\"item.NombreUsuario\" [color]=\"item.Color\" [textColor]=\"textColor\"></text-avatar>\r\n      </ion-avatar>\r\n      <ion-label class=\"ion-text-wrap\">{{ item.NombreUsuario }}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n      <!-- <ion-icon name=\"time\" slot=\"end\"></ion-icon> -->\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>  \r\n<!-- NO HAY ORDENES -->\r\n<div [hidden]=\"estaCargando\" *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay órdenes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ordenes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando exámenes\"></app-progress>\r\n\r\n<ion-card [hidden]=\"estaCargando\" *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <app-avatar [lines]=\"none\" [urlImagen] = \"item.UrlImagen\" \r\n    [nombreCompleto]=\"item.NombreUsuario\" \r\n    [parentezco]=\"item.Parentezco\"></app-avatar>\r\n<!--     <ion-item lines=\"none\" #myList>\r\n      <ion-avatar slot=\"start\">\r\n        <text-avatar [text]=\"item.NombreUsuario\" [color]=\"item.Color\" [textColor]=\"textColor\"></text-avatar>\r\n      </ion-avatar>\r\n      <ion-label class=\"ion-text-wrap\">{{ item.NombreUsuario }}</ion-label>\r\n    </ion-item> -->\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n      <!-- <ion-icon name=\"time\" slot=\"end\"></ion-icon> -->\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>  \r\n<!-- NO HAY ORDENES -->\r\n<div [hidden]=\"estaCargando\" *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay órdenes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -247,7 +247,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(OrdenesPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          var _this = this;
+
           moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+          this.activatedRoute.queryParams.subscribe(function (params) {
+            if (params && params.usuario) {
+              _this.usuarioAps = JSON.parse(params.usuario);
+              console.log(_this.usuarioAps);
+            }
+          });
           /*     if (sessionStorage.getItem("RSS_ID")){
                 if (this.parametrosApp.USA_LOG_MODULOS()){
                   this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
@@ -260,7 +268,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "loadInicio",
         value: function loadInicio() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var _this = this;
+            var _this2 = this;
 
             var loader;
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -270,39 +278,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     //mi color
                     //this.miColor = this.utiles.entregaMiColor();
                     //ordenes
-                    this.listadoOrdenes = []; //contenido de las llamadas.
-
-                    if (sessionStorage.UsuarioAps) {
-                      //debemos enviar el uspId del titular para que traiga todos los datos
-                      this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
-                    }
+                    this.listadoOrdenes = [];
 
                     if (!this.usuarioAps) {
-                      _context2.next = 10;
+                      _context2.next = 9;
                       break;
                     }
 
-                    this.miColor = this.utiles.entregaColor(this.usuarioAps); //original
-
-                    /*       let loader = await this.loading.create({
-                            message: 'Obteniendo...<br>Órdenes del usuario',
-                            duration: 20000
-                          }); */
-
+                    this.miColor = this.utiles.entregaColor(this.usuarioAps);
                     this.estaCargando = true;
-                    _context2.next = 7;
+                    _context2.next = 6;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
                       spinner: null
                     });
 
-                  case 7:
+                  case 6:
                     loader = _context2.sent;
-                    _context2.next = 10;
+                    _context2.next = 9;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                        var _this2 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                        var _this3 = this;
 
                         return regeneratorRuntime.wrap(function _callee$(_context) {
                           while (1) {
@@ -311,12 +308,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.lab.getOrdenes(this.usuarioAps.Id).subscribe(function (response) {
-                                    _this2.porocesarLista(response, loader);
+                                    _this3.porocesarLista(response, loader);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.lab.getOrdenesNative(this.usuarioAps.Id).then(function (response) {
-                                    _this2.porocesarLista(JSON.parse(response.data), loader);
+                                    _this3.porocesarLista(JSON.parse(response.data), loader);
                                   });
                                 }
 
@@ -329,7 +326,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 10:
+                  case 9:
                   case "end":
                     return _context2.stop();
                 }
@@ -346,6 +343,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             for (var s in listado) {
               var fecha = moment__WEBPACK_IMPORTED_MODULE_9__(listado[s].FechaRegistro).format('DD-MM-YYYY');
               listado[s].Fecha = fecha;
+              listado[s].UrlImagen = this.usuarioAps.UrlImagen;
+              listado[s].Parentezco = this.usuarioAps.Parentezco.Nombre;
             } //ahora asignamos la variable
 
 

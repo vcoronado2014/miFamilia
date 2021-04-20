@@ -2336,7 +2336,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-content [ngClass]=\"{'ion-no-padding':muestraMensaje, 'ion-padding': muestraMensaje == false }\">\n  <ion-row class=\"mt-24\" [hidden]=\"muestraMensaje\">\n    <button mat-icon-button aria-label=\"Example icon-button with a heart icon\" (click)=\"volver()\">\n      <mat-icon>arrow_back_ios</mat-icon>\n    </button>\n  </ion-row>\n  <div [hidden]=\"muestraMensaje\">\n    <ion-row class=\"mt-40\">\n      <h1>Hola, {{nombre}}, un gusto en conocerte</h1>\n    </ion-row>\n    <ion-row>\n      <p class=\"texto-1\">A continuación procederemos a verificar si ya tienes cuenta activa, para esto necesitamos que\n        ingreses tu RUN, fecha de nacimiento y correo electrónico.</p>\n  \n    </ion-row>\n    <form [formGroup]=\"forma\" novalidate>\n      <!-- run -->\n      <ion-row class=\"mt-16\">\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Run (Sin puntos y con guión)</mat-label>\n          <input matInput placeholder=\"12535301-1\" formControlName=\"run\" name=\"run\" required>\n          <mat-error *ngIf=\"f.run.errors && f.run.errors.required\">Run requerido</mat-error>\n          <mat-error *ngIf=\"f.run.errors && f.run.errors.runInvalido == false\">Rut inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- fecha nacimiento -->\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Seleccione fecha nacimiento</mat-label>\n          <input matInput [matDatepicker]=\"datepicker\"  formControlName=\"fechaNacimiento\" name=\"fechaNacimiento\" required>\n          <mat-datepicker-toggle matSuffix [for]=\"datepicker\"></mat-datepicker-toggle>\n          <mat-datepicker #datepicker>\n          </mat-datepicker>\n        </mat-form-field>\n      </ion-row>\n      <ion-row class=\"mt-24\">\n        <button [disabled]=\"forma.invalid\" mat-flat-button color=\"primary\" style=\"width: 90%; margin-left: 5%;\"\n          (click)=\"verificaRegistro()\">CONTINUAR</button>\n      </ion-row>\n    </form>\n  </div>\n  <div [hidden]=\"!muestraMensaje\">\n    <app-pagina-mensajes [titulo]=\"objetoMensaje.titulo\" [contenido]=\"objetoMensaje.contenido\" [irA]=\"objetoMensaje.irA\"></app-pagina-mensajes>\n  </div>\n\n</ion-content>";
+    __webpack_exports__["default"] = "<ion-content [ngClass]=\"{'ion-no-padding':muestraMensaje, 'ion-padding': muestraMensaje == false }\">\n  <ion-row class=\"mt-24\" [hidden]=\"muestraMensaje\">\n    <button mat-icon-button aria-label=\"Example icon-button with a heart icon\" (click)=\"volver()\">\n      <mat-icon>arrow_back_ios</mat-icon>\n    </button>\n  </ion-row>\n  <div [hidden]=\"muestraMensaje\">\n    <ion-row class=\"mt-16\">\n      <h1>Hola, {{nombre}}, un gusto en conocerte</h1>\n    </ion-row>\n    <ion-row>\n      <p class=\"texto-1\">A continuación procederemos a verificar si ya tienes cuenta activa y existen datos clínicos, para\n        esto necesitamos que\n        ingreses tu RUN, fecha de nacimiento y correo electrónico, la dirección de<strong> correo electrónico debe ser la registrada\n        al momento de inscribirte en tu Centro de salud.</strong><br>\n        Existe la posibilidad de validar con clave única, siempre y cuando tu Establecimiento tenga habilitado dicho servicio.\n      </p>\n    </ion-row>\n    <form [formGroup]=\"forma\" novalidate>\n      <!-- run -->\n      <ion-row class=\"mt-16\">\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Run (Sin puntos y con guión)</mat-label>\n          <input matInput placeholder=\"12535301-1\" formControlName=\"run\" name=\"run\" required>\n          <mat-error *ngIf=\"f.run.errors && f.run.errors.required\">Run requerido</mat-error>\n          <mat-error *ngIf=\"f.run.errors && f.run.errors.runInvalido == false\">Rut inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- fecha nacimiento -->\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Seleccione fecha nacimiento</mat-label>\n          <input matInput [matDatepicker]=\"datepicker\"  formControlName=\"fechaNacimiento\" name=\"fechaNacimiento\" required>\n          <mat-datepicker-toggle matSuffix [for]=\"datepicker\"></mat-datepicker-toggle>\n          <mat-datepicker #datepicker>\n          </mat-datepicker>\n          <mat-error *ngIf=\"f.fechaNacimiento.errors && f.fechaNacimiento.errors.required\">Fecha nac requerida</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\" required>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error>\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <ion-row class=\"mt-24\">\n        <button [disabled]=\"forma.invalid\" mat-flat-button color=\"primary\" style=\"width: 90%; margin-left: 5%;\"\n          (click)=\"verificaRegistroCompleto()\">CONTINUAR</button>\n      </ion-row>\n    </form>\n  </div>\n  <div [hidden]=\"!muestraMensaje\">\n    <app-pagina-mensajes [titulo]=\"objetoMensaje.titulo\" [contenido]=\"objetoMensaje.contenido\" [irA]=\"objetoMensaje.irA\"></app-pagina-mensajes>\n  </div>\n\n</ion-content>";
     /***/
   },
 
@@ -2486,7 +2486,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".mt-16 {\n  margin-top: 16px;\n}\n\n.mt-32 {\n  margin-top: 32px;\n}\n\n.mt-24 {\n  margin-top: 24px;\n}\n\n.mt-80 {\n  margin-top: 5em;\n}\n\n.mt-40 {\n  margin-top: 2.5em;\n}\n\n.mt-36 {\n  margin-top: 2.25em;\n}\n\n.mt-52 {\n  margin-top: 3.25em;\n}\n\n.texto-1 {\n  font-size: 1.3em;\n  color: #575657;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVnaXN0cm8tdW5vL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxccmVnaXN0cm8tdW5vXFxyZWdpc3Ryby11bm8ucGFnZS5zY3NzIiwic3JjL2FwcC9yZWdpc3Ryby11bm8vcmVnaXN0cm8tdW5vLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0FDQ0o7O0FEQ0E7RUFDSSxnQkFBQTtBQ0VKOztBREFBO0VBQ0ksZ0JBQUE7QUNHSjs7QUREQTtFQUNJLGVBQUE7QUNJSjs7QURGQTtFQUNJLGlCQUFBO0FDS0o7O0FESEE7RUFDSSxrQkFBQTtBQ01KOztBREpBO0VBQ0ksa0JBQUE7QUNPSjs7QURMQTtFQUNJLGdCQUFBO0VBQ0EsY0FBQTtBQ1FKIiwiZmlsZSI6InNyYy9hcHAvcmVnaXN0cm8tdW5vL3JlZ2lzdHJvLXVuby5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubXQtMTZ7XHJcbiAgICBtYXJnaW4tdG9wOiAxNnB4O1xyXG59XHJcbi5tdC0zMntcclxuICAgIG1hcmdpbi10b3A6IDMycHg7XHJcbn1cclxuLm10LTI0e1xyXG4gICAgbWFyZ2luLXRvcDogMjRweDtcclxufVxyXG4ubXQtODB7XHJcbiAgICBtYXJnaW4tdG9wOiA1ZW07XHJcbn1cclxuLm10LTQwe1xyXG4gICAgbWFyZ2luLXRvcDogMi41ZW07XHJcbn1cclxuLm10LTM2e1xyXG4gICAgbWFyZ2luLXRvcDogMi4yNWVtO1xyXG59XHJcbi5tdC01MntcclxuICAgIG1hcmdpbi10b3A6IDMuMjVlbTtcclxufVxyXG4udGV4dG8tMXtcclxuICAgIGZvbnQtc2l6ZTogMS4zZW07XHJcbiAgICBjb2xvcjogIzU3NTY1NztcclxuICAgIFxyXG59IiwiLm10LTE2IHtcbiAgbWFyZ2luLXRvcDogMTZweDtcbn1cblxuLm10LTMyIHtcbiAgbWFyZ2luLXRvcDogMzJweDtcbn1cblxuLm10LTI0IHtcbiAgbWFyZ2luLXRvcDogMjRweDtcbn1cblxuLm10LTgwIHtcbiAgbWFyZ2luLXRvcDogNWVtO1xufVxuXG4ubXQtNDAge1xuICBtYXJnaW4tdG9wOiAyLjVlbTtcbn1cblxuLm10LTM2IHtcbiAgbWFyZ2luLXRvcDogMi4yNWVtO1xufVxuXG4ubXQtNTIge1xuICBtYXJnaW4tdG9wOiAzLjI1ZW07XG59XG5cbi50ZXh0by0xIHtcbiAgZm9udC1zaXplOiAxLjNlbTtcbiAgY29sb3I6ICM1NzU2NTc7XG59Il19 */";
+    __webpack_exports__["default"] = ".mt-16 {\n  margin-top: 16px;\n}\n\n.mt-32 {\n  margin-top: 32px;\n}\n\n.mt-24 {\n  margin-top: 24px;\n}\n\n.mt-80 {\n  margin-top: 5em;\n}\n\n.mt-40 {\n  margin-top: 2.5em;\n}\n\n.mt-36 {\n  margin-top: 2.25em;\n}\n\n.mt-52 {\n  margin-top: 3.25em;\n}\n\n.texto-1 {\n  font-size: 1.2em;\n  color: #575657;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVnaXN0cm8tdW5vL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxccmVnaXN0cm8tdW5vXFxyZWdpc3Ryby11bm8ucGFnZS5zY3NzIiwic3JjL2FwcC9yZWdpc3Ryby11bm8vcmVnaXN0cm8tdW5vLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0FDQ0o7O0FEQ0E7RUFDSSxnQkFBQTtBQ0VKOztBREFBO0VBQ0ksZ0JBQUE7QUNHSjs7QUREQTtFQUNJLGVBQUE7QUNJSjs7QURGQTtFQUNJLGlCQUFBO0FDS0o7O0FESEE7RUFDSSxrQkFBQTtBQ01KOztBREpBO0VBQ0ksa0JBQUE7QUNPSjs7QURMQTtFQUNJLGdCQUFBO0VBQ0EsY0FBQTtBQ1FKIiwiZmlsZSI6InNyYy9hcHAvcmVnaXN0cm8tdW5vL3JlZ2lzdHJvLXVuby5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubXQtMTZ7XHJcbiAgICBtYXJnaW4tdG9wOiAxNnB4O1xyXG59XHJcbi5tdC0zMntcclxuICAgIG1hcmdpbi10b3A6IDMycHg7XHJcbn1cclxuLm10LTI0e1xyXG4gICAgbWFyZ2luLXRvcDogMjRweDtcclxufVxyXG4ubXQtODB7XHJcbiAgICBtYXJnaW4tdG9wOiA1ZW07XHJcbn1cclxuLm10LTQwe1xyXG4gICAgbWFyZ2luLXRvcDogMi41ZW07XHJcbn1cclxuLm10LTM2e1xyXG4gICAgbWFyZ2luLXRvcDogMi4yNWVtO1xyXG59XHJcbi5tdC01MntcclxuICAgIG1hcmdpbi10b3A6IDMuMjVlbTtcclxufVxyXG4udGV4dG8tMXtcclxuICAgIGZvbnQtc2l6ZTogMS4yZW07XHJcbiAgICBjb2xvcjogIzU3NTY1NztcclxuICAgIFxyXG59IiwiLm10LTE2IHtcbiAgbWFyZ2luLXRvcDogMTZweDtcbn1cblxuLm10LTMyIHtcbiAgbWFyZ2luLXRvcDogMzJweDtcbn1cblxuLm10LTI0IHtcbiAgbWFyZ2luLXRvcDogMjRweDtcbn1cblxuLm10LTgwIHtcbiAgbWFyZ2luLXRvcDogNWVtO1xufVxuXG4ubXQtNDAge1xuICBtYXJnaW4tdG9wOiAyLjVlbTtcbn1cblxuLm10LTM2IHtcbiAgbWFyZ2luLXRvcDogMi4yNWVtO1xufVxuXG4ubXQtNTIge1xuICBtYXJnaW4tdG9wOiAzLjI1ZW07XG59XG5cbi50ZXh0by0xIHtcbiAgZm9udC1zaXplOiAxLjJlbTtcbiAgY29sb3I6ICM1NzU2NTc7XG59Il19 */";
     /***/
   },
 
@@ -2584,7 +2584,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.activatedRoute = activatedRoute;
         this.router = router;
         this.nombre = '';
-        this.cargando = false; //rut = new FormControl('', [Validators.required, this.runValidator]);
+        this.cargando = false; //expresiones regulares
+
+        this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm; //rut = new FormControl('', [Validators.required, this.runValidator]);
         //por defecto dejamos el tipo movimiento en 1 solicitud de login
         //despues lo podemos recibir como parametro para cambiarlo
 
@@ -2640,7 +2642,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function cargarForma() {
           this.forma = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
             'run': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
-            //'email': new FormControl({value: '', disabled: this.estaEditando}, [Validators.required, Validators.pattern(this.expEmail)]),      
+            'email': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern(this.expEmail)]),
             'fechaNacimiento': new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required])
           }, {
             validators: this.RunValidator
@@ -2660,28 +2662,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         } //para validar
 
       }, {
-        key: "verificaRegistro",
-        value: function verificaRegistro() {
+        key: "verificaRegistroCompleto",
+        value: function verificaRegistroCompleto() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
             var _this10 = this;
 
-            var run, idDispositivo, loader;
+            var run, idDispositivo, fechaNac, fechaNacStr, loader;
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    run = this.forma.controls.run;
+                    if (!this.forma.invalid) {
+                      _context2.next = 2;
+                      break;
+                    }
+
+                    return _context2.abrupt("return");
+
+                  case 2:
+                    run = this.forma.controls.run.value;
                     idDispositivo = this.utiles.entregaIdDispositivo();
+                    fechaNac = moment__WEBPACK_IMPORTED_MODULE_8__(this.forma.controls.fechaNacimiento.value);
+                    fechaNacStr = fechaNac.format('DD-MM-YYYY');
+                    console.log('run registro uno ' + run);
+                    console.log('idispositivo registro uno ' + idDispositivo);
+                    console.log('fecha nac registro uno ' + fechaNac);
+                    console.log('fecha nac registro uno str ' + fechaNacStr);
                     this.cargando = true;
-                    _context2.next = 5;
+                    _context2.next = 13;
                     return this.loading.create({
                       message: 'Verificando...<br>Registro',
                       duration: 3000
                     });
 
-                  case 5:
+                  case 13:
                     loader = _context2.sent;
-                    _context2.next = 8;
+                    _context2.next = 16;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this10, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                         var _this11 = this;
@@ -2692,17 +2708,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
-                                  this.servicioGeo.getRegistroAppRun(run.value, idDispositivo).subscribe(function (response) {
+                                  this.servicioGeo.getRegistroAppRun(run, idDispositivo).subscribe(function (response) {
                                     //procesar
-                                    //this.procesarInfo(response, loader);
-                                    _this11.procesarRespuestaRegistro(response, loader);
+                                    _this11.procesarRespuestaRegistroCompleto(response, loader);
                                   });
                                 } else {
                                   //llamada nativa
-                                  this.servicioGeo.getRegistroAppNativeRun(run.value, idDispositivo).then(function (response) {
+                                  this.servicioGeo.getRegistroAppNativeRun(run, idDispositivo).then(function (response) {
                                     var data = JSON.parse(response.data);
 
-                                    _this11.procesarRespuestaRegistro(data, loader);
+                                    _this11.procesarRespuestaRegistroCompleto(data, loader);
                                   }, function (error) {
                                     _this11.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
 
@@ -2719,7 +2734,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       }));
                     });
 
-                  case 8:
+                  case 16:
                   case "end":
                     return _context2.stop();
                 }
@@ -2728,9 +2743,114 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }));
         }
       }, {
+        key: "verificaRegistro",
+        value: function verificaRegistro() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            var _this12 = this;
+
+            var run, idDispositivo, loader;
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    run = this.forma.controls.run;
+                    idDispositivo = this.utiles.entregaIdDispositivo();
+                    this.cargando = true;
+                    _context4.next = 5;
+                    return this.loading.create({
+                      message: 'Verificando...<br>Registro',
+                      duration: 3000
+                    });
+
+                  case 5:
+                    loader = _context4.sent;
+                    _context4.next = 8;
+                    return loader.present().then(function () {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this12, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                        var _this13 = this;
+
+                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                          while (1) {
+                            switch (_context3.prev = _context3.next) {
+                              case 0:
+                                if (!this.utiles.isAppOnDevice()) {
+                                  //llamada web
+                                  this.servicioGeo.getRegistroAppRun(run.value, idDispositivo).subscribe(function (response) {
+                                    //procesar
+                                    _this13.procesarRespuestaRegistro(response, loader);
+                                  });
+                                } else {
+                                  //llamada nativa
+                                  this.servicioGeo.getRegistroAppNativeRun(run.value, idDispositivo).then(function (response) {
+                                    var data = JSON.parse(response.data);
+
+                                    _this13.procesarRespuestaRegistro(data, loader);
+                                  }, function (error) {
+                                    _this13.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+
+                                    loader.dismiss();
+                                  });
+                                }
+
+                              case 1:
+                              case "end":
+                                return _context3.stop();
+                            }
+                          }
+                        }, _callee3, this);
+                      }));
+                    });
+
+                  case 8:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          }));
+        }
+      }, {
         key: "abrirLogin",
         value: function abrirLogin() {
           this.navCtrl.navigateRoot('nuevo-login');
+        }
+      }, {
+        key: "procesarRespuestaRegistroCompleto",
+        value: function procesarRespuestaRegistroCompleto(registro, loader) {
+          if (registro && registro != null) {
+            //verificamos si tiene su registro completo
+            var tieneCorreo = !(registro.CorreoElectronico == null || registro.CorreoElectronico == "" || registro.CorreoElectronico == undefined);
+            var tienePassword = !(registro.Password == null || registro.Password == "" || registro.Password == undefined);
+            var tieneRun = !(registro.Run == null || registro.Run == "" || registro.Run == undefined);
+            var tieneUsuario = !(registro.NombreUsuario == null || registro.NombreUsuario == "" || registro.NombreUsuario == undefined);
+
+            if (tieneCorreo && tienePassword && tieneRun && tieneUsuario) {
+              //tiene registro completo, enviarlo a la pagina de login
+              this.utiles.presentToast('Usted ya tiene registro', 'middle', 5000);
+              loader.dismiss();
+
+              if (this.estaAgregandoFamilia == false) {
+                this.abrirLogin();
+              } else {
+                //si esta agregando familia hay que crear lo que corresponde y avisar al
+                //usuario que fue creado o no exito
+                console.log('ESTA AGREGANDO FAMILIA');
+              }
+            } else {
+              //su registro esta incompleto, derivarlo a la pagina de registro de la app
+              this.registroIncompleto = registro; //pasar como parametro el registro incompleto a la otra pantalla para que pueda completarlo
+              //******* LLAMAR A LA PAGINA DE REGISTRO  *************/
+
+              this.utiles.presentToast('Su registro está incompleto', 'middle', 5000);
+              loader.dismiss();
+              this.irARegistro(this.estaAgregandoFamilia);
+            }
+          } else {
+            //no tiene registro, llamar a la api para buscarlo en rayen
+            loader.dismiss(); //llamamos a enrolamiento
+
+            this.verficarEnrolamientoRayenCompleto(); //console.log('Buscarlo en rayen');
+          }
         }
       }, {
         key: "procesarRespuestaRegistro",
@@ -2810,32 +2930,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "verficarEnrolamientoRayen",
         value: function verficarEnrolamientoRayen() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var _this12 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            var _this14 = this;
 
             var run, loader;
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
               while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context6.prev = _context6.next) {
                   case 0:
                     run = this.forma.controls.run;
                     this.cargando = true;
-                    _context4.next = 4;
+                    _context6.next = 4;
                     return this.loading.create({
                       message: 'Verificando...<br>Registro',
                       duration: 3000
                     });
 
                   case 4:
-                    loader = _context4.sent;
-                    _context4.next = 7;
+                    loader = _context6.sent;
+                    _context6.next = 7;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this12, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                        var _this13 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this14, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                        var _this15 = this;
 
-                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                        return regeneratorRuntime.wrap(function _callee5$(_context5) {
                           while (1) {
-                            switch (_context3.prev = _context3.next) {
+                            switch (_context5.prev = _context5.next) {
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
@@ -2843,7 +2963,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                     //procesar
                                     console.log(response);
 
-                                    _this13.procesaRespuestaEnrolamiento(response, loader);
+                                    _this15.procesaRespuestaEnrolamiento(response, loader);
                                   });
                                 } else {
                                   //llamada nativa
@@ -2851,9 +2971,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                     var data = JSON.parse(response.data);
                                     console.log(data);
 
-                                    _this13.procesaRespuestaEnrolamiento(data, loader);
+                                    _this15.procesaRespuestaEnrolamiento(data, loader);
                                   }, function (error) {
-                                    _this13.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                                    _this15.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
 
                                     loader.dismiss();
                                   });
@@ -2861,19 +2981,91 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                               case 1:
                               case "end":
-                                return _context3.stop();
+                                return _context5.stop();
                             }
                           }
-                        }, _callee3, this);
+                        }, _callee5, this);
                       }));
                     });
 
                   case 7:
                   case "end":
-                    return _context4.stop();
+                    return _context6.stop();
                 }
               }
-            }, _callee4, this);
+            }, _callee6, this);
+          }));
+        }
+      }, {
+        key: "verficarEnrolamientoRayenCompleto",
+        value: function verficarEnrolamientoRayenCompleto() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            var _this16 = this;
+
+            var run, fechaNac, fechaNacStr, email, loader;
+            return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              while (1) {
+                switch (_context8.prev = _context8.next) {
+                  case 0:
+                    run = this.forma.controls.run.value;
+                    fechaNac = moment__WEBPACK_IMPORTED_MODULE_8__(this.forma.controls.fechaNacimiento.value);
+                    fechaNacStr = fechaNac.format('DD-MM-YYYY');
+                    email = this.forma.controls.email.value;
+                    this.cargando = true;
+                    _context8.next = 7;
+                    return this.loading.create({
+                      message: 'Verificando...<br>Registro',
+                      duration: 3000
+                    });
+
+                  case 7:
+                    loader = _context8.sent;
+                    _context8.next = 10;
+                    return loader.present().then(function () {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this16, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+                        var _this17 = this;
+
+                        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                          while (1) {
+                            switch (_context7.prev = _context7.next) {
+                              case 0:
+                                if (!this.utiles.isAppOnDevice()) {
+                                  //llamada web
+                                  this.servicioGeo.verificaEnrolamientoCompleto(run, fechaNacStr, email).subscribe(function (response) {
+                                    //procesar
+                                    console.log(response);
+
+                                    _this17.procesaRespuestaEnrolamiento(response, loader);
+                                  });
+                                } else {
+                                  //llamada nativa
+                                  this.servicioGeo.verificaEnrolamientoCompletoNative(run, fechaNacStr, email).then(function (response) {
+                                    var data = JSON.parse(response.data);
+                                    console.log(data);
+
+                                    _this17.procesaRespuestaEnrolamiento(data, loader);
+                                  }, function (error) {
+                                    _this17.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+
+                                    loader.dismiss();
+                                  });
+                                }
+
+                              case 1:
+                              case "end":
+                                return _context7.stop();
+                            }
+                          }
+                        }, _callee7, this);
+                      }));
+                    });
+
+                  case 10:
+                  case "end":
+                    return _context8.stop();
+                }
+              }
+            }, _callee8, this);
           }));
         }
       }, {
@@ -2881,35 +3073,47 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function procesaRespuestaEnrolamiento(usuarioAps, loader) {
           if (usuarioAps.RespuestaBase.CodigoMensaje == 0) {
             var usuario = usuarioAps.UsuarioAps;
-            this.registroIncompleto = {
-              Activo: 1,
-              Apellidos: usuario.ApellidoPaterno == null ? '' : usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno == null ? '' : usuario.ApellidoMaterno,
-              Apodo: "",
-              Avatar: "",
-              Comuna: localStorage.getItem("comuna"),
-              CorreoElectronico: "",
-              Eliminado: 0,
-              FechaBaja: "0001-01-01T00:00:00",
-              FechaNacimiento: "0001-01-01T00:00:00",
-              FechaRegistro: "0001-01-01T00:00:00",
-              Id: 0,
-              IdDispositivo: localStorage.getItem("token_dispositivo"),
-              Latitud: sessionStorage.getItem("latitud"),
-              Longitud: sessionStorage.getItem("longitud"),
-              //registro mediante el enrolamiento
-              ModoRegistro: 2,
-              NombreUsuario: "",
-              Nombres: usuario.Nombres,
-              Pais: localStorage.getItem("pais"),
-              Password: "",
-              Plataforma: localStorage.getItem("plataforma"),
-              Provincia: localStorage.getItem("provincia"),
-              Run: this.utiles.insertarGuion(usuario.Rut),
-              TelefonoContacto: ''
-            };
-            loader.dismiss(); //acá estamos ok deberíamos mandarlo a que complete su fomrulario
+            var preRegistro = usuarioAps.PreRegistro;
+            /*       this.registroIncompleto = {
+                    Activo: 1,
+                    Apellidos: usuario.ApellidoPaterno == null ? '' : usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno == null ? '': usuario.ApellidoMaterno,
+                    Apodo: "",
+                    Avatar: "",
+                    Comuna: localStorage.getItem("comuna"),
+                    CorreoElectronico: "",
+                    Eliminado: 0,
+                    FechaBaja: "0001-01-01T00:00:00",
+                    FechaNacimiento: "0001-01-01T00:00:00",
+                    FechaRegistro: "0001-01-01T00:00:00",
+                    Id: 0,
+                    IdDispositivo: localStorage.getItem("token_dispositivo"),
+                    Latitud: sessionStorage.getItem("latitud"),
+                    Longitud: sessionStorage.getItem("longitud"),
+                    //registro mediante el enrolamiento
+                    ModoRegistro: 2,
+                    NombreUsuario: "",
+                    Nombres: usuario.Nombres,
+                    Pais: localStorage.getItem("pais"),
+                    Password: "",
+                    Plataforma: localStorage.getItem("plataforma"),
+                    Provincia: localStorage.getItem("provincia"),
+                    Run: this.utiles.insertarGuion(usuario.Rut),
+                    TelefonoContacto: ''
+                  } */
 
-            this.irARegistro(this.estaAgregandoFamilia);
+            loader.dismiss(); //acá estamos ok deberíamos mandarlo a que complete su fomrulario
+            //this.irARegistro(this.estaAgregandoFamilia);
+            //ya no vamos directamente al registro, guardamos los datos de validación en el backend
+            //en la table de pre-registro
+            //lo redirigimos a la pagina de login y le informamos que revise su correo electrónico
+
+            this.muestraMensaje = true; //this.objetoMensaje.irA = this.paginaAnterior;
+
+            this.objetoMensaje.irA = 'inicio';
+            this.objetoMensaje.titulo = 'Registro en la app mi familia';
+            this.objetoMensaje.contenido = usuarioAps.RespuestaBase.Mensaje; //aca debemos guardar el preregistro
+
+            localStorage.setItem('PRE-REGISTRO', JSON.stringify(preRegistro));
           } else {
             //aca definitivamente debemos enviarlo a clave única
             loader.dismiss(); //no debemos enviarlo a clave unica, debemos validar el mensaje
@@ -2928,6 +3132,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 this.objetoMensaje.irA = this.paginaAnterior;
                 this.objetoMensaje.titulo = 'Menor de edad';
                 this.objetoMensaje.contenido = 'No puedes registrarte ya que eres menor de edad y el registro para esta aplicación es sólo para mayores.';
+              } else if (usuarioAps.RespuestaBase.CodigoMensaje == 9) {
+                this.objetoMensaje.irA = this.paginaAnterior;
+                this.objetoMensaje.titulo = 'Fecha nacimiento no coincide';
+                this.objetoMensaje.contenido = 'La fecha de nacimiento ingresada no coincide con nuestros registros, revísela e inténtelo nuevamente.';
+              } else if (usuarioAps.RespuestaBase.CodigoMensaje == 10) {
+                this.objetoMensaje.irA = this.paginaAnterior;
+                this.objetoMensaje.titulo = 'Email no coincide';
+                this.objetoMensaje.contenido = 'El email ingresado no coincide con nuestros registros, revíselo e inténtelo nuevamente.';
+              } else if (usuarioAps.RespuestaBase.CodigoMensaje == 11) {
+                this.objetoMensaje.irA = this.paginaAnterior;
+                this.objetoMensaje.titulo = 'Sin datos de contacto';
+                this.objetoMensaje.contenido = 'No cuentas con datos de contacto, te sugerimos actualizarlos en tu centro de salud.';
+              } else if (usuarioAps.RespuestaBase.CodigoMensaje == 12) {
+                this.objetoMensaje.irA = this.paginaAnterior;
+                this.objetoMensaje.titulo = 'Establecimiento sin permisos';
+                this.objetoMensaje.contenido = 'El establecimiento en el cual te encuentras inscrito no tiene permisos para usar la aplicacion.';
               } else if (usuarioAps.RespuestaBase.CodigoMensaje == 1) {
                 this.objetoMensaje.irA = this.paginaAnterior;
                 this.objetoMensaje.titulo = 'Run no encontrado';

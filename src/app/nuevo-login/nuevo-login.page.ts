@@ -8,6 +8,7 @@ import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { ServicioFCM } from '../../app/services/ServicioFCM';
+import { ServicioNotificaciones } from '../../app/services/ServicioNotificaciones';
 import { NavigationExtras } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Device } from '@ionic-native/device/ngx';
@@ -69,10 +70,13 @@ export class NuevoLoginPage implements OnInit {
     public appVersion: AppVersion,
     public platform: Platform,
     public device: Device,
+    public servNotificaciones: ServicioNotificaciones,
   ) { }
 
   ngOnInit() {
     moment.locale('es');
+    //vamos a obtener las notificaciones push en esta pantalla
+    this.servNotificaciones.buscarCitasTodas();
     this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
     this.cargarForma();
   }
@@ -273,6 +277,11 @@ export class NuevoLoginPage implements OnInit {
             return;
           }
 
+        }, error=>{
+          console.log(error.message);
+          this.utiles.presentToast("Error de conexión.", "middle", 3000);
+          this.estaCargando = false;
+          loader.dismiss();
         })
       }
       else{
@@ -293,6 +302,11 @@ export class NuevoLoginPage implements OnInit {
             return;
           }
 
+        }).catch(error=>{
+          console.log(error.message);
+          this.utiles.presentToast("Error de conexión.", "middle", 3000);
+          this.estaCargando = false;
+          loader.dismiss();        
         })
       }
     })
@@ -381,6 +395,15 @@ export class NuevoLoginPage implements OnInit {
       userFamilia = JSON.stringify(retorno.UsuariosFamilia);
       //variable de sessión muy importante para el resto de la app.
       localStorage.setItem("UsuariosFamilia", userFamilia);
+    }
+    if (retorno.FamiliaPorAceptar && retorno.FamiliaPorAceptar.length >= 0) {
+      localStorage.setItem('FAMILIA-POR-ACEPTAR', JSON.stringify(retorno.FamiliaPorAceptar));
+    }
+    if (retorno.FamiliaAceptada && retorno.FamiliaAceptada.length >= 0) {
+      localStorage.setItem('FAMILIA-ACEPTADA', JSON.stringify(retorno.FamiliaAceptada));
+    }
+    if (retorno.FamiliaRechazada && retorno.FamiliaRechazada.length >= 0) {
+      localStorage.setItem('FAMILIA-RECHAZADA', JSON.stringify(retorno.FamiliaRechazada));
     }
 
 

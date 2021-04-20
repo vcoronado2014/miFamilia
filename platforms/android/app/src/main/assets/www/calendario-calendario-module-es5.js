@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Calendario</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\" #content>\r\n<app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloLoading\"></app-progress>\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div [hidden]=\"estaCargando\" *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\" [anioActual]=\"anioActual\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\" id=\"myListCard\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle class=\"ion-text-capitalize\">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/img/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" [hidden]=\"estaCargando\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- esto lo comentamos ya que se decidió no usar color de header personalizado -->\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Calendario</ion-title>\r\n    <ion-buttons slot=\"end\" (click)=\"ordenar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"swap-vertical\"></ion-icon>&nbsp;Ordenar\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\" style=\"--padding-bottom: 50px !important;\" #content>\r\n<app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloLoading\"></app-progress>\r\n <div *ngIf=\"!tiene\">\r\n  <div style=\"position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay eventos para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n </div>\r\n \r\n <div *ngIf=\"tiene\">\r\n  \r\n  <div [hidden]=\"estaCargando\" *ngFor=\"let item of citasVerticalTodasTop\">\r\n    \r\n    <ion-grid *ngIf=\"item.Mostrar\">\r\n      <app-card-calendario [fechaActual]=\"fechaActual\" [item]=\"item\" [anioActual]=\"anioActual\"></app-card-calendario>\r\n      <ion-row class=\"ion-no-padding ion-no-margin row-card\">\r\n        <mat-card *ngFor=\"let evento of item.Eventos\" color=\"light\" style=\"margin-bottom: 8px;\" id=\"myListCard\">\r\n          <mat-card-header (click)=\"goToDetalleCita(evento)\">\r\n            \r\n              <mat-card-subtitle class=\"hora\">{{evento.HoraInicioFin}}</mat-card-subtitle>\r\n              <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>\r\n              <mat-card-subtitle class=\"ion-text-capitalize\">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>\r\n            \r\n            <div class=\"img-card\">\r\n              <img class=\"example-header-image\" src=\"./assets/imgs_svg/{{evento.Imagen}}\">\r\n            </div>\r\n          </mat-card-header>\r\n          <mat-card-actions *ngIf=\"revisaEstado(evento)\">\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Anular')[1]\" (click)=\"presentAlertConfirm(botonCancelar, evento)\">ANULAR</button>\r\n            <button color=\"primary\" mat-button *ngIf=\"revisarCita(evento, 'Confirmar')[0]\" (click)=\"presentAlertConfirm(botonConfirmar, evento)\">CONFIRMAR</button>\r\n          </mat-card-actions>\r\n        </mat-card>\r\n      </ion-row>\r\n      <hr *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\r\n    </ion-grid>\r\n  </div>\r\n  <!-- pruebas con infinite scroll -->\r\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n    <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más eventos...\">\r\n    </ion-infinite-scroll-content>\r\n  </ion-infinite-scroll>\r\n </div>\r\n</ion-content>\r\n<!-- este es el fab para abrir reservar horas -->\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" [hidden]=\"estaCargando\">\r\n  <ion-button color=\"secondary\" (click)=\"openReservarHoraPage()\" shape=\"round\" style=\"--color:black;\">\r\n    <ion-icon slot=\"start\" name=\"add-outline\" class=\"botonReservar\" style=\"font-size: 16px;\"></ion-icon>\r\n    <span class=\"botonReservar\">RESERVAR HORA</span>\r\n  </ion-button>\r\n</ion-fab>\r\n";
     /***/
   },
 
@@ -794,42 +794,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (this.citasVertical[s].Eventos[t]) {
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'agendar_citas_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'agendar_citas.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada';
                 }
 
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita Web') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'agendar_citas_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'agendar_citas.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada web';
                 }
 
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Atención Realizada') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'atenciones_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'atenciones.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Atención Realizada';
                 }
 
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco en uso') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-medicamentos.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
                 }
 
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco Pendiente') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-medicamentos.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
                 }
 
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Alimento Entregado') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-alimentos_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'retiro-de-alimentos.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Entrega de alimento';
                 }
 
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna Administrada') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'vacunas_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'vacunas.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Inmunización';
                 }
 
                 if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna por administrar') {
-                  this.citasVertical[s].Eventos[t].Imagen = 'vacunas_p.png';
+                  this.citasVertical[s].Eventos[t].Imagen = 'vacunas.svg';
                   this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Vacuna';
                 }
               }
@@ -886,42 +886,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (this.citasVerticalTodas[s].Eventos[t]) {
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'agendar_citas_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'agendar_citas.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada';
                 }
 
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita Web') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'agendar_citas_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'agendar_citas.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Cita programada web';
                 }
 
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Atención Realizada') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'atenciones_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'atenciones.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Atención Realizada';
                 }
 
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco en uso') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-medicamentos.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
                 }
 
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Fármaco Pendiente') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-medicamentos_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-medicamentos.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco en uso';
                 }
 
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Alimento Entregado') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-alimentos_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'retiro-de-alimentos.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Entrega de alimento';
                 }
 
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna Administrada') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'vacunas_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'vacunas.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Inmunización';
                 }
 
                 if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Vacuna por administrar') {
-                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'vacunas_p.png';
+                  this.citasVerticalTodas[s].Eventos[t].Imagen = 'vacunas.svg';
                   this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Vacuna';
                 }
               }

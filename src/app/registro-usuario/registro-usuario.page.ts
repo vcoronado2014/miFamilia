@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder, FormControl, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { NavigationExtras } from '@angular/router';
+import { MatInput } from '@angular/material/input';
 
 import * as moment from 'moment';
 
@@ -26,6 +27,7 @@ export class RegistroUsuarioPage implements OnInit {
   expCelular = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/gm;
   expPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/gm;
   expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
+  expAceptaCondiciones = true;
   isLogged: boolean;
   loggedIn: boolean;
   CodigoMensaje: any;
@@ -34,7 +36,15 @@ export class RegistroUsuarioPage implements OnInit {
   estaAgregandoFamilia = false;
   //para validarse solo con enrolamiento
   usaEnrolamiento = false;
+  //para el progressbar
+  estaCargando = false;
+  tituloLoading = '';
+  //acepta CONDICIONES
+  rutaAceptoCondiciones;
+  //aceptaCondiciones = true;
 
+  //focus
+  @ViewChild('nombreId', {static: true}) nombreInput: MatInput;
   constructor(
     private navCtrl: NavController,
     public utiles: ServicioUtiles,
@@ -48,11 +58,14 @@ export class RegistroUsuarioPage implements OnInit {
     public alertController: AlertController
   ) { }
 
- 
+ //ESTOY TRABAJANDO EN EL REGISTRO
+ //ACA SE DEBE AGREGAR EL CHECK DE ACEPTO DE CONDICIONES
+ //Y EL LINK DEL ARCHIVO CORRESPONDIENTE
 
   ngOnInit() {
     moment.locale('es');
     this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
+    this.rutaAceptoCondiciones = this.parametrosApp.URL_ACEPTA_CONDICIONES();
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params.usuario) {
         //store the temp in data        
@@ -64,12 +77,21 @@ export class RegistroUsuarioPage implements OnInit {
           this.estaEditando = true;
         }
         if (params.estaAgregandoFamilia && params.estaAgregandoFamilia != null){
+
           this.estaAgregandoFamilia = true;
+        }
+        if (!this.estaEditando){
+          this.nombreMostrar = 'Nuevo registro';
         }
         //cargamos la forma
         this.cargarForma();
       }
     });
+  }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.nombreInput.focus();
+    }, 1000);
   }
   cargarForma(){
     this.forma = new FormGroup({
@@ -80,6 +102,7 @@ export class RegistroUsuarioPage implements OnInit {
       'nombreSocial': new FormControl('', [Validators.maxLength(100)]),
       'telefono': new FormControl('', [Validators.pattern(this.expCelular)]),
       'genero': new FormControl(),
+      'aceptaCondiciones': new FormControl(true,  [Validators.requiredTrue]),
       'clave':new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
       'repetirClave': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])      
     }, { validators: this.EmailIgualesValidator });
@@ -93,6 +116,7 @@ export class RegistroUsuarioPage implements OnInit {
         nombreSocial: this.registro.Apodo.trimStart(), 
         telefono: this.registro.TelefonoContacto ?  this.registro.TelefonoContacto : '',
         genero: sexo,
+        aceptaCondiciones: true,
         clave: '',
         repetirClave: ''
       })
@@ -100,6 +124,13 @@ export class RegistroUsuarioPage implements OnInit {
       if (this.estaEditando){
         this.forma.get('clave').clearValidators();
         this.forma.get('repetirClave').clearValidators();
+      }
+      else{
+        //esto no esta claro, yo creo que siempre debería estar deshabilitado
+        //ya que viene del pre-registro y la edición no debería cambiar tampoco 
+        //estos datos.
+        this.forma.controls['run'].disable();
+        this.forma.controls['email'].disable();
       }
 /*       if (this.estaEditando){
         //desactivar algunas cosas
@@ -147,13 +178,23 @@ export class RegistroUsuarioPage implements OnInit {
           //variable de sessión muy importante para el resto de la app.
           localStorage.setItem("UsuariosFamilia", userFamilia);
         }
-
+        if (retorno.FamiliaPorAceptar && retorno.FamiliaPorAceptar.length >= 0) {
+          localStorage.setItem('FAMILIA-POR-ACEPTAR', JSON.stringify(retorno.FamiliaPorAceptar));
+        }
+        if (retorno.FamiliaAceptada && retorno.FamiliaAceptada.length >= 0) {
+          localStorage.setItem('FAMILIA-ACEPTADA', JSON.stringify(retorno.FamiliaAceptada));
+        }
+        if (retorno.FamiliaRechazada && retorno.FamiliaRechazada.length >= 0) {
+          localStorage.setItem('FAMILIA-RECHAZADA', JSON.stringify(retorno.FamiliaRechazada));
+        }
 
         this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
         this.Mensaje = retorno.RespuestaBase.Mensaje;
 
         this.loggedIn = true;
         loader.dismiss();
+        this.estaCargando = false;
+        this.tituloLoading = '';
         //si tiene usuario está valido
         if (!tieneUsuario){
           this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
@@ -167,6 +208,8 @@ export class RegistroUsuarioPage implements OnInit {
         this.Mensaje = retorno.RespuestaBase.Mensaje;
         this.loggedIn = true;
         loader.dismiss();
+        this.estaCargando = false;
+        this.tituloLoading = '';
         this.utiles.presentToast(this.Mensaje, 'middle', 4000);
       }
 
@@ -178,6 +221,8 @@ export class RegistroUsuarioPage implements OnInit {
       this.Mensaje = 'Error de llamada Http;';
       this.loggedIn = true;
       loader.dismiss();
+      this.estaCargando = false;
+      this.tituloLoading = '';
       this.utiles.presentToast(this.Mensaje, 'middle', 4000);
     }
   }
@@ -188,16 +233,31 @@ export class RegistroUsuarioPage implements OnInit {
   async autentificarse(userName, password){
     //en este caso ya el user name es el email
     let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: 'Obteniendo...<br>Login',
       duration: 10000
+    }); */
+    this.estaCargando = true;
+    this.tituloLoading = 'Autentificándose';
+
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner:null,
     });
+
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
         this.acceso.loginWebDirecto(f).subscribe((response: any)=>{
           this.procesarLogin(response, loader);
+        },error=>{
+          console.log(error.message);
+          loader.dismiss();
+          this.estaCargando = false;
+          this.tituloLoading = '';
         });
       }
       else{
@@ -206,6 +266,10 @@ export class RegistroUsuarioPage implements OnInit {
           this.procesarLogin(JSON.parse(response.data), loader);
         },
         (error)=>{
+          console.log(error.message);
+          loader.dismiss();
+          this.estaCargando = false;
+          this.tituloLoading = '';
           this.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
         }
         );
@@ -213,7 +277,12 @@ export class RegistroUsuarioPage implements OnInit {
     })
 
   }
-  async salirRegistro() {
+  async salirRegistro(){
+    var titulo = '';
+    this.navCtrl.navigateRoot('inicio');
+  }
+  //original
+/*   async salirRegistro() {
     var titulo = '';
 
     const alert = await this.alertController.create({
@@ -241,7 +310,7 @@ export class RegistroUsuarioPage implements OnInit {
     });
 
     await alert.present();
-  }
+  } */
   async onSubmit() {
     if (this.forma.invalid) {
       return;
@@ -301,10 +370,21 @@ export class RegistroUsuarioPage implements OnInit {
       }
     }
     //ahora guardamos
-    let loader = await this.loading.create({
+    //original
+/*     let loader = await this.loading.create({
       message: this.estaEditando ? 'Modificando...<br>Registro' : 'Creando...<br>Registro',
       duration: 20000
+    }); */
+    this.estaCargando = true;
+    this.tituloLoading = 'Guardando el registro en la app';
+
+    let loader = await this.loading.create({
+      cssClass: 'loading-vacio',
+      showBackdrop: false,
+      spinner:null,
     });
+
+
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
@@ -313,6 +393,9 @@ export class RegistroUsuarioPage implements OnInit {
           localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
           localStorage.setItem('TIENE_REGISTRO', 'true');
           loader.dismiss();
+          //progress bar
+          this.estaCargando = false;
+          this.tituloLoading = '';
           if (localStorage.getItem('STATE_CLAVE_UNICA')){
             var state = localStorage.getItem('STATE_CLAVE_UNICA');
             //ACA HAY QUE HACER EL PROCESO DE ELIMINACION DEL REGISTRO Y LUEGO CONTINUAR
@@ -329,6 +412,12 @@ export class RegistroUsuarioPage implements OnInit {
               console.log('ESTA AGREGANDO FAMILIA');
             }
             else{
+              //si tiene pre-registro, hay que eliminarlo
+              if (localStorage.getItem('PRE-REGISTRO')){
+                localStorage.removeItem('PRE-REGISTRO');
+              }
+              console.log('autentificarse');
+              //lo comentamos por mientras
               this.autentificarse(entidadRegistro.Run, entidadRegistro.Password);
             }
             
@@ -343,6 +432,9 @@ export class RegistroUsuarioPage implements OnInit {
           localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
           localStorage.setItem('TIENE_REGISTRO', 'true');
           loader.dismiss();
+          //progress bar
+          this.estaCargando = false;
+          this.tituloLoading = '';
           if (localStorage.getItem('STATE_CLAVE_UNICA')){
             var state = localStorage.getItem('STATE_CLAVE_UNICA');
             //ACA HAY QUE HACER EL PROCESO DE ELIMINACION DEL REGISTRO Y LUEGO CONTINUAR
@@ -359,6 +451,12 @@ export class RegistroUsuarioPage implements OnInit {
               console.log('ESTA AGREGANDO FAMILIA');
             }
             else{
+              //si tiene pre-registro, hay que eliminarlo
+              if (localStorage.getItem('PRE-REGISTRO')){
+                localStorage.removeItem('PRE-REGISTRO');
+              }
+              console.log('autentificarse');
+              //lo comentamos por mientras
               this.autentificarse(entidadRegistro.Run, entidadRegistro.Password);
             }
           }
@@ -450,6 +548,14 @@ export class RegistroUsuarioPage implements OnInit {
       }
     });
     
+  }
+  onChangeAcepta(event){
+    if (event.detail){
+      //this.aceptaCondiciones = event.detail.checked;
+      if (event.detail.checked == false){
+        this.utiles.presentToast("Para continuar debe aceptar las condiciones del servicio, puede revisar las condiciones haciendo click en el ícono al costado derecho del check.", "middle", 3000);
+      }
+    }
   }
 
   get f() { return this.forma.controls; }

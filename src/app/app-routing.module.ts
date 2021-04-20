@@ -107,6 +107,22 @@ const routes: Routes = [
     path: 'seleccion-usuario',
     loadChildren: () => import('./seleccion-usuario/seleccion-usuario.module').then( m => m.SeleccionUsuarioPageModule)
   },
+  {
+    path: 'validacion-factor',
+    loadChildren: () => import('./validacion-factor/validacion-factor.module').then( m => m.ValidacionFactorPageModule)
+  },
+  {
+    path: 'asociar-familia',
+    loadChildren: () => import('./asociar-familia/asociar-familia.module').then( m => m.AsociarFamiliaPageModule)
+  },
+  {
+    path: 'quitar-familia',
+    loadChildren: () => import('./quitar-familia/quitar-familia.module').then( m => m.QuitarFamiliaPageModule)
+  },
+  {
+    path: 'pre-ordenes',
+    loadChildren: () => import('./pre-ordenes/pre-ordenes.module').then( m => m.PreOrdenesPageModule)
+  },
 
 
 

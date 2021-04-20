@@ -12,6 +12,7 @@ import { ProgressComponent } from './progress/progress.component'
 import { ItemHomeComponent } from './item-home/item-home.component'
 import { AvatarSimpleComponent } from './avatar-simple/avatar-simple.component'
 import { PaginaMensajesComponent } from './pagina-mensajes/pagina-mensajes.component'
+import { ContentSlideComponent } from './content-slide/content-slide.component'
 
 
 
@@ -23,6 +24,7 @@ import { PaginaMensajesComponent } from './pagina-mensajes/pagina-mensajes.compo
     ProgressComponent,
     ItemHomeComponent,
     PaginaMensajesComponent,
+    ContentSlideComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { PaginaMensajesComponent } from './pagina-mensajes/pagina-mensajes.compo
     ProgressComponent,
     ItemHomeComponent,
     PaginaMensajesComponent,
+    ContentSlideComponent,
   ]
 })
 export class ComponentsModule { }

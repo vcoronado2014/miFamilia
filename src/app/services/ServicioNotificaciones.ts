@@ -438,7 +438,8 @@ export class ServicioNotificaciones{
                             Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
                             Contenido: 'Tienes aplicada esta dosis el día ' + moment(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
                             Id: element.Id,
-                            Indice: indice
+                            Indice: indice,
+                            IrA: null
                         }
                         arr.push(entidad);
                         indice++;
@@ -459,7 +460,8 @@ export class ServicioNotificaciones{
                                 Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
                                 Contenido: 'Tienes aplicada esta dosis el día ' + moment(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
                                 Id: element.Id,
-                                Indice: indice
+                                Indice: indice,
+                                IrA: null
                             }
                             arr.push(entidad);
                             indice++;
@@ -485,7 +487,8 @@ export class ServicioNotificaciones{
                             Subtitulo: todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
                             Contenido: texto,
                             Id: id,
-                            Indice: indice
+                            Indice: indice,
+                            IrA: null
                         }
                         arr.push(entidad);
                         indice++;
@@ -493,6 +496,22 @@ export class ServicioNotificaciones{
                     }
                 }
             }
+        }
+        //familia por aceptar
+        if (localStorage.getItem('FAMILIA-POR-ACEPTAR')) {
+            let arrFam = JSON.parse(localStorage.getItem('FAMILIA-POR-ACEPTAR'));
+            arrFam.forEach(familia => {
+                let entidad = {
+                    Titulo: 'Miembro de la familia',
+                    Subtitulo: familia.NombreCompleto,
+                    Contenido: 'Tienes a ' + familia.NombreCompleto + ' que podrías aceptar y ver su información de salud',
+                    Id: familia.Id,
+                    Indice: indice,
+                    IrA: 'asociar-familia'
+                }
+                arr.push(entidad);
+                indice++;
+            });
         }
         return arr;
     }

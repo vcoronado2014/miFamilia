@@ -116,5 +116,18 @@ export class ServicioParametrosApp{
         } 
         return retorno;
     }
+    URL_ACEPTA_CONDICIONES = ()=>{
+        let retorno = '#';
+        if (localStorage.getItem('PARAMETROS_APP')){
+            let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+            if (elementos && elementos.length > 0){
+                let arrRetorno = elementos.find(p=>p.Nombre == 'URL_ACEPTA_CONDICIONES');
+                if (arrRetorno && arrRetorno.Id > 0){
+                    retorno = arrRetorno.Valor;
+                }
+            }
+        } 
+        return retorno;
+    }
     
 }

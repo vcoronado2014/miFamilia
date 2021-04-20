@@ -267,11 +267,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.paginaActual = 0; //para el progress de buscar diponibilidad
 
         this.mostrarProgressDisp = false;
-        this.encontroCitasDisp = false;
-      } //ACA QUEDÉ EN QUE AL REALIZAR LA OPERACION DE AGENDAMIENTO
-      //DEBEMOS VOLVER A UNA PAGINA INICIAL, SI MAL NO RECUERDO SE
-      //TRATARIA DE LA PAGINA CALENDARIO
+        this.encontroCitasDisp = false; //idconsultar
 
+        this.idConsultar = 0;
+      }
 
       _createClass(PreTiposatencionPage, [{
         key: "ngOnInit",
@@ -292,15 +291,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             switch (_context.prev = _context.next) {
                               case 0:
                                 if (!(params && params.Id)) {
-                                  _context.next = 22;
+                                  _context.next = 23;
                                   break;
                                 }
 
                                 //this.estaAgregandoFamilia = true;
+                                this.idConsultar = params.Id;
                                 this.usuarioAps = this.utiles.entregaUsuario(params.Id);
 
                                 if (!(this.usuarioAps != null)) {
-                                  _context.next = 19;
+                                  _context.next = 20;
                                   break;
                                 }
 
@@ -314,36 +314,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 this.setFechasInicioFin();
 
                                 if (!this.parametrosApp.USA_API_MANAGEMENT()) {
-                                  _context.next = 15;
+                                  _context.next = 16;
                                   break;
                                 }
 
-                                _context.next = 13;
+                                _context.next = 14;
                                 return this.buscarDisponibilidadApi(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
 
-                              case 13:
-                                _context.next = 17;
+                              case 14:
+                                _context.next = 18;
                                 break;
 
-                              case 15:
-                                _context.next = 17;
+                              case 16:
+                                _context.next = 18;
                                 return this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
 
-                              case 17:
-                                _context.next = 20;
+                              case 18:
+                                _context.next = 21;
                                 break;
-
-                              case 19:
-                                this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
 
                               case 20:
-                                _context.next = 23;
-                                break;
-
-                              case 22:
                                 this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
 
+                              case 21:
+                                _context.next = 24;
+                                break;
+
                               case 23:
+                                this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
+
+                              case 24:
                               case "end":
                                 return _context.stop();
                             }
@@ -616,6 +616,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               loader.dismiss();
               this.disabledCombo = false;
               this.mostrarProgressDisp = false;
+              this.mostrarProgress = false;
             } else {
               this.idComboSeleccionado = 0;
               this.tiposAtencion = [];
@@ -624,6 +625,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               loader.dismiss();
               this.disabledCombo = false;
               this.mostrarProgressDisp = false;
+              this.mostrarProgress = false;
             } //error
 
           }
@@ -815,7 +817,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "openBusquedaAvanzada",
         value: function openBusquedaAvanzada() {
-          this.navCtrl.navigateRoot('busqueda-avanzada');
+          var navigationExtras = {
+            queryParams: {
+              Id: this.idConsultar
+            }
+          };
+          this.navCtrl.navigateRoot(['busqueda-avanzada'], navigationExtras);
         }
       }]);
 

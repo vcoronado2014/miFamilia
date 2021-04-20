@@ -33,12 +33,12 @@ export class ServicioGeo{
     return data;
   }
   getRegistroApp(idDispositivo){
-    let url = environment.API_ENDPOINT + 'RegistroApp?IdDispositivo=' + idDispositivo;
+    let url = environment.API_ENDPOINT + 'ObtenerRegistroApp?IdDispositivo=' + idDispositivo;
     let data = this.httpClient.get(url,{});
     return data;
   }
   getRegistroAppNative(idDispositivo){
-    let url = environment.API_ENDPOINT + 'RegistroApp?IdDispositivo=' + idDispositivo;
+    let url = environment.API_ENDPOINT + 'ObtenerRegistroApp?IdDispositivo=' + idDispositivo;
     let data = this.http.get(url,{}, {});
     return data;
   }
@@ -403,6 +403,48 @@ export class ServicioGeo{
   }
   getContactabilidadNative(run){
     let url = environment.API_ENDPOINT + 'Contactabilidad?run=' + run;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  //validaciones para el registro de usuario
+  verificaEnrolamientoCompleto(run, fechaNacimiento, email){
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia?Run=' + run + '&FechaNacimiento=' + fechaNacimiento + '&Email=' + email;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  verificaEnrolamientoCompletoNative(run, fechaNacimiento, email){
+    let url = environment.API_ENDPOINT + 'RegistroAppFamilia?Run=' + run+ '&FechaNacimiento=' + fechaNacimiento + '&Email=' + email;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  validaCodigo(id, codigo, operacion){
+    let url = environment.API_ENDPOINT + 'ValidarCodigo?Id=' + id.toString() + '&Codigo=' + codigo + '&Operacion=' + operacion;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  validaCodigoNative(id, codigo, operacion){
+    let url = environment.API_ENDPOINT + 'ValidarCodigo?Id=' + id.toString() + '&Codigo=' + codigo + '&Operacion=' + operacion;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  //actualiza los datos de la familia
+  actualizaFamilia(uspsIds, uspIdTitular){
+    let url = environment.API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular;
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  actualizaFamiliaNative(uspsIds, uspIdTitular){
+    let url = environment.API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular;
+    let data = this.http.get(url,{}, {});
+    return data;
+  }
+  quitarFamilia(uspsIds, uspIdTitular){
+    let url = environment.API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular + '&Operacion=quitar';
+    let data = this.httpClient.get(url,{});
+    return data;
+  }
+  quitarFamiliaNative(uspsIds, uspIdTitular){
+    let url = environment.API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular + '&Operacion=quitar';
     let data = this.http.get(url,{}, {});
     return data;
   }

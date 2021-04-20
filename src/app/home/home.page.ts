@@ -62,9 +62,10 @@ export class HomePage implements OnInit {
   //procesar los items del menu
   itemsMenu = [];
   //notificaciones
-  //ESTOY CONSTRUYENDO LAS NOTIFICACIONES LOCALES
-  //ME FALTA MOSTRAR EL SLIDE EN LA PARTE INFERIOR DEL ICONO DE
-  //NOTIFICACIONES
+  //modificar las notificaciones de la campana de home
+  //ya que hay un atributo IrA que al existir se debe 
+  //mostrar link o boton que haga ciertas acciones
+  //por ejemplo agregar miembro de la familia
   notificaciones = [];
   muestraNotificaciones = false;
   constructor(
@@ -110,7 +111,17 @@ export class HomePage implements OnInit {
 /*     if (this.utiles.entregaParametroUsaAgenda()){
       this.buscarDisponibilidad();
     } */
+    //nueva implementación
+    this.miembrosPorAceptar();
 
+  }
+  miembrosPorAceptar() {
+    if (localStorage.getItem('FAMILIA-POR-ACEPTAR')) {
+      let arrFam = JSON.parse(localStorage.getItem('FAMILIA-POR-ACEPTAR'));
+      if (arrFam.length > 0) {
+        this.utiles.presentToast('Tienes familia asociada que podrías aceptar, pincha en la notificación para poder hacerlo', 'bottom', 5000);
+      }
+    }
   }
   ionViewWillEnter() {
     //si existen cambios se setean nuevamente
@@ -124,18 +135,9 @@ export class HomePage implements OnInit {
     console.log(this.miNombre);
   }
   openPage(pages) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    //this.navCtrl.push(pages.component,{ usuario: this.usuarioAps });
-    console.log(pages);
-    //ojo con esto
-/*     if (pages.title == 'Cita'){
-      //aca hay que comprobar si tiene o no citas agendadas
-      this.navCtrl.navigateRoot('agenda-disponible');
-    }
-    else{ */
-      this.navCtrl.navigateRoot(pages.src);
-    /* } */
+      if (pages.src != '#'){
+        this.navCtrl.navigateRoot(pages.src);
+      }
   }
   openFamiliaPage(){
     this.navCtrl.navigateRoot('familia');
@@ -154,7 +156,7 @@ export class HomePage implements OnInit {
         this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
       }
     }
-    this.navCtrl.navigateRoot('ordenes');
+    this.navCtrl.navigateRoot('pre-ordenes');
   }
   openCalendarioPage(){
     //registramos movimiento
@@ -279,6 +281,11 @@ export class HomePage implements OnInit {
     });
 
   }
+  openNotificacion(modulo){
+    if (modulo && modulo != ''){
+      this.navCtrl.navigateRoot(modulo);
+    }
+  }
   openGenerico(modulo){
     var pageName = modulo.toLowerCase();
     if (modulo == 'EXAMENES'){
@@ -311,6 +318,7 @@ export class HomePage implements OnInit {
   }
 
   async obtenerNotificacionesApi(){
+    this.notificaciones = [];
     this.estaCargando = true;
     this.estaCargandoNotificaciones = true;
     let loader = await this.loading.create({
@@ -355,8 +363,12 @@ export class HomePage implements OnInit {
           this.estaCargando = false;
           this.loading.dismiss();
           this.estaCargandoNotificaciones = false;
-        }, error =>{
+          console.log(this.notificaciones);
+        }, error =>{          
           console.log(error.message);
+          //revisamos igual las notificaciones ya que pueden haber
+          //aquellas que pasan por fuera de la api
+          this.notificaciones = this.servNotificaciones.construyeNotificaciones([]);
           this.estaCargando = false;
           this.loading.dismiss();
           this.estaCargandoNotificaciones = false;
@@ -373,6 +385,9 @@ export class HomePage implements OnInit {
           this.estaCargandoNotificaciones = false;
         }).catch(error=>{
           console.log(error.message);
+          //revisamos igual las notificaciones ya que pueden haber
+          //aquellas que pasan por fuera de la api
+          this.notificaciones = this.servNotificaciones.construyeNotificaciones([]);
           this.estaCargando = false;
           this.loading.dismiss();
           this.estaCargandoNotificaciones = false;

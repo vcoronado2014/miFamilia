@@ -43,6 +43,12 @@ export class OrdenesPage implements OnInit {
 
   ngOnInit() {
     moment.locale('es');
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params && params.usuario) {
+        this.usuarioAps = JSON.parse(params.usuario);
+        console.log(this.usuarioAps);
+      }
+    });
 /*     if (sessionStorage.getItem("RSS_ID")){
       if (this.parametrosApp.USA_LOG_MODULOS()){
         this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
@@ -55,18 +61,8 @@ export class OrdenesPage implements OnInit {
     //this.miColor = this.utiles.entregaMiColor();
     //ordenes
     this.listadoOrdenes = [];           
-    //contenido de las llamadas.
-    if (sessionStorage.UsuarioAps) {
-      //debemos enviar el uspId del titular para que traiga todos los datos
-      this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
-    }
     if (this.usuarioAps){
       this.miColor = this.utiles.entregaColor(this.usuarioAps);
-      //original
-/*       let loader = await this.loading.create({
-        message: 'Obteniendo...<br>Órdenes del usuario',
-        duration: 20000
-      }); */
       this.estaCargando = true;
       let loader = await this.loading.create({
         cssClass: 'loading-vacio',
@@ -96,6 +92,8 @@ export class OrdenesPage implements OnInit {
       for (var s in listado) {
         let fecha = moment(listado[s].FechaRegistro).format('DD-MM-YYYY');
         listado[s].Fecha = fecha;
+        listado[s].UrlImagen = this.usuarioAps.UrlImagen;
+        listado[s].Parentezco = this.usuarioAps.Parentezco.Nombre;
       }
       //ahora asignamos la variable
       this.listadoOrdenes = listado;

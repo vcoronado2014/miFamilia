@@ -48,6 +48,8 @@ export class PreTiposatencionPage implements OnInit {
   //para el progress de buscar diponibilidad
   mostrarProgressDisp = false;
   encontroCitasDisp = false;
+  //idconsultar
+  idConsultar = 0;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -64,17 +66,13 @@ export class PreTiposatencionPage implements OnInit {
     /* public global: ServicioGeo */
   ) { }
 
-  //ACA QUEDÉ EN QUE AL REALIZAR LA OPERACION DE AGENDAMIENTO
-  //DEBEMOS VOLVER A UNA PAGINA INICIAL, SI MAL NO RECUERDO SE
-  //TRATARIA DE LA PAGINA CALENDARIO
-  
-
   async ngOnInit() {
     moment.locale('es');
     //debemos recibir por parametro al usuario que le conseguiremos la hora
     this.activatedRoute.queryParams.subscribe(async params => {
       if (params && params.Id) {
         //this.estaAgregandoFamilia = true;
+        this.idConsultar = params.Id;
         this.usuarioAps = this.utiles.entregaUsuario(params.Id);
         if (this.usuarioAps != null) {
           this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
@@ -278,6 +276,7 @@ export class PreTiposatencionPage implements OnInit {
         loader.dismiss();
         this.disabledCombo = false;
         this.mostrarProgressDisp = false;
+        this.mostrarProgress = false;
       }
       else{
         this.idComboSeleccionado = 0;
@@ -287,6 +286,7 @@ export class PreTiposatencionPage implements OnInit {
         loader.dismiss();
         this.disabledCombo = false;
         this.mostrarProgressDisp = false;
+        this.mostrarProgress = false;
       }
       //error
     }
@@ -421,7 +421,12 @@ export class PreTiposatencionPage implements OnInit {
     return await modal.present();
   }
   openBusquedaAvanzada(){
-    this.navCtrl.navigateRoot('busqueda-avanzada');
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        Id: this.idConsultar
+      }
+    };
+    this.navCtrl.navigateRoot(['busqueda-avanzada'], navigationExtras);
   }
 
 }

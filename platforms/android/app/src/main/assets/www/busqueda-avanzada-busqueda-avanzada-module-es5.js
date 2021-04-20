@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n    <ion-toolbar color=\"primary\" mode=\"md\">\r\n      <ion-buttons slot=\"start\">\r\n        <ion-back-button defaultHref=\"/pre-tiposatencion\" class=\"fcw\"></ion-back-button>\r\n      </ion-buttons>\r\n      <ion-title class=\"fcw\">Búsqueda avanzada</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-content class=\"back-app\">\r\n    <mat-form-field appearance=\"outline\" class=\"field-tipo-atencion\">\r\n      <mat-label>Tipo atención</mat-label>\r\n      <mat-select [disabled]=\"disabledCombo\" [(ngModel)]=\"comboSeleccionado\" (selectionChange)=\"buscarCitas($event)\">\r\n        <mat-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n\r\n    <!-- fecha inicio -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Fecha de inicio</ion-label>\r\n      <ion-datetime \r\n        (ionChange)=\"changeFechaInicio($event)\"\r\n        monthNames=\"enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre\"\r\n        monthShortNames=\"ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic\"\r\n        dayNames=\"lunes, martes, miércoles, jueves, viernes, sábado, domingo\"\r\n        dayShortNames=\"lun, mar, mié, jue, vie, sáb, dom\"\r\n        displayFormat=\"MMMM, DD YYYY\" \r\n        doneText=\"Aceptar\"\r\n        cancelText=\"Cancelar\"\r\n        [min]=\"fechaInicio\" \r\n        [max]=\"fechaTermino\" \r\n        [value]=\"fechaInicio\">\r\n      </ion-datetime>\r\n    </ion-item>\r\n    <!-- horario -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Horario</ion-label>\r\n      <ion-select value=\"0\" (ionChange)=\"changeHorario($event)\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"0\">Todo el día</ion-select-option>\r\n        <ion-select-option value=\"1\">Mañana</ion-select-option>\r\n        <ion-select-option value=\"2\">Tarde</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- dias -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Días de la semana</ion-label>\r\n      <ion-select (ionChange)=\"changeDia($event)\" multiple=\"true\" [value]=\"['1','2','3','4','5','6','7']\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"1\">Lu</ion-select-option>\r\n        <ion-select-option value=\"2\">Ma</ion-select-option>\r\n        <ion-select-option value=\"3\">Mi</ion-select-option>\r\n        <ion-select-option value=\"4\">Ju</ion-select-option>\r\n        <ion-select-option value=\"5\">Vi</ion-select-option>\r\n        <ion-select-option value=\"6\">Sá</ion-select-option>\r\n        <ion-select-option value=\"7\">Do</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- boton buscar -->\r\n    <ion-button class=\"mt-32 ion-padding-start\" color=\"primary\" (click)=\"buscarCitas()\">BUSCAR</ion-button>\r\n\r\n    <app-progress [mostrar]=\"mostrarProgress\" titulo=\"Buscando citas\"></app-progress>\r\n    <!-- progress bar -->\r\n<!--     <div class=\"centrado\" [hidden]=\"!mostrarProgress\">\r\n      <ion-label class=\"titulo-item-2\">Buscando citas</ion-label>\r\n      <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n    </div> -->\r\n    <!-- resultados -->\r\n    <div *ngIf=\"encontroCitas\">\r\n      <div class=\"ion-padding\">\r\n        <ion-grid class=\"ion-no-padding\" *ngFor=\"let cita of citasFiltradasTop\">\r\n          <ion-row class=\"ion-padding-bottom ion-padding-top linea-item\" (click)=\"citaSelected(cita)\">\r\n            <ion-col size=\"9\" class=\"texto-item ion-text-capitalize\">\r\n              {{cita.Servicio.Nombre}}\r\n            </ion-col>\r\n            <ion-col size=\"3\" class=\"titulo-hora ion-text-end\">\r\n              {{transformDateIso(cita.FechaHoraInicio)}}\r\n            </ion-col>\r\n            <ion-col size=\"12\" class=\"titulo-fecha\" class=\"ion-text-capitalize\">\r\n              {{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}\r\n            </ion-col>\r\n            <ion-col class=\"texto-item ion-text-capitalize\">\r\n              {{cita.NombresMedico.toLowerCase()}} {{cita.ApellidosMedico.toLowerCase()}}\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n        <!-- pruebas con infinite scroll -->\r\n        <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n          <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más cupos...\">\r\n          </ion-infinite-scroll-content>\r\n        </ion-infinite-scroll>\r\n      </div>\r\n\r\n    </div>\r\n    <!-- NO ENCONTRADO -->\r\n    <div *ngIf=\"!encontroCitas && mostrarProgress == false\" class=\"ion-padding-start ion-padding-end centrado\">\r\n      <ion-label class=\"ion-text-center no-encontrado\">No existen cupos con los criterios ingresados</ion-label>\r\n    </div>\r\n\r\n\r\n  </ion-content>";
+    __webpack_exports__["default"] = "<ion-header>\r\n    <ion-toolbar color=\"primary\" mode=\"md\">\r\n      <ion-buttons slot=\"start\">\r\n       <!--  <ion-back-button defaultHref=\"/pre-tiposatencion\" class=\"fcw\"></ion-back-button> -->\r\n        <ion-back-button (click)=\"volver()\" defaultHref=\"/\" class=\"fcw\"></ion-back-button>\r\n      </ion-buttons>\r\n      <ion-title class=\"fcw\">Búsqueda avanzada</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-content class=\"back-app\">\r\n    <mat-form-field appearance=\"outline\" class=\"field-tipo-atencion\">\r\n      <mat-label>Tipo atención</mat-label>\r\n      <mat-select [disabled]=\"disabledCombo\" [(ngModel)]=\"comboSeleccionado\" (selectionChange)=\"buscarCitas($event)\">\r\n        <mat-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n\r\n    <!-- fecha inicio -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Fecha de inicio</ion-label>\r\n      <ion-datetime \r\n        (ionChange)=\"changeFechaInicio($event)\"\r\n        monthNames=\"enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre\"\r\n        monthShortNames=\"ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic\"\r\n        dayNames=\"lunes, martes, miércoles, jueves, viernes, sábado, domingo\"\r\n        dayShortNames=\"lun, mar, mié, jue, vie, sáb, dom\"\r\n        displayFormat=\"MMMM, DD YYYY\" \r\n        doneText=\"Aceptar\"\r\n        cancelText=\"Cancelar\"\r\n        [min]=\"fechaInicio\" \r\n        [max]=\"fechaTermino\" \r\n        [value]=\"fechaInicio\">\r\n      </ion-datetime>\r\n    </ion-item>\r\n    <!-- horario -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Horario</ion-label>\r\n      <ion-select value=\"0\" (ionChange)=\"changeHorario($event)\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"0\">Todo el día</ion-select-option>\r\n        <ion-select-option value=\"1\">Mañana</ion-select-option>\r\n        <ion-select-option value=\"2\">Tarde</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- dias -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Días de la semana</ion-label>\r\n      <ion-select (ionChange)=\"changeDia($event)\" multiple=\"true\" [value]=\"['1','2','3','4','5','6','7']\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"1\">Lu</ion-select-option>\r\n        <ion-select-option value=\"2\">Ma</ion-select-option>\r\n        <ion-select-option value=\"3\">Mi</ion-select-option>\r\n        <ion-select-option value=\"4\">Ju</ion-select-option>\r\n        <ion-select-option value=\"5\">Vi</ion-select-option>\r\n        <ion-select-option value=\"6\">Sá</ion-select-option>\r\n        <ion-select-option value=\"7\">Do</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- boton buscar -->\r\n    <ion-button class=\"mt-32 ion-padding-start\" color=\"primary\" (click)=\"buscarCitas()\">BUSCAR</ion-button>\r\n\r\n    <app-progress [mostrar]=\"mostrarProgress\" titulo=\"Buscando citas\"></app-progress>\r\n    <!-- progress bar -->\r\n<!--     <div class=\"centrado\" [hidden]=\"!mostrarProgress\">\r\n      <ion-label class=\"titulo-item-2\">Buscando citas</ion-label>\r\n      <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n    </div> -->\r\n    <!-- resultados -->\r\n    <div *ngIf=\"encontroCitas\">\r\n      <div class=\"ion-padding\">\r\n        <ion-grid class=\"ion-no-padding\" *ngFor=\"let cita of citasFiltradasTop\">\r\n          <ion-row class=\"ion-padding-bottom ion-padding-top linea-item\" (click)=\"citaSelected(cita)\">\r\n            <ion-col size=\"9\" class=\"texto-item ion-text-capitalize\">\r\n              {{cita.Servicio.Nombre}}\r\n            </ion-col>\r\n            <ion-col size=\"3\" class=\"titulo-hora ion-text-end\">\r\n              {{transformDateIso(cita.FechaHoraInicio)}}\r\n            </ion-col>\r\n            <ion-col size=\"12\" class=\"titulo-fecha\" class=\"ion-text-capitalize\">\r\n              {{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}\r\n            </ion-col>\r\n            <ion-col class=\"texto-item ion-text-capitalize\">\r\n              {{cita.NombresMedico.toLowerCase()}} {{cita.ApellidosMedico.toLowerCase()}}\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n        <!-- pruebas con infinite scroll -->\r\n        <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n          <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más cupos...\">\r\n          </ion-infinite-scroll-content>\r\n        </ion-infinite-scroll>\r\n      </div>\r\n\r\n    </div>\r\n    <!-- NO ENCONTRADO -->\r\n    <div *ngIf=\"!encontroCitas && mostrarProgress == false\" class=\"ion-padding-start ion-padding-end centrado\">\r\n      <ion-label class=\"ion-text-center no-encontrado\">No existen cupos con los criterios ingresados</ion-label>\r\n    </div>\r\n\r\n\r\n  </ion-content>";
     /***/
   },
 
@@ -179,53 +179,59 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../../app/services/ServicioUtiles */
     "./src/app/services/ServicioUtiles.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../../app/services/ServicioAcceso */
     "./src/app/services/ServicioAcceso.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../../app/services/ServicioCitas */
     "./src/app/services/ServicioCitas.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../../app/services/ServicioPaginacion */
     "./src/app/services/ServicioPaginacion.ts");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+    var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
     /* harmony import */
 
 
-    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ../../app/pipes/fecha.pipe */
     "./src/app/pipes/fecha.pipe.ts");
     /* harmony import */
 
 
-    var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ../modal-operacion-cita/modal-operacion-cita.page */
     "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts"); //modal
 
 
     var BusquedaAvanzadaPage = /*#__PURE__*/function () {
-      function BusquedaAvanzadaPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, paginacion) {
+      function BusquedaAvanzadaPage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, paginacion, activatedRoute, router) {
         _classCallCheck(this, BusquedaAvanzadaPage);
 
         this.navCtrl = navCtrl;
@@ -238,6 +244,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.acceso = acceso;
         this.cita = cita;
         this.paginacion = paginacion;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
         this.miColor = '#FF4081';
         this.textColor = '#FFFFFF'; //datos para consultar citas
 
@@ -254,16 +262,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.mostrarProgress = false;
         this.encontroCitas = false;
         this.disabledCombo = false;
-        this.paginaActual = 0; //esto es para infiniti scroll
+        this.paginaActual = 0; //para volver a la pagina anterior
+
+        this.idUsuario = 0; //esto es para infiniti scroll
 
         this.topLimit = 5;
         this.citasFiltradasTop = [];
       }
 
       _createClass(BusquedaAvanzadaPage, [{
+        key: "volver",
+        value: function volver() {
+          if (this.idUsuario == 0) {
+            this.navCtrl.navigateRoot('pre-tiposatencion');
+          } else {
+            var navigationExtras = {
+              queryParams: {
+                Id: this.idUsuario
+              }
+            };
+            this.navCtrl.navigateRoot(['pre-tiposatencion'], navigationExtras);
+          }
+        }
+      }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
+          var _this = this;
+
+          moment__WEBPACK_IMPORTED_MODULE_8__["locale"]('es');
 
           if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -276,8 +302,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
               this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
             }
-          } //creamos tipo atencion inicial
+          }
 
+          this.activatedRoute.queryParams.subscribe(function (params) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      if (params && params.Id) {
+                        this.idUsuario = params.Id;
+                      }
+
+                    case 1:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+          }); //creamos tipo atencion inicial
 
           this.crearTiposAtencion();
           this.setFechasInicioFin();
@@ -323,7 +367,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "indexarCitas",
         value: function indexarCitas() {
-          var _this = this;
+          var _this2 = this;
 
           //el tipo de atencion seleccionado
           //HAY QUE AGREGAR LOS DEMAS FILTROS
@@ -332,26 +376,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (this.citas && this.citas.length > 0) {
             this.citas.forEach(function (cita) {
-              if (cita.TipoAtencion == _this.comboSeleccionado) {
+              if (cita.TipoAtencion == _this2.comboSeleccionado) {
                 //aca debemos aplicar los demas filtros, el primero es fecha inicio
-                var fechaCita = moment__WEBPACK_IMPORTED_MODULE_7__(cita.FechaHoraInicio);
-                var isAfter = moment__WEBPACK_IMPORTED_MODULE_7__(fechaCita.format()).isAfter(_this.fechaInicioBusqueda); //aca ya tenemos el segundo filtro importante
+                var fechaCita = moment__WEBPACK_IMPORTED_MODULE_8__(cita.FechaHoraInicio);
+                var isAfter = moment__WEBPACK_IMPORTED_MODULE_8__(fechaCita.format()).isAfter(_this2.fechaInicioBusqueda); //aca ya tenemos el segundo filtro importante
 
                 if (isAfter) {
                   //ahora debemos trabajar con los filtros de horario
                   //partimos con dia de la semana
-                  if (_this.diasBusqueda && _this.diasBusqueda.length > 0) {
+                  if (_this2.diasBusqueda && _this2.diasBusqueda.length > 0) {
                     var diaSemana = fechaCita.day(); //console.log('dia semana ' + diaSemana + ' ' + fechaCita.format('DD-MM-YYYY'));
 
-                    var existe = _this.diasBusqueda.includes(diaSemana.toString()); //si el día de la semana existe se agrega
+                    var existe = _this2.diasBusqueda.includes(diaSemana.toString()); //si el día de la semana existe se agrega
 
 
                     if (existe) {
                       //ahora aplicamos filtros de mañana y tarde
-                      if (_this.horarioBusqueda == 0) {
+                      if (_this2.horarioBusqueda == 0) {
                         cita.indice = indice;
 
-                        _this.citasFiltradas.push(cita);
+                        _this2.citasFiltradas.push(cita);
 
                         indice++;
                       } else {
@@ -359,26 +403,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         var hora = fechaCita.hour();
                         var minute = fechaCita.minute();
 
-                        var horaEntera = _this.utiles.convertirHoraInt(hora, minute); //deberia entregar 600 para las 6 am y 1800 para las 6 pm
+                        var horaEntera = _this2.utiles.convertirHoraInt(hora, minute); //deberia entregar 600 para las 6 am y 1800 para las 6 pm
                         //por lo tanto todo aquello menor o igual 1200 es mañana
 
 
-                        if (_this.horarioBusqueda == 1 && horaEntera <= 1200) {
+                        if (_this2.horarioBusqueda == 1 && horaEntera <= 1200) {
                           //mañana
                           console.log('mañana');
                           cita.indice = indice;
 
-                          _this.citasFiltradas.push(cita);
+                          _this2.citasFiltradas.push(cita);
 
                           indice++;
                         }
 
-                        if (_this.horarioBusqueda == 2 && horaEntera > 1200) {
+                        if (_this2.horarioBusqueda == 2 && horaEntera > 1200) {
                           //tarde
                           console.log('tarde');
                           cita.indice = indice;
 
-                          _this.citasFiltradas.push(cita);
+                          _this2.citasFiltradas.push(cita);
 
                           indice++;
                         }
@@ -402,15 +446,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "loadData",
         value: function loadData(event) {
-          var _this2 = this;
+          var _this3 = this;
 
           setTimeout(function () {
             //console.log('Done');
-            _this2.topLimit += 5;
-            _this2.citasFiltradasTop = _this2.citasFiltradas.slice(0, _this2.topLimit);
+            _this3.topLimit += 5;
+            _this3.citasFiltradasTop = _this3.citasFiltradas.slice(0, _this3.topLimit);
             event.target.complete(); //aplicamos disabled si la cantidad de registros es la misma que el total
 
-            if (_this2.citasFiltradasTop.length == _this2.citasFiltradas.length) {
+            if (_this3.citasFiltradasTop.length == _this3.citasFiltradas.length) {
               event.target.disabled = true;
             }
           }, 500);
@@ -419,7 +463,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "crearTiposAtencion",
         value: function crearTiposAtencion() {
-          var _this3 = this;
+          var _this4 = this;
 
           this.tiposAtencion = [];
 
@@ -429,8 +473,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (this.tiposAtencion) {
               this.tiposAtencion.forEach(function (tipo) {
                 if (tipo.Selected) {
-                  _this3.comboSeleccionado = tipo.Texto;
-                  _this3.disabledCombo = true;
+                  _this4.comboSeleccionado = tipo.Texto;
+                  _this4.disabledCombo = true;
                 }
               });
             }
@@ -439,7 +483,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "buscarCitas",
         value: function buscarCitas() {
-          var _this4 = this;
+          var _this5 = this;
 
           console.log(this.comboSeleccionado);
           console.log(this.horarioBusqueda);
@@ -451,18 +495,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           setTimeout(function () {
             console.log('Async operation has ended'); //event.target.complete();
 
-            _this4.mostrarProgress = false; //this.encontroCitas = true;
+            _this5.mostrarProgress = false; //this.encontroCitas = true;
             //si existen citas hay que deshabilitar el control
 
-            _this4.disabledCombo = true;
+            _this5.disabledCombo = true;
 
-            _this4.indexarCitas();
+            _this5.indexarCitas();
           }, 2000);
         }
       }, {
         key: "transformDate",
         value: function transformDate(value, format) {
-          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__["MomentPipe"]();
+          var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__["MomentPipe"]();
           return pi.transform(value, format);
         }
       }, {
@@ -485,21 +529,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "citaSelected",
         value: function citaSelected(item) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-            var _this5 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var _this6 = this;
 
             var modal;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
-                switch (_context.prev = _context.next) {
+                switch (_context2.prev = _context2.next) {
                   case 0:
                     if (item) {
                       this.itemSelected = item;
                     }
 
-                    _context.next = 3;
+                    _context2.next = 3;
                     return this.modalCtrl.create({
-                      component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__["ModalOperacionCitaPage"],
+                      component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__["ModalOperacionCitaPage"],
                       componentProps: {
                         'cita': JSON.stringify(item),
                         'operacion': 'reservar'
@@ -507,28 +551,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 3:
-                    modal = _context.sent;
+                    modal = _context2.sent;
                     modal.onDidDismiss().then(function (data) {
                       if (data.data && data.data.accion) {
                         var accion = data.data.accion; //obtenemos la pagina actual
                         //aca debemos revisar a donde nos vamos
 
-                        _this5.navCtrl.navigateRoot('calendario'); //console.log(accion);        
+                        _this6.navCtrl.navigateRoot('calendario'); //console.log(accion);        
 
                       }
                     });
-                    _context.next = 7;
+                    _context2.next = 7;
                     return modal.present();
 
                   case 7:
-                    return _context.abrupt("return", _context.sent);
+                    return _context2.abrupt("return", _context2.sent);
 
                   case 8:
                   case "end":
-                    return _context.stop();
+                    return _context2.stop();
                 }
               }
-            }, _callee, this);
+            }, _callee2, this);
           }));
         }
       }, {
@@ -576,13 +620,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"]
       }, {
-        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__["ServicioUtiles"]
       }, {
-        type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"]
+        type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__["ServicioAcceso"]
       }, {
-        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__["ServicioCitas"]
+        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__["ServicioCitas"]
       }, {
-        type: _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_6__["ServicioPaginacion"]
+        type: _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_7__["ServicioPaginacion"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
       }];
     };
 

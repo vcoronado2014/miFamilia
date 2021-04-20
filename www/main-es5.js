@@ -530,7 +530,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>";
+    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\" style=\"font-size: 1.3em;\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/content-slide/content-slide.component.html":
+  /*!*************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/content-slide/content-slide.component.html ***!
+    \*************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsContentSlideContentSlideComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<h5 class=\"titulo-slide\">{{titulo}}</h5>\r\n<h6 class=\"titulo-slide\">{{subTitulo}}</h6>\r\n<p class=\"subtitulo-slide\">{{contenido}}</p>\r\n<!-- mostrar dependiendo si modulo es distinto de null -->\r\n<!-- <button [hidden]=\"modulo == null\" mat-stroked-button color=\"accent\" (click)=\"openGenerico(modulo)\">Ir...</button> -->";
     /***/
   },
 
@@ -700,7 +720,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | ordenes-ordenes-module */
-        [__webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
         /*! ./ordenes/ordenes.module */
         "./src/app/ordenes/ordenes.module.ts")).then(function (m) {
           return m.OrdenesPageModule;
@@ -711,7 +731,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | modal-examenes-modal-examenes-module */
-        [__webpack_require__.e("common"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null,
         /*! ./modal-examenes/modal-examenes.module */
         "./src/app/modal-examenes/modal-examenes.module.ts")).then(function (m) {
           return m.ModalExamenesPageModule;
@@ -915,6 +935,50 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.SeleccionUsuarioPageModule;
         });
       }
+    }, {
+      path: 'validacion-factor',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | validacion-factor-validacion-factor-module */
+        "validacion-factor-validacion-factor-module").then(__webpack_require__.bind(null,
+        /*! ./validacion-factor/validacion-factor.module */
+        "./src/app/validacion-factor/validacion-factor.module.ts")).then(function (m) {
+          return m.ValidacionFactorPageModule;
+        });
+      }
+    }, {
+      path: 'asociar-familia',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | asociar-familia-asociar-familia-module */
+        "asociar-familia-asociar-familia-module").then(__webpack_require__.bind(null,
+        /*! ./asociar-familia/asociar-familia.module */
+        "./src/app/asociar-familia/asociar-familia.module.ts")).then(function (m) {
+          return m.AsociarFamiliaPageModule;
+        });
+      }
+    }, {
+      path: 'quitar-familia',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | quitar-familia-quitar-familia-module */
+        "quitar-familia-quitar-familia-module").then(__webpack_require__.bind(null,
+        /*! ./quitar-familia/quitar-familia.module */
+        "./src/app/quitar-familia/quitar-familia.module.ts")).then(function (m) {
+          return m.QuitarFamiliaPageModule;
+        });
+      }
+    }, {
+      path: 'pre-ordenes',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | pre-ordenes-pre-ordenes-module */
+        "pre-ordenes-pre-ordenes-module").then(__webpack_require__.bind(null,
+        /*! ./pre-ordenes/pre-ordenes.module */
+        "./src/app/pre-ordenes/pre-ordenes.module.ts")).then(function (m) {
+          return m.PreOrdenesPageModule;
+        });
+      }
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -1067,10 +1131,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       return this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].production);
 
                     case 5:
+                      _context.next = 7;
+                      return this.utiles.crearTokenPlano();
+
+                    case 7:
                       this.fcmService.initFCM();
                       this.fcmService.receiveMessage(true);
 
-                    case 7:
+                    case 9:
                     case "end":
                       return _context.stop();
                   }
@@ -1934,16 +2002,150 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ./pagina-mensajes/pagina-mensajes.component */
     "./src/app/components/pagina-mensajes/pagina-mensajes.component.ts");
+    /* harmony import */
+
+
+    var _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    /*! ./content-slide/content-slide.component */
+    "./src/app/components/content-slide/content-slide.component.ts");
 
     var ComponentsModule = function ComponentsModule() {
       _classCallCheck(this, ComponentsModule);
     };
 
     ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"]],
+      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"], _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_5__["TextAvatarModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButtonModule"]],
-      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"]]
+      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"], _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"]]
     })], ComponentsModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/content-slide/content-slide.component.scss":
+  /*!***********************************************************************!*\
+    !*** ./src/app/components/content-slide/content-slide.component.scss ***!
+    \***********************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsContentSlideContentSlideComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".titulo-slide {\n  color: #F4F2FA;\n  font-size: 1em;\n  text-align: left;\n}\n\n.subtitulo-slide {\n  color: #AFA0D5;\n  text-align: left;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jb250ZW50LXNsaWRlL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcY29tcG9uZW50c1xcY29udGVudC1zbGlkZVxcY29udGVudC1zbGlkZS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9jb250ZW50LXNsaWRlL2NvbnRlbnQtc2xpZGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0FDQ0o7O0FEQ0U7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvY29udGVudC1zbGlkZS9jb250ZW50LXNsaWRlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdHVsby1zbGlkZXtcclxuICAgIGNvbG9yOiAjRjRGMkZBO1xyXG4gICAgZm9udC1zaXplOiAxZW07XHJcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIH1cclxuICAuc3VidGl0dWxvLXNsaWRle1xyXG4gICAgY29sb3I6ICNBRkEwRDU7XHJcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIH0iLCIudGl0dWxvLXNsaWRlIHtcbiAgY29sb3I6ICNGNEYyRkE7XG4gIGZvbnQtc2l6ZTogMWVtO1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xufVxuXG4uc3VidGl0dWxvLXNsaWRlIHtcbiAgY29sb3I6ICNBRkEwRDU7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG59Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/content-slide/content-slide.component.ts":
+  /*!*********************************************************************!*\
+    !*** ./src/app/components/content-slide/content-slide.component.ts ***!
+    \*********************************************************************/
+
+  /*! exports provided: ContentSlideComponent */
+
+  /***/
+  function srcAppComponentsContentSlideContentSlideComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ContentSlideComponent", function () {
+      return ContentSlideComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../app/services/ServicioUtiles */
+    "./src/app/services/ServicioUtiles.ts");
+    /* harmony import */
+
+
+    var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../../../app/services/ServicioParametrosApp */
+    "./src/app/services/ServicioParametrosApp.ts");
+
+    var ContentSlideComponent = /*#__PURE__*/function () {
+      function ContentSlideComponent(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, parametrosApp) {
+        _classCallCheck(this, ContentSlideComponent);
+
+        this.navCtrl = navCtrl;
+        this.toast = toast;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.loading = loading;
+        this.menu = menu;
+        this.utiles = utiles;
+        this.parametrosApp = parametrosApp;
+      }
+
+      _createClass(ContentSlideComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return ContentSlideComponent;
+    }();
+
+    ContentSlideComponent.ctorParameters = function () {
+      return [{
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"]
+      }, {
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"]
+      }, {
+        type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_4__["ServicioParametrosApp"]
+      }];
+    };
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ContentSlideComponent.prototype, "modulo", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ContentSlideComponent.prototype, "titulo", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ContentSlideComponent.prototype, "subTitulo", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ContentSlideComponent.prototype, "contenido", void 0);
+    ContentSlideComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-content-slide',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./content-slide.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/content-slide/content-slide.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./content-slide.component.scss */
+      "./src/app/components/content-slide/content-slide.component.scss"))["default"]]
+    })], ContentSlideComponent);
     /***/
   },
 
@@ -2040,7 +2242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var pageName = modulo.toLowerCase();
 
           if (modulo == 'EXAMENES') {
-            pageName = 'ordenes';
+            pageName = 'pre-ordenes';
           } //registramos movimiento
 
 
@@ -2640,18 +2842,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               _this2.Mensaje = 'Error de llamada Http;';
             }
           });
-        }
+        } //cambiado por la otra api
+
+        /*     loginWebDirecto(userInfo){
+                var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
+                '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
+                let data = this.httpClient.get(url,{});
+                return data;
+            }
+            loginWebNative(userInfo){
+                var url = environment.API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password +
+                '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;;
+                let data = this.http.get(url, {}, {});
+                return data;
+            } */
+
       }, {
         key: "loginWebDirecto",
         value: function loginWebDirecto(userInfo) {
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AutentificacionApp?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
           var data = this.httpClient.get(url, {});
           return data;
         }
       }, {
         key: "loginWebNative",
         value: function loginWebNative(userInfo) {
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AutentificacionApp?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password + '&UsaEnrolamiento=' + userInfo.UsaEnrolamiento + '&TokenFCM=' + userInfo.TokenFCM;
           ;
           var data = this.http.get(url, {}, {});
           return data;
@@ -3953,14 +4169,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getRegistroApp",
         value: function getRegistroApp(idDispositivo) {
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroApp?IdDispositivo=' + idDispositivo;
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerRegistroApp?IdDispositivo=' + idDispositivo;
           var data = this.httpClient.get(url, {});
           return data;
         }
       }, {
         key: "getRegistroAppNative",
         value: function getRegistroAppNative(idDispositivo) {
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroApp?IdDispositivo=' + idDispositivo;
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ObtenerRegistroApp?IdDispositivo=' + idDispositivo;
           var data = this.http.get(url, {}, {});
           return data;
         } //ya viene en formato objeto
@@ -4340,6 +4556,64 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getContactabilidadNative",
         value: function getContactabilidadNative(run) {
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Contactabilidad?run=' + run;
+          var data = this.http.get(url, {}, {});
+          return data;
+        } //validaciones para el registro de usuario
+
+      }, {
+        key: "verificaEnrolamientoCompleto",
+        value: function verificaEnrolamientoCompleto(run, fechaNacimiento, email) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Run=' + run + '&FechaNacimiento=' + fechaNacimiento + '&Email=' + email;
+          var data = this.httpClient.get(url, {});
+          return data;
+        }
+      }, {
+        key: "verificaEnrolamientoCompletoNative",
+        value: function verificaEnrolamientoCompletoNative(run, fechaNacimiento, email) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Run=' + run + '&FechaNacimiento=' + fechaNacimiento + '&Email=' + email;
+          var data = this.http.get(url, {}, {});
+          return data;
+        }
+      }, {
+        key: "validaCodigo",
+        value: function validaCodigo(id, codigo, operacion) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ValidarCodigo?Id=' + id.toString() + '&Codigo=' + codigo + '&Operacion=' + operacion;
+          var data = this.httpClient.get(url, {});
+          return data;
+        }
+      }, {
+        key: "validaCodigoNative",
+        value: function validaCodigoNative(id, codigo, operacion) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'ValidarCodigo?Id=' + id.toString() + '&Codigo=' + codigo + '&Operacion=' + operacion;
+          var data = this.http.get(url, {}, {});
+          return data;
+        } //actualiza los datos de la familia
+
+      }, {
+        key: "actualizaFamilia",
+        value: function actualizaFamilia(uspsIds, uspIdTitular) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular;
+          var data = this.httpClient.get(url, {});
+          return data;
+        }
+      }, {
+        key: "actualizaFamiliaNative",
+        value: function actualizaFamiliaNative(uspsIds, uspIdTitular) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular;
+          var data = this.http.get(url, {}, {});
+          return data;
+        }
+      }, {
+        key: "quitarFamilia",
+        value: function quitarFamilia(uspsIds, uspIdTitular) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular + '&Operacion=quitar';
+          var data = this.httpClient.get(url, {});
+          return data;
+        }
+      }, {
+        key: "quitarFamiliaNative",
+        value: function quitarFamiliaNative(uspsIds, uspIdTitular) {
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Familia?UspsIds=' + uspsIds + '&UspIdTitular=' + uspIdTitular + '&Operacion=quitar';
           var data = this.http.get(url, {}, {});
           return data;
         }
@@ -5488,7 +5762,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
                     Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
                     Id: element.Id,
-                    Indice: indice
+                    Indice: indice,
+                    IrA: null
                   };
                   arr.push(entidad);
                   indice++;
@@ -5510,7 +5785,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       Subtitulo: usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno,
                       Contenido: 'Tienes aplicada esta dosis el día ' + moment__WEBPACK_IMPORTED_MODULE_4__(element.FechaInmunizacion).format('DD-MM-YYYY') + ' en el centro de salud ' + element.DescripcionEstablecimiento,
                       Id: element.Id,
-                      Indice: indice
+                      Indice: indice,
+                      IrA: null
                     };
                     arr.push(entidad);
                     indice++;
@@ -5537,13 +5813,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     Subtitulo: todas[i].Eventos[s].DetalleEventoMes.NombrePaciente,
                     Contenido: texto,
                     Id: id,
-                    Indice: indice
+                    Indice: indice,
+                    IrA: null
                   };
                   arr.push(entidad);
                   indice++;
                 }
               }
             }
+          } //familia por aceptar
+
+
+          if (localStorage.getItem('FAMILIA-POR-ACEPTAR')) {
+            var arrFam = JSON.parse(localStorage.getItem('FAMILIA-POR-ACEPTAR'));
+            arrFam.forEach(function (familia) {
+              var entidad = {
+                Titulo: 'Miembro de la familia',
+                Subtitulo: familia.NombreCompleto,
+                Contenido: 'Tienes a ' + familia.NombreCompleto + ' que podrías aceptar y ver su información de salud',
+                Id: familia.Id,
+                Indice: indice,
+                IrA: 'asociar-familia'
+              };
+              arr.push(entidad);
+              indice++;
+            });
           }
 
           return arr;
@@ -6120,6 +6414,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         return retorno;
+      };
+
+      this.URL_ACEPTA_CONDICIONES = function () {
+        var retorno = '#';
+
+        if (localStorage.getItem('PARAMETROS_APP')) {
+          var elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
+
+          if (elementos && elementos.length > 0) {
+            var arrRetorno = elementos.find(function (p) {
+              return p.Nombre == 'URL_ACEPTA_CONDICIONES';
+            });
+
+            if (arrRetorno && arrRetorno.Id > 0) {
+              retorno = arrRetorno.Valor;
+            }
+          }
+        }
+
+        return retorno;
       }; //inicializamos los valores
 
 
@@ -6441,6 +6755,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return usaAgenda;
         }
       }, {
+        key: "tieneFamiliaAceptada",
+        value: function tieneFamiliaAceptada() {
+          var retorno = false;
+
+          if (localStorage.getItem('FAMILIA-ACEPTADA')) {
+            var fam = JSON.parse(localStorage.getItem('FAMILIA-ACEPTADA'));
+
+            if (fam && fam.length > 0) {
+              retorno = true;
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "tieneFamiliaRechazada",
+        value: function tieneFamiliaRechazada() {
+          var retorno = false;
+
+          if (localStorage.getItem('FAMILIA-RECHAZADA')) {
+            var fam = JSON.parse(localStorage.getItem('FAMILIA-RECHAZADA'));
+
+            if (fam && fam.length > 0) {
+              retorno = true;
+            }
+          }
+
+          return retorno;
+        }
+      }, {
         key: "entregaMenuPages",
         value: function entregaMenuPages() {
           var usaAgenda = this.entregaParametroUsaAgenda();
@@ -6449,65 +6793,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             title: 'Configurar familia',
             visible: true,
             icon: 'settings',
-            src: 'familia'
+            src: '#',
+            esSubMenu: false
           };
-          arrPages.push(pagUno);
-          /* comentada  */
+          arrPages.push(pagUno); //ahora los submenus de configurar familia
+          //simepre y cuando tenga familia aceptada
 
-          /*         var pagDos = {
-                      title: 'Calendario',
-                      visible: true,
-                      segment:'calendario/:this.usuarioAps',
-                      icon: 'calendar'
-                  };
-                  arrPages.push(pagDos); */
-          //la dejamos en home por mientras, hasta tener el acepto condiciones
+          if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
+            var pagQuitarIntegrantes = {
+              title: 'Desactivar/Activar',
+              visible: true,
+              icon: 'person',
+              src: 'quitar-familia',
+              esSubMenu: true
+            };
+            arrPages.push(pagQuitarIntegrantes);
+          }
 
+          var pagConfigContacto = {
+            title: 'Datos de contacto/avatar',
+            visible: true,
+            icon: 'share',
+            src: 'familia',
+            esSubMenu: true
+          };
+          arrPages.push(pagConfigContacto);
           var pagDos = {
             title: 'Términos y condiciones',
             visible: true,
             src: 'home',
-            icon: 'link'
+            icon: 'link',
+            esSubMenu: false
           };
-          arrPages.push(pagDos); //comentada
-
-          /*
-          var pagTres = {
-              title: 'Familia',
-              visible: true,
-              icon: 'people',
-              src: 'familia'
-          };
-          arrPages.push(pagTres);
-          */
-
-          /*         var pagCuatro = {
-                      title: 'Ajustes',
-                      visible: true,
-                      icon: 'heart',
-                      src: 'familia'
-                  }
-                  arrPages.push(pagCuatro); */
-          //ya no va en el menu
-          //verificamos si usa o no agendamiento remoto
-
-          /*         if (usaAgenda){
-                      var pagCinco = {
-                          title: 'Cupos disponibles',
-                          visible: true,
-                          icon: 'medkit',
-                          src: 'pre-tiposatencion'
-                      }
-                      arrPages.push(pagCinco);
-                      var pagSeis = {
-                          title: 'Mis Citas',
-                          visible: true,
-                          icon: 'medkit',
-                          src: 'agenda-disponible'
-                      }
-                      arrPages.push(pagSeis);
-                  } */
-
+          arrPages.push(pagDos);
           return arrPages;
         }
       }, {
@@ -7024,13 +7342,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
               if (elemento.NombreModulo == 'CALENDARIO') {
-                elemento.Imagen = './assets/imgs_nuevas/calendario-01.png';
+                elemento.Imagen = './assets/imgs_svg/calendario-01.svg';
               } else if (elemento.NombreModulo == 'ANTECEDENTES') {
-                elemento.Imagen = './assets/imgs_nuevas/antecedentes.png';
+                elemento.Imagen = './assets/imgs_svg/antecedentes.svg';
               } else if (elemento.NombreModulo == 'EXAMENES') {
-                elemento.Imagen = './assets/imgs_nuevas/examenes-de-salud.png';
+                elemento.Imagen = './assets/imgs_svg/examenes-de-salud.svg';
               } else if (elemento.NombreModulo == 'INTERCONSULTAS') {
-                elemento.Imagen = './assets/imgs_nuevas/interconsulta.png';
+                elemento.Imagen = './assets/imgs_svg/interconsulta_desactivado.svg';
               } //tercero la clase de la imagen
 
 
@@ -7199,6 +7517,117 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             }
           }
+        } //entrega y setea los parametros de token y otros
+
+      }, {
+        key: "crearTokenPlano",
+        value: function crearTokenPlano() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            var entidad, tokenDispositivo;
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    entidad = {
+                      tokenDispositivo: '',
+                      versionAppName: '',
+                      versionNumber: '',
+                      plataforma: ''
+                    };
+
+                    if (this.isAppOnDevice()) {
+                      _context5.next = 11;
+                      break;
+                    }
+
+                    //web
+                    //guardar local storage
+                    if (!localStorage.getItem('token_dispositivo')) {
+                      //crear token para web
+                      entidad.tokenDispositivo = (Math.random() * (1000000 - 1) + 1).toString() + ' web';
+                      localStorage.setItem('token_dispositivo', entidad.tokenDispositivo);
+                    } else {
+                      entidad.tokenDispositivo = localStorage.getItem('token_dispositivo');
+                    }
+
+                    entidad.versionAppName = "Mi salud familiar";
+                    entidad.versionNumber = "0.0";
+                    entidad.plataforma = "Web"; //loader.dismiss();
+                    //otras variables
+
+                    localStorage.setItem('version_app_name', entidad.versionAppName);
+                    localStorage.setItem('version_number', entidad.versionNumber);
+                    localStorage.setItem('plataforma', entidad.plataforma);
+                    _context5.next = 37;
+                    break;
+
+                  case 11:
+                    if (!this.platform.is('ios')) {
+                      _context5.next = 21;
+                      break;
+                    }
+
+                    _context5.next = 14;
+                    return this.appVersion.getAppName();
+
+                  case 14:
+                    entidad.versionAppName = _context5.sent;
+                    _context5.next = 17;
+                    return this.appVersion.getVersionNumber();
+
+                  case 17:
+                    entidad.versionNumber = _context5.sent;
+                    entidad.plataforma = "iOS";
+                    _context5.next = 32;
+                    break;
+
+                  case 21:
+                    if (!this.platform.is('android')) {
+                      _context5.next = 31;
+                      break;
+                    }
+
+                    _context5.next = 24;
+                    return this.appVersion.getAppName();
+
+                  case 24:
+                    entidad.versionAppName = _context5.sent;
+                    _context5.next = 27;
+                    return this.appVersion.getVersionNumber();
+
+                  case 27:
+                    entidad.versionNumber = _context5.sent;
+                    entidad.plataforma = "Android";
+                    _context5.next = 32;
+                    break;
+
+                  case 31:
+                    if (this.platform.is('mobileweb')) {
+                      entidad.versionAppName = "Mi salud familiar";
+                      entidad.versionNumber = "0.0";
+                      entidad.plataforma = "Web";
+                    } else {
+                      entidad.versionAppName = "Mi salud familiar";
+                      entidad.versionNumber = "0.0";
+                      entidad.plataforma = "No informado";
+                    }
+
+                  case 32:
+                    //crear token para web
+                    tokenDispositivo = this.device.uuid;
+                    localStorage.setItem('token_dispositivo', tokenDispositivo); //otras variables
+
+                    localStorage.setItem('version_app_name', entidad.versionAppName);
+                    localStorage.setItem('version_number', entidad.versionNumber);
+                    localStorage.setItem('plataforma', entidad.plataforma);
+
+                  case 37:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, this);
+          }));
         }
       }]);
 

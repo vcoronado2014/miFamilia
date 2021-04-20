@@ -12,8 +12,11 @@ import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp'
 import { NavigationExtras } from '@angular/router';
 
 import * as moment from 'moment';
-
-
+//ojo que cuando llegamos a la pantalla de registro se esta marcando 
+//en la tabla prg_pre_registro_app el elemento con estado 1 cuando debería seguir en estado 0
+//revisar
+//OJO AL COMPLETAR EL REGISTRO NO SE GUARDA LA FECHA DE NACIMIENTO EN LA TABLA RAP_REGISTR_APP
+//HAY QUE GUARDARLO
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -34,7 +37,7 @@ export class InicioPage implements OnInit {
     initialSlide: 0,
     speed: 500
   };
-
+  preRegistro: any;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -104,6 +107,7 @@ export class InicioPage implements OnInit {
     }
 
     this.VerificarRegistro(tieneValidacionCU);
+
   }
   abrirLogin(){
     this.navCtrl.navigateRoot('nuevo-login');
@@ -127,6 +131,9 @@ export class InicioPage implements OnInit {
       this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
     }
 
+  }
+  abrirValidacionFactor(){
+    this.navCtrl.navigateRoot('validacion-factor');
   }
 
   async procesarRespuestaCU(registros, loader, run, state){
@@ -356,6 +363,11 @@ export class InicioPage implements OnInit {
       //limpiamos local storage
       this.limpiarRegistro();
       loader.dismiss();
+      let tieneRegistroPendiente = this.validaPreRegistro();
+      if (tieneRegistroPendiente){
+        //si tiene registro pendiente se envía a la página de autentificación
+        this.abrirValidacionFactor();
+      }
     }
     else{
       //pasa a la pantalla login solo si tiene sus datos completos
@@ -464,6 +476,17 @@ export class InicioPage implements OnInit {
      return retorno;
 
     //console.log(this.pais + ' ' + this.region);
+ }
+ //verificacion de pre-registro
+ validaPreRegistro(){
+   var retorno = false;
+   if (localStorage.getItem('PRE-REGISTRO')){
+     this.preRegistro = JSON.parse(localStorage.getItem('PRE-REGISTRO'));
+     if (this.preRegistro.Id > 0){
+       retorno = true;
+     }
+   }
+   return retorno;
  }
 
 }

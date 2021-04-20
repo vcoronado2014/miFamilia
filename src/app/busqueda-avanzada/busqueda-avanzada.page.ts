@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { NavController, ToastController, Platform, ModalController, LoadingController, MenuController, IonItem } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
@@ -48,6 +49,8 @@ import { ModalOperacionCitaPage } from '../modal-operacion-cita/modal-operacion-
     fechaInicioBusqueda;
     horarioBusqueda;
     diasBusqueda;
+    //para volver a la pagina anterior
+    idUsuario = 0;
     //esto es para infiniti scroll
     private topLimit: number = 5;
     private citasFiltradasTop: any = [];
@@ -62,9 +65,24 @@ import { ModalOperacionCitaPage } from '../modal-operacion-cita/modal-operacion-
       public utiles: ServicioUtiles,
       public acceso: ServicioAcceso,
       public cita: ServicioCitas,
-      public paginacion: ServicioPaginacion
+      public paginacion: ServicioPaginacion,
+      public activatedRoute: ActivatedRoute,
+      private router: Router,
     ) { }
   
+    volver(){
+      if (this.idUsuario == 0){
+        this.navCtrl.navigateRoot('pre-tiposatencion');
+      }
+      else{
+        const navigationExtras: NavigationExtras = {
+          queryParams: {
+            Id: this.idUsuario
+          }
+        };
+        this.navCtrl.navigateRoot(['pre-tiposatencion'], navigationExtras);
+      }
+    }
     ngOnInit() {
       moment.locale('es');
       if (sessionStorage.UsuarioAps) {
@@ -78,6 +96,11 @@ import { ModalOperacionCitaPage } from '../modal-operacion-cita/modal-operacion-
           this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
         }
       }
+      this.activatedRoute.queryParams.subscribe(async params => {
+        if (params && params.Id) {
+          this.idUsuario = params.Id
+        }
+      });
       //creamos tipo atencion inicial
       this.crearTiposAtencion();
       this.setFechasInicioFin();

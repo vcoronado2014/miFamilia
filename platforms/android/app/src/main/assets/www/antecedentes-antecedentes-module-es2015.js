@@ -126,11 +126,6 @@ let AntecedentesPage = class AntecedentesPage {
     }
     cargarDatosInciales() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //original
-            /*     let loader = await this.loading.create({
-                  message: 'Cargando...<br>información',
-                  duration: 20000
-                }); */
             this.estaCargando = true;
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',

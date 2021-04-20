@@ -12,6 +12,10 @@ import * as moment from 'moment';
   templateUrl: './modal-examenes.page.html',
   styleUrls: ['./modal-examenes.page.scss'],
 })
+///HAY QUE CAMBIAR AL NUEVO ESTILO ESTE MODAL
+//YA QUE APARECE LA INICIAL Y NO EL AVATAR O TARJETA DEL USUARIO
+//SE DEBE MOSTRAR COMO LISTADO Y NO COMO TARJETA,
+//LO MISMO PARA EL MODAL DDEL DETALLE.
 
 export class ModalExamenesPage implements OnInit {
   //color
@@ -45,6 +49,7 @@ export class ModalExamenesPage implements OnInit {
     moment.locale('es');
     //this.miColor = this.utiles.entregaMiColor();
     this.orden= JSON.parse(this.navParams.get('orden'));
+    console.log(this.orden);
     //this.nombreUsuario = navParams.get('NombreUsuario');
     this.user = JSON.parse(sessionStorage.UsuarioAps);
     this.userColor = this.user.Color;

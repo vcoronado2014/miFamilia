@@ -68,13 +68,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../../directives/text-avatar/index */
     "./src/directives/text-avatar/index.ts");
+    /* harmony import */
+
+
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ../components/components.module */
+    "./src/app/components/components.module.ts");
 
     var ModalExamenesPageModule = function ModalExamenesPageModule() {
       _classCallCheck(this, ModalExamenesPageModule);
     };
 
     ModalExamenesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__["TextAvatarModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_7__["TextAvatarModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_8__["ComponentsModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([{
         path: '',
         component: _modal_examenes_page__WEBPACK_IMPORTED_MODULE_6__["ModalExamenesPage"]
       }])],

@@ -5,13 +5,16 @@
     </button>
   </ion-row>
   <div [hidden]="muestraMensaje">
-    <ion-row class="mt-40">
+    <ion-row class="mt-16">
       <h1>Hola, {{nombre}}, un gusto en conocerte</h1>
     </ion-row>
     <ion-row>
-      <p class="texto-1">A continuación procederemos a verificar si ya tienes cuenta activa y existen datos clínicos, para esto necesitamos que
-        ingreses tu RUN, fecha de nacimiento y correo electrónico.</p>
-  
+      <p class="texto-1">A continuación procederemos a verificar si ya tienes cuenta activa y existen datos clínicos, para
+        esto necesitamos que
+        ingreses tu RUN, fecha de nacimiento y correo electrónico, la dirección de<strong> correo electrónico debe ser la registrada
+        al momento de inscribirte en tu Centro de salud.</strong><br>
+        Existe la posibilidad de validar con clave única, siempre y cuando tu Establecimiento tenga habilitado dicho servicio.
+      </p>
     </ion-row>
     <form [formGroup]="forma" novalidate>
       <!-- run -->
@@ -44,7 +47,7 @@
       </ion-row>
       <ion-row class="mt-24">
         <button [disabled]="forma.invalid" mat-flat-button color="primary" style="width: 90%; margin-left: 5%;"
-          (click)="verificaRegistroPrueba()">CONTINUAR</button>
+          (click)="verificaRegistroCompleto()">CONTINUAR</button>
       </ion-row>
     </form>
   </div>

@@ -148,26 +148,26 @@ export class ModalDetalleCitaPage implements OnInit {
     }
     if (this.data) {
       if (this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita' || this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web') {
-        this.data.Imagen = "agendar_citas_p.png";
+        this.data.Imagen = "agendar_citas.svg";
         this.profesional = this.data.DetalleEventoMes.DescripcionSecundaria;
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Atencion Realizada') {
-        this.data.Imagen = "atenciones_p.png";
+        this.data.Imagen = "atenciones.svg";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Fármaco en uso') {
-        this.data.Imagen = "retiro-de-medicamentos_p.png";
+        this.data.Imagen = "retiro-de-medicamentos.svg";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Fármaco Pendiente') {
-        this.data.Imagen = "retiro-de-medicamentos_p.png";
+        this.data.Imagen = "retiro-de-medicamentos.svg";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Alimento Entregado') {
-        this.data.Imagen = "retiro-de-alimentos_p.png";
+        this.data.Imagen = "retiro-de-alimentos.svg";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Vacuna Administrada') {
-        this.data.Imagen = "vacunas_p.png";
+        this.data.Imagen = "vacunas.svg";
       }
       if (this.data.DetalleEventoMes.Subtitulo == 'Vacuna por administrar') {
-        this.data.Imagen = "vacunas_p.png";
+        this.data.Imagen = "vacunas.svg";
       }
       //convertimos la fecha a formato correcto
       if (this.data.DetalleEventoMes.FechaHora){

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ordenes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando exámenes\"></app-progress>\r\n\r\n<ion-card [hidden]=\"estaCargando\" *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <ion-item lines=\"none\" #myList>\r\n      <ion-avatar slot=\"start\">\r\n        <text-avatar [text]=\"item.NombreUsuario\" [color]=\"item.Color\" [textColor]=\"textColor\"></text-avatar>\r\n      </ion-avatar>\r\n      <ion-label class=\"ion-text-wrap\">{{ item.NombreUsuario }}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n      <!-- <ion-icon name=\"time\" slot=\"end\"></ion-icon> -->\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>  \r\n<!-- NO HAY ORDENES -->\r\n<div [hidden]=\"estaCargando\" *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay órdenes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ordenes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando exámenes\"></app-progress>\r\n\r\n<ion-card [hidden]=\"estaCargando\" *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <app-avatar [lines]=\"none\" [urlImagen] = \"item.UrlImagen\" \r\n    [nombreCompleto]=\"item.NombreUsuario\" \r\n    [parentezco]=\"item.Parentezco\"></app-avatar>\r\n<!--     <ion-item lines=\"none\" #myList>\r\n      <ion-avatar slot=\"start\">\r\n        <text-avatar [text]=\"item.NombreUsuario\" [color]=\"item.Color\" [textColor]=\"textColor\"></text-avatar>\r\n      </ion-avatar>\r\n      <ion-label class=\"ion-text-wrap\">{{ item.NombreUsuario }}</ion-label>\r\n    </ion-item> -->\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n      <!-- <ion-icon name=\"time\" slot=\"end\"></ion-icon> -->\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>  \r\n<!-- NO HAY ORDENES -->\r\n<div [hidden]=\"estaCargando\" *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay órdenes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -136,6 +136,12 @@ let OrdenesPage = class OrdenesPage {
     }
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+        this.activatedRoute.queryParams.subscribe(params => {
+            if (params && params.usuario) {
+                this.usuarioAps = JSON.parse(params.usuario);
+                console.log(this.usuarioAps);
+            }
+        });
         /*     if (sessionStorage.getItem("RSS_ID")){
               if (this.parametrosApp.USA_LOG_MODULOS()){
                 this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
@@ -149,18 +155,8 @@ let OrdenesPage = class OrdenesPage {
             //this.miColor = this.utiles.entregaMiColor();
             //ordenes
             this.listadoOrdenes = [];
-            //contenido de las llamadas.
-            if (sessionStorage.UsuarioAps) {
-                //debemos enviar el uspId del titular para que traiga todos los datos
-                this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
-            }
             if (this.usuarioAps) {
                 this.miColor = this.utiles.entregaColor(this.usuarioAps);
-                //original
-                /*       let loader = await this.loading.create({
-                        message: 'Obteniendo...<br>Órdenes del usuario',
-                        duration: 20000
-                      }); */
                 this.estaCargando = true;
                 let loader = yield this.loading.create({
                     cssClass: 'loading-vacio',
@@ -190,6 +186,8 @@ let OrdenesPage = class OrdenesPage {
             for (var s in listado) {
                 let fecha = moment__WEBPACK_IMPORTED_MODULE_9__(listado[s].FechaRegistro).format('DD-MM-YYYY');
                 listado[s].Fecha = fecha;
+                listado[s].UrlImagen = this.usuarioAps.UrlImagen;
+                listado[s].Parentezco = this.usuarioAps.Parentezco.Nombre;
             }
             //ahora asignamos la variable
             this.listadoOrdenes = listado;

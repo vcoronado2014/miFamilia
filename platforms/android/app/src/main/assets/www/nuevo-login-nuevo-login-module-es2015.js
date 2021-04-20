@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding\">\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Estamos ingresando a la app\"></app-progress>\n\n  <div [hidden]=\"estaCargando\" class=\"row mt-24\">\n    <img src=\"../../assets/imgs_nuevas/login.png\" alt=\"asistente\"/>\n  </div>\n  <form [hidden]=\"estaCargando\" [formGroup]=\"forma\" novalidate>\n    <ion-row class=\"ion-no-margin ion-no-padding mt-80\">\n      <!-- solo para enrolamiento -->\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento == false\">\n        <mat-label>Run</mat-label>\n        <input matInput placeholder=\"125458524\" formControlName=\"run\" name=\"run\">\n        <mat-error [hidden]=\"usaEnrolamiento == false\">Run requerido</mat-error>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento\">\n        <mat-label>Correo electrónico</mat-label>\n        <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\">\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo requerido</mat-error>\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo inválido</mat-error>\n      </mat-form-field>\n  \n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n        <mat-label>Contraseña</mat-label>\n        <input matInput placeholder=\"Clave\" type=\"password\" name=\"clave\" formControlName=\"clave\" required>\n        <mat-error [hidden]=\"!(f.clave.errors && f.clave.errors.required)\">Clave requerida</mat-error>\n      </mat-form-field>\n    </ion-row>\n    <ion-row class=\"ion-no-padding ion-no-margin mt-40\">\n      <button mat-raised-button color=\"primary\" style=\"width: 90%; margin-left: 5%; height:36px;\" (click)=\"onSubmit()\">INICIAR SESION</button>\n    </ion-row>\n  </form>\n  <ion-row [hidden]=\"estaCargando\" class=\"mt-36\" [hidden]=\"usaEnrolamiento\">\n    <a mat-button routerLink=\".\" color=\"primary\" class=\"ion-text-center\" style=\"width: 100%;\" (click)=\"irRecuperarClave()\">¿Olvidaste tu contraseña?</a>\n  </ion-row>\n  <ion-grid [hidden]=\"estaCargando\" class=\"ion-no-padding mt-36\">\n    <ion-row>\n      <ion-col class=\"ion-text-center texto-1\" style=\"margin-top:8px;\">\n        ¿No tienes cuenta?\n      </ion-col>\n      <ion-col>\n        <button (click)=\"abrirAsistente()\" mat-button color=\"primary\">REGISTRATE</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content class=\"ion-padding\">\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Estamos ingresando a la app\"></app-progress>\n\n  <div [hidden]=\"estaCargando\" class=\"row mt-24\">\n    <img src=\"../../assets/imgs_svg/login.svg\" alt=\"asistente\"/>\n  </div>\n  <form [hidden]=\"estaCargando\" [formGroup]=\"forma\" novalidate>\n    <ion-row class=\"ion-no-margin ion-no-padding mt-80\">\n      <!-- solo para enrolamiento -->\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento == false\">\n        <mat-label>Run</mat-label>\n        <input matInput placeholder=\"125458524\" formControlName=\"run\" name=\"run\">\n        <mat-error [hidden]=\"usaEnrolamiento == false\">Run requerido</mat-error>\n      </mat-form-field>\n\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\" [hidden]=\"usaEnrolamiento\">\n        <mat-label>Correo electrónico</mat-label>\n        <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\">\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo requerido</mat-error>\n        <mat-error [hidden]=\"usaEnrolamiento\">Correo inválido</mat-error>\n      </mat-form-field>\n  \n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n        <mat-label>Contraseña</mat-label>\n        <input matInput placeholder=\"Clave\" type=\"password\" name=\"clave\" formControlName=\"clave\" required>\n        <mat-error [hidden]=\"!(f.clave.errors && f.clave.errors.required)\">Clave requerida</mat-error>\n      </mat-form-field>\n    </ion-row>\n    <ion-row class=\"ion-no-padding ion-no-margin mt-40\">\n      <button mat-raised-button color=\"primary\" style=\"width: 90%; margin-left: 5%; height:36px;\" (click)=\"onSubmit()\">INICIAR SESION</button>\n    </ion-row>\n  </form>\n  <ion-row [hidden]=\"estaCargando\" class=\"mt-36\" [hidden]=\"usaEnrolamiento\">\n    <a mat-button routerLink=\".\" color=\"primary\" class=\"ion-text-center\" style=\"width: 100%;\" (click)=\"irRecuperarClave()\">¿Olvidaste tu contraseña?</a>\n  </ion-row>\n  <ion-grid [hidden]=\"estaCargando\" class=\"ion-no-padding mt-36\">\n    <ion-row>\n      <ion-col class=\"ion-text-center texto-1\" style=\"margin-top:8px;\">\n        ¿No tienes cuenta?\n      </ion-col>\n      <ion-col>\n        <button (click)=\"abrirAsistente()\" mat-button color=\"primary\">REGISTRATE</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n");
 
 /***/ }),
 
@@ -112,10 +112,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
 /* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
 /* harmony import */ var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/ServicioFCM */ "./src/app/services/ServicioFCM.ts");
-/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../app/services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
@@ -130,10 +131,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 //estoy implementando progress bar
 //aca hay que controlar cuando no hay internet
 let NuevoLoginPage = class NuevoLoginPage {
-    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device) {
+    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device, servNotificaciones) {
         this.navCtrl = navCtrl;
         this.utiles = utiles;
         this.servicioGeo = servicioGeo;
@@ -147,6 +149,7 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.appVersion = appVersion;
         this.platform = platform;
         this.device = device;
+        this.servNotificaciones = servNotificaciones;
         this.hide = true;
         //para validar
         this.patternOnlyLetter = '[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$';
@@ -169,7 +172,9 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.estaCargando = false;
     }
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_12__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_13__["locale"]('es');
+        //vamos a obtener las notificaciones push en esta pantalla
+        this.servNotificaciones.buscarCitasTodas();
         this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
         this.cargarForma();
     }
@@ -365,6 +370,11 @@ let NuevoLoginPage = class NuevoLoginPage {
                             loader.dismiss();
                             return;
                         }
+                    }, error => {
+                        console.log(error.message);
+                        this.utiles.presentToast("Error de conexión.", "middle", 3000);
+                        this.estaCargando = false;
+                        loader.dismiss();
                     });
                 }
                 else {
@@ -384,6 +394,11 @@ let NuevoLoginPage = class NuevoLoginPage {
                             loader.dismiss();
                             return;
                         }
+                    }).catch(error => {
+                        console.log(error.message);
+                        this.utiles.presentToast("Error de conexión.", "middle", 3000);
+                        this.estaCargando = false;
+                        loader.dismiss();
                     });
                 }
             }));
@@ -471,6 +486,15 @@ let NuevoLoginPage = class NuevoLoginPage {
             userFamilia = JSON.stringify(retorno.UsuariosFamilia);
             //variable de sessión muy importante para el resto de la app.
             localStorage.setItem("UsuariosFamilia", userFamilia);
+        }
+        if (retorno.FamiliaPorAceptar && retorno.FamiliaPorAceptar.length >= 0) {
+            localStorage.setItem('FAMILIA-POR-ACEPTAR', JSON.stringify(retorno.FamiliaPorAceptar));
+        }
+        if (retorno.FamiliaAceptada && retorno.FamiliaAceptada.length >= 0) {
+            localStorage.setItem('FAMILIA-ACEPTADA', JSON.stringify(retorno.FamiliaAceptada));
+        }
+        if (retorno.FamiliaRechazada && retorno.FamiliaRechazada.length >= 0) {
+            localStorage.setItem('FAMILIA-RECHAZADA', JSON.stringify(retorno.FamiliaRechazada));
         }
         this.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
         this.Mensaje = retorno.RespuestaBase.Mensaje;
@@ -565,9 +589,10 @@ NuevoLoginPage.ctorParameters = () => [
     { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__["ServicioAcceso"] },
     { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] },
     { type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__["ServicioFCM"] },
-    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_10__["AppVersion"] },
+    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_11__["AppVersion"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
-    { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_11__["Device"] }
+    { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_12__["Device"] },
+    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_10__["ServicioNotificaciones"] }
 ];
 NuevoLoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

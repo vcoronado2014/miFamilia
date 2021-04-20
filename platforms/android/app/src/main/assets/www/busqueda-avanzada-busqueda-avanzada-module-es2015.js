@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n    <ion-toolbar color=\"primary\" mode=\"md\">\r\n      <ion-buttons slot=\"start\">\r\n        <ion-back-button defaultHref=\"/pre-tiposatencion\" class=\"fcw\"></ion-back-button>\r\n      </ion-buttons>\r\n      <ion-title class=\"fcw\">Búsqueda avanzada</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-content class=\"back-app\">\r\n    <mat-form-field appearance=\"outline\" class=\"field-tipo-atencion\">\r\n      <mat-label>Tipo atención</mat-label>\r\n      <mat-select [disabled]=\"disabledCombo\" [(ngModel)]=\"comboSeleccionado\" (selectionChange)=\"buscarCitas($event)\">\r\n        <mat-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n\r\n    <!-- fecha inicio -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Fecha de inicio</ion-label>\r\n      <ion-datetime \r\n        (ionChange)=\"changeFechaInicio($event)\"\r\n        monthNames=\"enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre\"\r\n        monthShortNames=\"ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic\"\r\n        dayNames=\"lunes, martes, miércoles, jueves, viernes, sábado, domingo\"\r\n        dayShortNames=\"lun, mar, mié, jue, vie, sáb, dom\"\r\n        displayFormat=\"MMMM, DD YYYY\" \r\n        doneText=\"Aceptar\"\r\n        cancelText=\"Cancelar\"\r\n        [min]=\"fechaInicio\" \r\n        [max]=\"fechaTermino\" \r\n        [value]=\"fechaInicio\">\r\n      </ion-datetime>\r\n    </ion-item>\r\n    <!-- horario -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Horario</ion-label>\r\n      <ion-select value=\"0\" (ionChange)=\"changeHorario($event)\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"0\">Todo el día</ion-select-option>\r\n        <ion-select-option value=\"1\">Mañana</ion-select-option>\r\n        <ion-select-option value=\"2\">Tarde</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- dias -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Días de la semana</ion-label>\r\n      <ion-select (ionChange)=\"changeDia($event)\" multiple=\"true\" [value]=\"['1','2','3','4','5','6','7']\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"1\">Lu</ion-select-option>\r\n        <ion-select-option value=\"2\">Ma</ion-select-option>\r\n        <ion-select-option value=\"3\">Mi</ion-select-option>\r\n        <ion-select-option value=\"4\">Ju</ion-select-option>\r\n        <ion-select-option value=\"5\">Vi</ion-select-option>\r\n        <ion-select-option value=\"6\">Sá</ion-select-option>\r\n        <ion-select-option value=\"7\">Do</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- boton buscar -->\r\n    <ion-button class=\"mt-32 ion-padding-start\" color=\"primary\" (click)=\"buscarCitas()\">BUSCAR</ion-button>\r\n\r\n    <app-progress [mostrar]=\"mostrarProgress\" titulo=\"Buscando citas\"></app-progress>\r\n    <!-- progress bar -->\r\n<!--     <div class=\"centrado\" [hidden]=\"!mostrarProgress\">\r\n      <ion-label class=\"titulo-item-2\">Buscando citas</ion-label>\r\n      <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n    </div> -->\r\n    <!-- resultados -->\r\n    <div *ngIf=\"encontroCitas\">\r\n      <div class=\"ion-padding\">\r\n        <ion-grid class=\"ion-no-padding\" *ngFor=\"let cita of citasFiltradasTop\">\r\n          <ion-row class=\"ion-padding-bottom ion-padding-top linea-item\" (click)=\"citaSelected(cita)\">\r\n            <ion-col size=\"9\" class=\"texto-item ion-text-capitalize\">\r\n              {{cita.Servicio.Nombre}}\r\n            </ion-col>\r\n            <ion-col size=\"3\" class=\"titulo-hora ion-text-end\">\r\n              {{transformDateIso(cita.FechaHoraInicio)}}\r\n            </ion-col>\r\n            <ion-col size=\"12\" class=\"titulo-fecha\" class=\"ion-text-capitalize\">\r\n              {{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}\r\n            </ion-col>\r\n            <ion-col class=\"texto-item ion-text-capitalize\">\r\n              {{cita.NombresMedico.toLowerCase()}} {{cita.ApellidosMedico.toLowerCase()}}\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n        <!-- pruebas con infinite scroll -->\r\n        <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n          <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más cupos...\">\r\n          </ion-infinite-scroll-content>\r\n        </ion-infinite-scroll>\r\n      </div>\r\n\r\n    </div>\r\n    <!-- NO ENCONTRADO -->\r\n    <div *ngIf=\"!encontroCitas && mostrarProgress == false\" class=\"ion-padding-start ion-padding-end centrado\">\r\n      <ion-label class=\"ion-text-center no-encontrado\">No existen cupos con los criterios ingresados</ion-label>\r\n    </div>\r\n\r\n\r\n  </ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n    <ion-toolbar color=\"primary\" mode=\"md\">\r\n      <ion-buttons slot=\"start\">\r\n       <!--  <ion-back-button defaultHref=\"/pre-tiposatencion\" class=\"fcw\"></ion-back-button> -->\r\n        <ion-back-button (click)=\"volver()\" defaultHref=\"/\" class=\"fcw\"></ion-back-button>\r\n      </ion-buttons>\r\n      <ion-title class=\"fcw\">Búsqueda avanzada</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-content class=\"back-app\">\r\n    <mat-form-field appearance=\"outline\" class=\"field-tipo-atencion\">\r\n      <mat-label>Tipo atención</mat-label>\r\n      <mat-select [disabled]=\"disabledCombo\" [(ngModel)]=\"comboSeleccionado\" (selectionChange)=\"buscarCitas($event)\">\r\n        <mat-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</mat-option>\r\n      </mat-select>\r\n    </mat-form-field>\r\n\r\n    <!-- fecha inicio -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Fecha de inicio</ion-label>\r\n      <ion-datetime \r\n        (ionChange)=\"changeFechaInicio($event)\"\r\n        monthNames=\"enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre\"\r\n        monthShortNames=\"ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic\"\r\n        dayNames=\"lunes, martes, miércoles, jueves, viernes, sábado, domingo\"\r\n        dayShortNames=\"lun, mar, mié, jue, vie, sáb, dom\"\r\n        displayFormat=\"MMMM, DD YYYY\" \r\n        doneText=\"Aceptar\"\r\n        cancelText=\"Cancelar\"\r\n        [min]=\"fechaInicio\" \r\n        [max]=\"fechaTermino\" \r\n        [value]=\"fechaInicio\">\r\n      </ion-datetime>\r\n    </ion-item>\r\n    <!-- horario -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Horario</ion-label>\r\n      <ion-select value=\"0\" (ionChange)=\"changeHorario($event)\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"0\">Todo el día</ion-select-option>\r\n        <ion-select-option value=\"1\">Mañana</ion-select-option>\r\n        <ion-select-option value=\"2\">Tarde</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- dias -->\r\n    <ion-item class=\"ion-padding-start ion-padding-end\">\r\n      <ion-label>Días de la semana</ion-label>\r\n      <ion-select (ionChange)=\"changeDia($event)\" multiple=\"true\" [value]=\"['1','2','3','4','5','6','7']\" okText=\"Aceptar\" cancelText=\"Cancelar\">\r\n        <ion-select-option value=\"1\">Lu</ion-select-option>\r\n        <ion-select-option value=\"2\">Ma</ion-select-option>\r\n        <ion-select-option value=\"3\">Mi</ion-select-option>\r\n        <ion-select-option value=\"4\">Ju</ion-select-option>\r\n        <ion-select-option value=\"5\">Vi</ion-select-option>\r\n        <ion-select-option value=\"6\">Sá</ion-select-option>\r\n        <ion-select-option value=\"7\">Do</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <!-- boton buscar -->\r\n    <ion-button class=\"mt-32 ion-padding-start\" color=\"primary\" (click)=\"buscarCitas()\">BUSCAR</ion-button>\r\n\r\n    <app-progress [mostrar]=\"mostrarProgress\" titulo=\"Buscando citas\"></app-progress>\r\n    <!-- progress bar -->\r\n<!--     <div class=\"centrado\" [hidden]=\"!mostrarProgress\">\r\n      <ion-label class=\"titulo-item-2\">Buscando citas</ion-label>\r\n      <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n    </div> -->\r\n    <!-- resultados -->\r\n    <div *ngIf=\"encontroCitas\">\r\n      <div class=\"ion-padding\">\r\n        <ion-grid class=\"ion-no-padding\" *ngFor=\"let cita of citasFiltradasTop\">\r\n          <ion-row class=\"ion-padding-bottom ion-padding-top linea-item\" (click)=\"citaSelected(cita)\">\r\n            <ion-col size=\"9\" class=\"texto-item ion-text-capitalize\">\r\n              {{cita.Servicio.Nombre}}\r\n            </ion-col>\r\n            <ion-col size=\"3\" class=\"titulo-hora ion-text-end\">\r\n              {{transformDateIso(cita.FechaHoraInicio)}}\r\n            </ion-col>\r\n            <ion-col size=\"12\" class=\"titulo-fecha\" class=\"ion-text-capitalize\">\r\n              {{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}\r\n            </ion-col>\r\n            <ion-col class=\"texto-item ion-text-capitalize\">\r\n              {{cita.NombresMedico.toLowerCase()}} {{cita.ApellidosMedico.toLowerCase()}}\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n        <!-- pruebas con infinite scroll -->\r\n        <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\r\n          <ion-infinite-scroll-content loadingSpinner=\"bubbles\" loadingText=\"Cargando más cupos...\">\r\n          </ion-infinite-scroll-content>\r\n        </ion-infinite-scroll>\r\n      </div>\r\n\r\n    </div>\r\n    <!-- NO ENCONTRADO -->\r\n    <div *ngIf=\"!encontroCitas && mostrarProgress == false\" class=\"ion-padding-start ion-padding-end centrado\">\r\n      <ion-label class=\"ion-text-center no-encontrado\">No existen cupos con los criterios ingresados</ion-label>\r\n    </div>\r\n\r\n\r\n  </ion-content>");
 
 /***/ }),
 
@@ -95,14 +95,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
-/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
-/* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
-/* harmony import */ var _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioPaginacion */ "./src/app/services/ServicioPaginacion.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
-/* harmony import */ var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../modal-operacion-cita/modal-operacion-cita.page */ "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
+/* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
+/* harmony import */ var _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioPaginacion */ "./src/app/services/ServicioPaginacion.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/pipes/fecha.pipe */ "./src/app/pipes/fecha.pipe.ts");
+/* harmony import */ var _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../modal-operacion-cita/modal-operacion-cita.page */ "./src/app/modal-operacion-cita/modal-operacion-cita.page.ts");
+
 
 
 
@@ -115,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
 //modal
 
 let BusquedaAvanzadaPage = class BusquedaAvanzadaPage {
-    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, paginacion) {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, paginacion, activatedRoute, router) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -126,6 +128,8 @@ let BusquedaAvanzadaPage = class BusquedaAvanzadaPage {
         this.acceso = acceso;
         this.cita = cita;
         this.paginacion = paginacion;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
         this.miColor = '#FF4081';
         this.textColor = '#FFFFFF';
         //datos para consultar citas
@@ -143,12 +147,27 @@ let BusquedaAvanzadaPage = class BusquedaAvanzadaPage {
         this.encontroCitas = false;
         this.disabledCombo = false;
         this.paginaActual = 0;
+        //para volver a la pagina anterior
+        this.idUsuario = 0;
         //esto es para infiniti scroll
         this.topLimit = 5;
         this.citasFiltradasTop = [];
     }
+    volver() {
+        if (this.idUsuario == 0) {
+            this.navCtrl.navigateRoot('pre-tiposatencion');
+        }
+        else {
+            const navigationExtras = {
+                queryParams: {
+                    Id: this.idUsuario
+                }
+            };
+            this.navCtrl.navigateRoot(['pre-tiposatencion'], navigationExtras);
+        }
+    }
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_8__["locale"]('es');
         if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
             if (this.usuarioAps) {
@@ -160,6 +179,11 @@ let BusquedaAvanzadaPage = class BusquedaAvanzadaPage {
                 this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
             }
         }
+        this.activatedRoute.queryParams.subscribe((params) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            if (params && params.Id) {
+                this.idUsuario = params.Id;
+            }
+        }));
         //creamos tipo atencion inicial
         this.crearTiposAtencion();
         this.setFechasInicioFin();
@@ -208,8 +232,8 @@ let BusquedaAvanzadaPage = class BusquedaAvanzadaPage {
             this.citas.forEach(cita => {
                 if (cita.TipoAtencion == this.comboSeleccionado) {
                     //aca debemos aplicar los demas filtros, el primero es fecha inicio
-                    var fechaCita = moment__WEBPACK_IMPORTED_MODULE_7__(cita.FechaHoraInicio);
-                    var isAfter = moment__WEBPACK_IMPORTED_MODULE_7__(fechaCita.format()).isAfter(this.fechaInicioBusqueda);
+                    var fechaCita = moment__WEBPACK_IMPORTED_MODULE_8__(cita.FechaHoraInicio);
+                    var isAfter = moment__WEBPACK_IMPORTED_MODULE_8__(fechaCita.format()).isAfter(this.fechaInicioBusqueda);
                     //aca ya tenemos el segundo filtro importante
                     if (isAfter) {
                         //ahora debemos trabajar con los filtros de horario
@@ -308,7 +332,7 @@ let BusquedaAvanzadaPage = class BusquedaAvanzadaPage {
         }, 2000);
     }
     transformDate(value, format) {
-        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_8__["MomentPipe"]();
+        var pi = new _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_9__["MomentPipe"]();
         return pi.transform(value, format);
     }
     transformDateIso(dateString) {
@@ -329,7 +353,7 @@ let BusquedaAvanzadaPage = class BusquedaAvanzadaPage {
                 this.itemSelected = item;
             }
             const modal = yield this.modalCtrl.create({
-                component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_9__["ModalOperacionCitaPage"],
+                component: _modal_operacion_cita_modal_operacion_cita_page__WEBPACK_IMPORTED_MODULE_10__["ModalOperacionCitaPage"],
                 componentProps: {
                     'cita': JSON.stringify(item),
                     'operacion': 'reservar'
@@ -374,10 +398,12 @@ BusquedaAvanzadaPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
-    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] },
-    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_4__["ServicioAcceso"] },
-    { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__["ServicioCitas"] },
-    { type: _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_6__["ServicioPaginacion"] }
+    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_4__["ServicioUtiles"] },
+    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_5__["ServicioAcceso"] },
+    { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_6__["ServicioCitas"] },
+    { type: _app_services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_7__["ServicioPaginacion"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
 ];
 BusquedaAvanzadaPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

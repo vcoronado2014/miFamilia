@@ -226,12 +226,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    //original
-
-                    /*     let loader = await this.loading.create({
-                          message: 'Cargando...<br>información',
-                          duration: 20000
-                        }); */
                     this.estaCargando = true;
                     _context2.next = 3;
                     return this.loading.create({

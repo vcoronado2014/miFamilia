@@ -186,6 +186,26 @@ export class ServicioUtiles{
         }
         return usaAgenda;
     }
+    tieneFamiliaAceptada(){
+        var retorno = false;
+        if (localStorage.getItem('FAMILIA-ACEPTADA')){
+            var fam = JSON.parse(localStorage.getItem('FAMILIA-ACEPTADA'));
+            if (fam && fam.length > 0){
+                retorno = true;
+            }
+        }
+        return retorno;
+    }
+    tieneFamiliaRechazada(){
+        var retorno = false;
+        if (localStorage.getItem('FAMILIA-RECHAZADA')){
+            var fam = JSON.parse(localStorage.getItem('FAMILIA-RECHAZADA'));
+            if (fam && fam.length > 0){
+                retorno = true;
+            }
+        }
+        return retorno;
+    }
     entregaMenuPages(){
         var usaAgenda = this.entregaParametroUsaAgenda();
 
@@ -194,60 +214,41 @@ export class ServicioUtiles{
             title: 'Configurar familia',
             visible: true,
             icon: 'settings',
-            src: 'familia'
+            src: '#',
+            esSubMenu: false
         };
         arrPages.push(pagUno);
-        /* comentada  */
-/*         var pagDos = {
-            title: 'Calendario',
+
+        //ahora los submenus de configurar familia
+        //simepre y cuando tenga familia aceptada
+        if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
+            var pagQuitarIntegrantes = {
+                title: 'Desactivar/Activar',
+                visible: true,
+                icon: 'person',
+                src: 'quitar-familia',
+                esSubMenu: true
+            }
+            arrPages.push(pagQuitarIntegrantes);
+        }
+        var pagConfigContacto = {
+            title: 'Datos de contacto/avatar',
             visible: true,
-            segment:'calendario/:this.usuarioAps',
-            icon: 'calendar'
-        };
-        arrPages.push(pagDos); */
-        //la dejamos en home por mientras, hasta tener el acepto condiciones
+            icon: 'share',
+            src: 'familia',
+            esSubMenu: true
+        }
+        arrPages.push(pagConfigContacto);
+        
         var pagDos = {
             title: 'Términos y condiciones',
             visible: true,
             src:'home',
-            icon: 'link'
+            icon: 'link',
+            esSubMenu: false
         };
         arrPages.push(pagDos);
-        //comentada
-        /*
-        var pagTres = {
-            title: 'Familia',
-            visible: true,
-            icon: 'people',
-            src: 'familia'
-        };
-        arrPages.push(pagTres);
-        */
-/*         var pagCuatro = {
-            title: 'Ajustes',  
-            visible: true, 
-            icon: 'heart',
-            src: 'familia'
-        }
-        arrPages.push(pagCuatro); */
-        //ya no va en el menu
-        //verificamos si usa o no agendamiento remoto
-/*         if (usaAgenda){
-            var pagCinco = {
-                title: 'Cupos disponibles',  
-                visible: true, 
-                icon: 'medkit',
-                src: 'pre-tiposatencion'
-            }
-            arrPages.push(pagCinco);
-            var pagSeis = {
-                title: 'Mis Citas',  
-                visible: true, 
-                icon: 'medkit',
-                src: 'agenda-disponible'
-            }
-            arrPages.push(pagSeis);
-        } */
+
         return arrPages;
     }
     entregaMiImagen(){
@@ -687,16 +688,16 @@ export class ServicioUtiles{
                 }
                 //segundo las imagenes
                 if (elemento.NombreModulo == 'CALENDARIO'){
-                    elemento.Imagen = './assets/imgs_nuevas/calendario-01.png';
+                    elemento.Imagen = './assets/imgs_svg/calendario-01.svg';
                 }
                 else if (elemento.NombreModulo == 'ANTECEDENTES'){
-                    elemento.Imagen = './assets/imgs_nuevas/antecedentes.png';
+                    elemento.Imagen = './assets/imgs_svg/antecedentes.svg';
                 }
                 else if (elemento.NombreModulo == 'EXAMENES'){
-                    elemento.Imagen = './assets/imgs_nuevas/examenes-de-salud.png';
+                    elemento.Imagen = './assets/imgs_svg/examenes-de-salud.svg';
                 }
                 else if (elemento.NombreModulo == 'INTERCONSULTAS'){
-                    elemento.Imagen = './assets/imgs_nuevas/interconsulta.png';
+                    elemento.Imagen = './assets/imgs_svg/interconsulta_desactivado.svg';
                 }
                 //tercero la clase de la imagen
                 elemento.ClaseImagen = 'imgs-home';
@@ -832,5 +833,64 @@ export class ServicioUtiles{
                 }
             }
         }
-    } 
+    }
+    //entrega y setea los parametros de token y otros
+    async crearTokenPlano(){
+        var entidad = {
+            tokenDispositivo: '',
+            versionAppName: '',
+            versionNumber: '',
+            plataforma: ''
+        }
+        if (!this.isAppOnDevice()) {
+            //web
+            //guardar local storage
+            if (!localStorage.getItem('token_dispositivo')) {
+              //crear token para web
+              entidad.tokenDispositivo = (Math.random() * (1000000 - 1) + 1).toString() + ' web';
+              localStorage.setItem('token_dispositivo', entidad.tokenDispositivo);
+            }
+            else {
+              entidad.tokenDispositivo = localStorage.getItem('token_dispositivo');
+            }
+            entidad.versionAppName = "Mi salud familiar"
+            entidad.versionNumber = "0.0";
+            entidad.plataforma = "Web";
+            //loader.dismiss();
+            //otras variables
+            localStorage.setItem('version_app_name', entidad.versionAppName);
+            localStorage.setItem('version_number', entidad.versionNumber);
+            localStorage.setItem('plataforma', entidad.plataforma);
+          }
+          else {
+            if (this.platform.is('ios')){
+              entidad.versionAppName = await this.appVersion.getAppName();
+              entidad.versionNumber = await this.appVersion.getVersionNumber();
+              entidad.plataforma = "iOS";
+            } 
+            else if (this.platform.is('android')){
+              entidad.versionAppName = await this.appVersion.getAppName();
+              entidad.versionNumber = await this.appVersion.getVersionNumber();
+              entidad.plataforma = "Android";
+            }
+            else if (this.platform.is('mobileweb')){
+              entidad.versionAppName = "Mi salud familiar"
+              entidad.versionNumber = "0.0";
+              entidad.plataforma = "Web";
+            }
+            else {
+              entidad.versionAppName = "Mi salud familiar"
+              entidad.versionNumber = "0.0";
+              entidad.plataforma = "No informado";
+            }
+            //crear token para web
+            var tokenDispositivo = this.device.uuid;
+            localStorage.setItem('token_dispositivo', tokenDispositivo);
+            //otras variables
+            localStorage.setItem('version_app_name', entidad.versionAppName);
+            localStorage.setItem('version_number', entidad.versionNumber);
+            localStorage.setItem('plataforma', entidad.plataforma);
+          }
+    }
+
 }

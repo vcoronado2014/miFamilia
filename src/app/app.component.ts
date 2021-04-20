@@ -43,6 +43,7 @@ export class AppComponent {
       //this.notificacion.buscarCitas();
       this.notificacion.buscarCitasTodas();
       await this.utiles.obtenerParametrosApp(environment.production);
+      await this.utiles.crearTokenPlano();
       this.fcmService.initFCM();
       this.fcmService.receiveMessage(true);
     });
