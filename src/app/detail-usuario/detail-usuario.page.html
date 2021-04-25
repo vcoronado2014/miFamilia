@@ -8,9 +8,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="back-app">
-<!--   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
   <!-- progress -->
   <app-progress [mostrar]="estaCargando" titulo="Buscando información del usuario"></app-progress>
   <!-- lo cambiamos por la card -->
@@ -18,19 +15,6 @@
     <!-- poner avatar -->
     <app-avatar [urlImagen] = "usuario.UrlImagen" [nombreCompleto]="usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno" [parentezco]="usuario.Parentezco.Nombre"></app-avatar>
   </ion-item>
-<!--   <ion-card [hidden]="estaCargando">
-    <img *ngIf="usuario.UrlImagen != ''" src={{usuario.UrlImagen}} style="width: 100%;" />
-    <ion-card-header>
-      <ion-card-title class="ion-text-wrap" [style.--color]="miColor">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>
-        <ion-badge slot="end">{{usuario.Parentezco.Nombre}}</ion-badge>
-      </ion-item>
-
-    </ion-card-content>
-  </ion-card>  -->
   <!-- aca viene la lista de datos personales presion, altura, etc-->
   <ion-list [hidden]="estaCargando">
     <ion-item>

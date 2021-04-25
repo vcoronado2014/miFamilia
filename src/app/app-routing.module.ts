@@ -45,10 +45,6 @@ const routes: Routes = [
     loadChildren: () => import('./modal-detalle-cita/modal-detalle-cita.module').then( m => m.ModalDetalleCitaPageModule)
   },
   {
-    path: 'agenda-disponible',
-    loadChildren: () => import('./agenda-disponible/agenda-disponible.module').then( m => m.AgendaDisponiblePageModule)
-  },
-  {
     path: 'modal-operacion-cita',
     loadChildren: () => import('./modal-operacion-cita/modal-operacion-cita.module').then( m => m.ModalOperacionCitaPageModule)
   },
@@ -87,7 +83,8 @@ const routes: Routes = [
   {
     path: 'registro-usuario',
     loadChildren: () => import('./registro-usuario/registro-usuario.module').then( m => m.RegistroUsuarioPageModule)
-  },  {
+  },
+  {
     path: 'pre-registro-uno',
     loadChildren: () => import('./pre-registro-uno/pre-registro-uno.module').then( m => m.PreRegistroUnoPageModule)
   },

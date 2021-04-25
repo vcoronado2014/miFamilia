@@ -40,7 +40,7 @@ export class DetailUsuarioPage implements OnInit {
     public toast: ToastController,
     public modalCtrl: ModalController,
     public platform: Platform,
-    public menu:MenuController,
+    public menu: MenuController,
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public utiles: ServicioUtiles,
@@ -48,39 +48,34 @@ export class DetailUsuarioPage implements OnInit {
     public info: ServicioInfoUsuario,
     public acceso: ServicioAcceso,
     public parametrosApp: ServicioParametrosApp
-  ) { 
+  ) {
 
   }
-  //ARREGLAR TEMAS DE COLORES Y URL CUANDO SON VARIOS MIEMBROS DE LA FAMILIA
+
   ngOnInit() {
     //this.miColor = this.utiles.entregaMiColor();
     //capturamos los parametros
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params.usuario) {
         //store the temp in data
-        
+
         this.usuario = JSON.parse(params.usuario);
-        if (this.usuario.Parentezco && this.usuario.Parentezco.Id > 0){
-          if (this.usuario.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA'){
+        if (this.usuario.Parentezco && this.usuario.Parentezco.Id > 0) {
+          if (this.usuario.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA') {
             this.usuario.Parentezco.Nombre = 'Yo';
           }
         }
-        else{
+        else {
           this.usuario.Parentezco.Nombre = 'No informado';
         }
         this.userImagen = this.usuario.UrlImagen;
         this.miColor = this.utiles.entregaColor(this.usuario);
-        console.log(this.usuario);
+        //console.log(this.usuario);
         this.obtenerInfoUsuario(this.usuario.Id);
       }
     });
   }
-  async obtenerInfoUsuario(uspId){
-    //original
-/*     let loader = await this.loading.create({
-      message: 'Obteniendo...<br>Información del usuario',
-      duration: 20000
-    }); */
+  async obtenerInfoUsuario(uspId) {
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
@@ -88,38 +83,29 @@ export class DetailUsuarioPage implements OnInit {
       //message: 'Cargando...<br>tipos de atención',
       duration: 2000
     });
-    this.estaCargando =true;
+    this.estaCargando = true;
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        if (this.parametrosApp.USA_API_MANAGEMENT()){
+        if (this.parametrosApp.USA_API_MANAGEMENT()) {
           //llamada api management
-          this.info.getIndicadorValorApi(uspId).subscribe((response: any)=>{
+          this.info.getIndicadorValorApi(uspId).subscribe((response: any) => {
             this.procesarIndicadorValor(response, loader);
           });
           //presion
-          //original
-/*           let loader1 = await this.loading.create({
-            message: 'Obteniendo...<br>Presión',
-          }); */
           let loader1 = await this.loading.create({
             cssClass: 'loading-vacio',
             showBackdrop: false,
             spinner: null
           });
-          this.estaCargando =true;
+          this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresionApi(uspId).subscribe((response: any) => {
               this.procesarPresion(response, loader1);
             });
           });
           //alergias
-          //original
-/*           let loader2 = await this.loading.create({
-            message: 'Obteniendo...<br>Alergias',
-
-          }); */
           this.estaCargando = true;
           let loader2 = await this.loading.create({
             cssClass: 'loading-vacio',
@@ -132,16 +118,11 @@ export class DetailUsuarioPage implements OnInit {
             });
           });
         }
-        else{
-          this.info.getIndicadorValor(uspId).subscribe((response: any)=>{
+        else {
+          this.info.getIndicadorValor(uspId).subscribe((response: any) => {
             this.procesarIndicadorValor(response, loader);
           });
           //presion
-          //original
-/*           let loader1 = await this.loading.create({
-            message: 'Obteniendo...<br>Presión',
-            
-          }); */
           let loader1 = await this.loading.create({
             cssClass: 'loading-vacio',
             showBackdrop: false,
@@ -149,16 +130,11 @@ export class DetailUsuarioPage implements OnInit {
           });
           this.estaCargando = true;
           await loader1.present().then(async () => {
-            this.info.getPresion(uspId).subscribe((response: any)=>{
+            this.info.getPresion(uspId).subscribe((response: any) => {
               this.procesarPresion(response, loader1);
             });
           });
           //alergias
-          //original
-/*           let loader2 = await this.loading.create({
-            message: 'Obteniendo...<br>Alergias',
-            
-          }); */
           let loader2 = await this.loading.create({
             cssClass: 'loading-vacio',
             showBackdrop: false,
@@ -166,24 +142,19 @@ export class DetailUsuarioPage implements OnInit {
           });
           this.estaCargando = true;
           await loader2.present().then(async () => {
-            this.info.getAlergias(uspId).subscribe((response: any)=>{
+            this.info.getAlergias(uspId).subscribe((response: any) => {
               this.procesarAlergias(response, loader2);
             });
           });
         }
       }
-      else{
-        if (this.parametrosApp.USA_API_MANAGEMENT()){
+      else {
+        if (this.parametrosApp.USA_API_MANAGEMENT()) {
           //llamada nativa
           this.info.getIndicadorValorNativeApi(uspId).then((response: any) => {
             this.procesarIndicadorValor(JSON.parse(response.data), loader);
           });
           //presion
-          //original
-/*           let loader1 = await this.loading.create({
-            message: 'Obteniendo...<br>Presión',
-
-          }); */
           let loader1 = await this.loading.create({
             cssClass: 'loading-vacio',
             showBackdrop: false,
@@ -196,11 +167,6 @@ export class DetailUsuarioPage implements OnInit {
             });
           });
           //alergias
-          //original
-/*           let loader2 = await this.loading.create({
-            message: 'Obteniendo...<br>Alergias',
-
-          }); */
           let loader2 = await this.loading.create({
             cssClass: 'loading-vacio',
             showBackdrop: false,
@@ -213,17 +179,12 @@ export class DetailUsuarioPage implements OnInit {
             });
           });
         }
-        else{
+        else {
           //llamada nativa
           this.info.getIndicadorValorNative(uspId).then((response: any) => {
             this.procesarIndicadorValor(JSON.parse(response.data), loader);
           });
           //presion
-          //original
-/*           let loader1 = await this.loading.create({
-            message: 'Obteniendo...<br>Presión',
-
-          }); */
           let loader1 = await this.loading.create({
             cssClass: 'loading-vacio',
             showBackdrop: false,
@@ -236,11 +197,6 @@ export class DetailUsuarioPage implements OnInit {
             });
           });
           //alergias
-          //original
-/*           let loader2 = await this.loading.create({
-            message: 'Obteniendo...<br>Alergias',
-
-          }); */
           let loader2 = await this.loading.create({
             cssClass: 'loading-vacio',
             showBackdrop: false,
@@ -257,12 +213,12 @@ export class DetailUsuarioPage implements OnInit {
       }
     });
   }
-  procesarAlergias(data, loader){
+  procesarAlergias(data, loader) {
     this.alergias = data.AlergiasUsp;
-    if (this.alergias){
-      if(this.alergias.length == 1){
+    if (this.alergias) {
+      if (this.alergias.length == 1) {
         this.title = "Alergia";
-      }else{
+      } else {
         this.title = "Alergias";
       }
     }
@@ -270,27 +226,26 @@ export class DetailUsuarioPage implements OnInit {
     loader.dismiss();
     this.estaCargando = false;
   }
-  procesarAlergiasSinLoader(data){
+  procesarAlergiasSinLoader(data) {
     this.alergias = data.AlergiasUsp;
-    if(this.alergias.length == 1){
+    if (this.alergias.length == 1) {
       this.title = "Alergia";
-    }else{
+    } else {
       this.title = "Alergias";
     }
   }
-  procesarPresion(data, loader){
+  procesarPresion(data, loader) {
     this.presiones = data.PresionesUsp;
-    if (this.presiones && this.presiones.length > 0){
+    if (this.presiones && this.presiones.length > 0) {
       //todo ok
-      for (var s in this.presiones){
+      for (var s in this.presiones) {
         //altura
         this.valorPresion = this.presiones[s].ValorPresion;
-        if (this.presiones[s].FechaPresion == null){
-           this.fechaPresion = 'n/a'; 
+        if (this.presiones[s].FechaPresion == null) {
+          this.fechaPresion = 'n/a';
         }
-        else
-        {
-            this.fechaPresion = this.presiones[s].FechaPresion;
+        else {
+          this.fechaPresion = this.presiones[s].FechaPresion;
         }
       }
 
@@ -303,19 +258,18 @@ export class DetailUsuarioPage implements OnInit {
     loader.dismiss();
     this.estaCargando = false;
   }
-  procesarPresionSinLoader(data){
+  procesarPresionSinLoader(data) {
     this.presiones = data.PresionesUsp;
-    if (this.presiones && this.presiones.length > 0){
+    if (this.presiones && this.presiones.length > 0) {
       //todo ok
-      for (var s in this.presiones){
+      for (var s in this.presiones) {
         //altura
         this.valorPresion = this.presiones[s].ValorPresion;
-        if (this.presiones[s].FechaPresion == null){
-           this.fechaPresion = 'n/a'; 
+        if (this.presiones[s].FechaPresion == null) {
+          this.fechaPresion = 'n/a';
         }
-        else
-        {
-            this.fechaPresion = this.presiones[s].FechaPresion;
+        else {
+          this.fechaPresion = this.presiones[s].FechaPresion;
         }
       }
 
@@ -326,7 +280,7 @@ export class DetailUsuarioPage implements OnInit {
       this.fechaPresion = 'N/A';
     }
   }
-  procesarIndicadorValor(data, loader){
+  procesarIndicadorValor(data, loader) {
     this.indicadorValor = data.IndicadorValorUsp;
     if (this.indicadorValor) {
       if (this.indicadorValor.length > 0) {
@@ -389,16 +343,16 @@ export class DetailUsuarioPage implements OnInit {
     //para progress
     this.estaCargando = false;
   }
-/*   doRefresh(event) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      this.loadData(this.usuario.Id);
-      event.target.complete();
-    }, 2000);
-  } */
-  logout(){
+  /*   doRefresh(event) {
+      console.log('Begin async operation');
+  
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        this.loadData(this.usuario.Id);
+        event.target.complete();
+      }, 2000);
+    } */
+  logout() {
     this.acceso.logout();
     this.navCtrl.navigateRoot('login');
   }

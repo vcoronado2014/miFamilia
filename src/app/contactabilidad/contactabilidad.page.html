@@ -10,20 +10,7 @@
 <ion-content>
   <app-progress [mostrar]="estaCargando" [titulo]="tituloProgress"></app-progress>
   <div [hidden]="estaCargando" class="ion-padding" style="margin-top: 15px;">
-    <!-- <h5>Estas cambiando los datos de contactabilidad de {{nombrePersona}}</h5> -->
     <form [formGroup]="forma" novalidate>
-<!--       <ion-row>
-        <ion-avatar slot="start">
-          <img *ngIf="usuarioAps.UrlImagen != ''" src={{usuarioAps.UrlImagen}}>
-          <img *ngIf="usuarioAps.UrlImagen == ''" src="../assets/img/no-imagen.jpg">
-        </ion-avatar>
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>Nombre social</mat-label>
-          <input matInput placeholder="Nombre social" formControlName="nombreSocial" name="nombreSocial" required>
-          <mat-error [hidden]="!(f.nombreSocial.errors && f.nombreSocial.errors.required)">Nombre social requerido</mat-error>
-          <mat-hint align="start"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>
-        </mat-form-field>
-      </ion-row> -->
       <ion-item lines="none" style="--ion-item-background: transparent; --padding-start:0px;">
         <ion-avatar slot="start" style="margin-top: -10px;">
           <img *ngIf="usuarioAps.UrlImagen != ''" src={{usuarioAps.UrlImagen}}>
@@ -41,7 +28,6 @@
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>Correo electrónico</mat-label>
           <input matInput placeholder="ejemplo@gmail.com" formControlName="email" name="email">
-          <!-- <mat-error [hidden]="!(f.email.errors && f.email.errors.required)">Correo requerido</mat-error> -->
           <mat-error [hidden]="!(f.email.errors && f.email.errors.pattern)">Correo inválido</mat-error>
         </mat-form-field>
       </ion-row>

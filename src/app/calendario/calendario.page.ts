@@ -105,16 +105,11 @@ export class CalendarioPage implements OnInit {
     public parametrosApp: ServicioParametrosApp
   ) { }
 
-  //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
-  //OJO HAY VACUNAS CON FECHA PROXIMA 29-11-2020 Y NO VEO QUE APAREZCAN
-  //CUANDO SELECCIONAS EL COMBO DE FECHA Y LUEGO VUELVES A SELECCIONAR 
-  //UNA FECHA ANTERIOR POR EJEMPLO NO MUESTRA NADA
-
   ngOnInit() {
     moment().locale('es');
     this.fechaActual = this.transformDate(moment(), 'YYYY-MM-DD');
     this.anioActual = this.transformDate(moment(), 'YYYY');
-    console.log(this.fechaActual);
+    //console.log(this.fechaActual);
     //this.miColor = this.utiles.entregaMiColor();
     if (sessionStorage.UsuarioAps) {
       this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -128,9 +123,6 @@ export class CalendarioPage implements OnInit {
     }
     //mes seleccionado
     this.mesActualSeleccionado = moment().month() + 1 + ',' + moment().year();
-    //this.mesActualSeleccionado = moment().month() + 1;
-    console.log('formato de mes seleccionado ===> ' + this.mesActualSeleccionado);
-    //revisar estos parametros ya que estan en el otro codigo en el oninit
     let diasSemana = new Array("domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado");
     let meses = new Array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
     this.diaSem = diasSemana[new Date().getDay()];
@@ -143,7 +135,7 @@ export class CalendarioPage implements OnInit {
 
     var mesActual = moment().month() + 1;
     //var mesActual = this.mesActualSeleccionado;
-    console.log(mesActual);
+    //console.log(mesActual);
     //***************************** */
     this.tratamientoMeses();
     //prueba de implementacion api management
@@ -172,11 +164,6 @@ export class CalendarioPage implements OnInit {
       anno: fechaActual.year()
     };
 
-    //original
-/*     let loader = await this.loading.create({
-      message: 'Obteniendo...<br>Información del usuario api',
-      duration: 20000
-    }); */
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
@@ -184,7 +171,7 @@ export class CalendarioPage implements OnInit {
       //message: 'Cargando...<br>tipos de atención',
       duration: 2000
     });
-    this.estaCargando =true;
+    this.estaCargando = true;
     this.tituloLoading = 'Obteniendo calendario';
 
     await loader.present().then(async () => {
@@ -199,13 +186,13 @@ export class CalendarioPage implements OnInit {
           sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
           //creamos top limit al nuevo arreglo de citas
           this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-          console.log(this.citasVerticalTodasTop);
+          //console.log(this.citasVerticalTodasTop);
           loader.dismiss();
           this.estaCargando = false;
           this.tituloLoading = '';
           this.scrollListVisible();
-        },error =>{
-          console.log(error.message);
+        }, error => {
+          //console.log(error.message);
           this.estaCargando = false;
           this.tituloLoading = '';
           loader.dismiss();
@@ -227,12 +214,12 @@ export class CalendarioPage implements OnInit {
           sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
           //creamos top limit al nuevo arreglo de citas
           this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-          console.log(this.citasVerticalTodasTop);
+          //console.log(this.citasVerticalTodasTop);
           loader.dismiss();
           this.estaCargando = false;
           this.tituloLoading = '';
-        }).catch(error =>{
-          console.log(error.message);
+        }).catch(error => {
+          //console.log(error.message);
           this.estaCargando = false;
           this.tituloLoading = '';
           loader.dismiss();
@@ -263,11 +250,6 @@ export class CalendarioPage implements OnInit {
       mes: fechaPosterior.month() + 1,
       anno: fechaPosterior.year()
     };
-    //original
-/*     let loader = await this.loading.create({
-      message: 'Obteniendo...<br>Información del usuario',
-      duration: 20000
-    }); */
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
@@ -275,7 +257,7 @@ export class CalendarioPage implements OnInit {
       //message: 'Cargando...<br>tipos de atención',
       duration: 2000
     });
-    this.estaCargando =true;
+    this.estaCargando = true;
     this.tituloLoading = 'Cargando calendario';
 
     await loader.present().then(async () => {
@@ -292,7 +274,7 @@ export class CalendarioPage implements OnInit {
               //aca procedemos a procesarlos
               this.procesarArregloCitasTodas();
               this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
-              //console.log(this.citasVerticalMostrar);
+              ////console.log(this.citasVerticalMostrar);
               //ahora que tenemos las citas que queremos mostrar
               //ordenamos
               this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta) });
@@ -300,7 +282,7 @@ export class CalendarioPage implements OnInit {
               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
               //creamos top limit al nuevo arreglo de citas
               this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-              console.log(this.citasVerticalTodasTop);
+              //console.log(this.citasVerticalTodasTop);
               loader.dismiss();
               this.estaCargando = false;
               this.tituloLoading = '';
@@ -330,7 +312,7 @@ export class CalendarioPage implements OnInit {
               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
               //creamos top limit al nuevo arreglo de citas
               this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-              console.log(this.citasVerticalTodasTop);
+              //console.log(this.citasVerticalTodasTop);
               loader.dismiss();
               this.estaCargando = false;
               this.tituloLoading = '';
@@ -355,8 +337,8 @@ export class CalendarioPage implements OnInit {
         var fechaEvento = moment(fechaHora, 'YYYY-MM-DD').toDate();
         var fechaHoy = moment().toDate();
 
-        console.log('Evento: ' + fechaEvento);
-        console.log('Hoy:' + fechaHoy);
+        //console.log('Evento: ' + fechaEvento);
+        //console.log('Hoy:' + fechaHoy);
         contador++;
         if (this.citasVertical[s].Eventos[t]) {
 
@@ -396,7 +378,7 @@ export class CalendarioPage implements OnInit {
         }
         if (fechaEvento < fechaHoy && this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de alimento') {
           this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado';
-          console.log(this.citasVertical[s].Eventos[t].DetalleEventoMes);
+          //console.log(this.citasVertical[s].Eventos[t].DetalleEventoMes);
         }
         if (fechaEvento < fechaHoy && this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de fármaco') {
           this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco entregado'
@@ -424,8 +406,8 @@ export class CalendarioPage implements OnInit {
       var fechaActual = moment();
       var fechaEvento1 = moment(this.citasVerticalTodas[s].FechaCompleta);
       var dif = fechaActual.diff(fechaEvento1);
-      if (dif < 0){
-        dif = dif *-1;
+      if (dif < 0) {
+        dif = dif * -1;
       }
       this.citasVerticalTodas[s].DiferenciaFechas = dif;
       for (var t in this.citasVerticalTodas[s].Eventos) {
@@ -433,8 +415,8 @@ export class CalendarioPage implements OnInit {
         var fechaEvento = moment(fechaHora, 'YYYY-MM-DD').toDate();
         var fechaHoy = moment().toDate();
 
-        console.log('Evento: ' + fechaEvento);
-        console.log('Hoy:' + fechaHoy);
+        //console.log('Evento: ' + fechaEvento);
+        //console.log('Hoy:' + fechaHoy);
         contador++;
 
         if (this.citasVerticalTodas[s].Eventos[t]) {
@@ -475,7 +457,7 @@ export class CalendarioPage implements OnInit {
         }
         if (fechaEvento < fechaHoy && this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de alimento') {
           this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado';
-          console.log(this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes);
+          //console.log(this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes);
         }
         if (fechaEvento < fechaHoy && this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de fármaco') {
           this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco entregado'
@@ -518,7 +500,7 @@ export class CalendarioPage implements OnInit {
   }
   loadData(event) {
     setTimeout(() => {
-      //console.log('Done');
+      ////console.log('Done');
       this.topLimit += 5;
       this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
       event.target.complete();
@@ -582,11 +564,11 @@ export class CalendarioPage implements OnInit {
     this.mesesVertical.push(entidadActual);
     this.mesesVertical.push(entidadMas);
 
-    console.log(this.mesesVertical);
+    //console.log(this.mesesVertical);
   }
   createEventsCalendario() {
     this.calendarioData = this.citas;
-    console.log(this.calendarioData);
+    //console.log(this.calendarioData);
     return this.calendarioData;
   }
   async goToDetalleCita(evento) {
@@ -604,14 +586,14 @@ export class CalendarioPage implements OnInit {
     modal.onDidDismiss().then((data) => {
       if (data.data && data.data.accion) {
         var accion = data.data.accion;
-        //console.log(accion);
+        ////console.log(accion);
         //obtenemos la pagina actual
         //actualizar
         var annoActual = moment().year();
 
         var mesActual = moment().month() + 1;
         //var mesActual = this.mesActualSeleccionado;
-        //console.log(mesActual);
+        ////console.log(mesActual);
         //***************************** */
         this.tratamientoMeses();
         if (accion === 'booked') {
@@ -685,7 +667,7 @@ export class CalendarioPage implements OnInit {
           role: 'cancel',
           cssClass: 'danger',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            //console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Si',
@@ -709,17 +691,17 @@ export class CalendarioPage implements OnInit {
       var idCita = evento.DetalleEventoMes.IdElemento;
       var accion = boton.Operacion;
       //original
-/*       let loader = await this.loading.create({
-        message: 'Procesado...<br>Información',
-        duration: 20000
-      }); */
+      /*       let loader = await this.loading.create({
+              message: 'Procesado...<br>Información',
+              duration: 20000
+            }); */
       let loader = await this.loading.create({
         cssClass: 'loading-vacio',
         showBackdrop: false,
         spinner: null,
         duration: 2000
       });
-      this.estaCargando =true;
+      this.estaCargando = true;
       this.tituloLoading = 'Obteniendo respuesta';
 
       await loader.present().then(async () => {
@@ -753,7 +735,7 @@ export class CalendarioPage implements OnInit {
 
         var mesActual = moment().month() + 1;
         //var mesActual = this.mesActualSeleccionado;
-        console.log(mesActual);
+        //console.log(mesActual);
         //***************************** */
         this.tratamientoMeses();
         this.estaCargando = false;
@@ -767,7 +749,7 @@ export class CalendarioPage implements OnInit {
         else if (accion === 'cancelled') {
           //si la cita es cnacelada hay que quitarla de notificaciones locales
           //obtenemos el id dde la cita
-          if (data.CitasDisponibles && data.CitasDisponibles.length == 1){
+          if (data.CitasDisponibles && data.CitasDisponibles.length == 1) {
             let idCita = data.CitasDisponibles[0].IdCita;
             this.utiles.removeCitaNotificacionesLocales(idCita);
           }
@@ -799,10 +781,10 @@ export class CalendarioPage implements OnInit {
   openReservarHoraPage() {
     var tieneFamilia = this.utiles.tieneFamilia();
     //si tiene familia hay que enviarlo a la pagina de los miembros de la familia
-    if (tieneFamilia){
+    if (tieneFamilia) {
       this.navCtrl.navigateRoot('seleccion-usuario');
     }
-    else{
+    else {
       //si no tiene hay que enviarlo a buscar disponibilidad directo
       //pasando id
       const navigationExtras: NavigationExtras = {
@@ -812,7 +794,7 @@ export class CalendarioPage implements OnInit {
       };
       this.navCtrl.navigateRoot(['pre-tiposatencion'], navigationExtras);
     }
-    
+
   }
   revisaEstado(item) {
     var retorno = false;
@@ -830,23 +812,23 @@ export class CalendarioPage implements OnInit {
     return pi.transform(value, format);
   }
 
-  hasMin = function(attrib) {
-    return (this.length && this.reduce(function(prev, curr){ 
-        return prev[attrib] < curr[attrib] ? prev : curr; 
+  hasMin = function (attrib) {
+    return (this.length && this.reduce(function (prev, curr) {
+      return prev[attrib] < curr[attrib] ? prev : curr;
     })) || null;
- }
-  determinaFechaMasCercana(){
+  }
+  determinaFechaMasCercana() {
     var fechaActual = moment();
-    if (this.citasVerticalTodasTop && this.citasVerticalTodasTop.length > 0){
-      for(var i=0; i < this.citasVerticalTodasTop.length; i++){
+    if (this.citasVerticalTodasTop && this.citasVerticalTodasTop.length > 0) {
+      for (var i = 0; i < this.citasVerticalTodasTop.length; i++) {
         var fechaEvento = moment(this.citasVerticalTodasTop[i].FechaCompleta);
         var dif = fechaActual.diff(fechaEvento);
-        if (dif < 0){
-          dif = dif *-1;
+        if (dif < 0) {
+          dif = dif * -1;
         }
         this.citasVerticalTodasTop[i].DiferenciaFechas = dif;
-/*         console.log(dif);
-        console.log(this.citasVerticalTodasTop[i]); */
+        /*         //console.log(dif);
+                //console.log(this.citasVerticalTodasTop[i]); */
       }
 
     }
@@ -855,8 +837,8 @@ export class CalendarioPage implements OnInit {
 
   finder(cmp, arr, attr) {
     var val = arr[0][attr];
-    for(var i=1;i<arr.length;i++) {
-        val = cmp(val, arr[i][attr])
+    for (var i = 1; i < arr.length; i++) {
+      val = cmp(val, arr[i][attr])
     }
     return val;
   }
@@ -869,10 +851,10 @@ export class CalendarioPage implements OnInit {
         var entidad = this.citasVerticalTodasTop.filter(p => p.DiferenciaFechas == min)[0];
         if (entidad) {
           //var elemento = this.min();
-          console.log(min);
-          console.log(entidad);
+          //console.log(min);
+          //console.log(entidad);
           let yOffset = document.getElementById(entidad.DiferenciaFechas.toString()).offsetTop;
-          if (yOffset != null){
+          if (yOffset != null) {
             this.content.scrollToPoint(0, yOffset, 600);
           }
         }

@@ -9,14 +9,12 @@
 </ion-header>
 
 <ion-content class="ion-padding back-app">
-  <!-- <h4>Datos para {{titulo}}</h4> -->
   <app-progress [mostrar]="estaCargando" [titulo]="tituloLoading"></app-progress>
   <div [hidden]="estaCargando">
     <ion-list class="ion-padding-bottom">
       <ion-item>
         <ion-label>
           <h5 class="label-info">FECHA</h5>
-          <!-- <p class="ion-text-wrap detalle-label-info">{{transformDate(cita.FechaHoraInicio, 'dddd DD MMMM YYYY')}}</p> -->
           <p class="ion-text-wrap detalle-label-info">
             <span style="text-transform: capitalize;">{{transformDate(cita.FechaHoraInicio, 'dddd')}}</span>,  {{transformDate(cita.FechaHoraInicio, 'D')}} de 
             {{transformDate(cita.FechaHoraInicio, 'MMMM')}} {{transformDate(cita.FechaHoraInicio, 'YYYY')}}

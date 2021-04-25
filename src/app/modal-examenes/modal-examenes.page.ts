@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController, NavParams, NavController, ToastController, Platform,  LoadingController, MenuController, IonList } from '@ionic/angular';
+import { ModalController, NavParams, NavController, ToastController, Platform, LoadingController, MenuController, IonList } from '@ionic/angular';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioLaboratorio } from '../../app/services/ServicioLaboratorio';
@@ -12,11 +12,6 @@ import * as moment from 'moment';
   templateUrl: './modal-examenes.page.html',
   styleUrls: ['./modal-examenes.page.scss'],
 })
-///HAY QUE CAMBIAR AL NUEVO ESTILO ESTE MODAL
-//YA QUE APARECE LA INICIAL Y NO EL AVATAR O TARJETA DEL USUARIO
-//SE DEBE MOSTRAR COMO LISTADO Y NO COMO TARJETA,
-//LO MISMO PARA EL MODAL DDEL DETALLE.
-
 export class ModalExamenesPage implements OnInit {
   //color
   miColor = '#FF4081';
@@ -32,7 +27,7 @@ export class ModalExamenesPage implements OnInit {
   public user;
   public userColor;
   fechaOrden;
-  @ViewChild('myList', {read: IonList}) list: IonList;
+  @ViewChild('myList', { read: IonList }) list: IonList;
   constructor(
     public modalCtrl: ModalController,
     public navParams: NavParams,
@@ -40,7 +35,7 @@ export class ModalExamenesPage implements OnInit {
     public navCtrl: NavController,
     public toast: ToastController,
     public platform: Platform,
-    public menu:MenuController,
+    public menu: MenuController,
     public loading: LoadingController,
     private lab: ServicioLaboratorio,
   ) { }
@@ -48,13 +43,13 @@ export class ModalExamenesPage implements OnInit {
   ngOnInit() {
     moment.locale('es');
     //this.miColor = this.utiles.entregaMiColor();
-    this.orden= JSON.parse(this.navParams.get('orden'));
-    console.log(this.orden);
+    this.orden = JSON.parse(this.navParams.get('orden'));
+    //console.log(this.orden);
     //this.nombreUsuario = navParams.get('NombreUsuario');
     this.user = JSON.parse(sessionStorage.UsuarioAps);
     this.userColor = this.user.Color;
     this.miColor = this.utiles.entregaColor(this.user);
-    if (this.orden){
+    if (this.orden) {
       //existe la orden hacer las llamadas
       this.oalaId = this.orden.Id;
       this.fechaOrden = this.orden.Fecha;
@@ -64,15 +59,15 @@ export class ModalExamenesPage implements OnInit {
   dismiss() {
     this.modalCtrl.dismiss();
   }
-  async loadInicio(){
+  async loadInicio() {
     //ordenes
-    this.listadoExamenes = [];           
+    this.listadoExamenes = [];
     //contenido de las llamadas.
     if (sessionStorage.UsuarioAps) {
       //debemos enviar el uspId del titular para que traiga todos los datos
       this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
     }
-    if (this.usuarioAps){
+    if (this.usuarioAps) {
       let loader = await this.loading.create({
         message: 'Obteniendo...<br>Exámenes del usuario',
         duration: 20000
@@ -81,13 +76,13 @@ export class ModalExamenesPage implements OnInit {
       await loader.present().then(async () => {
         if (!this.utiles.isAppOnDevice()) {
           //llamada web
-          this.lab.getExamenes(this.oalaId).subscribe((response: any)=>{
+          this.lab.getExamenes(this.oalaId).subscribe((response: any) => {
             this.porocesarLista(response, loader);
           });
         }
         else {
           //llamada nativa
-          this.lab.getExamenesNative(this.oalaId).then((response: any)=>{
+          this.lab.getExamenesNative(this.oalaId).then((response: any) => {
             this.porocesarLista(JSON.parse(response.data), loader);
           });
         }
@@ -106,7 +101,7 @@ export class ModalExamenesPage implements OnInit {
       if (this.listadoExamenes.length == 0) {
         this.tiene = false;
       }
-      console.log(this.listadoExamenes);
+      //console.log(this.listadoExamenes);
     }
     loader.dismiss();
   }

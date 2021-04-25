@@ -19,17 +19,17 @@ export class SeleccionUsuarioPage implements OnInit {
   //otras variables
   hayInfo = true;
   public usuarioAps;
-  public usuarioApsFamilia=[];
-  public listadoUsuario=[];
+  public usuarioApsFamilia = [];
+  public listadoUsuario = [];
   estaCargando = false;
-  @ViewChild('myList', {read: IonList}) list: IonList;
+  @ViewChild('myList', { read: IonList }) list: IonList;
 
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
     public modalCtrl: ModalController,
     public platform: Platform,
-    public menu:MenuController,
+    public menu: MenuController,
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public utiles: ServicioUtiles,
@@ -39,7 +39,7 @@ export class SeleccionUsuarioPage implements OnInit {
   ngOnInit() {
     this.cargarDatosIniciales();
   }
-  async cargarDatosIniciales(){
+  async cargarDatosIniciales() {
     this.listadoUsuario = [];
 
     this.estaCargando = true;
@@ -48,7 +48,7 @@ export class SeleccionUsuarioPage implements OnInit {
       showBackdrop: false,
       spinner: null,
     });
-    
+
     await loader.present().then(async () => {
       //cargamos mi color
       this.miColor = this.utiles.entregaMiColor();
@@ -58,8 +58,8 @@ export class SeleccionUsuarioPage implements OnInit {
         if (this.usuarioAps) {
           this.usuarioAps.UrlImagen = environment.URL_FOTOS + this.usuarioAps.UrlImagen;
           //this.usuarioAps.Parentezco = 'Yo';
-          if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Id > 0){
-            if (this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA'){
+          if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Id > 0) {
+            if (this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA') {
               this.usuarioAps.Parentezco.Nombre = 'Yo';
             }
           }
@@ -75,7 +75,7 @@ export class SeleccionUsuarioPage implements OnInit {
         if (this.usuarioApsFamilia.length > 0) {
           for (var s in this.usuarioApsFamilia) {
             this.usuarioApsFamilia[s].UrlImagen = environment.URL_FOTOS + this.usuarioApsFamilia[s].UrlImagen;
-            if (!(this.usuarioApsFamilia[s].Parentezco && this.usuarioApsFamilia[s].Parentezco.Id > 0)){
+            if (!(this.usuarioApsFamilia[s].Parentezco && this.usuarioApsFamilia[s].Parentezco.Id > 0)) {
               this.usuarioApsFamilia[s].Parentezco.Nombre = 'No informado';
             }
             //this.usuarioApsFamilia[s].Parentezco = "No informado";
@@ -83,24 +83,24 @@ export class SeleccionUsuarioPage implements OnInit {
         }
       }
       //ahora vamos a generar un solo listado de usuarios con los datos que necesitamos
-      if (this.usuarioAps){
+      if (this.usuarioAps) {
         this.listadoUsuario.push(this.usuarioAps);
       }
-      if (this.usuarioApsFamilia){
-        if (this.usuarioApsFamilia.length > 0){
-          for (var s in this.usuarioApsFamilia){
+      if (this.usuarioApsFamilia) {
+        if (this.usuarioApsFamilia.length > 0) {
+          for (var s in this.usuarioApsFamilia) {
             this.listadoUsuario.push(this.usuarioApsFamilia[s]);
           }
         }
       }
-      if (this.listadoUsuario.length == 0){
+      if (this.listadoUsuario.length == 0) {
         this.hayInfo = false;
       }
       loader.dismiss();
       this.estaCargando = false;
     });
   }
-  irHoras(item){
+  irHoras(item) {
     //console.log(item);
     //pasando id
     const navigationExtras: NavigationExtras = {

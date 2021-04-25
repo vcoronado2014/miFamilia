@@ -49,11 +49,11 @@ export class PreRegistroUnoPage implements OnInit {
     });
     this.cargarForma();
   }
-  cargarForma(){
+  cargarForma() {
     this.forma = new FormGroup({
-      'nombre': new FormControl('', [Validators.required])      
+      'nombre': new FormControl('', [Validators.required])
     });
-    if (this.nombre && this.nombre != ''){
+    if (this.nombre && this.nombre != '') {
       //agregamos el elemento a la forma
       this.forma.setValue({
         nombre: this.nombre
@@ -61,17 +61,17 @@ export class PreRegistroUnoPage implements OnInit {
     }
   }
 
-  volver(){
-    if (this.paginaAnterior){
+  volver() {
+    if (this.paginaAnterior) {
       this.navCtrl.navigateRoot(this.paginaAnterior);
     }
-    else{
+    else {
       this.navCtrl.navigateRoot('nuevo-login');
     }
   }
   //para validar
   get f() { return this.forma.controls; }
-  irRegistroUno(){
+  irRegistroUno() {
     const navigationExtras: NavigationExtras = {
       queryParams: {
         nombre: this.forma.controls.nombre.value,

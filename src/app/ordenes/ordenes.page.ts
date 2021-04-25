@@ -18,7 +18,7 @@ import * as moment from 'moment';
   styleUrls: ['./ordenes.page.scss'],
 })
 export class OrdenesPage implements OnInit {
-  @ViewChild('myList', {read: IonItem}) list: IonItem;
+  @ViewChild('myList', { read: IonItem }) list: IonItem;
   miColor = '#FF4081';
   textColor = '#FFFFFF';
   //tiene registros
@@ -31,7 +31,7 @@ export class OrdenesPage implements OnInit {
     public toast: ToastController,
     public modalCtrl: ModalController,
     public platform: Platform,
-    public menu:MenuController,
+    public menu: MenuController,
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public utiles: ServicioUtiles,
@@ -46,40 +46,40 @@ export class OrdenesPage implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params.usuario) {
         this.usuarioAps = JSON.parse(params.usuario);
-        console.log(this.usuarioAps);
+        //console.log(this.usuarioAps);
       }
     });
-/*     if (sessionStorage.getItem("RSS_ID")){
-      if (this.parametrosApp.USA_LOG_MODULOS()){
-        this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
-      }
-    } */
+    /*     if (sessionStorage.getItem("RSS_ID")){
+          if (this.parametrosApp.USA_LOG_MODULOS()){
+            this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
+          }
+        } */
     this.loadInicio();
   }
-  async loadInicio(){
+  async loadInicio() {
     //mi color
     //this.miColor = this.utiles.entregaMiColor();
     //ordenes
-    this.listadoOrdenes = [];           
-    if (this.usuarioAps){
+    this.listadoOrdenes = [];
+    if (this.usuarioAps) {
       this.miColor = this.utiles.entregaColor(this.usuarioAps);
       this.estaCargando = true;
       let loader = await this.loading.create({
         cssClass: 'loading-vacio',
         showBackdrop: false,
-        spinner:null,
+        spinner: null,
       });
 
       await loader.present().then(async () => {
         if (!this.utiles.isAppOnDevice()) {
           //llamada web
-          this.lab.getOrdenes(this.usuarioAps.Id).subscribe((response: any)=>{
+          this.lab.getOrdenes(this.usuarioAps.Id).subscribe((response: any) => {
             this.porocesarLista(response, loader);
           });
         }
         else {
           //llamada nativa
-          this.lab.getOrdenesNative(this.usuarioAps.Id).then((response: any)=>{
+          this.lab.getOrdenesNative(this.usuarioAps.Id).then((response: any) => {
             this.porocesarLista(JSON.parse(response.data), loader);
           });
         }
@@ -100,13 +100,13 @@ export class OrdenesPage implements OnInit {
       if (this.listadoOrdenes.length == 0) {
         this.tiene = false;
       }
-      console.log(this.listadoOrdenes);
+      //console.log(this.listadoOrdenes);
     }
     loader.dismiss();
     this.estaCargando = false;
   }
 
-  async ordenSelected(item){
+  async ordenSelected(item) {
     const modal = await this.modalCtrl.create(
       {
         component: ModalExamenesPage,
@@ -117,7 +117,7 @@ export class OrdenesPage implements OnInit {
     );
     return await modal.present();
   }
-  logout(){
+  logout() {
     this.acceso.logout();
     this.navCtrl.navigateRoot('login');
   }

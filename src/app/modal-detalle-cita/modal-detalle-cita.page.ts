@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, NavController, ToastController, Platform,  LoadingController, MenuController, AlertController } from '@ionic/angular';
+import { ModalController, NavParams, NavController, ToastController, Platform, LoadingController, MenuController, AlertController } from '@ionic/angular';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioLaboratorio } from '../../app/services/ServicioLaboratorio';
@@ -22,18 +22,18 @@ export class ModalDetalleCitaPage implements OnInit {
   public tituloSuperior;
   public iconCita;
   public usuarioAps;
-  public farmacos:any[];
+  public farmacos: any[];
   public medic;
   public dosis;
   public far;
   public title;
   public profesional;
   public prescripcion;
-  redClassBool:boolean;
+  redClassBool: boolean;
   public cita = {
     IdCita: 0,
     IdPaciente: '',
-    Estado:''
+    Estado: ''
   };
   botonReservar = {
     Titulo: 'RESERVAR',
@@ -72,26 +72,23 @@ export class ModalDetalleCitaPage implements OnInit {
     public navCtrl: NavController,
     public toast: ToastController,
     public platform: Platform,
-    public menu:MenuController,
+    public menu: MenuController,
     public loading: LoadingController,
     private lab: ServicioLaboratorio,
     private alertController: AlertController,
-    private agendar:ServicioCitas,
+    private agendar: ServicioCitas,
   ) { }
 
-  //QUEDE ACA POR MIENTRARS, ESTOY TRABAJANDO EN LOS ESTILOS
   ngOnInit() {
     moment.locale('es');
     this.loadInicio();
   }
   loadInicio() {
-    //this.miColor = this.utiles.entregaMiColor();
-
     this.data = JSON.parse(this.navParams.get('evento'));
-    console.log(this.data);
+    //console.log(this.data);
 
     this.farmacos = this.data.ListaFarmacos;
-    console.log(this.farmacos);
+    //console.log(this.farmacos);
 
     this.dosis = "";
     this.usuarioAps = JSON.parse(this.navParams.get('usuario'));
@@ -100,44 +97,42 @@ export class ModalDetalleCitaPage implements OnInit {
     //primero determinamoos si es el mismo usuario o no
     //usuarioAps es el logueado
     var nombreCompletoUsuario = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-    
-    if (nombreCompletoUsuario == this.data.DetalleEventoMes.NombrePaciente){
+
+    if (nombreCompletoUsuario == this.data.DetalleEventoMes.NombrePaciente) {
       //el el mismo
       this.miNombre = nombreCompletoUsuario;
       this.miImagen = this.usuarioAps.UrlImagen;
       this.miParentezco = "Yo";
-      if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA'){
+      if (this.usuarioAps.Parentezco && this.usuarioAps.Parentezco.Nombre.toUpperCase() == 'LA MISMA PERSONA') {
         this.miParentezco = "Yo";
       }
-      else{
+      else {
         this.miParentezco = this.usuarioAps.Parentezco.Nombre;
       }
 
     }
-    else{
+    else {
       this.miNombre = this.data.DetalleEventoMes.NombrePaciente;
       //obtenemos al usuario que corresponde
-      //this.usuarioAps = this.utiles.entregaUsuarioNombre(this.miNombre);
-      //this.miImagen = this.utiles.entregaImagen(this.usuarioAps);
-      if (localStorage.getItem('UsuariosFamilia')){
+      if (localStorage.getItem('UsuariosFamilia')) {
         var usuariosFamilia = JSON.parse(localStorage.getItem('UsuariosFamilia'));
-        if (usuariosFamilia && usuariosFamilia.length > 0){
+        if (usuariosFamilia && usuariosFamilia.length > 0) {
           usuariosFamilia.forEach(usu => {
-            if (usu.Nombres + ' ' + usu.ApellidoPaterno + ' ' + usu.ApellidoMaterno == this.data.DetalleEventoMes.NombrePaciente){
+            if (usu.Nombres + ' ' + usu.ApellidoPaterno + ' ' + usu.ApellidoMaterno == this.data.DetalleEventoMes.NombrePaciente) {
               this.miImagen = this.utiles.entregaImagen(usu);
-              if (usu.Parentezco && usu.Parentezco.Id > 0){
+              if (usu.Parentezco && usu.Parentezco.Id > 0) {
                 this.miParentezco = usu.Parentezco.Nombre;
               }
-              else{
+              else {
                 this.miParentezco = 'No informado';
               }
             }
           });
         }
       }
-      
+
       //this.miParentezco = "No informado";
-    } 
+    }
 
     var prev = (this.data.DetalleEventoMes.DescripcionPrincipal).split('-');
     var posologia = prev[1];
@@ -170,7 +165,7 @@ export class ModalDetalleCitaPage implements OnInit {
         this.data.Imagen = "vacunas.svg";
       }
       //convertimos la fecha a formato correcto
-      if (this.data.DetalleEventoMes.FechaHora){
+      if (this.data.DetalleEventoMes.FechaHora) {
         var fecha = moment(this.data.DetalleEventoMes.FechaHora).format("dddd DD MMMM YYYY, HH:mm");
         //console.log(fecha);
         this.data.DetalleEventoMes.FechaHora = fecha;
@@ -200,42 +195,42 @@ export class ModalDetalleCitaPage implements OnInit {
       }
     }
     //esto hacemos para obtener los datos de la cita y del paciente
-    if (this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web' && this.data.DetalleEventoMes.Estado != ''){
+    if (this.data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web' && this.data.DetalleEventoMes.Estado != '') {
       this.cita.IdCita = this.data.DetalleEventoMes.IdElemento;
       //aca obtenemos el run del paciente
       let usuarioCita = this.utiles.entregaUsuarioNombre(this.data.DetalleEventoMes.NombrePaciente);
       //this.cita.IdPaciente = this.usuarioAps.Rut;
       this.cita.IdPaciente = usuarioCita.Rut;
       this.cita.Estado = this.data.DetalleEventoMes.Estado;
-      if (this.cita.Estado == 'proposed'){
+      if (this.cita.Estado == 'proposed') {
         this.titulo = 'Reserva de horas';
         this.botonReservar.Visible = true;
         this.botonCancelar.Visible = false;
         this.botonConfirmar.Visible = false;
       }
-      else if (this.cita.Estado == 'booked'){
+      else if (this.cita.Estado == 'booked') {
         //si esta booked se puede confirmar
         this.titulo = 'Confirmar/Anular hora';
         this.botonReservar.Visible = false;
         this.botonCancelar.Visible = true;
         this.botonConfirmar.Visible = true;
       }
-      else if (this.cita.Estado == 'confirmed'){
+      else if (this.cita.Estado == 'confirmed') {
         //si esta booked se puede confirmar
         this.titulo = 'Anular hora';
         this.botonReservar.Visible = false;
         this.botonCancelar.Visible = true;
         this.botonConfirmar.Visible = false;
       }
-      else{
+      else {
         this.titulo = 'No Cita';
         this.botonReservar.Visible = false;
         this.botonCancelar.Visible = false;
         this.botonConfirmar.Visible = false;
-        
+
       }
-      console.log(this.cita);
-      console.log(this.cita);
+      //console.log(this.cita);
+      //console.log(this.cita);
     }
     //proceso de los iconos
     switch (this.data.DetalleEventoMes.Titulo) {
@@ -264,12 +259,12 @@ export class ModalDetalleCitaPage implements OnInit {
       default:
         this.iconCita;
         break;
-    } 
+    }
   }
   dismiss() {
     this.modalCtrl.dismiss();
   }
-  split(input: string, sep: string, inx: number){
+  split(input: string, sep: string, inx: number) {
     var pi = new SplitPipe();
     return pi.transform(input, sep, inx);
   }
@@ -301,63 +296,63 @@ export class ModalDetalleCitaPage implements OnInit {
 
     await alert.present();
   }
-  async accionCita(boton){
+  async accionCita(boton) {
     var idPaciente = this.cita.IdPaciente;
     var idCita = this.cita.IdCita;
     var accion = boton.Operacion;
 
     //original
-/*     let loader = await this.loading.create({
-      message: 'Procesado...<br>Información',
-      duration: 20000
-    }); */
+    /*     let loader = await this.loading.create({
+          message: 'Procesado...<br>Información',
+          duration: 20000
+        }); */
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
       spinner: null,
     });
-    this.estaCargando =true;
+    this.estaCargando = true;
     this.tituloLoading = 'Procesando cita';
 
     await loader.present().then(async () => {
       var retorno = null;
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.agendar.getOperacionCita(idCita, idPaciente, accion).subscribe((response: any)=>{
+        this.agendar.getOperacionCita(idCita, idPaciente, accion).subscribe((response: any) => {
           this.procesarRespuesta(response, loader, accion);
         })
       }
-      else{
+      else {
         //llamada nativa
         //this.cargarDatosNative(mesConsultar, annoConsultar, loader);
-        this.agendar.getOperacionCitaNative(idCita, idPaciente, accion).then((responseData: any)=>{
+        this.agendar.getOperacionCitaNative(idCita, idPaciente, accion).then((responseData: any) => {
           var response = JSON.parse(responseData.data);
           this.procesarRespuesta(response, loader, accion);
         })
       }
     });
   }
-  procesarRespuesta(data, loader, accion){
+  procesarRespuesta(data, loader, accion) {
     var retorno = null;
-    if (data && data.Mensaje){
-      if (data.Mensaje.Codigo == 'correcto'){
+    if (data && data.Mensaje) {
+      if (data.Mensaje.Codigo == 'correcto') {
         //todo bien
         //this.utiles.presentToast('Operación realizada con éxito', 'middle', 2000);
-        if (accion == 'cancelled'){
+        if (accion == 'cancelled') {
           //si la cita es cnacelada hay que quitarla de notificaciones locales
           //obtenemos el id dde la cita
-          if (data.CitasDisponibles && data.CitasDisponibles.length == 1){
+          if (data.CitasDisponibles && data.CitasDisponibles.length == 1) {
             let idCita = data.CitasDisponibles[0].IdCita;
             this.utiles.removeCitaNotificacionesLocales(idCita);
           }
         }
         retorno = data;
       }
-      else{
+      else {
         this.utiles.presentToast(data.Mensaje.Detalle.Texto, 'middle', 2000);
       }
     }
-    else{
+    else {
       //error en la operacion
       this.utiles.presentToast('Error en la operación', 'middle', 2000);
     }

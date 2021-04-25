@@ -14,11 +14,6 @@
       <app-avatar [lines]="none" [urlImagen] = "orden.UrlImagen" 
       [nombreCompleto]="orden.NombreUsuario" 
       [parentezco]="orden.Parentezco"></app-avatar>
-<!-- <ion-item #myList lines="none">      <ion-avatar slot="start">
-        <text-avatar [text]="orden.NombreUsuario" [color]="orden.Color" [textColor]="textColor"></text-avatar>
-      </ion-avatar>
-      <ion-label>{{orden.NombreUsuario}}</ion-label>    </ion-item> -->
-
     <ion-list-header lines="inset" mode="md">
       <ion-label><strong>Nº Órden: {{oalaId}}</strong></ion-label>
       <ion-badge color="secondary" class="ion-margin-end">{{ fechaOrden }}</ion-badge>
@@ -35,7 +30,6 @@
             </p>
           </ion-col>
           <ion-col size="4">
-            <!-- <ion-icon name="checkmark-circle"></ion-icon>&nbsp;<span>{{item.Estado}}</span> -->
             <ion-badge color="primary">{{ item.Estado }}</ion-badge>
             <h6 *ngIf="!item.VisibleTabla" style="color: #666; font-size:0.7em;"><ion-icon name="analitycs"></ion-icon>&nbsp;Sin Resultados</h6> 
             <h6 *ngIf="item.VisibleTabla" style="color: #666; font-size:0.7em;"><ion-icon name="time"></ion-icon>&nbsp;{{item.FechaMuestraStr}}</h6> 

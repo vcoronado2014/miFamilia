@@ -35,7 +35,7 @@ export class PreTiposatencionPage implements OnInit {
   citas = [];
   citasFiltradas = [];
   tiposAtencion = [];
-  comboSeleccionado ='Selecciona...';
+  comboSeleccionado = 'Selecciona...';
   idComboSeleccionado = 0;
   //para el tratamiento de fechas
   fechaInicio;
@@ -56,7 +56,7 @@ export class PreTiposatencionPage implements OnInit {
     public modalCtrl: ModalController,
     public platform: Platform,
     public loading: LoadingController,
-    public menu:MenuController,
+    public menu: MenuController,
     public utiles: ServicioUtiles,
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
@@ -90,36 +90,36 @@ export class PreTiposatencionPage implements OnInit {
             await this.buscarDisponibilidad(this.fechaInicio, this.fechaTermino, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
           }
         }
-        else{
+        else {
           this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
         }
       }
-      else{
+      else {
         this.utiles.presentToast('No hay usuario, vuelva a seleccionar', 'bottom', 2000);
       }
     });
-/*     if (sessionStorage.UsuarioAps) {
-      this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
-      if (this.usuarioAps) {
-        //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
-        this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
-        this.miColor = this.utiles.entregaColor(this.usuarioAps);
-        this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
-        this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
-        this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
-      }
-    } */
+    /*     if (sessionStorage.UsuarioAps) {
+          this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
+          if (this.usuarioAps) {
+            //this.usuarioAps.UrlImagen = this.utiles.entregaMiImagen();
+            this.usuarioAps.UrlImagen = this.utiles.entregaImagen(this.usuarioAps);
+            this.miColor = this.utiles.entregaColor(this.usuarioAps);
+            this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
+            this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
+            this.nodId = this.usuarioAps.ConfiguracionNodo.NodId;
+          }
+        } */
 
   }
-  setFechasInicioFin(){
+  setFechasInicioFin() {
     //var fechaIni = moment().add(environment.HORAS_FECHA_INICIO, 'hour');
     var fechaIni = moment().add(this.parametrosApp.HORAS_FECHA_INICIO(), 'hour');
     var date = new Date();
     console.log(fechaIni);
-    date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0,0,0,0);
+    date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
     console.log(date);
-    var fechaTer = moment().add(1,'month');
-    var dateFin = new Date(fechaTer.year(), fechaTer.month(), fechaTer.date(), 23,59,0,0);
+    var fechaTer = moment().add(1, 'month');
+    var dateFin = new Date(fechaTer.year(), fechaTer.month(), fechaTer.date(), 23, 59, 0, 0);
     console.log(fechaTer);
     console.log(dateFin);
     this.fechaInicio = fechaIni.format();
@@ -130,16 +130,16 @@ export class PreTiposatencionPage implements OnInit {
 
   }
 
-  
+
   //metodo para obtener disponibilidad y tipos de atención
   //lo comentamos debido a que se usará progress
-  
-  async buscarDisponibilidad(start, end, organization, patient, serviceType, tipoOperacion){
+
+  async buscarDisponibilidad(start, end, organization, patient, serviceType, tipoOperacion) {
     //ACA ME FALTA CONTROLAR LOS MENSAJES
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
-      spinner:null,
+      spinner: null,
     });
 
     await loader.present().then(async () => {
@@ -152,32 +152,32 @@ export class PreTiposatencionPage implements OnInit {
       this.citasFiltradas = [];
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+        this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any) => {
           this.procesarRespuestaTotal(response, loader);
         });
-/*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
-          this.procesarRespuestaTotal(response, loader);
-        }); */
+        /*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+                  this.procesarRespuestaTotal(response, loader);
+                }); */
       }
       else {
         //llamada nativa
-        this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+        this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any) => {
           var respuesta = JSON.parse(response.data);
           this.procesarRespuestaTotal(respuesta, loader);
         });
-/*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
-          var respuesta = JSON.parse(response.data);
-          this.procesarRespuestaTotal(respuesta, loader);
-        }); */
+        /*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+                  var respuesta = JSON.parse(response.data);
+                  this.procesarRespuestaTotal(respuesta, loader);
+                }); */
       }
     });
   }
-  async buscarDisponibilidadApi(start, end, organization, patient, serviceType, tipoOperacion){
+  async buscarDisponibilidadApi(start, end, organization, patient, serviceType, tipoOperacion) {
     //ACA ME FALTA CONTROLAR LOS MENSAJES
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
-      spinner:null,
+      spinner: null,
     });
 
     await loader.present().then(async () => {
@@ -191,7 +191,7 @@ export class PreTiposatencionPage implements OnInit {
         //llamada web
         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any) => {
           this.procesarRespuestaTotal(response, loader);
-        },error=>{
+        }, error => {
           console.log(error.message);
           loader.dismiss();
           this.disabledCombo = false;
@@ -204,7 +204,7 @@ export class PreTiposatencionPage implements OnInit {
         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((responseD: any) => {
           var respuestaDisp = JSON.parse(responseD.data);
           this.procesarRespuestaTotal(respuestaDisp, loader);
-        }).catch(error=>{
+        }).catch(error => {
           console.log(error.message);
           loader.dismiss();
           this.disabledCombo = false;
@@ -214,31 +214,31 @@ export class PreTiposatencionPage implements OnInit {
       }
     });
   }
-  
+
   //metodo para procesar la respuesta
-  procesarRespuestaTotalDisp(data){
+  procesarRespuestaTotalDisp(data) {
     //vienen las citas sin fecha
     this.citas = [];
     this.citasFiltradas = [];
     //this.tiposAtencion = [];
-    if (data && data.Mensaje){
+    if (data && data.Mensaje) {
       //correcto
-      if (data.Mensaje.Codigo == 'correcto'){
+      if (data.Mensaje.Codigo == 'correcto') {
         //todo bien procesar las citas
         var contador = 0;
-        if (data.TiposAtencion){
+        if (data.TiposAtencion) {
           this.agregarTiposAtencion(data.TiposAtencion);
-          console.log(this.tiposAtencion);
+          //console.log(this.tiposAtencion);
         }
         //aca asignamos las citas
         this.citas = data.CitasDisponibles;
-        console.log(this.citas);
+        //console.log(this.citas);
         //guardamos las citas en session
         sessionStorage.setItem('CITAS_DISPONIBLES', JSON.stringify(this.citas));
         //als citas deberíamos guardarlas para procesarlas
         //hay que ver si es necesario o no
       }
-      else{
+      else {
         this.idComboSeleccionado = 0;
         this.tiposAtencion = [];
         this.citas = [];
@@ -249,26 +249,23 @@ export class PreTiposatencionPage implements OnInit {
       //error
     }
   }
- /*  capitalizeWords(texto){
-    return texto.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-  } */
-  procesarRespuestaTotal(data, loader){
+  procesarRespuestaTotal(data, loader) {
     //vienen las citas sin fecha
     this.citas = [];
     this.citasFiltradas = [];
     //this.tiposAtencion = [];
-    if (data && data.Mensaje){
+    if (data && data.Mensaje) {
       //correcto
-      if (data.Mensaje.Codigo == 'correcto'){
+      if (data.Mensaje.Codigo == 'correcto') {
         //todo bien procesar las citas
         var contador = 0;
-        if (data.TiposAtencion){
+        if (data.TiposAtencion) {
           this.agregarTiposAtencion(data.TiposAtencion);
-          console.log(this.tiposAtencion);
+          //console.log(this.tiposAtencion);
         }
         //aca asignamos las citas
         this.citas = data.CitasDisponibles;
-        console.log(this.citas);
+        //console.log(this.citas);
         //guardamos las citas en session
         sessionStorage.setItem('CITAS_DISPONIBLES', JSON.stringify(this.citas));
         //als citas deberíamos guardarlas para procesarlas
@@ -278,7 +275,7 @@ export class PreTiposatencionPage implements OnInit {
         this.mostrarProgressDisp = false;
         this.mostrarProgress = false;
       }
-      else{
+      else {
         this.idComboSeleccionado = 0;
         this.tiposAtencion = [];
         this.citas = [];
@@ -291,13 +288,13 @@ export class PreTiposatencionPage implements OnInit {
       //error
     }
   }
-  indexarCitas(){
+  indexarCitas() {
     //el tipo de atencion seleccionado
     this.citasFiltradas = [];
     var indice = 1;
-    if (this.citas && this.citas.length > 0){
+    if (this.citas && this.citas.length > 0) {
       this.citas.forEach(cita => {
-        if (cita.TipoAtencion == this.comboSeleccionado){
+        if (cita.TipoAtencion == this.comboSeleccionado) {
           //esta filtrando
           cita.indice = indice;
           this.citasFiltradas.push(cita);
@@ -305,13 +302,13 @@ export class PreTiposatencionPage implements OnInit {
         }
       });
     }
-    if (indice > 2){
+    if (indice > 2) {
       this.encontroCitas = true;
     }
-    console.log(this.citasFiltradas);
+    //console.log(this.citasFiltradas);
   }
   //creamos los tipos de atención disponibles
-  crearTiposAtencion(){
+  crearTiposAtencion() {
     //var arr = [];
     this.tiposAtencion = [];
     var contador = 1;
@@ -320,14 +317,14 @@ export class PreTiposatencionPage implements OnInit {
       Valor: 0,
       Selected: true
     }
-    this.tiposAtencion.push(entidadInicial); 
+    this.tiposAtencion.push(entidadInicial);
     this.idComboSeleccionado = 0;
-    console.log('tipo seleccionado ' + this.idComboSeleccionado);
-    console.log(this.tiposAtencion);
+    //console.log('tipo seleccionado ' + this.idComboSeleccionado);
+    //console.log(this.tiposAtencion);
   }
-  agregarTiposAtencion(tipos){
+  agregarTiposAtencion(tipos) {
     var contador = 1;
-    if (tipos && tipos.length > 0){
+    if (tipos && tipos.length > 0) {
       tipos.forEach(tipo => {
         var entidadTipo = {
           Texto: tipo,
@@ -342,13 +339,13 @@ export class PreTiposatencionPage implements OnInit {
     //guardamos los tipos de atencion
     sessionStorage.setItem('TIPOS_ATENCION', JSON.stringify(this.tiposAtencion));
   }
-  seleccionarItemCombo(){
-    if (this.comboSeleccionado && this.tiposAtencion){
+  seleccionarItemCombo() {
+    if (this.comboSeleccionado && this.tiposAtencion) {
       this.tiposAtencion.forEach(tipo => {
-        if (tipo.Texto == this.comboSeleccionado){
+        if (tipo.Texto == this.comboSeleccionado) {
           tipo.Selected = true;
         }
-        else{
+        else {
           tipo.Selected = false;
         }
       });
@@ -356,20 +353,20 @@ export class PreTiposatencionPage implements OnInit {
       sessionStorage.setItem('TIPOS_ATENCION', JSON.stringify(this.tiposAtencion));
     }
   }
-  buscarCitas(event){
+  buscarCitas(event) {
     //este lo cambiamos para el control mat-select
 
     //if (event.detail.value){
-    if (event.value){
+    if (event.value) {
       this.comboSeleccionado = event.value;
-      console.log(this.comboSeleccionado);
+      //console.log(this.comboSeleccionado);
       this.mostrarProgress = true;
       this.encontroCitas = false;
       this.disabledCombo = false;
       this.seleccionarItemCombo();
       setTimeout(() => {
-        console.log('Async operation has ended');
-        
+        //console.log('Async operation has ended');
+
         //event.target.complete();
         this.mostrarProgress = false;
         //this.encontroCitas = true;
@@ -380,24 +377,24 @@ export class PreTiposatencionPage implements OnInit {
     }
 
   }
-  transformDate(value, format){
+  transformDate(value, format) {
     var pi = new MomentPipe();
     return pi.transform(value, format);
   }
-  transformDateIso(dateString){
+  transformDateIso(dateString) {
     var retorno = "";
     var parteT = dateString.split("T");
-    if (parteT && parteT.length == 2){
+    if (parteT && parteT.length == 2) {
       var partes = parteT[1].split(":");
-      if (partes && partes.length > 1){
+      if (partes && partes.length > 1) {
         retorno = partes[0] + ":" + partes[1];
       }
     }
     return retorno;
   }
   //modal del detalle de la cita
-  async citaSelected(item){
-    if (item){
+  async citaSelected(item) {
+    if (item) {
       this.itemSelected = item;
     }
     const modal = await this.modalCtrl.create(
@@ -410,7 +407,7 @@ export class PreTiposatencionPage implements OnInit {
       }
     );
     modal.onDidDismiss().then((data) => {
-      if(data.data && data.data.accion){
+      if (data.data && data.data.accion) {
         var accion = data.data.accion;
         //obtenemos la pagina actual
         //aca debemos revisar a donde nos vamos
@@ -420,7 +417,7 @@ export class PreTiposatencionPage implements OnInit {
     });
     return await modal.present();
   }
-  openBusquedaAvanzada(){
+  openBusquedaAvanzada() {
     const navigationExtras: NavigationExtras = {
       queryParams: {
         Id: this.idConsultar

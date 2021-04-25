@@ -62,10 +62,6 @@ export class HomePage implements OnInit {
   //procesar los items del menu
   itemsMenu = [];
   //notificaciones
-  //modificar las notificaciones de la campana de home
-  //ya que hay un atributo IrA que al existir se debe 
-  //mostrar link o boton que haga ciertas acciones
-  //por ejemplo agregar miembro de la familia
   notificaciones = [];
   muestraNotificaciones = false;
   constructor(
@@ -74,7 +70,7 @@ export class HomePage implements OnInit {
     public modalCtrl: ModalController,
     public platform: Platform,
     public loading: LoadingController,
-    public menu:MenuController,
+    public menu: MenuController,
     public utiles: ServicioUtiles,
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
@@ -82,7 +78,7 @@ export class HomePage implements OnInit {
     public parametrosApp: ServicioParametrosApp,
     public servicioNotLocales: ServicioNotificacionesLocales,
     public servNotificaciones: ServicioNotificaciones,
-  ) {}
+  ) { }
 
   ngOnInit() {
     moment.locale('es');
@@ -92,14 +88,14 @@ export class HomePage implements OnInit {
     //this.miImagen = this.utiles.entregaMiImagen();
     this.miImagen = this.utiles.entregaImagen(this.usuarioAps)
     this.miNombre = this.utiles.entregaMiNombre();
-    if (this.usuarioAps.Establecimiento){
+    if (this.usuarioAps.Establecimiento) {
       this.miInstitucion = this.usuarioAps.Establecimiento.RazonSocial;
     }
-    console.log(this.miColor);
-    console.log(this.miImagen);
-    console.log(this.miNombre);
+    //console.log(this.miColor);
+    //console.log(this.miImagen);
+    //console.log(this.miNombre);
     this.pages = this.utiles.entregaMenuPages();
-    console.log(this.pages);
+    //console.log(this.pages);
     this.runPaciente = this.utiles.insertarGuion(this.usuarioAps.Rut);
     this.codigoDeis = this.usuarioAps.ConfiguracionNodo.CodigoDeis2014;
     this.usaAgenda = this.utiles.entregaParametroUsaAgenda();
@@ -108,9 +104,9 @@ export class HomePage implements OnInit {
     //this.obtenerNotificaciones();
     //ACA ESTOY TRABAJANDO HAY UN ERROR EN API MANAGEMENT
     this.obtenerNotificacionesApi();
-/*     if (this.utiles.entregaParametroUsaAgenda()){
-      this.buscarDisponibilidad();
-    } */
+    /*     if (this.utiles.entregaParametroUsaAgenda()){
+          this.buscarDisponibilidad();
+        } */
     //nueva implementación
     this.miembrosPorAceptar();
 
@@ -130,35 +126,35 @@ export class HomePage implements OnInit {
     //this.miImagen = this.utiles.entregaMiImagen();
     this.miImagen = this.utiles.entregaImagen(this.usuarioAps)
     this.miNombre = this.utiles.entregaMiNombre();
-    console.log(this.miColor);
-    console.log(this.miImagen);
-    console.log(this.miNombre);
+    //console.log(this.miColor);
+    //console.log(this.miImagen);
+    //console.log(this.miNombre);
   }
   openPage(pages) {
-      if (pages.src != '#'){
-        this.navCtrl.navigateRoot(pages.src);
-      }
+    if (pages.src != '#') {
+      this.navCtrl.navigateRoot(pages.src);
+    }
   }
-  openFamiliaPage(){
+  openFamiliaPage() {
     this.navCtrl.navigateRoot('familia');
-  }  
-  openAntePage(){
-    if (sessionStorage.getItem("RSS_ID")){
-      if (this.parametrosApp.USA_LOG_MODULOS()){
+  }
+  openAntePage() {
+    if (sessionStorage.getItem("RSS_ID")) {
+      if (this.parametrosApp.USA_LOG_MODULOS()) {
         this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'ANTECEDENTES');
       }
     }
     this.navCtrl.navigateRoot('antecedentes');
   }
-  openOrdenesPage(){
-    if (sessionStorage.getItem("RSS_ID")){
-      if (this.parametrosApp.USA_LOG_MODULOS()){
+  openOrdenesPage() {
+    if (sessionStorage.getItem("RSS_ID")) {
+      if (this.parametrosApp.USA_LOG_MODULOS()) {
         this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
       }
     }
     this.navCtrl.navigateRoot('pre-ordenes');
   }
-  openCalendarioPage(){
+  openCalendarioPage() {
     //registramos movimiento
     if (sessionStorage.getItem("RSS_ID")) {
       if (this.parametrosApp.USA_LOG_MODULOS()) {
@@ -167,18 +163,18 @@ export class HomePage implements OnInit {
     }
     this.navCtrl.navigateRoot('calendario');
   }
-  logout(){
+  logout() {
     //aca debemos registrar el fin de la session
     this.registrarSalida();
     this.acceso.logout();
     this.navCtrl.navigateRoot('nuevo-login');
   }
-  openReservarHoraPage(){
+  openReservarHoraPage() {
     this.navCtrl.navigateRoot('pre-tiposatencion');
   }
-  abrirEditar(){
+  abrirEditar() {
     let registro = null;
-    if (localStorage.getItem('REGISTRO')){
+    if (localStorage.getItem('REGISTRO')) {
       registro = JSON.parse(localStorage.getItem('REGISTRO'));
       const navigationExtras: NavigationExtras = {
         queryParams: {
@@ -189,17 +185,17 @@ export class HomePage implements OnInit {
       //this.dismiss();
       this.navCtrl.navigateRoot(['registro-usuario'], navigationExtras);
     }
-    else{
+    else {
       this.utiles.presentToast("No puedes editar ya que no te encuentras registrado", "bottom", 3000);
 
     }
   }
-  dismiss(){
+  dismiss() {
     this.modalCtrl.dismiss();
   }
-  async registrarSalida(){
+  async registrarSalida() {
     //variable de session que identifica el ingreso
-    if (sessionStorage.getItem('RSS_ID')){
+    if (sessionStorage.getItem('RSS_ID')) {
       this.objetoEntrada.VersionAppName = localStorage.getItem('version_app_name');
       this.objetoEntrada.Plataforma = localStorage.getItem('plataforma');
       this.objetoEntrada.VersionAppNumber = localStorage.getItem('version_number');
@@ -216,7 +212,7 @@ export class HomePage implements OnInit {
         if (!this.utiles.isAppOnDevice()) {
           //web
           this.servicioGeo.postIngreso(this.objetoEntrada).subscribe((data: any) => {
-            console.log(data);
+            //console.log(data);
             loader.dismiss();
           });
         }
@@ -224,7 +220,7 @@ export class HomePage implements OnInit {
           //dispositivo
           this.servicioGeo.postIngresoNative(this.objetoEntrada).then(response => {
             let respuesta = JSON.parse(response.data);
-            console.log(respuesta);
+            //console.log(respuesta);
             loader.dismiss();
           });
         }
@@ -234,7 +230,7 @@ export class HomePage implements OnInit {
     }
   }
   //para obtener los movimientos en la app
-  async buscarLogMovimientos(){
+  async buscarLogMovimientos() {
     var idDispositivo = localStorage.getItem('token_dispositivo');
     var cantidadDias = this.parametrosApp.DIAS_LOG_MODULOS();
     this.estaCargando = true;
@@ -245,9 +241,9 @@ export class HomePage implements OnInit {
     });
     await loader.present().then(async () => {
       //si ya se encuentra no es necesario volverlo a cargar
-      if (sessionStorage.getItem('LOG_MOVIMIENTOS')){
+      if (sessionStorage.getItem('LOG_MOVIMIENTOS')) {
         this.itemsMenu = JSON.parse(sessionStorage.getItem('LOG_MOVIMIENTOS'));
-        console.log(this.itemsMenu);
+        //console.log(this.itemsMenu);
         loader.dismiss();
         this.estaCargando = false;
       }
@@ -261,7 +257,7 @@ export class HomePage implements OnInit {
             //se carge constantemente, según ultima observación de 
             //juan moran
             sessionStorage.setItem('LOG_MOVIMIENTOS', JSON.stringify(this.itemsMenu));
-            console.log(this.itemsMenu);
+            //console.log(this.itemsMenu);
             loader.dismiss();
             this.estaCargando = false;
           })
@@ -272,7 +268,7 @@ export class HomePage implements OnInit {
             //procesar
             var data = JSON.parse(response.data);
             this.itemsMenu = this.utiles.entregaArregloHome(data);
-            console.log(this.itemsMenu);
+            //console.log(this.itemsMenu);
             loader.dismiss();
             this.estaCargando = false;
           })
@@ -281,14 +277,14 @@ export class HomePage implements OnInit {
     });
 
   }
-  openNotificacion(modulo){
-    if (modulo && modulo != ''){
+  openNotificacion(modulo) {
+    if (modulo && modulo != '') {
       this.navCtrl.navigateRoot(modulo);
     }
   }
-  openGenerico(modulo){
+  openGenerico(modulo) {
     var pageName = modulo.toLowerCase();
-    if (modulo == 'EXAMENES'){
+    if (modulo == 'EXAMENES') {
       pageName = 'ordenes';
     }
     //registramos movimiento
@@ -300,7 +296,7 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot(pageName);
   }
   //notificaciones
-  async obtenerNotificaciones(){
+  async obtenerNotificaciones() {
     this.estaCargando = true;
     this.estaCargandoNotificaciones = true;
     let loader = await this.loading.create({
@@ -314,10 +310,10 @@ export class HomePage implements OnInit {
       this.estaCargando = false;
       this.estaCargandoNotificaciones = false;
     })
-    
+
   }
 
-  async obtenerNotificacionesApi(){
+  async obtenerNotificacionesApi() {
     this.notificaciones = [];
     this.estaCargando = true;
     this.estaCargandoNotificaciones = true;
@@ -327,8 +323,8 @@ export class HomePage implements OnInit {
       spinner: null,
     });
     var usuario = null;
-    if (localStorage.getItem('UsuarioAps')){
-        usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
+    if (localStorage.getItem('UsuarioAps')) {
+      usuario = JSON.parse(localStorage.getItem('UsuarioAps'));
     }
     var annoConsultar = 0;
     var mesConsultar = 0;
@@ -339,32 +335,32 @@ export class HomePage implements OnInit {
       anno: fechaActual.year()
     };
     var mesEvaluar = {
-        mes: fechaEvaluar.month() + 1,
-        anno: fechaEvaluar.year()
+      mes: fechaEvaluar.month() + 1,
+      anno: fechaEvaluar.year()
     };
     //debemos ver si en los 5 dias de diferencia hay dos meses o un mes
-    if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno){
-        //es le mismo mes
-        mesConsultar = mesActual.mes;
-        annoConsultar = mesActual.anno;
+    if (mesActual.mes == mesEvaluar.mes && mesActual.anno == mesEvaluar.anno) {
+      //es le mismo mes
+      mesConsultar = mesActual.mes;
+      annoConsultar = mesActual.anno;
     }
-    else{
-        //hay diferencia, por tanto se toma el ultimo mes
-        mesConsultar = mesEvaluar.mes;
-        annoConsultar = mesEvaluar.anno;
+    else {
+      //hay diferencia, por tanto se toma el ultimo mes
+      mesConsultar = mesEvaluar.mes;
+      annoConsultar = mesEvaluar.anno;
     }
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.cita.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response:any)=>{
+        this.cita.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe((response: any) => {
           var data = response;
-          console.log(data);
+          //console.log(data);
           this.notificaciones = this.servNotificaciones.construyeNotificaciones(data);
           this.estaCargando = false;
           this.loading.dismiss();
           this.estaCargandoNotificaciones = false;
-          console.log(this.notificaciones);
-        }, error =>{          
+          //console.log(this.notificaciones);
+        }, error => {
           console.log(error.message);
           //revisamos igual las notificaciones ya que pueden haber
           //aquellas que pasan por fuera de la api
@@ -374,16 +370,16 @@ export class HomePage implements OnInit {
           this.estaCargandoNotificaciones = false;
         })
       }
-      else{
+      else {
         //llamada native
-        this.cita.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response:any)=>{
+        this.cita.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then((response: any) => {
           var data = JSON.parse(response.data);
-          console.log(data);
+          //console.log(data);
           this.notificaciones = this.servNotificaciones.construyeNotificaciones(data);
           this.estaCargando = false;
           this.loading.dismiss();
           this.estaCargandoNotificaciones = false;
-        }).catch(error=>{
+        }).catch(error => {
           console.log(error.message);
           //revisamos igual las notificaciones ya que pueden haber
           //aquellas que pasan por fuera de la api
@@ -397,7 +393,7 @@ export class HomePage implements OnInit {
 
   }
 
-  openItemPage(modulo){
+  openItemPage(modulo) {
     this.openGenerico(modulo);
   }
 
@@ -454,21 +450,21 @@ export class HomePage implements OnInit {
   }
   */
 
-  mostrarNotificaciones(mostrar){
+  mostrarNotificaciones(mostrar) {
     this.slides.slideTo(0);
-    if (this.muestraNotificaciones == true && mostrar == true){
+    if (this.muestraNotificaciones == true && mostrar == true) {
       this.muestraNotificaciones = false;
       return;
     }
-    if (this.muestraNotificaciones == false && mostrar == true){
+    if (this.muestraNotificaciones == false && mostrar == true) {
       this.muestraNotificaciones = true;
     }
   }
-  moverSlide(indice){
-    if (indice <= this.notificaciones.length -1){
+  moverSlide(indice) {
+    if (indice <= this.notificaciones.length - 1) {
       this.slides.slideNext();
     }
-    else{
+    else {
       //this.slides.slidePrev();
       //lo volvemos al inicio
       this.slides.slideTo(0);

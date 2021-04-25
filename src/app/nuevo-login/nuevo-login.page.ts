@@ -80,7 +80,7 @@ export class NuevoLoginPage implements OnInit {
     this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
     this.cargarForma();
   }
-  abrirAsistente(){
+  abrirAsistente() {
     const navigationExtras: NavigationExtras = {
       queryParams: {
         modulo: 'nuevo-login'
@@ -88,49 +88,49 @@ export class NuevoLoginPage implements OnInit {
     }
     this.navCtrl.navigateRoot(['pre-registro-uno'], navigationExtras);
   }
-  cargarForma(){
+  cargarForma() {
     this.forma = new FormGroup({
       'run': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.required, Validators.pattern(this.expEmail)]),
-      'clave':new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])    
+      'clave': new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])
     });
     //si usa enrolamiento hay que quitar validación de email
-    if (this.usaEnrolamiento){
+    if (this.usaEnrolamiento) {
       this.forma.get('email').clearValidators();
     }
-    else{
+    else {
       this.forma.get('run').clearValidators();
     }
     //acá ver si dejamos preseteado el usuario y clave
     //por lo pronto lo comentamos
 
-/*     if (this.registro && this.registro.Id > 0){
-      this.forma.setValue({
-        run: this.registro.Run,
-        email: this.registro.CorreoElectronico,
-        nombre: this.registro.Nombres,
-        apellido: this.registro.Apellidos,
-        telefono: this.registro.TelefonoContacto,
-        genero: this.registro.Sexo.toString(),
-        clave: '',
-        repetirClave: ''
-      })
-    } */
+    /*     if (this.registro && this.registro.Id > 0){
+          this.forma.setValue({
+            run: this.registro.Run,
+            email: this.registro.CorreoElectronico,
+            nombre: this.registro.Nombres,
+            apellido: this.registro.Apellidos,
+            telefono: this.registro.TelefonoContacto,
+            genero: this.registro.Sexo.toString(),
+            clave: '',
+            repetirClave: ''
+          })
+        } */
   }
-  async crearToken(){
+  async crearToken() {
     var versionAppName;
     var versionNumber;
     var plataforma;
     //original
-/*     let loader = await this.loading.create({
-      message: 'Creando...<br>Token inicial',
-      duration: 2000
-    }); */
+    /*     let loader = await this.loading.create({
+          message: 'Creando...<br>Token inicial',
+          duration: 2000
+        }); */
     this.estaCargando = true;
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
-      spinner:null,
+      spinner: null,
     });
 
     await loader.present().then(async () => {
@@ -157,17 +157,17 @@ export class NuevoLoginPage implements OnInit {
         this.estaCargando = false;
       }
       else {
-        if (this.platform.is('ios')){
+        if (this.platform.is('ios')) {
           versionAppName = await this.appVersion.getAppName();
           versionNumber = await this.appVersion.getVersionNumber();
           plataforma = "iOS";
-        } 
-        else if (this.platform.is('android')){
+        }
+        else if (this.platform.is('android')) {
           versionAppName = await this.appVersion.getAppName();
           versionNumber = await this.appVersion.getVersionNumber();
           plataforma = "Android";
         }
-        else if (this.platform.is('mobileweb')){
+        else if (this.platform.is('mobileweb')) {
           versionAppName = "Mi salud familiar"
           versionNumber = "0.0";
           plataforma = "Web";
@@ -190,9 +190,9 @@ export class NuevoLoginPage implements OnInit {
 
     })
   }
-  async registrarEntrada(){
+  async registrarEntrada() {
     //variable de session que identifica el ingreso
-    if (!sessionStorage.getItem('RSS_ID')){
+    if (!sessionStorage.getItem('RSS_ID')) {
       this.objetoEntrada.VersionAppName = localStorage.getItem('version_app_name');
       this.objetoEntrada.Plataforma = localStorage.getItem('plataforma');
       this.objetoEntrada.VersionAppNumber = localStorage.getItem('version_number');
@@ -201,26 +201,26 @@ export class NuevoLoginPage implements OnInit {
       //GUARDAMOS EN LA SESSION PARA OCUPARLO DESPUES
       sessionStorage.setItem('ENTRADA', JSON.stringify(this.objetoEntrada));
       //original
-/*       let loader = await this.loading.create({
-        message: 'Creando...<br>registro de sessión',
-        duration: 2000
-      }); */
+      /*       let loader = await this.loading.create({
+              message: 'Creando...<br>registro de sessión',
+              duration: 2000
+            }); */
       this.estaCargando = true;
       let loader = await this.loading.create({
         cssClass: 'loading-vacio',
         showBackdrop: false,
-        spinner:null,
+        spinner: null,
       });
 
       await loader.present().then(async () => {
         if (!this.utiles.isAppOnDevice()) {
           //web
           this.servicioGeo.postIngreso(this.objetoEntrada).subscribe((data: any) => {
-            if (data){
-              if (data.Id > 0){
+            if (data) {
+              if (data.Id > 0) {
                 //guardamos el identificador del registro para procesarlo despues
                 sessionStorage.setItem("RSS_ID", data.Id);
-  
+
               }
             }
             loader.dismiss();
@@ -241,27 +241,22 @@ export class NuevoLoginPage implements OnInit {
 
     }
   }
-  async loguearseRegistro(){
+  async loguearseRegistro() {
     let correo = this.forma.controls.email.value;
     let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
 
     //ahora guardamos
-    //original
-/*     let loader = await this.loading.create({
-      message: 'Creando...<br>Registro',
-      duration: 20000
-    }); */
     this.estaCargando = true;
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
-      spinner:null,
+      spinner: null,
     });
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.servicioGeo.getRegistroAppCorreoPassword(correo, password).subscribe((data)=>{
-          if (data){
+        this.servicioGeo.getRegistroAppCorreoPassword(correo, password).subscribe((data) => {
+          if (data) {
             let respuesta = data;
             localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
             localStorage.setItem('TIENE_REGISTRO', 'true');
@@ -270,23 +265,23 @@ export class NuevoLoginPage implements OnInit {
 
             this.autentificarse(registro.Run, password);
           }
-          else{
+          else {
             this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
             this.estaCargando = false;
             loader.dismiss();
             return;
           }
 
-        }, error=>{
+        }, error => {
           console.log(error.message);
           this.utiles.presentToast("Error de conexión.", "middle", 3000);
           this.estaCargando = false;
           loader.dismiss();
         })
       }
-      else{
+      else {
         //llamada nativa
-        this.servicioGeo.getRegistroAppNativeCorreoPassword(correo, password).then((data)=>{
+        this.servicioGeo.getRegistroAppNativeCorreoPassword(correo, password).then((data) => {
           let respuesta = JSON.parse(data.data);
           if (respuesta) {
             localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
@@ -295,24 +290,24 @@ export class NuevoLoginPage implements OnInit {
             let registro = JSON.parse(localStorage.getItem('REGISTRO'));
             this.autentificarse(registro.Run, password);
           }
-          else{
+          else {
             this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
             this.estaCargando = false;
             loader.dismiss();
             return;
           }
 
-        }).catch(error=>{
+        }).catch(error => {
           console.log(error.message);
           this.utiles.presentToast("Error de conexión.", "middle", 3000);
           this.estaCargando = false;
-          loader.dismiss();        
+          loader.dismiss();
         })
       }
     })
   }
 
-  async loguearseEnrolamiento(){
+  async loguearseEnrolamiento() {
     this.estaCargando = true;
     let run = this.forma.controls.run.value;
     let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
@@ -323,56 +318,52 @@ export class NuevoLoginPage implements OnInit {
   async onSubmit() {
     if (this.forma.invalid) {
       return;
-    } 
-    if (this.usaEnrolamiento){
+    }
+    if (this.usaEnrolamiento) {
       //loguearse con enrolamiento
       this.loguearseEnrolamiento();
     }
-    else{
+    else {
       //loguearse con registro app
       this.loguearseRegistro();
     }
   }
-  async autentificarse(userName, password){
+  async autentificarse(userName, password) {
     //en este caso ya el user name es el email
 
     let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
-    //original
-/*     let loader = await this.loading.create({
-      message: 'Obteniendo...<br>Login',
-      duration: 10000
-    }); */
+
     this.estaCargando = true;
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
-      spinner:null,
+      spinner: null,
     });
 
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.acceso.loginWebDirecto(f).subscribe((response: any)=>{
+        this.acceso.loginWebDirecto(f).subscribe((response: any) => {
           this.procesarLogin(response, loader);
         },
-        (error)=>{
-          loader.dismiss();
-          this.estaCargando = false;
-          return;
-        });
+          (error) => {
+            loader.dismiss();
+            this.estaCargando = false;
+            return;
+          });
       }
-      else{
+      else {
         //llamada nativa
-        this.acceso.loginWebNative(f).then((response: any)=>{
+        this.acceso.loginWebNative(f).then((response: any) => {
           this.procesarLogin(JSON.parse(response.data), loader);
         },
-        (error)=>{
-          this.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
-          this.estaCargando = false;
-          loader.dismiss();
-          return;
-        }
+          (error) => {
+            this.utiles.presentToast('Ocurrió un error de autentificación', 'bottom', 4000);
+            this.estaCargando = false;
+            loader.dismiss();
+            return;
+          }
         );
       }
     })
@@ -411,30 +402,30 @@ export class NuevoLoginPage implements OnInit {
     this.Mensaje = retorno.RespuestaBase.Mensaje;
 
     this.loggedIn = true;
-/*     this.fcmService.initFCM();
-    this.fcmService.receiveMessage(true); */
+    /*     this.fcmService.initFCM();
+        this.fcmService.receiveMessage(true); */
   }
-  procesarLogin(response, loader){
+  procesarLogin(response, loader) {
     var retorno = response;
     let tieneUsuario = false;
-    if (retorno.RespuestaBase){
+    if (retorno.RespuestaBase) {
       if (retorno.RespuestaBase.CodigoMensaje == 0) {
         //esta todo ok
         var user;
         var userFamilia;
-        if (retorno.UsuarioAps){
+        if (retorno.UsuarioAps) {
           user = JSON.stringify(retorno.UsuarioAps);
           //antes debemos validar si tiene entidad contratante
-          if (user.NodId && this.parametrosApp.USA_ENTIDAD_CONTRATANTE()){
+          if (user.NodId && this.parametrosApp.USA_ENTIDAD_CONTRATANTE()) {
             //usa entidad contratante y tiene nodo
-            if (retorno.UsuarioAps.EntidadContratante && retorno.UsuarioAps.EntidadContratante.length > 0){
+            if (retorno.UsuarioAps.EntidadContratante && retorno.UsuarioAps.EntidadContratante.length > 0) {
               //tiene entidad contratante
               tieneUsuario = true;
               this.setDatosUsuario(retorno, user, userFamilia);
               loader.dismiss();
               this.estaCargando = false;
             }
-            else{
+            else {
               //no tiene entidad contratante
               this.utiles.presentToast("No tiene entidad contratante asociada", "middle", 3000);
               loader.dismiss();
@@ -449,11 +440,11 @@ export class NuevoLoginPage implements OnInit {
             loader.dismiss();
             this.estaCargando = false;
           }
-              
+
         }
 
         //si tiene usuario está valido
-        if (!tieneUsuario){
+        if (!tieneUsuario) {
           this.utiles.presentToast("Tiene registro correcto, pero no cuenta con información en la red de salud.", "middle", 3000);
         }
         this.crearToken();
@@ -473,7 +464,7 @@ export class NuevoLoginPage implements OnInit {
       }
 
     }
-    else{
+    else {
       //error también
       this.loggedIn = false;
       this.CodigoMensaje = 1000;
@@ -485,10 +476,10 @@ export class NuevoLoginPage implements OnInit {
       return;
     }
   }
-  irAHome(){
+  irAHome() {
     this.navCtrl.navigateRoot('home');
   }
-  irRecuperarClave(){
+  irRecuperarClave() {
     this.navCtrl.navigateRoot('recuperar-clave');
   }
   get f() { return this.forma.controls; }

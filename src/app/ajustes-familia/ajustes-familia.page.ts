@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController,  NavController, ToastController, Platform,  LoadingController, MenuController } from '@ionic/angular';
+import { ModalController, NavController, ToastController, Platform, LoadingController, MenuController } from '@ionic/angular';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 //SERVICIOS
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
@@ -34,7 +34,7 @@ export class AjustesFamiliaPage implements OnInit {
     public navCtrl: NavController,
     public toast: ToastController,
     public platform: Platform,
-    public menu:MenuController,
+    public menu: MenuController,
     public loading: LoadingController,
     private img: ServicioImagen,
     public activatedRoute: ActivatedRoute,
@@ -42,8 +42,8 @@ export class AjustesFamiliaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (localStorage.getItem('TIENE_REGISTRO')){
-      if (localStorage.getItem('TIENE_REGISTRO').toLowerCase() == 'true'){
+    if (localStorage.getItem('TIENE_REGISTRO')) {
+      if (localStorage.getItem('TIENE_REGISTRO').toLowerCase() == 'true') {
         this.tieneRegistro = true;
       }
 
@@ -56,7 +56,7 @@ export class AjustesFamiliaPage implements OnInit {
         this.miColor = this.utiles.entregaColor(this.usuarioAps);
         this.color = this.miColor;//this.usuarioAps.Color;
         this.nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-        console.log(this.usuarioAps);
+        //console.log(this.usuarioAps);
       }
     });
   }
@@ -65,13 +65,6 @@ export class AjustesFamiliaPage implements OnInit {
     this.color = color;
   }
   changeListener($event): void {
-    //lo comentamos por mientras
-
-    /*     if (!this.utiles.isAppOnDevice()){
-          this.utiles.presentToast('Esta operación no esta permitida', 'center', 3000);
-          return;
-        }
-        else { */
     this.fileP = $event.target.files[0];
 
     if (this.fileP) {
@@ -85,13 +78,11 @@ export class AjustesFamiliaPage implements OnInit {
       //this.presentToast('No ha seleccionado ninguna imágen válida.'); 
       this.utiles.presentToast('No ha seleccionado ninguna imágen válida.', 'center', 3000);
     }
-    /*  } */
-
   }
 
   async putImagen(files) {
     var uspId = this.usuarioAps.Id.toString();
-    console.log(files.size);
+    //console.log(files.size);
     let loader = await this.loading.create({
       message: 'Guardando...<br>Imagen del usuario.',
       duration: 20000
@@ -200,14 +191,11 @@ export class AjustesFamiliaPage implements OnInit {
         //llamada web
         this.img.putColor(uspId, colorGuardar).subscribe((data: any) => {
           if (data) {
-            //hay que setear el color del localstorage
-            //this.utiles.cambiaColorLocalStorage(data);
             this.color = data;
             if (this.usuarioAps) {
               if (this.usuarioAps.Color) {
                 //dejamos al usuario con la nueva imagen
                 this.usuarioAps.Color = data;
-                //sessionStorage.setItem('UsuarioAps', JSON.stringify(nuevoUsuarioAps));
               }
             }
             if (sessionStorage.UsuarioAps) {
@@ -287,7 +275,7 @@ export class AjustesFamiliaPage implements OnInit {
     });
   }
 
-  abrirEditar(){
+  abrirEditar() {
     //debemos pasar al usuario 
     let query = {
       usuario: null

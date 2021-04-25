@@ -44,8 +44,6 @@ export class ContactabilidadPage implements OnInit {
     public alertController: AlertController
   ) { }
 
-  //ACA HAY QUE SACAR LOS CAMPOS REQUERIDOS Y LOS ASTERISCOS DE LOS LABELS
-  //LO DDEMAS ESTTA FUNCIONANDO BIEN
   ngOnInit() {
     moment.locale('es');
     //obtenemos el registro
@@ -68,7 +66,7 @@ export class ContactabilidadPage implements OnInit {
             this.modificaRegistro = true;
           }
         }
-        console.log(this.usuarioAps);
+        //console.log(this.usuarioAps);
       }
 
     });
@@ -91,9 +89,9 @@ export class ContactabilidadPage implements OnInit {
         })
       }
     }
-    else{
+    else {
       //no tiene registro, pero puede tener datos de contactabilidad en el local storage
-      if (this.usuarioAps.Contactabilidad != null){
+      if (this.usuarioAps.Contactabilidad != null) {
         this.forma.setValue({
           nombreSocial: this.usuarioAps.Contactabilidad.NombreSocial,
           email: this.usuarioAps.Contactabilidad.Email,
@@ -102,8 +100,8 @@ export class ContactabilidadPage implements OnInit {
       }
     }
   }
-  async onSumbit(){
-    if (this.parametrosApp.USA_API_MANAGEMENT()){
+  async onSumbit() {
+    if (this.parametrosApp.USA_API_MANAGEMENT()) {
       let loader = await this.loading.create({
         cssClass: 'loading-vacio',
         showBackdrop: false,
@@ -111,9 +109,9 @@ export class ContactabilidadPage implements OnInit {
         //message: 'Cargando...<br>tipos de atención',
         duration: 2000
       });
-      this.estaCargando =true;
+      this.estaCargando = true;
       this.tituloProgress = 'Actualizando datos de contacto';
-  
+
       //variables a enviar
       let email = this.forma.controls.email ? this.forma.controls.email.value : '';
       let nombreSocial = this.forma.controls.nombreSocial ? this.forma.controls.nombreSocial.value : '';
@@ -124,12 +122,12 @@ export class ContactabilidadPage implements OnInit {
       await loader.present().then(async () => {
         if (!this.utiles.isAppOnDevice()) {
           //llamada web
-          this.servicioGeo.postInformarPersona(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').subscribe((response: any)=>{
+          this.servicioGeo.postInformarPersona(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').subscribe((response: any) => {
             //procesar respuesta
             var datos = response;
             this.procesarRespuesta(datos, loader, nombreSocial, telefono, email, run);
-  
-          },error=>{
+
+          }, error => {
             console.log(error.message);
             this.estaCargando = false;
             loader.dismiss();
@@ -139,12 +137,12 @@ export class ContactabilidadPage implements OnInit {
         }
         else {
           //llamada nativa
-          this.servicioGeo.postInformarPersonaNative(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').then((response:any)=>{
+          this.servicioGeo.postInformarPersonaNative(run, nombreSocial, email, telefono, 'MOVIL_FICHA_FAMILIAR').then((response: any) => {
             //procesar respuesta
             var datos = JSON.parse(response.data);
             this.procesarRespuesta(datos, loader, nombreSocial, telefono, email, run);
-  
-          }).catch(error=>{
+
+          }).catch(error => {
             console.log(error.message);
             this.estaCargando = false;
             loader.dismiss();
@@ -154,69 +152,69 @@ export class ContactabilidadPage implements OnInit {
         }
       });
     }
-    else{
+    else {
       //si no tiene api management
-      this.utiles.presentToast('Esta funcionalidad no está disponible','bottom', 3000);
+      this.utiles.presentToast('Esta funcionalidad no está disponible', 'bottom', 3000);
     }
 
   }
-  async procesarRespuesta(data, loading, nombreSocial, telefono, email, run){
+  async procesarRespuesta(data, loading, nombreSocial, telefono, email, run) {
     //primero evaluamos la respuesta
-    if (data){
-      if (data.InformarPersonaResponse){
-        if (data.InformarPersonaResponse.RespuestaBase){
+    if (data) {
+      if (data.InformarPersonaResponse) {
+        if (data.InformarPersonaResponse.RespuestaBase) {
           //acá trae info de rayen y de ryf
           //ojo que debemos actualizar igual el registro, al menos con el telefono y el apodo
           //ya que el email es de autentificacion y no se puede cambiar
           let correctoRayen = false;
           let correctoRyf = false;
-          if (data.InformarPersonaResponse.RespuestaBase.Rayen){
-            if (data.InformarPersonaResponse.RespuestaBase.Rayen.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA'){
+          if (data.InformarPersonaResponse.RespuestaBase.Rayen) {
+            if (data.InformarPersonaResponse.RespuestaBase.Rayen.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
               correctoRayen = true;
-              console.log('actualizado rayen');
+              //console.log('actualizado rayen');
             }
           }
           if (data.InformarPersonaResponse.RespuestaBase.Ryf) {
             if (data.InformarPersonaResponse.RespuestaBase.Ryf.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
               correctoRyf = true;
-              console.log('actualizado ryf');
+              //console.log('actualizado ryf');
             }
           }
-          if (correctoRyf || correctoRayen){
+          if (correctoRyf || correctoRayen) {
             this.estaCargando = false;
             this.tituloProgress = '';
             loading.dismiss();
             this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
             //se debe actualizar registro solo si esta registrado
-            if (this.modificaRegistro){
+            if (this.modificaRegistro) {
               this.actualizarRegistro(nombreSocial, telefono);
             }
             //aca debemos hacer la llamada para obtener la contactabilidad y guardarla en el localstorage
             //this.utiles.actualizarContactabilidad(this.usuarioAps, nombreSocial, telefono, email);
             this.obtenerContactabilidad(run);
           }
-          else{
+          else {
             this.estaCargando = false;
             loading.dismiss();
             this.tituloProgress = '';
             this.utiles.presentToast('Error al actualizar los datos', 'bottom', 2000);
           }
         }
-        else{
+        else {
           this.estaCargando = false;
           loading.dismiss();
           this.tituloProgress = '';
           this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
         }
       }
-      else{
+      else {
         this.estaCargando = false;
         loading.dismiss();
         this.tituloProgress = '';
         this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
       }
     }
-    else{
+    else {
       this.estaCargando = false;
       loading.dismiss();
       this.utiles.presentToast('Error al actualizar los datos', 'bottom', 3000);
@@ -224,9 +222,9 @@ export class ContactabilidadPage implements OnInit {
     }
   }
 
-  async actualizarRegistro(nombreSocial, telefono){
+  async actualizarRegistro(nombreSocial, telefono) {
     var fechaNac = moment();
-    if (this.registro.FechaNacimiento){
+    if (this.registro.FechaNacimiento) {
       fechaNac = moment(this.registro.FechaNacimiento);
     }
     //ahora actualizar el registro
@@ -247,34 +245,34 @@ export class ContactabilidadPage implements OnInit {
       showBackdrop: false,
       spinner: null
     });
-    this.estaCargando =true;
+    this.estaCargando = true;
     this.tituloProgress = 'Actualizando datos de registro';
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.servicioGeo.postRegistroFamilia(this.registro).subscribe((data)=>{
+        this.servicioGeo.postRegistroFamilia(this.registro).subscribe((data) => {
           let respuesta = data;
           localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
           loader.dismiss();
           this.estaCargando = false;
           this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
         },
-        error=>{
-          loader.dismiss();
-          this.estaCargando = false;
-          this.utiles.presentToast(error, 'bottom', 2000);
-        });
+          error => {
+            loader.dismiss();
+            this.estaCargando = false;
+            this.utiles.presentToast(error, 'bottom', 2000);
+          });
       }
-      else{
+      else {
         //llamada nativa
-        this.servicioGeo.postRegistroFamiliaNative(this.registro).then((data)=>{
+        this.servicioGeo.postRegistroFamiliaNative(this.registro).then((data) => {
           let respuesta = JSON.parse(data.data);
           localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
           loader.dismiss();
           this.estaCargando = false;
           this.utiles.presentToast('Datos actualizados correctamente', 'bottom', 2000);
 
-        }).catch(error =>{
+        }).catch(error => {
           loader.dismiss();
           this.estaCargando = false;
           this.utiles.presentToast(error, 'bottom', 2000);
@@ -282,7 +280,7 @@ export class ContactabilidadPage implements OnInit {
       }
     });
   }
-  actualizarContactabilidad(usuario, nombreSocial, telefono, email){
+  actualizarContactabilidad(usuario, nombreSocial, telefono, email) {
     //buscamos al usuario en local sttorage
     var contactabilidad = {
       Rut: usuario.Rut,
@@ -293,65 +291,65 @@ export class ContactabilidadPage implements OnInit {
       EtiquetaTelefono: 'MOVIL_FICHA_FAMILIAR'
     }
 
-    if (localStorage.getItem('UsuarioAps')){
+    if (localStorage.getItem('UsuarioAps')) {
       var usu = JSON.parse(localStorage.getItem('UsuarioAps'));
-      if (usu){
-        if (usu.Id == usuario.Id){
+      if (usu) {
+        if (usu.Id == usuario.Id) {
           usu.Contactabilidad = contactabilidad;
           localStorage.setItem('UsuarioAps', JSON.stringify(usu));
         }
       }
     }
-    if (localStorage.getItem('UsuariosFamilia')){
+    if (localStorage.getItem('UsuariosFamilia')) {
       var existe = false;
       var usuarios = JSON.parse(localStorage.getItem('UsuariosFamilia'));
-      if (usuarios && usuarios.length > 0){
-        for(var i=0; i < usuarios.length; i++){
-          if (usuarios[i].Id == usuario.Id){
+      if (usuarios && usuarios.length > 0) {
+        for (var i = 0; i < usuarios.length; i++) {
+          if (usuarios[i].Id == usuario.Id) {
             usuarios[i].Contactabilidad = contactabilidad;
             existe = true;
           }
         }
       }
-      if (existe){
+      if (existe) {
         localStorage.setItem('UsuariosFamilia', JSON.stringify(usuarios));
       }
     }
 
   }
-  async obtenerContactabilidad(run){
+  async obtenerContactabilidad(run) {
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
       spinner: null
     });
-    this.estaCargando =true;
+    this.estaCargando = true;
     this.tituloProgress = 'Buscando contactabilidad';
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.servicioGeo.getContactabilidad(run).subscribe((data)=>{
+        this.servicioGeo.getContactabilidad(run).subscribe((data) => {
           let respuesta = data;
           loader.dismiss();
           this.estaCargando = false;
           this.utiles.actualizarContactabilidad(respuesta);
         },
-        error=>{
-          loader.dismiss();
-          this.estaCargando = false;
-          this.utiles.presentToast(error, 'bottom', 2000);
-        });
+          error => {
+            loader.dismiss();
+            this.estaCargando = false;
+            this.utiles.presentToast(error, 'bottom', 2000);
+          });
       }
-      else{
+      else {
         //llamada nativa
-        this.servicioGeo.getContactabilidadNative(run).then((data)=>{
+        this.servicioGeo.getContactabilidadNative(run).then((data) => {
           let respuesta = JSON.parse(data.data);
           loader.dismiss();
           this.estaCargando = false;
           this.utiles.actualizarContactabilidad(respuesta);
 
-        }).catch(error =>{
+        }).catch(error => {
           loader.dismiss();
           this.estaCargando = false;
           this.utiles.presentToast(error, 'bottom', 2000);
@@ -363,5 +361,5 @@ export class ContactabilidadPage implements OnInit {
   }
 
   get f() { return this.forma.controls; }
-  
+
 }

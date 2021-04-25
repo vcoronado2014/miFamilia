@@ -16,12 +16,6 @@
     <app-avatar [lines]="none" [urlImagen] = "item.UrlImagen" 
     [nombreCompleto]="item.NombreUsuario" 
     [parentezco]="item.Parentezco"></app-avatar>
-<!--     <ion-item lines="none" #myList>
-      <ion-avatar slot="start">
-        <text-avatar [text]="item.NombreUsuario" [color]="item.Color" [textColor]="textColor"></text-avatar>
-      </ion-avatar>
-      <ion-label class="ion-text-wrap">{{ item.NombreUsuario }}</ion-label>
-    </ion-item> -->
     <ion-item lines="none">
       <ion-grid>
         <ion-row>
@@ -36,7 +30,6 @@
     </ion-item>
     <ion-item lines="none">
       <ion-badge color="primary" slot="end">{{ item.Fecha }}</ion-badge>
-      <!-- <ion-icon name="time" slot="end"></ion-icon> -->
     </ion-item>
   </ion-card-content>
 </ion-card>  

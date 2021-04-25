@@ -45,23 +45,20 @@ export class CuposDisponiblesPage implements OnInit {
   //tipos de atencion
   tiposAtencion = [];
   comboSeleccionado = "";
-    //******************** */
-  @ViewChild('myList', {read: IonItem}) list: IonItem;
+  //******************** */
+  @ViewChild('myList', { read: IonItem }) list: IonItem;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
     public modalCtrl: ModalController,
     public platform: Platform,
     public loading: LoadingController,
-    public menu:MenuController,
+    public menu: MenuController,
     public utiles: ServicioUtiles,
     public acceso: ServicioAcceso,
     public cita: ServicioCitas,
   ) { }
-  
-  //AHORA DEBO REVISAR EL WEBSERVICE DE PERSONA
-  //PARA OBTENER LA INFORMACION DEL PACIENTE Y usarlo en las consultas
-  
+
   ngOnInit() {
     moment.locale('es');
     if (sessionStorage.UsuarioAps) {
@@ -80,26 +77,26 @@ export class CuposDisponiblesPage implements OnInit {
   }
 
   //llamada al servidor
-  construyeSemanaBuscar(pagina, operacion){
+  construyeSemanaBuscar(pagina, operacion) {
     //si la pagina es 0 se debe construir la semana a contar de la fecha actual
     var factorDias = 0;
     var fecha = new Date();
     //en el caso que venga la misma pagina que se envio y la operacion nula, debemos tomar los datos de la semana
     //seleccionada actual
 
-    if (operacion == null){
-      if (this.semana){
+    if (operacion == null) {
+      if (this.semana) {
         var fechaIni = moment();
         var date = new Date();
-        if (operacion == 'ant'){
+        if (operacion == 'ant') {
           //si es anterior hay que ver que pasa
           //deberiamos retroceder desde la fecha de inicio
           fechaIni = moment(this.semana.start).add(-8, 'day');
-          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0,0,0,0);
+          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
         }
-        else{
+        else {
           fechaIni = moment(this.semana.end);
-          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0,0,0,0);
+          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
 
         }
         this.utiles.construyeSemana(this.runPaciente, this.codigoDeis, date);
@@ -115,35 +112,35 @@ export class CuposDisponiblesPage implements OnInit {
         this.buscarDisponibilidad(ini, ter, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
       }
     }
-    if (pagina == 0){
+    if (pagina == 0) {
       this.utiles.construyeSemana(this.runPaciente, this.codigoDeis, fecha);
       this.semana = this.utiles.semana;
       this.semanas = this.utiles.semanas;
-      
+
       //esto lo cambiamos para que obtenga la semana completa
       //var ini = this.semana.semanas[0].start;
       var ini = this.semana.start;
       //var ter = this.semana.semanas[0].end;
       var ter = this.semana.end;
-      console.log(this.semana);
+      //console.log(this.semana);
       //carga inicial
       sessionStorage.setItem("PAGINA_ACTUAL", pagina);
       this.buscarDisponibilidad(ini, ter, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
     }
-    else{
+    else {
       //aca debemos sacar fecha inicio y termino
-      if (this.semana){
+      if (this.semana) {
         var fechaIni = moment();
         var date = new Date();
-        if (operacion == 'ant'){
+        if (operacion == 'ant') {
           //si es anterior hay que ver que pasa
           //deberiamos retroceder desde la fecha de inicio
           fechaIni = moment(this.semana.start).add(-8, 'day');
-          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0,0,0,0);
+          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
         }
-        else{
+        else {
           fechaIni = moment(this.semana.end);
-          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0,0,0,0);
+          date = new Date(fechaIni.year(), fechaIni.month(), fechaIni.date(), 0, 0, 0, 0);
 
         }
         this.utiles.construyeSemana(this.runPaciente, this.codigoDeis, date);
@@ -161,7 +158,7 @@ export class CuposDisponiblesPage implements OnInit {
     }
   }
 
-  async buscarDisponibilidad(start, end, organization, patient, serviceType, tipoOperacion){
+  async buscarDisponibilidad(start, end, organization, patient, serviceType, tipoOperacion) {
     //ACA ME FALTA CONTROLAR LOS MENSAJES
     let loader = await this.loading.create({
       message: 'Cargando...<br>disponibilidad',
@@ -173,37 +170,37 @@ export class CuposDisponiblesPage implements OnInit {
       this.citasAgrupadas = [];
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+        this.cita.getDisponibilidad(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any) => {
           this.procesarRespuestaTotal(response, loader);
         });
-/*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
-          this.procesarRespuestaTotal(response, loader);
-        }); */
+        /*         this.cita.getDisponibilidadApi(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).subscribe((response: any)=>{
+                  this.procesarRespuestaTotal(response, loader);
+                }); */
       }
       else {
         //llamada nativa
-        this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+        this.cita.getDisponibilidadNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any) => {
           var respuesta = JSON.parse(response.data);
           this.procesarRespuestaTotal(respuesta, loader);
         });
-/*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
-          var respuesta = JSON.parse(response.data);
-          this.procesarRespuestaTotal(respuesta, loader);
-        }); */
+        /*         this.cita.getDisponibilidadApiNative(start, end, organization, patient, serviceType, '', '', tipoOperacion, this.nodId).then((response: any)=>{
+                  var respuesta = JSON.parse(response.data);
+                  this.procesarRespuestaTotal(respuesta, loader);
+                }); */
       }
     });
   }
-  procesarRespuestaTotal(data, loader){
+  procesarRespuestaTotal(data, loader) {
     //vienen las citas sin fecha
     this.cuposAgrupadosSelected = [];
     this.tiposAtencion = [];
-    console.log(this.semana);
-    if (data && data.Mensaje){
+    //console.log(this.semana);
+    if (data && data.Mensaje) {
       //correcto
-      if (data.Mensaje.Codigo == 'correcto'){
+      if (data.Mensaje.Codigo == 'correcto') {
         //todo bien procesar las citas
         var contador = 0;
-        if (data.CitasDisponibles && data.CitasDisponibles.length > 0){
+        if (data.CitasDisponibles && data.CitasDisponibles.length > 0) {
           data.CitasDisponibles.forEach(cit => {
             cit.horaInicio = moment(cit.FechaHoraInicio).format('HH:mm');
             cit.horaTermino = moment(cit.FechaHoraTermino).format('HH:mm');
@@ -211,37 +208,37 @@ export class CuposDisponiblesPage implements OnInit {
             contador++;
           });
         }
-        if (data.TiposAtencion){
+        if (data.TiposAtencion) {
           this.tiposAtencion = this.crearTiposAtencion(data.TiposAtencion);
-          if (this.tiposAtencion && this.tiposAtencion.length > 0){
+          if (this.tiposAtencion && this.tiposAtencion.length > 0) {
             this.comboSeleccionado = this.tiposAtencion[0].Texto;
           }
         }
         //aca asignamos las citas
         this.citas = data.CitasDisponibles;
         //hacemos foreach a las semanas
-        if (this.semana.semanas && this.semana.semanas.length > 0){
+        if (this.semana.semanas && this.semana.semanas.length > 0) {
           this.semana.semanas.forEach(sem => {
             var cupos = 0;
-            console.log(sem);
-            if (this.citas && this.citas.length > 0){
+            //console.log(sem);
+            if (this.citas && this.citas.length > 0) {
               sem.Cupos = [];
               this.citas.forEach(cupo => {
                 //cupos = 0;
                 var fechaComparar = moment(cupo.FechaHoraInicio).format('YYYY-MM-DD');
-                if (moment(sem.start).format('YYYY-MM-DD') == fechaComparar){
+                if (moment(sem.start).format('YYYY-MM-DD') == fechaComparar) {
                   sem.Cupos.push(cupo);
                   cupos++;
                 }
               });
             }
-            console.log(cupos);
+            //console.log(cupos);
             sem.total = cupos;
             sem.CuposAgrupados = this.agruparCitasTodas(sem.Cupos);
           });
         }
-        //console.log(this.citas);
-        console.log(this.semana);
+        ////console.log(this.citas);
+        //console.log(this.semana);
         //aca guardamos la semana en una variable de session
         sessionStorage.setItem('CUPOS_SEMANA', JSON.stringify(this.semana));
         //this.agruparCitas();
@@ -252,7 +249,7 @@ export class CuposDisponiblesPage implements OnInit {
         this.filtrarTiposAtencion();
         loader.dismiss();
       }
-      else{
+      else {
         this.cuposAgrupadosSelected = [];
         loader.dismiss();
       }
@@ -260,7 +257,7 @@ export class CuposDisponiblesPage implements OnInit {
     }
   }
 
-  agruparCitasTodas(arrCupos){
+  agruparCitasTodas(arrCupos) {
     //aca vienen los cupos
     var cuposAgrupados = [];
     //this.citasAgrupadas = [];
@@ -316,15 +313,15 @@ export class CuposDisponiblesPage implements OnInit {
     //console.log(this.citasAgrupadas);
     return cuposAgrupados;
   }
-  crearTiposAtencion(tiposAtencion){
+  crearTiposAtencion(tiposAtencion) {
     var arr = [];
-/*     var entidadInicial = {
-      Texto: 'Todos',
-      Valor: 0,
-      Selected: true
-    }
-    arr.push(entidadInicial); */
-    if (tiposAtencion && tiposAtencion.length > 0){
+    /*     var entidadInicial = {
+          Texto: 'Todos',
+          Valor: 0,
+          Selected: true
+        }
+        arr.push(entidadInicial); */
+    if (tiposAtencion && tiposAtencion.length > 0) {
       tiposAtencion.forEach(tipo => {
         var contador = 1;
         var entidadTipo = {
@@ -339,58 +336,58 @@ export class CuposDisponiblesPage implements OnInit {
 
     return arr;
   }
-  transformDate(value, format){
+  transformDate(value, format) {
     var pi = new MomentPipe();
     return pi.transform(value, format);
   }
-  traduceString(texto){
+  traduceString(texto) {
     return this.utiles.traduceString(texto);
   }
-  logout(){
+  logout() {
     this.acceso.logout();
     this.navCtrl.navigateRoot('login');
   }
-  onClickCambiarSemana(operacion){
-    if (operacion == 'ant'){
+  onClickCambiarSemana(operacion) {
+    if (operacion == 'ant') {
       //console.log('anterior');
-      if (this.indiceActual == 0){
+      if (this.indiceActual == 0) {
         return;
       }
       this.indiceActual--;
     }
-    else{
-      if (this.indiceActual < this.cantidadSemanas){
+    else {
+      if (this.indiceActual < this.cantidadSemanas) {
         //correcto
         this.indiceActual++;
       }
-      else{
+      else {
         return;
       }
     }
     this.construyeSemanaBuscar(this.indiceActual, operacion);
 
   }
-  filtrarSemana(semana){
-    if (semana){
+  filtrarSemana(semana) {
+    if (semana) {
       //primero contamos
-      if (semana.Cupos > 0){
+      if (semana.Cupos > 0) {
         var contador = 0;
         semana.Cupos.forEach(cupo => {
-          if (cupo.TipoAtencion == this.comboSeleccionado){
+          if (cupo.TipoAtencion == this.comboSeleccionado) {
             contador++;
           }
         });
         //total de horas por tipo atencion
         semana.total = contador;
         //ahora se deben reprocesar las citas
-        if (semana.CuposAgrupados && semana.CuposAgrupados.length > 0){
+        if (semana.CuposAgrupados && semana.CuposAgrupados.length > 0) {
           semana.CuposAgrupados.forEach(cupo => {
-            if (cupo[1].HorasDisponibles && cupo[1].HorasDisponibles.length > 0){
+            if (cupo[1].HorasDisponibles && cupo[1].HorasDisponibles.length > 0) {
               cupo[1].HorasDisponibles.forEach(element => {
-                if (element.TipoAtencion != this.comboSeleccionado){
+                if (element.TipoAtencion != this.comboSeleccionado) {
                   element.Visible = false;
                 }
-                else{
+                else {
                   element.Visible = true;
                 }
               });
@@ -402,48 +399,48 @@ export class CuposDisponiblesPage implements OnInit {
 
     }
   }
-  seleccionarCuposAgrupados(item){
-    console.log(item);
+  seleccionarCuposAgrupados(item) {
+    //console.log(item);
     this.itemSelected = item;
     this.cuposAgrupadosSelected = [];
-    if (item != null){
-      if (this.semana.semanas && this.semana.semanas.length > 0){
+    if (item != null) {
+      if (this.semana.semanas && this.semana.semanas.length > 0) {
         this.semana.semanas.forEach(sem => {
-          if (sem.end == item.end){
+          if (sem.end == item.end) {
             sem.selected = true;
             this.cuposAgrupadosSelected = sem.CuposAgrupados;
-            console.log(sem);
+            //console.log(sem);
             //this.cuposAgrupadosSelected = this.filter(sem.CuposAgrupados);
             //filtramos
             this.filtrarTiposAtencion();
-            console.log(this.cuposAgrupadosSelected);
+            //console.log(this.cuposAgrupadosSelected);
           }
-          else{
+          else {
             sem.selected = false;
           }
         });
       }
     }
   }
-  tipoSeleccionado(event){
-    if (event.detail.value){
+  tipoSeleccionado(event) {
+    if (event.detail.value) {
       this.comboSeleccionado = event.detail.value;
-      console.log(this.comboSeleccionado);
+      //console.log(this.comboSeleccionado);
       //this.seleccionarCuposAgrupados(this.itemSelected);
       this.filtrarTiposAtencion();
     }
   }
-  filtrarTiposAtencion(){
+  filtrarTiposAtencion() {
     //arr cuposAgrupadosSelected
     var total = 0;
-    if (this.cuposAgrupadosSelected && this.cuposAgrupadosSelected.length > 0){
+    if (this.cuposAgrupadosSelected && this.cuposAgrupadosSelected.length > 0) {
       this.cuposAgrupadosSelected.forEach(cupo => {
-        if (cupo[1].HorasDisponibles && cupo[1].HorasDisponibles.length > 0){
+        if (cupo[1].HorasDisponibles && cupo[1].HorasDisponibles.length > 0) {
           cupo[1].HorasDisponibles.forEach(element => {
-            if (element.TipoAtencion != this.comboSeleccionado){
+            if (element.TipoAtencion != this.comboSeleccionado) {
               element.Visible = false;
             }
-            else{
+            else {
               element.Visible = true;
               total++;
             }
@@ -468,108 +465,72 @@ export class CuposDisponiblesPage implements OnInit {
       }
       sessionStorage.setItem('CUPOS_SEMANA', JSON.stringify(this.semana));
     }
-    console.log(this.cuposAgrupadosSelected);
+    //console.log(this.cuposAgrupadosSelected);
 
   }
-  contadorHorasDisponibles(cupos){
+  contadorHorasDisponibles(cupos) {
     var total = 0;
-    if (cupos && cupos.length > 0){
+    if (cupos && cupos.length > 0) {
       cupos.forEach(element => {
-        if (element.TipoAtencion == this.comboSeleccionado){
+        if (element.TipoAtencion == this.comboSeleccionado) {
           total++;
         }
       });
     }
     return total;
   }
-  /*
-  async mesSelected(item){
-    //realizar la llamada para cargar los eventos del mes
-    console.log(item.detail.value);
-    var arr = item.detail.value.split(',');
-    if (arr){
-      if (arr.length == 2){
-        var mes = arr[0];
-        var anno = arr[1];
-        // setear this.mesActualSeleccionado al mes seleccionado de lo contrario simpre sera el mes actual
-        //this.mesActualSeleccionado = mes;
-        this.mesActualSeleccionado = item.detail.value;
-        let loader = await this.loading.create({
-          message: 'Obteniendo...<br>Información del usuario',
-          duration: 20000
-        });
-    
-        await loader.present().then(async () => {
-          if(!this.utiles.isAppOnDevice()){
-            //llamada web
-            //this.cargarDatosWeb(mes, anno, loader);
-            this.cargarDatosWebN(mes, anno, loader);
-          }
-          else {
-            //llamada nativa
-            this.cargarDatosNativeN(mes, anno, loader);
-          }
-        });
+
+  filter(cuposDisponibles) {
+    var fi = new FilterPipe();
+    var arr = [];
+    if (cuposDisponibles && cuposDisponibles.length > 0) {
+      cuposDisponibles.forEach(cupo => {
+        if (cupo[1].HorasDisponibles && cupo[1].HorasDisponibles.length > 0) {
+          arr = fi.transform(cupo[1].HorasDisponibles, this.comboSeleccionado);
+        }
+      })
+    }
+    return arr;
+  }
+
+  async citaSelected(item) {
+    if (item) {
+      this.itemSelected = item;
+    }
+    const modal = await this.modalCtrl.create(
+      {
+        component: ModalOperacionCitaPage,
+        componentProps: {
+          'cita': JSON.stringify(item),
+          'operacion': 'reservar'
+        }
+      }
+    );
+    modal.onDidDismiss().then((data) => {
+      if (data.data && data.data.accion) {
+        var accion = data.data.accion;
+        //obtenemos la pagina actual
+        var pag = 0;
+        if (sessionStorage.getItem('NUMERO_PAGINA')) {
+          pag = parseInt(sessionStorage.getItem('NUMERO_PAGINA'));
+        }
+        this.construyeSemanaBuscar(pag, null);
+        //revisar esto NO FUNCIONA
+        //this.seleccionarCuposAgrupados(this.itemSelected);
 
       }
-    }
-         
+    });
+    return await modal.present();
   }
-  */
- filter(cuposDisponibles){
-   var fi = new FilterPipe();
-   var arr=[];
-  if (cuposDisponibles && cuposDisponibles.length > 0){
-    cuposDisponibles.forEach(cupo => {
-      if (cupo[1].HorasDisponibles && cupo[1].HorasDisponibles.length > 0){
-        arr = fi.transform(cupo[1].HorasDisponibles, this.comboSeleccionado);
-      }
-    })
-  }
-  return arr;
- }
-/*  split(input: string, sep: string, inx: number){
-  var pi = new SplitPipe();
-  return pi.transform(input, sep, inx);
-} */
-async citaSelected(item){
-  if (item){
-    this.itemSelected = item;
-  }
-  const modal = await this.modalCtrl.create(
-    {
-      component: ModalOperacionCitaPage,
-      componentProps: {
-        'cita': JSON.stringify(item),
-        'operacion': 'reservar'
+  transformDateIso(dateString) {
+    var retorno = "";
+    var parteT = dateString.split("T");
+    if (parteT && parteT.length == 2) {
+      var partes = parteT[1].split(":");
+      if (partes && partes.length > 1) {
+        retorno = partes[0] + ":" + partes[1];
       }
     }
-  );
-  modal.onDidDismiss().then((data) => {
-    if(data.data && data.data.accion){
-      var accion = data.data.accion;
-      //obtenemos la pagina actual
-      var pag = 0;
-      if (sessionStorage.getItem('NUMERO_PAGINA')){
-        pag = parseInt(sessionStorage.getItem('NUMERO_PAGINA'));
-      }
-      this.construyeSemanaBuscar(pag, null);
-      //revisar esto NO FUNCIONA
-      //this.seleccionarCuposAgrupados(this.itemSelected);
-      
-    }
-  });
-  return await modal.present();
-}
-transformDateIso(dateString){
-  var retorno = "";
-  var parteT = dateString.split("T");
-  if (parteT && parteT.length == 2){
-    var partes = parteT[1].split(":");
-    if (partes && partes.length > 1){
-      retorno = partes[0] + ":" + partes[1];
-    }
+    return retorno;
   }
-  return retorno;
-}
 }

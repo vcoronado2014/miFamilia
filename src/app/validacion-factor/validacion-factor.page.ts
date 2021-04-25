@@ -28,19 +28,19 @@ export class ValidacionFactorPage implements OnInit {
 
   //elementos
   ///@ViewChild('codigo1', {static: true}) codigoUnoInput: any;
-  @ViewChild('codigo1', {static: true}) codigoUnoInput: MatInput;
-  @ViewChild('codigo2', {static: true}) codigoDosInput: MatInput;
-  @ViewChild('codigo3', {static: true}) codigoTresInput: MatInput;
-  @ViewChild('codigo4', {static: true}) codigoCuatroInput: MatInput;
-  @ViewChild('codigo5', {static: true}) codigoCincoInput: MatInput;
-  @ViewChild('codigo6', {static: true}) codigoSeisInput: MatInput;
+  @ViewChild('codigo1', { static: true }) codigoUnoInput: MatInput;
+  @ViewChild('codigo2', { static: true }) codigoDosInput: MatInput;
+  @ViewChild('codigo3', { static: true }) codigoTresInput: MatInput;
+  @ViewChild('codigo4', { static: true }) codigoCuatroInput: MatInput;
+  @ViewChild('codigo5', { static: true }) codigoCincoInput: MatInput;
+  @ViewChild('codigo6', { static: true }) codigoSeisInput: MatInput;
   //@ViewChild('codigo1', {static: true}) codigoUnoInput: ElementRef;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
     public modalCtrl: ModalController,
     public platform: Platform,
-    public menu:MenuController,
+    public menu: MenuController,
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public utiles: ServicioUtiles,
@@ -50,15 +50,11 @@ export class ValidacionFactorPage implements OnInit {
 
   ngOnInit() {
     //lo volvemos a la pagina de inicio
-    if (this.validaPreRegistro() == false){
+    if (this.validaPreRegistro() == false) {
       this.utiles.presentToast('No cuentas con registro pendiente', 'bottom', 3000);
       this.navCtrl.navigateRoot('inicio');
     }
     this.cargarForma();
-    //seteamos el primer codigo en el foco
-    //this.codigoUnoInput.focus();
-    //this.codigoUnoInput.nativeElement.focus();
-    //this.enviarFoco();
   }
 
   ngAfterViewInit() {
@@ -66,30 +62,30 @@ export class ValidacionFactorPage implements OnInit {
       this.codigoUnoInput.focus();
     }, 1000);
   }
-  onKeypressEvent(event: any){
+  onKeypressEvent(event: any) {
     //console.log(event.target.value);
-    if (event.currentTarget){
-      if (event.currentTarget.name == "codigoUno"){
+    if (event.currentTarget) {
+      if (event.currentTarget.name == "codigoUno") {
         setTimeout(() => {
           this.codigoDosInput.focus();
         }, 100);
       }
-      if (event.currentTarget.name == "codigoDos"){
+      if (event.currentTarget.name == "codigoDos") {
         setTimeout(() => {
           this.codigoTresInput.focus();
         }, 100);
       }
-      if (event.currentTarget.name == "codigoTres"){
+      if (event.currentTarget.name == "codigoTres") {
         setTimeout(() => {
           this.codigoCuatroInput.focus();
         }, 100);
       }
-      if (event.currentTarget.name == "codigoCuatro"){
+      if (event.currentTarget.name == "codigoCuatro") {
         setTimeout(() => {
           this.codigoCincoInput.focus();
         }, 100);
       }
-      if (event.currentTarget.name == "codigoCinco"){
+      if (event.currentTarget.name == "codigoCinco") {
         setTimeout(() => {
           this.codigoSeisInput.focus();
         }, 100);
@@ -97,9 +93,9 @@ export class ValidacionFactorPage implements OnInit {
     }
   }
 
-/*   enviarFoco(){
-    setTimeout(() => this.codigoUnoInput.focus(), 1000);
-  } */
+  /*   enviarFoco(){
+      setTimeout(() => this.codigoUnoInput.focus(), 1000);
+    } */
 
   cargarForma() {
     this.forma = new FormGroup({
@@ -123,8 +119,8 @@ export class ValidacionFactorPage implements OnInit {
     return retorno;
   }
 
-  async onSubmit(){
-    if (this.forma.invalid){
+  async onSubmit() {
+    if (this.forma.invalid) {
       return;
     }
     //obtenemos los valores a enviar
@@ -136,7 +132,7 @@ export class ValidacionFactorPage implements OnInit {
     let codSeis = this.forma.controls.codigoSeis.value;
     let codigoCompleto = codUno + codDos + codTres + codCuatro + codCinco + codSeis;
     let idPreRegistro = "";
-    if (this.preRegistro && this.preRegistro.Id > 0){
+    if (this.preRegistro && this.preRegistro.Id > 0) {
       idPreRegistro = this.preRegistro.Id;
     }
 
@@ -147,19 +143,19 @@ export class ValidacionFactorPage implements OnInit {
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
-      spinner:null,
+      spinner: null,
     });
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.servicioGeo.validaCodigo(idPreRegistro, codigoCompleto, accion).subscribe((response:any)=>{
+        this.servicioGeo.validaCodigo(idPreRegistro, codigoCompleto, accion).subscribe((response: any) => {
           //procesar
           var data = response;
           //la respuesta trae
           //CodigoMensaje, TextoMensaje, PreRegistroApp { Codigo, Correo, Eliminado, Estado, FechaHora, Id, Run (con guion) }
-          if (data){
-            if (data.CodigoMensaje == 0){
+          if (data) {
+            if (data.CodigoMensaje == 0) {
               //correcto
               loader.dismiss();
               this.estaCargando = false;
@@ -170,7 +166,7 @@ export class ValidacionFactorPage implements OnInit {
               //ir a la pagina de registro
               this.irARegistro();
             }
-            else{
+            else {
               loader.dismiss();
               this.estaCargando = false;
               this.tituloLoading = '';
@@ -180,7 +176,7 @@ export class ValidacionFactorPage implements OnInit {
               this.contenidoMensaje = data.TextoMensaje;
             }
           }
-          else{
+          else {
             loader.dismiss();
             this.estaCargando = false;
             this.tituloLoading = '';
@@ -189,16 +185,16 @@ export class ValidacionFactorPage implements OnInit {
             this.tituloMensaje = 'Error de comunicación';
             this.contenidoMensaje = 'Hubo un error de comunicación, contacte al administrador.';
           }
-        }, error=>{
+        }, error => {
           console.log(error);
           loader.dismiss();
           this.estaCargando = false;
           this.tituloLoading = '';
         })
       }
-      else{
+      else {
         //llamada nativa
-        this.servicioGeo.validaCodigoNative(idPreRegistro, codigoCompleto, accion).then((response:any)=>{
+        this.servicioGeo.validaCodigoNative(idPreRegistro, codigoCompleto, accion).then((response: any) => {
           var data = JSON.parse(response.data);
           //la respuesta trae
           //CodigoMensaje, TextoMensaje, PreRegistroApp { Codigo, Correo, Eliminado, Estado, FechaHora, Id, Run (con guion) }
@@ -234,7 +230,7 @@ export class ValidacionFactorPage implements OnInit {
             this.contenidoMensaje = 'Hubo un error de comunicación, contacte al administrador.';
           }
 
-        }).catch(error=>{
+        }).catch(error => {
           console.log(error);
           loader.dismiss();
           this.estaCargando = false;
@@ -244,11 +240,11 @@ export class ValidacionFactorPage implements OnInit {
     });
   }
 
-  async cancelarRegistro(){
+  async cancelarRegistro() {
     //aca da lo mismo el codigo ya que esta cancelando
     let codigoCompleto = "123456";
     let idPreRegistro = "";
-    if (this.preRegistro && this.preRegistro.Id > 0){
+    if (this.preRegistro && this.preRegistro.Id > 0) {
       idPreRegistro = this.preRegistro.Id;
     }
 
@@ -259,19 +255,19 @@ export class ValidacionFactorPage implements OnInit {
     let loader = await this.loading.create({
       cssClass: 'loading-vacio',
       showBackdrop: false,
-      spinner:null,
+      spinner: null,
     });
 
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.servicioGeo.validaCodigo(idPreRegistro, codigoCompleto, accion).subscribe((response:any)=>{
+        this.servicioGeo.validaCodigo(idPreRegistro, codigoCompleto, accion).subscribe((response: any) => {
           //procesar
           var data = response;
           //la respuesta trae
           //CodigoMensaje, TextoMensaje, PreRegistroApp { Codigo, Correo, Eliminado, Estado, FechaHora, Id, Run (con guion) }
-          if (data){
-            if (data.CodigoMensaje == 0){
+          if (data) {
+            if (data.CodigoMensaje == 0) {
               //correcto
               loader.dismiss();
               this.estaCargando = false;
@@ -282,7 +278,7 @@ export class ValidacionFactorPage implements OnInit {
               //lo manadmos a la pagina de inicio nuevamente
               this.navCtrl.navigateRoot('inicio');
             }
-            else{
+            else {
               loader.dismiss();
               this.estaCargando = false;
               this.tituloLoading = '';
@@ -292,7 +288,7 @@ export class ValidacionFactorPage implements OnInit {
               this.contenidoMensaje = data.TextoMensaje;
             }
           }
-          else{
+          else {
             loader.dismiss();
             this.estaCargando = false;
             this.tituloLoading = '';
@@ -301,16 +297,16 @@ export class ValidacionFactorPage implements OnInit {
             this.tituloMensaje = 'Error de comunicación';
             this.contenidoMensaje = 'Hubo un error de comunicación, contacte al administrador.';
           }
-        }, error=>{
+        }, error => {
           console.log(error);
           loader.dismiss();
           this.estaCargando = false;
           this.tituloLoading = '';
         })
       }
-      else{
+      else {
         //llamada nativa
-        this.servicioGeo.validaCodigoNative(idPreRegistro, codigoCompleto, accion).then((response:any)=>{
+        this.servicioGeo.validaCodigoNative(idPreRegistro, codigoCompleto, accion).then((response: any) => {
           var data = JSON.parse(response.data);
           //la respuesta trae
           //CodigoMensaje, TextoMensaje, PreRegistroApp { Codigo, Correo, Eliminado, Estado, FechaHora, Id, Run (con guion) }
@@ -347,7 +343,7 @@ export class ValidacionFactorPage implements OnInit {
             this.contenidoMensaje = 'Hubo un error de comunicación, contacte al administrador.';
           }
 
-        }).catch(error=>{
+        }).catch(error => {
           console.log(error);
           loader.dismiss();
           this.estaCargando = false;

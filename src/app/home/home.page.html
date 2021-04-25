@@ -45,7 +45,6 @@
 </ion-menu>
 
 <ion-header>
-  <!-- <ion-toolbar [style.--background]="miColor"> -->
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button class="home"></ion-menu-button>
@@ -82,58 +81,12 @@
       </div>
     </ion-slide>
   </ion-slides>
-  
-    <!-- original -->
-<!--     <ion-slides [hidden]="muestraNotificaciones == false" pager="true" [options]="slideOpts" #mySlider class="slides-back ion-padding">
-      <ion-slide *ngFor="let info of notificaciones" style="margin:5px;">
-        <div class="slide">
-          <h5 class="titulo-slide">{{info.Titulo}}</h5>
-          <h6 class="titulo-slide">{{info.Subtitulo}}</h6>
-          <p class="subtitulo-slide">{{info.Contenido}}</p>
-          <button mat-raised-button color="accent" class="boton" (click)="moverSlide(info.Indice)">SIGUIENTE</button>
-        </div>
-      </ion-slide>
-    </ion-slides> -->
-
-
-  <!-- card antecedentes -->
   <ion-grid>
-<!--     <ion-row>
-      <label class="text-seleccione">Seleccione una de las siguientes opciones</label>
-    </ion-row> -->
     <app-progress [mostrar]="estaCargando" titulo="Buscando preferencias"></app-progress>
-
     <ion-row [hidden]="estaCargando" class="ion-padding-top">
       <ion-col size="6" *ngFor="let modulo of itemsMenu">
         <app-item-home [modulo]="modulo.NombreModulo" [classImagen]="modulo.ClaseImagen" [rutaImagen]="modulo.Imagen"></app-item-home>
       </ion-col>
-        <!--
-        <ion-col size="6">
-          <mat-card style="padding: 0;" (click)="openAntePage()">
-          <img class="imgs-home" src="./assets/imgs_nuevas/antecedentes.png">
-          <mat-card-header style="padding-left: 16px;">
-              <mat-card-title style="padding-top: 16px;">Antecedentes</mat-card-title>
-          </mat-card-header>
-        </mat-card>
-      </ion-col> -->
-      <!-- card exámenes -->
-<!--       <ion-col size="6">
-        <mat-card style="padding: 0;" (click)="openOrdenesPage()">
-          <img class="imgs-home" src="./assets/imgs_nuevas/examenes-de-salud.png">
-          <mat-card-header style="padding-left: 16px;">
-              <mat-card-title style="padding-top: 16px;">Exámenes</mat-card-title>
-          </mat-card-header>
-        </mat-card>
-      </ion-col> -->
-      <!-- card calendario -->
-<!--       <ion-col size="6">
-        <mat-card style="padding: 0;" (click)="openCalendarioPage()">
-          <img class="imgs-home" src="./assets/imgs_nuevas/calendario-01.png">
-          <mat-card-header style="padding-left: 16px;">
-              <mat-card-title style="padding-top: 16px;">Calendario</mat-card-title>
-          </mat-card-header>
-        </mat-card>
-      </ion-col> -->
     </ion-row>
   </ion-grid>
 </ion-content>
