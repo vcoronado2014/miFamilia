@@ -1551,9 +1551,6 @@ let RegistroUnoPage = class RegistroUnoPage {
         this.cargando = false;
         //expresiones regulares
         this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
-        //rut = new FormControl('', [Validators.required, this.runValidator]);
-        //por defecto dejamos el tipo movimiento en 1 solicitud de login
-        //despues lo podemos recibir como parametro para cambiarlo
         this.tipoMovimiento = '1';
         this.estaAgregandoFamilia = false;
         this.paginaAnterior = 'inicio';
@@ -1617,10 +1614,10 @@ let RegistroUnoPage = class RegistroUnoPage {
             let idDispositivo = this.utiles.entregaIdDispositivo();
             let fechaNac = moment__WEBPACK_IMPORTED_MODULE_8__(this.forma.controls.fechaNacimiento.value);
             let fechaNacStr = fechaNac.format('DD-MM-YYYY');
-            console.log('run registro uno ' + run);
-            console.log('idispositivo registro uno ' + idDispositivo);
-            console.log('fecha nac registro uno ' + fechaNac);
-            console.log('fecha nac registro uno str ' + fechaNacStr);
+            //console.log('run registro uno ' + run);
+            //console.log('idispositivo registro uno ' + idDispositivo);
+            //console.log('fecha nac registro uno ' + fechaNac);
+            //console.log('fecha nac registro uno str ' + fechaNacStr);
             this.cargando = true;
             let loader = yield this.loading.create({
                 message: 'Verificando...<br>Registro',
@@ -1699,7 +1696,7 @@ let RegistroUnoPage = class RegistroUnoPage {
                 else {
                     //si esta agregando familia hay que crear lo que corresponde y avisar al
                     //usuario que fue creado o no exito
-                    console.log('ESTA AGREGANDO FAMILIA');
+                    //console.log('ESTA AGREGANDO FAMILIA');
                 }
             }
             else {
@@ -1737,7 +1734,7 @@ let RegistroUnoPage = class RegistroUnoPage {
                 else {
                     //si esta agregando familia hay que crear lo que corresponde y avisar al
                     //usuario que fue creado o no exito
-                    console.log('ESTA AGREGANDO FAMILIA');
+                    //console.log('ESTA AGREGANDO FAMILIA');
                 }
             }
             else {
@@ -1801,7 +1798,7 @@ let RegistroUnoPage = class RegistroUnoPage {
                     //llamada web
                     this.servicioGeo.verificaEnrolamiento(run.value).subscribe((response) => {
                         //procesar
-                        console.log(response);
+                        //console.log(response);
                         this.procesaRespuestaEnrolamiento(response, loader);
                     });
                 }
@@ -1809,7 +1806,7 @@ let RegistroUnoPage = class RegistroUnoPage {
                     //llamada nativa
                     this.servicioGeo.verificaEnrolamientoNative(run.value).then((response) => {
                         var data = JSON.parse(response.data);
-                        console.log(data);
+                        //console.log(data);
                         this.procesaRespuestaEnrolamiento(data, loader);
                     }, (error) => {
                         this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
@@ -1835,7 +1832,7 @@ let RegistroUnoPage = class RegistroUnoPage {
                     //llamada web
                     this.servicioGeo.verificaEnrolamientoCompleto(run, fechaNacStr, email).subscribe((response) => {
                         //procesar
-                        console.log(response);
+                        //console.log(response);
                         this.procesaRespuestaEnrolamiento(response, loader);
                     });
                 }
@@ -1843,7 +1840,7 @@ let RegistroUnoPage = class RegistroUnoPage {
                     //llamada nativa
                     this.servicioGeo.verificaEnrolamientoCompletoNative(run, fechaNacStr, email).then((response) => {
                         var data = JSON.parse(response.data);
-                        console.log(data);
+                        //console.log(data);
                         this.procesaRespuestaEnrolamiento(data, loader);
                     }, (error) => {
                         this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
@@ -1903,7 +1900,7 @@ let RegistroUnoPage = class RegistroUnoPage {
             //no debemos enviarlo a clave unica, debemos validar el mensaje
             //en base a la respuesta del mensaje realizar acciones
             if (this.parametros.USA_CLAVE_UNICA()) {
-                console.log('clave unica');
+                //console.log('clave unica');
                 this.irAClaveUnica();
             }
             else {

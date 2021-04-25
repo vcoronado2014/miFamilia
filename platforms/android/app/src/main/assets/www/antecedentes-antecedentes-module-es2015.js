@@ -72,7 +72,7 @@ AntecedentesPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".text-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.15px;\n  color: #000000DE;\n  font-size: 1em;\n  margin-bottom: 0;\n}\n\n.subtext-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.25px;\n  color: #00000099;\n  font-size: 0.875em;\n  margin-bottom: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYW50ZWNlZGVudGVzL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcYW50ZWNlZGVudGVzXFxhbnRlY2VkZW50ZXMucGFnZS5zY3NzIiwic3JjL2FwcC9hbnRlY2VkZW50ZXMvYW50ZWNlZGVudGVzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHFCQUFBO0VBQ0Esc0JBQUE7RUFDQSxnQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQ0NKOztBRENFO0VBQ0UscUJBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtBQ0VKIiwiZmlsZSI6InNyYy9hcHAvYW50ZWNlZGVudGVzL2FudGVjZWRlbnRlcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGV4dC1hdmF0YXJ7XHJcbiAgICBmb250LWZhbWlseTogJ1JvYm90byc7XHJcbiAgICBsZXR0ZXItc3BhY2luZzogMC4xNXB4O1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxuICAgIGZvbnQtc2l6ZTogMWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB9XHJcbiAgLnN1YnRleHQtYXZhdGFye1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMjVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwOTk7XHJcbiAgICBmb250LXNpemU6IDAuODc1ZW07XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xyXG4gIH0iLCIudGV4dC1hdmF0YXIge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMTVweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbiAgZm9udC1zaXplOiAxZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59XG5cbi5zdWJ0ZXh0LWF2YXRhciB7XG4gIGZvbnQtZmFtaWx5OiBcIlJvYm90b1wiO1xuICBsZXR0ZXItc3BhY2luZzogMC4yNXB4O1xuICBjb2xvcjogIzAwMDAwMDk5O1xuICBmb250LXNpemU6IDAuODc1ZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FudGVjZWRlbnRlcy9hbnRlY2VkZW50ZXMucGFnZS5zY3NzIn0= */");
 
 /***/ }),
 
@@ -115,13 +115,6 @@ let AntecedentesPage = class AntecedentesPage {
         this.estaCargando = false;
     }
     ngOnInit() {
-        //this.miColor = this.utiles.entregaMiColor();
-        //this.miColor = this.utiles.entregaColor(this.usuarioAps);
-        /*     if (sessionStorage.getItem("RSS_ID")){
-              if (this.parametrosApp.USA_LOG_MODULOS()){
-                this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'ANTECEDENTES');
-              }
-            } */
         this.cargarDatosInciales();
     }
     cargarDatosInciales() {
@@ -184,12 +177,6 @@ let AntecedentesPage = class AntecedentesPage {
                 this.estaCargando = false;
             }));
         });
-    }
-    ionViewWillEnter() {
-        //si existen cambios se setean nuevamente
-        //this.miColor = this.utiles.entregaMiColor();
-        console.log('will enter');
-        this.miColor = this.utiles.entregaColor(this.usuarioAps);
     }
     goToDetails(usuario) {
         const navigationExtras = {

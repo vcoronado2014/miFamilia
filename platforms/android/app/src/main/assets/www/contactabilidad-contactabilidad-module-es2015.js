@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Contactabilidad</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n  <div [hidden]=\"estaCargando\" class=\"ion-padding\" style=\"margin-top: 15px;\">\n    <!-- <h5>Estas cambiando los datos de contactabilidad de {{nombrePersona}}</h5> -->\n    <form [formGroup]=\"forma\" novalidate>\n<!--       <ion-row>\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"usuarioAps.UrlImagen != ''\" src={{usuarioAps.UrlImagen}}>\n          <img *ngIf=\"usuarioAps.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n        </ion-avatar>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre social</mat-label>\n          <input matInput placeholder=\"Nombre social\" formControlName=\"nombreSocial\" name=\"nombreSocial\" required>\n          <mat-error [hidden]=\"!(f.nombreSocial.errors && f.nombreSocial.errors.required)\">Nombre social requerido</mat-error>\n          <mat-hint align=\"start\"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>\n        </mat-form-field>\n      </ion-row> -->\n      <ion-item lines=\"none\" style=\"--ion-item-background: transparent; --padding-start:0px;\">\n        <ion-avatar slot=\"start\" style=\"margin-top: -10px;\">\n          <img *ngIf=\"usuarioAps.UrlImagen != ''\" src={{usuarioAps.UrlImagen}}>\n          <img *ngIf=\"usuarioAps.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n        </ion-avatar>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre social</mat-label>\n          <input matInput placeholder=\"Nombre social\" formControlName=\"nombreSocial\" name=\"nombreSocial\">\n          <!-- <mat-error [hidden]=\"!(f.nombreSocial.errors && f.nombreSocial.errors.required)\">Nombre social</mat-error> -->\n          <mat-hint align=\"start\"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>\n        </mat-form-field>\n      </ion-item>\n      <h3 class=\"mt-40\">Datos de contacto</h3>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\">\n          <!-- <mat-error [hidden]=\"!(f.email.errors && f.email.errors.required)\">Correo requerido</mat-error> -->\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Teléfono</mat-label>\n          <input matInput placeholder=\"9XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n          <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- boton de registrarse -->\n      <ion-row>\n        <button  [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSumbit()\" mat-raised-button\n          color=\"accent\">GUARDAR</button>\n      </ion-row>\n    </form>\n  \n  </div>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Contactabilidad</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n  <div [hidden]=\"estaCargando\" class=\"ion-padding\" style=\"margin-top: 15px;\">\n    <form [formGroup]=\"forma\" novalidate>\n      <ion-item lines=\"none\" style=\"--ion-item-background: transparent; --padding-start:0px;\">\n        <ion-avatar slot=\"start\" style=\"margin-top: -10px;\">\n          <img *ngIf=\"usuarioAps.UrlImagen != ''\" src={{usuarioAps.UrlImagen}}>\n          <img *ngIf=\"usuarioAps.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n        </ion-avatar>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Nombre social</mat-label>\n          <input matInput placeholder=\"Nombre social\" formControlName=\"nombreSocial\" name=\"nombreSocial\">\n          <!-- <mat-error [hidden]=\"!(f.nombreSocial.errors && f.nombreSocial.errors.required)\">Nombre social</mat-error> -->\n          <mat-hint align=\"start\"><strong>Nombre por el cual te sientes identificado</strong> </mat-hint>\n        </mat-form-field>\n      </ion-item>\n      <h3 class=\"mt-40\">Datos de contacto</h3>\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Correo electrónico</mat-label>\n          <input matInput placeholder=\"ejemplo@gmail.com\" formControlName=\"email\" name=\"email\">\n          <mat-error [hidden]=\"!(f.email.errors && f.email.errors.pattern)\">Correo inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n\n      <ion-row>\n        <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n          <mat-label>Teléfono</mat-label>\n          <input matInput placeholder=\"9XXXXXXXX\" formControlName=\"telefono\" name=\"telefono\">\n          <mat-error [hidden]=\"!(f.telefono.errors && f.telefono.errors.pattern)\">Teléfono inválido</mat-error>\n        </mat-form-field>\n      </ion-row>\n      <!-- boton de registrarse -->\n      <ion-row>\n        <button  [disabled]=\"forma.invalid\" class=\"button-registrarse\" (click)=\"onSumbit()\" mat-raised-button\n          color=\"accent\">GUARDAR</button>\n      </ion-row>\n    </form>\n  \n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -150,8 +150,6 @@ let ContactabilidadPage = class ContactabilidadPage {
         this.modificaRegistro = false;
         this.nombrePersona = '';
     }
-    //ACA HAY QUE SACAR LOS CAMPOS REQUERIDOS Y LOS ASTERISCOS DE LOS LABELS
-    //LO DDEMAS ESTTA FUNCIONANDO BIEN
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
         //obtenemos el registro
@@ -171,7 +169,7 @@ let ContactabilidadPage = class ContactabilidadPage {
                         this.modificaRegistro = true;
                     }
                 }
-                console.log(this.usuarioAps);
+                //console.log(this.usuarioAps);
             }
         });
         //cargamos la forma
@@ -274,13 +272,13 @@ let ContactabilidadPage = class ContactabilidadPage {
                         if (data.InformarPersonaResponse.RespuestaBase.Rayen) {
                             if (data.InformarPersonaResponse.RespuestaBase.Rayen.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
                                 correctoRayen = true;
-                                console.log('actualizado rayen');
+                                //console.log('actualizado rayen');
                             }
                         }
                         if (data.InformarPersonaResponse.RespuestaBase.Ryf) {
                             if (data.InformarPersonaResponse.RespuestaBase.Ryf.Descripcion.toUpperCase() == 'TRANSACCIÓN EXITOSA') {
                                 correctoRyf = true;
-                                console.log('actualizado ryf');
+                                //console.log('actualizado ryf');
                             }
                         }
                         if (correctoRyf || correctoRayen) {

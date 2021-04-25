@@ -874,11 +874,11 @@ const routes = [
     },
     {
         path: 'ordenes',
-        loadChildren: () => Promise.all(/*! import() | ordenes-ordenes-module */[__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null, /*! ./ordenes/ordenes.module */ "./src/app/ordenes/ordenes.module.ts")).then(m => m.OrdenesPageModule)
+        loadChildren: () => Promise.all(/*! import() | ordenes-ordenes-module */[__webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null, /*! ./ordenes/ordenes.module */ "./src/app/ordenes/ordenes.module.ts")).then(m => m.OrdenesPageModule)
     },
     {
         path: 'modal-examenes',
-        loadChildren: () => Promise.all(/*! import() | modal-examenes-modal-examenes-module */[__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null, /*! ./modal-examenes/modal-examenes.module */ "./src/app/modal-examenes/modal-examenes.module.ts")).then(m => m.ModalExamenesPageModule)
+        loadChildren: () => Promise.all(/*! import() | modal-examenes-modal-examenes-module */[__webpack_require__.e("common"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null, /*! ./modal-examenes/modal-examenes.module */ "./src/app/modal-examenes/modal-examenes.module.ts")).then(m => m.ModalExamenesPageModule)
     },
     {
         path: 'calendario',
@@ -889,24 +889,20 @@ const routes = [
         loadChildren: () => Promise.all(/*! import() | modal-detalle-cita-modal-detalle-cita-module */[__webpack_require__.e("default~calendario-calendario-module~modal-detalle-cita-modal-detalle-cita-module"), __webpack_require__.e("modal-detalle-cita-modal-detalle-cita-module")]).then(__webpack_require__.bind(null, /*! ./modal-detalle-cita/modal-detalle-cita.module */ "./src/app/modal-detalle-cita/modal-detalle-cita.module.ts")).then(m => m.ModalDetalleCitaPageModule)
     },
     {
-        path: 'agenda-disponible',
-        loadChildren: () => Promise.all(/*! import() | agenda-disponible-agenda-disponible-module */[__webpack_require__.e("default~agenda-disponible-agenda-disponible-module~busqueda-avanzada-busqueda-avanzada-module~cupos-~f71bc473"), __webpack_require__.e("agenda-disponible-agenda-disponible-module")]).then(__webpack_require__.bind(null, /*! ./agenda-disponible/agenda-disponible.module */ "./src/app/agenda-disponible/agenda-disponible.module.ts")).then(m => m.AgendaDisponiblePageModule)
-    },
-    {
         path: 'modal-operacion-cita',
-        loadChildren: () => Promise.all(/*! import() | modal-operacion-cita-modal-operacion-cita-module */[__webpack_require__.e("default~agenda-disponible-agenda-disponible-module~busqueda-avanzada-busqueda-avanzada-module~cupos-~f71bc473"), __webpack_require__.e("modal-operacion-cita-modal-operacion-cita-module")]).then(__webpack_require__.bind(null, /*! ./modal-operacion-cita/modal-operacion-cita.module */ "./src/app/modal-operacion-cita/modal-operacion-cita.module.ts")).then(m => m.ModalOperacionCitaPageModule)
+        loadChildren: () => Promise.all(/*! import() | modal-operacion-cita-modal-operacion-cita-module */[__webpack_require__.e("default~busqueda-avanzada-busqueda-avanzada-module~cupos-disponibles-cupos-disponibles-module~modal-~8414b8c5"), __webpack_require__.e("modal-operacion-cita-modal-operacion-cita-module")]).then(__webpack_require__.bind(null, /*! ./modal-operacion-cita/modal-operacion-cita.module */ "./src/app/modal-operacion-cita/modal-operacion-cita.module.ts")).then(m => m.ModalOperacionCitaPageModule)
     },
     {
         path: 'cupos-disponibles',
-        loadChildren: () => Promise.all(/*! import() | cupos-disponibles-cupos-disponibles-module */[__webpack_require__.e("default~agenda-disponible-agenda-disponible-module~busqueda-avanzada-busqueda-avanzada-module~cupos-~f71bc473"), __webpack_require__.e("cupos-disponibles-cupos-disponibles-module")]).then(__webpack_require__.bind(null, /*! ./cupos-disponibles/cupos-disponibles.module */ "./src/app/cupos-disponibles/cupos-disponibles.module.ts")).then(m => m.CuposDisponiblesPageModule)
+        loadChildren: () => Promise.all(/*! import() | cupos-disponibles-cupos-disponibles-module */[__webpack_require__.e("default~busqueda-avanzada-busqueda-avanzada-module~cupos-disponibles-cupos-disponibles-module~modal-~8414b8c5"), __webpack_require__.e("cupos-disponibles-cupos-disponibles-module")]).then(__webpack_require__.bind(null, /*! ./cupos-disponibles/cupos-disponibles.module */ "./src/app/cupos-disponibles/cupos-disponibles.module.ts")).then(m => m.CuposDisponiblesPageModule)
     },
     {
         path: 'pre-tiposatencion',
-        loadChildren: () => Promise.all(/*! import() | pre-tiposatencion-pre-tiposatencion-module */[__webpack_require__.e("default~agenda-disponible-agenda-disponible-module~busqueda-avanzada-busqueda-avanzada-module~cupos-~f71bc473"), __webpack_require__.e("pre-tiposatencion-pre-tiposatencion-module")]).then(__webpack_require__.bind(null, /*! ./pre-tiposatencion/pre-tiposatencion.module */ "./src/app/pre-tiposatencion/pre-tiposatencion.module.ts")).then(m => m.PreTiposatencionPageModule)
+        loadChildren: () => Promise.all(/*! import() | pre-tiposatencion-pre-tiposatencion-module */[__webpack_require__.e("default~busqueda-avanzada-busqueda-avanzada-module~cupos-disponibles-cupos-disponibles-module~modal-~8414b8c5"), __webpack_require__.e("pre-tiposatencion-pre-tiposatencion-module")]).then(__webpack_require__.bind(null, /*! ./pre-tiposatencion/pre-tiposatencion.module */ "./src/app/pre-tiposatencion/pre-tiposatencion.module.ts")).then(m => m.PreTiposatencionPageModule)
     },
     {
         path: 'busqueda-avanzada',
-        loadChildren: () => Promise.all(/*! import() | busqueda-avanzada-busqueda-avanzada-module */[__webpack_require__.e("default~agenda-disponible-agenda-disponible-module~busqueda-avanzada-busqueda-avanzada-module~cupos-~f71bc473"), __webpack_require__.e("busqueda-avanzada-busqueda-avanzada-module")]).then(__webpack_require__.bind(null, /*! ./busqueda-avanzada/busqueda-avanzada.module */ "./src/app/busqueda-avanzada/busqueda-avanzada.module.ts")).then(m => m.BusquedaAvanzadaPageModule)
+        loadChildren: () => Promise.all(/*! import() | busqueda-avanzada-busqueda-avanzada-module */[__webpack_require__.e("default~busqueda-avanzada-busqueda-avanzada-module~cupos-disponibles-cupos-disponibles-module~modal-~8414b8c5"), __webpack_require__.e("busqueda-avanzada-busqueda-avanzada-module")]).then(__webpack_require__.bind(null, /*! ./busqueda-avanzada/busqueda-avanzada.module */ "./src/app/busqueda-avanzada/busqueda-avanzada.module.ts")).then(m => m.BusquedaAvanzadaPageModule)
     },
     {
         path: 'nuevo-login',
@@ -1292,7 +1288,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".text-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.15px;\n  color: #000000DE;\n  font-size: 1em;\n  margin-bottom: 0;\n}\n\n.subtext-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.25px;\n  color: #00000099;\n  font-size: 0.875em;\n  margin-bottom: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2ltcGxlL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcY29tcG9uZW50c1xcYXZhdGFyLXNpbXBsZVxcYXZhdGFyLXNpbXBsZS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2ltcGxlL2F2YXRhci1zaW1wbGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxxQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQUFBO0VBQ0EsZ0JBQUE7QUNDSjs7QURDRTtFQUNFLHFCQUFBO0VBQ0Esc0JBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyLXNpbXBsZS9hdmF0YXItc2ltcGxlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRleHQtYXZhdGFye1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMTVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwREU7XHJcbiAgICBmb250LXNpemU6IDFlbTtcclxuICAgIG1hcmdpbi1ib3R0b206IDA7XHJcbiAgfVxyXG4gIC5zdWJ0ZXh0LWF2YXRhcntcclxuICAgIGZvbnQtZmFtaWx5OiAnUm9ib3RvJztcclxuICAgIGxldHRlci1zcGFjaW5nOiAwLjI1cHg7XHJcbiAgICBjb2xvcjogIzAwMDAwMDk5O1xyXG4gICAgZm9udC1zaXplOiAwLjg3NWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB9IiwiLnRleHQtYXZhdGFyIHtcbiAgZm9udC1mYW1pbHk6IFwiUm9ib3RvXCI7XG4gIGxldHRlci1zcGFjaW5nOiAwLjE1cHg7XG4gIGNvbG9yOiAjMDAwMDAwREU7XG4gIGZvbnQtc2l6ZTogMWVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufVxuXG4uc3VidGV4dC1hdmF0YXIge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMjVweDtcbiAgY29sb3I6ICMwMDAwMDA5OTtcbiAgZm9udC1zaXplOiAwLjg3NWVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyLXNpbXBsZS9hdmF0YXItc2ltcGxlLmNvbXBvbmVudC5zY3NzIn0= */");
 
 /***/ }),
 
@@ -1341,7 +1337,7 @@ AvatarSimpleComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".text-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.15px;\n  color: #000000DE;\n  font-size: 1em;\n  margin-bottom: 0;\n}\n\n.subtext-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.25px;\n  color: #00000099;\n  font-size: 0.875em;\n  margin-bottom: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXIvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxjb21wb25lbnRzXFxhdmF0YXJcXGF2YXRhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXIvYXZhdGFyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0FDQ0o7O0FEQ0U7RUFDRSxxQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0FDRUoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2F2YXRhci9hdmF0YXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGV4dC1hdmF0YXJ7XHJcbiAgICBmb250LWZhbWlseTogJ1JvYm90byc7XHJcbiAgICBsZXR0ZXItc3BhY2luZzogMC4xNXB4O1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxuICAgIGZvbnQtc2l6ZTogMWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB9XHJcbiAgLnN1YnRleHQtYXZhdGFye1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMjVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwOTk7XHJcbiAgICBmb250LXNpemU6IDAuODc1ZW07XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xyXG4gIH0iLCIudGV4dC1hdmF0YXIge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMTVweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbiAgZm9udC1zaXplOiAxZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59XG5cbi5zdWJ0ZXh0LWF2YXRhciB7XG4gIGZvbnQtZmFtaWx5OiBcIlJvYm90b1wiO1xuICBsZXR0ZXItc3BhY2luZzogMC4yNXB4O1xuICBjb2xvcjogIzAwMDAwMDk5O1xuICBmb250LXNpemU6IDAuODc1ZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyL2F2YXRhci5jb21wb25lbnQuc2NzcyJ9 */");
 
 /***/ }),
 

@@ -341,11 +341,6 @@ let NuevoLoginPage = class NuevoLoginPage {
             let correo = this.forma.controls.email.value;
             let password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
             //ahora guardamos
-            //original
-            /*     let loader = await this.loading.create({
-                  message: 'Creando...<br>Registro',
-                  duration: 20000
-                }); */
             this.estaCargando = true;
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',
@@ -432,11 +427,6 @@ let NuevoLoginPage = class NuevoLoginPage {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             //en este caso ya el user name es el email
             let f = { UserName: userName, Password: password, UsaEnrolamiento: this.usaEnrolamiento, TokenFCM: this.utiles.entregaTokenFCM() };
-            //original
-            /*     let loader = await this.loading.create({
-                  message: 'Obteniendo...<br>Login',
-                  duration: 10000
-                }); */
             this.estaCargando = true;
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',

@@ -143,11 +143,6 @@ let RecuperarClavePage = class RecuperarClavePage {
                 this.utiles.presentToast('Debe ingresar un correo', 'middle', 2000);
                 return;
             }
-            //original
-            /*     let loader = await this.loading.create({
-                  message: 'Verificando...<br>correo',
-                  duration: 10000
-                }); */
             this.estaCargando = true;
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',

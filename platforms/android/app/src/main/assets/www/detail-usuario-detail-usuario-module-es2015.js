@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <!-- progress -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando información del usuario\"></app-progress>\r\n  <!-- lo cambiamos por la card -->\r\n  <ion-item lines=\"none\" [hidden]=\"estaCargando\" style=\"padding-top: 15px;\">\r\n    <!-- poner avatar -->\r\n    <app-avatar [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item>\r\n<!--   <ion-card [hidden]=\"estaCargando\">\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-item lines=\"none\">\r\n        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>\r\n        <ion-badge slot=\"end\">{{usuario.Parentezco.Nombre}}</ion-badge>\r\n      </ion-item>\r\n\r\n    </ion-card-content>\r\n  </ion-card>  -->\r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\">\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n  <!-- progress -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando información del usuario\"></app-progress>\r\n  <!-- lo cambiamos por la card -->\r\n  <ion-item lines=\"none\" [hidden]=\"estaCargando\" style=\"padding-top: 15px;\">\r\n    <!-- poner avatar -->\r\n    <app-avatar [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item>\r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\">\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -126,7 +126,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
         //para controlar componente progess
         this.estaCargando = false;
     }
-    //ARREGLAR TEMAS DE COLORES Y URL CUANDO SON VARIOS MIEMBROS DE LA FAMILIA
     ngOnInit() {
         //this.miColor = this.utiles.entregaMiColor();
         //capturamos los parametros
@@ -144,18 +143,13 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                 }
                 this.userImagen = this.usuario.UrlImagen;
                 this.miColor = this.utiles.entregaColor(this.usuario);
-                console.log(this.usuario);
+                //console.log(this.usuario);
                 this.obtenerInfoUsuario(this.usuario.Id);
             }
         });
     }
     obtenerInfoUsuario(uspId) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            //original
-            /*     let loader = await this.loading.create({
-                  message: 'Obteniendo...<br>Información del usuario',
-                  duration: 20000
-                }); */
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',
                 showBackdrop: false,
@@ -173,10 +167,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(response, loader);
                         });
                         //presion
-                        //original
-                        /*           let loader1 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Presión',
-                                  }); */
                         let loader1 = yield this.loading.create({
                             cssClass: 'loading-vacio',
                             showBackdrop: false,
@@ -189,11 +179,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             });
                         }));
                         //alergias
-                        //original
-                        /*           let loader2 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Alergias',
-                        
-                                  }); */
                         this.estaCargando = true;
                         let loader2 = yield this.loading.create({
                             cssClass: 'loading-vacio',
@@ -211,11 +196,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(response, loader);
                         });
                         //presion
-                        //original
-                        /*           let loader1 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Presión',
-                                    
-                                  }); */
                         let loader1 = yield this.loading.create({
                             cssClass: 'loading-vacio',
                             showBackdrop: false,
@@ -228,11 +208,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             });
                         }));
                         //alergias
-                        //original
-                        /*           let loader2 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Alergias',
-                                    
-                                  }); */
                         let loader2 = yield this.loading.create({
                             cssClass: 'loading-vacio',
                             showBackdrop: false,
@@ -253,11 +228,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(JSON.parse(response.data), loader);
                         });
                         //presion
-                        //original
-                        /*           let loader1 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Presión',
-                        
-                                  }); */
                         let loader1 = yield this.loading.create({
                             cssClass: 'loading-vacio',
                             showBackdrop: false,
@@ -270,11 +240,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             });
                         }));
                         //alergias
-                        //original
-                        /*           let loader2 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Alergias',
-                        
-                                  }); */
                         let loader2 = yield this.loading.create({
                             cssClass: 'loading-vacio',
                             showBackdrop: false,
@@ -293,11 +258,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             this.procesarIndicadorValor(JSON.parse(response.data), loader);
                         });
                         //presion
-                        //original
-                        /*           let loader1 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Presión',
-                        
-                                  }); */
                         let loader1 = yield this.loading.create({
                             cssClass: 'loading-vacio',
                             showBackdrop: false,
@@ -310,11 +270,6 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                             });
                         }));
                         //alergias
-                        //original
-                        /*           let loader2 = await this.loading.create({
-                                    message: 'Obteniendo...<br>Alergias',
-                        
-                                  }); */
                         let loader2 = yield this.loading.create({
                             cssClass: 'loading-vacio',
                             showBackdrop: false,

@@ -21,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"home\">Ajustes {{nombrePaciente}}</ion-title>\r\n    <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n      <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <!-- la imagen -->\r\n  <ion-card>\r\n    <ion-card-header>\r\n     <!--  <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->\r\n      <ion-card-title>Mi imagen</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div>\r\n        <img [src]=\"image\" *ngIf=\"image\" />\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n  <!-- control abrir archivos si es que tiene registro -->\r\n  <ion-list lines=\"none\" *ngIf=\"tieneRegistro\">\r\n    <ion-item>\r\n      <ion-note id=\"profile_image\" color=\"primary\">Seleccione el archivo</ion-note>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-input  type=\"file\" accept=\"image/*\" (change)=\"changeListener($event)\"></ion-input>\r\n    </ion-item>\r\n  </ion-list>\r\n  <!-- si no tiene registro -->\r\n  <ion-item *ngIf=\"!tieneRegistro\">\r\n    No puede editar ya que no se encuentra registrado\r\n  </ion-item>\r\n  <ion-row class=\"ion-padding\">\r\n          <button mat-raised-button color=\"primary\" (click)=\"abrirEditar()\" style=\"width: 90%; margin-left: 5%; height:36px;background: #3880ff;color:white;\" >Cambiar datos de contacto</button>\r\n  </ion-row>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"home\">Ajustes {{nombrePaciente}}</ion-title>\r\n    <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n      <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <!-- la imagen -->\r\n  <ion-card>\r\n    <ion-card-header>\r\n      <ion-card-title>Mi imagen</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div>\r\n        <img [src]=\"image\" *ngIf=\"image\" />\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n  <!-- control abrir archivos si es que tiene registro -->\r\n  <ion-list lines=\"none\" *ngIf=\"tieneRegistro\">\r\n    <ion-item>\r\n      <ion-note id=\"profile_image\" color=\"primary\">Seleccione el archivo</ion-note>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-input  type=\"file\" accept=\"image/*\" (change)=\"changeListener($event)\"></ion-input>\r\n    </ion-item>\r\n  </ion-list>\r\n  <!-- si no tiene registro -->\r\n  <ion-item *ngIf=\"!tieneRegistro\">\r\n    No puede editar ya que no se encuentra registrado\r\n  </ion-item>\r\n  <ion-row class=\"ion-padding\">\r\n          <button mat-raised-button color=\"primary\" (click)=\"abrirEditar()\" style=\"width: 90%; margin-left: 5%; height:36px;background: #3880ff;color:white;\" >Cambiar datos de contacto</button>\r\n  </ion-row>\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -118,9 +118,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.image = null;
         this.lastImage = null;
         this.nombrePaciente = '';
-        this.color = "#127bdc"; //ACA QUEDE, ESTOY ARMANDO LA PANTALLA DE AJUSTES
-        //color
-
+        this.color = "#127bdc";
         this.miColor = '#FF4081';
         this.tieneRegistro = false;
       }
@@ -140,8 +138,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.miColor = this.utiles.entregaColor(this.usuarioAps);
           this.color = this.miColor; //this.usuarioAps.Color;
 
-          this.nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-          console.log(this.usuarioAps);
+          this.nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno; //console.log(this.usuarioAps);
         }
       }, {
         key: "dismiss",
@@ -156,13 +153,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "changeListener",
         value: function changeListener($event) {
-          //lo comentamos por mientras
-
-          /*     if (!this.utiles.isAppOnDevice()){
-                this.utiles.presentToast('Esta operación no esta permitida', 'center', 3000);
-                return;
-              }
-              else { */
           this.fileP = $event.target.files[0];
 
           if (this.fileP) {
@@ -176,8 +166,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             //this.presentToast('No ha seleccionado ninguna imágen válida.'); 
             this.utiles.presentToast('No ha seleccionado ninguna imágen válida.', 'center', 3000);
           }
-          /*  } */
-
         }
       }, {
         key: "putImagen",
@@ -190,17 +178,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    uspId = this.usuarioAps.Id.toString();
-                    console.log(files.size);
-                    _context2.next = 4;
+                    uspId = this.usuarioAps.Id.toString(); //console.log(files.size);
+
+                    _context2.next = 3;
                     return this.loading.create({
                       message: 'Guardando...<br>Imagen del usuario.',
                       duration: 20000
                     });
 
-                  case 4:
+                  case 3:
                     loader = _context2.sent;
-                    _context2.next = 7;
+                    _context2.next = 6;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                         var _this2 = this;
@@ -304,7 +292,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       }));
                     });
 
-                  case 7:
+                  case 6:
                   case "end":
                     return _context2.stop();
                 }

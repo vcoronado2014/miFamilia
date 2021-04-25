@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar [style.--background]=\"miColor\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Cupos disponibles</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n\r\n  <ion-item>\r\n    <ion-label>Tipos de atención</ion-label>\r\n    <ion-select interface=\"popover\" (ionChange)=\"tipoSeleccionado($event)\" multiple=\"false\" value=\"{{comboSeleccionado}}\">\r\n      <ion-select-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col size=\"1\" class=\"ion-no-margin ion-no-padding\" [style.background]=\"miColor\" [style.color]=\"textColor\">\r\n        <ion-icon name=\"chevron-back-outline\" style=\"font-size: 2em;padding-top: 10px;\" *ngIf=\"indiceActual > 0\" (click)=\"onClickCambiarSemana('ant')\"></ion-icon>\r\n      </ion-col>\r\n      <ion-col class=\"ion-no-margin ion-no-padding\">\r\n        <ion-item [style.--background]=\"miColor\" [style.--color]=\"textColor\">\r\n          <ion-label class=\"ion-text-wrap ion-text-center titulo-semanas\">\r\n            {{semana.texto}}\r\n          </ion-label>\r\n        </ion-item>\r\n        <ion-grid class=\"ion-no-margin ion-no-padding\">\r\n          <ion-row>\r\n            <ion-col *ngFor=\"let item of semana.semanas\" class=\"ion-text-center ion-padding-bottom label-fecha\" \r\n              [style.background]=\"item.selected ? '#3880ff' : '#3dc2ff'\" \r\n              (click)=\"seleccionarCuposAgrupados(item)\"\r\n              [style.color]=\"textColor\">\r\n              <ion-label class=\"ion-text-center ion-text-capitalize\">\r\n                <strong>{{item.diaStr}}</strong> \r\n                <!-- {{item.texto}} -->\r\n              </ion-label>\r\n              <p class=\"ion-text-center ion-text-capitalize\">\r\n                {{item.texto}}\r\n              </p>\r\n              <!-- <ion-badge *ngIf=\"item.total > 0\" class=\"badge-cita\" color=\"primary\">{{item.total}}</ion-badge> -->\r\n              <ion-badge *ngIf=\"item.total > 0\" class=\"badge-cita\" color=\"success\"><ion-icon name=\"checkmark\"></ion-icon></ion-badge>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </ion-col>\r\n      <ion-col size=\"1\" class=\"ion-no-margin ion-no-padding\" [style.background]=\"miColor\" [style.color]=\"textColor\">\r\n        <ion-icon name=\"chevron-forward-outline\" style=\"font-size: 2em;padding-top: 10px;\" *ngIf=\"indiceActual < cantidadSemanas\" (click)=\"onClickCambiarSemana('sig')\"></ion-icon>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <div>\r\n   \r\n      <ion-list *ngFor=\"let cita of cuposAgrupadosSelected\" class=\"ion-padding-left\">\r\n        \r\n        <ion-list-header lines=\"inset\" [hidden]=\"contadorHorasDisponibles(cita[1].HorasDisponibles) == 0\">\r\n          <ion-label><h1>{{cita[1].MedicoPrestador.NombreCompletoMedico}}</h1></ion-label>\r\n          <ion-label>{{cita[0]}}</ion-label>\r\n        </ion-list-header>\r\n        <div *ngFor=\"let cupo of cita[1].HorasDisponibles\">\r\n          <ion-item lines=\"none\" [hidden]=\"!cupo.Visible\">\r\n            <ion-label class=\"ion-text-wrap\" [ngClass]=\"{'danger':cupo.Estado === 'cancelled'}\">\r\n              <h5><ion-icon name=\"navigate\" slot=\"start\"></ion-icon>&nbsp;{{cupo.Servicio.Nombre}}</h5>\r\n              <h6><ion-icon name=\"bandage\" slot=\"start\"></ion-icon>&nbsp;{{cupo.TipoAtencion}}</h6>\r\n              <h6 class=\"ion-text-capitalize\"><ion-icon name=\"alarm\" slot=\"start\"></ion-icon>&nbsp;{{transformDate(cupo.FechaHoraInicio, 'dddd DD MMMM YYYY')}}</h6>\r\n              <h6 class=\"ion-text-capitalize\">Estado: <strong>{{traduceString(cupo.Estado)}}</strong></h6>\r\n            </ion-label>\r\n            <ion-button \r\n              [ngClass]=\"{'danger-boton':cupo.Estado === 'cancelled', 'success-boton':cupo.Estado === 'booked' || cupo.Estado === 'confirmed'}\" \r\n              (click)=\"citaSelected(cupo)\">{{cupo.HoraInicio}} - {{cupo.HoraTermino}}\r\n              <ion-icon name=\"chevron-forward-outline\" slot=\"end\"></ion-icon>\r\n            </ion-button>\r\n          </ion-item>\r\n        </div>\r\n\r\n      </ion-list>\r\n   \r\n      <!-- no hay datos -->\r\n    <ion-row *ngIf=\"cuposAgrupadosSelected.length == 0\">\r\n      <div style=\"position: absolute; display: table; height: 80%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n        <p style=\"display: table-cell; vertical-align: middle\">No hay citas para el día seleccionado  <br>\r\n        <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n      </div>\r\n    </ion-row>\r\n\r\n  </div>\r\n</ion-content>\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-fab-button (click)=\"logout()\" [style.--background]=\"miColor\">\r\n    <ion-icon name=\"close\"></ion-icon>\r\n  </ion-fab-button>\r\n</ion-fab>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar [style.--background]=\"miColor\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Cupos disponibles</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n\r\n  <ion-item>\r\n    <ion-label>Tipos de atención</ion-label>\r\n    <ion-select interface=\"popover\" (ionChange)=\"tipoSeleccionado($event)\" multiple=\"false\" value=\"{{comboSeleccionado}}\">\r\n      <ion-select-option *ngFor=\"let tipo of tiposAtencion\" [value]=\"tipo.Texto\">{{tipo.Texto}}</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col size=\"1\" class=\"ion-no-margin ion-no-padding\" [style.background]=\"miColor\" [style.color]=\"textColor\">\r\n        <ion-icon name=\"chevron-back-outline\" style=\"font-size: 2em;padding-top: 10px;\" *ngIf=\"indiceActual > 0\" (click)=\"onClickCambiarSemana('ant')\"></ion-icon>\r\n      </ion-col>\r\n      <ion-col class=\"ion-no-margin ion-no-padding\">\r\n        <ion-item [style.--background]=\"miColor\" [style.--color]=\"textColor\">\r\n          <ion-label class=\"ion-text-wrap ion-text-center titulo-semanas\">\r\n            {{semana.texto}}\r\n          </ion-label>\r\n        </ion-item>\r\n        <ion-grid class=\"ion-no-margin ion-no-padding\">\r\n          <ion-row>\r\n            <ion-col *ngFor=\"let item of semana.semanas\" class=\"ion-text-center ion-padding-bottom label-fecha\" \r\n              [style.background]=\"item.selected ? '#3880ff' : '#3dc2ff'\" \r\n              (click)=\"seleccionarCuposAgrupados(item)\"\r\n              [style.color]=\"textColor\">\r\n              <ion-label class=\"ion-text-center ion-text-capitalize\">\r\n                <strong>{{item.diaStr}}</strong> \r\n                <!-- {{item.texto}} -->\r\n              </ion-label>\r\n              <p class=\"ion-text-center ion-text-capitalize\">\r\n                {{item.texto}}\r\n              </p>\r\n              <ion-badge *ngIf=\"item.total > 0\" class=\"badge-cita\" color=\"success\"><ion-icon name=\"checkmark\"></ion-icon></ion-badge>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </ion-col>\r\n      <ion-col size=\"1\" class=\"ion-no-margin ion-no-padding\" [style.background]=\"miColor\" [style.color]=\"textColor\">\r\n        <ion-icon name=\"chevron-forward-outline\" style=\"font-size: 2em;padding-top: 10px;\" *ngIf=\"indiceActual < cantidadSemanas\" (click)=\"onClickCambiarSemana('sig')\"></ion-icon>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <div>\r\n   \r\n      <ion-list *ngFor=\"let cita of cuposAgrupadosSelected\" class=\"ion-padding-left\">\r\n        \r\n        <ion-list-header lines=\"inset\" [hidden]=\"contadorHorasDisponibles(cita[1].HorasDisponibles) == 0\">\r\n          <ion-label><h1>{{cita[1].MedicoPrestador.NombreCompletoMedico}}</h1></ion-label>\r\n          <ion-label>{{cita[0]}}</ion-label>\r\n        </ion-list-header>\r\n        <div *ngFor=\"let cupo of cita[1].HorasDisponibles\">\r\n          <ion-item lines=\"none\" [hidden]=\"!cupo.Visible\">\r\n            <ion-label class=\"ion-text-wrap\" [ngClass]=\"{'danger':cupo.Estado === 'cancelled'}\">\r\n              <h5><ion-icon name=\"navigate\" slot=\"start\"></ion-icon>&nbsp;{{cupo.Servicio.Nombre}}</h5>\r\n              <h6><ion-icon name=\"bandage\" slot=\"start\"></ion-icon>&nbsp;{{cupo.TipoAtencion}}</h6>\r\n              <h6 class=\"ion-text-capitalize\"><ion-icon name=\"alarm\" slot=\"start\"></ion-icon>&nbsp;{{transformDate(cupo.FechaHoraInicio, 'dddd DD MMMM YYYY')}}</h6>\r\n              <h6 class=\"ion-text-capitalize\">Estado: <strong>{{traduceString(cupo.Estado)}}</strong></h6>\r\n            </ion-label>\r\n            <ion-button \r\n              [ngClass]=\"{'danger-boton':cupo.Estado === 'cancelled', 'success-boton':cupo.Estado === 'booked' || cupo.Estado === 'confirmed'}\" \r\n              (click)=\"citaSelected(cupo)\">{{cupo.HoraInicio}} - {{cupo.HoraTermino}}\r\n              <ion-icon name=\"chevron-forward-outline\" slot=\"end\"></ion-icon>\r\n            </ion-button>\r\n          </ion-item>\r\n        </div>\r\n\r\n      </ion-list>\r\n   \r\n      <!-- no hay datos -->\r\n    <ion-row *ngIf=\"cuposAgrupadosSelected.length == 0\">\r\n      <div style=\"position: absolute; display: table; height: 80%; font-size: 30px; color:#BDBDBD; text-align: center;\" class=\"ion-padding\">\r\n        <p style=\"display: table-cell; vertical-align: middle\">No hay citas para el día seleccionado  <br>\r\n        <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n      </div>\r\n    </ion-row>\r\n\r\n  </div>\r\n</ion-content>\r\n<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n  <ion-fab-button (click)=\"logout()\" [style.--background]=\"miColor\">\r\n    <ion-icon name=\"close\"></ion-icon>\r\n  </ion-fab-button>\r\n</ion-fab>\r\n";
     /***/
   },
 
@@ -242,9 +242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.tiposAtencion = [];
         this.comboSeleccionado = "";
-      } //AHORA DEBO REVISAR EL WEBSERVICE DE PERSONA
-      //PARA OBTENER LA INFORMACION DEL PACIENTE Y usarlo en las consultas
-
+      }
 
       _createClass(CuposDisponiblesPage, [{
         key: "ngOnInit",
@@ -312,8 +310,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             var ini = this.semana.start; //var ter = this.semana.semanas[0].end;
 
-            var ter = this.semana.end;
-            console.log(this.semana); //carga inicial
+            var ter = this.semana.end; //console.log(this.semana);
+            //carga inicial
 
             sessionStorage.setItem("PAGINA_ACTUAL", pagina);
             this.buscarDisponibilidad(ini, ter, this.codigoDeis, this.runPaciente, this.serviceType, this.tipoOperacion);
@@ -422,8 +420,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           //vienen las citas sin fecha
           this.cuposAgrupadosSelected = [];
-          this.tiposAtencion = [];
-          console.log(this.semana);
+          this.tiposAtencion = []; //console.log(this.semana);
 
           if (data && data.Mensaje) {
             //correcto
@@ -453,8 +450,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (this.semana.semanas && this.semana.semanas.length > 0) {
                 this.semana.semanas.forEach(function (sem) {
-                  var cupos = 0;
-                  console.log(sem);
+                  var cupos = 0; //console.log(sem);
 
                   if (_this3.citas && _this3.citas.length > 0) {
                     sem.Cupos = [];
@@ -468,16 +464,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         cupos++;
                       }
                     });
-                  }
+                  } //console.log(cupos);
 
-                  console.log(cupos);
+
                   sem.total = cupos;
                   sem.CuposAgrupados = _this3.agruparCitasTodas(sem.Cupos);
                 });
-              } //console.log(this.citas);
+              } ////console.log(this.citas);
+              //console.log(this.semana);
+              //aca guardamos la semana en una variable de session
 
-
-              console.log(this.semana); //aca guardamos la semana en una variable de session
 
               sessionStorage.setItem('CUPOS_SEMANA', JSON.stringify(this.semana)); //this.agruparCitas();
               //dejamos por defecto el primer item seleccionado
@@ -659,7 +655,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function seleccionarCuposAgrupados(item) {
           var _this6 = this;
 
-          console.log(item);
+          //console.log(item);
           this.itemSelected = item;
           this.cuposAgrupadosSelected = [];
 
@@ -668,13 +664,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               this.semana.semanas.forEach(function (sem) {
                 if (sem.end == item.end) {
                   sem.selected = true;
-                  _this6.cuposAgrupadosSelected = sem.CuposAgrupados;
-                  console.log(sem); //this.cuposAgrupadosSelected = this.filter(sem.CuposAgrupados);
+                  _this6.cuposAgrupadosSelected = sem.CuposAgrupados; //console.log(sem);
+                  //this.cuposAgrupadosSelected = this.filter(sem.CuposAgrupados);
                   //filtramos
 
-                  _this6.filtrarTiposAtencion();
+                  _this6.filtrarTiposAtencion(); //console.log(this.cuposAgrupadosSelected);
 
-                  console.log(_this6.cuposAgrupadosSelected);
                 } else {
                   sem.selected = false;
                 }
@@ -686,8 +681,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "tipoSeleccionado",
         value: function tipoSeleccionado(event) {
           if (event.detail.value) {
-            this.comboSeleccionado = event.detail.value;
-            console.log(this.comboSeleccionado); //this.seleccionarCuposAgrupados(this.itemSelected);
+            this.comboSeleccionado = event.detail.value; //console.log(this.comboSeleccionado);
+            //this.seleccionarCuposAgrupados(this.itemSelected);
 
             this.filtrarTiposAtencion();
           }
@@ -734,9 +729,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
 
             sessionStorage.setItem('CUPOS_SEMANA', JSON.stringify(this.semana));
-          }
+          } //console.log(this.cuposAgrupadosSelected);
 
-          console.log(this.cuposAgrupadosSelected);
         }
       }, {
         key: "contadorHorasDisponibles",
@@ -755,40 +749,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           return total;
         }
-        /*
-        async mesSelected(item){
-          //realizar la llamada para cargar los eventos del mes
-          console.log(item.detail.value);
-          var arr = item.detail.value.split(',');
-          if (arr){
-            if (arr.length == 2){
-              var mes = arr[0];
-              var anno = arr[1];
-              // setear this.mesActualSeleccionado al mes seleccionado de lo contrario simpre sera el mes actual
-              //this.mesActualSeleccionado = mes;
-              this.mesActualSeleccionado = item.detail.value;
-              let loader = await this.loading.create({
-                message: 'Obteniendo...<br>Información del usuario',
-                duration: 20000
-              });
-          
-              await loader.present().then(async () => {
-                if(!this.utiles.isAppOnDevice()){
-                  //llamada web
-                  //this.cargarDatosWeb(mes, anno, loader);
-                  this.cargarDatosWebN(mes, anno, loader);
-                }
-                else {
-                  //llamada nativa
-                  this.cargarDatosNativeN(mes, anno, loader);
-                }
-              });
-                }
-          }
-               
-        }
-        */
-
       }, {
         key: "filter",
         value: function filter(cuposDisponibles) {
@@ -807,11 +767,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           return arr;
         }
-        /*  split(input: string, sep: string, inx: number){
-          var pi = new SplitPipe();
-          return pi.transform(input, sep, inx);
-        } */
-
       }, {
         key: "citaSelected",
         value: function citaSelected(item) {

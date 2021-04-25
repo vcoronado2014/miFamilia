@@ -259,10 +259,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.navCtrl.navigateRoot('inicio');
           }
 
-          this.cargarForma(); //seteamos el primer codigo en el foco
-          //this.codigoUnoInput.focus();
-          //this.codigoUnoInput.nativeElement.focus();
-          //this.enviarFoco();
+          this.cargarForma();
         }
       }, {
         key: "ngAfterViewInit",

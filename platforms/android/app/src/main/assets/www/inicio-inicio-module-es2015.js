@@ -146,12 +146,12 @@ let InicioPage = class InicioPage {
                 //obtener la info de registro y setear los campos que corresponden
                 if (!this.utiles.isAppOnDevice()) {
                     //this.doGeocode(lat, lon);
-                    console.log('web');
+                    //console.log('web');
                     this.doGeocode(lat, lon);
                 }
                 else {
                     //this.doGeocodeNative(lat, lon);
-                    console.log('native');
+                    //console.log('native');
                     this.doGeocodeNative(lat, lon);
                 }
             }).catch((error) => {
@@ -269,7 +269,7 @@ let InicioPage = class InicioPage {
                                 //web
                                 this.servicioGeo.postValidacionClaveUnica(run, state).subscribe((response) => {
                                     //aca quedamos, no habría que hacer nada
-                                    console.log(response);
+                                    //console.log(response);
                                     loader2.dismiss();
                                 });
                             }
@@ -277,7 +277,7 @@ let InicioPage = class InicioPage {
                                 //nativa
                                 this.servicioGeo.postValidacionClaveUnicaNative(run, state).then((response) => {
                                     var responseData = JSON.parse(response.data);
-                                    console.log(responseData);
+                                    //console.log(responseData);
                                     loader2.dismiss();
                                 });
                             }
@@ -294,8 +294,8 @@ let InicioPage = class InicioPage {
     //este método se debe validar antes ya que puede tener una validación por clave unica
     verificaRegistroClaveUnica(stateClaveUnica, stateObjeto) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log(stateClaveUnica);
-            console.log(stateObjeto);
+            //console.log(stateClaveUnica);
+            //console.log(stateObjeto);
             //hay que traer el registro de clave unica
             //1. si el registro de clave unica esta correcto, hay que enviarlo al formulario de
             //   registro para que rellene los datos
@@ -392,7 +392,7 @@ let InicioPage = class InicioPage {
         });
     }
     procesarInfoRun(registro, loader) {
-        console.log(registro);
+        //console.log(registro);
         if (registro == null) {
             //no tiene registro, hay que dejarlo acá
             console.log('no tiene registro');
@@ -418,10 +418,10 @@ let InicioPage = class InicioPage {
         }
     }
     procesarInfo(registro, loader) {
-        console.log(registro);
+        //console.log(registro);
         if (registro == null) {
             //no tiene registro, hay que dejarlo acá
-            console.log('no tiene registro');
+            //console.log('no tiene registro');
             //limpiamos local storage
             this.limpiarRegistro();
             loader.dismiss();

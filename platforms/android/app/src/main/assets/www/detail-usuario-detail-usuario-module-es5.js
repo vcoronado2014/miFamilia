@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n<!--   <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n  <!-- progress -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando información del usuario\"></app-progress>\r\n  <!-- lo cambiamos por la card -->\r\n  <ion-item lines=\"none\" [hidden]=\"estaCargando\" style=\"padding-top: 15px;\">\r\n    <!-- poner avatar -->\r\n    <app-avatar [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item>\r\n<!--   <ion-card [hidden]=\"estaCargando\">\r\n    <img *ngIf=\"usuario.UrlImagen != ''\" src={{usuario.UrlImagen}} style=\"width: 100%;\" />\r\n    <ion-card-header>\r\n      <ion-card-title class=\"ion-text-wrap\" [style.--color]=\"miColor\">{{usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno}}</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-item lines=\"none\">\r\n        <ion-label>Edad: {{usuario.Edad}} años.</ion-label>\r\n        <ion-badge slot=\"end\">{{usuario.Parentezco.Nombre}}</ion-badge>\r\n      </ion-item>\r\n\r\n    </ion-card-content>\r\n  </ion-card>  -->\r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\">\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Detalle</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n  <!-- progress -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando información del usuario\"></app-progress>\r\n  <!-- lo cambiamos por la card -->\r\n  <ion-item lines=\"none\" [hidden]=\"estaCargando\" style=\"padding-top: 15px;\">\r\n    <!-- poner avatar -->\r\n    <app-avatar [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item>\r\n  <!-- aca viene la lista de datos personales presion, altura, etc-->\r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-item>\r\n      <ion-icon name=\"pulse\" slot=\"start\"></ion-icon>\r\n      <ion-label>Presión</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPresion}}</ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"body\" slot=\"start\"></ion-icon>\r\n      <ion-label>Altura</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorAltura}}<span *ngIf=\"valorAltura != 'No informada'\">&nbsp;cm</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"logo-buffer\" slot=\"start\"></ion-icon>\r\n      <ion-label>Peso</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorPeso}}<span *ngIf=\"valorPeso != 'No informado'\">&nbsp;Kg</span></ion-label>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-icon name=\"heart\" slot=\"start\"></ion-icon>\r\n      <ion-label>IMC</ion-label>\r\n      <ion-label slot=\"end\" class=\"ion-text-right\">{{valorImc}}</ion-label>\r\n    </ion-item>\r\n\r\n  </ion-list>\r\n  <!-- aca poner el listado de alergias --> \r\n  <ion-list [hidden]=\"estaCargando\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\">\r\n      <h5>{{title}}</h5>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-icon name=\"medkit\" slot=\"start\"></ion-icon>\r\n      <ion-label>{{item.Descripcion}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> \r\n</ion-content>\r\n";
     /***/
   },
 
@@ -220,8 +220,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.cargando = false; //para controlar componente progess
 
         this.estaCargando = false;
-      } //ARREGLAR TEMAS DE COLORES Y URL CUANDO SON VARIOS MIEMBROS DE LA FAMILIA
-
+      }
 
       _createClass(DetailUsuarioPage, [{
         key: "ngOnInit",
@@ -244,8 +243,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
 
               _this.userImagen = _this.usuario.UrlImagen;
-              _this.miColor = _this.utiles.entregaColor(_this.usuario);
-              console.log(_this.usuario);
+              _this.miColor = _this.utiles.entregaColor(_this.usuario); //console.log(this.usuario);
 
               _this.obtenerInfoUsuario(_this.usuario.Id);
             }
@@ -299,11 +297,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 this.info.getIndicadorValorApi(uspId).subscribe(function (response) {
                                   _this3.procesarIndicadorValor(response, loader);
                                 }); //presion
-                                //original
-
-                                /*           let loader1 = await this.loading.create({
-                                            message: 'Obteniendo...<br>Presión',
-                                          }); */
 
                                 _context9.next = 5;
                                 return this.loading.create({
@@ -339,12 +332,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                               case 9:
                                 //alergias
-                                //original
-
-                                /*           let loader2 = await this.loading.create({
-                                            message: 'Obteniendo...<br>Alergias',
-                                
-                                          }); */
                                 this.estaCargando = true;
                                 _context9.next = 12;
                                 return this.loading.create({
@@ -385,12 +372,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 this.info.getIndicadorValor(uspId).subscribe(function (response) {
                                   _this3.procesarIndicadorValor(response, loader);
                                 }); //presion
-                                //original
-
-                                /*           let loader1 = await this.loading.create({
-                                            message: 'Obteniendo...<br>Presión',
-                                            
-                                          }); */
 
                                 _context9.next = 20;
                                 return this.loading.create({
@@ -471,12 +452,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 this.info.getIndicadorValorNativeApi(uspId).then(function (response) {
                                   _this3.procesarIndicadorValor(JSON.parse(response.data), loader);
                                 }); //presion
-                                //original
-
-                                /*           let loader1 = await this.loading.create({
-                                            message: 'Obteniendo...<br>Presión',
-                                
-                                          }); */
 
                                 _context9.next = 36;
                                 return this.loading.create({
@@ -552,12 +527,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 this.info.getIndicadorValorNative(uspId).then(function (response) {
                                   _this3.procesarIndicadorValor(JSON.parse(response.data), loader);
                                 }); //presion
-                                //original
-
-                                /*           let loader1 = await this.loading.create({
-                                            message: 'Obteniendo...<br>Presión',
-                                
-                                          }); */
 
                                 _context9.next = 51;
                                 return this.loading.create({

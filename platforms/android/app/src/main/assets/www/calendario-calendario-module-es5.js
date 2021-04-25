@@ -324,19 +324,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return prev[attrib] < curr[attrib] ? prev : curr;
           }) || null;
         };
-      } //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
-      //OJO HAY VACUNAS CON FECHA PROXIMA 29-11-2020 Y NO VEO QUE APAREZCAN
-      //CUANDO SELECCIONAS EL COMBO DE FECHA Y LUEGO VUELVES A SELECCIONAR 
-      //UNA FECHA ANTERIOR POR EJEMPLO NO MUESTRA NADA
-
+      }
 
       _createClass(CalendarioPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
           moment__WEBPACK_IMPORTED_MODULE_10__().locale('es');
           this.fechaActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY-MM-DD');
-          this.anioActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY');
-          console.log(this.fechaActual); //this.miColor = this.utiles.entregaMiColor();
+          this.anioActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY'); //console.log(this.fechaActual);
+          //this.miColor = this.utiles.entregaMiColor();
 
           if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -351,10 +347,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } //mes seleccionado
 
 
-          this.mesActualSeleccionado = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1 + ',' + moment__WEBPACK_IMPORTED_MODULE_10__().year(); //this.mesActualSeleccionado = moment().month() + 1;
-
-          console.log('formato de mes seleccionado ===> ' + this.mesActualSeleccionado); //revisar estos parametros ya que estan en el otro codigo en el oninit
-
+          this.mesActualSeleccionado = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1 + ',' + moment__WEBPACK_IMPORTED_MODULE_10__().year();
           var diasSemana = new Array("domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado");
           var meses = new Array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
           this.diaSem = diasSemana[new Date().getDay()];
@@ -365,8 +358,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
           var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1; //var mesActual = this.mesActualSeleccionado;
-
-          console.log(mesActual); //***************************** */
+          //console.log(mesActual);
+          //***************************** */
 
           this.tratamientoMeses(); //prueba de implementacion api management
           //this.cargarTodosLosEventosApi();
@@ -401,13 +394,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     mesActual = {
                       mes: fechaActual.month() + 1,
                       anno: fechaActual.year()
-                    }; //original
-
-                    /*     let loader = await this.loading.create({
-                          message: 'Obteniendo...<br>Información del usuario api',
-                          duration: 20000
-                        }); */
-
+                    };
                     _context4.next = 6;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
@@ -451,14 +438,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                                               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
 
-                                              this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                                              console.log(this.citasVerticalTodasTop);
+                                              this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit); //console.log(this.citasVerticalTodasTop);
+
                                               loader.dismiss();
                                               this.estaCargando = false;
                                               this.tituloLoading = '';
                                               this.scrollListVisible();
 
-                                            case 11:
+                                            case 10:
                                             case "end":
                                               return _context.stop();
                                           }
@@ -466,7 +453,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                       }, _callee, this);
                                     }));
                                   }, function (error) {
-                                    console.log(error.message);
+                                    //console.log(error.message);
                                     _this2.estaCargando = false;
                                     _this2.tituloLoading = '';
                                     loader.dismiss();
@@ -498,13 +485,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                                               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
 
-                                              this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                                              console.log(this.citasVerticalTodasTop);
+                                              this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit); //console.log(this.citasVerticalTodasTop);
+
                                               loader.dismiss();
                                               this.estaCargando = false;
                                               this.tituloLoading = '';
 
-                                            case 10:
+                                            case 9:
                                             case "end":
                                               return _context2.stop();
                                           }
@@ -512,7 +499,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                       }, _callee2, this);
                                     }));
                                   })["catch"](function (error) {
-                                    console.log(error.message);
+                                    //console.log(error.message);
                                     _this2.estaCargando = false;
                                     _this2.tituloLoading = '';
                                     loader.dismiss();
@@ -567,13 +554,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     mesPosterior = {
                       mes: fechaPosterior.month() + 1,
                       anno: fechaPosterior.year()
-                    }; //original
-
-                    /*     let loader = await this.loading.create({
-                          message: 'Obteniendo...<br>Información del usuario',
-                          duration: 20000
-                        }); */
-
+                    };
                     _context12.next = 10;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
@@ -631,7 +612,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       this.procesarArregloCitasTodas();
                                                                       this.citasVerticalMostrar = this.citasVerticalTodas.filter(function (e) {
                                                                         return e.Mostrar == true;
-                                                                      }); //console.log(this.citasVerticalMostrar);
+                                                                      }); ////console.log(this.citasVerticalMostrar);
                                                                       //ahora que tenemos las citas que queremos mostrar
                                                                       //ordenamos
 
@@ -641,13 +622,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                                                                       sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
 
-                                                                      this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                                                                      console.log(this.citasVerticalTodasTop);
+                                                                      this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit); //console.log(this.citasVerticalTodasTop);
+
                                                                       loader.dismiss();
                                                                       this.estaCargando = false;
                                                                       this.tituloLoading = '';
 
-                                                                    case 10:
+                                                                    case 9:
                                                                     case "end":
                                                                       return _context5.stop();
                                                                   }
@@ -721,13 +702,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                                                                       sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
 
-                                                                      this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                                                                      console.log(this.citasVerticalTodasTop);
+                                                                      this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit); //console.log(this.citasVerticalTodasTop);
+
                                                                       loader.dismiss();
                                                                       this.estaCargando = false;
                                                                       this.tituloLoading = '';
 
-                                                                    case 11:
+                                                                    case 10:
                                                                     case "end":
                                                                       return _context8.stop();
                                                                   }
@@ -787,9 +768,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             for (var t in this.citasVertical[s].Eventos) {
               var fechaHora = this.citasVertical[s].Eventos[t].DetalleEventoMes.FechaHora;
               var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
-              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
-              console.log('Evento: ' + fechaEvento);
-              console.log('Hoy:' + fechaHoy);
+              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate(); //console.log('Evento: ' + fechaEvento);
+              //console.log('Hoy:' + fechaHoy);
+
               contador++;
 
               if (this.citasVertical[s].Eventos[t]) {
@@ -835,8 +816,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
 
               if (fechaEvento < fechaHoy && this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de alimento') {
-                this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado';
-                console.log(this.citasVertical[s].Eventos[t].DetalleEventoMes);
+                this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado'; //console.log(this.citasVertical[s].Eventos[t].DetalleEventoMes);
               }
 
               if (fechaEvento < fechaHoy && this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de fármaco') {
@@ -879,9 +859,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             for (var t in this.citasVerticalTodas[s].Eventos) {
               var fechaHora = this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.FechaHora;
               var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
-              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
-              console.log('Evento: ' + fechaEvento);
-              console.log('Hoy:' + fechaHoy);
+              var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate(); //console.log('Evento: ' + fechaEvento);
+              //console.log('Hoy:' + fechaHoy);
+
               contador++;
 
               if (this.citasVerticalTodas[s].Eventos[t]) {
@@ -927,8 +907,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
 
               if (fechaEvento < fechaHoy && this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de alimento') {
-                this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado';
-                console.log(this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes);
+                this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado'; //console.log(this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes);
               }
 
               if (fechaEvento < fechaHoy && this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de fármaco') {
@@ -987,7 +966,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this14 = this;
 
           setTimeout(function () {
-            //console.log('Done');
+            ////console.log('Done');
             _this14.topLimit += 5;
             _this14.citasVerticalTodasTop = _this14.citasVerticalMostrar.slice(0, _this14.topLimit);
             event.target.complete(); //aplicamos disabled si la cantidad de registros es la misma que el total
@@ -1124,14 +1103,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.mesesVertical.push(entidadMenos);
           this.mesesVertical.push(entidadActual);
-          this.mesesVertical.push(entidadMas);
-          console.log(this.mesesVertical);
+          this.mesesVertical.push(entidadMas); //console.log(this.mesesVertical);
         }
       }, {
         key: "createEventsCalendario",
         value: function createEventsCalendario() {
-          this.calendarioData = this.citas;
-          console.log(this.calendarioData);
+          this.calendarioData = this.citas; //console.log(this.calendarioData);
+
           return this.calendarioData;
         }
       }, {
@@ -1158,13 +1136,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     modal = _context17.sent;
                     modal.onDidDismiss().then(function (data) {
                       if (data.data && data.data.accion) {
-                        var accion = data.data.accion; //console.log(accion);
+                        var accion = data.data.accion; ////console.log(accion);
                         //obtenemos la pagina actual
                         //actualizar
 
                         var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
                         var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1; //var mesActual = this.mesActualSeleccionado;
-                        //console.log(mesActual);
+                        ////console.log(mesActual);
                         //***************************** */
 
                         _this18.tratamientoMeses();
@@ -1259,8 +1237,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         text: 'No',
                         role: 'cancel',
                         cssClass: 'danger',
-                        handler: function handler(blah) {
-                          console.log('Confirm Cancel: blah');
+                        handler: function handler(blah) {//console.log('Confirm Cancel: blah');
                         }
                       }, {
                         text: 'Si',
@@ -1381,8 +1358,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
               var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1; //var mesActual = this.mesActualSeleccionado;
-
-              console.log(mesActual); //***************************** */
+              //console.log(mesActual);
+              //***************************** */
 
               this.tratamientoMeses();
               this.estaCargando = false;
@@ -1477,8 +1454,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
 
               this.citasVerticalTodasTop[i].DiferenciaFechas = dif;
-              /*         console.log(dif);
-                      console.log(this.citasVerticalTodasTop[i]); */
+              /*         //console.log(dif);
+                      //console.log(this.citasVerticalTodasTop[i]); */
             }
           }
         }
@@ -1509,8 +1486,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               if (entidad) {
                 //var elemento = this.min();
-                console.log(min);
-                console.log(entidad);
+                //console.log(min);
+                //console.log(entidad);
                 var yOffset = document.getElementById(entidad.DiferenciaFechas.toString()).offsetTop;
 
                 if (yOffset != null) {
