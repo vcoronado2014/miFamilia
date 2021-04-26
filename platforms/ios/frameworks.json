@@ -1,0 +1,12 @@
+{
+    "Security.framework": 1,
+    "SystemConfiguration.framework": 3,
+    "ImageIO.framework": 1,
+    "CoreLocation.framework": 6,
+    "AVFoundation.framework": 1,
+    "WebKit.framework": 1,
+    "UserNotifications.framework": 1,
+    "CoreTelephony.framework": 1,
+    "AudioToolbox.framework": 1,
+    "MapKit.framework": 1
+}
