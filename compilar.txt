@@ -1,0 +1,10 @@
+--primero
+nvm use v12
+ionic cordova platform rm ios
+ionic cordova platform add ios@6.0.0
+--copiar archivo 
+GoogleService-Info.plist en
+1. raiz de platform/ios
+2. raiz Mi familia app
+
+--abrir xcode, menu file - add file to mi familia app y agregar el archivo GoogleService-Info.plist
