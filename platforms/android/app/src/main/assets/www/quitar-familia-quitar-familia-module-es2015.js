@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Desactivar/activar</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n\n  <div [hidden]=\"estaCargando\">\n    <div class=\"ion-padding\">\n      <p class=\"texto-item\">\n        Puede activar o desactivar a los miembros de la familia deslizando el check de cada unos de ellos.\n      </p>\n    </div>\n  \n    <div *ngIf=\"familiaAsociar.length > 0\" style=\"padding-top: 16px;\">\n      <div *ngFor=\"let item of familiaAsociar\">\n        <ion-item lines=\"inset\">\n          <ion-grid>\n            <ion-row>\n              <ion-col size=\"10\">\n                <h3 class=\"text-avatar\">{{item.NombreCompleto}}</h3>\n                <small>Run: {{item.Run}}</small>\n              </ion-col>\n              <ion-col size=\"2\">\n                <!-- <ion-toggle color=\"primary\" slot=\"end\" [value]=\"item.EsAceptado\"  mode=\"ios\"></ion-toggle> -->\n                <ion-toggle mode=\"ios\" [checked]=\"item.EsAceptado\" [(ngModel)]=\"item.EsAceptado\"></ion-toggle>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </div>\n      <!-- boton acpetar -->\n      <ion-row>\n        <button [disabled]=\"familiaAsociar.length == 0\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">GUARDAR</button>\n      </ion-row>\n    </div>\n  </div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Desactivar/activar</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n\n  <div [hidden]=\"estaCargando\">\n    <div class=\"ion-padding\">\n      <p class=\"texto-item\">\n        Puede activar o desactivar a los miembros de la familia deslizando el check de cada unos de ellos.\n      </p>\n    </div>\n  \n    <div *ngIf=\"familiaAsociar.length > 0\" style=\"padding-top: 16px;\">\n      <div *ngFor=\"let item of familiaAsociar\">\n        <ion-item lines=\"inset\">\n          <ion-grid>\n            <ion-row>\n              <ion-col size=\"10\">\n                <h3 class=\"text-avatar\">{{item.NombreCompleto}}</h3>\n                <small>Run: {{item.Run}}</small>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-toggle mode=\"ios\" [checked]=\"item.EsAceptado\" [(ngModel)]=\"item.EsAceptado\"></ion-toggle>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </div>\n      <!-- boton acpetar -->\n      <ion-row>\n        <button [disabled]=\"familiaAsociar.length == 0\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">GUARDAR</button>\n      </ion-row>\n    </div>\n  </div>\n");
 
 /***/ }),
 
@@ -87,7 +87,7 @@ QuitarFamiliaPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".texto-item {\n  color: #00000099;\n  font-size: 14px;\n}\n\n.button-registrarse {\n  margin-top: 32px;\n  width: 90%;\n  margin-left: 5%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcXVpdGFyLWZhbWlsaWEvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxxdWl0YXItZmFtaWxpYVxccXVpdGFyLWZhbWlsaWEucGFnZS5zY3NzIiwic3JjL2FwcC9xdWl0YXItZmFtaWxpYS9xdWl0YXItZmFtaWxpYS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxnQkFBQTtFQUNBLGVBQUE7QUNDSjs7QURDQTtFQUNJLGdCQUFBO0VBQ0EsVUFBQTtFQUNBLGVBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL3F1aXRhci1mYW1pbGlhL3F1aXRhci1mYW1pbGlhLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50ZXh0by1pdGVte1xyXG4gICAgY29sb3I6ICMwMDAwMDA5OTtcclxuICAgIGZvbnQtc2l6ZTogMTRweDtcclxufVxyXG4uYnV0dG9uLXJlZ2lzdHJhcnNle1xyXG4gICAgbWFyZ2luLXRvcDogMzJweDtcclxuICAgIHdpZHRoOiA5MCU7XHJcbiAgICBtYXJnaW4tbGVmdDogNSU7XHJcbn0iLCIudGV4dG8taXRlbSB7XG4gIGNvbG9yOiAjMDAwMDAwOTk7XG4gIGZvbnQtc2l6ZTogMTRweDtcbn1cblxuLmJ1dHRvbi1yZWdpc3RyYXJzZSB7XG4gIG1hcmdpbi10b3A6IDMycHg7XG4gIHdpZHRoOiA5MCU7XG4gIG1hcmdpbi1sZWZ0OiA1JTtcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".button-registrarse {\n  margin-top: 32px;\n  width: 90%;\n  margin-left: 5%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcXVpdGFyLWZhbWlsaWEvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxxdWl0YXItZmFtaWxpYVxccXVpdGFyLWZhbWlsaWEucGFnZS5zY3NzIiwic3JjL2FwcC9xdWl0YXItZmFtaWxpYS9xdWl0YXItZmFtaWxpYS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxnQkFBQTtFQUNBLFVBQUE7RUFDQSxlQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9xdWl0YXItZmFtaWxpYS9xdWl0YXItZmFtaWxpYS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYnV0dG9uLXJlZ2lzdHJhcnNle1xyXG4gICAgbWFyZ2luLXRvcDogMzJweDtcclxuICAgIHdpZHRoOiA5MCU7XHJcbiAgICBtYXJnaW4tbGVmdDogNSU7XHJcbn0iLCIuYnV0dG9uLXJlZ2lzdHJhcnNlIHtcbiAgbWFyZ2luLXRvcDogMzJweDtcbiAgd2lkdGg6IDkwJTtcbiAgbWFyZ2luLWxlZnQ6IDUlO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -186,7 +186,7 @@ let QuitarFamiliaPage = class QuitarFamiliaPage {
                 }
             }
         }
-        console.log(this.familiaAsociar);
+        //console.log(this.familiaAsociar);
     }
     procesarFamilia() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -196,9 +196,6 @@ let QuitarFamiliaPage = class QuitarFamiliaPage {
                 let arrString = [];
                 for (let i = 0; i < this.familiaAsociar.length; i++) {
                     const element = this.familiaAsociar[i];
-                    /*         if (element.EsAceptado == false){
-                              arrString.push(element.UspId.toString());
-                            } */
                     //enviaremos par valor uspid;1|0
                     let valor = element.EsAceptado ? '1' : '0';
                     arrString.push(element.UspId.toString() + ';' + valor);
@@ -209,8 +206,8 @@ let QuitarFamiliaPage = class QuitarFamiliaPage {
                     arrString.push("0;0");
                 }
                 //tomamos los elementos a guardar
-                console.log(uspIdTitular);
-                console.log(arrString.toString());
+                //console.log(uspIdTitular);
+                //console.log(arrString.toString());
                 //ahora que tenemos los elementos procedemos a ejecutar el proceso
                 this.estaCargando = true;
                 this.tituloProgress = 'Guardando información de la familia';
@@ -229,7 +226,7 @@ let QuitarFamiliaPage = class QuitarFamiliaPage {
                                 this.estaCargando = false;
                                 this.tituloProgress = '';
                                 //correcto, hay que volver a autentificarse
-                                console.log('autentificarse');
+                                //console.log('autentificarse');
                                 this.autentificarse();
                             }
                             else {
@@ -298,7 +295,7 @@ let QuitarFamiliaPage = class QuitarFamiliaPage {
         else {
             this.utiles.presentToast('No hay miembros de la familia para quitar', 'bottom', 3000);
         }
-        console.log(this.familiaAsociar);
+        //console.log(this.familiaAsociar);
     }
     presentAlertConfirm(header, message) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {

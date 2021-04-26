@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Ajustes {{nombrePaciente}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <!-- la imagen -->\n  <ion-card>\n    <ion-card-header>\n     <!--  <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->\n      <ion-card-title>Mi imagen</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div>\n        <img [src]=\"image\" *ngIf=\"image\" />\n      </div>\n    </ion-card-content>\n  </ion-card>\n  <!-- control abrir archivos si es que tiene registro -->\n  <ion-list lines=\"none\" *ngIf=\"tieneRegistro\">\n    <ion-item>\n      <ion-note id=\"profile_image\" color=\"primary\">Seleccione el archivo</ion-note>\n    </ion-item>\n    <ion-item>\n      <ion-input  type=\"file\" accept=\"image/*\" (change)=\"changeListener($event)\"></ion-input>\n    </ion-item>\n  </ion-list>\n  <!-- si no tiene registro -->\n  <ion-item *ngIf=\"!tieneRegistro\">\n    No puede editar ya que no se encuentra registrado\n  </ion-item>\n<!--   <ion-row class=\"ion-padding\">\n          <button mat-raised-button color=\"primary\" (click)=\"abrirEditar()\" style=\"width: 90%; margin-left: 5%; height:36px;background: #3880ff;color:white;\" >Cambiar datos de contacto</button>\n  </ion-row> -->\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/familia\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Ajustes {{nombrePaciente}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <!-- la imagen -->\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title>Mi imagen</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div>\n        <img [src]=\"image\" *ngIf=\"image\" />\n      </div>\n    </ion-card-content>\n  </ion-card>\n  <!-- control abrir archivos si es que tiene registro -->\n  <ion-list lines=\"none\" *ngIf=\"tieneRegistro\">\n    <ion-item>\n      <ion-note id=\"profile_image\" color=\"primary\">Seleccione el archivo</ion-note>\n    </ion-item>\n    <ion-item>\n      <ion-input  type=\"file\" accept=\"image/*\" (change)=\"changeListener($event)\"></ion-input>\n    </ion-item>\n  </ion-list>\n  <!-- si no tiene registro -->\n  <ion-item *ngIf=\"!tieneRegistro\">\n    No puede editar ya que no se encuentra registrado\n  </ion-item>\n</ion-content>\n");
 
 /***/ }),
 
@@ -136,7 +136,7 @@ let AjustesFamiliaPage = class AjustesFamiliaPage {
                 this.miColor = this.utiles.entregaColor(this.usuarioAps);
                 this.color = this.miColor; //this.usuarioAps.Color;
                 this.nombrePaciente = this.usuarioAps.Nombres + ' ' + this.usuarioAps.ApellidoPaterno + ' ' + this.usuarioAps.ApellidoMaterno;
-                console.log(this.usuarioAps);
+                //console.log(this.usuarioAps);
             }
         });
     }
@@ -144,12 +144,6 @@ let AjustesFamiliaPage = class AjustesFamiliaPage {
         this.color = color;
     }
     changeListener($event) {
-        //lo comentamos por mientras
-        /*     if (!this.utiles.isAppOnDevice()){
-              this.utiles.presentToast('Esta operación no esta permitida', 'center', 3000);
-              return;
-            }
-            else { */
         this.fileP = $event.target.files[0];
         if (this.fileP) {
             if (this.fileP.size <= 2048000) {
@@ -164,12 +158,11 @@ let AjustesFamiliaPage = class AjustesFamiliaPage {
             //this.presentToast('No ha seleccionado ninguna imágen válida.'); 
             this.utiles.presentToast('No ha seleccionado ninguna imágen válida.', 'center', 3000);
         }
-        /*  } */
     }
     putImagen(files) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             var uspId = this.usuarioAps.Id.toString();
-            console.log(files.size);
+            //console.log(files.size);
             let loader = yield this.loading.create({
                 message: 'Guardando...<br>Imagen del usuario.',
                 duration: 20000
@@ -273,14 +266,11 @@ let AjustesFamiliaPage = class AjustesFamiliaPage {
                     //llamada web
                     this.img.putColor(uspId, colorGuardar).subscribe((data) => {
                         if (data) {
-                            //hay que setear el color del localstorage
-                            //this.utiles.cambiaColorLocalStorage(data);
                             this.color = data;
                             if (this.usuarioAps) {
                                 if (this.usuarioAps.Color) {
                                     //dejamos al usuario con la nueva imagen
                                     this.usuarioAps.Color = data;
-                                    //sessionStorage.setItem('UsuarioAps', JSON.stringify(nuevoUsuarioAps));
                                 }
                             }
                             if (sessionStorage.UsuarioAps) {

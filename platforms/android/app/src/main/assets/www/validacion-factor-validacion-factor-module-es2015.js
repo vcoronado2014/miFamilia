@@ -148,10 +148,6 @@ let ValidacionFactorPage = class ValidacionFactorPage {
             this.navCtrl.navigateRoot('inicio');
         }
         this.cargarForma();
-        //seteamos el primer codigo en el foco
-        //this.codigoUnoInput.focus();
-        //this.codigoUnoInput.nativeElement.focus();
-        //this.enviarFoco();
     }
     ngAfterViewInit() {
         setTimeout(() => {

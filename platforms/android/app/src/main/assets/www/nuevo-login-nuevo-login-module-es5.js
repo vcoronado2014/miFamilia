@@ -599,12 +599,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     correo = this.forma.controls.email.value;
                     password = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : ''; //ahora guardamos
-                    //original
-
-                    /*     let loader = await this.loading.create({
-                          message: 'Creando...<br>Registro',
-                          duration: 20000
-                        }); */
 
                     this.estaCargando = true;
                     _context6.next = 5;
@@ -769,13 +763,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       Password: password,
                       UsaEnrolamiento: this.usaEnrolamiento,
                       TokenFCM: this.utiles.entregaTokenFCM()
-                    }; //original
-
-                    /*     let loader = await this.loading.create({
-                          message: 'Obteniendo...<br>Login',
-                          duration: 10000
-                        }); */
-
+                    };
                     this.estaCargando = true;
                     _context10.next = 4;
                     return this.loading.create({

@@ -129,7 +129,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".text-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.15px;\n  color: #000000DE;\n  font-size: 1em;\n  margin-bottom: 0;\n}\n\n.subtext-avatar {\n  font-family: \"Roboto\";\n  letter-spacing: 0.25px;\n  color: #00000099;\n  font-size: 0.875em;\n  margin-bottom: 0;\n}\n\n.texto-item {\n  color: #00000099;\n  font-size: 14px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmFtaWxpYS9GOlxcYXBwX21pZmFtaWxpYV9naXRcXG1pRmFtaWxpYV9wcmUvc3JjXFxhcHBcXGZhbWlsaWFcXGZhbWlsaWEucGFnZS5zY3NzIiwic3JjL2FwcC9mYW1pbGlhL2ZhbWlsaWEucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxzQkFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0FDQ0o7O0FEQ0U7RUFDRSxxQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0FDRUo7O0FEQUU7RUFDRSxnQkFBQTtFQUNBLGVBQUE7QUNHSiIsImZpbGUiOiJzcmMvYXBwL2ZhbWlsaWEvZmFtaWxpYS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGV4dC1hdmF0YXJ7XHJcbiAgICBmb250LWZhbWlseTogJ1JvYm90byc7XHJcbiAgICBsZXR0ZXItc3BhY2luZzogMC4xNXB4O1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxuICAgIGZvbnQtc2l6ZTogMWVtO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMDtcclxuICB9XHJcbiAgLnN1YnRleHQtYXZhdGFye1xyXG4gICAgZm9udC1mYW1pbHk6ICdSb2JvdG8nO1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuMjVweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwOTk7XHJcbiAgICBmb250LXNpemU6IDAuODc1ZW07XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xyXG4gIH1cclxuICAudGV4dG8taXRlbXtcclxuICAgIGNvbG9yOiAjMDAwMDAwOTk7XHJcbiAgICBmb250LXNpemU6IDE0cHg7XHJcbn0iLCIudGV4dC1hdmF0YXIge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMTVweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbiAgZm9udC1zaXplOiAxZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59XG5cbi5zdWJ0ZXh0LWF2YXRhciB7XG4gIGZvbnQtZmFtaWx5OiBcIlJvYm90b1wiO1xuICBsZXR0ZXItc3BhY2luZzogMC4yNXB4O1xuICBjb2xvcjogIzAwMDAwMDk5O1xuICBmb250LXNpemU6IDAuODc1ZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59XG5cbi50ZXh0by1pdGVtIHtcbiAgY29sb3I6ICMwMDAwMDA5OTtcbiAgZm9udC1zaXplOiAxNHB4O1xufSJdfQ== */";
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2ZhbWlsaWEvZmFtaWxpYS5wYWdlLnNjc3MifQ== */";
     /***/
   },
 
@@ -228,34 +228,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.cargarDatosIniciales();
         }
       }, {
-        key: "ionViewWillLeave",
-        value: function ionViewWillLeave() {
-          console.log('ionViewWillLeave'); // <- Not in console when leaving
-        }
-      }, {
-        key: "ngDoCheck",
-        value: function ngDoCheck() {
-          //console.log('check');
-          //this.miColor = this.utiles.entregaMiColor();
-          //this.cargarDatosIniciales();
-          //ESTOY VIENDO ESTO, YA QUE ES MUCHA CARGA HACER SIEMPRE LA
-          //VALIDACIÓN EN EL DOCHECK, BUSCAR OTRA FORMA, BUSCAR TAMBIEN SACAR SIEMPRE EL COLOR DESDE
-          //LA LOCALSTORAGE MI_COLOR Y MI_IMAGEN
-          //verificamos el color
-          if (localStorage.getItem('MI_COLOR')) {
-            var colorLocal = localStorage.getItem('MI_COLOR');
-            var sessionColor = JSON.parse(sessionStorage.UsuarioAps);
-
-            if (colorLocal != sessionColor.Color) {
-              //hay que cambiarlo
-              console.log('Cambia color de ' + sessionColor.Color + ' a ' + colorLocal);
-              localStorage.setItem('MI_COLOR', colorLocal); //this.miColor = this.utiles.entregaMiColor();
-
-              this.miColor = this.utiles.entregaColor(this.usuarioAps);
-            }
-          }
-        }
-      }, {
         key: "cargarDatosIniciales",
         value: function cargarDatosIniciales() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
@@ -266,13 +238,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    this.listadoUsuario = []; //original
-
-                    /*     let loader = await this.loading.create({
-                          message: 'Obteniendo...<br>Información del usuario',
-                          duration: 20000
-                        }); */
-
+                    this.listadoUsuario = [];
                     this.estaCargando = true;
                     _context2.next = 4;
                     return this.loading.create({

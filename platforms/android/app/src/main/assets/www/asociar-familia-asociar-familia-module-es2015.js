@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Asociar familia</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n\n  <div [hidden]=\"estaCargando\">\n    <div class=\"ion-padding\">\n      <p class=\"texto-item\">\n        Puede asociar a los miembros de la familia propuestos deslizando el check de cada unos de ellos.<br>\n      </p>\n    </div>\n  \n    <div *ngIf=\"familiaAsociar.length > 0\" style=\"padding-top: 16px;\">\n      <div *ngFor=\"let item of familiaAsociar\">\n        <ion-item lines=\"inset\">\n          <ion-grid>\n            <ion-row>\n              <ion-col size=\"10\">\n                <h3 class=\"text-avatar\">{{item.NombreCompleto}}</h3>\n                <small>Run: {{item.Run}}</small>\n              </ion-col>\n              <ion-col size=\"2\">\n                <!-- <ion-toggle color=\"primary\" slot=\"end\" [value]=\"item.EsAceptado\"  mode=\"ios\"></ion-toggle> -->\n                <ion-toggle mode=\"ios\" [checked]=\"item.EsAceptado\" [(ngModel)]=\"item.EsAceptado\"></ion-toggle>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </div>\n      <!-- boton acpetar -->\n      <ion-row>\n        <button [disabled]=\"familiaAsociar.length == 0\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">GUARDAR</button>\n      </ion-row>\n    </div>\n  </div>\n\n  \n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"back-app\">\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Asociar familia</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\n\n  <div [hidden]=\"estaCargando\">\n    <div class=\"ion-padding\">\n      <p class=\"texto-item\">\n        Puede asociar a los miembros de la familia propuestos deslizando el check de cada unos de ellos.<br>\n      </p>\n    </div>\n  \n    <div *ngIf=\"familiaAsociar.length > 0\" style=\"padding-top: 16px;\">\n      <div *ngFor=\"let item of familiaAsociar\">\n        <ion-item lines=\"inset\">\n          <ion-grid>\n            <ion-row>\n              <ion-col size=\"10\">\n                <h3 class=\"text-avatar\">{{item.NombreCompleto}}</h3>\n                <small>Run: {{item.Run}}</small>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-toggle mode=\"ios\" [checked]=\"item.EsAceptado\" [(ngModel)]=\"item.EsAceptado\"></ion-toggle>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </div>\n      <!-- boton acpetar -->\n      <ion-row>\n        <button [disabled]=\"familiaAsociar.length == 0\" class=\"button-registrarse\" (click)=\"onSubmit()\" mat-raised-button\n          color=\"accent\">GUARDAR</button>\n      </ion-row>\n    </div>\n  </div>\n\n  \n</ion-content>\n");
 
 /***/ }),
 
@@ -87,7 +87,7 @@ AsociarFamiliaPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".texto-item {\n  color: #00000099;\n  font-size: 14px;\n}\n\n.button-registrarse {\n  margin-top: 32px;\n  width: 90%;\n  margin-left: 5%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXNvY2lhci1mYW1pbGlhL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcYXNvY2lhci1mYW1pbGlhXFxhc29jaWFyLWZhbWlsaWEucGFnZS5zY3NzIiwic3JjL2FwcC9hc29jaWFyLWZhbWlsaWEvYXNvY2lhci1mYW1pbGlhLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0VBQ0EsZUFBQTtBQ0NKOztBRENBO0VBQ0ksZ0JBQUE7RUFDQSxVQUFBO0VBQ0EsZUFBQTtBQ0VKIiwiZmlsZSI6InNyYy9hcHAvYXNvY2lhci1mYW1pbGlhL2Fzb2NpYXItZmFtaWxpYS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGV4dG8taXRlbXtcclxuICAgIGNvbG9yOiAjMDAwMDAwOTk7XHJcbiAgICBmb250LXNpemU6IDE0cHg7XHJcbn1cclxuLmJ1dHRvbi1yZWdpc3RyYXJzZXtcclxuICAgIG1hcmdpbi10b3A6IDMycHg7XHJcbiAgICB3aWR0aDogOTAlO1xyXG4gICAgbWFyZ2luLWxlZnQ6IDUlO1xyXG59IiwiLnRleHRvLWl0ZW0ge1xuICBjb2xvcjogIzAwMDAwMDk5O1xuICBmb250LXNpemU6IDE0cHg7XG59XG5cbi5idXR0b24tcmVnaXN0cmFyc2Uge1xuICBtYXJnaW4tdG9wOiAzMnB4O1xuICB3aWR0aDogOTAlO1xuICBtYXJnaW4tbGVmdDogNSU7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".button-registrarse {\n  margin-top: 32px;\n  width: 90%;\n  margin-left: 5%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXNvY2lhci1mYW1pbGlhL0Y6XFxhcHBfbWlmYW1pbGlhX2dpdFxcbWlGYW1pbGlhX3ByZS9zcmNcXGFwcFxcYXNvY2lhci1mYW1pbGlhXFxhc29jaWFyLWZhbWlsaWEucGFnZS5zY3NzIiwic3JjL2FwcC9hc29jaWFyLWZhbWlsaWEvYXNvY2lhci1mYW1pbGlhLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0VBQ0EsVUFBQTtFQUNBLGVBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2Fzb2NpYXItZmFtaWxpYS9hc29jaWFyLWZhbWlsaWEucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJ1dHRvbi1yZWdpc3RyYXJzZXtcclxuICAgIG1hcmdpbi10b3A6IDMycHg7XHJcbiAgICB3aWR0aDogOTAlO1xyXG4gICAgbWFyZ2luLWxlZnQ6IDUlO1xyXG59IiwiLmJ1dHRvbi1yZWdpc3RyYXJzZSB7XG4gIG1hcmdpbi10b3A6IDMycHg7XG4gIHdpZHRoOiA5MCU7XG4gIG1hcmdpbi1sZWZ0OiA1JTtcbn0iXX0= */");
 
 /***/ }),
 
@@ -169,7 +169,7 @@ let AsociarFamiliaPage = class AsociarFamiliaPage {
                     }
                 }
                 this.familiaAsociar = arrFam;
-                console.log(this.familiaAsociar);
+                //console.log(this.familiaAsociar);
             }
         }
     }
@@ -190,8 +190,8 @@ let AsociarFamiliaPage = class AsociarFamiliaPage {
                     arrString.push("0");
                 }
                 //tomamos los elementos a guardar
-                console.log(uspIdTitular);
-                console.log(arrString.toString());
+                //console.log(uspIdTitular);
+                //console.log(arrString.toString());
                 //ahora que tenemos los elementos procedemos a ejecutar el proceso
                 this.estaCargando = true;
                 this.tituloProgress = 'Guardando información de la familia';
@@ -210,7 +210,7 @@ let AsociarFamiliaPage = class AsociarFamiliaPage {
                                 this.estaCargando = false;
                                 this.tituloProgress = '';
                                 //correcto, hay que volver a autentificarse
-                                console.log('autentificarse');
+                                //console.log('autentificarse');
                                 this.autentificarse();
                             }
                             else {
@@ -236,7 +236,7 @@ let AsociarFamiliaPage = class AsociarFamiliaPage {
                                 this.estaCargando = false;
                                 this.tituloProgress = '';
                                 //correcto, hay que volver a autentificarse
-                                console.log('autentificarse');
+                                //console.log('autentificarse');
                                 this.autentificarse();
                             }
                             else {
@@ -258,29 +258,25 @@ let AsociarFamiliaPage = class AsociarFamiliaPage {
         });
     }
     onSubmit() {
-        //aca se deben guardar los miembros de la familia,
-        //o se hace un relogin o se trata el archivo
-        //FAMILIA-POR-ACEPTAR
-        //se debiera enviar el uspId del titular y los uspsIds de los aceptados
         if (this.familiaAsociar && this.familiaAsociar.length > 0) {
             let cantidadMiembros = this.familiaAsociar.length;
             let miembrosAceptados = this.familiaAsociar.filter(p => p.EsAceptado == true);
             if (miembrosAceptados.length < cantidadMiembros) {
-                console.log('infromar que no esta aceptando a todos los miembros, si esta seguro de continuar');
+                //console.log('infromar que no esta aceptando a todos los miembros, si esta seguro de continuar');
                 let header = "Aviso";
                 let message = "Hay al menos un miembro de la familia al cual no está aceptando. Posteriormente lo puede volver a aceptar en Activar/Desactivar integrantes. \n¿Está seguro de continuar?.";
                 this.presentAlertConfirm(header, message);
                 //this.procesarFamilia();
             }
             else {
-                console.log('esta aceptando a todos los miembros');
+                //console.log('esta aceptando a todos los miembros');
                 this.procesarFamilia();
             }
         }
         else {
             this.utiles.presentToast('No hay miembros de la familia a asociar', 'bottom', 3000);
         }
-        console.log(this.familiaAsociar);
+        //console.log(this.familiaAsociar);
     }
     presentAlertConfirm(header, message) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {

@@ -255,13 +255,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (!_this.utiles.isAppOnDevice()) {
               //this.doGeocode(lat, lon);
-              console.log('web');
-
+              //console.log('web');
               _this.doGeocode(lat, lon);
             } else {
               //this.doGeocodeNative(lat, lon);
-              console.log('native');
-
+              //console.log('native');
               _this.doGeocodeNative(lat, lon);
             }
           })["catch"](function (error) {
@@ -436,14 +434,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                   //web
                                   this.servicioGeo.postValidacionClaveUnica(run, state).subscribe(function (response) {
                                     //aca quedamos, no habría que hacer nada
-                                    console.log(response);
+                                    //console.log(response);
                                     loader2.dismiss();
                                   });
                                 } else {
                                   //nativa
                                   this.servicioGeo.postValidacionClaveUnicaNative(run, state).then(function (response) {
-                                    var responseData = JSON.parse(response.data);
-                                    console.log(responseData);
+                                    var responseData = JSON.parse(response.data); //console.log(responseData);
+
                                     loader2.dismiss();
                                   });
                                 }
@@ -485,25 +483,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context4.prev = _context4.next) {
                   case 0:
-                    console.log(stateClaveUnica);
-                    console.log(stateObjeto); //hay que traer el registro de clave unica
+                    //console.log(stateClaveUnica);
+                    //console.log(stateObjeto);
+                    //hay que traer el registro de clave unica
                     //1. si el registro de clave unica esta correcto, hay que enviarlo al formulario de
                     //   registro para que rellene los datos
                     //1.1. hay que eliminar la variable de localstorage
                     //1.2. hay que eliminar el registro de clave unica
                     //2. si la validación de clave unica salió incorrecto
                     //2.1. hay que informar al usuario.
-
                     this.cargando = true;
-                    _context4.next = 5;
+                    _context4.next = 3;
                     return this.loading.create({
                       message: 'Verificando...<br>Registro Clave única',
                       duration: 3000
                     });
 
-                  case 5:
+                  case 3:
                     loader = _context4.sent;
-                    _context4.next = 8;
+                    _context4.next = 6;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
                         var _this4 = this;
@@ -540,7 +538,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }));
                     });
 
-                  case 8:
+                  case 6:
                   case "end":
                     return _context4.stop();
                 }
@@ -685,8 +683,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "procesarInfoRun",
         value: function procesarInfoRun(registro, loader) {
-          console.log(registro);
-
+          //console.log(registro);
           if (registro == null) {
             //no tiene registro, hay que dejarlo acá
             console.log('no tiene registro'); //limpiamos local storage
@@ -713,12 +710,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "procesarInfo",
         value: function procesarInfo(registro, loader) {
-          console.log(registro);
-
+          //console.log(registro);
           if (registro == null) {
             //no tiene registro, hay que dejarlo acá
-            console.log('no tiene registro'); //limpiamos local storage
-
+            //console.log('no tiene registro');
+            //limpiamos local storage
             this.limpiarRegistro();
             loader.dismiss();
             var tieneRegistroPendiente = this.validaPreRegistro();

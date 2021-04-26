@@ -2586,10 +2586,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.nombre = '';
         this.cargando = false; //expresiones regulares
 
-        this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm; //rut = new FormControl('', [Validators.required, this.runValidator]);
-        //por defecto dejamos el tipo movimiento en 1 solicitud de login
-        //despues lo podemos recibir como parametro para cambiarlo
-
+        this.expEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/gm;
         this.tipoMovimiento = '1';
         this.estaAgregandoFamilia = false;
         this.paginaAnterior = 'inicio'; //para mostrar la pagina de mensajes
@@ -2683,21 +2680,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     run = this.forma.controls.run.value;
                     idDispositivo = this.utiles.entregaIdDispositivo();
                     fechaNac = moment__WEBPACK_IMPORTED_MODULE_8__(this.forma.controls.fechaNacimiento.value);
-                    fechaNacStr = fechaNac.format('DD-MM-YYYY');
-                    console.log('run registro uno ' + run);
-                    console.log('idispositivo registro uno ' + idDispositivo);
-                    console.log('fecha nac registro uno ' + fechaNac);
-                    console.log('fecha nac registro uno str ' + fechaNacStr);
+                    fechaNacStr = fechaNac.format('DD-MM-YYYY'); //console.log('run registro uno ' + run);
+                    //console.log('idispositivo registro uno ' + idDispositivo);
+                    //console.log('fecha nac registro uno ' + fechaNac);
+                    //console.log('fecha nac registro uno str ' + fechaNacStr);
+
                     this.cargando = true;
-                    _context2.next = 13;
+                    _context2.next = 9;
                     return this.loading.create({
                       message: 'Verificando...<br>Registro',
                       duration: 3000
                     });
 
-                  case 13:
+                  case 9:
                     loader = _context2.sent;
-                    _context2.next = 16;
+                    _context2.next = 12;
                     return loader.present().then(function () {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this10, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                         var _this11 = this;
@@ -2734,7 +2731,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       }));
                     });
 
-                  case 16:
+                  case 12:
                   case "end":
                     return _context2.stop();
                 }
@@ -2831,10 +2828,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               if (this.estaAgregandoFamilia == false) {
                 this.abrirLogin();
-              } else {
-                //si esta agregando familia hay que crear lo que corresponde y avisar al
+              } else {//si esta agregando familia hay que crear lo que corresponde y avisar al
                 //usuario que fue creado o no exito
-                console.log('ESTA AGREGANDO FAMILIA');
+                //console.log('ESTA AGREGANDO FAMILIA');
               }
             } else {
               //su registro esta incompleto, derivarlo a la pagina de registro de la app
@@ -2869,10 +2865,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               if (this.estaAgregandoFamilia == false) {
                 this.abrirLogin();
-              } else {
-                //si esta agregando familia hay que crear lo que corresponde y avisar al
+              } else {//si esta agregando familia hay que crear lo que corresponde y avisar al
                 //usuario que fue creado o no exito
-                console.log('ESTA AGREGANDO FAMILIA');
+                //console.log('ESTA AGREGANDO FAMILIA');
               }
             } else {
               //su registro esta incompleto, derivarlo a la pagina de registro de la app
@@ -2961,15 +2956,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                   //llamada web
                                   this.servicioGeo.verificaEnrolamiento(run.value).subscribe(function (response) {
                                     //procesar
-                                    console.log(response);
-
+                                    //console.log(response);
                                     _this15.procesaRespuestaEnrolamiento(response, loader);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.servicioGeo.verificaEnrolamientoNative(run.value).then(function (response) {
-                                    var data = JSON.parse(response.data);
-                                    console.log(data);
+                                    var data = JSON.parse(response.data); //console.log(data);
 
                                     _this15.procesaRespuestaEnrolamiento(data, loader);
                                   }, function (error) {
@@ -3033,15 +3026,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                   //llamada web
                                   this.servicioGeo.verificaEnrolamientoCompleto(run, fechaNacStr, email).subscribe(function (response) {
                                     //procesar
-                                    console.log(response);
-
+                                    //console.log(response);
                                     _this17.procesaRespuestaEnrolamiento(response, loader);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.servicioGeo.verificaEnrolamientoCompletoNative(run, fechaNacStr, email).then(function (response) {
-                                    var data = JSON.parse(response.data);
-                                    console.log(data);
+                                    var data = JSON.parse(response.data); //console.log(data);
 
                                     _this17.procesaRespuestaEnrolamiento(data, loader);
                                   }, function (error) {
@@ -3120,7 +3111,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             //en base a la respuesta del mensaje realizar acciones
 
             if (this.parametros.USA_CLAVE_UNICA()) {
-              console.log('clave unica');
+              //console.log('clave unica');
               this.irAClaveUnica();
             } else {
               this.muestraMensaje = true; //debemos revisar la respuesta, pondremos una pagina intermedia

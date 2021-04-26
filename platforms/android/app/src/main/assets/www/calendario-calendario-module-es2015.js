@@ -193,15 +193,11 @@ let CalendarioPage = class CalendarioPage {
             })) || null;
         };
     }
-    //DEBO EMPEZAR A TRABAJAR EN LA PAGINA DE DETALLE DE LOS EVENTOS,
-    //OJO HAY VACUNAS CON FECHA PROXIMA 29-11-2020 Y NO VEO QUE APAREZCAN
-    //CUANDO SELECCIONAS EL COMBO DE FECHA Y LUEGO VUELVES A SELECCIONAR 
-    //UNA FECHA ANTERIOR POR EJEMPLO NO MUESTRA NADA
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_10__().locale('es');
         this.fechaActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY-MM-DD');
         this.anioActual = this.transformDate(moment__WEBPACK_IMPORTED_MODULE_10__(), 'YYYY');
-        console.log(this.fechaActual);
+        //console.log(this.fechaActual);
         //this.miColor = this.utiles.entregaMiColor();
         if (sessionStorage.UsuarioAps) {
             this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -215,9 +211,6 @@ let CalendarioPage = class CalendarioPage {
         }
         //mes seleccionado
         this.mesActualSeleccionado = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1 + ',' + moment__WEBPACK_IMPORTED_MODULE_10__().year();
-        //this.mesActualSeleccionado = moment().month() + 1;
-        console.log('formato de mes seleccionado ===> ' + this.mesActualSeleccionado);
-        //revisar estos parametros ya que estan en el otro codigo en el oninit
         let diasSemana = new Array("domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado");
         let meses = new Array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
         this.diaSem = diasSemana[new Date().getDay()];
@@ -229,7 +222,7 @@ let CalendarioPage = class CalendarioPage {
         var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
         var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1;
         //var mesActual = this.mesActualSeleccionado;
-        console.log(mesActual);
+        //console.log(mesActual);
         //***************************** */
         this.tratamientoMeses();
         //prueba de implementacion api management
@@ -255,11 +248,6 @@ let CalendarioPage = class CalendarioPage {
                 mes: fechaActual.month() + 1,
                 anno: fechaActual.year()
             };
-            //original
-            /*     let loader = await this.loading.create({
-                  message: 'Obteniendo...<br>Información del usuario api',
-                  duration: 20000
-                }); */
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',
                 showBackdrop: false,
@@ -281,13 +269,13 @@ let CalendarioPage = class CalendarioPage {
                         sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
                         //creamos top limit al nuevo arreglo de citas
                         this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                        console.log(this.citasVerticalTodasTop);
+                        //console.log(this.citasVerticalTodasTop);
                         loader.dismiss();
                         this.estaCargando = false;
                         this.tituloLoading = '';
                         this.scrollListVisible();
                     }), error => {
-                        console.log(error.message);
+                        //console.log(error.message);
                         this.estaCargando = false;
                         this.tituloLoading = '';
                         loader.dismiss();
@@ -309,12 +297,12 @@ let CalendarioPage = class CalendarioPage {
                         sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
                         //creamos top limit al nuevo arreglo de citas
                         this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                        console.log(this.citasVerticalTodasTop);
+                        //console.log(this.citasVerticalTodasTop);
                         loader.dismiss();
                         this.estaCargando = false;
                         this.tituloLoading = '';
                     })).catch(error => {
-                        console.log(error.message);
+                        //console.log(error.message);
                         this.estaCargando = false;
                         this.tituloLoading = '';
                         loader.dismiss();
@@ -345,11 +333,6 @@ let CalendarioPage = class CalendarioPage {
                 mes: fechaPosterior.month() + 1,
                 anno: fechaPosterior.year()
             };
-            //original
-            /*     let loader = await this.loading.create({
-                  message: 'Obteniendo...<br>Información del usuario',
-                  duration: 20000
-                }); */
             let loader = yield this.loading.create({
                 cssClass: 'loading-vacio',
                 showBackdrop: false,
@@ -373,7 +356,7 @@ let CalendarioPage = class CalendarioPage {
                                 //aca procedemos a procesarlos
                                 this.procesarArregloCitasTodas();
                                 this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
-                                //console.log(this.citasVerticalMostrar);
+                                ////console.log(this.citasVerticalMostrar);
                                 //ahora que tenemos las citas que queremos mostrar
                                 //ordenamos
                                 this.citasVerticalMostrar.sort((a, b) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta); });
@@ -381,7 +364,7 @@ let CalendarioPage = class CalendarioPage {
                                 sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
                                 //creamos top limit al nuevo arreglo de citas
                                 this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                                console.log(this.citasVerticalTodasTop);
+                                //console.log(this.citasVerticalTodasTop);
                                 loader.dismiss();
                                 this.estaCargando = false;
                                 this.tituloLoading = '';
@@ -411,7 +394,7 @@ let CalendarioPage = class CalendarioPage {
                                 sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
                                 //creamos top limit al nuevo arreglo de citas
                                 this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
-                                console.log(this.citasVerticalTodasTop);
+                                //console.log(this.citasVerticalTodasTop);
                                 loader.dismiss();
                                 this.estaCargando = false;
                                 this.tituloLoading = '';
@@ -433,8 +416,8 @@ let CalendarioPage = class CalendarioPage {
                 var fechaHora = (this.citasVertical[s].Eventos[t].DetalleEventoMes.FechaHora);
                 var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
                 var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
-                console.log('Evento: ' + fechaEvento);
-                console.log('Hoy:' + fechaHoy);
+                //console.log('Evento: ' + fechaEvento);
+                //console.log('Hoy:' + fechaHoy);
                 contador++;
                 if (this.citasVertical[s].Eventos[t]) {
                     if (this.citasVertical[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita') {
@@ -472,7 +455,7 @@ let CalendarioPage = class CalendarioPage {
                 }
                 if (fechaEvento < fechaHoy && this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de alimento') {
                     this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado';
-                    console.log(this.citasVertical[s].Eventos[t].DetalleEventoMes);
+                    //console.log(this.citasVertical[s].Eventos[t].DetalleEventoMes);
                 }
                 if (fechaEvento < fechaHoy && this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de fármaco') {
                     this.citasVertical[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco entregado';
@@ -507,8 +490,8 @@ let CalendarioPage = class CalendarioPage {
                 var fechaHora = (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.FechaHora);
                 var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_10__(fechaHora, 'YYYY-MM-DD').toDate();
                 var fechaHoy = moment__WEBPACK_IMPORTED_MODULE_10__().toDate();
-                console.log('Evento: ' + fechaEvento);
-                console.log('Hoy:' + fechaHoy);
+                //console.log('Evento: ' + fechaEvento);
+                //console.log('Hoy:' + fechaHoy);
                 contador++;
                 if (this.citasVerticalTodas[s].Eventos[t]) {
                     if (this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Subtitulo == 'Próxima Cita') {
@@ -546,7 +529,7 @@ let CalendarioPage = class CalendarioPage {
                 }
                 if (fechaEvento < fechaHoy && this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de alimento') {
                     this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Alimento entregado';
-                    console.log(this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes);
+                    //console.log(this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes);
                 }
                 if (fechaEvento < fechaHoy && this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo == 'Entrega de fármaco') {
                     this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Fármaco entregado';
@@ -588,7 +571,7 @@ let CalendarioPage = class CalendarioPage {
     }
     loadData(event) {
         setTimeout(() => {
-            //console.log('Done');
+            ////console.log('Done');
             this.topLimit += 5;
             this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
             event.target.complete();
@@ -646,11 +629,11 @@ let CalendarioPage = class CalendarioPage {
         this.mesesVertical.push(entidadMenos);
         this.mesesVertical.push(entidadActual);
         this.mesesVertical.push(entidadMas);
-        console.log(this.mesesVertical);
+        //console.log(this.mesesVertical);
     }
     createEventsCalendario() {
         this.calendarioData = this.citas;
-        console.log(this.calendarioData);
+        //console.log(this.calendarioData);
         return this.calendarioData;
     }
     goToDetalleCita(evento) {
@@ -667,13 +650,13 @@ let CalendarioPage = class CalendarioPage {
             modal.onDidDismiss().then((data) => {
                 if (data.data && data.data.accion) {
                     var accion = data.data.accion;
-                    //console.log(accion);
+                    ////console.log(accion);
                     //obtenemos la pagina actual
                     //actualizar
                     var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
                     var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1;
                     //var mesActual = this.mesActualSeleccionado;
-                    //console.log(mesActual);
+                    ////console.log(mesActual);
                     //***************************** */
                     this.tratamientoMeses();
                     if (accion === 'booked') {
@@ -744,7 +727,7 @@ let CalendarioPage = class CalendarioPage {
                         role: 'cancel',
                         cssClass: 'danger',
                         handler: (blah) => {
-                            console.log('Confirm Cancel: blah');
+                            //console.log('Confirm Cancel: blah');
                         }
                     }, {
                         text: 'Si',
@@ -811,7 +794,7 @@ let CalendarioPage = class CalendarioPage {
                 var annoActual = moment__WEBPACK_IMPORTED_MODULE_10__().year();
                 var mesActual = moment__WEBPACK_IMPORTED_MODULE_10__().month() + 1;
                 //var mesActual = this.mesActualSeleccionado;
-                console.log(mesActual);
+                //console.log(mesActual);
                 //***************************** */
                 this.tratamientoMeses();
                 this.estaCargando = false;
@@ -895,8 +878,8 @@ let CalendarioPage = class CalendarioPage {
                     dif = dif * -1;
                 }
                 this.citasVerticalTodasTop[i].DiferenciaFechas = dif;
-                /*         console.log(dif);
-                        console.log(this.citasVerticalTodasTop[i]); */
+                /*         //console.log(dif);
+                        //console.log(this.citasVerticalTodasTop[i]); */
             }
         }
     }
@@ -915,8 +898,8 @@ let CalendarioPage = class CalendarioPage {
                 var entidad = this.citasVerticalTodasTop.filter(p => p.DiferenciaFechas == min)[0];
                 if (entidad) {
                     //var elemento = this.min();
-                    console.log(min);
-                    console.log(entidad);
+                    //console.log(min);
+                    //console.log(entidad);
                     let yOffset = document.getElementById(entidad.DiferenciaFechas.toString()).offsetTop;
                     if (yOffset != null) {
                         this.content.scrollToPoint(0, yOffset, 600);
