@@ -1,6 +1,14 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
+      "id": "cordova-plugin-actionsheet.ActionSheet",
+      "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+      "pluginId": "cordova-plugin-actionsheet",
+      "clobbers": [
+        "window.plugins.actionsheet"
+      ]
+    },
+    {
       "id": "cordova-plugin-file.DirectoryEntry",
       "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
       "pluginId": "cordova-plugin-file",
@@ -312,6 +320,30 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
+      "id": "cordova-plugin-dialogs.notification",
+      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
+    },
+    {
+      "id": "cordova-plugin-firebase-analytics.FirebaseAnalytics",
+      "file": "plugins/cordova-plugin-firebase-analytics/www/FirebaseAnalytics.js",
+      "pluginId": "cordova-plugin-firebase-analytics",
+      "merges": [
+        "cordova.plugins.firebase.analytics"
+      ]
+    },
+    {
+      "id": "cordova-plugin-firebase-messaging.FirebaseMessaging",
+      "file": "plugins/cordova-plugin-firebase-messaging/www/FirebaseMessaging.js",
+      "pluginId": "cordova-plugin-firebase-messaging",
+      "merges": [
+        "cordova.plugins.firebase.messaging"
+      ]
+    },
+    {
       "id": "cordova-plugin-geolocation.Coordinates",
       "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
       "pluginId": "cordova-plugin-geolocation",
@@ -451,22 +483,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-actionsheet.ActionSheet",
-      "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
-      "pluginId": "cordova-plugin-actionsheet",
-      "clobbers": [
-        "window.plugins.actionsheet"
-      ]
-    },
-    {
-      "id": "cordova-plugin-dialogs.notification",
-      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-      "pluginId": "cordova-plugin-dialogs",
-      "merges": [
-        "navigator.notification"
-      ]
-    },
-    {
       "id": "uk.co.workingedge.phonegap.plugin.launchnavigator.Common",
       "file": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator/www/common.js",
       "pluginId": "uk.co.workingedge.phonegap.plugin.launchnavigator",
@@ -492,6 +508,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     }
   ];
   module.exports.metadata = {
+    "cordova-plugin-actionsheet": "2.3.3",
     "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-advanced-http": "3.0.0",
@@ -502,6 +519,9 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-background-mode": "0.7.3",
     "cordova-plugin-badge": "0.8.8",
     "cordova-plugin-camera": "4.1.0",
+    "cordova-plugin-dialogs": "2.0.2",
+    "cordova-plugin-firebase-analytics": "5.0.0",
+    "cordova-plugin-firebase-messaging": "5.0.1",
     "cordova-plugin-geolocation": "4.0.2",
     "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
@@ -515,8 +535,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-support-android-plugin": "1.0.2",
     "cordova-support-google-services": "1.4.1",
-    "cordova-plugin-actionsheet": "2.3.3",
-    "cordova-plugin-dialogs": "2.0.2",
     "uk.co.workingedge.phonegap.plugin.launchnavigator": "5.0.4"
   };
 });
