@@ -47,10 +47,13 @@ ion-select {
   }
   .botonReservar{
     /*color:#000000DE;
-    font-weight: 20px;*/
-    font: normal normal medium 14px/16px Roboto;
+    font-weight: 20px;
+    font: normal normal medium 14px Roboto; */
+    color: white;
+    font-family: 'Roboto';
+    font-size: .875em;
+    font-weight: 500;
     letter-spacing: 1.25px;
-    color: #000000DE;
     text-transform: uppercase;
     opacity: 1;
   }
@@ -91,4 +94,9 @@ ion-select {
     height: 1px;
     background-color: rgba(0,0,0,.12);
   }
-  
+
+  .button-native {
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
+
+  }

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" class="fcw"></ion-back-button>
     </ion-buttons>
-    <ion-title class="fcw">Datos de contacto/avatar</ion-title>
+    <ion-title class="fcw">Configurar familia</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,8 +23,7 @@
   <div [hidden]="estaCargando" *ngIf="listadoUsuario.length > 0" style="padding-top: 16px;">
     <div class="ion-padding">
       <p class="texto-item">
-        Para cambiar su avatar pinche en la imágen.<br>
-        Para cambiar sus datos de contacto pinche en el nombre.
+        Modifica la imagen del avatar, el telefono o el e-mail de los miembros de tu familia.
       </p>
     </div>
     <div *ngFor="let item of listadoUsuario">
@@ -35,8 +34,8 @@
           <img *ngIf="item.UrlImagen == ''" src="../assets/img/no-imagen.jpg">
         </ion-avatar>
         <ion-row style="display: block;" (click)="abrirContactabilidad(item)">
-          <h3 class="text-avatar">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</h3>
-          <p class="subtext-avatar">{{item.Parentezco.Nombre}}</p>
+          <div class="text-avatar">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</div>
+          <div class="subtext-avatar">{{item.Parentezco.Nombre}}</div>
         </ion-row>
       </ion-item>
     </div>

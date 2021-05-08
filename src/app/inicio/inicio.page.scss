@@ -24,6 +24,7 @@ p{
 /* slides */
 ion-slides {
     height: 100%;
+    justify-content: flex-start;
 }
 .ml-48{
     margin-left: 48px;
@@ -40,3 +41,4 @@ ion-slides {
 .font-title{
     font-size: 1em;
 }
+

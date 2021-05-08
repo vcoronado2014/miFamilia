@@ -15,7 +15,7 @@
 <ion-content class="back-app" style="--padding-bottom: 50px !important;" #content>
 <app-progress [mostrar]="estaCargando" [titulo]="tituloLoading"></app-progress>
  <div *ngIf="!tiene">
-  <div style="position: absolute; display: table; height: 90%; font-size: 30px; color:#BDBDBD; text-align: center;" class="ion-padding">
+  <div style="position: absolute; display: table; height: 90%; font-size: 16px; color:rgba(0, 0, 0, 0.54); text-align: center; width: -webkit-fill-available;" class="ion-padding">
     <p style="display: table-cell; vertical-align: middle">No hay eventos para mostrar  <br>
     <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p>
   </div>
@@ -57,8 +57,8 @@
 </ion-content>
 <!-- este es el fab para abrir reservar horas -->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="estaCargando">
-  <ion-button color="secondary" (click)="openReservarHoraPage()" shape="round" style="--color:black;">
-    <ion-icon slot="start" name="add-outline" class="botonReservar" style="font-size: 16px;"></ion-icon>
+  <ion-button color="secondary" (click)="openReservarHoraPage()" shape="round">
+    <ion-icon slot="start" name="add-outline"></ion-icon>
     <span class="botonReservar">RESERVAR HORA</span>
   </ion-button>
 </ion-fab>

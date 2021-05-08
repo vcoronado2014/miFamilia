@@ -1,38 +1,40 @@
 <ion-menu side="start" menuId="first" contentId="content">
-  <ion-header>
+ 
+ <ion-header> 
     <!-- <ion-toolbar [style.--background]="miColor"> -->
-    <ion-toolbar color="primary">
+   <!-- <ion-toolbar color="primary"> -->
       <!-- <ion-title class="fcw">Menu</ion-title> -->
-    </ion-toolbar>
+   <!-- </ion-toolbar> -->
+   <!-- menu avatar -->
+   <ion-item lines="none" >
+    <ion-avatar class="avatar" slot="start">
+      <img *ngIf = "miImagen != ''" src={{miImagen}}>
+      <img *ngIf = "miImagen == ''" src="../assets/img/no-imagen.jpg">
+    </ion-avatar>
+    <ion-row class="texAvatarContainer">
+      <div class="text-avatar">{{miNombre}}</div>
+      <div class="subtext-avatar">{{miInstitucion}}</div>
+    </ion-row>
+  </ion-item>
   </ion-header>
   <ion-content class="back-app">
-    <!-- menu avatar -->
-    <ion-item lines="none">
-      <ion-avatar slot="start">
-        <img *ngIf = "miImagen != ''" src={{miImagen}}>
-        <img *ngIf = "miImagen == ''" src="../assets/img/no-imagen.jpg">
-      </ion-avatar>
-      <ion-row>
-        <h3 class="text-avatar">{{miNombre}}</h3>
-        <p class="subtext-avatar">{{miInstitucion}}</p>
-      </ion-row>
-    </ion-item>
+
     <ion-list>
-      <ion-item *ngFor="let p of pages" (click)="openPage(p)" button lines="none" [ngStyle]="{'margin-left': p.esSubMenu ? '16px' : '0px'}">
+      <ion-item *ngFor="let p of pages" (click)="openPage(p)" class="listItem" button lines="none" [ngStyle]="{'margin-left': p.esSubMenu ? '16px' : '0px'}">
         <ion-icon name={{p.icon}} slot="start"></ion-icon>
         <ion-label>
           {{p.title}}
         </ion-label>
       </ion-item>
       <!-- ajustes de la cuenta -->
-      <ion-item button lines="none" (click)="abrirEditar()">
+      <ion-item button lines="none" (click)="abrirEditar()" class="listItem">
         <ion-icon name="heart" slot="start"></ion-icon>
         <ion-label>
           Ajustes de la cuenta
         </ion-label>
       </ion-item>
       <!-- cerrar sesión -->
-      <ion-item button lines="none" (click)="logout()">
+      <ion-item button lines="none" (click)="logout()" class="listItem">
         <ion-icon name="close" slot="start"></ion-icon>
         <ion-label>
           Cerrar sesión
@@ -44,12 +46,12 @@
   </ion-content>
 </ion-menu>
 
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="home header">
+  <ion-toolbar  class="toolbar" color="primary">
     <ion-buttons slot="start">
       <ion-menu-button class="home"></ion-menu-button>
     </ion-buttons>
-    <ion-title class="home">Mi salud familiar</ion-title>
+    <ion-title class="title">Mi salud familiar</ion-title>
     <!-- icono de notificaciones -->
     <ion-buttons slot="end"  style="padding-right: 16px;" [hidden]="estaCargandoNotificaciones == false">
       <ion-spinner color="light"></ion-spinner>
