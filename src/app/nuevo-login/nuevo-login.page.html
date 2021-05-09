@@ -8,7 +8,7 @@
     <ion-row class="ion-no-margin ion-no-padding mt-80">
       <!-- solo para enrolamiento -->
       <mat-form-field appearance="outline" style="width: 100%;" [hidden]="usaEnrolamiento == false">
-        <mat-label>Run</mat-label>
+        <mat-label>RUN</mat-label>
         <input matInput placeholder="125458524" formControlName="run" name="run">
         <mat-error [hidden]="usaEnrolamiento == false">Run requerido</mat-error>
       </mat-form-field>
@@ -16,7 +16,7 @@
       <mat-form-field appearance="outline" style="width: 100%;" [hidden]="usaEnrolamiento">
         <mat-label>Correo electrónico</mat-label>
         <input matInput placeholder="ejemplo@gmail.com" formControlName="email" name="email">
-        <mat-error [hidden]="usaEnrolamiento">Correo requerido</mat-error>
+        <!--<mat-error [hidden]="usaEnrolamiento">Correo requerido</mat-error>-->
         <mat-error [hidden]="usaEnrolamiento">Correo inválido</mat-error>
       </mat-form-field>
   
@@ -27,11 +27,11 @@
       </mat-form-field>
     </ion-row>
     <ion-row class="ion-no-padding ion-no-margin mt-40">
-      <button mat-raised-button color="primary" style="width: 90%; margin-left: 5%; height:36px;" (click)="onSubmit()">INICIAR SESION</button>
+      <button class="boton-Principal" mat-raised-button color="primary" style="width: 90%; margin-left: 5%; height:36px;" (click)="onSubmit()">INICIAR SESION</button>
     </ion-row>
   </form>
   <ion-row [hidden]="estaCargando" class="mt-36" [hidden]="usaEnrolamiento">
-    <a mat-button routerLink="." color="primary" class="ion-text-center" style="width: 100%;" (click)="irRecuperarClave()">¿Olvidaste tu contraseña?</a>
+    <a mat-button routerLink="." color="primary" class="ion-text-center accent-color" style="width: 100%;" (click)="irRecuperarClave()">¿Olvidaste tu contraseña?</a>
   </ion-row>
   <ion-grid [hidden]="estaCargando" class="ion-no-padding mt-36">
     <ion-row>
@@ -39,7 +39,7 @@
         ¿No tienes cuenta?
       </ion-col>
       <ion-col>
-        <button (click)="abrirAsistente()" mat-button color="primary">REGISTRATE</button>
+        <button class="accent-color" (click)="abrirAsistente()" mat-button color="primary">REGISTRATE</button>
       </ion-col>
     </ion-row>
   </ion-grid>

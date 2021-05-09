@@ -4,7 +4,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/antecedentes" class="fcw"></ion-back-button>
     </ion-buttons>
-    <ion-title class="fcw">Detalle</ion-title>
+    <ion-title class="fcw">Antecedentes</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="back-app">
@@ -42,10 +42,9 @@
   <!-- aca poner el listado de alergias --> 
   <ion-list [hidden]="estaCargando">
     <ion-list-header *ngIf="alergias && alergias.length > 0">
-      <h5>{{title}}</h5>
+      <div style="font-weight: 500">{{title}}</div>
     </ion-list-header>
     <ion-item *ngFor="let item of alergias" class ="lista-alergias">
-      <ion-icon name="medkit" slot="start"></ion-icon>
       <ion-label>{{item.Descripcion}}</ion-label>
     </ion-item>
   </ion-list> 

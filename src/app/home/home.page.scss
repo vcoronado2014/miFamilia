@@ -97,3 +97,51 @@ ion-slides{
 .slide-buttons-padding{
   padding: 0px 16px 16px 16px;
 }
+
+//Ajustes de estilo
+
+.header{
+  height: 56px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.toolbar{
+  height: 56px;
+}
+
+.title{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.menu-button{
+  padding-top: 16px;
+}
+
+.avatar{
+  height: 40px;
+  width: 40px;
+}
+
+.texAvatarContainer{
+  flex-direction: column;
+  height: 70px;
+  padding-top: 16px;
+}
+
+ion-icon {
+  color: #00000099;
+}
+
+ion-item.listItem {
+  height: 48px;
+}
+
+.text-avatar{
+  font-size: 1.25em;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  width:80%;
+}
