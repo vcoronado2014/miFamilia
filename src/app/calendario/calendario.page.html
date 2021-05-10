@@ -6,9 +6,9 @@
       <ion-back-button defaultHref="/home" class="fcw"></ion-back-button>
     </ion-buttons>
     <ion-title class="fcw">Calendario</ion-title>
-    <ion-buttons slot="end" (click)="ordenar()" style="padding-right: 16px;">
+<!--     <ion-buttons slot="end" (click)="ordenar()" style="padding-right: 16px;">
       <ion-icon class="fcw" slot="icon-only" name="swap-vertical"></ion-icon>&nbsp;Ordenar
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -16,18 +16,17 @@
 <app-progress [mostrar]="estaCargando" [titulo]="tituloLoading"></app-progress>
  <div *ngIf="!tiene">
   <div style="position: absolute; display: table; height: 90%;font-size: 16px; color:rgba(0, 0, 0, 0.54); text-align: center; width: -webkit-fill-available;" class="ion-padding">
-    <p style="display: table-cell; vertical-align: middle">No hay eventos para mostrar  <br>
-    <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p>
+<!--     <p style="display: table-cell; vertical-align: middle">No hay eventos para mostrar  <br>
+    <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p> -->
+    <p style="display: table-cell; vertical-align: middle">No tiene actividades  <br>
+      programadas para el futuro</p>
   </div>
  </div>
- 
  <div *ngIf="tiene">
-  
   <div [hidden]="estaCargando" *ngFor="let item of citasVerticalTodasTop">
-    
     <ion-grid *ngIf="item.Mostrar">
       <app-card-calendario [fechaActual]="fechaActual" [item]="item" [anioActual]="anioActual"></app-card-calendario>
-      <ion-row class="ion-no-padding ion-no-margin row-card">
+      <ion-row class="ion-no-padding ion-no-margin row-card" *ngIf="item.Eventos[0].NombrePrincipal != 'Nada planificado para hoy'">
         <mat-card *ngFor="let evento of item.Eventos" color="light" style="margin-bottom: 8px;" id="myListCard">
           <mat-card-header (click)="goToDetalleCita(evento)">
             
@@ -45,7 +44,7 @@
           </mat-card-actions>
         </mat-card>
       </ion-row>
-      <hr *ngIf="transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual">
+      <hr *ngIf="transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual && item.Eventos[0].NombrePrincipal != 'Nada planificado para hoy'">
     </ion-grid>
   </div>
   <!-- pruebas con infinite scroll -->
