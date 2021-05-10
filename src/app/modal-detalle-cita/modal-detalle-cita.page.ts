@@ -64,7 +64,7 @@ export class ModalDetalleCitaPage implements OnInit {
   //para procesar
   estaCargando = false;
   tituloLoading = '';
-
+  styleAvatar = false;
   constructor(
     public modalCtrl: ModalController,
     public navParams: NavParams,

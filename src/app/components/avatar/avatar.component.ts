@@ -11,8 +11,11 @@ export class AvatarComponent implements OnInit {
   @Input() parentezco: any;
   //inset: solo la parte del texto y no avatar full: todo none: ninguna
   @Input() lines = 'none';
+  @Input() style = true;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.style);
+  }
 
 }

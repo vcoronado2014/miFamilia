@@ -21,7 +21,7 @@
       </ion-item>
       <ion-item lines="none">
         <!-- poner avatar -->
-        <app-avatar [urlImagen] = "miImagen" [nombreCompleto]="miNombre" [parentezco]="miParentezco"></app-avatar>
+        <app-avatar [style]="styleAvatar" [urlImagen] = "miImagen" [nombreCompleto]="miNombre" [parentezco]="miParentezco"></app-avatar>
       </ion-item>
     </ion-list>
     <ion-list>
@@ -45,14 +45,17 @@
         <ion-label class="ion-text-capitalize ion-text-wrap">{{data.DetalleEventoMes.Lugar.toLowerCase()}}  </ion-label>
       </ion-item>
       <!-- tiene farmacos -->
-      <div *ngIf="farmacos">
-        <h3 id ="tituloPrescripcion" *ngIf="farmacos.length == 0" margin text-center style="font-size: 1.9rem; padding:7px;"></h3>
-        <h3 id ="tituloPrescripcion" *ngIf="farmacos.length > 0" margin text-center [ngStyle]="{'background-color': data.Color}" style="color:#fff; font-size: 1.9rem; padding:7px;">{{title}}</h3>
-      </div>
-        <ion-item *ngFor='let item of farmacos' class="ion-no-padding ion-no-margin">				
+      <!-- <div *ngIf="farmacos"> -->
+        <div *ngIf="farmacos">
+        <h3 id="tituloPrescripcion" *ngIf="farmacos.length == 0" margin text-center style="font-size: 1.9rem; padding:7px;">
+        </h3>
+        <h3 id="tituloPrescripcion" *ngIf="farmacos.length > 0" margin text-center [ngStyle]="{'background-color': data.Color}"
+          style="color:#fff; font-size: 1.9rem; padding:7px;">{{title}}</h3>
+        </div>        
+        <ion-item  *ngFor='let item of farmacos' class="ion-no-padding ion-no-margin">
           <ion-icon item-start><i class="care-pill pill"></i></ion-icon>
           <p text-wrap class="medic">{{ split(item.DescripcionPrincipal,":",0) }}</p>
-          <p text-wrap class="medic down">{{ split(item.DescripcionPrincipal,":",1) }}</p>		
+          <p text-wrap class="medic down">{{ split(item.DescripcionPrincipal,":",1) }}</p>
         </ion-item>
       <!-- </ion-list> -->
     </ion-list>

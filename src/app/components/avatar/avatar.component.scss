@@ -4,3 +4,11 @@
     white-space: nowrap;
     width: 80%;
 }
+.avatar-no-padding{
+    --padding-start: 0;
+    width: 100%;
+}
+.avatar-padding{
+    --padding-start: 8px;
+    width: 100%;
+}

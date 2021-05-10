@@ -201,6 +201,7 @@ export class CalendarioPage implements OnInit {
           loader.dismiss();
           this.tiene = false;
           this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
+          this.agregarUnElemento(moment().toDate());
         });
       }
       else {
@@ -228,6 +229,7 @@ export class CalendarioPage implements OnInit {
           loader.dismiss();
           this.tiene = false;
           this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
+          this.agregarUnElemento(moment().toDate());
         });
       }
     });
@@ -479,6 +481,7 @@ export class CalendarioPage implements OnInit {
         }
       }
     }
+
     //para determinar si tiene o no eventos
     if (contador == 0) {
       this.tiene = false;
@@ -487,7 +490,7 @@ export class CalendarioPage implements OnInit {
       this.tiene = true;
     }
     //aca hay que determinar si agregar o no el evento de hoy
-    if (this.tieneEventosHoy == false){
+    if (this.tieneEventosHoy == false) {
       var ultimo = this.citasVerticalTodas.length + 1;
       var entidadHoy = {
         FechaCompleta: fechaHoy,
@@ -524,6 +527,46 @@ export class CalendarioPage implements OnInit {
     }
 
   
+}
+agregarUnElemento(fechaHoy){
+  if (this.tieneEventosHoy == false){
+    //contador = 1;
+    var ultimo = this.citasVerticalTodas.length + 1;
+    var entidadHoy = {
+      FechaCompleta: fechaHoy,
+      Id: parseInt(moment(fechaHoy).format('DD')),
+      Mostrar: true,
+      NombreDia: moment(fechaHoy).format('dddd'),
+      NombreDiaReducido: moment(fechaHoy).format('ddd'),
+      NumeroDia: parseInt(moment(fechaHoy).format('DD')),
+      Indice: ultimo,
+      DiferenciaFechas: 10,
+      NoHayEvento: true,
+      Eventos: [{
+        Color: null,
+        HoraInicioFin: '00:00',
+        Imagen: 'agendar_citas.svg',
+        ListaFarmacos: null,
+        NombrePrincipal: 'Nada planificado para hoy',
+        NombreSecundario: 'Nada planificado para hoy',
+        DetalleEventoMes: {
+          DescripcionPrincipal: 'Nada planificado para hoy',
+          DescripcionSecundaria: 'Nada planificado para hoy',
+          Estado: '',
+          FechaHora: fechaHoy,
+          IdElemento: 0,
+          Lugar: '',
+          NombrePaciente: '',
+          Subtitulo: 'Nada planificado para hoy',
+          Titulo: 'Nada planificado para hoy'
+        }
+      }]
+    }
+    //si no tiene eventos hoy lo agregamos
+    this.citasVerticalTodas.push(entidadHoy);
+    this.citasVerticalTodasTop = this.citasVerticalTodas;
+    this.tiene = false;
+  }
 }
   //ordena los elementos de forma descende o ascendente
   ordenar() {
