@@ -59,7 +59,7 @@
         <mat-card *ngFor="let evento of item.Eventos" color="light" style="margin-bottom: 8px;" id="myListCard">
           <mat-card-header (click)="goToDetalleCita(evento)">
             
-              <mat-card-subtitle class="hora">{{evento.HoraInicioFin}}</mat-card-subtitle>
+              <mat-card-subtitle *ngIf="evento.DetalleEventoMes.Titulo != 'Vacuna administrada'" class="hora">{{evento.HoraInicioFin}}</mat-card-subtitle>
               <mat-card-title>{{evento.DetalleEventoMes.Titulo}}</mat-card-title>
               <mat-card-subtitle class="ion-text-capitalize">{{evento.DetalleEventoMes.NombrePaciente.toLowerCase()}}</mat-card-subtitle>
             
@@ -86,7 +86,7 @@
 <!-- este es el fab para abrir reservar horas -->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="estaCargando">
   <ion-button color="secondary" (click)="openReservarHoraPage()" shape="round">
-    <ion-icon slot="start" name="add-outline"></ion-icon>
-    <span class="botonReservar">RESERVAR HORA</span>
+    <ion-icon slot="start" name="add-outline" style="padding-left: 12px;"></ion-icon>
+    <span class="botonReservar" style="padding-right: 12px;">RESERVAR HORA</span>
   </ion-button>
 </ion-fab>

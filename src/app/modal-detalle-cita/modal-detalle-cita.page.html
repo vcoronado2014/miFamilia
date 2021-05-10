@@ -33,7 +33,8 @@
       </ion-item>
       <ion-item>
         <ion-label>Fecha</ion-label>
-        <ion-label class="ion-text-wrap">{{data.DetalleEventoMes.FechaHora}}</ion-label>
+        <!-- <ion-label class="ion-text-wrap">{{data.DetalleEventoMes.FechaHora}}</ion-label> -->
+        <ion-label class="ion-text-wrap">{{transformaHora(data)}}</ion-label>
       </ion-item>
       <!-- proxima cita -->
       <ion-item *ngIf="data.DetalleEventoMes.Subtitulo == 'Próxima Cita' || data.DetalleEventoMes.Subtitulo == 'Próxima Cita Web'">
