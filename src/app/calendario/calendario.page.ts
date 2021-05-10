@@ -88,6 +88,9 @@ export class CalendarioPage implements OnInit {
   fechaActual = '';
   anioActual = '';
   scrollTo = null;
+  //tiene eventos hoy
+  tieneEventosHoy = false;
+  fechaParaHoy;
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -415,8 +418,14 @@ export class CalendarioPage implements OnInit {
         var fechaEvento = moment(fechaHora, 'YYYY-MM-DD').toDate();
         var fechaHoy = moment().toDate();
 
-        //console.log('Evento: ' + fechaEvento);
-        //console.log('Hoy:' + fechaHoy);
+        console.log('Evento: ' + fechaEvento);
+        console.log('Hoy:' + fechaHoy);
+        if (moment(fechaHoy).format('DD-MM-YYYY') == moment(fechaEvento).format('DD-MM-YYYY')){
+          this.tieneEventosHoy = true;
+        }
+        this.fechaParaHoy = moment(fechaHoy).format('DD') + ' de ' + moment(fechaHoy).format('MMMM');
+        console.log(this.fechaParaHoy);
+        
         contador++;
 
         if (this.citasVerticalTodas[s].Eventos[t]) {
@@ -468,7 +477,6 @@ export class CalendarioPage implements OnInit {
         if (fechaEvento < fechaHoy && this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo == 'Vacuna') {
           this.citasVerticalTodas[s].Eventos[t].DetalleEventoMes.Titulo = 'Vacuna por administrar'
         }
-
       }
     }
     //para determinar si tiene o no eventos
@@ -478,7 +486,45 @@ export class CalendarioPage implements OnInit {
     else {
       this.tiene = true;
     }
-  }
+    //aca hay que determinar si agregar o no el evento de hoy
+    if (this.tieneEventosHoy == false){
+      var ultimo = this.citasVerticalTodas.length + 1;
+      var entidadHoy = {
+        FechaCompleta: fechaHoy,
+        Id: parseInt(moment(fechaHoy).format('DD')),
+        Mostrar: true,
+        NombreDia: moment(fechaHoy).format('dddd'),
+        NombreDiaReducido: moment(fechaHoy).format('ddd'),
+        NumeroDia: parseInt(moment(fechaHoy).format('DD')),
+        Indice: ultimo,
+        DiferenciaFechas: 10,
+        NoHayEvento: true,
+        Eventos: [{
+          Color: null,
+          HoraInicioFin: '00:00',
+          Imagen: 'agendar_citas.svg',
+          ListaFarmacos: null,
+          NombrePrincipal: 'Nada planificado para hoy',
+          NombreSecundario: 'Nada planificado para hoy',
+          DetalleEventoMes: {
+            DescripcionPrincipal: 'Nada planificado para hoy',
+            DescripcionSecundaria: 'Nada planificado para hoy',
+            Estado: '',
+            FechaHora: fechaHoy,
+            IdElemento: 0,
+            Lugar: '',
+            NombrePaciente: '',
+            Subtitulo: 'Nada planificado para hoy',
+            Titulo: 'Nada planificado para hoy'
+          }
+        }]
+      }
+      //si no tiene eventos hoy lo agregamos
+      this.citasVerticalTodas.push(entidadHoy);
+    }
+
+  
+}
   //ordena los elementos de forma descende o ascendente
   ordenar() {
     if (sessionStorage.getItem('ORDEN_EVENTOS')) {
@@ -865,3 +911,4 @@ export class CalendarioPage implements OnInit {
 
   }
 }
+
