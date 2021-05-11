@@ -10,6 +10,8 @@ import { ServicioNotificaciones } from '../../app/services/ServicioNotificacione
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { environment } from 'src/environments/environment';
+//modal
+import { ModalAlertasPage } from '../modal-alertas/modal-alertas.page';
 //moment
 import * as moment from 'moment';
 
@@ -450,6 +452,33 @@ export class HomePage implements OnInit {
   }
   */
 
+  mostrarNotificacionesModal(mostrar) {
+    //this.slides.slideTo(0);
+/*     if (this.muestraNotificaciones == true && mostrar == true) {
+      this.muestraNotificaciones = false;
+      return;
+    }
+    if (this.muestraNotificaciones == false && mostrar == true) {
+      this.muestraNotificaciones = true;
+    } */
+    this.goToNoficiaciones();
+  }
+  async goToNoficiaciones() {
+    const modal = await this.modalCtrl.create(
+      {
+        component: ModalAlertasPage,
+        componentProps: {
+          'notificaciones': JSON.stringify(this.notificaciones)
+        }
+      }
+    );
+    modal.onDidDismiss().then((data) => {
+      if (data) {
+        console.log(data);
+      }
+    });
+    return await modal.present();
+  }
   mostrarNotificaciones(mostrar) {
     this.slides.slideTo(0);
     if (this.muestraNotificaciones == true && mostrar == true) {

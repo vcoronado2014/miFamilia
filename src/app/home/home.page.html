@@ -56,15 +56,15 @@
      <ion-buttons slot="end"  style="padding-right: 16px;" [hidden]="estaCargandoNotificaciones == false">
        <ion-spinner color="light"></ion-spinner>
      </ion-buttons>
-     <ion-buttons slot="end"  style="padding-right: 16px;" [hidden]="estaCargandoNotificaciones && notificaciones.length == 0" (click)="mostrarNotificaciones(true)">
+     <ion-buttons slot="end"  style="padding-right: 16px;" [hidden]="estaCargandoNotificaciones && notificaciones.length == 0" (click)="mostrarNotificacionesModal(true)">
        <ion-icon [hidden]="notificaciones.length == 0" class="fcw" slot="icon-only" name="notifications"></ion-icon>
        <ion-badge [hidden]="notificaciones.length == 0" slot="end" color="danger" class="badge-notificaciones">{{notificaciones.length}}</ion-badge>
      </ion-buttons>
    </ion-toolbar>
  </ion-header>
  <ion-content class="card-background-page-home back-app" id="content">
-   <!-- notificaciones -->
-   <ion-slides [hidden]="muestraNotificaciones == false" pager="true" [options]="slideOpts" #mySlider class="slides-back">
+   <!-- notificaciones lo comentamos para usar un modal -->
+<!--    <ion-slides [hidden]="muestraNotificaciones == false" pager="true" [options]="slideOpts" #mySlider class="slides-back">
      <ion-slide *ngFor="let info of notificaciones">
        <div class="slide-content-padding">
          <app-content-slide [titulo]="info.Titulo" [subTitulo]="info.Subtitulo" [contenido]="info.Contenido" [modulo]="info.IrA"></app-content-slide>
@@ -82,7 +82,7 @@
          </ion-grid>
        </div>
      </ion-slide>
-   </ion-slides>
+   </ion-slides> -->
    <ion-grid>
      <app-progress [mostrar]="estaCargando" titulo="Buscando preferencias"></app-progress>
      <ion-row [hidden]="estaCargando" class="ion-padding-top">

@@ -120,7 +120,10 @@ const routes: Routes = [
     path: 'pre-ordenes',
     loadChildren: () => import('./pre-ordenes/pre-ordenes.module').then( m => m.PreOrdenesPageModule)
   },
-
+  {
+    path: 'modal-alertas',
+    loadChildren: () => import('./modal-alertas/modal-alertas.module').then( m => m.ModalAlertasPageModule)
+  },
 
 
 ];
