@@ -84,9 +84,9 @@
  </div>
 </ion-content>
 <!-- este es el fab para abrir reservar horas -->
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="estaCargando">
-  <ion-button color="secondary" (click)="openReservarHoraPage()" shape="round">
-    <ion-icon slot="start" name="add-outline" style="padding-left: 12px;"></ion-icon>
-    <span class="botonReservar" style="padding-right: 12px;">RESERVAR HORA</span>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="estaCargando" style="min-height: 48px;">
+  <ion-button color="secondary" (click)="openReservarHoraPage()" shape="round" style="min-height: 48px;">
+    <ion-icon slot="start" name="add-outline" style="font-size: 24px;margin-right: 12px;"></ion-icon>
+    <span class="botonReservar" style="font-size: 1em;">RESERVAR HORA</span>
   </ion-button>
 </ion-fab>

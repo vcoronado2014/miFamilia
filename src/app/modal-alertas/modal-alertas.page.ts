@@ -57,6 +57,15 @@ export class ModalAlertasPage implements OnInit{
                         }
                       }
                   }
+                  else{
+                    //si no está la notificacion viene por ejemplo de asociar un nuevo miembro de la familia
+                    alerta.UsuarioAps = {
+                      UrlImagen: '',
+                      Parentezco: {
+                        Nombre: ''
+                      }
+                    }
+                  }
               });
           }
       }

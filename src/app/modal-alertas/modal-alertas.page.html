@@ -32,7 +32,7 @@
                 <div class="subtext-avatar">{{item.Contenido}}</div>
             </ion-row>
         </ion-item>
-        <ion-item lines="full">
+        <ion-item lines="full" [hidden]="item.IrA != null">
             <ion-row style="display: block; width: 100%;">
                 <div class="text-avatar">{{item.Titulo}}</div>
                 <div class="subtext-avatar">{{item.Contenido}}</div>
