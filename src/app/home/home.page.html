@@ -57,7 +57,7 @@
        <ion-spinner color="light"></ion-spinner>
      </ion-buttons>
      <ion-buttons slot="end"  style="padding-right: 16px;" [hidden]="estaCargandoNotificaciones && notificaciones.length == 0" (click)="mostrarNotificacionesModal(true)">
-       <ion-icon [hidden]="notificaciones.length == 0" class="fcw" slot="icon-only" name="notifications"></ion-icon>
+       <ion-icon [hidden]="notificaciones.length == 0" class="fcw" slot="icon-only" name="notifications" style="color:white;"></ion-icon>
        <ion-badge [hidden]="notificaciones.length == 0" slot="end" color="danger" class="badge-notificaciones">{{notificaciones.length}}</ion-badge>
      </ion-buttons>
    </ion-toolbar>

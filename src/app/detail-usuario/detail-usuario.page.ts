@@ -7,6 +7,7 @@ import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioInfoUsuario } from '../../app/services/ServicioInfoUsuario';
 import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-detail-usuario',
@@ -91,7 +92,8 @@ export class DetailUsuarioPage implements OnInit {
         if (this.parametrosApp.USA_API_MANAGEMENT()) {
           //llamada api management
           this.info.getIndicadorValorApi(uspId).subscribe((response: any) => {
-            this.procesarIndicadorValor(response, loader);
+            //this.procesarIndicadorValor(response, loader);
+            this.porcesarIndicadorValorApi(response, loader);
           });
           //presion
           let loader1 = await this.loading.create({
@@ -102,7 +104,8 @@ export class DetailUsuarioPage implements OnInit {
           this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresionApi(uspId).subscribe((response: any) => {
-              this.procesarPresion(response, loader1);
+              //this.procesarPresion(response, loader1);
+              this.procesarPresionApi(response, loader1);
             });
           });
           //alergias
@@ -120,7 +123,8 @@ export class DetailUsuarioPage implements OnInit {
         }
         else {
           this.info.getIndicadorValor(uspId).subscribe((response: any) => {
-            this.procesarIndicadorValor(response, loader);
+            //this.procesarIndicadorValor(response, loader);
+            this.porcesarIndicadorValorApi(response, loader);
           });
           //presion
           let loader1 = await this.loading.create({
@@ -131,7 +135,8 @@ export class DetailUsuarioPage implements OnInit {
           this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresion(uspId).subscribe((response: any) => {
-              this.procesarPresion(response, loader1);
+              //this.procesarPresion(response, loader1);
+              this.procesarPresionApi(response, loader1);
             });
           });
           //alergias
@@ -152,7 +157,8 @@ export class DetailUsuarioPage implements OnInit {
         if (this.parametrosApp.USA_API_MANAGEMENT()) {
           //llamada nativa
           this.info.getIndicadorValorNativeApi(uspId).then((response: any) => {
-            this.procesarIndicadorValor(JSON.parse(response.data), loader);
+            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+            this.porcesarIndicadorValorApi(JSON.parse(response.data), loader);
           });
           //presion
           let loader1 = await this.loading.create({
@@ -163,7 +169,8 @@ export class DetailUsuarioPage implements OnInit {
           this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresionNativeApi(uspId).then((response: any) => {
-              this.procesarPresion(JSON.parse(response.data), loader1);
+              //this.procesarPresion(JSON.parse(response.data), loader1);
+              this.procesarPresionApi(JSON.parse(response.data), loader1);
             });
           });
           //alergias
@@ -182,7 +189,8 @@ export class DetailUsuarioPage implements OnInit {
         else {
           //llamada nativa
           this.info.getIndicadorValorNative(uspId).then((response: any) => {
-            this.procesarIndicadorValor(JSON.parse(response.data), loader);
+            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+            this.porcesarIndicadorValorApi(JSON.parse(response.data), loader);
           });
           //presion
           let loader1 = await this.loading.create({
@@ -193,7 +201,8 @@ export class DetailUsuarioPage implements OnInit {
           this.estaCargando = true;
           await loader1.present().then(async () => {
             this.info.getPresionNative(uspId).then((response: any) => {
-              this.procesarPresion(JSON.parse(response.data), loader1);
+              //this.procesarPresion(JSON.parse(response.data), loader1);
+              this.procesarPresionApi(JSON.parse(response.data), loader1);
             });
           });
           //alergias
@@ -233,6 +242,31 @@ export class DetailUsuarioPage implements OnInit {
     } else {
       this.title = "Alergias";
     }
+  }
+  procesarPresionApi(data, loader) {
+    this.presiones = data.PresionesUsp;
+    if (this.presiones && this.presiones.length > 0) {
+      var arrPresiones = this.presiones.sort((a: any, b: any) => { return this.getTime(moment(b.FechaPresion).toDate()) - this.getTime(moment(a.FechaPresion).toDate()) });
+      if (arrPresiones && arrPresiones.length > 0){
+        console.log('tiene presion');
+        console.log(arrPresiones);
+        //el primer elemento es el más nuevo
+        this.valorPresion = arrPresiones[0].ValorPresion;
+        this.fechaPresion = moment(arrPresiones[0].FechaPresion).format('DD-MM-YYYY HH:mm');
+      }
+      else{
+        console.log('no tiene presion');
+        this.valorPresion = 'N/A';
+        this.fechaPresion = 'N/A';
+      }
+    }
+    else {
+      //llenar con valores predeterminados
+      this.valorPresion = 'N/A';
+      this.fechaPresion = 'N/A';
+    }
+    loader.dismiss();
+    this.estaCargando = false;
   }
   procesarPresion(data, loader) {
     this.presiones = data.PresionesUsp;
@@ -279,6 +313,80 @@ export class DetailUsuarioPage implements OnInit {
       this.valorPresion = 'N/A';
       this.fechaPresion = 'N/A';
     }
+  }
+  private getTime(date?: Date) {
+    return date != null ? new Date(date).getTime() : 0;
+  }
+  porcesarIndicadorValorApi(data, loader){
+    this.indicadorValor = data.IndicadorValorUsp;
+    if (this.indicadorValor && this.indicadorValor.length > 0){
+      //ahora procesamos los valores
+      //altura
+      var arrAltura = this.indicadorValor.filter(p=>p.Descripcion.includes('Altura') || p.Descripcion.includes('Talla'));
+      if (arrAltura && arrAltura.length > 0){
+        console.log('tiene altura');
+        //fecha mas actualizada
+        arrAltura.sort((a: any, b: any) => { return this.getTime(moment(b.fecha).toDate()) - this.getTime(moment(a.fecha).toDate()) });
+        console.log(arrAltura);
+        //el primer elemento es el más nuevo
+        this.valorAltura = arrAltura[0].Valor;
+        this.fechaAltura = moment(arrAltura[0].fecha).format('DD-MM-YYYY HH:mm');
+      }
+      else{
+        console.log('no tiene altura');
+        this.valorAltura = 'No informada';
+        this.fechaAltura = 'No informada';
+      }
+      //fin altura
+      //peso
+      var arrPeso = this.indicadorValor.filter(p=>p.Descripcion.includes('Peso'));
+      if (arrPeso && arrPeso.length > 0){
+        console.log('tiene peso');
+        //fecha mas actualizada
+        arrPeso.sort((a: any, b: any) => { return this.getTime(moment(b.fecha).toDate()) - this.getTime(moment(a.fecha).toDate()) });
+        console.log(arrPeso);
+        //el primer elemento es el más nuevo
+        this.valorPeso = arrPeso[0].Valor;
+        this.fechaPeso = moment(arrPeso[0].fecha).format('DD-MM-YYYY HH:mm');
+      }
+      else{
+        console.log('no tiene peso');
+        this.valorPeso = 'No informado';
+        this.fechaPeso = 'No informada';
+      }
+      //fin peso
+      var arrImc = this.indicadorValor.filter(p=>p.Descripcion.includes('I.M.C.'));
+      if (arrImc && arrImc.length > 0){
+        console.log('tiene imc');
+        //fecha mas actualizada
+        arrImc.sort((a: any, b: any) => { return this.getTime(moment(b.fecha).toDate()) - this.getTime(moment(a.fecha).toDate()) });
+        console.log(arrImc);
+        //el primer elemento es el más nuevo
+        this.valorImc = arrImc[0].Valor;
+        this.fechaImc = moment(arrImc[0].fecha).format('DD-MM-YYYY HH:mm');
+      }
+      else{
+        console.log('no tiene imc');
+        this.valorImc = 'No informado';
+        this.fechaImc = 'No informada';
+      }
+      loader.dismiss();
+      //para progress
+      this.estaCargando = false;
+    }
+    else {
+      //viene valor nulo
+      //llenar con valores predeterminados
+      this.valorAltura = 'No informada';
+      this.fechaAltura = 'No informada';
+      this.valorPeso = 'No informado';
+      this.fechaPeso = 'No informada';
+      this.valorImc = 'No informado';
+      this.fechaImc = 'No informada';
+    }
+    loader.dismiss();
+    //para progress
+    this.estaCargando = false;
   }
   procesarIndicadorValor(data, loader) {
     this.indicadorValor = data.IndicadorValorUsp;

@@ -19,22 +19,22 @@
   <ion-list [hidden]="estaCargando">
     <ion-item>
       <ion-icon name="pulse" slot="start"></ion-icon>
-      <ion-label>Presión</ion-label>
+      <ion-label>Presión <small>{{fechaPresion}}</small> </ion-label>
       <ion-label slot="end" class="ion-text-right">{{valorPresion}}</ion-label>
     </ion-item>
     <ion-item>
       <ion-icon name="body" slot="start"></ion-icon>
-      <ion-label>Altura</ion-label>
+      <ion-label>Altura <small>{{fechaAltura}}</small></ion-label>
       <ion-label slot="end" class="ion-text-right">{{valorAltura}}<span *ngIf="valorAltura != 'No informada'">&nbsp;cm</span></ion-label>
     </ion-item>
     <ion-item>
       <ion-icon name="logo-buffer" slot="start"></ion-icon>
-      <ion-label>Peso</ion-label>
+      <ion-label>Peso <small>{{fechaPeso}}</small></ion-label>
       <ion-label slot="end" class="ion-text-right">{{valorPeso}}<span *ngIf="valorPeso != 'No informado'">&nbsp;Kg</span></ion-label>
     </ion-item>
     <ion-item>
       <ion-icon name="heart" slot="start"></ion-icon>
-      <ion-label>IMC</ion-label>
+      <ion-label>IMC <small>{{fechaImc}}</small></ion-label>
       <ion-label slot="end" class="ion-text-right">{{valorImc}}</ion-label>
     </ion-item>
 
