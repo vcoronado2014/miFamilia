@@ -43,9 +43,6 @@ export class ServicioFCM{
             //native
             this.firebaseMessaging.requestPermission({forceShow: true}).then(()=>{
                 console.log('push permitido');
-            }).catch(error => {
-                console.log('push no permitido');
-                console.log(error.message);
             })
             //pasaremos apn-string
             if (this.verificaTokenSession() == false) {

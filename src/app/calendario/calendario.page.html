@@ -76,6 +76,13 @@
       <hr *ngIf="transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual && item.Eventos[0].NombrePrincipal != 'Nada planificado para hoy'">
     </ion-grid>
   </div>
+  <!-- mostrar cuando no tenga eventos futuros y si tenga eventos pasados -->
+  <div *ngIf="!tieneEventosFuturos" [hidden]="estaCargando">
+    <div style="display: table; height: 10%;font-size: 16px; color:rgba(0, 0, 0, 0.54); text-align: center; width: -webkit-fill-available;" class="ion-padding">
+          <p style="display: table-cell; vertical-align: middle">No tiene actividades  <br>
+            programadas para el futuro</p>
+        </div>
+  </div>
   <!-- pruebas con infinite scroll -->
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más eventos...">

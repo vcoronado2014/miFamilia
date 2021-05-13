@@ -82,7 +82,7 @@ export class CalendarioPage implements OnInit {
   estaCargando = false;
   tituloLoading = '';
   //para infinity scroll
-  private topLimit: number = 5;
+  private topLimit: number = 25;
   private citasVerticalTodasTop: any = [];
   //para poner la linea en la fecha actual
   fechaActual = '';
@@ -90,6 +90,7 @@ export class CalendarioPage implements OnInit {
   scrollTo = null;
   //tiene eventos hoy
   tieneEventosHoy = false;
+  tieneEventosFuturos = false;
   fechaParaHoy;
   constructor(
     public navCtrl: NavController,
@@ -184,16 +185,18 @@ export class CalendarioPage implements OnInit {
           this.citasVerticalTodas = response;
           this.procesarArregloCitasTodas();
           this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
-          this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta) });
+          this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(a.FechaCompleta) - this.getTime(b.FechaCompleta) });
           //guardamos la variable de ordenamiento
           sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
           //creamos top limit al nuevo arreglo de citas
           this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
           //console.log(this.citasVerticalTodasTop);
+          console.log(this.tieneEventosFuturos);
           loader.dismiss();
           this.estaCargando = false;
           this.tituloLoading = '';
           this.scrollListVisible();
+          
         }, error => {
           //console.log(error.message);
           this.estaCargando = false;
@@ -202,6 +205,7 @@ export class CalendarioPage implements OnInit {
           this.tiene = false;
           this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
           this.agregarUnElemento(moment().toDate());
+          console.log(this.tieneEventosFuturos);
         });
       }
       else {
@@ -213,7 +217,7 @@ export class CalendarioPage implements OnInit {
           this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
           //ahora que tenemos las citas que queremos mostrar
           //ordenamos
-          this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta) });
+          this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(a.FechaCompleta) - this.getTime(b.FechaCompleta) });
           //guardamos la variable de ordenamiento
           sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
           //creamos top limit al nuevo arreglo de citas
@@ -282,7 +286,7 @@ export class CalendarioPage implements OnInit {
               ////console.log(this.citasVerticalMostrar);
               //ahora que tenemos las citas que queremos mostrar
               //ordenamos
-              this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(b.FechaCompleta) - this.getTime(a.FechaCompleta) });
+              this.citasVerticalMostrar.sort((a: any, b: any) => { return this.getTime(a.FechaCompleta) - this.getTime(b.FechaCompleta) });
               //guardamos la variable de ordenamiento
               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
               //creamos top limit al nuevo arreglo de citas
@@ -424,6 +428,9 @@ export class CalendarioPage implements OnInit {
         console.log('Hoy:' + fechaHoy);
         if (moment(fechaHoy).format('DD-MM-YYYY') == moment(fechaEvento).format('DD-MM-YYYY')){
           this.tieneEventosHoy = true;
+        }
+        if (moment(fechaEvento).isAfter(moment(fechaHoy))){
+          this.tieneEventosFuturos = true;
         }
         this.fechaParaHoy = moment(fechaHoy).format('DD') + ' de ' + moment(fechaHoy).format('MMMM');
         console.log(this.fechaParaHoy);

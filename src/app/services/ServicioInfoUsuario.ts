@@ -202,5 +202,38 @@ export class ServicioInfoUsuario{
     
         return this.http.post(url, body, {});
       }
+
+      //antecedentes morbidos y familiares
+      postAntecedentesApi(uspId){
+        const body = JSON.stringify({ UspId: uspId.toString() });
+
+        let url = environment.API_ENDPOINT + 'AntecedentesApi';
+        let httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+    
+        let options = { headers: httpHeaders };
+    
+        let data = this.httpClient.post(url, body, options);
+        return data;
+      }
+      postAntecedentesNativeApi(uspId){
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body =
+        {
+          "UspId": uspId.toString()
+        };
+    
+        let url = environment.API_ENDPOINT + 'AntecedentesApi';
+        this.http.setDataSerializer('json');
+    
+    
+        return this.http.post(url, body, {});
+      }
     
 }

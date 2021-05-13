@@ -8,8 +8,9 @@
 </ion-header>
 
 <ion-content class="back-app">
+  <app-progress [mostrar]="estaCargando" [titulo]="tituloProgress"></app-progress>
   <!-- HAY EXAMENES -->
-  <ion-list *ngIf="tiene">
+  <ion-list [hidden]="estaCargando" *ngIf="tiene">
     
       <app-avatar [lines]="none" [urlImagen] = "orden.UrlImagen" 
       [nombreCompleto]="orden.NombreUsuario" 
@@ -78,7 +79,7 @@
     </ion-item>
   </ion-list>
   <!-- NO HAY EXAMENES -->
-  <div *ngIf="tiene == false" style="position: relative; height: 100vh;">
+  <div [hidden]="estaCargando" *ngIf="tiene == false" style="position: relative; height: 100vh;">
     <div style="position: absolute; display: table; height: 100%; font-size: 30px; color:#BDBDBD; text-align: center;">
       <p style="display: table-cell; vertical-align: middle">No hay exámenes para mostrar  <br>
       <ion-icon name="information-circle" style="font-size: 50px;"></ion-icon></p>

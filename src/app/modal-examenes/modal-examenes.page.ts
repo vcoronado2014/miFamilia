@@ -27,6 +27,9 @@ export class ModalExamenesPage implements OnInit {
   public user;
   public userColor;
   fechaOrden;
+  //loading
+  estaCargando = false;
+  tituloProgress = '';
   @ViewChild('myList', { read: IonList }) list: IonList;
   constructor(
     public modalCtrl: ModalController,
@@ -68,9 +71,17 @@ export class ModalExamenesPage implements OnInit {
       this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
     }
     if (this.usuarioAps) {
-      let loader = await this.loading.create({
+      this.estaCargando = true;
+      this.tituloProgress = 'Buscando exámenes del usuario';
+/*       let loader = await this.loading.create({
         message: 'Obteniendo...<br>Exámenes del usuario',
         duration: 20000
+      }); */
+
+      let loader = await this.loading.create({
+        cssClass: 'loading-vacio',
+        showBackdrop: false,
+        spinner: null,
       });
 
       await loader.present().then(async () => {
@@ -78,12 +89,23 @@ export class ModalExamenesPage implements OnInit {
           //llamada web
           this.lab.getExamenes(this.oalaId).subscribe((response: any) => {
             this.porocesarLista(response, loader);
+          }, error => {
+            console.log(error.message);
+            this.estaCargando = false;
+            this.tituloProgress = '';
+            loader.dismiss();
+
           });
         }
         else {
           //llamada nativa
           this.lab.getExamenesNative(this.oalaId).then((response: any) => {
             this.porocesarLista(JSON.parse(response.data), loader);
+          }).catch(error=>{
+            console.log(error.message);
+            this.estaCargando = false;
+            this.tituloProgress = '';
+            loader.dismiss();
           });
         }
       });
@@ -103,6 +125,8 @@ export class ModalExamenesPage implements OnInit {
       }
       //console.log(this.listadoExamenes);
     }
+    this.estaCargando = false;
+    this.tituloProgress = '';
     loader.dismiss();
   }
 
