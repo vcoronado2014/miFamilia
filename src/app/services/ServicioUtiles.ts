@@ -214,17 +214,17 @@ export class ServicioUtiles{
             title: 'Configurar familia',
             visible: true,
             icon: 'settings',
-            src: '#',
+            src: 'familia',
             esSubMenu: false
         };
         arrPages.push(pagUno);
 
         //ahora los submenus de configurar familia
         //simepre y cuando tenga familia aceptada
-        if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
+/*         if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
             var pagQuitarIntegrantes = {
                 title: 'Desactivar/Activar',
-                visible: true,
+                visible: false,
                 icon: 'person',
                 src: 'quitar-familia',
                 esSubMenu: true
@@ -233,12 +233,12 @@ export class ServicioUtiles{
         }
         var pagConfigContacto = {
             title: 'Datos de contacto/avatar',
-            visible: true,
+            visible: false,
             icon: 'share',
             src: 'familia',
             esSubMenu: true
         }
-        arrPages.push(pagConfigContacto);
+        arrPages.push(pagConfigContacto); */
         
         var pagDos = {
             title: 'Términos y condiciones',

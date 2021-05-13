@@ -24,6 +24,7 @@ export class FamiliaPage implements OnInit {
   public usuarioApsFamilia = [];
   public listadoUsuario = [];
   estaCargando = false;
+  mostrarAgregarQuitar = false;
 
   @ViewChild('myList', { read: IonList }) list: IonList;
   constructor(
@@ -54,6 +55,9 @@ export class FamiliaPage implements OnInit {
     await loader.present().then(async () => {
       //cargamos mi color
       this.miColor = this.utiles.entregaMiColor();
+      if (this.utiles.tieneFamiliaAceptada() || this.utiles.tieneFamiliaRechazada()){
+        this.mostrarAgregarQuitar = true;
+      }
       //demas cargas
       if (sessionStorage.UsuarioAps) {
         this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -125,6 +129,10 @@ export class FamiliaPage implements OnInit {
       }
     };
     this.navCtrl.navigateRoot(['registro-uno'], navigationExtras);
+
+  }
+  irQuitarAgregar() {
+    this.navCtrl.navigateRoot('quitar-familia');
 
   }
   irAjustes(item) {

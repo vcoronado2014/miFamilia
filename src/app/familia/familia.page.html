@@ -22,7 +22,7 @@
 
   <div [hidden]="estaCargando" *ngIf="listadoUsuario.length > 0" style="padding-top: 16px;">
     <div class="ion-padding">
-      <p class="texto-item">
+      <p class="texto-item" style="color: #0000008A; font-size: 14pt;letter-spacing: 0.25pt;line-height: 20pt;">
         Modifica la imagen del avatar, el telefono o el e-mail de los miembros de tu familia.
       </p>
     </div>
@@ -38,6 +38,16 @@
           <div class="subtext-avatar">{{item.Parentezco.Nombre}}</div>
         </ion-row>
       </ion-item>
+    </div>
+    <div *ngIf="mostrarAgregarQuitar">
+      <ion-list style="margin-top: 24px; padding-top: 0;">
+        <ion-list-header style="background-color: #faf9fa;padding-right: 16px;padding-bottom: 16px;">
+          <div style="color: #0000008A; font-size: 14pt;letter-spacing: 0.25pt;line-height: 20pt;">A continuación puedes activar o desactivar a los integrantes de tu familia, solo visualizaras la información clínica de los integrantes activos.</div>
+        </ion-list-header>
+        <ion-item button class="lista-alergias" detail (click)="irQuitarAgregar()">
+          <ion-label class="ion-text-wrap" style="color:#000000DE;font-size: 16pt;">Activar o desactivar integrantes</ion-label>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
 
