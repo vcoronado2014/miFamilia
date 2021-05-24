@@ -892,5 +892,138 @@ export class ServicioUtiles{
             localStorage.setItem('plataforma', entidad.plataforma);
           }
     }
+    necesitaActualizarDatosPaciente(uspId){
+        var retorno = true;
+        var fechaActual = moment();
+        var fechaUltimaActualizacion = moment();
+        if (localStorage.getItem('ANTECEDENTES')) {
+            //tiene antecedentes, pero puede que no tenga antecddentes el usuario aps, en este caso hay que acrualizar
+            var tiene = false;
+            let antecedentes = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+            if (antecedentes && antecedentes.length > 0) {
+                var arrUsuarioTiene = antecedentes.filter(p => p.UsuarioAps.Id == uspId);
+                if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+                    tiene = true;
+                }
+            }
+            if (tiene == false) {
+                retorno = true;
+            }
+            else {
+                if (localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES')) {
+                    fechaUltimaActualizacion = moment(localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES'));
+                    var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+                    if (diferencia < 1) {
+                        retorno = false;
+                    }
+                }
+            }
+
+        }
+        return retorno;
+    }
+    necesitaActualizarAlergiasPacientes(uspId){
+        var retorno = true;
+        var fechaActual = moment();
+        var fechaUltimaActualizacion = moment();
+        var tiene = false;
+        let alergias = JSON.parse(localStorage.getItem('ALERGIAS'));
+        if (alergias && alergias.length > 0) {
+            var arrUsuarioTiene = alergias.filter(p => p.UsuarioAps.Id == uspId);
+            if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+                tiene = true;
+            }
+        }
+        if (tiene == false) {
+            retorno = true;
+        }
+        else {
+            if (localStorage.getItem('ALERGIAS')) {
+                if (localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS')) {
+                    fechaUltimaActualizacion = moment(localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS'));
+                    var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+                    if (diferencia < 1) {
+                        retorno = false;
+                    }
+                }
+            }
+        }
+
+        return retorno;
+    }
+    necesitaActualizarMorbidosPacientes(uspId){
+        var retorno = true;
+        var fechaActual = moment();
+        var fechaUltimaActualizacion = moment();
+        var tiene = false;
+        let morbidos = JSON.parse(localStorage.getItem('MORBIDOS'));
+        if (morbidos && morbidos.length > 0) {
+            var arrUsuarioTiene = morbidos.filter(p => p.UsuarioAps.Id == uspId);
+            if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+                tiene = true;
+            }
+        }
+        if (tiene == false) {
+            retorno = true;
+        }
+        else {
+            if (localStorage.getItem('MORBIDOS')) {
+                if (localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS')) {
+                    fechaUltimaActualizacion = moment(localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS'));
+                    var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+                    if (diferencia < 1) {
+                        retorno = false;
+                    }
+                }
+            }
+        }
+
+        return retorno;
+    }
+    entregaArregloDatosPaciente(uspId){
+        var antecedentes = [];
+        if (localStorage.getItem('ANTECEDENTES')){
+            var arreglo = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+            if (arreglo && arreglo.length > 0){
+                for(var s in arreglo){
+                    if (arreglo[s].UsuarioAps.Id == uspId){
+                        antecedentes = arreglo[s].Mediciones;
+                    }
+                }
+            }
+        }
+
+        return antecedentes;
+    }
+    entregaArregloAlergiasPaciente(uspId){
+        var alergias = [];
+        if (localStorage.getItem('ALERGIAS')){
+            var arreglo = JSON.parse(localStorage.getItem('ALERGIAS'));
+            if (arreglo && arreglo.length > 0){
+                for(var s in arreglo){
+                    if (arreglo[s].UsuarioAps.Id == uspId){
+                        alergias = arreglo[s].Alergias;
+                    }
+                }
+            }
+        }
+
+        return alergias;
+    }
+    entregaArregloMorbidosPaciente(uspId){
+        var morbidos = [];
+        if (localStorage.getItem('MORBIDOS')){
+            var arreglo = JSON.parse(localStorage.getItem('MORBIDOS'));
+            if (arreglo && arreglo.length > 0){
+                for(var s in arreglo){
+                    if (arreglo[s].UsuarioAps.Id == uspId){
+                        morbidos = arreglo[s].Morbidos;
+                    }
+                }
+            }
+        }
+
+        return morbidos;
+    }
 
 }

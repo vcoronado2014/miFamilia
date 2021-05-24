@@ -124,6 +124,14 @@ const routes: Routes = [
     path: 'modal-alertas',
     loadChildren: () => import('./modal-alertas/modal-alertas.module').then( m => m.ModalAlertasPageModule)
   },
+  {
+    path: 'resultados',
+    loadChildren: () => import('./resultados/resultados.module').then( m => m.ResultadosPageModule)
+  },
+  {
+    path: 'modal-busqueda',
+    loadChildren: () => import('./modal-busqueda/modal-busqueda.module').then( m => m.ModalBusquedaPageModule)
+  },
 
 
 ];

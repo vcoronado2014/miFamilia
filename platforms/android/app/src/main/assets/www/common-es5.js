@@ -663,63 +663,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
 
   /***/
-  "./node_modules/raw-loader/dist/cjs.js!./src/app/modal-examenes/modal-examenes.page.html":
-  /*!***********************************************************************************************!*\
-    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modal-examenes/modal-examenes.page.html ***!
-    \***********************************************************************************************/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/modal-alertas/modal-alertas.page.html":
+  /*!*********************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modal-alertas/modal-alertas.page.html ***!
+    \*********************************************************************************************/
 
   /*! exports provided: default */
 
   /***/
-  function node_modulesRawLoaderDistCjsJsSrcAppModalExamenesModalExamenesPageHtml(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesRawLoaderDistCjsJsSrcAppModalAlertasModalAlertasPageHtml(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"home\">Exámenes</ion-title>\r\n    <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n      <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <!-- HAY EXAMENES -->\r\n  <ion-list *ngIf=\"tiene\">\r\n    \r\n      <app-avatar [lines]=\"none\" [urlImagen] = \"orden.UrlImagen\" \r\n      [nombreCompleto]=\"orden.NombreUsuario\" \r\n      [parentezco]=\"orden.Parentezco\"></app-avatar>\r\n    <ion-list-header lines=\"inset\" mode=\"md\">\r\n      <ion-label><strong>Nº Órden: {{oalaId}}</strong></ion-label>\r\n      <ion-badge color=\"secondary\" class=\"ion-margin-end\">{{ fechaOrden }}</ion-badge>\r\n      <!-- <ion-button>Clear</ion-button> -->\r\n    </ion-list-header>\r\n    <ion-item lines=\"none\" *ngFor=\"let item of listadoExamenes\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"8\">\r\n            <h5>{{item.NombreExamen}}</h5>\r\n            <p *ngIf=\"item.VisibleIcono\">\r\n              <ion-icon name=\"checkmark-circle\" *ngIf=\"item.Check\"></ion-icon>\r\n              <ion-icon name=\"remove-circle\" *ngIf=\"item.UnCheck\"></ion-icon>&nbsp;{{item.TextoResultados}}\r\n            </p>\r\n          </ion-col>\r\n          <ion-col size=\"4\">\r\n            <ion-badge color=\"primary\">{{ item.Estado }}</ion-badge>\r\n            <h6 *ngIf=\"!item.VisibleTabla\" style=\"color: #666; font-size:0.7em;\"><ion-icon name=\"analitycs\"></ion-icon>&nbsp;Sin Resultados</h6> \r\n            <h6 *ngIf=\"item.VisibleTabla\" style=\"color: #666; font-size:0.7em;\"><ion-icon name=\"time\"></ion-icon>&nbsp;{{item.FechaMuestraStr}}</h6> \r\n          </ion-col>\r\n          <!-- RESULTADOS -->\r\n          <!-- aca debemos agregar otra lista quitar visible -->\r\n          <ion-list *ngIf=\"item.VisibleTabla\" style=\"width: 100%;\">\r\n            <ion-grid>\r\n              <ion-row class=\"titulo-tabla-examen\" [ngStyle]=\"{'background-color': userColor}\">\r\n                <ion-col size=\"6\" class=\"ion-text-wrap ion-text-center\">\r\n                  Nombre\r\n                </ion-col>\r\n                <ion-col size=\"2\" class=\"ion-text-center\">\r\n                  Valor\r\n                </ion-col>\r\n                <ion-col size=\"2\" class=\"ion-text-center\">\r\n                  U/M\r\n                </ion-col>\r\n                <ion-col size=\"2\" class=\"ion-text-center\">\r\n                  Ref.\r\n                </ion-col>\r\n              </ion-row>\r\n            </ion-grid>\r\n\r\n            <ion-row  *ngFor=\"let exa of item.Resultados\">\r\n              <ion-grid>\r\n                <ion-row style=\"font-size: 0.8em;font-style: italic;\">\r\n                  <ion-col size=\"6\" class=\"ion-text-wrap\">\r\n                    {{exa.DescripcionResultado}}\r\n                  </ion-col>\r\n                  <ion-col size=\"2\" class=\"ion-text-center\">\r\n                    {{exa.Resultado}}\r\n                  </ion-col>\r\n                  <ion-col size=\"2\" class=\"ion-text-center\">\r\n                    {{exa.Um}}\r\n                  </ion-col>\r\n                  <ion-col size=\"2\" class=\"ion-text-center\">\r\n                    {{exa.ValoresReferencia}}\r\n                  </ion-col>\r\n                </ion-row>\r\n              </ion-grid>\r\n            </ion-row>\r\n          </ion-list>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n  </ion-list>\r\n  <!-- NO HAY EXAMENES -->\r\n  <div *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n    <div style=\"position: absolute; display: table; height: 100%; font-size: 30px; color:#BDBDBD; text-align: center;\">\r\n      <p style=\"display: table-cell; vertical-align: middle\">No hay exámenes para mostrar  <br>\r\n      <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n    </div>\r\n  </div>\r\n\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n    <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n    <ion-toolbar color=\"primary\">\r\n      <ion-title class=\"home\">Alertas</ion-title>\r\n      <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n        <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n      </ion-buttons>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-content class=\"back-app\">\r\n    <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloLoading\"></app-progress>\r\n    <div [hidden]=\"estaCargando\">\r\n\r\n      <!-- aca debe ir el avatar -->\r\n      <ion-list *ngFor=\"let item of notificaciones\">\r\n        <ion-item lines=\"none\">\r\n            <!-- poner avatar -->\r\n            <ion-avatar slot=\"start\">\r\n              <img *ngIf=\"item.UsuarioAps.UrlImagen != ''\" src={{item.UsuarioAps.UrlImagen}}>\r\n              <img *ngIf=\"item.UsuarioAps.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n            </ion-avatar>\r\n            <ion-row style=\"display: block;\">\r\n              <div class=\"text-avatar\">{{item.Subtitulo}}</div>\r\n              <div class=\"subtext-avatar\">{{item.UsuarioAps.Parentezco.Nombre}}</div>\r\n            </ion-row>\r\n          </ion-item>\r\n        <!-- aca el contenido de las alertas [hidden]=\"info.IrA == null\" -->\r\n        <ion-item lines=\"full\" button detail [hidden]=\"item.IrA == null\" (click)=\"openNotificacion(item.IrA)\">\r\n            <ion-row style=\"display: block; width: 100%;\">\r\n                <div class=\"text-avatar\">{{item.Titulo}}</div>\r\n                <div class=\"subtext-avatar\">{{item.Contenido}}</div>\r\n            </ion-row>\r\n        </ion-item>\r\n        <ion-item lines=\"full\" [hidden]=\"item.IrA != null\">\r\n            <ion-row style=\"display: block; width: 100%;\">\r\n                <div class=\"text-avatar\">{{item.Titulo}}</div>\r\n                <div class=\"subtext-avatar\">{{item.Contenido}}</div>\r\n            </ion-row>\r\n        </ion-item>\r\n    </ion-list>\r\n    </div>\r\n  \r\n  </ion-content>";
     /***/
   },
 
   /***/
-  "./src/app/modal-examenes/modal-examenes.page.scss":
-  /*!*********************************************************!*\
-    !*** ./src/app/modal-examenes/modal-examenes.page.scss ***!
-    \*********************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcAppModalExamenesModalExamenesPageScss(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = ".titulo-tabla-examen {\n  border-bottom-color: #dedede;\n  border-bottom-style: solid;\n  border-bottom-width: 1px;\n  color: #fff;\n  font-size: 0.8em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWwtZXhhbWVuZXMvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxtb2RhbC1leGFtZW5lc1xcbW9kYWwtZXhhbWVuZXMucGFnZS5zY3NzIiwic3JjL2FwcC9tb2RhbC1leGFtZW5lcy9tb2RhbC1leGFtZW5lcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSw0QkFBQTtFQUNBLDBCQUFBO0VBQ0Esd0JBQUE7RUFFQSxXQUFBO0VBQ0EsZ0JBQUE7QUNBSiIsImZpbGUiOiJzcmMvYXBwL21vZGFsLWV4YW1lbmVzL21vZGFsLWV4YW1lbmVzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50aXR1bG8tdGFibGEtZXhhbWVue1xyXG4gICAgYm9yZGVyLWJvdHRvbS1jb2xvcjogI2RlZGVkZTtcclxuICAgIGJvcmRlci1ib3R0b20tc3R5bGU6IHNvbGlkO1xyXG4gICAgYm9yZGVyLWJvdHRvbS13aWR0aDogMXB4O1xyXG4gICAgLy9iYWNrZ3JvdW5kLWNvbG9yOiAjMDA5N0E3O1xyXG4gICAgY29sb3I6ICNmZmY7XHJcbiAgICBmb250LXNpemU6IDAuOGVtO1xyXG5cclxufSIsIi50aXR1bG8tdGFibGEtZXhhbWVuIHtcbiAgYm9yZGVyLWJvdHRvbS1jb2xvcjogI2RlZGVkZTtcbiAgYm9yZGVyLWJvdHRvbS1zdHlsZTogc29saWQ7XG4gIGJvcmRlci1ib3R0b20td2lkdGg6IDFweDtcbiAgY29sb3I6ICNmZmY7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG59Il19 */";
-    /***/
-  },
-
-  /***/
-  "./src/app/modal-examenes/modal-examenes.page.ts":
+  "./src/app/modal-alertas/modal-alertas.page.scss":
   /*!*******************************************************!*\
-    !*** ./src/app/modal-examenes/modal-examenes.page.ts ***!
+    !*** ./src/app/modal-alertas/modal-alertas.page.scss ***!
     \*******************************************************/
 
-  /*! exports provided: ModalExamenesPage */
+  /*! exports provided: default */
 
   /***/
-  function srcAppModalExamenesModalExamenesPageTs(module, __webpack_exports__, __webpack_require__) {
+  function srcAppModalAlertasModalAlertasPageScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".titulo-evento {\n  font-family: \"Roboto\";\n  font-size: 1.25em;\n  color: #000000DE;\n  letter-spacing: 0.15px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kYWwtYWxlcnRhcy9GOlxcYXBwX21pZmFtaWxpYV9naXRcXG1pRmFtaWxpYV9wcmUvc3JjXFxhcHBcXG1vZGFsLWFsZXJ0YXNcXG1vZGFsLWFsZXJ0YXMucGFnZS5zY3NzIiwic3JjL2FwcC9tb2RhbC1hbGVydGFzL21vZGFsLWFsZXJ0YXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0VBQ0Ysc0JBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL21vZGFsLWFsZXJ0YXMvbW9kYWwtYWxlcnRhcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGl0dWxvLWV2ZW50b3tcclxuICAgIGZvbnQtZmFtaWx5OiAnUm9ib3RvJztcclxuICAgIGZvbnQtc2l6ZTogMS4yNWVtO1xyXG4gICAgY29sb3I6ICMwMDAwMDBERTtcclxuICBsZXR0ZXItc3BhY2luZzogMC4xNXB4O1xyXG59IiwiLnRpdHVsby1ldmVudG8ge1xuICBmb250LWZhbWlseTogXCJSb2JvdG9cIjtcbiAgZm9udC1zaXplOiAxLjI1ZW07XG4gIGNvbG9yOiAjMDAwMDAwREU7XG4gIGxldHRlci1zcGFjaW5nOiAwLjE1cHg7XG59Il19 */";
+    /***/
+  },
+
+  /***/
+  "./src/app/modal-alertas/modal-alertas.page.ts":
+  /*!*****************************************************!*\
+    !*** ./src/app/modal-alertas/modal-alertas.page.ts ***!
+    \*****************************************************/
+
+  /*! exports provided: ModalAlertasPage */
+
+  /***/
+  function srcAppModalAlertasModalAlertasPageTs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "ModalExamenesPage", function () {
-      return ModalExamenesPage;
+    __webpack_require__.d(__webpack_exports__, "ModalAlertasPage", function () {
+      return ModalAlertasPage;
     });
     /* harmony import */
 
@@ -754,19 +754,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../../app/services/ServicioCitas */
+    "./src/app/services/ServicioCitas.ts");
+    /* harmony import */
+
+
+    var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! src/environments/environment */
+    "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__); //SERVICIOS
+    var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__); //SERVICIOS
     //moment
 
 
-    var ModalExamenesPage = /*#__PURE__*/function () {
-      function ModalExamenesPage(modalCtrl, navParams, utiles, navCtrl, toast, platform, menu, loading, lab) {
-        _classCallCheck(this, ModalExamenesPage);
+    var ModalAlertasPage = /*#__PURE__*/function () {
+      function ModalAlertasPage(modalCtrl, navParams, utiles, navCtrl, toast, platform, menu, loading, lab, alertController, agendar) {
+        _classCallCheck(this, ModalAlertasPage);
 
         this.modalCtrl = modalCtrl;
         this.navParams = navParams;
@@ -776,32 +788,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.platform = platform;
         this.menu = menu;
         this.loading = loading;
-        this.lab = lab; //color
-
-        this.miColor = '#FF4081'; //textColor Directive
-
-        this.textColor = '#FFFFFF'; //tiene registros
-
-        this.tiene = true;
+        this.lab = lab;
+        this.alertController = alertController;
+        this.agendar = agendar;
+        this.estaCargando = false;
+        this.tituloLoading = '';
+        this.styleAvatar = false;
+        this.notificaciones = [];
       }
 
-      _createClass(ModalExamenesPage, [{
+      _createClass(ModalAlertasPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_5__["locale"]('es'); //this.miColor = this.utiles.entregaMiColor();
+          moment__WEBPACK_IMPORTED_MODULE_7__["locale"]('es'); //traer las notificaciones que vienen desde la pagina home
 
-          this.orden = JSON.parse(this.navParams.get('orden')); //console.log(this.orden);
-          //this.nombreUsuario = navParams.get('NombreUsuario');
+          if (this.navParams.get('notificaciones')) {
+            this.notificaciones = JSON.parse(this.navParams.get('notificaciones'));
+            this.procesarAlertas();
+            console.log(this.notificaciones);
+          }
+        }
+      }, {
+        key: "procesarAlertas",
+        value: function procesarAlertas() {
+          var _this = this;
 
-          this.user = JSON.parse(sessionStorage.UsuarioAps);
-          this.userColor = this.user.Color;
-          this.miColor = this.utiles.entregaColor(this.user);
+          if (this.notificaciones && this.notificaciones.length > 0) {
+            this.notificaciones.forEach(function (alerta) {
+              var usu = _this.utiles.entregaUsuarioNombre(alerta.Subtitulo);
 
-          if (this.orden) {
-            //existe la orden hacer las llamadas
-            this.oalaId = this.orden.Id;
-            this.fechaOrden = this.orden.Fecha;
-            this.loadInicio();
+              alerta.UsuarioAps = usu == null ? null : usu;
+
+              if (alerta.UsuarioAps != null) {
+                alerta.UsuarioAps.UrlImagen = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + alerta.UsuarioAps.UrlImagen;
+
+                if (alerta.UsuarioAps.Parentezco) {
+                  if (alerta.UsuarioAps.Parentezco.Nombre == 'La misma persona') {
+                    alerta.UsuarioAps.Parentezco.Nombre = 'Yo';
+                  }
+                }
+              } else {
+                //si no está la notificacion viene por ejemplo de asociar un nuevo miembro de la familia
+                alerta.UsuarioAps = {
+                  UrlImagen: '',
+                  Parentezco: {
+                    Nombre: ''
+                  }
+                };
+              }
+            });
+          }
+        }
+      }, {
+        key: "openNotificacion",
+        value: function openNotificacion(modulo) {
+          if (modulo && modulo != '') {
+            this.dismiss();
+            this.navCtrl.navigateRoot(modulo);
           }
         }
       }, {
@@ -809,104 +852,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: function dismiss() {
           this.modalCtrl.dismiss();
         }
-      }, {
-        key: "loadInicio",
-        value: function loadInicio() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var _this = this;
-
-            var loader;
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
-              while (1) {
-                switch (_context4.prev = _context4.next) {
-                  case 0:
-                    //ordenes
-                    this.listadoExamenes = []; //contenido de las llamadas.
-
-                    if (sessionStorage.UsuarioAps) {
-                      //debemos enviar el uspId del titular para que traiga todos los datos
-                      this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
-                    }
-
-                    if (!this.usuarioAps) {
-                      _context4.next = 8;
-                      break;
-                    }
-
-                    _context4.next = 5;
-                    return this.loading.create({
-                      message: 'Obteniendo...<br>Exámenes del usuario',
-                      duration: 20000
-                    });
-
-                  case 5:
-                    loader = _context4.sent;
-                    _context4.next = 8;
-                    return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                        var _this2 = this;
-
-                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                          while (1) {
-                            switch (_context3.prev = _context3.next) {
-                              case 0:
-                                if (!this.utiles.isAppOnDevice()) {
-                                  //llamada web
-                                  this.lab.getExamenes(this.oalaId).subscribe(function (response) {
-                                    _this2.porocesarLista(response, loader);
-                                  });
-                                } else {
-                                  //llamada nativa
-                                  this.lab.getExamenesNative(this.oalaId).then(function (response) {
-                                    _this2.porocesarLista(JSON.parse(response.data), loader);
-                                  });
-                                }
-
-                              case 1:
-                              case "end":
-                                return _context3.stop();
-                            }
-                          }
-                        }, _callee3, this);
-                      }));
-                    });
-
-                  case 8:
-                  case "end":
-                    return _context4.stop();
-                }
-              }
-            }, _callee4, this);
-          }));
-        }
-      }, {
-        key: "porocesarLista",
-        value: function porocesarLista(data, loader) {
-          var listado = data;
-
-          if (listado) {
-            for (var s in listado) {
-              var fecha = moment__WEBPACK_IMPORTED_MODULE_5__(listado[s].FechaRegistro).format('DD-MM-YYYY');
-              listado[s].Fecha = fecha;
-            } //ahora asignamos la variable
-
-
-            this.listadoExamenes = listado;
-
-            if (this.listadoExamenes.length == 0) {
-              this.tiene = false;
-            } //console.log(this.listadoExamenes);
-
-          }
-
-          loader.dismiss();
-        }
       }]);
 
-      return ModalExamenesPage;
+      return ModalAlertasPage;
     }();
 
-    ModalExamenesPage.ctorParameters = function () {
+    ModalAlertasPage.ctorParameters = function () {
       return [{
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
       }, {
@@ -925,21 +876,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
       }, {
         type: _app_services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_4__["ServicioLaboratorio"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
+      }, {
+        type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__["ServicioCitas"]
       }];
     };
 
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('myList', {
-      read: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonList"]
-    })], ModalExamenesPage.prototype, "list", void 0);
-    ModalExamenesPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-      selector: 'app-modal-examenes',
+    ModalAlertasPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-modal-alertas',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
-      /*! raw-loader!./modal-examenes.page.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/modal-examenes/modal-examenes.page.html"))["default"],
+      /*! raw-loader!./modal-alertas.page.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/modal-alertas/modal-alertas.page.html"))["default"],
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
-      /*! ./modal-examenes.page.scss */
-      "./src/app/modal-examenes/modal-examenes.page.scss"))["default"]]
-    })], ModalExamenesPage);
+      /*! ./modal-alertas.page.scss */
+      "./src/app/modal-alertas/modal-alertas.page.scss"))["default"]]
+    })], ModalAlertasPage);
     /***/
   }
 }]);

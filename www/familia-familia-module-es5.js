@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header class=\"back-app\">\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Datos de contacto/avatar</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <!-- lo comentamos hasta tener la nueva funcionalidad -->\r\n<!--   <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" color=\"danger\">\r\n    <ion-fab-button (click)=\"irValidacion()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab> -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando familia\"></app-progress>\r\n  <!-- si no hay registros -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"hayInfo == false\" style=\"padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay familiares para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario.length > 0\" style=\"padding-top: 16px;\">\r\n    <div class=\"ion-padding\">\r\n      <p class=\"texto-item\">\r\n        Para cambiar su avatar pinche en la imágen.<br>\r\n        Para cambiar sus datos de contacto pinche en el nombre.\r\n      </p>\r\n    </div>\r\n    <div *ngFor=\"let item of listadoUsuario\">\r\n      <ion-item lines=\"inset\">\r\n        <!-- poner avatar -->\r\n        <ion-avatar slot=\"start\" (click)=\"irAjustes(item)\">\r\n          <img *ngIf=\"item.UrlImagen != ''\" src={{item.UrlImagen}}>\r\n          <img *ngIf=\"item.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n        </ion-avatar>\r\n        <ion-row style=\"display: block;\" (click)=\"abrirContactabilidad(item)\">\r\n          <h3 class=\"text-avatar\">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</h3>\r\n          <p class=\"subtext-avatar\">{{item.Parentezco.Nombre}}</p>\r\n        </ion-row>\r\n      </ion-item>\r\n    </div>\r\n  </div>\r\n\r\n  \r\n\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header class=\"back-app\">\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Configurar familia</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n  <!-- lo comentamos hasta tener la nueva funcionalidad -->\r\n<!--   <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" color=\"danger\">\r\n    <ion-fab-button (click)=\"irValidacion()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab> -->\r\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando familia\"></app-progress>\r\n  <!-- si no hay registros -->\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"hayInfo == false\" style=\"padding-top: 162px; padding-left: 16px; padding-right: 16px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay familiares para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\r\n  </div>\r\n\r\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario.length > 0\" style=\"padding-top: 16px;\">\r\n    <div class=\"ion-padding\">\r\n      <p class=\"texto-item\" style=\"color: #0000008A; font-size: 14pt;letter-spacing: 0.25pt;line-height: 20pt;\">\r\n        Modifica la imagen del avatar, el telefono o el e-mail de los miembros de tu familia.\r\n      </p>\r\n    </div>\r\n    <div *ngFor=\"let item of listadoUsuario\">\r\n      <ion-item lines=\"inset\">\r\n        <!-- poner avatar -->\r\n        <ion-avatar slot=\"start\" (click)=\"irAjustes(item)\">\r\n          <img *ngIf=\"item.UrlImagen != ''\" src={{item.UrlImagen}}>\r\n          <img *ngIf=\"item.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n        </ion-avatar>\r\n        <ion-row style=\"display: block;\" (click)=\"abrirContactabilidad(item)\">\r\n          <div class=\"text-avatar\">{{item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno}}</div>\r\n          <div class=\"subtext-avatar\">{{item.Parentezco.Nombre}}</div>\r\n        </ion-row>\r\n      </ion-item>\r\n    </div>\r\n    <div *ngIf=\"mostrarAgregarQuitar\">\r\n      <ion-list style=\"margin-top: 24px; padding-top: 0;\">\r\n        <ion-list-header style=\"background-color: #faf9fa;padding-right: 16px;padding-bottom: 16px;\">\r\n          <div style=\"color: #0000008A; font-size: 14pt;letter-spacing: 0.25pt;line-height: 20pt;\">A continuación puedes activar o desactivar a los integrantes de tu familia, solo visualizaras la información clínica de los integrantes activos.</div>\r\n        </ion-list-header>\r\n        <ion-item button class=\"lista-alergias\" detail (click)=\"irQuitarAgregar()\">\r\n          <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">Activar o desactivar integrantes</ion-label>\r\n        </ion-item>\r\n      </ion-list>\r\n    </div>\r\n  </div>\r\n\r\n  \r\n\r\n</ion-content>";
     /***/
   },
 
@@ -220,6 +220,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.usuarioApsFamilia = [];
         this.listadoUsuario = [];
         this.estaCargando = false;
+        this.mostrarAgregarQuitar = false;
       }
 
       _createClass(FamiliaPage, [{
@@ -258,7 +259,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             switch (_context.prev = _context.next) {
                               case 0:
                                 //cargamos mi color
-                                this.miColor = this.utiles.entregaMiColor(); //demas cargas
+                                this.miColor = this.utiles.entregaMiColor();
+
+                                if (this.utiles.tieneFamiliaAceptada() || this.utiles.tieneFamiliaRechazada()) {
+                                  this.mostrarAgregarQuitar = true;
+                                } //demas cargas
+
 
                                 if (sessionStorage.UsuarioAps) {
                                   this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
@@ -316,7 +322,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 loader.dismiss();
                                 this.estaCargando = false;
 
-                              case 8:
+                              case 9:
                               case "end":
                                 return _context.stop();
                             }
@@ -381,6 +387,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           };
           this.navCtrl.navigateRoot(['registro-uno'], navigationExtras);
+        }
+      }, {
+        key: "irQuitarAgregar",
+        value: function irQuitarAgregar() {
+          this.navCtrl.navigateRoot('quitar-familia');
         }
       }, {
         key: "irAjustes",

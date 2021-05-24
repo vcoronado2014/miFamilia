@@ -747,7 +747,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n  <ion-row style=\"display: block;\">\n    <h3 class=\"text-avatar\">{{nombreCompleto}}</h3>\n    <p class=\"subtext-avatar\">{{parentezco}}</p>\n  </ion-row>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("  <ion-row style=\"display: block;\">\n    <div class=\"text-avatar\">{{nombreCompleto}}</div>\n    <div class=\"subtext-avatar\">{{parentezco}}</div>\n  </ion-row>\n\n");
 
 /***/ }),
 
@@ -760,7 +760,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-item [lines]=\"lines\">\n  <!-- poner avatar -->\n  <ion-avatar slot=\"start\">\n    <img *ngIf=\"urlImagen != ''\" src={{urlImagen}}>\n    <img *ngIf=\"urlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n  </ion-avatar>\n  <ion-row style=\"display: block;\">\n    <h3 class=\"text-avatar\">{{nombreCompleto}}</h3>\n    <p class=\"subtext-avatar\">{{parentezco}}</p>\n  </ion-row>\n</ion-item>\n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-item [lines]=\"lines\" [ngClass]=\"{'avatar-padding':style, 'avatar-no-padding': style == false }\" style=\"width: 100%;\">\n  <!-- poner avatar -->\n  <ion-avatar slot=\"start\">\n    <img *ngIf=\"urlImagen != ''\" src={{urlImagen}}>\n    <img *ngIf=\"urlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n  </ion-avatar>\n  <ion-row style=\"display: block; width: 100%;\">\n    <div class=\"text-avatar\">{{nombreCompleto}}</div>\n    <div class=\"subtext-avatar\">{{parentezco}}</div>\n  </ion-row>\n</ion-item>\n\n\n");
 
 /***/ }),
 
@@ -773,7 +773,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\" style=\"font-size: 1.3em;\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>");
+/* harmony default export */ __webpack_exports__["default"] = ("      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual && item.Eventos[0].NombrePrincipal != 'Nada planificado para hoy'\">\n          <label class=\"fecha-card\" style=\"font-size: 1.3em;\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n        <ion-row\n          *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual && item.Eventos[0].NombrePrincipal == 'Nada planificado para hoy'\">\n          <ion-grid style=\"background-color: #d1c4e9;\n                      font-size: 16px;\n                      width: initial;\n                      border-radius: 4px;\n                      height: 40px;\n                      margin: 8px;\n                      margin-top: 0;\n                      margin-bottom: 0;\" id=\"0\">\n            <ion-col>\n              <span><strong>{{item.NumeroDia}} de\n                  {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></span>\n            </ion-col>\n            <ion-col>\n              <span style=\"padding-inline: 16px;color: rgb(0 0 0 / 54%);\">Nada planificado para hoy </span>\n            </ion-col>\n          </ion-grid>\n        \n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>");
 
 /***/ }),
 
@@ -786,7 +786,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h5 class=\"titulo-slide\">{{titulo}}</h5>\r\n<h6 class=\"titulo-slide\">{{subTitulo}}</h6>\r\n<p class=\"subtitulo-slide\">{{contenido}}</p>\r\n<!-- mostrar dependiendo si modulo es distinto de null -->\r\n<!-- <button [hidden]=\"modulo == null\" mat-stroked-button color=\"accent\" (click)=\"openGenerico(modulo)\">Ir...</button> -->");
+/* harmony default export */ __webpack_exports__["default"] = ("<h5 class=\"titulo-slide\">{{titulo}}</h5>\r\n<h6 class=\"titulo-slide\"  *ngIf=\"subTitulo != null\">{{subTitulo}}</h6>\r\n<p class=\"subtitulo-slide\">{{contenido}}</p>\r\n<!-- mostrar dependiendo si modulo es distinto de null -->\r\n<!-- <button [hidden]=\"modulo == null\" mat-stroked-button color=\"accent\" (click)=\"openGenerico(modulo)\">Ir...</button> -->");
 
 /***/ }),
 
@@ -813,6 +813,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"centrado ion-no-padding\">\r\n    <h1>{{titulo}}</h1>\r\n    <p class=\"texto-1 ion-text-left\">{{contenido}}</p>\r\n    <!-- boton volver -->\r\n    <div class=\"row mt-32\">\r\n        <button mat-raised-button color=\"primary\" style=\"width: 100%;\" class=\"boton\" (click)=\"volver()\">VOLVER</button>\r\n    </div>\r\n</div>");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress-minimo/progress-minimo.component.html":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress-minimo/progress-minimo.component.html ***!
+  \*****************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("  <!-- progress bar -->\r\n<div class=\"centrado\" [hidden]=\"!mostrar\">\r\n    <ion-label class=\"titulo-item-2\">{{titulo}}</ion-label>\r\n    <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n</div>");
 
 /***/ }),
 
@@ -849,7 +862,7 @@ const routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
     {
         path: 'home',
-        loadChildren: () => __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule)
+        loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule)
     },
     {
         path: '',
@@ -874,11 +887,11 @@ const routes = [
     },
     {
         path: 'ordenes',
-        loadChildren: () => Promise.all(/*! import() | ordenes-ordenes-module */[__webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null, /*! ./ordenes/ordenes.module */ "./src/app/ordenes/ordenes.module.ts")).then(m => m.OrdenesPageModule)
+        loadChildren: () => Promise.all(/*! import() | ordenes-ordenes-module */[__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null, /*! ./ordenes/ordenes.module */ "./src/app/ordenes/ordenes.module.ts")).then(m => m.OrdenesPageModule)
     },
     {
         path: 'modal-examenes',
-        loadChildren: () => Promise.all(/*! import() | modal-examenes-modal-examenes-module */[__webpack_require__.e("common"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null, /*! ./modal-examenes/modal-examenes.module */ "./src/app/modal-examenes/modal-examenes.module.ts")).then(m => m.ModalExamenesPageModule)
+        loadChildren: () => Promise.all(/*! import() | modal-examenes-modal-examenes-module */[__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null, /*! ./modal-examenes/modal-examenes.module */ "./src/app/modal-examenes/modal-examenes.module.ts")).then(m => m.ModalExamenesPageModule)
     },
     {
         path: 'calendario',
@@ -963,6 +976,10 @@ const routes = [
     {
         path: 'pre-ordenes',
         loadChildren: () => __webpack_require__.e(/*! import() | pre-ordenes-pre-ordenes-module */ "pre-ordenes-pre-ordenes-module").then(__webpack_require__.bind(null, /*! ./pre-ordenes/pre-ordenes.module */ "./src/app/pre-ordenes/pre-ordenes.module.ts")).then(m => m.PreOrdenesPageModule)
+    },
+    {
+        path: 'modal-alertas',
+        loadChildren: () => Promise.all(/*! import() | modal-alertas-modal-alertas-module */[__webpack_require__.e("common"), __webpack_require__.e("modal-alertas-modal-alertas-module")]).then(__webpack_require__.bind(null, /*! ./modal-alertas/modal-alertas.module */ "./src/app/modal-alertas/modal-alertas.module.ts")).then(m => m.ModalAlertasPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -1337,7 +1354,7 @@ AvatarSimpleComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyL2F2YXRhci5jb21wb25lbnQuc2NzcyJ9 */");
+/* harmony default export */ __webpack_exports__["default"] = (".text-avatar {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%;\n}\n\n.avatar-no-padding {\n  --padding-start: 0;\n  width: 100%;\n}\n\n.avatar-padding {\n  --padding-start: 8px;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXIvRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxjb21wb25lbnRzXFxhdmF0YXJcXGF2YXRhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXIvYXZhdGFyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7RUFDQSx1QkFBQTtFQUNBLG1CQUFBO0VBQ0EsV0FBQTtBQ0NKOztBRENBO0VBQ0ksa0JBQUE7RUFDQSxXQUFBO0FDRUo7O0FEQUE7RUFDSSxvQkFBQTtFQUNBLFdBQUE7QUNHSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyL2F2YXRhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50ZXh0LWF2YXRhcntcclxuICAgIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcclxuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG4uYXZhdGFyLW5vLXBhZGRpbmd7XHJcbiAgICAtLXBhZGRpbmctc3RhcnQ6IDA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG4uYXZhdGFyLXBhZGRpbmd7XHJcbiAgICAtLXBhZGRpbmctc3RhcnQ6IDhweDtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcbiIsIi50ZXh0LWF2YXRhciB7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICB3aWR0aDogMTAwJTtcbn1cblxuLmF2YXRhci1uby1wYWRkaW5nIHtcbiAgLS1wYWRkaW5nLXN0YXJ0OiAwO1xuICB3aWR0aDogMTAwJTtcbn1cblxuLmF2YXRhci1wYWRkaW5nIHtcbiAgLS1wYWRkaW5nLXN0YXJ0OiA4cHg7XG4gIHdpZHRoOiAxMDAlO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -1359,8 +1376,11 @@ let AvatarComponent = class AvatarComponent {
     constructor() {
         //inset: solo la parte del texto y no avatar full: todo none: ninguna
         this.lines = 'none';
+        this.style = true;
     }
-    ngOnInit() { }
+    ngOnInit() {
+        console.log(this.style);
+    }
 };
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -1374,6 +1394,9 @@ Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], AvatarComponent.prototype, "lines", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], AvatarComponent.prototype, "style", void 0);
 AvatarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-avatar',
@@ -1512,6 +1535,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./avatar-simple/avatar-simple.component */ "./src/app/components/avatar-simple/avatar-simple.component.ts");
 /* harmony import */ var _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pagina-mensajes/pagina-mensajes.component */ "./src/app/components/pagina-mensajes/pagina-mensajes.component.ts");
 /* harmony import */ var _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./content-slide/content-slide.component */ "./src/app/components/content-slide/content-slide.component.ts");
+/* harmony import */ var _progress_minimo_progress_minimo_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./progress-minimo/progress-minimo.component */ "./src/app/components/progress-minimo/progress-minimo.component.ts");
+
 
 
 
@@ -1539,6 +1564,7 @@ ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"],
             _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"],
             _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"],
+            _progress_minimo_progress_minimo_component__WEBPACK_IMPORTED_MODULE_15__["ProgressMinimoComponent"]
         ],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -1556,6 +1582,7 @@ ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"],
             _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"],
             _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"],
+            _progress_minimo_progress_minimo_component__WEBPACK_IMPORTED_MODULE_15__["ProgressMinimoComponent"]
         ]
     })
 ], ComponentsModule);
@@ -1810,6 +1837,57 @@ PaginaMensajesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./pagina-mensajes.component.scss */ "./src/app/components/pagina-mensajes/pagina-mensajes.component.scss")).default]
     })
 ], PaginaMensajesComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/progress-minimo/progress-minimo.component.scss":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/progress-minimo/progress-minimo.component.scss ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".centrado {\n  text-align: center;\n  width: 100%;\n  height: 20%;\n  /*position: absolute;*/\n  top: 5%;\n  padding-top: 5%;\n  padding-left: 60px;\n  padding-right: 60px;\n}\n\n.titulo-item-2 {\n  font-size: 16px;\n  color: #000000DE;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wcm9ncmVzcy1taW5pbW8vRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxjb21wb25lbnRzXFxwcm9ncmVzcy1taW5pbW9cXHByb2dyZXNzLW1pbmltby5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9wcm9ncmVzcy1taW5pbW8vcHJvZ3Jlc3MtbWluaW1vLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQUE7RUFDQSxXQUFBO0VBQ0EsV0FBQTtFQUNBLHNCQUFBO0VBQ0EsT0FBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtFQUNBLG1CQUFBO0FDQ0o7O0FEQ0E7RUFDSSxlQUFBO0VBQ0EsZ0JBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcHJvZ3Jlc3MtbWluaW1vL3Byb2dyZXNzLW1pbmltby5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jZW50cmFkb3tcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIHdpZHRoOiAxMDAlOyAgICAgICBcclxuICAgIGhlaWdodDogMjAlO1xyXG4gICAgLypwb3NpdGlvbjogYWJzb2x1dGU7Ki9cclxuICAgIHRvcDo1JTtcclxuICAgIHBhZGRpbmctdG9wOiA1JTsgIFxyXG4gICAgcGFkZGluZy1sZWZ0OiA2MHB4O1xyXG4gICAgcGFkZGluZy1yaWdodDogNjBweDsgICAgICAgICBcclxufVxyXG4udGl0dWxvLWl0ZW0tMntcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIGNvbG9yOiAjMDAwMDAwREU7XHJcbn0iLCIuY2VudHJhZG8ge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDIwJTtcbiAgLypwb3NpdGlvbjogYWJzb2x1dGU7Ki9cbiAgdG9wOiA1JTtcbiAgcGFkZGluZy10b3A6IDUlO1xuICBwYWRkaW5nLWxlZnQ6IDYwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDYwcHg7XG59XG5cbi50aXR1bG8taXRlbS0yIHtcbiAgZm9udC1zaXplOiAxNnB4O1xuICBjb2xvcjogIzAwMDAwMERFO1xufSJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/components/progress-minimo/progress-minimo.component.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/components/progress-minimo/progress-minimo.component.ts ***!
+  \*************************************************************************/
+/*! exports provided: ProgressMinimoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProgressMinimoComponent", function() { return ProgressMinimoComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+
+let ProgressMinimoComponent = class ProgressMinimoComponent {
+    constructor() {
+        this.mostrar = false;
+    }
+    ngOnInit() { }
+};
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], ProgressMinimoComponent.prototype, "mostrar", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], ProgressMinimoComponent.prototype, "titulo", void 0);
+ProgressMinimoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-progress-minimo',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./progress-minimo.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress-minimo/progress-minimo.component.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./progress-minimo.component.scss */ "./src/app/components/progress-minimo/progress-minimo.component.scss")).default]
+    })
+], ProgressMinimoComponent);
 
 
 
@@ -3700,6 +3778,31 @@ let ServicioInfoUsuario = class ServicioInfoUsuario {
         this.http.setDataSerializer('json');
         return this.http.post(url, body, {});
     }
+    //antecedentes morbidos y familiares
+    postAntecedentesApi(uspId) {
+        const body = JSON.stringify({ UspId: uspId.toString() });
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AntecedentesApi';
+        let httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        httpHeaders.set('Access-Control-Allow-Origin', '*');
+        httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        httpHeaders.set("Access-Control-Allow-Headers", "*");
+        let options = { headers: httpHeaders };
+        let data = this.httpClient.post(url, body, options);
+        return data;
+    }
+    postAntecedentesNativeApi(uspId) {
+        //realizar la llamada post nativa
+        const headers = new Headers;
+        const body = {
+            "UspId": uspId.toString()
+        };
+        let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AntecedentesApi';
+        this.http.setDataSerializer('json');
+        return this.http.post(url, body, {});
+    }
 };
 ServicioInfoUsuario.ctorParameters = () => [
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__["HTTP"] },
@@ -4912,30 +5015,30 @@ let ServicioUtiles = class ServicioUtiles {
             title: 'Configurar familia',
             visible: true,
             icon: 'settings',
-            src: '#',
+            src: 'familia',
             esSubMenu: false
         };
         arrPages.push(pagUno);
         //ahora los submenus de configurar familia
         //simepre y cuando tenga familia aceptada
-        if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
-            var pagQuitarIntegrantes = {
-                title: 'Desactivar/Activar',
-                visible: true,
-                icon: 'person',
-                src: 'quitar-familia',
-                esSubMenu: true
-            };
-            arrPages.push(pagQuitarIntegrantes);
-        }
-        var pagConfigContacto = {
-            title: 'Datos de contacto/avatar',
-            visible: true,
-            icon: 'share',
-            src: 'familia',
-            esSubMenu: true
-        };
-        arrPages.push(pagConfigContacto);
+        /*         if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
+                    var pagQuitarIntegrantes = {
+                        title: 'Desactivar/Activar',
+                        visible: false,
+                        icon: 'person',
+                        src: 'quitar-familia',
+                        esSubMenu: true
+                    }
+                    arrPages.push(pagQuitarIntegrantes);
+                }
+                var pagConfigContacto = {
+                    title: 'Datos de contacto/avatar',
+                    visible: false,
+                    icon: 'share',
+                    src: 'familia',
+                    esSubMenu: true
+                }
+                arrPages.push(pagConfigContacto); */
         var pagDos = {
             title: 'Términos y condiciones',
             visible: true,
@@ -5766,10 +5869,10 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
-    URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
-    //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
-    //URL_FOTOS: 'http://190.151.14.101:8065/',
+    //API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
+    //URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
+    API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
+    URL_FOTOS: 'http://190.151.14.101:8065/',
     //API_ENDPOINT: 'http://localhost:27563/Api/',
     //API_ENDPOINT: 'http://localhost:1960/Api/',
     //API_ENDPOINT: 'https://10.211.55.5:45456/Api/',

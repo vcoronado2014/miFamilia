@@ -9,6 +9,7 @@ import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'app-detail-usuario',
   templateUrl: './detail-usuario.page.html',
@@ -64,6 +65,15 @@ export class DetailUsuarioPage implements OnInit {
   tituloProgressAlergias = '';
   estaCargandoMorbidos = false;
   tituloProgressMorbidos = '';
+  //para mostrar que no tiene
+  tieneDatosUsuario = false;
+  tieneAlergias = false;
+  tieneMorbidosPersonales = false;
+  tieneMorbidosFamiliares = false;
+  //variables para insertar en local storage
+  arrMedicionesL=[];
+  arrAlergias=[];
+  arrMorbidos=[];
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -737,37 +747,61 @@ export class DetailUsuarioPage implements OnInit {
     this.estaCargandoDatosUsuario = true;
     this.tituloProgressDatosUsuario = 'Buscando datos del paciente';
     await loader.present().then(async () => {
-      if (!this.utiles.isAppOnDevice()) {
-        //llamada web
-        this.info.getIndicadorValorApi(uspId).subscribe((response: any) => {
-          console.log(response);
-          //correcto
-          this.procesarNuevoArregloValoresIndependiente(response, loader);
-        },async error=>{
-          console.log(error.message);
-          this.estaCargandoDatosUsuario = false;
-          this.tituloProgressDatosUsuario = '';
-          loader.dismiss();
-        });
+      //validamos si necesita actualizar
+      if (this.utiles.necesitaActualizarDatosPaciente(uspId) == false){
+        var datos = this.utiles.entregaArregloDatosPaciente(uspId);
+        this.procesarNuevoArregloValoresIndependiente(datos, loader, this.usuario, false);
       }
-      else{
-        //llamada nativa
-        this.info.getIndicadorValorNativeApi(uspId).then((response: any) => {
-          //this.procesarIndicadorValor(JSON.parse(response.data), loader);
-          console.log(JSON.parse(response.data));
-          this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
-        }).catch(async error =>{
-          console.log(error.message);
-          this.estaCargandoDatosUsuario = false;
-          this.tituloProgressDatosUsuario = '';
-          loader.dismiss();
-        });
+      else {
+        if (!this.utiles.isAppOnDevice()) {
+          //llamada web
+          this.info.getIndicadorValorApi(uspId).subscribe((response: any) => {
+            console.log(response);
+            //correcto
+            this.procesarNuevoArregloValoresIndependiente(response, loader, this.usuario, true);
+          }, async error => {
+            console.log(error.message);
+            this.estaCargandoDatosUsuario = false;
+            this.tituloProgressDatosUsuario = '';
+            loader.dismiss();
+          });
+        }
+        else {
+          //llamada nativa
+          this.info.getIndicadorValorNativeApi(uspId).then((response: any) => {
+            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+            console.log(JSON.parse(response.data));
+            this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader, this.usuario, true);
+          }).catch(async error => {
+            console.log(error.message);
+            this.estaCargandoDatosUsuario = false;
+            this.tituloProgressDatosUsuario = '';
+            loader.dismiss();
+          });
 
+        }
       }
+
 
     });
   }
-  async procesarNuevoArregloValoresIndependiente(response, loader) {
+  async procesarNuevoArregloValoresIndependiente(response, loader, usuarioAps, guardaLocalStorage) {
+    //procesamos los datos en el local storage
+    if (guardaLocalStorage) {
+      var entidad = {
+        UsuarioAps: usuarioAps,
+        Mediciones: null,
+      }
+      entidad.Mediciones = response;
+      this.arrMedicionesL = [];
+      if (localStorage.getItem('ANTECEDENTES')){
+        this.arrMedicionesL = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+      }
+      this.arrMedicionesL.push(entidad);
+      localStorage.setItem('ANTECEDENTES', JSON.stringify(this.arrMedicionesL));
+      localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment().format('YYYY-MM-DD HH:mm'));
+    }
+    //fin proceso ********************************
     this.arrMediciones = [];
     this.arrMedicionesParteUno = [];
     this.arrMedicionesParteDos = [];
@@ -909,7 +943,10 @@ export class DetailUsuarioPage implements OnInit {
     //console.log(this.arrMedicionesParteUno);
     //console.log(this.arrMedicionesParteDos);
     this.estaCargandoDatosUsuario = false;
-    this.tituloProgressDatosUsuario = '';    
+    this.tituloProgressDatosUsuario = '';
+    if (this.arrMediciones && this.arrMediciones.length > 0){
+      this.tieneDatosUsuario = true;
+    }    
     loader.dismiss();
   }
   async construirArregloAlergiasIndividual(uspId){
@@ -921,37 +958,58 @@ export class DetailUsuarioPage implements OnInit {
     this.estaCargandoAlergias = true;
     this.tituloProgressAlergias = 'Buscando alergias del paciente';
     await loader.present().then(async () => {
-      if (!this.utiles.isAppOnDevice()) {
-        //llamada web
-        this.info.getAlergiasApi(uspId).subscribe((response: any) => {
-          console.log(response);
-          //correcto
-          this.procesarAlergiasIndividual(response, loader);
-        },async error=>{
-          console.log(error.message);
-          this.tituloProgressAlergias = '';
-          this.estaCargandoAlergias = false;          
-          loader.dismiss();
-        });
+      if (this.utiles.necesitaActualizarAlergiasPacientes(uspId) == false){
+        var datos = this.utiles.entregaArregloAlergiasPaciente(uspId);
+        this.procesarAlergiasIndividual(datos, loader, this.usuario, false);
       }
-      else{
-        //llamada nativa
-        this.info.getAlergiasNativeApi(uspId).then((response: any) => {
-          //this.procesarIndicadorValor(JSON.parse(response.data), loader);
-          console.log(JSON.parse(response.data));
-          this.procesarAlergiasIndividual(JSON.parse(response.data), loader);
-        }).catch(async error =>{
-          console.log(error.message);
-          this.tituloProgressAlergias = '';
-          this.estaCargandoAlergias = false;          
-          loader.dismiss();
-        });
+      else {
+        if (!this.utiles.isAppOnDevice()) {
+          //llamada web
+          this.info.getAlergiasApi(uspId).subscribe((response: any) => {
+            console.log(response);
+            //correcto
+            this.procesarAlergiasIndividual(response, loader, this.usuario, true);
+          }, async error => {
+            console.log(error.message);
+            this.tituloProgressAlergias = '';
+            this.estaCargandoAlergias = false;
+            loader.dismiss();
+          });
+        }
+        else {
+          //llamada nativa
+          this.info.getAlergiasNativeApi(uspId).then((response: any) => {
+            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+            console.log(JSON.parse(response.data));
+            this.procesarAlergiasIndividual(JSON.parse(response.data), loader, this.usuario, true);
+          }).catch(async error => {
+            console.log(error.message);
+            this.tituloProgressAlergias = '';
+            this.estaCargandoAlergias = false;
+            loader.dismiss();
+          });
 
+        }
       }
-
     });
   }
-  async procesarAlergiasIndividual(data, loader) {
+  async procesarAlergiasIndividual(data, loader, usuarioAps, guardaLocalStorage) {
+    //procesamos los datos en el local storage
+    if (guardaLocalStorage) {
+      var entidad = {
+        UsuarioAps: usuarioAps,
+        Alergias: null,
+      }
+      entidad.Alergias = data;
+      this.arrAlergias = [];
+      if (localStorage.getItem('ALERGIAS')){
+        this.arrAlergias = JSON.parse(localStorage.getItem('ALERGIAS'));
+      }
+      this.arrAlergias.push(entidad);
+      localStorage.setItem('ALERGIAS', JSON.stringify(this.arrAlergias));
+      localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment().format('YYYY-MM-DD HH:mm'));
+    }
+    //fin proceso ********************************
     this.alergias = data.AlergiasUsp;
     if (this.alergias) {
       if (this.alergias.length == 1) {
@@ -962,6 +1020,9 @@ export class DetailUsuarioPage implements OnInit {
     }
     this.estaCargandoAlergias = false;
     this.tituloProgressAlergias = '';
+    if (this.alergias && this.alergias.length > 0){
+      this.tieneAlergias = true;
+    }
     loader.dismiss();
   }
   async construirArregloMorbidosIndividual(uspId){
@@ -973,37 +1034,58 @@ export class DetailUsuarioPage implements OnInit {
     this.estaCargandoMorbidos = true;
     this.tituloProgressMorbidos = 'Buscando otros datos del paciente';
     await loader.present().then(async () => {
-      if (!this.utiles.isAppOnDevice()) {
-        //llamada web
-        this.info.postAntecedentesApi(uspId).subscribe((response: any) => {
-          console.log(response);
-          //correcto
-          this.procesarAntecedentesIndividual(response, loader);
-        },error=>{
-          console.log(error.message);
-          this.estaCargandoMorbidos = false;
-          this.tituloProgressMorbidos = '';
-          loader.dismiss();
-        });
+      if (this.utiles.necesitaActualizarMorbidosPacientes(uspId) == false){
+        var datos = this.utiles.entregaArregloMorbidosPaciente(uspId);
+        this.procesarAntecedentesIndividual(datos, loader, null, false);
       }
-      else{
-        //llamada nativa
-        this.info.postAntecedentesNativeApi(uspId).then((response: any) => {
-          //this.procesarIndicadorValor(JSON.parse(response.data), loader);
-          console.log(JSON.parse(response.data));
-          this.procesarAntecedentesIndividual(JSON.parse(response.data), loader);
-        }).catch(error =>{
-          console.log(error.message);
-          this.estaCargandoMorbidos = false;
-          this.tituloProgressMorbidos = '';
-          loader.dismiss();
-        });
+      else {
+        if (!this.utiles.isAppOnDevice()) {
+          //llamada web
+          this.info.postAntecedentesApi(uspId).subscribe((response: any) => {
+            console.log(response);
+            //correcto
+            this.procesarAntecedentesIndividual(response, loader, this.usuario, true);
+          }, error => {
+            console.log(error.message);
+            this.estaCargandoMorbidos = false;
+            this.tituloProgressMorbidos = '';
+            loader.dismiss();
+          });
+        }
+        else {
+          //llamada nativa
+          this.info.postAntecedentesNativeApi(uspId).then((response: any) => {
+            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+            console.log(JSON.parse(response.data));
+            this.procesarAntecedentesIndividual(JSON.parse(response.data), loader, this.usuario, true);
+          }).catch(error => {
+            console.log(error.message);
+            this.estaCargandoMorbidos = false;
+            this.tituloProgressMorbidos = '';
+            loader.dismiss();
+          });
 
+        }
       }
-
     });
   }
-  procesarAntecedentesIndividual(data, loader) {
+  procesarAntecedentesIndividual(data, loader, usuarioAps, guardaLocalStorage) {
+    //procesamos los datos en el local storage
+    if (guardaLocalStorage) {
+      var entidad = {
+        UsuarioAps: usuarioAps,
+        Morbidos: null,
+      }
+      entidad.Morbidos = data;
+      this.arrMorbidos = [];
+      if (localStorage.getItem('MORBIDOS')){
+        this.arrMorbidos = JSON.parse(localStorage.getItem('MORBIDOS'));
+      }
+      this.arrMorbidos.push(entidad);
+      localStorage.setItem('MORBIDOS', JSON.stringify(this.arrMorbidos));
+      localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment().format('YYYY-MM-DD HH:mm'));
+    }
+    //fin proceso ********************************
     this.antecedentes = data;
     console.log(this.antecedentes);
     this.familiares = [];
@@ -1032,7 +1114,13 @@ export class DetailUsuarioPage implements OnInit {
         }
       }
     }
-
+    //if (this.personales.length > 0 || this.familiares.len)
+    if (this.personales && this.personales.length > 0){
+      this.tieneMorbidosPersonales = true;
+    }
+    if (this.familiares && this.familiares.length > 0){
+      this.tieneMorbidosFamiliares = true;
+    }
     this.estaCargandoMorbidos = false;
     this.tituloProgressMorbidos = '';
     loader.dismiss();
