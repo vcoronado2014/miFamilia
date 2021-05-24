@@ -46,7 +46,11 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <div class="subtext-avatar-1" *ngIf="exa.Resultados == null">Fecha de toma {{exa.FechaMuestra}}</div>
+          <div class="subtext-avatar-1" *ngIf="exa.Resultados == null">
+            <div *ngIf="exa.FechaMuestra != '01-01-0001'">
+              Fecha de toma {{exa.FechaMuestra}}
+            </div>
+          </div>
           <div class="subtext-avatar-1" *ngIf="exa.Resultados != null">Fecha resultados {{exa.FechaResultado}}</div>
         </ion-col>
       </ion-row>
