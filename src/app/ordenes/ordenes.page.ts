@@ -235,6 +235,9 @@ export class OrdenesPage implements OnInit {
                     this.listadoOrdenesCompleto[t].Examenes.push(data[s]);
                     this.listadoExamenesCompleto.push(data[s]);
                   }
+                  if (this.listadoExamenesCompleto.length > 0){
+                    this.tiene = true;
+                  }
                   this.listadoExamenesCompletoBackUp = this.listadoExamenesCompleto;
                   this.estaCargando = false;
                   loaderUno.dismiss();
@@ -266,6 +269,9 @@ export class OrdenesPage implements OnInit {
                     data[s].FechaResultado = fechaResultado;
                     this.listadoOrdenesCompleto[t].Examenes.push(data[s]);
                     this.listadoExamenesCompleto.push(data[s]);
+                  }
+                  if (this.listadoExamenesCompleto.length > 0){
+                    this.tiene = true;
                   }
                   this.listadoExamenesCompletoBackUp = this.listadoExamenesCompleto;
                   this.estaCargando = false;
