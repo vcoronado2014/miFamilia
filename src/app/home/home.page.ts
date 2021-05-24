@@ -9,6 +9,7 @@ import { ServicioNotificacionesLocales } from '../../app/services/ServicioNotifi
 import { ServicioNotificaciones } from '../../app/services/ServicioNotificaciones';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
+import { ServicioInfoUsuario } from '../../app/services/ServicioInfoUsuario';
 import { environment } from 'src/environments/environment';
 //modal
 import { ModalAlertasPage } from '../modal-alertas/modal-alertas.page';
@@ -66,6 +67,10 @@ export class HomePage implements OnInit {
   //notificaciones
   notificaciones = [];
   muestraNotificaciones = false;
+  //para generar data
+  arrMediciones=[];
+  arrAlergias=[];
+  arrMorbidos=[];
   constructor(
     public navCtrl: NavController,
     public toast: ToastController,
@@ -80,6 +85,7 @@ export class HomePage implements OnInit {
     public parametrosApp: ServicioParametrosApp,
     public servicioNotLocales: ServicioNotificacionesLocales,
     public servNotificaciones: ServicioNotificaciones,
+    public info: ServicioInfoUsuario
   ) { }
 
   ngOnInit() {
@@ -113,6 +119,136 @@ export class HomePage implements OnInit {
     this.miembrosPorAceptar();
 
   }
+  obtenerDatosUsuarios() {
+      this.arrMediciones = [];
+      var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+      if (arregloUsuarios && arregloUsuarios.length > 0) {
+        arregloUsuarios.forEach(usu => {
+          if (this.utiles.necesitaActualizarDatosPaciente(usu.Id)) {
+            var entidad = {
+              UsuarioAps: usu,
+              Mediciones: null,
+            }
+            if (!this.utiles.isAppOnDevice()) {
+              //llamada web
+              this.info.getIndicadorValorApi(usu.Id).subscribe((response: any) => {
+                console.log(response);
+                entidad.Mediciones = response;
+                this.arrMediciones.push(entidad);
+                localStorage.setItem('ANTECEDENTES', JSON.stringify(this.arrMediciones));
+                localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment().format('YYYY-MM-DD HH:mm'));
+                //correcto
+                //this.procesarNuevoArregloValoresIndependiente(response, loader);
+              }, async error => {
+                console.log(error.message);
+              });
+            }
+            else {
+              //llamada nativa
+              this.info.getIndicadorValorNativeApi(usu.Id).then((response: any) => {
+                //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                console.log(JSON.parse(response.data));
+                entidad.Mediciones = JSON.parse(response.data);
+                this.arrMediciones.push(entidad);
+                localStorage.setItem('ANTECEDENTES', JSON.stringify(this.arrMediciones));
+                localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment().format('YYYY-MM-DD HH:mm'));
+                //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+              }).catch(async error => {
+                console.log(error.message);
+              });
+
+            }
+          }
+        });
+      }
+  }
+  obtenerAlergiasPacientes(){
+      this.arrAlergias = [];
+      var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+      if (arregloUsuarios && arregloUsuarios.length > 0) {
+        arregloUsuarios.forEach(usu => {
+          if (this.utiles.necesitaActualizarAlergiasPacientes(usu.Id)) {
+            var entidad = {
+              UsuarioAps: usu,
+              Alergias: null,
+            }
+            if (!this.utiles.isAppOnDevice()) {
+              //llamada web
+              this.info.getAlergiasApi(usu.Id).subscribe((response: any) => {
+                console.log(response);
+                entidad.Alergias = response;
+                this.arrAlergias.push(entidad);
+                localStorage.setItem('ALERGIAS', JSON.stringify(this.arrAlergias));
+                localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment().format('YYYY-MM-DD HH:mm'));
+                //correcto
+                //this.procesarNuevoArregloValoresIndependiente(response, loader);
+              }, async error => {
+                console.log(error.message);
+              });
+            }
+            else {
+              //llamada nativa
+              this.info.getAlergiasNativeApi(usu.Id).then((response: any) => {
+                //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                console.log(JSON.parse(response.data));
+                entidad.Alergias = JSON.parse(response.data);
+                this.arrAlergias.push(entidad);
+                localStorage.setItem('ALERGIAS', JSON.stringify(this.arrAlergias));
+                localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment().format('YYYY-MM-DD HH:mm'));
+                //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+              }).catch(async error => {
+                console.log(error.message);
+              });
+
+            }
+          }
+        });
+      }
+
+  }
+  obtenerMorbidosPacientes(){
+      this.arrMorbidos = [];
+      var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+      if (arregloUsuarios && arregloUsuarios.length > 0) {
+        arregloUsuarios.forEach(usu => {
+          if (this.utiles.necesitaActualizarMorbidosPacientes(usu.Id)) {
+            var entidad = {
+              UsuarioAps: usu,
+              Morbidos: null,
+            }
+            if (!this.utiles.isAppOnDevice()) {
+              //llamada web
+              this.info.postAntecedentesApi(usu.Id).subscribe((response: any) => {
+                console.log(response);
+                entidad.Morbidos = response;
+                this.arrMorbidos.push(entidad);
+                localStorage.setItem('MORBIDOS', JSON.stringify(this.arrMorbidos));
+                localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment().format('YYYY-MM-DD HH:mm'));
+                //correcto
+                //this.procesarNuevoArregloValoresIndependiente(response, loader);
+              }, async error => {
+                console.log(error.message);
+              });
+            }
+            else {
+              //llamada nativa
+              this.info.postAntecedentesNativeApi(usu.Id).then((response: any) => {
+                //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                console.log(JSON.parse(response.data));
+                entidad.Morbidos = JSON.parse(response.data);
+                this.arrMorbidos.push(entidad);
+                localStorage.setItem('MORBIDOS', JSON.stringify(this.arrMorbidos));
+                localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment().format('YYYY-MM-DD HH:mm'));
+                //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+              }).catch(async error => {
+                console.log(error.message);
+              });
+
+            }
+          }
+        });
+      }
+  }
   miembrosPorAceptar() {
     if (localStorage.getItem('FAMILIA-POR-ACEPTAR')) {
       let arrFam = JSON.parse(localStorage.getItem('FAMILIA-POR-ACEPTAR'));
@@ -128,7 +264,10 @@ export class HomePage implements OnInit {
     //this.miImagen = this.utiles.entregaMiImagen();
     this.miImagen = this.utiles.entregaImagen(this.usuarioAps)
     this.miNombre = this.utiles.entregaMiNombre();
-    //console.log(this.miColor);
+    console.log('will enter home');
+    this.obtenerDatosUsuarios();
+    this.obtenerAlergiasPacientes();
+    this.obtenerMorbidosPacientes();
     //console.log(this.miImagen);
     //console.log(this.miNombre);
   }

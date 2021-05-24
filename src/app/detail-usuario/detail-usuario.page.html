@@ -124,6 +124,9 @@
     </ion-slides>
   
   </ion-grid>
+  <div [hidden]="estaCargandoDatosUsuario">
+    <div class="no-tiene-antecedentes" *ngIf="tieneDatosUsuario == false">No tiene mediciones registradas</div>
+  </div>
 
   <app-progress-minimo [mostrar]="estaCargandoAlergias" [titulo]="tituloProgressAlergias"></app-progress-minimo>
   <ion-list [hidden]="estaCargandoAlergias" style="padding-top: 0;">
@@ -133,23 +136,32 @@
     <ion-item *ngFor="let item of alergias" class ="lista-alergias">
       <ion-label class="ion-text-wrap" style="color:#000000DE;font-size: 16pt;text-transform: capitalize;">{{item.Descripcion.toLowerCase()}}</ion-label>
     </ion-item>
+    <div>
+      <div class="no-tiene-antecedentes" *ngIf="tieneAlergias == false">No tiene alergias registradas</div>
+    </div>
   </ion-list>
 
 
   <app-progress-minimo [mostrar]="estaCargandoMorbidos" [titulo]="tituloProgressMorbidos"></app-progress-minimo>
-  <ion-list [hidden]="estaCargandoMorbidos" style="padding-top: 0;">
-    <ion-list-header *ngIf="personales && personales.length > 0" style="background-color: #FAF9FA;">
+  <ion-list [hidden]="estaCargandoMorbidos" style="padding-top: 0;padding-bottom: 0;">
+    <ion-list-header *ngIf="personales && personales.length >= 0" style="background-color: #FAF9FA;">
       <div style="font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;">Diagnósticos relevantes</div>
     </ion-list-header>
     <ion-item *ngFor="let ante of personales" class ="lista-alergias">
       <ion-label class="ion-text-wrap" style="color:#000000DE;font-size: 16pt;">{{ante.Nombre}}</ion-label>
     </ion-item>
-    <ion-list-header *ngIf="familiares && familiares.length > 0" style="background-color: #FAF9FA;">
+    <div>
+      <div *ngIf="tieneMorbidosPersonales == false" class="no-tiene-antecedentes">No tiene diagnósticos relevantes <br> registrados</div>
+    </div>
+    <ion-list-header *ngIf="familiares && familiares.length >= 0" style="background-color: #FAF9FA;">
       <div style="font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;">Diagnósticos familiares relevantes</div>
     </ion-list-header>
     <ion-item *ngFor="let fam of familiares" class ="lista-alergias">
       <ion-label class="ion-text-wrap" style="color:#000000DE;font-size: 16pt;">{{fam.Nombre}}</ion-label>
     </ion-item>
+    <div>
+      <div *ngIf="tieneMorbidosFamiliares == false" class="no-tiene-antecedentes">No tiene diagnósticos familiares <br> relevantes registrados</div>
+    </div>
   </ion-list>
   
 
