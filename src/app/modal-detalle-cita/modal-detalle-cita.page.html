@@ -50,8 +50,8 @@
         <div *ngIf="farmacos">
         <h3 id="tituloPrescripcion" *ngIf="farmacos.length == 0" margin text-center style="font-size: 1.9rem; padding:7px;">
         </h3>
-        <h3 id="tituloPrescripcion" *ngIf="farmacos.length > 0" margin text-center [ngStyle]="{'background-color': data.Color}"
-          style="color:#fff; font-size: 1.9rem; padding:7px;">{{title}}</h3>
+        <h3 class="ion-padding" id="tituloPrescripcion" *ngIf="farmacos.length > 0" margin text-center [ngStyle]="{'background-color': data.Color}"
+          style="font-family: 'Roboto';font-size: 1.25em;color: #000000DE;letter-spacing: 0.15px;">{{title}}</h3>
         </div>        
         <ion-item  *ngFor='let item of farmacos' class="ion-no-padding ion-no-margin">
           <ion-icon item-start><i class="care-pill pill"></i></ion-icon>
