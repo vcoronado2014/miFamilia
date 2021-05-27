@@ -82,7 +82,7 @@ export class CalendarioPage implements OnInit {
   estaCargando = false;
   tituloLoading = '';
   //para infinity scroll
-  private topLimit: number = 25;
+  private topLimit: number = 50;
   private citasVerticalTodasTop: any = [];
   //para poner la linea en la fecha actual
   fechaActual = '';
