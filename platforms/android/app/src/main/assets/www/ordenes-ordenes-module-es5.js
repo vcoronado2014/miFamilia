@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Ordenes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando exámenes\"></app-progress>\r\n\r\n<ion-card [hidden]=\"estaCargando\" *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <app-avatar [lines]=\"none\" [urlImagen] = \"item.UrlImagen\" \r\n    [nombreCompleto]=\"item.NombreUsuario\" \r\n    [parentezco]=\"item.Parentezco\"></app-avatar>\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>  \r\n<!-- NO HAY ORDENES -->\r\n<div [hidden]=\"estaCargando\" *ngIf=\"tiene == false\" style=\"position: relative; height: 100vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 20px; color:#BDBDBD; text-align: center;width: 100%;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No hay órdenes para mostrar  <br>\r\n    <ion-icon name=\"information-circle\" style=\"font-size: 50px;\"></ion-icon></p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/pre-ordenes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Exámenes</ion-title>\r\n    <ion-buttons *ngIf=\"tiene\" slot=\"end\" (click)=\"modalBusqueda()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"funnel\"></ion-icon>\r\n    </ion-buttons> \r\n    <ion-buttons *ngIf=\"tiene\" slot=\"end\" (click)=\"buscar()\" style=\"padding-right: 16px;\">\r\n      <ion-icon class=\"fcw\" slot=\"icon-only\" name=\"search\"></ion-icon>\r\n    </ion-buttons> \r\n  </ion-toolbar>\r\n  <ion-toolbar color=\"primary\" *ngIf=\"mostrarBusqueda\">\r\n    <ion-searchbar placeholder=\"Nombre examen\" (ionInput)=\"filterList($event)\"></ion-searchbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"back-app\">\r\n<!--SI HAY ORDENES -->\r\n<app-progress [mostrar]=\"estaCargando\" titulo=\"Cargando exámenes\"></app-progress>\r\n<div [hidden]=\"estaCargando\" style=\"padding-top: 24px;\">\r\n  <ion-item lines=\"none\" style=\"--background:#FAF9FA; padding-bottom: 24px;\">\r\n    <!-- poner avatar -->\r\n    <ion-avatar slot=\"start\">\r\n      <img *ngIf=\"usuarioAps.UrlImagen != ''\" src={{usuarioAps.UrlImagen}}>\r\n      <img *ngIf=\"usuarioAps.UrlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\r\n    </ion-avatar>\r\n    <ion-row style=\"display: block;\">\r\n      <div class=\"text-avatar\">{{usuarioAps.Nombres + ' ' + usuarioAps.ApellidoPaterno + ' ' + usuarioAps.ApellidoMaterno}}</div>\r\n      <div class=\"subtext-avatar\">{{usuarioAps.Parentezco.Nombre}}</div>\r\n    </ion-row>\r\n  </ion-item>\r\n</div>\r\n<!-- nueva implementación -->\r\n<div [hidden]=\"estaCargando\">\r\n  <ion-item lines=\"full\"  *ngFor=\"let exa of listadoExamenesCompleto\" (click)=\"ordenSelectedCompleto(exa)\">\r\n    <ion-grid>\r\n      <ion-row style=\" width: 100%;\">\r\n        <ion-col size=\"8\">\r\n          <div class=\"text-avatar-1\">{{exa.NombreExamen}}</div>\r\n        </ion-col>\r\n        <ion-col size=\"4\">\r\n          <div class=\"text-solicitud\" style=\"float: right;\">{{exa.FechaSolicitud}}</div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"subtext-avatar-1\" *ngIf=\"exa.Resultados == null\">\r\n            <div *ngIf=\"exa.FechaMuestra != '01-01-0001'\">\r\n              Fecha de toma {{exa.FechaMuestra}}\r\n            </div>\r\n          </div>\r\n          <div class=\"subtext-avatar-1\" *ngIf=\"exa.Resultados != null\">Fecha resultados {{exa.FechaResultado}}</div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n</ion-item>\r\n</div>\r\n\r\n\r\n<!-- <ion-card [hidden]=\"estaCargando\" *ngFor=\"let item of listadoOrdenes\" (click)=\"ordenSelected(item)\">\r\n  <ion-card-content>\r\n    <app-avatar [lines]=\"none\" [urlImagen] = \"item.UrlImagen\" \r\n    [nombreCompleto]=\"item.NombreUsuario\" \r\n    [parentezco]=\"item.Parentezco\"></app-avatar>\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">N° de órden: <strong>{{ item.Id }}</strong></ion-label>\r\n          </ion-col>\r\n          <ion-col>\r\n            <ion-label class=\"ion-text-wrap\">Estado: <strong>{{ item.Estado }}</strong></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"none\">\r\n      <ion-badge color=\"primary\" slot=\"end\">{{ item.Fecha }}</ion-badge>\r\n    </ion-item>\r\n  </ion-card-content>\r\n</ion-card>   -->\r\n<!-- NO HAY ORDENES -->\r\n<div [hidden]=\"estaCargando\" *ngIf=\"tiene == false\" style=\"position: relative; height: 30vh;\">\r\n  <div style=\"position: absolute; display: table; height: 100%; font-size: 16pt; color:#0000008A; text-align: center;width: 100%;letter-spacing: 0.5pt;\">\r\n    <p style=\"display: table-cell; vertical-align: middle\">No tiene exámenes  <br>registrados\r\n    </p>\r\n  </div>\r\n</div>\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -129,7 +129,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL29yZGVuZXMvb3JkZW5lcy5wYWdlLnNjc3MifQ== */";
+    __webpack_exports__["default"] = ".text-avatar-1 {\n  color: #000000DE;\n  font-size: 16pt;\n  letter-spacing: 0.5pt;\n  margin-top: 12px;\n}\n\n.subtext-avatar-1 {\n  color: #00000099;\n  font-size: 14pt;\n  letter-spacing: 0.25pt;\n  margin-bottom: 12px;\n}\n\n.text-solicitud {\n  color: #000000DE;\n  font-size: 12pt;\n  letter-spacing: 0.4pt;\n  margin-top: 12px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvb3JkZW5lcy9GOlxcYXBwX21pZmFtaWxpYV9naXRcXG1pRmFtaWxpYV9wcmUvc3JjXFxhcHBcXG9yZGVuZXNcXG9yZGVuZXMucGFnZS5zY3NzIiwic3JjL2FwcC9vcmRlbmVzL29yZGVuZXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7RUFDQSxlQUFBO0VBQ0EscUJBQUE7RUFDQSxnQkFBQTtBQ0NKOztBRENBO0VBQ0ksZ0JBQUE7RUFDQSxlQUFBO0VBQ0Esc0JBQUE7RUFDQSxtQkFBQTtBQ0VKOztBREFBO0VBQ0ksZ0JBQUE7RUFDQSxlQUFBO0VBQ0EscUJBQUE7RUFDQSxnQkFBQTtBQ0dKIiwiZmlsZSI6InNyYy9hcHAvb3JkZW5lcy9vcmRlbmVzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50ZXh0LWF2YXRhci0xe1xyXG4gICAgY29sb3I6IzAwMDAwMERFO1xyXG4gICAgZm9udC1zaXplOiAxNnB0O1xyXG4gICAgbGV0dGVyLXNwYWNpbmc6IDAuNXB0O1xyXG4gICAgbWFyZ2luLXRvcDogMTJweDtcclxufVxyXG4uc3VidGV4dC1hdmF0YXItMXtcclxuICAgIGNvbG9yOiMwMDAwMDA5OTtcclxuICAgIGZvbnQtc2l6ZTogMTRwdDtcclxuICAgIGxldHRlci1zcGFjaW5nOiAwLjI1cHQ7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMnB4O1xyXG59XHJcbi50ZXh0LXNvbGljaXR1ZHtcclxuICAgIGNvbG9yOiMwMDAwMDBERTtcclxuICAgIGZvbnQtc2l6ZTogMTJwdDtcclxuICAgIGxldHRlci1zcGFjaW5nOiAwLjRwdDtcclxuICAgIG1hcmdpbi10b3A6IDEycHg7XHJcbn0iLCIudGV4dC1hdmF0YXItMSB7XG4gIGNvbG9yOiAjMDAwMDAwREU7XG4gIGZvbnQtc2l6ZTogMTZwdDtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuNXB0O1xuICBtYXJnaW4tdG9wOiAxMnB4O1xufVxuXG4uc3VidGV4dC1hdmF0YXItMSB7XG4gIGNvbG9yOiAjMDAwMDAwOTk7XG4gIGZvbnQtc2l6ZTogMTRwdDtcbiAgbGV0dGVyLXNwYWNpbmc6IDAuMjVwdDtcbiAgbWFyZ2luLWJvdHRvbTogMTJweDtcbn1cblxuLnRleHQtc29saWNpdHVkIHtcbiAgY29sb3I6ICMwMDAwMDBERTtcbiAgZm9udC1zaXplOiAxMnB0O1xuICBsZXR0ZXItc3BhY2luZzogMC40cHQ7XG4gIG1hcmdpbi10b3A6IDEycHg7XG59Il19 */";
     /***/
   },
 
@@ -209,14 +209,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _modal_busqueda_modal_busqueda_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ../modal-busqueda/modal-busqueda.page */
+    "./src/app/modal-busqueda/modal-busqueda.page.ts");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__); //parametros
+    var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__); //parametros
     //SERVICIOS
+    //modal
     //modal
     //moment
 
@@ -241,38 +248,163 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.textColor = '#FFFFFF'; //tiene registros
 
         this.tiene = true;
-        this.estaCargando = false;
-      }
+        this.estaCargando = false; //nueva busqueda
+
+        this.listadoOrdenesCompleto = [];
+        this.listadoOrdenesCompletoBackup = [];
+        this.listadoExamenesCompleto = [];
+        this.listadoExamenesCompletoBackUp = [];
+        this.lineAvatar = 'none';
+        this.mostrarBusqueda = false;
+      } //var arrPresiones = this.presiones.sort((a: any, b: any) => { return this.getTime(moment(b.FechaPresion).toDate()) - this.getTime(moment(a.FechaPresion).toDate()) });
+
 
       _createClass(OrdenesPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
           var _this = this;
 
-          moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+          moment__WEBPACK_IMPORTED_MODULE_10__["locale"]('es');
           this.activatedRoute.queryParams.subscribe(function (params) {
             if (params && params.usuario) {
               _this.usuarioAps = JSON.parse(params.usuario); //console.log(this.usuarioAps);
             }
-          });
-          /*     if (sessionStorage.getItem("RSS_ID")){
-                if (this.parametrosApp.USA_LOG_MODULOS()){
-                  this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), 'EXAMENES');
-                }
-              } */
+          }); //this.loadInicio();
 
-          this.loadInicio();
+          this.loadInicioCompleto();
+        }
+      }, {
+        key: "filterList",
+        value: function filterList(event) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var searchTerm;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    console.log(event.srcElement.value);
+                    this.listadoExamenesCompleto = this.listadoExamenesCompletoBackUp; //this.listadoOrdenesCompleto = this.listadoOrdenesCompletoBackup;
+
+                    searchTerm = event.srcElement.value;
+
+                    if (searchTerm) {
+                      _context.next = 5;
+                      break;
+                    }
+
+                    return _context.abrupt("return");
+
+                  case 5:
+                    this.listadoExamenesCompleto = this.listadoExamenesCompleto.filter(function (examen) {
+                      if (examen.NombreExamen && searchTerm) {
+                        return examen.NombreExamen.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+                      }
+                    });
+
+                  case 6:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
+      }, {
+        key: "buscar",
+        value: function buscar() {
+          //this.listadoOrdenesCompleto = this.listadoOrdenesCompletoBackup;
+          this.listadoExamenesCompleto = this.listadoExamenesCompletoBackUp;
+
+          if (this.mostrarBusqueda == false) {
+            this.mostrarBusqueda = true;
+          } else {
+            this.mostrarBusqueda = false;
+          }
+        }
+      }, {
+        key: "loadInicioCompleto",
+        value: function loadInicioCompleto() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            var _this2 = this;
+
+            var loader;
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    this.listadoOrdenesCompleto = [];
+
+                    if (!this.usuarioAps) {
+                      _context3.next = 8;
+                      break;
+                    }
+
+                    this.estaCargando = true;
+                    _context3.next = 5;
+                    return this.loading.create({
+                      cssClass: 'loading-vacio',
+                      showBackdrop: false,
+                      spinner: null
+                    });
+
+                  case 5:
+                    loader = _context3.sent;
+                    _context3.next = 8;
+                    return loader.present().then(function () {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                        var _this3 = this;
+
+                        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                          while (1) {
+                            switch (_context2.prev = _context2.next) {
+                              case 0:
+                                if (!this.utiles.isAppOnDevice()) {
+                                  //llamada web
+                                  this.lab.getOrdenes(this.usuarioAps.Id).subscribe(function (response) {
+                                    _this3.porocesarListaCompleto(response, loader);
+                                  }, function (error) {
+                                    console.log(error.message);
+                                    _this3.estaCargando = false;
+                                    loader.dismiss();
+                                  });
+                                } else {
+                                  //llamada nativa
+                                  this.lab.getOrdenesNative(this.usuarioAps.Id).then(function (response) {
+                                    _this3.porocesarListaCompleto(JSON.parse(response.data), loader);
+                                  })["catch"](function (error) {
+                                    console.log(error.message);
+                                    _this3.estaCargando = false;
+                                    loader.dismiss();
+                                  });
+                                }
+
+                              case 1:
+                              case "end":
+                                return _context2.stop();
+                            }
+                          }
+                        }, _callee2, this);
+                      }));
+                    });
+
+                  case 8:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, this);
+          }));
         }
       }, {
         key: "loadInicio",
         value: function loadInicio() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var _this2 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            var _this4 = this;
 
             var loader;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
-                switch (_context2.prev = _context2.next) {
+                switch (_context5.prev = _context5.next) {
                   case 0:
                     //mi color
                     //this.miColor = this.utiles.entregaMiColor();
@@ -280,13 +412,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     this.listadoOrdenes = [];
 
                     if (!this.usuarioAps) {
-                      _context2.next = 9;
+                      _context5.next = 9;
                       break;
                     }
 
                     this.miColor = this.utiles.entregaColor(this.usuarioAps);
                     this.estaCargando = true;
-                    _context2.next = 6;
+                    _context5.next = 6;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
@@ -294,43 +426,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 6:
-                    loader = _context2.sent;
-                    _context2.next = 9;
+                    loader = _context5.sent;
+                    _context5.next = 9;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                        var _this3 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                        var _this5 = this;
 
-                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                        return regeneratorRuntime.wrap(function _callee4$(_context4) {
                           while (1) {
-                            switch (_context.prev = _context.next) {
+                            switch (_context4.prev = _context4.next) {
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.lab.getOrdenes(this.usuarioAps.Id).subscribe(function (response) {
-                                    _this3.porocesarLista(response, loader);
+                                    _this5.porocesarLista(response, loader);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.lab.getOrdenesNative(this.usuarioAps.Id).then(function (response) {
-                                    _this3.porocesarLista(JSON.parse(response.data), loader);
+                                    _this5.porocesarLista(JSON.parse(response.data), loader);
                                   });
                                 }
 
                               case 1:
                               case "end":
-                                return _context.stop();
+                                return _context4.stop();
                             }
                           }
-                        }, _callee, this);
+                        }, _callee4, this);
                       }));
                     });
 
                   case 9:
                   case "end":
-                    return _context2.stop();
+                    return _context5.stop();
                 }
               }
-            }, _callee2, this);
+            }, _callee5, this);
           }));
         }
       }, {
@@ -340,7 +472,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (listado) {
             for (var s in listado) {
-              var fecha = moment__WEBPACK_IMPORTED_MODULE_9__(listado[s].FechaRegistro).format('DD-MM-YYYY');
+              var fecha = moment__WEBPACK_IMPORTED_MODULE_10__(listado[s].FechaRegistro).format('DD-MM-YYYY');
               listado[s].Fecha = fecha;
               listado[s].UrlImagen = this.usuarioAps.UrlImagen;
               listado[s].Parentezco = this.usuarioAps.Parentezco.Nombre;
@@ -359,15 +491,231 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.estaCargando = false;
         }
       }, {
+        key: "porocesarListaCompleto",
+        value: function porocesarListaCompleto(data, loader) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+            var _this6 = this;
+
+            var listado, s, fecha, entidad, _loop, t;
+
+            return regeneratorRuntime.wrap(function _callee7$(_context8) {
+              while (1) {
+                switch (_context8.prev = _context8.next) {
+                  case 0:
+                    listado = data;
+
+                    if (!listado) {
+                      _context8.next = 20;
+                      break;
+                    }
+
+                    for (s in listado) {
+                      fecha = moment__WEBPACK_IMPORTED_MODULE_10__(listado[s].FechaRegistro).format('DD-MM-YYYY');
+                      listado[s].Fecha = fecha;
+                      listado[s].UrlImagen = this.usuarioAps.UrlImagen;
+                      listado[s].Parentezco = this.usuarioAps.Parentezco.Nombre;
+                      entidad = {
+                        Estado: listado[s].Estado,
+                        Fecha: fecha,
+                        Id: listado[s].Id,
+                        IdEstado: listado[s].IdEstado,
+                        UrlImagen: this.usuarioAps.UrlImagen,
+                        Parentezco: this.usuarioAps.Parentezco.Nombre,
+                        NombreUsuario: listado[s].NombreUsuario,
+                        UspId: listado[s].UspId,
+                        Examenes: []
+                      };
+                      this.listadoOrdenesCompleto.push(entidad);
+                    } //vamos a filtrar los resultados de acuerdo a la consulta
+
+
+                    this.listadoOrdenesCompleto = this.listadoOrdenesCompleto.filter(function (p) {
+                      return p.UspId == _this6.usuarioAps.Id;
+                    });
+
+                    if (this.listadoOrdenesCompleto.length == 0) {
+                      this.tiene = false;
+                    } //puede que traiga un elemento
+
+
+                    if (this.listadoOrdenesCompleto && this.listadoOrdenesCompleto.length == 1) {
+                      if (this.listadoOrdenesCompleto[0].Estado == "No hay Información") {
+                        this.tiene = false;
+                      }
+                    }
+
+                    this.estaCargando = false;
+                    loader.dismiss(); //aca hacer foreach para traer los examenes
+
+                    if (!(this.listadoOrdenesCompleto && this.listadoOrdenesCompleto.length > 0)) {
+                      _context8.next = 16;
+                      break;
+                    }
+
+                    _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop() {
+                      var loaderUno;
+                      return regeneratorRuntime.wrap(function _loop$(_context7) {
+                        while (1) {
+                          switch (_context7.prev = _context7.next) {
+                            case 0:
+                              _context7.next = 2;
+                              return _this6.loading.create({
+                                cssClass: 'loading-vacio',
+                                showBackdrop: false,
+                                spinner: null
+                              });
+
+                            case 2:
+                              loaderUno = _context7.sent;
+                              _this6.estaCargando = true;
+                              _context7.next = 6;
+                              return loaderUno.present().then(function () {
+                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                                  var _this7 = this;
+
+                                  return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                                    while (1) {
+                                      switch (_context6.prev = _context6.next) {
+                                        case 0:
+                                          if (!this.utiles.isAppOnDevice()) {
+                                            //llamada web
+                                            this.lab.getExamenes(this.listadoOrdenesCompleto[t].Id).subscribe(function (response) {
+                                              //this.porocesarLista(response, loader);
+                                              var data = response;
+
+                                              if (data) {
+                                                for (var s in data) {
+                                                  var _fecha = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaRegistro).format('DD-MM-YYYY');
+
+                                                  var fechaMuestra = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaMuestra).format('DD-MM-YYYY');
+                                                  var fechaSolicitud = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaSolicitud).format('DD-MM-YYYY');
+                                                  var fechaResultado = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaResultado).format('DD-MM-YYYY');
+                                                  data[s].Fecha = _fecha;
+                                                  data[s].FechaMuestra = fechaMuestra;
+                                                  data[s].FechaSolicitud = fechaSolicitud;
+                                                  data[s].FechaResultado = fechaResultado;
+
+                                                  _this7.listadoOrdenesCompleto[t].Examenes.push(data[s]);
+
+                                                  _this7.listadoExamenesCompleto.push(data[s]);
+                                                }
+
+                                                if (_this7.listadoExamenesCompleto.length > 0) {
+                                                  _this7.tiene = true;
+                                                }
+
+                                                _this7.listadoExamenesCompletoBackUp = _this7.listadoExamenesCompleto;
+                                                _this7.estaCargando = false;
+                                                loaderUno.dismiss();
+                                              } else {
+                                                _this7.estaCargando = false;
+                                                loaderUno.dismiss();
+                                              }
+                                            }, function (error) {
+                                              console.log(error.message);
+                                              _this7.estaCargando = false;
+                                              loaderUno.dismiss();
+                                            });
+                                          } else {
+                                            //llamada nativa
+                                            this.lab.getExamenesNative(this.listadoOrdenesCompleto[t].Id).then(function (response) {
+                                              var data = JSON.parse(response.data);
+
+                                              if (data) {
+                                                for (var s in data) {
+                                                  var _fecha2 = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaRegistro).format('DD-MM-YYYY');
+
+                                                  var fechaMuestra = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaMuestra).format('DD-MM-YYYY');
+                                                  var fechaSolicitud = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaSolicitud).format('DD-MM-YYYY');
+                                                  var fechaResultado = moment__WEBPACK_IMPORTED_MODULE_10__(data[s].FechaResultado).format('DD-MM-YYYY');
+                                                  data[s].Fecha = _fecha2;
+                                                  data[s].FechaMuestra = fechaMuestra;
+                                                  data[s].FechaSolicitud = fechaSolicitud;
+                                                  data[s].FechaResultado = fechaResultado;
+
+                                                  _this7.listadoOrdenesCompleto[t].Examenes.push(data[s]);
+
+                                                  _this7.listadoExamenesCompleto.push(data[s]);
+                                                }
+
+                                                if (_this7.listadoExamenesCompleto.length > 0) {
+                                                  _this7.tiene = true;
+                                                }
+
+                                                _this7.listadoExamenesCompletoBackUp = _this7.listadoExamenesCompleto;
+                                                _this7.estaCargando = false;
+                                                loaderUno.dismiss();
+                                              } else {
+                                                _this7.estaCargando = false;
+                                                loaderUno.dismiss();
+                                              }
+                                            })["catch"](function (error) {
+                                              console.log(error.message);
+                                              _this7.estaCargando = false;
+                                              loaderUno.dismiss();
+                                            });
+                                          }
+
+                                        case 1:
+                                        case "end":
+                                          return _context6.stop();
+                                      }
+                                    }
+                                  }, _callee6, this);
+                                }));
+                              });
+
+                            case 6:
+                            case "end":
+                              return _context7.stop();
+                          }
+                        }
+                      }, _loop);
+                    });
+                    _context8.t0 = regeneratorRuntime.keys(this.listadoOrdenesCompleto);
+
+                  case 11:
+                    if ((_context8.t1 = _context8.t0()).done) {
+                      _context8.next = 16;
+                      break;
+                    }
+
+                    t = _context8.t1.value;
+                    return _context8.delegateYield(_loop(), "t2", 14);
+
+                  case 14:
+                    _context8.next = 11;
+                    break;
+
+                  case 16:
+                    /////console.log(this.listadoOrdenesCompleto);
+                    this.listadoOrdenesCompletoBackup = this.listadoOrdenesCompleto;
+                    console.log(this.listadoOrdenesCompletoBackup);
+                    _context8.next = 22;
+                    break;
+
+                  case 20:
+                    this.estaCargando = false;
+                    loader.dismiss();
+
+                  case 22:
+                  case "end":
+                    return _context8.stop();
+                }
+              }
+            }, _callee7, this);
+          }));
+        }
+      }, {
         key: "ordenSelected",
         value: function ordenSelected(item) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
             var modal;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return regeneratorRuntime.wrap(function _callee8$(_context9) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context9.prev = _context9.next) {
                   case 0:
-                    _context3.next = 2;
+                    _context9.next = 2;
                     return this.modalCtrl.create({
                       component: _modal_examenes_modal_examenes_page__WEBPACK_IMPORTED_MODULE_8__["ModalExamenesPage"],
                       componentProps: {
@@ -376,19 +724,58 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 2:
-                    modal = _context3.sent;
-                    _context3.next = 5;
+                    modal = _context9.sent;
+                    _context9.next = 5;
                     return modal.present();
 
                   case 5:
-                    return _context3.abrupt("return", _context3.sent);
+                    return _context9.abrupt("return", _context9.sent);
 
                   case 6:
                   case "end":
-                    return _context3.stop();
+                    return _context9.stop();
                 }
               }
-            }, _callee3, this);
+            }, _callee8, this);
+          }));
+        }
+      }, {
+        key: "ordenSelectedCompleto",
+        value: function ordenSelectedCompleto(item) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+            var navigationExtras;
+            return regeneratorRuntime.wrap(function _callee9$(_context10) {
+              while (1) {
+                switch (_context10.prev = _context10.next) {
+                  case 0:
+                    /*     const modal = await this.modalCtrl.create(
+                          {
+                            component: ModalExamenesPage,
+                            componentProps: {
+                              'orden': JSON.stringify(item)
+                            }
+                          }
+                        );
+                        return await modal.present(); */
+                    console.log(item);
+
+                    if (item) {
+                      navigationExtras = {
+                        queryParams: {
+                          resultados: JSON.stringify(item.Resultados),
+                          nombreExamen: item.NombreExamen,
+                          usuario: JSON.stringify(this.usuarioAps)
+                        }
+                      };
+                      this.navCtrl.navigateRoot(['resultados'], navigationExtras);
+                    }
+
+                  case 2:
+                  case "end":
+                    return _context10.stop();
+                }
+              }
+            }, _callee9, this);
           }));
         }
       }, {
@@ -396,6 +783,109 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function logout() {
           this.acceso.logout();
           this.navCtrl.navigateRoot('login');
+        }
+      }, {
+        key: "obtenerFiltro",
+        value: function obtenerFiltro(data) {
+          var filtro = '';
+
+          if (data && data.length > 0) {
+            for (var s in data) {
+              if (data[s].Valor == true) {
+                filtro = data[s].Nombre.toUpperCase();
+              }
+            }
+          }
+
+          return filtro;
+        }
+      }, {
+        key: "getTime",
+        value: function getTime(date) {
+          return date != null ? new Date(date).getTime() : 0;
+        }
+      }, {
+        key: "ordenar",
+        value: function ordenar(nombreFiltro) {
+          var _this8 = this;
+
+          //arrPeso.sort((a: any, b: any) => { return this.getTime(moment(b.Fecha).toDate()) - this.getTime(moment(a.Fecha).toDate()) });
+          if (nombreFiltro.toUpperCase() == 'FECHA DE SOLICITUD') {
+            this.listadoExamenesCompleto.sort(function (a, b) {
+              return _this8.getTime(moment__WEBPACK_IMPORTED_MODULE_10__(_this8.transformDate(b.FechaSolicitud)).toDate()) - _this8.getTime(moment__WEBPACK_IMPORTED_MODULE_10__(_this8.transformDate(a.FechaSolicitud)).toDate());
+            });
+          }
+
+          if (nombreFiltro.toUpperCase() == 'FECHA DE TOMA DE MUESTRA') {
+            this.listadoExamenesCompleto.sort(function (a, b) {
+              return _this8.getTime(moment__WEBPACK_IMPORTED_MODULE_10__(_this8.transformDate(b.FechaMuestra)).toDate()) - _this8.getTime(moment__WEBPACK_IMPORTED_MODULE_10__(_this8.transformDate(a.FechaMuestra)).toDate());
+            });
+          }
+
+          if (nombreFiltro.toUpperCase() == 'FECHA DE RESULTADOS') {
+            this.listadoExamenesCompleto.sort(function (a, b) {
+              return _this8.getTime(moment__WEBPACK_IMPORTED_MODULE_10__(_this8.transformDate(b.FechaResultado)).toDate()) - _this8.getTime(moment__WEBPACK_IMPORTED_MODULE_10__(_this8.transformDate(a.FechaResultado)).toDate());
+            });
+          }
+        } //para abrir el modal de busqueda
+
+      }, {
+        key: "modalBusqueda",
+        value: function modalBusqueda() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            var _this9 = this;
+
+            var modal;
+            return regeneratorRuntime.wrap(function _callee10$(_context11) {
+              while (1) {
+                switch (_context11.prev = _context11.next) {
+                  case 0:
+                    _context11.next = 2;
+                    return this.modalCtrl.create({
+                      component: _modal_busqueda_modal_busqueda_page__WEBPACK_IMPORTED_MODULE_9__["ModalBusquedaPage"],
+                      componentProps: {
+                        'opciones': JSON.stringify(this.listadoExamenesCompletoBackUp)
+                      }
+                    });
+
+                  case 2:
+                    modal = _context11.sent;
+                    modal.onDidDismiss().then(function (data) {
+                      if (data.data && data.data != undefined) {
+                        //aca filtrar
+                        console.log(data);
+
+                        var filtro = _this9.obtenerFiltro(data.data.data);
+
+                        _this9.ordenar(filtro);
+                      }
+                    });
+                    _context11.next = 6;
+                    return modal.present();
+
+                  case 6:
+                    return _context11.abrupt("return", _context11.sent);
+
+                  case 7:
+                  case "end":
+                    return _context11.stop();
+                }
+              }
+            }, _callee10, this);
+          }));
+        }
+      }, {
+        key: "transformDate",
+        value: function transformDate(dateString) {
+          //formato DD-MM-YYYY
+          var retorno = "";
+          var partes = dateString.split("-");
+
+          if (partes && partes.length == 3) {
+            retorno = partes[2] + '-' + partes[1] + '-' + partes[0];
+          }
+
+          return retorno;
         }
       }]);
 

@@ -740,7 +740,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | ordenes-ordenes-module */
-        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
         /*! ./ordenes/ordenes.module */
         "./src/app/ordenes/ordenes.module.ts")).then(function (m) {
           return m.OrdenesPageModule;
@@ -997,6 +997,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /*! ./modal-alertas/modal-alertas.module */
         "./src/app/modal-alertas/modal-alertas.module.ts")).then(function (m) {
           return m.ModalAlertasPageModule;
+        });
+      }
+    }, {
+      path: 'resultados',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | resultados-resultados-module */
+        "resultados-resultados-module").then(__webpack_require__.bind(null,
+        /*! ./resultados/resultados.module */
+        "./src/app/resultados/resultados.module.ts")).then(function (m) {
+          return m.ResultadosPageModule;
+        });
+      }
+    }, {
+      path: 'modal-busqueda',
+      loadChildren: function loadChildren() {
+        return Promise.all(
+        /*! import() | modal-busqueda-modal-busqueda-module */
+        [__webpack_require__.e("common"), __webpack_require__.e("modal-busqueda-modal-busqueda-module")]).then(__webpack_require__.bind(null,
+        /*! ./modal-busqueda/modal-busqueda.module */
+        "./src/app/modal-busqueda/modal-busqueda.module.ts")).then(function (m) {
+          return m.ModalBusquedaPageModule;
         });
       }
     }];
@@ -7773,6 +7795,173 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }, _callee5, this);
           }));
         }
+      }, {
+        key: "necesitaActualizarDatosPaciente",
+        value: function necesitaActualizarDatosPaciente(uspId) {
+          var retorno = true;
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+
+          if (localStorage.getItem('ANTECEDENTES')) {
+            //tiene antecedentes, pero puede que no tenga antecddentes el usuario aps, en este caso hay que acrualizar
+            var tiene = false;
+            var antecedentes = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+
+            if (antecedentes && antecedentes.length > 0) {
+              var arrUsuarioTiene = antecedentes.filter(function (p) {
+                return p.UsuarioAps.Id == uspId;
+              });
+
+              if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+                tiene = true;
+              }
+            }
+
+            if (tiene == false) {
+              retorno = true;
+            } else {
+              if (localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES')) {
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES'));
+                var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+
+                if (diferencia < 1) {
+                  retorno = false;
+                }
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "necesitaActualizarAlergiasPacientes",
+        value: function necesitaActualizarAlergiasPacientes(uspId) {
+          var retorno = true;
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var tiene = false;
+          var alergias = JSON.parse(localStorage.getItem('ALERGIAS'));
+
+          if (alergias && alergias.length > 0) {
+            var arrUsuarioTiene = alergias.filter(function (p) {
+              return p.UsuarioAps.Id == uspId;
+            });
+
+            if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+              tiene = true;
+            }
+          }
+
+          if (tiene == false) {
+            retorno = true;
+          } else {
+            if (localStorage.getItem('ALERGIAS')) {
+              if (localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS')) {
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS'));
+                var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+
+                if (diferencia < 1) {
+                  retorno = false;
+                }
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "necesitaActualizarMorbidosPacientes",
+        value: function necesitaActualizarMorbidosPacientes(uspId) {
+          var retorno = true;
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var tiene = false;
+          var morbidos = JSON.parse(localStorage.getItem('MORBIDOS'));
+
+          if (morbidos && morbidos.length > 0) {
+            var arrUsuarioTiene = morbidos.filter(function (p) {
+              return p.UsuarioAps.Id == uspId;
+            });
+
+            if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+              tiene = true;
+            }
+          }
+
+          if (tiene == false) {
+            retorno = true;
+          } else {
+            if (localStorage.getItem('MORBIDOS')) {
+              if (localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS')) {
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS'));
+                var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+
+                if (diferencia < 1) {
+                  retorno = false;
+                }
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "entregaArregloDatosPaciente",
+        value: function entregaArregloDatosPaciente(uspId) {
+          var antecedentes = [];
+
+          if (localStorage.getItem('ANTECEDENTES')) {
+            var arreglo = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+
+            if (arreglo && arreglo.length > 0) {
+              for (var s in arreglo) {
+                if (arreglo[s].UsuarioAps.Id == uspId) {
+                  antecedentes = arreglo[s].Mediciones;
+                }
+              }
+            }
+          }
+
+          return antecedentes;
+        }
+      }, {
+        key: "entregaArregloAlergiasPaciente",
+        value: function entregaArregloAlergiasPaciente(uspId) {
+          var alergias = [];
+
+          if (localStorage.getItem('ALERGIAS')) {
+            var arreglo = JSON.parse(localStorage.getItem('ALERGIAS'));
+
+            if (arreglo && arreglo.length > 0) {
+              for (var s in arreglo) {
+                if (arreglo[s].UsuarioAps.Id == uspId) {
+                  alergias = arreglo[s].Alergias;
+                }
+              }
+            }
+          }
+
+          return alergias;
+        }
+      }, {
+        key: "entregaArregloMorbidosPaciente",
+        value: function entregaArregloMorbidosPaciente(uspId) {
+          var morbidos = [];
+
+          if (localStorage.getItem('MORBIDOS')) {
+            var arreglo = JSON.parse(localStorage.getItem('MORBIDOS'));
+
+            if (arreglo && arreglo.length > 0) {
+              for (var s in arreglo) {
+                if (arreglo[s].UsuarioAps.Id == uspId) {
+                  morbidos = arreglo[s].Morbidos;
+                }
+              }
+            }
+          }
+
+          return morbidos;
+        }
       }]);
 
       return ServicioUtiles;
@@ -8106,7 +8295,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
       USA_CALENDARIO: false,
       HORAS_FECHA_INICIO: 3,
-      TIEMPO_CONSULTA_NOTIFICACIONES: 20000
+      TIEMPO_CONSULTA_NOTIFICACIONES: 2000
     };
     /*
      * For easier debugging in development mode, you can import the following file

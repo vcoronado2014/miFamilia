@@ -450,6 +450,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/modal-busqueda/modal-busqueda.page.html":
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modal-busqueda/modal-busqueda.page.html ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n    <!-- <ion-toolbar [style.--background]=\"miColor\"> -->\r\n    <ion-toolbar color=\"primary\">\r\n      <ion-title class=\"home\">Búsqueda</ion-title>\r\n      <ion-buttons slot=\"end\" class=\"pdr10\" (click)=\"dismiss()\">\r\n        <ion-icon class=\"home\" slot=\"icon-only\" name=\"close\"></ion-icon>\r\n      </ion-buttons>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-content class=\"back-app\">\r\n    <ion-list>\r\n      <ion-radio-group value=\"fechas\" (ionChange)=\"onChange($event)\">\r\n        <ion-list-header lines=\"none\">\r\n          <ion-label>Ordenado por</ion-label>\r\n        </ion-list-header>\r\n        <div class=\"ion-margin\" lines=\"full\" *ngFor=\"let item of listaBusqueda\">\r\n          <ion-item *ngIf=\"item.TieneFecha\">\r\n            <ion-label>\r\n              {{item.Nombre}}\r\n            </ion-label>\r\n            <ion-radio slot=\"end\" [value]=\"item.Nombre\"></ion-radio>\r\n          </ion-item>\r\n        </div>\r\n      </ion-radio-group>\r\n    \r\n      \r\n    </ion-list>\r\n    <ion-item lines=\"none\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col></ion-col>\r\n          <ion-col class=\"ion-text-right\">\r\n            <button mat-button color=\"primary\" class=\"boton\" (click)=\"dismiss()\">CANCELAR</button>\r\n          </ion-col>\r\n          <ion-col class=\"ion-text-right\">\r\n            <button mat-button color=\"primary\" class=\"boton\" (click)=\"dismissDatos()\">ACEPTAR</button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n\r\n  </ion-content>");
+
+/***/ }),
+
 /***/ "./src/app/modal-alertas/modal-alertas.page.scss":
 /*!*******************************************************!*\
   !*** ./src/app/modal-alertas/modal-alertas.page.scss ***!
@@ -574,6 +587,178 @@ ModalAlertasPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./modal-alertas.page.scss */ "./src/app/modal-alertas/modal-alertas.page.scss")).default]
     })
 ], ModalAlertasPage);
+
+
+
+/***/ }),
+
+/***/ "./src/app/modal-busqueda/modal-busqueda.page.scss":
+/*!*********************************************************!*\
+  !*** ./src/app/modal-busqueda/modal-busqueda.page.scss ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFsLWJ1c3F1ZWRhL21vZGFsLWJ1c3F1ZWRhLnBhZ2Uuc2NzcyJ9 */");
+
+/***/ }),
+
+/***/ "./src/app/modal-busqueda/modal-busqueda.page.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/modal-busqueda/modal-busqueda.page.ts ***!
+  \*******************************************************/
+/*! exports provided: ModalBusquedaPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalBusquedaPage", function() { return ModalBusquedaPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _app_services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/services/ServicioLaboratorio */ "./src/app/services/ServicioLaboratorio.ts");
+/* harmony import */ var _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioCitas */ "./src/app/services/ServicioCitas.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+//SERVICIOS
+
+
+
+//moment
+
+let ModalBusquedaPage = class ModalBusquedaPage {
+    constructor(modalCtrl, navParams, utiles, navCtrl, toast, platform, menu, loading, lab, alertController, agendar) {
+        this.modalCtrl = modalCtrl;
+        this.navParams = navParams;
+        this.utiles = utiles;
+        this.navCtrl = navCtrl;
+        this.toast = toast;
+        this.platform = platform;
+        this.menu = menu;
+        this.loading = loading;
+        this.lab = lab;
+        this.alertController = alertController;
+        this.agendar = agendar;
+        this.estaCargando = false;
+        this.tituloLoading = '';
+        this.styleAvatar = false;
+        this.examenes = [];
+        this.listaBusqueda = [
+            {
+                Inidice: 1,
+                Nombre: 'Fecha de solicitud',
+                TieneFecha: false,
+                Valor: false
+            },
+            {
+                Inidice: 2,
+                Nombre: 'Fecha de toma de muestra',
+                TieneFecha: false,
+                Valor: false
+            },
+            {
+                Inidice: 3,
+                Nombre: 'Fecha de resultados',
+                TieneFecha: false,
+                Valor: false
+            },
+        ];
+    }
+    ngOnInit() {
+        moment__WEBPACK_IMPORTED_MODULE_6__["locale"]('es');
+        if (this.navParams.get('opciones')) {
+            this.examenes = JSON.parse(this.navParams.get('opciones'));
+            this.procesarItems();
+            console.log(this.examenes);
+            console.log(this.listaBusqueda);
+        }
+    }
+    procesarItems() {
+        let arrConFechaSolicitud = this.examenes.filter(p => p.FechaSolicitud != '01-01-0001');
+        let arrConFechaMuestra = this.examenes.filter(p => p.FechaMuestra != '01-01-0001');
+        let arrConFechaResultados = this.examenes.filter(p => p.FechaResultado != '01-01-0001');
+        if (arrConFechaSolicitud && arrConFechaSolicitud.length > 0) {
+            this.listaBusqueda[0].TieneFecha = true;
+        }
+        if (arrConFechaMuestra && arrConFechaMuestra.length > 0) {
+            this.listaBusqueda[1].TieneFecha = true;
+        }
+        if (arrConFechaResultados && arrConFechaResultados.length > 0) {
+            this.listaBusqueda[2].TieneFecha = true;
+        }
+    }
+    dismiss() {
+        this.modalCtrl.dismiss();
+        /*         if (this.haySeleccionado()) {
+                    this.modalCtrl.dismiss({
+                        data: this.listaBusqueda
+                    });
+                }
+                else{
+                    this.utiles.presentToast('Debe seleccionar un orden para continuar', 'bottom', 3000);
+                } */
+    }
+    dismissDatos() {
+        //this.modalCtrl.dismiss();
+        if (this.haySeleccionado()) {
+            this.modalCtrl.dismiss({
+                data: this.listaBusqueda
+            });
+        }
+        else {
+            this.utiles.presentToast('Debe seleccionar un orden para continuar', 'bottom', 3000);
+        }
+    }
+    onChange(event) {
+        if (event.detail) {
+            if (this.listaBusqueda && this.listaBusqueda.length > 0) {
+                for (var s in this.listaBusqueda) {
+                    if (this.listaBusqueda[s].Nombre == event.detail.value) {
+                        this.listaBusqueda[s].Valor = true;
+                    }
+                    else {
+                        this.listaBusqueda[s].Valor = false;
+                    }
+                }
+            }
+            console.log(this.listaBusqueda);
+        }
+    }
+    haySeleccionado() {
+        var retorno = false;
+        var arrSeleccionados = this.listaBusqueda.filter(p => p.Valor == true);
+        if (arrSeleccionados && arrSeleccionados.length > 0) {
+            retorno = true;
+        }
+        return retorno;
+    }
+};
+ModalBusquedaPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },
+    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_3__["ServicioUtiles"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+    { type: _app_services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_4__["ServicioLaboratorio"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _app_services_ServicioCitas__WEBPACK_IMPORTED_MODULE_5__["ServicioCitas"] }
+];
+ModalBusquedaPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-modal-busqueda',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./modal-busqueda.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/modal-busqueda/modal-busqueda.page.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./modal-busqueda.page.scss */ "./src/app/modal-busqueda/modal-busqueda.page.scss")).default]
+    })
+], ModalBusquedaPage);
 
 
 

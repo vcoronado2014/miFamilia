@@ -221,24 +221,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _app_services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! ../../app/services/ServicioInfoUsuario */
+    "./src/app/services/ServicioInfoUsuario.ts");
+    /* harmony import */
+
+
+    var _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ../modal-alertas/modal-alertas.page */
     "./src/app/modal-alertas/modal-alertas.page.ts");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_11__); //modal
+    var moment__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_12__); //modal
     //moment
 
 
     var HomePage = /*#__PURE__*/function () {
-      function HomePage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, servicioGeo, parametrosApp, servicioNotLocales, servNotificaciones) {
+      function HomePage(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, servicioGeo, parametrosApp, servicioNotLocales, servNotificaciones, info) {
         _classCallCheck(this, HomePage);
 
         this.navCtrl = navCtrl;
@@ -253,7 +259,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.servicioGeo = servicioGeo;
         this.parametrosApp = parametrosApp;
         this.servicioNotLocales = servicioNotLocales;
-        this.servNotificaciones = servNotificaciones; //nuevo slide
+        this.servNotificaciones = servNotificaciones;
+        this.info = info; //nuevo slide
 
         this.slideOpts = {
           initialSlide: 0,
@@ -289,13 +296,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.itemsMenu = []; //notificaciones
 
         this.notificaciones = [];
-        this.muestraNotificaciones = false;
+        this.muestraNotificaciones = false; //para generar data
+
+        this.arrMediciones = [];
+        this.arrAlergias = [];
+        this.arrMorbidos = [];
       }
 
       _createClass(HomePage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_11__["locale"]('es'); //this.miColor = this.utiles.entregaMiColor();
+          moment__WEBPACK_IMPORTED_MODULE_12__["locale"]('es'); //this.miColor = this.utiles.entregaMiColor();
 
           this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
           this.miColor = this.utiles.entregaColor(this.usuarioAps); //this.miImagen = this.utiles.entregaMiImagen();
@@ -328,6 +339,231 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.miembrosPorAceptar();
         }
       }, {
+        key: "obtenerDatosUsuarios",
+        value: function obtenerDatosUsuarios() {
+          var _this = this;
+
+          this.arrMediciones = [];
+          var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+
+          if (arregloUsuarios && arregloUsuarios.length > 0) {
+            arregloUsuarios.forEach(function (usu) {
+              if (_this.utiles.necesitaActualizarDatosPaciente(usu.Id)) {
+                var entidad = {
+                  UsuarioAps: usu,
+                  Mediciones: null
+                };
+
+                if (!_this.utiles.isAppOnDevice()) {
+                  //llamada web
+                  _this.info.getIndicadorValorApi(usu.Id).subscribe(function (response) {
+                    console.log(response);
+                    entidad.Mediciones = response;
+
+                    _this.arrMediciones.push(entidad);
+
+                    localStorage.setItem('ANTECEDENTES', JSON.stringify(_this.arrMediciones));
+                    localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm')); //correcto
+                    //this.procesarNuevoArregloValoresIndependiente(response, loader);
+                  }, function (error) {
+                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                      return regeneratorRuntime.wrap(function _callee$(_context) {
+                        while (1) {
+                          switch (_context.prev = _context.next) {
+                            case 0:
+                              console.log(error.message);
+
+                            case 1:
+                            case "end":
+                              return _context.stop();
+                          }
+                        }
+                      }, _callee);
+                    }));
+                  });
+                } else {
+                  //llamada nativa
+                  _this.info.getIndicadorValorNativeApi(usu.Id).then(function (response) {
+                    //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                    console.log(JSON.parse(response.data));
+                    entidad.Mediciones = JSON.parse(response.data);
+
+                    _this.arrMediciones.push(entidad);
+
+                    localStorage.setItem('ANTECEDENTES', JSON.stringify(_this.arrMediciones));
+                    localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm')); //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+                  })["catch"](function (error) {
+                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                        while (1) {
+                          switch (_context2.prev = _context2.next) {
+                            case 0:
+                              console.log(error.message);
+
+                            case 1:
+                            case "end":
+                              return _context2.stop();
+                          }
+                        }
+                      }, _callee2);
+                    }));
+                  });
+                }
+              }
+            });
+          }
+        }
+      }, {
+        key: "obtenerAlergiasPacientes",
+        value: function obtenerAlergiasPacientes() {
+          var _this2 = this;
+
+          this.arrAlergias = [];
+          var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+
+          if (arregloUsuarios && arregloUsuarios.length > 0) {
+            arregloUsuarios.forEach(function (usu) {
+              if (_this2.utiles.necesitaActualizarAlergiasPacientes(usu.Id)) {
+                var entidad = {
+                  UsuarioAps: usu,
+                  Alergias: null
+                };
+
+                if (!_this2.utiles.isAppOnDevice()) {
+                  //llamada web
+                  _this2.info.getAlergiasApi(usu.Id).subscribe(function (response) {
+                    console.log(response);
+                    entidad.Alergias = response;
+
+                    _this2.arrAlergias.push(entidad);
+
+                    localStorage.setItem('ALERGIAS', JSON.stringify(_this2.arrAlergias));
+                    localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm')); //correcto
+                    //this.procesarNuevoArregloValoresIndependiente(response, loader);
+                  }, function (error) {
+                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                        while (1) {
+                          switch (_context3.prev = _context3.next) {
+                            case 0:
+                              console.log(error.message);
+
+                            case 1:
+                            case "end":
+                              return _context3.stop();
+                          }
+                        }
+                      }, _callee3);
+                    }));
+                  });
+                } else {
+                  //llamada nativa
+                  _this2.info.getAlergiasNativeApi(usu.Id).then(function (response) {
+                    //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                    console.log(JSON.parse(response.data));
+                    entidad.Alergias = JSON.parse(response.data);
+
+                    _this2.arrAlergias.push(entidad);
+
+                    localStorage.setItem('ALERGIAS', JSON.stringify(_this2.arrAlergias));
+                    localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm')); //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+                  })["catch"](function (error) {
+                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                        while (1) {
+                          switch (_context4.prev = _context4.next) {
+                            case 0:
+                              console.log(error.message);
+
+                            case 1:
+                            case "end":
+                              return _context4.stop();
+                          }
+                        }
+                      }, _callee4);
+                    }));
+                  });
+                }
+              }
+            });
+          }
+        }
+      }, {
+        key: "obtenerMorbidosPacientes",
+        value: function obtenerMorbidosPacientes() {
+          var _this3 = this;
+
+          this.arrMorbidos = [];
+          var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+
+          if (arregloUsuarios && arregloUsuarios.length > 0) {
+            arregloUsuarios.forEach(function (usu) {
+              if (_this3.utiles.necesitaActualizarMorbidosPacientes(usu.Id)) {
+                var entidad = {
+                  UsuarioAps: usu,
+                  Morbidos: null
+                };
+
+                if (!_this3.utiles.isAppOnDevice()) {
+                  //llamada web
+                  _this3.info.postAntecedentesApi(usu.Id).subscribe(function (response) {
+                    console.log(response);
+                    entidad.Morbidos = response;
+
+                    _this3.arrMorbidos.push(entidad);
+
+                    localStorage.setItem('MORBIDOS', JSON.stringify(_this3.arrMorbidos));
+                    localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm')); //correcto
+                    //this.procesarNuevoArregloValoresIndependiente(response, loader);
+                  }, function (error) {
+                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                        while (1) {
+                          switch (_context5.prev = _context5.next) {
+                            case 0:
+                              console.log(error.message);
+
+                            case 1:
+                            case "end":
+                              return _context5.stop();
+                          }
+                        }
+                      }, _callee5);
+                    }));
+                  });
+                } else {
+                  //llamada nativa
+                  _this3.info.postAntecedentesNativeApi(usu.Id).then(function (response) {
+                    //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                    console.log(JSON.parse(response.data));
+                    entidad.Morbidos = JSON.parse(response.data);
+
+                    _this3.arrMorbidos.push(entidad);
+
+                    localStorage.setItem('MORBIDOS', JSON.stringify(_this3.arrMorbidos));
+                    localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm')); //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+                  })["catch"](function (error) {
+                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                        while (1) {
+                          switch (_context6.prev = _context6.next) {
+                            case 0:
+                              console.log(error.message);
+
+                            case 1:
+                            case "end":
+                              return _context6.stop();
+                          }
+                        }
+                      }, _callee6);
+                    }));
+                  });
+                }
+              }
+            });
+          }
+        }
+      }, {
         key: "miembrosPorAceptar",
         value: function miembrosPorAceptar() {
           if (localStorage.getItem('FAMILIA-POR-ACEPTAR')) {
@@ -346,8 +582,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.miColor = this.utiles.entregaColor(this.usuarioAps); //this.miImagen = this.utiles.entregaMiImagen();
 
           this.miImagen = this.utiles.entregaImagen(this.usuarioAps);
-          this.miNombre = this.utiles.entregaMiNombre(); //console.log(this.miColor);
-          //console.log(this.miImagen);
+          this.miNombre = this.utiles.entregaMiNombre();
+          console.log('will enter home');
+          this.obtenerDatosUsuarios();
+          this.obtenerAlergiasPacientes();
+          this.obtenerMorbidosPacientes(); //console.log(this.miImagen);
           //console.log(this.miNombre);
         }
       }, {
@@ -436,16 +675,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "registrarSalida",
         value: function registrarSalida() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var _this = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            var _this4 = this;
 
             var loader;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            return regeneratorRuntime.wrap(function _callee8$(_context8) {
               while (1) {
-                switch (_context2.prev = _context2.next) {
+                switch (_context8.prev = _context8.next) {
                   case 0:
                     if (!sessionStorage.getItem('RSS_ID')) {
-                      _context2.next = 13;
+                      _context8.next = 13;
                       break;
                     }
 
@@ -456,20 +695,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     this.objetoEntrada.Fecha = new Date();
                     this.objetoEntrada.Id = sessionStorage.getItem("RSS_ID");
                     this.objetoEntrada.TipoOperacion = '1';
-                    _context2.next = 10;
+                    _context8.next = 10;
                     return this.loading.create({
                       message: 'Creando...<br>registro de sessión',
                       duration: 2000
                     });
 
                   case 10:
-                    loader = _context2.sent;
-                    _context2.next = 13;
+                    loader = _context8.sent;
+                    _context8.next = 13;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+                        return regeneratorRuntime.wrap(function _callee7$(_context7) {
                           while (1) {
-                            switch (_context.prev = _context.next) {
+                            switch (_context7.prev = _context7.next) {
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //web
@@ -488,37 +727,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                               case 1:
                               case "end":
-                                return _context.stop();
+                                return _context7.stop();
                             }
                           }
-                        }, _callee, this);
+                        }, _callee7, this);
                       }));
                     });
 
                   case 13:
                   case "end":
-                    return _context2.stop();
+                    return _context8.stop();
                 }
               }
-            }, _callee2, this);
+            }, _callee8, this);
           }));
         } //para obtener los movimientos en la app
 
       }, {
         key: "buscarLogMovimientos",
         value: function buscarLogMovimientos() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var _this2 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+            var _this5 = this;
 
             var idDispositivo, cantidadDias, loader;
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            return regeneratorRuntime.wrap(function _callee10$(_context10) {
               while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context10.prev = _context10.next) {
                   case 0:
                     idDispositivo = localStorage.getItem('token_dispositivo');
                     cantidadDias = this.parametrosApp.DIAS_LOG_MODULOS();
                     this.estaCargando = true;
-                    _context4.next = 5;
+                    _context10.next = 5;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
@@ -526,15 +765,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 5:
-                    loader = _context4.sent;
-                    _context4.next = 8;
+                    loader = _context10.sent;
+                    _context10.next = 8;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                        var _this3 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this5, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+                        var _this6 = this;
 
-                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                        return regeneratorRuntime.wrap(function _callee9$(_context9) {
                           while (1) {
-                            switch (_context3.prev = _context3.next) {
+                            switch (_context9.prev = _context9.next) {
                               case 0:
                                 //si ya se encuentra no es necesario volverlo a cargar
                                 if (sessionStorage.getItem('LOG_MOVIMIENTOS')) {
@@ -547,43 +786,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                     //llamada web
                                     this.servicioGeo.getMovimientos(cantidadDias, idDispositivo).subscribe(function (response) {
                                       //procesar
-                                      _this3.itemsMenu = _this3.utiles.entregaArregloHome(response); //lo guardaremos en una variable de sesión para que no 
+                                      _this6.itemsMenu = _this6.utiles.entregaArregloHome(response); //lo guardaremos en una variable de sesión para que no 
                                       //se carge constantemente, según ultima observación de 
                                       //juan moran
 
-                                      sessionStorage.setItem('LOG_MOVIMIENTOS', JSON.stringify(_this3.itemsMenu)); //console.log(this.itemsMenu);
+                                      sessionStorage.setItem('LOG_MOVIMIENTOS', JSON.stringify(_this6.itemsMenu)); //console.log(this.itemsMenu);
 
                                       loader.dismiss();
-                                      _this3.estaCargando = false;
+                                      _this6.estaCargando = false;
                                     });
                                   } else {
                                     //llamada nativa
                                     this.servicioGeo.getMovimientosNative(cantidadDias, idDispositivo).then(function (response) {
                                       //procesar
                                       var data = JSON.parse(response.data);
-                                      _this3.itemsMenu = _this3.utiles.entregaArregloHome(data); //console.log(this.itemsMenu);
+                                      _this6.itemsMenu = _this6.utiles.entregaArregloHome(data); //console.log(this.itemsMenu);
 
                                       loader.dismiss();
-                                      _this3.estaCargando = false;
+                                      _this6.estaCargando = false;
                                     });
                                   }
                                 }
 
                               case 1:
                               case "end":
-                                return _context3.stop();
+                                return _context9.stop();
                             }
                           }
-                        }, _callee3, this);
+                        }, _callee9, this);
                       }));
                     });
 
                   case 8:
                   case "end":
-                    return _context4.stop();
+                    return _context10.stop();
                 }
               }
-            }, _callee4, this);
+            }, _callee10, this);
           }));
         }
       }, {
@@ -615,17 +854,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "obtenerNotificaciones",
         value: function obtenerNotificaciones() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-            var _this4 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+            var _this7 = this;
 
             var loader;
-            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            return regeneratorRuntime.wrap(function _callee12$(_context12) {
               while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context12.prev = _context12.next) {
                   case 0:
                     this.estaCargando = true;
                     this.estaCargandoNotificaciones = true;
-                    _context6.next = 4;
+                    _context12.next = 4;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
@@ -633,55 +872,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 4:
-                    loader = _context6.sent;
-                    _context6.next = 7;
+                    loader = _context12.sent;
+                    _context12.next = 7;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-                        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+                        return regeneratorRuntime.wrap(function _callee11$(_context11) {
                           while (1) {
-                            switch (_context5.prev = _context5.next) {
+                            switch (_context11.prev = _context11.next) {
                               case 0:
-                                _context5.next = 2;
+                                _context11.next = 2;
                                 return this.servicioNotLocales.getAll();
 
                               case 2:
-                                this.notificaciones = _context5.sent;
+                                this.notificaciones = _context11.sent;
                                 //console.log(this.notificaciones);
                                 this.estaCargando = false;
                                 this.estaCargandoNotificaciones = false;
 
                               case 5:
                               case "end":
-                                return _context5.stop();
+                                return _context11.stop();
                             }
                           }
-                        }, _callee5, this);
+                        }, _callee11, this);
                       }));
                     });
 
                   case 7:
                   case "end":
-                    return _context6.stop();
+                    return _context12.stop();
                 }
               }
-            }, _callee6, this);
+            }, _callee12, this);
           }));
         }
       }, {
         key: "obtenerNotificacionesApi",
         value: function obtenerNotificacionesApi() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-            var _this5 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
+            var _this8 = this;
 
             var loader, usuario, annoConsultar, mesConsultar, fechaActual, fechaEvaluar, mesActual, mesEvaluar;
-            return regeneratorRuntime.wrap(function _callee8$(_context8) {
+            return regeneratorRuntime.wrap(function _callee14$(_context14) {
               while (1) {
-                switch (_context8.prev = _context8.next) {
+                switch (_context14.prev = _context14.next) {
                   case 0:
                     this.notificaciones = [];
                     this.estaCargando = true;
                     this.estaCargandoNotificaciones = true;
-                    _context8.next = 5;
+                    _context14.next = 5;
                     return this.loading.create({
                       cssClass: 'loading-vacio',
                       showBackdrop: false,
@@ -689,7 +928,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 5:
-                    loader = _context8.sent;
+                    loader = _context14.sent;
                     usuario = null;
 
                     if (localStorage.getItem('UsuarioAps')) {
@@ -698,8 +937,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     annoConsultar = 0;
                     mesConsultar = 0;
-                    fechaActual = moment__WEBPACK_IMPORTED_MODULE_11__();
-                    fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_11__().add(5, 'days');
+                    fechaActual = moment__WEBPACK_IMPORTED_MODULE_12__();
+                    fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_12__().add(5, 'days');
                     mesActual = {
                       mes: fechaActual.month() + 1,
                       anno: fechaActual.year()
@@ -719,76 +958,76 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       annoConsultar = mesEvaluar.anno;
                     }
 
-                    _context8.next = 17;
+                    _context14.next = 17;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this5, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-                        var _this6 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this8, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+                        var _this9 = this;
 
-                        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                        return regeneratorRuntime.wrap(function _callee13$(_context13) {
                           while (1) {
-                            switch (_context7.prev = _context7.next) {
+                            switch (_context13.prev = _context13.next) {
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.cita.entregaPorMesNuevoLivianoApi(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
                                     var data = response; //console.log(data);
 
-                                    _this6.notificaciones = _this6.servNotificaciones.construyeNotificaciones(data);
-                                    _this6.estaCargando = false;
+                                    _this9.notificaciones = _this9.servNotificaciones.construyeNotificaciones(data);
+                                    _this9.estaCargando = false;
 
-                                    _this6.loading.dismiss();
+                                    _this9.loading.dismiss();
 
-                                    _this6.estaCargandoNotificaciones = false; //console.log(this.notificaciones);
+                                    _this9.estaCargandoNotificaciones = false; //console.log(this.notificaciones);
                                   }, function (error) {
                                     console.log(error.message); //revisamos igual las notificaciones ya que pueden haber
                                     //aquellas que pasan por fuera de la api
 
-                                    _this6.notificaciones = _this6.servNotificaciones.construyeNotificaciones([]);
-                                    _this6.estaCargando = false;
+                                    _this9.notificaciones = _this9.servNotificaciones.construyeNotificaciones([]);
+                                    _this9.estaCargando = false;
 
-                                    _this6.loading.dismiss();
+                                    _this9.loading.dismiss();
 
-                                    _this6.estaCargandoNotificaciones = false;
+                                    _this9.estaCargandoNotificaciones = false;
                                   });
                                 } else {
                                   //llamada native
                                   this.cita.entregaPorMesNuevoLivianoApiNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
                                     var data = JSON.parse(response.data); //console.log(data);
 
-                                    _this6.notificaciones = _this6.servNotificaciones.construyeNotificaciones(data);
-                                    _this6.estaCargando = false;
+                                    _this9.notificaciones = _this9.servNotificaciones.construyeNotificaciones(data);
+                                    _this9.estaCargando = false;
 
-                                    _this6.loading.dismiss();
+                                    _this9.loading.dismiss();
 
-                                    _this6.estaCargandoNotificaciones = false;
+                                    _this9.estaCargandoNotificaciones = false;
                                   })["catch"](function (error) {
                                     console.log(error.message); //revisamos igual las notificaciones ya que pueden haber
                                     //aquellas que pasan por fuera de la api
 
-                                    _this6.notificaciones = _this6.servNotificaciones.construyeNotificaciones([]);
-                                    _this6.estaCargando = false;
+                                    _this9.notificaciones = _this9.servNotificaciones.construyeNotificaciones([]);
+                                    _this9.estaCargando = false;
 
-                                    _this6.loading.dismiss();
+                                    _this9.loading.dismiss();
 
-                                    _this6.estaCargandoNotificaciones = false;
+                                    _this9.estaCargandoNotificaciones = false;
                                   });
                                 }
 
                               case 1:
                               case "end":
-                                return _context7.stop();
+                                return _context13.stop();
                             }
                           }
-                        }, _callee7, this);
+                        }, _callee13, this);
                       }));
                     });
 
                   case 17:
                   case "end":
-                    return _context8.stop();
+                    return _context14.stop();
                 }
               }
-            }, _callee8, this);
+            }, _callee14, this);
           }));
         }
       }, {
@@ -864,39 +1103,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "goToNoficiaciones",
         value: function goToNoficiaciones() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
             var modal;
-            return regeneratorRuntime.wrap(function _callee9$(_context9) {
+            return regeneratorRuntime.wrap(function _callee15$(_context15) {
               while (1) {
-                switch (_context9.prev = _context9.next) {
+                switch (_context15.prev = _context15.next) {
                   case 0:
-                    _context9.next = 2;
+                    _context15.next = 2;
                     return this.modalCtrl.create({
-                      component: _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_10__["ModalAlertasPage"],
+                      component: _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_11__["ModalAlertasPage"],
                       componentProps: {
                         'notificaciones': JSON.stringify(this.notificaciones)
                       }
                     });
 
                   case 2:
-                    modal = _context9.sent;
+                    modal = _context15.sent;
                     modal.onDidDismiss().then(function (data) {
                       if (data) {
                         console.log(data);
                       }
                     });
-                    _context9.next = 6;
+                    _context15.next = 6;
                     return modal.present();
 
                   case 6:
-                    return _context9.abrupt("return", _context9.sent);
+                    return _context15.abrupt("return", _context15.sent);
 
                   case 7:
                   case "end":
-                    return _context9.stop();
+                    return _context15.stop();
                 }
               }
-            }, _callee9, this);
+            }, _callee15, this);
           }));
         }
       }, {
@@ -956,6 +1195,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _app_services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_6__["ServicioNotificacionesLocales"]
       }, {
         type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__["ServicioNotificaciones"]
+      }, {
+        type: _app_services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_10__["ServicioInfoUsuario"]
       }];
     };
 

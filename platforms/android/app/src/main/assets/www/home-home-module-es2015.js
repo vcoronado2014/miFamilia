@@ -102,9 +102,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
 /* harmony import */ var _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
 /* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
-/* harmony import */ var _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../modal-alertas/modal-alertas.page */ "./src/app/modal-alertas/modal-alertas.page.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _app_services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../app/services/ServicioInfoUsuario */ "./src/app/services/ServicioInfoUsuario.ts");
+/* harmony import */ var _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../modal-alertas/modal-alertas.page */ "./src/app/modal-alertas/modal-alertas.page.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_12__);
+
 
 
 
@@ -120,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 //moment
 
 let HomePage = class HomePage {
-    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, servicioGeo, parametrosApp, servicioNotLocales, servNotificaciones) {
+    constructor(navCtrl, toast, modalCtrl, platform, loading, menu, utiles, acceso, cita, servicioGeo, parametrosApp, servicioNotLocales, servNotificaciones, info) {
         this.navCtrl = navCtrl;
         this.toast = toast;
         this.modalCtrl = modalCtrl;
@@ -134,6 +136,7 @@ let HomePage = class HomePage {
         this.parametrosApp = parametrosApp;
         this.servicioNotLocales = servicioNotLocales;
         this.servNotificaciones = servNotificaciones;
+        this.info = info;
         //nuevo slide
         this.slideOpts = {
             initialSlide: 0,
@@ -170,9 +173,13 @@ let HomePage = class HomePage {
         //notificaciones
         this.notificaciones = [];
         this.muestraNotificaciones = false;
+        //para generar data
+        this.arrMediciones = [];
+        this.arrAlergias = [];
+        this.arrMorbidos = [];
     }
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_11__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_12__["locale"]('es');
         //this.miColor = this.utiles.entregaMiColor();
         this.usuarioAps = JSON.parse(sessionStorage.UsuarioAps);
         this.miColor = this.utiles.entregaColor(this.usuarioAps);
@@ -201,6 +208,132 @@ let HomePage = class HomePage {
         //nueva implementación
         this.miembrosPorAceptar();
     }
+    obtenerDatosUsuarios() {
+        this.arrMediciones = [];
+        var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+        if (arregloUsuarios && arregloUsuarios.length > 0) {
+            arregloUsuarios.forEach(usu => {
+                if (this.utiles.necesitaActualizarDatosPaciente(usu.Id)) {
+                    var entidad = {
+                        UsuarioAps: usu,
+                        Mediciones: null,
+                    };
+                    if (!this.utiles.isAppOnDevice()) {
+                        //llamada web
+                        this.info.getIndicadorValorApi(usu.Id).subscribe((response) => {
+                            console.log(response);
+                            entidad.Mediciones = response;
+                            this.arrMediciones.push(entidad);
+                            localStorage.setItem('ANTECEDENTES', JSON.stringify(this.arrMediciones));
+                            localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm'));
+                            //correcto
+                            //this.procesarNuevoArregloValoresIndependiente(response, loader);
+                        }, (error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                        }));
+                    }
+                    else {
+                        //llamada nativa
+                        this.info.getIndicadorValorNativeApi(usu.Id).then((response) => {
+                            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                            console.log(JSON.parse(response.data));
+                            entidad.Mediciones = JSON.parse(response.data);
+                            this.arrMediciones.push(entidad);
+                            localStorage.setItem('ANTECEDENTES', JSON.stringify(this.arrMediciones));
+                            localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm'));
+                            //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+                        }).catch((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                        }));
+                    }
+                }
+            });
+        }
+    }
+    obtenerAlergiasPacientes() {
+        this.arrAlergias = [];
+        var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+        if (arregloUsuarios && arregloUsuarios.length > 0) {
+            arregloUsuarios.forEach(usu => {
+                if (this.utiles.necesitaActualizarAlergiasPacientes(usu.Id)) {
+                    var entidad = {
+                        UsuarioAps: usu,
+                        Alergias: null,
+                    };
+                    if (!this.utiles.isAppOnDevice()) {
+                        //llamada web
+                        this.info.getAlergiasApi(usu.Id).subscribe((response) => {
+                            console.log(response);
+                            entidad.Alergias = response;
+                            this.arrAlergias.push(entidad);
+                            localStorage.setItem('ALERGIAS', JSON.stringify(this.arrAlergias));
+                            localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm'));
+                            //correcto
+                            //this.procesarNuevoArregloValoresIndependiente(response, loader);
+                        }, (error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                        }));
+                    }
+                    else {
+                        //llamada nativa
+                        this.info.getAlergiasNativeApi(usu.Id).then((response) => {
+                            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                            console.log(JSON.parse(response.data));
+                            entidad.Alergias = JSON.parse(response.data);
+                            this.arrAlergias.push(entidad);
+                            localStorage.setItem('ALERGIAS', JSON.stringify(this.arrAlergias));
+                            localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm'));
+                            //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+                        }).catch((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                        }));
+                    }
+                }
+            });
+        }
+    }
+    obtenerMorbidosPacientes() {
+        this.arrMorbidos = [];
+        var arregloUsuarios = this.utiles.entregaArregloUsuarios();
+        if (arregloUsuarios && arregloUsuarios.length > 0) {
+            arregloUsuarios.forEach(usu => {
+                if (this.utiles.necesitaActualizarMorbidosPacientes(usu.Id)) {
+                    var entidad = {
+                        UsuarioAps: usu,
+                        Morbidos: null,
+                    };
+                    if (!this.utiles.isAppOnDevice()) {
+                        //llamada web
+                        this.info.postAntecedentesApi(usu.Id).subscribe((response) => {
+                            console.log(response);
+                            entidad.Morbidos = response;
+                            this.arrMorbidos.push(entidad);
+                            localStorage.setItem('MORBIDOS', JSON.stringify(this.arrMorbidos));
+                            localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm'));
+                            //correcto
+                            //this.procesarNuevoArregloValoresIndependiente(response, loader);
+                        }, (error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                        }));
+                    }
+                    else {
+                        //llamada nativa
+                        this.info.postAntecedentesNativeApi(usu.Id).then((response) => {
+                            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                            console.log(JSON.parse(response.data));
+                            entidad.Morbidos = JSON.parse(response.data);
+                            this.arrMorbidos.push(entidad);
+                            localStorage.setItem('MORBIDOS', JSON.stringify(this.arrMorbidos));
+                            localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_12__().format('YYYY-MM-DD HH:mm'));
+                            //this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
+                        }).catch((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                        }));
+                    }
+                }
+            });
+        }
+    }
     miembrosPorAceptar() {
         if (localStorage.getItem('FAMILIA-POR-ACEPTAR')) {
             let arrFam = JSON.parse(localStorage.getItem('FAMILIA-POR-ACEPTAR'));
@@ -216,7 +349,10 @@ let HomePage = class HomePage {
         //this.miImagen = this.utiles.entregaMiImagen();
         this.miImagen = this.utiles.entregaImagen(this.usuarioAps);
         this.miNombre = this.utiles.entregaMiNombre();
-        //console.log(this.miColor);
+        console.log('will enter home');
+        this.obtenerDatosUsuarios();
+        this.obtenerAlergiasPacientes();
+        this.obtenerMorbidosPacientes();
         //console.log(this.miImagen);
         //console.log(this.miNombre);
     }
@@ -418,8 +554,8 @@ let HomePage = class HomePage {
             }
             var annoConsultar = 0;
             var mesConsultar = 0;
-            var fechaActual = moment__WEBPACK_IMPORTED_MODULE_11__();
-            var fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_11__().add(5, 'days');
+            var fechaActual = moment__WEBPACK_IMPORTED_MODULE_12__();
+            var fechaEvaluar = moment__WEBPACK_IMPORTED_MODULE_12__().add(5, 'days');
             var mesActual = {
                 mes: fechaActual.month() + 1,
                 anno: fechaActual.year()
@@ -550,7 +686,7 @@ let HomePage = class HomePage {
     goToNoficiaciones() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalCtrl.create({
-                component: _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_10__["ModalAlertasPage"],
+                component: _modal_alertas_modal_alertas_page__WEBPACK_IMPORTED_MODULE_11__["ModalAlertasPage"],
                 componentProps: {
                     'notificaciones': JSON.stringify(this.notificaciones)
                 }
@@ -597,7 +733,8 @@ HomePage.ctorParameters = () => [
     { type: _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__["ServicioGeo"] },
     { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_9__["ServicioParametrosApp"] },
     { type: _app_services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_6__["ServicioNotificacionesLocales"] },
-    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__["ServicioNotificaciones"] }
+    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__["ServicioNotificaciones"] },
+    { type: _app_services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_10__["ServicioInfoUsuario"] }
 ];
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mySlider', { static: true })

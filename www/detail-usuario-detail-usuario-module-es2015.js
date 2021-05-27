@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n  \r\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\r\n  \r\n<!--   <ion-item lines=\"none\" [hidden]=\"estaCargando\" style=\"padding-top: 15px;\">\r\n    <app-avatar [style]=\"false\" [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item> -->\r\n\r\n<!--   <ion-grid [hidden]=\"estaCargando\">\r\n    \r\n      <ion-slides pager=\"true\" [options]=\"slideOpts\" #mySlider class=\"slides-back\" style=\"padding-bottom: 30px;\">\r\n        <ion-slide class=\"row ion-no-padding\" *ngIf=\"arrMedicionesParteUno.length > 0\" style=\"justify-content: left;\">\r\n            <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let sl of arrMedicionesParteUno\">\r\n              <ion-card style=\"margin: 5px;\">\r\n                <ion-card-header style=\"background: #D1C4E9;\">\r\n                  <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{sl.Nombre}}</ion-card-subtitle>\r\n                </ion-card-header>\r\n                <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n                  <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{sl.Valor.toString()}}&nbsp;\r\n                    <span *ngIf=\"sl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{sl.Medida}}</span>\r\n                    <span *ngIf=\"sl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{sl.Medida}}</span>\r\n                  </div>\r\n                  <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{sl.Fecha}}</div>\r\n                </ion-card-content>\r\n              </ion-card>\r\n            </ion-col>\r\n\r\n        </ion-slide>\r\n        <ion-slide class=\"row ion-no-padding\" style=\"justify-content: left;\" *ngIf=\"arrMedicionesParteDos.length > 0\">\r\n          <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let dl of arrMedicionesParteDos\">\r\n            <ion-card style=\"margin: 5px;\">\r\n              <ion-card-header style=\"background: #D1C4E9;\">\r\n                <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{dl.Nombre}}</ion-card-subtitle>\r\n              </ion-card-header>\r\n              <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n                <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{dl.Valor.toString()}}&nbsp;\r\n                  <span *ngIf=\"dl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{dl.Medida}}</span>\r\n                  <span *ngIf=\"dl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{dl.Medida}}</span>\r\n                </div>\r\n                <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{dl.Fecha}}</div>\r\n              </ion-card-content>\r\n            </ion-card>\r\n          </ion-col>\r\n\r\n      </ion-slide>\r\n      </ion-slides>\r\n    \r\n  </ion-grid> -->\r\n\r\n  \r\n<!--   <ion-list [hidden]=\"estaCargando\" style=\"padding-top: 0;\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 0;margin-bottom: 24px;\">{{title}}</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;text-transform: capitalize;\">{{item.Descripcion.toLowerCase()}}</ion-label>\r\n    </ion-item>\r\n    <ion-list-header *ngIf=\"personales && personales.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let ante of personales\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{ante.Nombre}}</ion-label>\r\n    </ion-item>\r\n    <ion-list-header *ngIf=\"familiares && familiares.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos familiares relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let fam of familiares\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{fam.Nombre}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> -->\r\n  \r\n  <!-- implementacion con spinner independiente -->\r\n\r\n  <ion-item lines=\"none\" style=\"padding-top: 15px;\">\r\n    <app-avatar [style]=\"false\" [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item>\r\n  <app-progress-minimo [mostrar]=\"estaCargandoDatosUsuario\" [titulo]=\"tituloProgressDatosUsuario\"></app-progress-minimo>\r\n  <ion-grid [hidden]=\"estaCargandoDatosUsuario\">\r\n  \r\n    <ion-slides pager=\"true\" [options]=\"slideOpts\" #mySlider class=\"slides-back\" style=\"padding-bottom: 30px;\">\r\n      <ion-slide class=\"row ion-no-padding\" *ngIf=\"arrMedicionesParteUno.length > 0\" style=\"justify-content: left;\">\r\n        <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let sl of arrMedicionesParteUno\">\r\n          <ion-card style=\"margin: 5px;\">\r\n            <ion-card-header style=\"background: #D1C4E9;\">\r\n              <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{sl.Nombre}}</ion-card-subtitle>\r\n            </ion-card-header>\r\n            <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n              <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{sl.Valor.toString()}}&nbsp;\r\n                <span *ngIf=\"sl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{sl.Medida}}</span>\r\n                <span *ngIf=\"sl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{sl.Medida}}</span>\r\n              </div>\r\n              <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{sl.Fecha}}</div>\r\n            </ion-card-content>\r\n          </ion-card>\r\n        </ion-col>\r\n  \r\n      </ion-slide>\r\n      <ion-slide class=\"row ion-no-padding\" style=\"justify-content: left;\" *ngIf=\"arrMedicionesParteDos.length > 0\">\r\n        <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let dl of arrMedicionesParteDos\">\r\n          <ion-card style=\"margin: 5px;\">\r\n            <ion-card-header style=\"background: #D1C4E9;\">\r\n              <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{dl.Nombre}}</ion-card-subtitle>\r\n            </ion-card-header>\r\n            <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n              <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{dl.Valor.toString()}}&nbsp;\r\n                <span *ngIf=\"dl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{dl.Medida}}</span>\r\n                <span *ngIf=\"dl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{dl.Medida}}</span>\r\n              </div>\r\n              <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{dl.Fecha}}</div>\r\n            </ion-card-content>\r\n          </ion-card>\r\n        </ion-col>\r\n  \r\n      </ion-slide>\r\n    </ion-slides>\r\n  \r\n  </ion-grid>\r\n\r\n  <app-progress-minimo [mostrar]=\"estaCargandoAlergias\" [titulo]=\"tituloProgressAlergias\"></app-progress-minimo>\r\n  <ion-list [hidden]=\"estaCargandoAlergias\" style=\"padding-top: 0;\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 0;margin-bottom: 24px;\">{{title}}</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;text-transform: capitalize;\">{{item.Descripcion.toLowerCase()}}</ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n\r\n  <app-progress-minimo [mostrar]=\"estaCargandoMorbidos\" [titulo]=\"tituloProgressMorbidos\"></app-progress-minimo>\r\n  <ion-list [hidden]=\"estaCargandoMorbidos\" style=\"padding-top: 0;\">\r\n    <ion-list-header *ngIf=\"personales && personales.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let ante of personales\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{ante.Nombre}}</ion-label>\r\n    </ion-item>\r\n    <ion-list-header *ngIf=\"familiares && familiares.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos familiares relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let fam of familiares\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{fam.Nombre}}</ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n  \r\n\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\r\n  <ion-toolbar color=\"primary\" mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/antecedentes\" class=\"fcw\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"fcw\">Antecedentes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"back-app\">\r\n  \r\n  <app-progress [mostrar]=\"estaCargando\" [titulo]=\"tituloProgress\"></app-progress>\r\n  \r\n<!--   <ion-item lines=\"none\" [hidden]=\"estaCargando\" style=\"padding-top: 15px;\">\r\n    <app-avatar [style]=\"false\" [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item> -->\r\n\r\n<!--   <ion-grid [hidden]=\"estaCargando\">\r\n    \r\n      <ion-slides pager=\"true\" [options]=\"slideOpts\" #mySlider class=\"slides-back\" style=\"padding-bottom: 30px;\">\r\n        <ion-slide class=\"row ion-no-padding\" *ngIf=\"arrMedicionesParteUno.length > 0\" style=\"justify-content: left;\">\r\n            <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let sl of arrMedicionesParteUno\">\r\n              <ion-card style=\"margin: 5px;\">\r\n                <ion-card-header style=\"background: #D1C4E9;\">\r\n                  <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{sl.Nombre}}</ion-card-subtitle>\r\n                </ion-card-header>\r\n                <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n                  <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{sl.Valor.toString()}}&nbsp;\r\n                    <span *ngIf=\"sl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{sl.Medida}}</span>\r\n                    <span *ngIf=\"sl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{sl.Medida}}</span>\r\n                  </div>\r\n                  <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{sl.Fecha}}</div>\r\n                </ion-card-content>\r\n              </ion-card>\r\n            </ion-col>\r\n\r\n        </ion-slide>\r\n        <ion-slide class=\"row ion-no-padding\" style=\"justify-content: left;\" *ngIf=\"arrMedicionesParteDos.length > 0\">\r\n          <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let dl of arrMedicionesParteDos\">\r\n            <ion-card style=\"margin: 5px;\">\r\n              <ion-card-header style=\"background: #D1C4E9;\">\r\n                <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{dl.Nombre}}</ion-card-subtitle>\r\n              </ion-card-header>\r\n              <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n                <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{dl.Valor.toString()}}&nbsp;\r\n                  <span *ngIf=\"dl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{dl.Medida}}</span>\r\n                  <span *ngIf=\"dl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{dl.Medida}}</span>\r\n                </div>\r\n                <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{dl.Fecha}}</div>\r\n              </ion-card-content>\r\n            </ion-card>\r\n          </ion-col>\r\n\r\n      </ion-slide>\r\n      </ion-slides>\r\n    \r\n  </ion-grid> -->\r\n\r\n  \r\n<!--   <ion-list [hidden]=\"estaCargando\" style=\"padding-top: 0;\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 0;margin-bottom: 24px;\">{{title}}</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;text-transform: capitalize;\">{{item.Descripcion.toLowerCase()}}</ion-label>\r\n    </ion-item>\r\n    <ion-list-header *ngIf=\"personales && personales.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let ante of personales\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{ante.Nombre}}</ion-label>\r\n    </ion-item>\r\n    <ion-list-header *ngIf=\"familiares && familiares.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos familiares relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let fam of familiares\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{fam.Nombre}}</ion-label>\r\n    </ion-item>\r\n  </ion-list> -->\r\n  \r\n  <!-- implementacion con spinner independiente -->\r\n\r\n  <ion-item lines=\"none\" style=\"padding-top: 15px;\">\r\n    <app-avatar [style]=\"false\" [urlImagen] = \"usuario.UrlImagen\" [nombreCompleto]=\"usuario.Nombres + ' ' + usuario.ApellidoPaterno + ' ' + usuario.ApellidoMaterno\" [parentezco]=\"usuario.Parentezco.Nombre\"></app-avatar>\r\n  </ion-item>\r\n  <app-progress-minimo [mostrar]=\"estaCargandoDatosUsuario\" [titulo]=\"tituloProgressDatosUsuario\"></app-progress-minimo>\r\n  <ion-grid [hidden]=\"estaCargandoDatosUsuario\">\r\n  \r\n    <ion-slides pager=\"true\" [options]=\"slideOpts\" #mySlider class=\"slides-back\" style=\"padding-bottom: 30px;\">\r\n      <ion-slide class=\"row ion-no-padding\" *ngIf=\"arrMedicionesParteUno.length > 0\" style=\"justify-content: left;\">\r\n        <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let sl of arrMedicionesParteUno\">\r\n          <ion-card style=\"margin: 5px;\">\r\n            <ion-card-header style=\"background: #D1C4E9;\">\r\n              <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{sl.Nombre}}</ion-card-subtitle>\r\n            </ion-card-header>\r\n            <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n              <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{sl.Valor.toString()}}&nbsp;\r\n                <span *ngIf=\"sl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{sl.Medida}}</span>\r\n                <span *ngIf=\"sl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{sl.Medida}}</span>\r\n              </div>\r\n              <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{sl.Fecha}}</div>\r\n            </ion-card-content>\r\n          </ion-card>\r\n        </ion-col>\r\n  \r\n      </ion-slide>\r\n      <ion-slide class=\"row ion-no-padding\" style=\"justify-content: left;\" *ngIf=\"arrMedicionesParteDos.length > 0\">\r\n        <ion-col size=\"4\" class=\"ion-no-padding\" *ngFor=\"let dl of arrMedicionesParteDos\">\r\n          <ion-card style=\"margin: 5px;\">\r\n            <ion-card-header style=\"background: #D1C4E9;\">\r\n              <ion-card-subtitle style=\"color: #000000DE;font-size: 16pt;\">{{dl.Nombre}}</ion-card-subtitle>\r\n            </ion-card-header>\r\n            <ion-card-content style=\"display: block;padding-left: 5px;padding-right: 5px;\" class=\"ion-text-center\">\r\n              <div style=\"margin-top: 11px;color: #000000DE;font-size: 20pt;\">{{dl.Valor.toString()}}&nbsp;\r\n                <span *ngIf=\"dl.Medida == 'mg/dl'\" style=\"font-size: 12pt;\">{{dl.Medida}}</span>\r\n                <span *ngIf=\"dl.Medida != 'mg/dl'\" style=\"font-size: 20pt;\">{{dl.Medida}}</span>\r\n              </div>\r\n              <div style=\"margin-top: 8px;font-size: 12pt;color: #0000008A;\">{{dl.Fecha}}</div>\r\n            </ion-card-content>\r\n          </ion-card>\r\n        </ion-col>\r\n  \r\n      </ion-slide>\r\n    </ion-slides>\r\n  \r\n  </ion-grid>\r\n  <div [hidden]=\"estaCargandoDatosUsuario\">\r\n    <div class=\"no-tiene-antecedentes\" *ngIf=\"tieneDatosUsuario == false\">No tiene mediciones registradas</div>\r\n  </div>\r\n\r\n  <app-progress-minimo [mostrar]=\"estaCargandoAlergias\" [titulo]=\"tituloProgressAlergias\"></app-progress-minimo>\r\n  <ion-list [hidden]=\"estaCargandoAlergias\" style=\"padding-top: 0;\">\r\n    <ion-list-header *ngIf=\"alergias && alergias.length > 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 0;margin-bottom: 24px;\">{{title}}</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let item of alergias\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;text-transform: capitalize;\">{{item.Descripcion.toLowerCase()}}</ion-label>\r\n    </ion-item>\r\n    <div>\r\n      <div class=\"no-tiene-antecedentes\" *ngIf=\"tieneAlergias == false\">No tiene alergias registradas</div>\r\n    </div>\r\n  </ion-list>\r\n\r\n\r\n  <app-progress-minimo [mostrar]=\"estaCargandoMorbidos\" [titulo]=\"tituloProgressMorbidos\"></app-progress-minimo>\r\n  <ion-list [hidden]=\"estaCargandoMorbidos\" style=\"padding-top: 0;padding-bottom: 0;\">\r\n    <ion-list-header *ngIf=\"personales && personales.length >= 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let ante of personales\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{ante.Nombre}}</ion-label>\r\n    </ion-item>\r\n    <div>\r\n      <div *ngIf=\"tieneMorbidosPersonales == false\" class=\"no-tiene-antecedentes\">No tiene diagnósticos relevantes <br> registrados</div>\r\n    </div>\r\n    <ion-list-header *ngIf=\"familiares && familiares.length >= 0\" style=\"background-color: #FAF9FA;\">\r\n      <div style=\"font-weight: 500; color: #000000DE; font-size: 14pt; margin-top: 24px;margin-bottom: 24px;\">Diagnósticos familiares relevantes</div>\r\n    </ion-list-header>\r\n    <ion-item *ngFor=\"let fam of familiares\" class =\"lista-alergias\">\r\n      <ion-label class=\"ion-text-wrap\" style=\"color:#000000DE;font-size: 16pt;\">{{fam.Nombre}}</ion-label>\r\n    </ion-item>\r\n    <div>\r\n      <div *ngIf=\"tieneMorbidosFamiliares == false\" class=\"no-tiene-antecedentes\">No tiene diagnósticos familiares <br> relevantes registrados</div>\r\n    </div>\r\n  </ion-list>\r\n  \r\n\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -72,7 +72,7 @@ DetailUsuarioPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2RldGFpbC11c3VhcmlvL2RldGFpbC11c3VhcmlvLnBhZ2Uuc2NzcyJ9 */");
+/* harmony default export */ __webpack_exports__["default"] = (".no-tiene-antecedentes {\n  height: 70px;\n  width: 100%;\n  padding-top: 15px;\n  font-size: 16pt;\n  letter-spacing: 0.5pt;\n  color: #0000008A;\n  text-align: center;\n  background-color: #FAF9FA;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGV0YWlsLXVzdWFyaW8vRjpcXGFwcF9taWZhbWlsaWFfZ2l0XFxtaUZhbWlsaWFfcHJlL3NyY1xcYXBwXFxkZXRhaWwtdXN1YXJpb1xcZGV0YWlsLXVzdWFyaW8ucGFnZS5zY3NzIiwic3JjL2FwcC9kZXRhaWwtdXN1YXJpby9kZXRhaWwtdXN1YXJpby5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFBO0VBQ0EsV0FBQTtFQUNBLGlCQUFBO0VBQ0EsZUFBQTtFQUNBLHFCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLHlCQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9kZXRhaWwtdXN1YXJpby9kZXRhaWwtdXN1YXJpby5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubm8tdGllbmUtYW50ZWNlZGVudGVze1xyXG4gICAgaGVpZ2h0OiA3MHB4O1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBwYWRkaW5nLXRvcDogMTVweDtcclxuICAgIGZvbnQtc2l6ZTogMTZwdDtcclxuICAgIGxldHRlci1zcGFjaW5nOiAwLjVwdDtcclxuICAgIGNvbG9yOiAjMDAwMDAwOEE7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkFGOUZBO1xyXG59IiwiLm5vLXRpZW5lLWFudGVjZWRlbnRlcyB7XG4gIGhlaWdodDogNzBweDtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmctdG9wOiAxNXB4O1xuICBmb250LXNpemU6IDE2cHQ7XG4gIGxldHRlci1zcGFjaW5nOiAwLjVwdDtcbiAgY29sb3I6ICMwMDAwMDA4QTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkFGOUZBO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -149,6 +149,15 @@ let DetailUsuarioPage = class DetailUsuarioPage {
         this.tituloProgressAlergias = '';
         this.estaCargandoMorbidos = false;
         this.tituloProgressMorbidos = '';
+        //para mostrar que no tiene
+        this.tieneDatosUsuario = false;
+        this.tieneAlergias = false;
+        this.tieneMorbidosPersonales = false;
+        this.tieneMorbidosFamiliares = false;
+        //variables para insertar en local storage
+        this.arrMedicionesL = [];
+        this.arrAlergias = [];
+        this.arrMorbidos = [];
     }
     ngOnInit() {
         //this.miColor = this.utiles.entregaMiColor();
@@ -804,37 +813,60 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             this.estaCargandoDatosUsuario = true;
             this.tituloProgressDatosUsuario = 'Buscando datos del paciente';
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                if (!this.utiles.isAppOnDevice()) {
-                    //llamada web
-                    this.info.getIndicadorValorApi(uspId).subscribe((response) => {
-                        console.log(response);
-                        //correcto
-                        this.procesarNuevoArregloValoresIndependiente(response, loader);
-                    }, (error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                        console.log(error.message);
-                        this.estaCargandoDatosUsuario = false;
-                        this.tituloProgressDatosUsuario = '';
-                        loader.dismiss();
-                    }));
+                //validamos si necesita actualizar
+                if (this.utiles.necesitaActualizarDatosPaciente(uspId) == false) {
+                    var datos = this.utiles.entregaArregloDatosPaciente(uspId);
+                    this.procesarNuevoArregloValoresIndependiente(datos, loader, this.usuario, false);
                 }
                 else {
-                    //llamada nativa
-                    this.info.getIndicadorValorNativeApi(uspId).then((response) => {
-                        //this.procesarIndicadorValor(JSON.parse(response.data), loader);
-                        console.log(JSON.parse(response.data));
-                        this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader);
-                    }).catch((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                        console.log(error.message);
-                        this.estaCargandoDatosUsuario = false;
-                        this.tituloProgressDatosUsuario = '';
-                        loader.dismiss();
-                    }));
+                    if (!this.utiles.isAppOnDevice()) {
+                        //llamada web
+                        this.info.getIndicadorValorApi(uspId).subscribe((response) => {
+                            console.log(response);
+                            //correcto
+                            this.procesarNuevoArregloValoresIndependiente(response, loader, this.usuario, true);
+                        }, (error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                            this.estaCargandoDatosUsuario = false;
+                            this.tituloProgressDatosUsuario = '';
+                            loader.dismiss();
+                        }));
+                    }
+                    else {
+                        //llamada nativa
+                        this.info.getIndicadorValorNativeApi(uspId).then((response) => {
+                            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                            console.log(JSON.parse(response.data));
+                            this.procesarNuevoArregloValoresIndependiente(JSON.parse(response.data), loader, this.usuario, true);
+                        }).catch((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                            this.estaCargandoDatosUsuario = false;
+                            this.tituloProgressDatosUsuario = '';
+                            loader.dismiss();
+                        }));
+                    }
                 }
             }));
         });
     }
-    procesarNuevoArregloValoresIndependiente(response, loader) {
+    procesarNuevoArregloValoresIndependiente(response, loader, usuarioAps, guardaLocalStorage) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //procesamos los datos en el local storage
+            if (guardaLocalStorage) {
+                var entidad = {
+                    UsuarioAps: usuarioAps,
+                    Mediciones: null,
+                };
+                entidad.Mediciones = response;
+                this.arrMedicionesL = [];
+                if (localStorage.getItem('ANTECEDENTES')) {
+                    this.arrMedicionesL = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+                }
+                this.arrMedicionesL.push(entidad);
+                localStorage.setItem('ANTECEDENTES', JSON.stringify(this.arrMedicionesL));
+                localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_8__().format('YYYY-MM-DD HH:mm'));
+            }
+            //fin proceso ********************************
             this.arrMediciones = [];
             this.arrMedicionesParteUno = [];
             this.arrMedicionesParteDos = [];
@@ -977,6 +1009,9 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             //console.log(this.arrMedicionesParteDos);
             this.estaCargandoDatosUsuario = false;
             this.tituloProgressDatosUsuario = '';
+            if (this.arrMediciones && this.arrMediciones.length > 0) {
+                this.tieneDatosUsuario = true;
+            }
             loader.dismiss();
         });
     }
@@ -990,37 +1025,59 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             this.estaCargandoAlergias = true;
             this.tituloProgressAlergias = 'Buscando alergias del paciente';
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                if (!this.utiles.isAppOnDevice()) {
-                    //llamada web
-                    this.info.getAlergiasApi(uspId).subscribe((response) => {
-                        console.log(response);
-                        //correcto
-                        this.procesarAlergiasIndividual(response, loader);
-                    }, (error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                        console.log(error.message);
-                        this.tituloProgressAlergias = '';
-                        this.estaCargandoAlergias = false;
-                        loader.dismiss();
-                    }));
+                if (this.utiles.necesitaActualizarAlergiasPacientes(uspId) == false) {
+                    var datos = this.utiles.entregaArregloAlergiasPaciente(uspId);
+                    this.procesarAlergiasIndividual(datos, loader, this.usuario, false);
                 }
                 else {
-                    //llamada nativa
-                    this.info.getAlergiasNativeApi(uspId).then((response) => {
-                        //this.procesarIndicadorValor(JSON.parse(response.data), loader);
-                        console.log(JSON.parse(response.data));
-                        this.procesarAlergiasIndividual(JSON.parse(response.data), loader);
-                    }).catch((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                        console.log(error.message);
-                        this.tituloProgressAlergias = '';
-                        this.estaCargandoAlergias = false;
-                        loader.dismiss();
-                    }));
+                    if (!this.utiles.isAppOnDevice()) {
+                        //llamada web
+                        this.info.getAlergiasApi(uspId).subscribe((response) => {
+                            console.log(response);
+                            //correcto
+                            this.procesarAlergiasIndividual(response, loader, this.usuario, true);
+                        }, (error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                            this.tituloProgressAlergias = '';
+                            this.estaCargandoAlergias = false;
+                            loader.dismiss();
+                        }));
+                    }
+                    else {
+                        //llamada nativa
+                        this.info.getAlergiasNativeApi(uspId).then((response) => {
+                            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                            console.log(JSON.parse(response.data));
+                            this.procesarAlergiasIndividual(JSON.parse(response.data), loader, this.usuario, true);
+                        }).catch((error) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                            console.log(error.message);
+                            this.tituloProgressAlergias = '';
+                            this.estaCargandoAlergias = false;
+                            loader.dismiss();
+                        }));
+                    }
                 }
             }));
         });
     }
-    procesarAlergiasIndividual(data, loader) {
+    procesarAlergiasIndividual(data, loader, usuarioAps, guardaLocalStorage) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            //procesamos los datos en el local storage
+            if (guardaLocalStorage) {
+                var entidad = {
+                    UsuarioAps: usuarioAps,
+                    Alergias: null,
+                };
+                entidad.Alergias = data;
+                this.arrAlergias = [];
+                if (localStorage.getItem('ALERGIAS')) {
+                    this.arrAlergias = JSON.parse(localStorage.getItem('ALERGIAS'));
+                }
+                this.arrAlergias.push(entidad);
+                localStorage.setItem('ALERGIAS', JSON.stringify(this.arrAlergias));
+                localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_8__().format('YYYY-MM-DD HH:mm'));
+            }
+            //fin proceso ********************************
             this.alergias = data.AlergiasUsp;
             if (this.alergias) {
                 if (this.alergias.length == 1) {
@@ -1032,6 +1089,9 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             }
             this.estaCargandoAlergias = false;
             this.tituloProgressAlergias = '';
+            if (this.alergias && this.alergias.length > 0) {
+                this.tieneAlergias = true;
+            }
             loader.dismiss();
         });
     }
@@ -1045,36 +1105,58 @@ let DetailUsuarioPage = class DetailUsuarioPage {
             this.estaCargandoMorbidos = true;
             this.tituloProgressMorbidos = 'Buscando otros datos del paciente';
             yield loader.present().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                if (!this.utiles.isAppOnDevice()) {
-                    //llamada web
-                    this.info.postAntecedentesApi(uspId).subscribe((response) => {
-                        console.log(response);
-                        //correcto
-                        this.procesarAntecedentesIndividual(response, loader);
-                    }, error => {
-                        console.log(error.message);
-                        this.estaCargandoMorbidos = false;
-                        this.tituloProgressMorbidos = '';
-                        loader.dismiss();
-                    });
+                if (this.utiles.necesitaActualizarMorbidosPacientes(uspId) == false) {
+                    var datos = this.utiles.entregaArregloMorbidosPaciente(uspId);
+                    this.procesarAntecedentesIndividual(datos, loader, null, false);
                 }
                 else {
-                    //llamada nativa
-                    this.info.postAntecedentesNativeApi(uspId).then((response) => {
-                        //this.procesarIndicadorValor(JSON.parse(response.data), loader);
-                        console.log(JSON.parse(response.data));
-                        this.procesarAntecedentesIndividual(JSON.parse(response.data), loader);
-                    }).catch(error => {
-                        console.log(error.message);
-                        this.estaCargandoMorbidos = false;
-                        this.tituloProgressMorbidos = '';
-                        loader.dismiss();
-                    });
+                    if (!this.utiles.isAppOnDevice()) {
+                        //llamada web
+                        this.info.postAntecedentesApi(uspId).subscribe((response) => {
+                            console.log(response);
+                            //correcto
+                            this.procesarAntecedentesIndividual(response, loader, this.usuario, true);
+                        }, error => {
+                            console.log(error.message);
+                            this.estaCargandoMorbidos = false;
+                            this.tituloProgressMorbidos = '';
+                            loader.dismiss();
+                        });
+                    }
+                    else {
+                        //llamada nativa
+                        this.info.postAntecedentesNativeApi(uspId).then((response) => {
+                            //this.procesarIndicadorValor(JSON.parse(response.data), loader);
+                            console.log(JSON.parse(response.data));
+                            this.procesarAntecedentesIndividual(JSON.parse(response.data), loader, this.usuario, true);
+                        }).catch(error => {
+                            console.log(error.message);
+                            this.estaCargandoMorbidos = false;
+                            this.tituloProgressMorbidos = '';
+                            loader.dismiss();
+                        });
+                    }
                 }
             }));
         });
     }
-    procesarAntecedentesIndividual(data, loader) {
+    procesarAntecedentesIndividual(data, loader, usuarioAps, guardaLocalStorage) {
+        //procesamos los datos en el local storage
+        if (guardaLocalStorage) {
+            var entidad = {
+                UsuarioAps: usuarioAps,
+                Morbidos: null,
+            };
+            entidad.Morbidos = data;
+            this.arrMorbidos = [];
+            if (localStorage.getItem('MORBIDOS')) {
+                this.arrMorbidos = JSON.parse(localStorage.getItem('MORBIDOS'));
+            }
+            this.arrMorbidos.push(entidad);
+            localStorage.setItem('MORBIDOS', JSON.stringify(this.arrMorbidos));
+            localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_8__().format('YYYY-MM-DD HH:mm'));
+        }
+        //fin proceso ********************************
         this.antecedentes = data;
         console.log(this.antecedentes);
         this.familiares = [];
@@ -1102,6 +1184,13 @@ let DetailUsuarioPage = class DetailUsuarioPage {
                     });
                 }
             }
+        }
+        //if (this.personales.length > 0 || this.familiares.len)
+        if (this.personales && this.personales.length > 0) {
+            this.tieneMorbidosPersonales = true;
+        }
+        if (this.familiares && this.familiares.length > 0) {
+            this.tieneMorbidosFamiliares = true;
         }
         this.estaCargandoMorbidos = false;
         this.tituloProgressMorbidos = '';
