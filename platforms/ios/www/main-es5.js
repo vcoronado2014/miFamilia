@@ -490,7 +490,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n  <ion-row style=\"display: block;\">\n    <h3 class=\"text-avatar\">{{nombreCompleto}}</h3>\n    <p class=\"subtext-avatar\">{{parentezco}}</p>\n  </ion-row>\n\n";
+    __webpack_exports__["default"] = "  <ion-row style=\"display: block;\">\n    <div class=\"text-avatar\">{{nombreCompleto}}</div>\n    <div class=\"subtext-avatar\">{{parentezco}}</div>\n  </ion-row>\n\n";
     /***/
   },
 
@@ -510,7 +510,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-item [lines]=\"lines\">\n  <!-- poner avatar -->\n  <ion-avatar slot=\"start\">\n    <img *ngIf=\"urlImagen != ''\" src={{urlImagen}}>\n    <img *ngIf=\"urlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n  </ion-avatar>\n  <ion-row style=\"display: block;\">\n    <h3 class=\"text-avatar\">{{nombreCompleto}}</h3>\n    <p class=\"subtext-avatar\">{{parentezco}}</p>\n  </ion-row>\n</ion-item>\n\n\n";
+    __webpack_exports__["default"] = "<ion-item [lines]=\"lines\" [ngClass]=\"{'avatar-padding':style, 'avatar-no-padding': style == false }\" style=\"width: 100%;\">\n  <!-- poner avatar -->\n  <ion-avatar slot=\"start\">\n    <img *ngIf=\"urlImagen != ''\" src={{urlImagen}}>\n    <img *ngIf=\"urlImagen == ''\" src=\"../assets/img/no-imagen.jpg\">\n  </ion-avatar>\n  <ion-row style=\"display: block; width: 100%;\">\n    <div class=\"text-avatar\">{{nombreCompleto}}</div>\n    <div class=\"subtext-avatar\">{{parentezco}}</div>\n  </ion-row>\n</ion-item>\n\n\n";
     /***/
   },
 
@@ -530,7 +530,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual\">\n          <label class=\"fecha-card\" style=\"font-size: 1.3em;\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>";
+    __webpack_exports__["default"] = "      <!-- prueba de material -->\n      <!-- fila fecha superior si es actual la mostramos en negrita-->\n      <div id=\"{{item.DiferenciaFechas.toString()}}\">\n        <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual && item.Eventos[0].NombrePrincipal != 'Nada planificado para hoy'\">\n          <label class=\"fecha-card\" style=\"font-size: 1.3em;\"><strong>{{item.NumeroDia}} de\n              {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></label>\n        </ion-row>\n        <ion-row\n          *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual && item.Eventos[0].NombrePrincipal == 'Nada planificado para hoy'\">\n          <ion-grid style=\"background-color: #d1c4e9;\n                      font-size: 16px;\n                      width: initial;\n                      border-radius: 4px;\n                      height: 40px;\n                      margin: 8px;\n                      margin-top: 0;\n                      margin-bottom: 0;\" id=\"0\">\n            <ion-col>\n              <span><strong>{{item.NumeroDia}} de\n                  {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></span>\n            </ion-col>\n            <ion-col>\n              <span style=\"padding-inline: 16px;color: rgb(0 0 0 / 54%);\">Nada planificado para hoy </span>\n            </ion-col>\n          </ion-grid>\n        \n        </ion-row>\n      </div>\n      <ion-row *ngIf=\"transformDate(item.FechaCompleta, 'YYYY-MM-DD') != fechaActual\">\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') != anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} del {{transformDate(item.FechaCompleta, 'YYYY')}}</label>\n        <label *ngIf=\"transformDate(item.FechaCompleta, 'YYYY') == anioActual\" class=\"fecha-card\">{{item.NumeroDia}} de\n          {{transformDate(item.FechaCompleta, 'MMMM')}} </label>\n      </ion-row>";
     /***/
   },
 
@@ -550,7 +550,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<h5 class=\"titulo-slide\">{{titulo}}</h5>\r\n<h6 class=\"titulo-slide\">{{subTitulo}}</h6>\r\n<p class=\"subtitulo-slide\">{{contenido}}</p>\r\n<!-- mostrar dependiendo si modulo es distinto de null -->\r\n<!-- <button [hidden]=\"modulo == null\" mat-stroked-button color=\"accent\" (click)=\"openGenerico(modulo)\">Ir...</button> -->";
+    __webpack_exports__["default"] = "<h5 class=\"titulo-slide\">{{titulo}}</h5>\r\n<h6 class=\"titulo-slide\"  *ngIf=\"subTitulo != null\">{{subTitulo}}</h6>\r\n<p class=\"subtitulo-slide\">{{contenido}}</p>\r\n<!-- mostrar dependiendo si modulo es distinto de null -->\r\n<!-- <button [hidden]=\"modulo == null\" mat-stroked-button color=\"accent\" (click)=\"openGenerico(modulo)\">Ir...</button> -->";
     /***/
   },
 
@@ -591,6 +591,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     __webpack_exports__["default"] = "<div class=\"centrado ion-no-padding\">\r\n    <h1>{{titulo}}</h1>\r\n    <p class=\"texto-1 ion-text-left\">{{contenido}}</p>\r\n    <!-- boton volver -->\r\n    <div class=\"row mt-32\">\r\n        <button mat-raised-button color=\"primary\" style=\"width: 100%;\" class=\"boton\" (click)=\"volver()\">VOLVER</button>\r\n    </div>\r\n</div>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress-minimo/progress-minimo.component.html":
+  /*!*****************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress-minimo/progress-minimo.component.html ***!
+    \*****************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsProgressMinimoProgressMinimoComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "  <!-- progress bar -->\r\n<div class=\"centrado\" [hidden]=\"!mostrar\">\r\n    <ion-label class=\"titulo-item-2\">{{titulo}}</ion-label>\r\n    <ion-progress-bar type=\"indeterminate\" class=\"ion-margin-top\"></ion-progress-bar>\r\n</div>";
     /***/
   },
 
@@ -659,9 +679,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       path: 'home',
       loadChildren: function loadChildren() {
-        return __webpack_require__.e(
+        return Promise.all(
         /*! import() | home-home-module */
-        "home-home-module").then(__webpack_require__.bind(null,
+        [__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null,
         /*! ./home/home.module */
         "./src/app/home/home.module.ts")).then(function (m) {
           return m.HomePageModule;
@@ -720,7 +740,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | ordenes-ordenes-module */
-        [__webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("common"), __webpack_require__.e("ordenes-ordenes-module")]).then(__webpack_require__.bind(null,
         /*! ./ordenes/ordenes.module */
         "./src/app/ordenes/ordenes.module.ts")).then(function (m) {
           return m.OrdenesPageModule;
@@ -731,7 +751,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | modal-examenes-modal-examenes-module */
-        [__webpack_require__.e("common"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~modal-examenes-modal-examenes-module~ordenes-ordenes-module"), __webpack_require__.e("modal-examenes-modal-examenes-module")]).then(__webpack_require__.bind(null,
         /*! ./modal-examenes/modal-examenes.module */
         "./src/app/modal-examenes/modal-examenes.module.ts")).then(function (m) {
           return m.ModalExamenesPageModule;
@@ -968,6 +988,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.PreOrdenesPageModule;
         });
       }
+    }, {
+      path: 'modal-alertas',
+      loadChildren: function loadChildren() {
+        return Promise.all(
+        /*! import() | modal-alertas-modal-alertas-module */
+        [__webpack_require__.e("common"), __webpack_require__.e("modal-alertas-modal-alertas-module")]).then(__webpack_require__.bind(null,
+        /*! ./modal-alertas/modal-alertas.module */
+        "./src/app/modal-alertas/modal-alertas.module.ts")).then(function (m) {
+          return m.ModalAlertasPageModule;
+        });
+      }
+    }, {
+      path: 'resultados',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | resultados-resultados-module */
+        "resultados-resultados-module").then(__webpack_require__.bind(null,
+        /*! ./resultados/resultados.module */
+        "./src/app/resultados/resultados.module.ts")).then(function (m) {
+          return m.ResultadosPageModule;
+        });
+      }
+    }, {
+      path: 'modal-busqueda',
+      loadChildren: function loadChildren() {
+        return Promise.all(
+        /*! import() | modal-busqueda-modal-busqueda-module */
+        [__webpack_require__.e("common"), __webpack_require__.e("modal-busqueda-modal-busqueda-module")]).then(__webpack_require__.bind(null,
+        /*! ./modal-busqueda/modal-busqueda.module */
+        "./src/app/modal-busqueda/modal-busqueda.module.ts")).then(function (m) {
+          return m.ModalBusquedaPageModule;
+        });
+      }
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -1055,45 +1108,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! @ionic-native/background-mode/ngx */
-    "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
-    /* harmony import */
-
-
-    var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! src/environments/environment */
     "./src/environments/environment.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../app/services/ServicioNotificaciones */
     "./src/app/services/ServicioNotificaciones.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../app/services/ServicioUtiles */
     "./src/app/services/ServicioUtiles.ts");
     /* harmony import */
 
 
-    var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ../app/services/ServicioFCM */
-    "./src/app/services/ServicioFCM.ts"); //componente para dejar la app en backgroud
-    //servicio de notificaciones para prueba
+    "./src/app/services/ServicioFCM.ts"); //servicio de notificaciones para prueba
 
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(platform, splashScreen, statusBar, notificacion, backgroundMode, utiles, fcmService) {
+      function AppComponent(platform, splashScreen, statusBar, notificacion, utiles, fcmService) {
         _classCallCheck(this, AppComponent);
 
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.notificacion = notificacion;
-        this.backgroundMode = backgroundMode;
         this.utiles = utiles;
         this.fcmService = fcmService;
         this.initializeApp();
@@ -1117,7 +1162,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                       this.notificacion.buscarCitasTodas();
                       _context.next = 5;
-                      return this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].production);
+                      return this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].production);
 
                     case 5:
                       _context.next = 7;
@@ -1149,13 +1194,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]
       }, {
-        type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_7__["ServicioNotificaciones"]
+        type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_6__["ServicioNotificaciones"]
       }, {
-        type: _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_5__["BackgroundMode"]
+        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_7__["ServicioUtiles"]
       }, {
-        type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_8__["ServicioUtiles"]
-      }, {
-        type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__["ServicioFCM"]
+        type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_8__["ServicioFCM"]
       }];
     };
 
@@ -1463,61 +1506,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
-    /*! @ionic-native/background-mode/ngx */
-    "./node_modules/@ionic-native/background-mode/__ivy_ngcc__/ngx/index.js");
-    /* harmony import */
-
-
-    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
+    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
     /*! ../environments/firebaseconfig */
     "./src/environments/firebaseconfig.ts");
     /* harmony import */
 
 
-    var _angular_fire__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
+    var _angular_fire__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
     /*! @angular/fire */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
     /* harmony import */
 
 
-    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
+    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
     /*! @angular/fire/database */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
     /* harmony import */
 
 
-    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
+    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
     /*! @angular/fire/storage */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
     /* harmony import */
 
 
-    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
+    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
     /*! @angular/fire/messaging */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
     /* harmony import */
 
 
-    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
+    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
     /*! @ionic-native/firebase-messaging/ngx */
     "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _components_components_module__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
     /*! ./components/components.module */
     "./src/app/components/components.module.ts");
     /* harmony import */
 
 
-    var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(
+    var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(
     /*! @angular/material-moment-adapter */
     "./node_modules/@angular/material-moment-adapter/__ivy_ngcc__/fesm2015/material-moment-adapter.js");
     /* harmony import */
 
 
-    var _angular_material_core__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(
+    var _angular_material_core__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(
     /*! @angular/material/core */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js"); //nativos
     //Pipes
@@ -1528,8 +1565,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* import { MatSelectModule  } from '@angular/material/select';
     import { MatFormField  } from '@angular/material/form-field/form-field';
     import { MatFormField  } from '@angular/material/form-field/label'; */
-
-    /* import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'; */
     //material datepicker
 
 
@@ -1540,19 +1575,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"], _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__["CelsiusPipe"], _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__["SplitPipe"], _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__["MomentPipe"], _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__["FilterPipe"]],
       entryComponents: [],
-      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__["MatIconModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__["MatDatepickerModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_52__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_47__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__["firebaseConfig"])],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__["LocalNotifications"], _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_45__["BackgroundMode"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__["FirebaseMessaging"],
-      /*  BackgroundGeolocation, */
-      {
-        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"],
+      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__["MatIconModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__["MatDatepickerModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_51__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_46__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__["firebaseConfig"])],
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__["LocalNotifications"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__["FirebaseMessaging"], {
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_LOCALE"],
         useValue: 'es-CL'
       }, {
-        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["DateAdapter"],
-        useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MomentDateAdapter"],
-        deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["DateAdapter"],
+        useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MomentDateAdapter"],
+        deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
       }, {
-        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_FORMATS"],
-        useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_FORMATS"]
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_FORMATS"],
+        useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MAT_MOMENT_DATE_FORMATS"]
       }, {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
@@ -1657,7 +1690,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyL2F2YXRhci5jb21wb25lbnQuc2NzcyJ9 */";
+    __webpack_exports__["default"] = ".text-avatar {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%;\n}\n\n.avatar-no-padding {\n  --padding-start: 0;\n  width: 100%;\n}\n\n.avatar-padding {\n  --padding-start: 8px;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy92aWN0b3Jjb3JvbmFkby9EZXNrdG9wL21pRmFtaWxpYV9wcmUvc3JjL2FwcC9jb21wb25lbnRzL2F2YXRhci9hdmF0YXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyL2F2YXRhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtFQUNBLFdBQUE7QUNDSjs7QURDQTtFQUNJLGtCQUFBO0VBQ0EsV0FBQTtBQ0VKOztBREFBO0VBQ0ksb0JBQUE7RUFDQSxXQUFBO0FDR0oiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2F2YXRhci9hdmF0YXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGV4dC1hdmF0YXJ7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XHJcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbn1cclxuLmF2YXRhci1uby1wYWRkaW5ne1xyXG4gICAgLS1wYWRkaW5nLXN0YXJ0OiAwO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbn1cclxuLmF2YXRhci1wYWRkaW5ne1xyXG4gICAgLS1wYWRkaW5nLXN0YXJ0OiA4cHg7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG4iLCIudGV4dC1hdmF0YXIge1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5hdmF0YXItbm8tcGFkZGluZyB7XG4gIC0tcGFkZGluZy1zdGFydDogMDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5hdmF0YXItcGFkZGluZyB7XG4gIC0tcGFkZGluZy1zdGFydDogOHB4O1xuICB3aWR0aDogMTAwJTtcbn0iXX0= */";
     /***/
   },
 
@@ -1699,11 +1732,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         //inset: solo la parte del texto y no avatar full: todo none: ninguna
         this.lines = 'none';
+        this.style = true;
       }
 
       _createClass(AvatarComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          console.log(this.style);
+        }
       }]);
 
       return AvatarComponent;
@@ -1713,6 +1749,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "nombreCompleto", void 0);
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "parentezco", void 0);
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "lines", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AvatarComponent.prototype, "style", void 0);
     AvatarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-avatar',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
@@ -1997,15 +2034,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! ./content-slide/content-slide.component */
     "./src/app/components/content-slide/content-slide.component.ts");
+    /* harmony import */
+
+
+    var _progress_minimo_progress_minimo_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    /*! ./progress-minimo/progress-minimo.component */
+    "./src/app/components/progress-minimo/progress-minimo.component.ts");
 
     var ComponentsModule = function ComponentsModule() {
       _classCallCheck(this, ComponentsModule);
     };
 
     ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"], _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"]],
+      declarations: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"], _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"], _progress_minimo_progress_minimo_component__WEBPACK_IMPORTED_MODULE_15__["ProgressMinimoComponent"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _directives_text_avatar_index__WEBPACK_IMPORTED_MODULE_5__["TextAvatarModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_6__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_7__["MatButtonModule"]],
-      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"], _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"]]
+      exports: [_card_calendario_card_calendario_component__WEBPACK_IMPORTED_MODULE_8__["CardCalendarioComponent"], _avatar_avatar_component__WEBPACK_IMPORTED_MODULE_9__["AvatarComponent"], _avatar_simple_avatar_simple_component__WEBPACK_IMPORTED_MODULE_12__["AvatarSimpleComponent"], _progress_progress_component__WEBPACK_IMPORTED_MODULE_10__["ProgressComponent"], _item_home_item_home_component__WEBPACK_IMPORTED_MODULE_11__["ItemHomeComponent"], _pagina_mensajes_pagina_mensajes_component__WEBPACK_IMPORTED_MODULE_13__["PaginaMensajesComponent"], _content_slide_content_slide_component__WEBPACK_IMPORTED_MODULE_14__["ContentSlideComponent"], _progress_minimo_progress_minimo_component__WEBPACK_IMPORTED_MODULE_15__["ProgressMinimoComponent"]]
     })], ComponentsModule);
     /***/
   },
@@ -2410,6 +2453,87 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /*! ./pagina-mensajes.component.scss */
       "./src/app/components/pagina-mensajes/pagina-mensajes.component.scss"))["default"]]
     })], PaginaMensajesComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/progress-minimo/progress-minimo.component.scss":
+  /*!***************************************************************************!*\
+    !*** ./src/app/components/progress-minimo/progress-minimo.component.scss ***!
+    \***************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsProgressMinimoProgressMinimoComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".centrado {\n  text-align: center;\n  width: 100%;\n  height: 20%;\n  /*position: absolute;*/\n  top: 5%;\n  padding-top: 5%;\n  padding-left: 60px;\n  padding-right: 60px;\n}\n\n.titulo-item-2 {\n  font-size: 16px;\n  color: #000000DE;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy92aWN0b3Jjb3JvbmFkby9EZXNrdG9wL21pRmFtaWxpYV9wcmUvc3JjL2FwcC9jb21wb25lbnRzL3Byb2dyZXNzLW1pbmltby9wcm9ncmVzcy1taW5pbW8uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvcHJvZ3Jlc3MtbWluaW1vL3Byb2dyZXNzLW1pbmltby5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLFdBQUE7RUFDQSxzQkFBQTtFQUNBLE9BQUE7RUFDQSxlQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtBQ0NKOztBRENBO0VBQ0ksZUFBQTtFQUNBLGdCQUFBO0FDRUoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3Byb2dyZXNzLW1pbmltby9wcm9ncmVzcy1taW5pbW8uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2VudHJhZG97XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICB3aWR0aDogMTAwJTsgICAgICAgXHJcbiAgICBoZWlnaHQ6IDIwJTtcclxuICAgIC8qcG9zaXRpb246IGFic29sdXRlOyovXHJcbiAgICB0b3A6NSU7XHJcbiAgICBwYWRkaW5nLXRvcDogNSU7ICBcclxuICAgIHBhZGRpbmctbGVmdDogNjBweDtcclxuICAgIHBhZGRpbmctcmlnaHQ6IDYwcHg7ICAgICAgICAgXHJcbn1cclxuLnRpdHVsby1pdGVtLTJ7XHJcbiAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICBjb2xvcjogIzAwMDAwMERFO1xyXG59IiwiLmNlbnRyYWRvIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAyMCU7XG4gIC8qcG9zaXRpb246IGFic29sdXRlOyovXG4gIHRvcDogNSU7XG4gIHBhZGRpbmctdG9wOiA1JTtcbiAgcGFkZGluZy1sZWZ0OiA2MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA2MHB4O1xufVxuXG4udGl0dWxvLWl0ZW0tMiB7XG4gIGZvbnQtc2l6ZTogMTZweDtcbiAgY29sb3I6ICMwMDAwMDBERTtcbn0iXX0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/progress-minimo/progress-minimo.component.ts":
+  /*!*************************************************************************!*\
+    !*** ./src/app/components/progress-minimo/progress-minimo.component.ts ***!
+    \*************************************************************************/
+
+  /*! exports provided: ProgressMinimoComponent */
+
+  /***/
+  function srcAppComponentsProgressMinimoProgressMinimoComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ProgressMinimoComponent", function () {
+      return ProgressMinimoComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+    var ProgressMinimoComponent = /*#__PURE__*/function () {
+      function ProgressMinimoComponent() {
+        _classCallCheck(this, ProgressMinimoComponent);
+
+        this.mostrar = false;
+      }
+
+      _createClass(ProgressMinimoComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return ProgressMinimoComponent;
+    }();
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ProgressMinimoComponent.prototype, "mostrar", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], ProgressMinimoComponent.prototype, "titulo", void 0);
+    ProgressMinimoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-progress-minimo',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./progress-minimo.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/progress-minimo/progress-minimo.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./progress-minimo.component.scss */
+      "./src/app/components/progress-minimo/progress-minimo.component.scss"))["default"]]
+    })], ProgressMinimoComponent);
     /***/
   },
 
@@ -3993,9 +4117,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               forceShow: true
             }).then(function () {
               console.log('push permitido');
-            })["catch"](function (error) {
-              console.log('push no permitido');
-              console.log(error.message);
             }); //pasaremos apn-string
 
             if (this.verificaTokenSession() == false) {
@@ -5032,6 +5153,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             "UspId": uspId.toString()
           };
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AlergiaApi';
+          this.http.setDataSerializer('json');
+          return this.http.post(url, body, {});
+        } //antecedentes morbidos y familiares
+
+      }, {
+        key: "postAntecedentesApi",
+        value: function postAntecedentesApi(uspId) {
+          var body = JSON.stringify({
+            UspId: uspId.toString()
+          });
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AntecedentesApi';
+          var httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          });
+          httpHeaders.set('Access-Control-Allow-Origin', '*');
+          httpHeaders.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+          httpHeaders.set("Access-Control-Allow-Headers", "*");
+          var options = {
+            headers: httpHeaders
+          };
+          var data = this.httpClient.post(url, body, options);
+          return data;
+        }
+      }, {
+        key: "postAntecedentesNativeApi",
+        value: function postAntecedentesNativeApi(uspId) {
+          //realizar la llamada post nativa
+          var headers = new Headers();
+          var body = {
+            "UspId": uspId.toString()
+          };
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AntecedentesApi';
           this.http.setDataSerializer('json');
           return this.http.post(url, body, {});
         }
@@ -6785,31 +6939,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             title: 'Configurar familia',
             visible: true,
             icon: 'settings',
-            src: '#',
+            src: 'familia',
             esSubMenu: false
           };
           arrPages.push(pagUno); //ahora los submenus de configurar familia
           //simepre y cuando tenga familia aceptada
 
-          if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
-            var pagQuitarIntegrantes = {
-              title: 'Desactivar/Activar',
-              visible: true,
-              icon: 'person',
-              src: 'quitar-familia',
-              esSubMenu: true
-            };
-            arrPages.push(pagQuitarIntegrantes);
-          }
+          /*         if (this.tieneFamiliaAceptada() || this.tieneFamiliaRechazada()) {
+                      var pagQuitarIntegrantes = {
+                          title: 'Desactivar/Activar',
+                          visible: false,
+                          icon: 'person',
+                          src: 'quitar-familia',
+                          esSubMenu: true
+                      }
+                      arrPages.push(pagQuitarIntegrantes);
+                  }
+                  var pagConfigContacto = {
+                      title: 'Datos de contacto/avatar',
+                      visible: false,
+                      icon: 'share',
+                      src: 'familia',
+                      esSubMenu: true
+                  }
+                  arrPages.push(pagConfigContacto); */
 
-          var pagConfigContacto = {
-            title: 'Datos de contacto/avatar',
-            visible: true,
-            icon: 'share',
-            src: 'familia',
-            esSubMenu: true
-          };
-          arrPages.push(pagConfigContacto);
           var pagDos = {
             title: 'Términos y condiciones',
             visible: true,
@@ -7621,6 +7775,173 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }, _callee5, this);
           }));
         }
+      }, {
+        key: "necesitaActualizarDatosPaciente",
+        value: function necesitaActualizarDatosPaciente(uspId) {
+          var retorno = true;
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+
+          if (localStorage.getItem('ANTECEDENTES')) {
+            //tiene antecedentes, pero puede que no tenga antecddentes el usuario aps, en este caso hay que acrualizar
+            var tiene = false;
+            var antecedentes = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+
+            if (antecedentes && antecedentes.length > 0) {
+              var arrUsuarioTiene = antecedentes.filter(function (p) {
+                return p.UsuarioAps.Id == uspId;
+              });
+
+              if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+                tiene = true;
+              }
+            }
+
+            if (tiene == false) {
+              retorno = true;
+            } else {
+              if (localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES')) {
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES'));
+                var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+
+                if (diferencia < 1) {
+                  retorno = false;
+                }
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "necesitaActualizarAlergiasPacientes",
+        value: function necesitaActualizarAlergiasPacientes(uspId) {
+          var retorno = true;
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var tiene = false;
+          var alergias = JSON.parse(localStorage.getItem('ALERGIAS'));
+
+          if (alergias && alergias.length > 0) {
+            var arrUsuarioTiene = alergias.filter(function (p) {
+              return p.UsuarioAps.Id == uspId;
+            });
+
+            if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+              tiene = true;
+            }
+          }
+
+          if (tiene == false) {
+            retorno = true;
+          } else {
+            if (localStorage.getItem('ALERGIAS')) {
+              if (localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS')) {
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS'));
+                var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+
+                if (diferencia < 1) {
+                  retorno = false;
+                }
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "necesitaActualizarMorbidosPacientes",
+        value: function necesitaActualizarMorbidosPacientes(uspId) {
+          var retorno = true;
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var tiene = false;
+          var morbidos = JSON.parse(localStorage.getItem('MORBIDOS'));
+
+          if (morbidos && morbidos.length > 0) {
+            var arrUsuarioTiene = morbidos.filter(function (p) {
+              return p.UsuarioAps.Id == uspId;
+            });
+
+            if (arrUsuarioTiene && arrUsuarioTiene.length > 0) {
+              tiene = true;
+            }
+          }
+
+          if (tiene == false) {
+            retorno = true;
+          } else {
+            if (localStorage.getItem('MORBIDOS')) {
+              if (localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS')) {
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS'));
+                var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
+
+                if (diferencia < 1) {
+                  retorno = false;
+                }
+              }
+            }
+          }
+
+          return retorno;
+        }
+      }, {
+        key: "entregaArregloDatosPaciente",
+        value: function entregaArregloDatosPaciente(uspId) {
+          var antecedentes = [];
+
+          if (localStorage.getItem('ANTECEDENTES')) {
+            var arreglo = JSON.parse(localStorage.getItem('ANTECEDENTES'));
+
+            if (arreglo && arreglo.length > 0) {
+              for (var s in arreglo) {
+                if (arreglo[s].UsuarioAps.Id == uspId) {
+                  antecedentes = arreglo[s].Mediciones;
+                }
+              }
+            }
+          }
+
+          return antecedentes;
+        }
+      }, {
+        key: "entregaArregloAlergiasPaciente",
+        value: function entregaArregloAlergiasPaciente(uspId) {
+          var alergias = [];
+
+          if (localStorage.getItem('ALERGIAS')) {
+            var arreglo = JSON.parse(localStorage.getItem('ALERGIAS'));
+
+            if (arreglo && arreglo.length > 0) {
+              for (var s in arreglo) {
+                if (arreglo[s].UsuarioAps.Id == uspId) {
+                  alergias = arreglo[s].Alergias;
+                }
+              }
+            }
+          }
+
+          return alergias;
+        }
+      }, {
+        key: "entregaArregloMorbidosPaciente",
+        value: function entregaArregloMorbidosPaciente(uspId) {
+          var morbidos = [];
+
+          if (localStorage.getItem('MORBIDOS')) {
+            var arreglo = JSON.parse(localStorage.getItem('MORBIDOS'));
+
+            if (arreglo && arreglo.length > 0) {
+              for (var s in arreglo) {
+                if (arreglo[s].UsuarioAps.Id == uspId) {
+                  morbidos = arreglo[s].Morbidos;
+                }
+              }
+            }
+          }
+
+          return morbidos;
+        }
       }]);
 
       return ServicioUtiles;
@@ -7954,7 +8275,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
       USA_CALENDARIO: false,
       HORAS_FECHA_INICIO: 3,
-      TIEMPO_CONSULTA_NOTIFICACIONES: 20000
+      TIEMPO_CONSULTA_NOTIFICACIONES: 2000
     };
     /*
      * For easier debugging in development mode, you can import the following file

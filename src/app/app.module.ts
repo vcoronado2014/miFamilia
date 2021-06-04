@@ -52,8 +52,6 @@ import { MatIconModule  } from '@angular/material/icon';
 import { MatFormField  } from '@angular/material/form-field/form-field';
 import { MatFormField  } from '@angular/material/form-field/label'; */
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-/* import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx'; */
 import { firebaseConfig } from '../environments/firebaseconfig';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -124,9 +122,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
     ServicioFCM,
     LaunchNavigator,
     LocalNotifications,
-    BackgroundMode,
     FirebaseMessaging,
-    /*  BackgroundGeolocation, */
     { provide: MAT_DATE_LOCALE, useValue: 'es-CL' },
     {
       provide: DateAdapter,
