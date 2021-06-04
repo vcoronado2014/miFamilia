@@ -312,7 +312,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.estaCargando = false;
         this.tituloLoading = ''; //para infinity scroll
 
-        this.topLimit = 25;
+        this.topLimit = 50;
         this.citasVerticalTodasTop = []; //para poner la linea en la fecha actual
 
         this.fechaActual = '';
