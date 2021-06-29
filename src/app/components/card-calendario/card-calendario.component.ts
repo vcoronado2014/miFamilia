@@ -18,6 +18,8 @@ export class CardCalendarioComponent implements OnInit {
     Mostrar: false,
     FechaCompleta: '',
     NumeroDia: '',
+    DiferenciaFechas: '',
+    Eventos: [],
   };
   @Input() fechaActual;
   @Input() anioActual;

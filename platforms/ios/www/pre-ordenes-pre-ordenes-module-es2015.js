@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Exámenes</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando antecedentes\"></app-progress>\n\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\n  </div>\n\n  <div style=\"padding-top: 12px;\" [hidden]=\"estaCargando\">\n    <h5 class=\"texto m-16\">Selecciona un integrante de tu familia</h5>\n    <div *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\n      <!-- poner avatar -->\n      <app-avatar [lines]=\"inset\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\n    </div>\n  </div>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <!-- <ion-toolbar [style.--background]=\"miColor\" mode=\"md\"> -->\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/home\" class=\"fcw\"></ion-back-button>\n    </ion-buttons>\n    <ion-title class=\"fcw\">Exámenes</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <app-progress [mostrar]=\"estaCargando\" titulo=\"Buscando antecedentes\"></app-progress>\n\n  <div [hidden]=\"estaCargando\" *ngIf=\"listadoUsuario.length <= 0\" style=\"padding-top: 162px; font-size: 30px; color:#BDBDBD; text-align: center;\"><p>No hay antecedentes para mostrar  <br>\n    <ion-icon name=\"information-circle\" style=\"font-size: 60px;\"></ion-icon></p>\n  </div>\n\n  <div style=\"padding-top: 12px;\" [hidden]=\"estaCargando\">\n    <h5 class=\"texto m-16\">Selecciona un integrante de tu familia</h5>\n    <div *ngFor=\"let item of listadoUsuario\" (click)=\"goToDetails(item)\">\n      <!-- poner avatar -->\n      <app-avatar [lines]=\"linesAvatar\" [urlImagen] = \"item.UrlImagen\" [nombreCompleto]=\"item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno\" [parentezco]=\"item.Parentezco.Nombre\"></app-avatar>\n    </div>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -112,6 +112,7 @@ let PreOrdenesPage = class PreOrdenesPage {
         this.miColor = '#FF4081';
         this.usuarioApsFamilia = [];
         this.listadoUsuario = [];
+        this.linesAvatar = 'inset';
         this.estaCargando = false;
     }
     ngOnInit() {

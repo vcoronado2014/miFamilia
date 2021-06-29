@@ -56,7 +56,7 @@
       </ion-select>
     </ion-item>
     <!-- boton buscar -->
-    <ion-button class="mt-32 ion-padding-start" color="primary" (click)="buscarCitas()">BUSCAR</ion-button>
+    <ion-button class="mt-32 ion-padding-start" color="primary" (click)="buscarCitas($event)">BUSCAR</ion-button>
 
     <app-progress [mostrar]="mostrarProgress" titulo="Buscando citas"></app-progress>
     <!-- resultados -->

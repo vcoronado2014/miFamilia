@@ -30,6 +30,7 @@ export class ModalExamenesPage implements OnInit {
   //loading
   estaCargando = false;
   tituloProgress = '';
+  linesAvatar = 'none';
   @ViewChild('myList', { read: IonList }) list: IonList;
   constructor(
     public modalCtrl: ModalController,

@@ -104,12 +104,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
-/* harmony import */ var _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
-/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
-/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
+/* harmony import */ var _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
+/* harmony import */ var _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioAcceso */ "./src/app/services/ServicioAcceso.ts");
+/* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
+
 
 
 
@@ -122,7 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RegistroUsuarioPage = class RegistroUsuarioPage {
-    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, alertController) {
+    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, alertController, inap) {
         this.navCtrl = navCtrl;
         this.utiles = utiles;
         this.servicioGeo = servicioGeo;
@@ -133,6 +135,10 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
         this.acceso = acceso;
         this.parametrosApp = parametrosApp;
         this.alertController = alertController;
+        this.inap = inap;
+        this.options = {
+            location: 'yes',
+        };
         //para validar
         this.patternOnlyLetter = '[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$';
         this.expCelular = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/gm;
@@ -156,7 +162,7 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
         };
     }
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_9__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_10__["locale"]('es');
         this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
         this.rutaAceptoCondiciones = this.parametrosApp.URL_ACEPTA_CONDICIONES();
         this.activatedRoute.queryParams.subscribe(params => {
@@ -365,9 +371,9 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
             }
             //aca seguir con el formulario
             //seteamos los valores para enviar el formulario
-            var fechaNac = moment__WEBPACK_IMPORTED_MODULE_9__();
+            var fechaNac = moment__WEBPACK_IMPORTED_MODULE_10__();
             if (this.registro.FechaNacimiento) {
-                fechaNac = moment__WEBPACK_IMPORTED_MODULE_9__(this.registro.FechaNacimiento);
+                fechaNac = moment__WEBPACK_IMPORTED_MODULE_10__(this.registro.FechaNacimiento);
             }
             var pass = "";
             pass = this.forma.controls.clave ? this.utiles.encriptar(this.forma.controls.clave.value) : '';
@@ -596,19 +602,33 @@ let RegistroUsuarioPage = class RegistroUsuarioPage {
             }
         }
     }
+    abrirPDF() {
+        if (this.rutaAceptoCondiciones != '#') {
+            //abrir en una ventana nueva
+            if (this.utiles.isAppOnDevice()) {
+                let target = "_system";
+                this.inap.create(encodeURI(this.rutaAceptoCondiciones), target, this.options);
+            }
+            else {
+                //web
+                window.open(encodeURI(this.rutaAceptoCondiciones), "_system", "location=yes");
+            }
+        }
+    }
     get f() { return this.forma.controls; }
 };
 RegistroUsuarioPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
-    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_5__["ServicioUtiles"] },
-    { type: _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_6__["ServicioGeo"] },
+    { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_6__["ServicioUtiles"] },
+    { type: _app_services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__["ServicioGeo"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__["ServicioAcceso"] },
-    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
+    { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_8__["ServicioAcceso"] },
+    { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_9__["ServicioParametrosApp"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"] }
 ];
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('nombreId', { static: true })

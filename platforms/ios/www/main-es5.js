@@ -1857,7 +1857,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.item = {
           Mostrar: false,
           FechaCompleta: '',
-          NumeroDia: ''
+          NumeroDia: '',
+          DiferenciaFechas: '',
+          Eventos: []
         };
       }
 

@@ -1457,6 +1457,8 @@ let CardCalendarioComponent = class CardCalendarioComponent {
             Mostrar: false,
             FechaCompleta: '',
             NumeroDia: '',
+            DiferenciaFechas: '',
+            Eventos: [],
         };
     }
     ngOnInit() {
