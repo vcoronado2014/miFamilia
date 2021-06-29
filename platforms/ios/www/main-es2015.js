@@ -5994,8 +5994,10 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
-    URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
+    API_ENDPOINT: 'https://app.rayensalud.com/MiFamilia/Api/',
+    URL_FOTOS: 'https://app.rayensalud.com/MiFamilia/',
+    //API_ENDPOINT: 'https://preapp.rayensalud.com/MiFamilia/Api/',
+    //URL_FOTOS: 'https://preapp.rayensalud.com/MiFamilia/',
     //API_ENDPOINT: 'http://190.151.14.101:8065/Api/',
     //URL_FOTOS: 'http://190.151.14.101:8065/',
     //API_ENDPOINT: 'http://localhost:27563/Api/',
