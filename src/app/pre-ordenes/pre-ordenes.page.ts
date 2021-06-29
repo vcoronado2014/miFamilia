@@ -16,6 +16,7 @@ export class PreOrdenesPage implements OnInit {
   public usuarioAps;
   public usuarioApsFamilia = [];
   public listadoUsuario = [];
+  linesAvatar='inset';
 
   estaCargando = false;
   constructor(

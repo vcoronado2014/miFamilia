@@ -16,7 +16,7 @@
   <!-- si hay registros -->
   <div [hidden]="estaCargando" *ngIf="listadoUsuario.length > 0" style="padding-top: 32px;">
       <div *ngFor="let item of listadoUsuario" (click)="irHoras(item)">
-        <app-avatar [lines]="inset" [urlImagen] = "item.UrlImagen" [nombreCompleto]="item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno" [parentezco]="item.Parentezco.Nombre"></app-avatar>
+        <app-avatar [lines]="linesAvatar" [urlImagen] = "item.UrlImagen" [nombreCompleto]="item.Nombres + ' ' + item.ApellidoPaterno + ' ' + item.ApellidoMaterno" [parentezco]="item.Parentezco.Nombre"></app-avatar>
       </div>
   </div>
 </ion-content>

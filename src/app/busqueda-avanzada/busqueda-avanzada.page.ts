@@ -52,8 +52,8 @@ export class BusquedaAvanzadaPage implements OnInit {
   //para volver a la pagina anterior
   idUsuario = 0;
   //esto es para infiniti scroll
-  private topLimit: number = 5;
-  private citasFiltradasTop: any = [];
+  topLimit: number = 5;
+  citasFiltradasTop: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -209,7 +209,7 @@ export class BusquedaAvanzadaPage implements OnInit {
       }
     }
   }
-  buscarCitas() {
+  buscarCitas(event) {
 
     //console.log(this.comboSeleccionado);
     //console.log(this.horarioBusqueda);

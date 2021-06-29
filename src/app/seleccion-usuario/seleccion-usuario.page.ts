@@ -22,6 +22,7 @@ export class SeleccionUsuarioPage implements OnInit {
   public usuarioApsFamilia = [];
   public listadoUsuario = [];
   estaCargando = false;
+  linesAvatar = 'inset';
   @ViewChild('myList', { read: IonList }) list: IonList;
 
   constructor(

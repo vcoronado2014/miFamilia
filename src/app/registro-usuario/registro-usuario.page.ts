@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { FormGroup, Validators, FormBuilder, FormControl, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 //servicios
 import { ServicioUtiles } from '../../app/services/ServicioUtiles';
 import { ServicioGeo } from '../../app/services/ServicioGeo';
@@ -18,7 +19,9 @@ import * as moment from 'moment';
   styleUrls: ['./registro-usuario.page.scss'],
 })
 export class RegistroUsuarioPage implements OnInit {
-
+  options: InAppBrowserOptions = {
+    location: 'yes',
+  };
   registro;
   forma: FormGroup;
   nombreMostrar;
@@ -55,7 +58,8 @@ export class RegistroUsuarioPage implements OnInit {
     private router: Router,
     public acceso: ServicioAcceso,
     public parametrosApp: ServicioParametrosApp,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public inap: InAppBrowser,
   ) { }
 
   ngOnInit() {
@@ -521,6 +525,19 @@ export class RegistroUsuarioPage implements OnInit {
       //this.aceptaCondiciones = event.detail.checked;
       if (event.detail.checked == false) {
         this.utiles.presentToast("Para continuar debe aceptar las condiciones del servicio, puede revisar las condiciones haciendo click en el ícono al costado derecho del check.", "middle", 3000);
+      }
+    }
+  }
+  abrirPDF(){
+    if (this.rutaAceptoCondiciones != '#'){
+      //abrir en una ventana nueva
+      if (this.utiles.isAppOnDevice()){
+        let target = "_system";
+        this.inap.create(encodeURI(this.rutaAceptoCondiciones), target, this.options);
+      }
+      else {
+        //web
+        window.open(encodeURI(this.rutaAceptoCondiciones), "_system", "location=yes");
       }
     }
   }

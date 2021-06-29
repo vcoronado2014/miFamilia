@@ -12,7 +12,7 @@
   <!-- HAY EXAMENES -->
   <ion-list [hidden]="estaCargando" *ngIf="tiene">
     
-      <app-avatar [lines]="none" [urlImagen] = "orden.UrlImagen" 
+      <app-avatar [lines]="linesAvatar" [urlImagen] = "orden.UrlImagen" 
       [nombreCompleto]="orden.NombreUsuario" 
       [parentezco]="orden.Parentezco"></app-avatar>
     <ion-list-header lines="inset" mode="md">

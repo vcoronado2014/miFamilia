@@ -19,6 +19,7 @@ export class AntecedentesPage implements OnInit {
   public listadoUsuario=[];
 
   estaCargando = false;
+  linesAvatar = 'inset';
 
   constructor(
     public navCtrl: NavController,
