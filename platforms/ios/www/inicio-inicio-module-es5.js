@@ -591,7 +591,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                     //procesar JSON.parse(response.data)
                                     _this6.procesarInfoRun(JSON.parse(response.data), loader);
                                   }, function (error) {
-                                    _this6.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                                    console.log('No hay registro por run'); //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+
+                                    loader.dismiss();
                                   });
                                 }
 
@@ -659,7 +661,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                     //procesar JSON.parse(response.data)
                                     _this8.procesarInfo(JSON.parse(response.data), loader);
                                   }, function (error) {
-                                    _this8.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                                    console.log('No hay registro del dispositivo'); //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+
+                                    loader.dismiss();
                                   });
                                 }
 

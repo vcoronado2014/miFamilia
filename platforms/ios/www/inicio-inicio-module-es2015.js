@@ -355,7 +355,9 @@ let InicioPage = class InicioPage {
                         //procesar JSON.parse(response.data)
                         this.procesarInfoRun(JSON.parse(response.data), loader);
                     }, (error) => {
-                        this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                        console.log('No hay registro por run');
+                        //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                        loader.dismiss();
                     });
                 }
             }));
@@ -384,7 +386,9 @@ let InicioPage = class InicioPage {
                             //procesar JSON.parse(response.data)
                             this.procesarInfo(JSON.parse(response.data), loader);
                         }, (error) => {
-                            this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                            console.log('No hay registro del dispositivo');
+                            //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                            loader.dismiss();
                         });
                     }
                 }));

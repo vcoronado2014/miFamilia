@@ -2716,7 +2716,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                                     _this11.procesarRespuestaRegistroCompleto(data, loader);
                                   }, function (error) {
-                                    _this11.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                                    console.log('No hay registro por run'); //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
 
                                     loader.dismiss();
                                   });
@@ -2783,7 +2783,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                                     _this13.procesarRespuestaRegistro(data, loader);
                                   }, function (error) {
-                                    _this13.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                                    console.log('No hay registro por Run'); //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
 
                                     loader.dismiss();
                                   });
@@ -2966,7 +2966,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                                     _this15.procesaRespuestaEnrolamiento(data, loader);
                                   }, function (error) {
-                                    _this15.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                                    console.log('No hay enrolamiento por clave única'); //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
 
                                     loader.dismiss();
                                   });
@@ -3036,7 +3036,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                                     _this17.procesaRespuestaEnrolamiento(data, loader);
                                   }, function (error) {
-                                    _this17.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
+                                    console.log('No hay enrolamiento clave única'); //this.utiles.presentToast('Ocurrió un error de obtención identificador', 'bottom', 4000);
 
                                     loader.dismiss();
                                   });

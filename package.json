@@ -1,6 +1,6 @@
 {
   "name": "MiFamiliaapp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Victor Coronado",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -111,7 +111,7 @@
       "cordova-plugin-device": {},
       "cordova-plugin-geolocation": {},
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
-        "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes",
+        "LOCATION_USAGE_DESCRIPTION": "Activar lo servicios de ubicación nos permite entregarle datos importantes sobre su establecimiento de salud (lugar y hora de sus citas, retiro de medicamentos, entre otros), esta información no se comparte con terceros es sólo de coordinación con su centro de salud.",
         "OKHTTP_VERSION": "3.10.0",
         "GOOGLE_API_KEY_FOR_ANDROID": "AIzaSyBxNhJT5Msr4h6K01OHsLKjsMqk1xNu9o8",
         "GOOGLE_API_KEY_FOR_IOS": "AIzaSyC7ThFFNyQNRwzI_iDEXKJn3pz2BDfXvpY"
