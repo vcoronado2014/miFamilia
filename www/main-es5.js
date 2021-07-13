@@ -5561,9 +5561,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     console.log(nuevas);
                   }
                 })["catch"](function (error) {
-                  console.log(error.message);
-
-                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                  console.log(error.message); //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               } else {
                 this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
@@ -5596,9 +5594,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     console.log(nuevas);
                   }
                 })["catch"](function (error) {
-                  console.log(error.message);
-
-                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                  console.log(error.message); //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               }
             } else {
@@ -5633,9 +5629,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     console.log(nuevas);
                   }
                 }, function (error) {
-                  console.log(error.message);
-
-                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                  console.log(error.message); //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               } else {
                 this.citas.entregaPorMesNuevo(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
@@ -5668,9 +5662,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     console.log(nuevas);
                   }
                 }, function (error) {
-                  console.log(error.message);
-
-                  _this6.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                  console.log(error.message); //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               }
             }
@@ -5778,9 +5770,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
                   }
                 })["catch"](function (error) {
-                  console.log(error.message);
-
-                  _this7.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                  console.log(error.message); //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               } else {
                 this.citas.entregaPorMesNuevoNative(usuario.Id, usuario.IdRyf, usuario.NodId, mesConsultar, annoConsultar).then(function (response) {
@@ -5817,9 +5807,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     console.log(nuevas);
                   }
                 })["catch"](function (error) {
-                  console.log(error.message);
-
-                  _this7.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                  console.log(error.message); //lo comentamos por mientras
+                  //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               }
             } else {
@@ -5885,9 +5874,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     console.log(nuevas);
                   }
                 }, function (error) {
-                  console.log(error.message);
-
-                  _this7.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                  console.log(error.message); //lo comentamos por miientras
+                  //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                 });
               }
             }

@@ -190,6 +190,368 @@ let CalendarioPage = class CalendarioPage {
         //tiene eventos hoy
         this.tieneEventosHoy = false;
         this.tieneEventosFuturos = false;
+        //data local
+        this.EVENTOS_LOCAL = [
+            {
+                "FechaCompleta": "2021-06-01T00:00:00",
+                "NumeroDia": 1,
+                "NombreDia": "martes",
+                "NombreDiaReducido": "mar",
+                "Id": 1,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-02T00:00:00",
+                "NumeroDia": 2,
+                "NombreDia": "miércoles",
+                "NombreDiaReducido": "mié",
+                "Id": 2,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-03T00:00:00",
+                "NumeroDia": 3,
+                "NombreDia": "jueves",
+                "NombreDiaReducido": "jue",
+                "Id": 3,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-04T00:00:00",
+                "NumeroDia": 4,
+                "NombreDia": "viernes",
+                "NombreDiaReducido": "vie",
+                "Id": 4,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-05T00:00:00",
+                "NumeroDia": 5,
+                "NombreDia": "sábado",
+                "NombreDiaReducido": "sáb",
+                "Id": 5,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-06T00:00:00",
+                "NumeroDia": 6,
+                "NombreDia": "domingo",
+                "NombreDiaReducido": "dom",
+                "Id": 6,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-07T00:00:00",
+                "NumeroDia": 7,
+                "NombreDia": "lunes",
+                "NombreDiaReducido": "lun",
+                "Id": 7,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-08T00:00:00",
+                "NumeroDia": 8,
+                "NombreDia": "martes",
+                "NombreDiaReducido": "mar",
+                "Id": 8,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-09T00:00:00",
+                "NumeroDia": 9,
+                "NombreDia": "miércoles",
+                "NombreDiaReducido": "mié",
+                "Id": 9,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-10T00:00:00",
+                "NumeroDia": 10,
+                "NombreDia": "jueves",
+                "NombreDiaReducido": "jue",
+                "Id": 10,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-11T00:00:00",
+                "NumeroDia": 11,
+                "NombreDia": "viernes",
+                "NombreDiaReducido": "vie",
+                "Id": 11,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-12T00:00:00",
+                "NumeroDia": 12,
+                "NombreDia": "sábado",
+                "NombreDiaReducido": "sáb",
+                "Id": 12,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-13T00:00:00",
+                "NumeroDia": 13,
+                "NombreDia": "domingo",
+                "NombreDiaReducido": "dom",
+                "Id": 13,
+                "Eventos": [
+                    {
+                        "NombrePrincipal": "Leche Purita Fortificada",
+                        "NombreSecundario": "2",
+                        "HoraInicioFin": "13:00",
+                        "Imagen": "alimento.png",
+                        "DetalleEventoMes": {
+                            "FechaHora": "2021-06-13T13:00:00",
+                            "NombrePaciente": "Victor Edgardo Coronado Troncoso",
+                            "DescripcionPrincipal": "Leche Purita Fortificada",
+                            "DescripcionSecundaria": "2",
+                            "Lugar": "RAYENSALUD [CESFAM]",
+                            "Titulo": "Alimento",
+                            "Subtitulo": "Alimento Entregado",
+                            "IdElemento": 14105,
+                            "Estado": ""
+                        },
+                        "ListaFarmacos": null,
+                        "Color": "#757575"
+                    },
+                    {
+                        "NombrePrincipal": "Bebida Lactea Años Dorados",
+                        "NombreSecundario": "1",
+                        "HoraInicioFin": "13:00",
+                        "Imagen": "alimento.png",
+                        "DetalleEventoMes": {
+                            "FechaHora": "2021-06-13T13:00:00",
+                            "NombrePaciente": "Victor Edgardo Coronado Troncoso",
+                            "DescripcionPrincipal": "Bebida Lactea Años Dorados",
+                            "DescripcionSecundaria": "1",
+                            "Lugar": "RAYENSALUD [CESFAM]",
+                            "Titulo": "Alimento",
+                            "Subtitulo": "Alimento Entregado",
+                            "IdElemento": 14126,
+                            "Estado": ""
+                        },
+                        "ListaFarmacos": null,
+                        "Color": "#757575"
+                    }
+                ],
+                "Mostrar": true,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-14T00:00:00",
+                "NumeroDia": 14,
+                "NombreDia": "lunes",
+                "NombreDiaReducido": "lun",
+                "Id": 14,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-15T00:00:00",
+                "NumeroDia": 15,
+                "NombreDia": "martes",
+                "NombreDiaReducido": "mar",
+                "Id": 15,
+                "Eventos": [
+                    {
+                        "NombrePrincipal": "Rinofaringitis aguda (resfriado común)",
+                        "NombreSecundario": "J00",
+                        "HoraInicioFin": "13:09",
+                        "Imagen": "diagnostico.png",
+                        "DetalleEventoMes": {
+                            "FechaHora": "2021-06-15T13:09:54.547",
+                            "NombrePaciente": "Victor Edgardo Coronado Troncoso",
+                            "DescripcionPrincipal": "Rinofaringitis aguda (resfriado común)",
+                            "DescripcionSecundaria": "J00",
+                            "Lugar": "RAYENSALUD [CESFAM]",
+                            "Titulo": "Atención",
+                            "Subtitulo": "Atención Realizada",
+                            "IdElemento": 390333192,
+                            "Estado": ""
+                        },
+                        "ListaFarmacos": null,
+                        "Color": "#757575"
+                    }
+                ],
+                "Mostrar": true,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-16T00:00:00",
+                "NumeroDia": 16,
+                "NombreDia": "miércoles",
+                "NombreDiaReducido": "mié",
+                "Id": 16,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-17T00:00:00",
+                "NumeroDia": 17,
+                "NombreDia": "jueves",
+                "NombreDiaReducido": "jue",
+                "Id": 17,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-18T00:00:00",
+                "NumeroDia": 18,
+                "NombreDia": "viernes",
+                "NombreDiaReducido": "vie",
+                "Id": 18,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-19T00:00:00",
+                "NumeroDia": 19,
+                "NombreDia": "sábado",
+                "NombreDiaReducido": "sáb",
+                "Id": 19,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-20T00:00:00",
+                "NumeroDia": 20,
+                "NombreDia": "domingo",
+                "NombreDiaReducido": "dom",
+                "Id": 20,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-21T00:00:00",
+                "NumeroDia": 21,
+                "NombreDia": "lunes",
+                "NombreDiaReducido": "lun",
+                "Id": 21,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-22T00:00:00",
+                "NumeroDia": 22,
+                "NombreDia": "martes",
+                "NombreDiaReducido": "mar",
+                "Id": 22,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-23T00:00:00",
+                "NumeroDia": 23,
+                "NombreDia": "miércoles",
+                "NombreDiaReducido": "mié",
+                "Id": 23,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-24T00:00:00",
+                "NumeroDia": 24,
+                "NombreDia": "jueves",
+                "NombreDiaReducido": "jue",
+                "Id": 24,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-25T00:00:00",
+                "NumeroDia": 25,
+                "NombreDia": "viernes",
+                "NombreDiaReducido": "vie",
+                "Id": 25,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-26T00:00:00",
+                "NumeroDia": 26,
+                "NombreDia": "sábado",
+                "NombreDiaReducido": "sáb",
+                "Id": 26,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-27T00:00:00",
+                "NumeroDia": 27,
+                "NombreDia": "domingo",
+                "NombreDiaReducido": "dom",
+                "Id": 27,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-28T00:00:00",
+                "NumeroDia": 28,
+                "NombreDia": "lunes",
+                "NombreDiaReducido": "lun",
+                "Id": 28,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-29T00:00:00",
+                "NumeroDia": 29,
+                "NombreDia": "martes",
+                "NombreDiaReducido": "mar",
+                "Id": 29,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            },
+            {
+                "FechaCompleta": "2021-06-30T00:00:00",
+                "NumeroDia": 30,
+                "NombreDia": "miércoles",
+                "NombreDiaReducido": "mié",
+                "Id": 30,
+                "Eventos": [],
+                "Mostrar": false,
+                "indice": 0
+            }
+        ];
         this.hasMin = function (attrib) {
             return (this.length && this.reduce(function (prev, curr) {
                 return prev[attrib] < curr[attrib] ? prev : curr;
@@ -241,6 +603,17 @@ let CalendarioPage = class CalendarioPage {
     getTime(date) {
         return date != null ? new Date(date).getTime() : 0;
     }
+    cargarDataLocal() {
+        sessionStorage.setItem('EVENTOS_LOCAL', JSON.stringify(this.EVENTOS_LOCAL));
+        this.citasVerticalTodas = this.EVENTOS_LOCAL;
+        this.procesarArregloCitasTodas();
+        this.citasVerticalMostrar = this.citasVerticalTodas.filter(e => e.Mostrar == true);
+        this.citasVerticalMostrar.sort((a, b) => { return this.getTime(a.FechaCompleta) - this.getTime(b.FechaCompleta); });
+        //guardamos la variable de ordenamiento
+        sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
+        //creamos top limit al nuevo arreglo de citas
+        this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+    }
     cargarTodosLosEventosApi() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             //usar citasVerticalTodas
@@ -283,9 +656,12 @@ let CalendarioPage = class CalendarioPage {
                         this.estaCargando = false;
                         this.tituloLoading = '';
                         loader.dismiss();
-                        this.tiene = false;
-                        this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
-                        this.agregarUnElemento(moment__WEBPACK_IMPORTED_MODULE_10__().toDate());
+                        //LO COMENTAMOS POR MIENTRAS
+                        //this.tiene = false;
+                        //this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
+                        //this.agregarUnElemento(moment().toDate());
+                        //******************* */
+                        this.cargarDataLocal();
                         console.log(this.tieneEventosFuturos);
                     });
                 }
@@ -312,9 +688,12 @@ let CalendarioPage = class CalendarioPage {
                         this.estaCargando = false;
                         this.tituloLoading = '';
                         loader.dismiss();
-                        this.tiene = false;
-                        this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
-                        this.agregarUnElemento(moment__WEBPACK_IMPORTED_MODULE_10__().toDate());
+                        //LO COMENTAMOS POR MIENTRAS
+                        //this.tiene = false;
+                        //this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
+                        //this.agregarUnElemento(moment().toDate());
+                        //**************** */
+                        this.cargarDataLocal();
                     });
                 }
             }));

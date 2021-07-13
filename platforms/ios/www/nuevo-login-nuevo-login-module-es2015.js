@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 //estoy implementando progress bar
 //aca hay que controlar cuando no hay internet
 let NuevoLoginPage = class NuevoLoginPage {
-    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device, servNotificaciones) {
+    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device, alertController, servNotificaciones) {
         this.navCtrl = navCtrl;
         this.utiles = utiles;
         this.servicioGeo = servicioGeo;
@@ -149,6 +149,7 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.appVersion = appVersion;
         this.platform = platform;
         this.device = device;
+        this.alertController = alertController;
         this.servNotificaciones = servNotificaciones;
         this.hide = true;
         //para validar
@@ -170,6 +171,541 @@ let NuevoLoginPage = class NuevoLoginPage {
         };
         //para progress bar
         this.estaCargando = false;
+        this.esDataLocal = false;
+        this.dataLocalStorage = {
+            PARAMETROS_APP: [
+                {
+                    "Id": 1,
+                    "Nombre": "USA_CLAVE_UNICA",
+                    "Valor": "0",
+                    "Descripcion": "DEFINE SI LA APP USA CLAVE UNICA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 2,
+                    "Nombre": "HORAS_FECHA_INICIO",
+                    "Valor": "3",
+                    "Descripcion": "DETERMINA LA CANTIDAD DE HORAS DESDE LA HORA ACTUAL PARA EMPEZAR A CONSULTAR AGENDAMIENTO REMOTO                                                                                                                                                                                                                                                                                                                                                                                                                    ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 3,
+                    "Nombre": "USA_ENTIDAD_CONTRATANTE",
+                    "Valor": "1",
+                    "Descripcion": "DETERMINA SI USA ENTIDAD CONTRATANTE AL LOGUEARSE, ES PARTE DE LA VALIDACION                                                                                                                                                                                                                                                                                                                                                                                                                                        ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 4,
+                    "Nombre": "USA_LOGIN_ENROLAMIENTO",
+                    "Valor": "0",
+                    "Descripcion": "DETERMINA SI USA ENROLAMIENTO EN VEZ DE REGISTRO                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 5,
+                    "Nombre": "USA_API_MANAGEMENT",
+                    "Valor": "1",
+                    "Descripcion": "DETERMINA SI USA API MANAGEMENT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 6,
+                    "Nombre": "USA_LOG_MODULOS",
+                    "Valor": "1",
+                    "Descripcion": "DETERMINA SI ESCRIBE LAS ACCIONES EN LA TABLA MAP_MOVIMIENTOS_APP                                                                                                                                                                                                                                                                                                                                                                                                                                                   ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 7,
+                    "Nombre": "DIAS_LOG_MODULOS",
+                    "Valor": "5",
+                    "Descripcion": "DETERMINA LA CANTIDAD DE DIAS PARA CONSULTAR LOS MOVIMIENTOS DEL USUARIO EN LOS MODULOS DE LA APLICACIÓN                                                                                                                                                                                                                                                                                                                                                                                                            ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 8,
+                    "Nombre": "RESTRINGE_REGISTRO_MENORES_EDAD",
+                    "Valor": "1",
+                    "Descripcion": "DETERMINA SI RESGTRINGE EL REGISTRO A LA APP A MENORES DE EDAD, POR DEFECTO DEBE RESTRINGIRLO, SIN EMBARGO SE PARAMETRIZA IGUAL.                                                                                                                                                                                                                                                                                                                                                                                    ",
+                    "Eliminado": 0
+                },
+                {
+                    "Id": 9,
+                    "Nombre": "URL_ACEPTA_CONDICIONES",
+                    "Valor": "#",
+                    "Descripcion": "URL DEL ARCHIVO PDF QUE TIENE EL ACEPTA CONDICIONES DE LA APP MI FAMILIA.                                                                                                                                                                                                                                                                                                                                                                                                                                           ",
+                    "Eliminado": 0
+                }
+            ],
+            UsuarioAps: {
+                "Id": 15029781,
+                "NodId": 2411,
+                "Nombres": "Victor Edgardo",
+                "ApellidoPaterno": "Coronado",
+                "ApellidoMaterno": "Troncoso",
+                "Rut": "400000018",
+                "Direccion": "Cordon Roma 0621 - Villa La Primavera, Puente Alto- Chile",
+                "FechaDeNacimiento": "1973-01-24T12:57:00",
+                "IdRyf": "15245358",
+                "Edad": 48,
+                "Establecimiento": {
+                    "RazonSocial": "RAYENSALUD [CESFAM]",
+                    "Dominio": "CESFAMRAYENSALUD",
+                    "Descripcion": "RAYENSALUD [CESFAM]",
+                    "Direccion1": "Paulino Alfonso 3900",
+                    "CodigoDeis": "99-991"
+                },
+                "FamId": 58539323,
+                "UrlImagen": "Recursos/logousuario.png",
+                "Color": "#757575",
+                "EsLogueado": false,
+                "Email": "vcoronado.alarcon@gmail.com",
+                "NombreResponde": "Corito Pro",
+                "ClavePortal": "",
+                "ConfiguracionNodo": {
+                    "NodId": 2411,
+                    "CodigoDeis2014": "199991"
+                },
+                "ParametrosRayen": [],
+                "EntidadContratante": [
+                    {
+                        "Id": 1,
+                        "Nombre": "S.S. Metropolitano Occidente",
+                        "Activo": 1,
+                        "Eliminado": 0
+                    }
+                ],
+                "Parentezco": {
+                    "Id": 26,
+                    "Codigo": "SEL",
+                    "Nombre": "La misma persona",
+                    "Descripcion": "La misma persona",
+                    "Consanguineo": false,
+                    "Sexo": 5,
+                    "Mostrar": true,
+                    "Editar": true
+                },
+                "VacunasCovid": [],
+                "Contactabilidad": {
+                    "Id": 1,
+                    "FechaHoraRegistro": "2021-06-18T12:53:30.81",
+                    "Run": "400000018",
+                    "Telefono": "940178392",
+                    "Email": "vcoronado.alarcon@gmail.com",
+                    "NombreSocial": "Corito pro",
+                    "EtiquetaTelefono": "MOVIL_FICHA_FAMILIAR",
+                    "Eliminado": 0
+                }
+            },
+            ALERGIAS: [
+                {
+                    "UsuarioAps": {
+                        "Id": 15029781,
+                        "NodId": 2411,
+                        "Nombres": "Victor Edgardo",
+                        "ApellidoPaterno": "Coronado",
+                        "ApellidoMaterno": "Troncoso",
+                        "Rut": "400000018",
+                        "Direccion": "Cordon Roma 0621 - Villa La Primavera, Puente Alto- Chile",
+                        "FechaDeNacimiento": "1973-01-24T12:57:00",
+                        "IdRyf": "15245358",
+                        "Edad": 48,
+                        "Establecimiento": {
+                            "RazonSocial": "RAYENSALUD [CESFAM]",
+                            "Dominio": "CESFAMRAYENSALUD",
+                            "Descripcion": "RAYENSALUD [CESFAM]",
+                            "Direccion1": "Paulino Alfonso 3900",
+                            "CodigoDeis": "99-991"
+                        },
+                        "FamId": 58539323,
+                        "UrlImagen": "Recursos/logousuario.png",
+                        "Color": "#757575",
+                        "EsLogueado": false,
+                        "Email": "vcoronado.alarcon@gmail.com",
+                        "NombreResponde": "Corito Pro",
+                        "ClavePortal": "",
+                        "ConfiguracionNodo": {
+                            "NodId": 2411,
+                            "CodigoDeis2014": "199991"
+                        },
+                        "ParametrosRayen": [],
+                        "EntidadContratante": [
+                            {
+                                "Id": 1,
+                                "Nombre": "S.S. Metropolitano Occidente",
+                                "Activo": 1,
+                                "Eliminado": 0
+                            }
+                        ],
+                        "Parentezco": {
+                            "Id": 26,
+                            "Codigo": "SEL",
+                            "Nombre": "La misma persona",
+                            "Descripcion": "La misma persona",
+                            "Consanguineo": false,
+                            "Sexo": 5,
+                            "Mostrar": true,
+                            "Editar": true
+                        },
+                        "VacunasCovid": [],
+                        "Contactabilidad": {
+                            "Id": 1,
+                            "FechaHoraRegistro": "2021-06-18T12:53:30.81",
+                            "Run": "400000018",
+                            "Telefono": "940178392",
+                            "Email": "vcoronado.alarcon@gmail.com",
+                            "NombreSocial": "Corito pro",
+                            "EtiquetaTelefono": "MOVIL_FICHA_FAMILIAR",
+                            "Eliminado": 0
+                        }
+                    },
+                    "Alergias": {
+                        "AlergiasUsp": [
+                            {
+                                "Descripcion": "Penicilina",
+                                "Observacion": "No hay",
+                                "Fecha": "2021-06-15T13:10:18"
+                            },
+                            {
+                                "Descripcion": "Coliflor",
+                                "Observacion": "No hay",
+                                "Fecha": "2021-06-08T00:00:00"
+                            }
+                        ],
+                        "RespuestaBase": {
+                            "CodigoMensaje": 0,
+                            "Mensaje": "Exito"
+                        }
+                    }
+                }
+            ],
+            MORBIDOS: [
+                {
+                    "UsuarioAps": {
+                        "Id": 15029781,
+                        "NodId": 2411,
+                        "Nombres": "Victor Edgardo",
+                        "ApellidoPaterno": "Coronado",
+                        "ApellidoMaterno": "Troncoso",
+                        "Rut": "400000018",
+                        "Direccion": "Cordon Roma 0621 - Villa La Primavera, Puente Alto- Chile",
+                        "FechaDeNacimiento": "1973-01-24T12:57:00",
+                        "IdRyf": "15245358",
+                        "Edad": 48,
+                        "Establecimiento": {
+                            "RazonSocial": "RAYENSALUD [CESFAM]",
+                            "Dominio": "CESFAMRAYENSALUD",
+                            "Descripcion": "RAYENSALUD [CESFAM]",
+                            "Direccion1": "Paulino Alfonso 3900",
+                            "CodigoDeis": "99-991"
+                        },
+                        "FamId": 58539323,
+                        "UrlImagen": "Recursos/logousuario.png",
+                        "Color": "#757575",
+                        "EsLogueado": false,
+                        "Email": "vcoronado.alarcon@gmail.com",
+                        "NombreResponde": "Corito Pro",
+                        "ClavePortal": "",
+                        "ConfiguracionNodo": {
+                            "NodId": 2411,
+                            "CodigoDeis2014": "199991"
+                        },
+                        "ParametrosRayen": [],
+                        "EntidadContratante": [
+                            {
+                                "Id": 1,
+                                "Nombre": "S.S. Metropolitano Occidente",
+                                "Activo": 1,
+                                "Eliminado": 0
+                            }
+                        ],
+                        "Parentezco": {
+                            "Id": 26,
+                            "Codigo": "SEL",
+                            "Nombre": "La misma persona",
+                            "Descripcion": "La misma persona",
+                            "Consanguineo": false,
+                            "Sexo": 5,
+                            "Mostrar": true,
+                            "Editar": true
+                        },
+                        "VacunasCovid": [],
+                        "Contactabilidad": {
+                            "Id": 1,
+                            "FechaHoraRegistro": "2021-06-18T12:53:30.81",
+                            "Run": "400000018",
+                            "Telefono": "940178392",
+                            "Email": "vcoronado.alarcon@gmail.com",
+                            "NombreSocial": "Corito pro",
+                            "EtiquetaTelefono": "MOVIL_FICHA_FAMILIAR",
+                            "Eliminado": 0
+                        }
+                    },
+                    "Morbidos": {
+                        "Antecedentes": {
+                            "Familiares": {
+                                "Antecedente": [
+                                    "Hiperesplenismo",
+                                    "Diabetes mellitus insulinodependiente"
+                                ]
+                            },
+                            "Personales": {
+                                "Antecedente": [
+                                    "Otras hipoglicemias",
+                                    "Hiperqueratosis de frambesia"
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            UsuariosFamilia: [],
+            REGISTRO: {
+                "Id": 88,
+                "CorreoElectronico": "vcoronado.alarcon@gmail.com",
+                "Password": "MTIzNDU2",
+                "FechaRegistro": "2021-06-18T12:53:56.16",
+                "ModoRegistro": 1,
+                "NombreUsuario": "vcoronado.alarcon@gmail.com",
+                "FechaNacimiento": "0001-01-01T00:00:00",
+                "Sexo": 0,
+                "Eliminado": 0,
+                "Activo": 1,
+                "Nombres": "Victor hugo",
+                "Apellidos": "Troncoso",
+                "FechaBaja": "0001-01-01T00:00:00",
+                "Apodo": "Corito producción",
+                "Avatar": "",
+                "VersionAppName": "Mi familia app",
+                "Plataforma": "Android",
+                "VersionAppNumber": "1.0.0",
+                "IdDispositivo": "4e30592675cc75d1",
+                "Pais": "Chile",
+                "Provincia": "Cordillera Province",
+                "Region": "Santiago Metropolitan Region",
+                "Comuna": "Puente Alto",
+                "Latitud": "",
+                "Longitud": "",
+                "TelefonoContacto": "940178392",
+                "Run": "40000001-8"
+            },
+            MI_RUT: '400000018',
+            MI_NOMBRE: 'Victor Edgardo Coronado',
+            FAMILIA_POR_ACEPTAR: [],
+            FAMILIA_ACEPTADA: [],
+            FAMILIA_RECHAZAZDA: [],
+            ANTECEDENTES: [
+                {
+                    "UsuarioAps": {
+                        "Id": 15029781,
+                        "NodId": 2411,
+                        "Nombres": "Victor Edgardo",
+                        "ApellidoPaterno": "Coronado",
+                        "ApellidoMaterno": "Troncoso",
+                        "Rut": "400000018",
+                        "Direccion": "Cordon Roma 0621 - Villa La Primavera, Puente Alto- Chile",
+                        "FechaDeNacimiento": "1973-01-24T12:57:00",
+                        "IdRyf": "15245358",
+                        "Edad": 48,
+                        "Establecimiento": {
+                            "RazonSocial": "RAYENSALUD [CESFAM]",
+                            "Dominio": "CESFAMRAYENSALUD",
+                            "Descripcion": "RAYENSALUD [CESFAM]",
+                            "Direccion1": "Paulino Alfonso 3900",
+                            "CodigoDeis": "99-991"
+                        },
+                        "FamId": 58539323,
+                        "UrlImagen": "Recursos/logousuario.png",
+                        "Color": "#757575",
+                        "EsLogueado": false,
+                        "Email": "vcoronado.alarcon@gmail.com",
+                        "NombreResponde": "Corito Pro",
+                        "ClavePortal": "",
+                        "ConfiguracionNodo": {
+                            "NodId": 2411,
+                            "CodigoDeis2014": "199991"
+                        },
+                        "ParametrosRayen": [],
+                        "EntidadContratante": [
+                            {
+                                "Id": 1,
+                                "Nombre": "S.S. Metropolitano Occidente",
+                                "Activo": 1,
+                                "Eliminado": 0
+                            }
+                        ],
+                        "Parentezco": {
+                            "Id": 26,
+                            "Codigo": "SEL",
+                            "Nombre": "La misma persona",
+                            "Descripcion": "La misma persona",
+                            "Consanguineo": false,
+                            "Sexo": 5,
+                            "Mostrar": true,
+                            "Editar": true
+                        },
+                        "VacunasCovid": [],
+                        "Contactabilidad": {
+                            "Id": 1,
+                            "FechaHoraRegistro": "2021-06-18T12:53:30.81",
+                            "Run": "400000018",
+                            "Telefono": "940178392",
+                            "Email": "vcoronado.alarcon@gmail.com",
+                            "NombreSocial": "Corito pro",
+                            "EtiquetaTelefono": "MOVIL_FICHA_FAMILIAR",
+                            "Eliminado": 0
+                        }
+                    },
+                    "Mediciones": {
+                        "IndicadorValorUsp": [
+                            {
+                                "Descripcion": "Peso (Kg)",
+                                "Valor": 94,
+                                "fecha": "2021-06-15 13:30:17"
+                            },
+                            {
+                                "Descripcion": "Talla (cm)",
+                                "Valor": 175,
+                                "fecha": "2021-06-15 13:30:17"
+                            },
+                            {
+                                "Descripcion": "I.M.C.",
+                                "Valor": 30.69999999,
+                                "fecha": "2021-06-15 13:30:17"
+                            },
+                            {
+                                "Descripcion": "Presión Arterial Diastólica",
+                                "Valor": 80,
+                                "fecha": "2021-06-15 13:30:17"
+                            },
+                            {
+                                "Descripcion": "Presión Arterial Sistólica",
+                                "Valor": 120,
+                                "fecha": "2021-06-15 13:30:17"
+                            }
+                        ],
+                        "RespuestaBase": {
+                            "CodigoMensaje": 0,
+                            "Mensaje": "Exito"
+                        }
+                    }
+                }
+            ]
+        };
+        this.dataSessionStorage = {
+            ENTRADA: {
+                "VersionAppName": "Mi salud familiar",
+                "Plataforma": "Web",
+                "Token": "55566.394325136316 web",
+                "VersionAppNumber": "0.0",
+                "Fecha": "2021-07-12T02:18:32.231Z",
+                "TipoOperacion": "0",
+                "Id": "0"
+            },
+            LOG_MOVIMIENTOS: [
+                {
+                    "Id": 1,
+                    "NombreModulo": "CALENDARIO",
+                    "Total": 0,
+                    "Orden": 1,
+                    "Mostrar": true,
+                    "Favorito": true,
+                    "Imagen": "./assets/imgs_svg/calendario-01.svg",
+                    "ClaseImagen": "imgs-home"
+                },
+                {
+                    "Id": 2,
+                    "NombreModulo": "ANTECEDENTES",
+                    "Total": 0,
+                    "Orden": 2,
+                    "Mostrar": true,
+                    "Favorito": true,
+                    "Imagen": "./assets/imgs_svg/antecedentes.svg",
+                    "ClaseImagen": "imgs-home"
+                },
+                {
+                    "Id": 3,
+                    "NombreModulo": "EXAMENES",
+                    "Total": 0,
+                    "Orden": 3,
+                    "Mostrar": true,
+                    "Favorito": false,
+                    "Imagen": "./assets/imgs_svg/examenes-de-salud.svg",
+                    "ClaseImagen": "imgs-home"
+                },
+                {
+                    "Id": 4,
+                    "NombreModulo": "INTERCONSULTAS",
+                    "Total": 0,
+                    "Orden": 4,
+                    "Mostrar": false,
+                    "Favorito": false,
+                    "Imagen": "./assets/imgs_svg/interconsulta_desactivado.svg",
+                    "ClaseImagen": "imgs-home"
+                }
+            ],
+            UsuarioAps: {
+                "Id": 15029781,
+                "NodId": 2411,
+                "Nombres": "Victor Edgardo",
+                "ApellidoPaterno": "Coronado",
+                "ApellidoMaterno": "Troncoso",
+                "Rut": "400000018",
+                "Direccion": "Cordon Roma 0621 - Villa La Primavera, Puente Alto- Chile",
+                "FechaDeNacimiento": "1973-01-24T12:57:00",
+                "IdRyf": "15245358",
+                "Edad": 48,
+                "Establecimiento": {
+                    "RazonSocial": "RAYENSALUD [CESFAM]",
+                    "Dominio": "CESFAMRAYENSALUD",
+                    "Descripcion": "RAYENSALUD [CESFAM]",
+                    "Direccion1": "Paulino Alfonso 3900",
+                    "CodigoDeis": "99-991"
+                },
+                "FamId": 58539323,
+                "UrlImagen": "Recursos/logousuario.png",
+                "Color": "#757575",
+                "EsLogueado": false,
+                "Email": "vcoronado.alarcon@gmail.com",
+                "NombreResponde": "Corito Pro",
+                "ClavePortal": "",
+                "ConfiguracionNodo": {
+                    "NodId": 2411,
+                    "CodigoDeis2014": "199991"
+                },
+                "ParametrosRayen": [],
+                "EntidadContratante": [
+                    {
+                        "Id": 1,
+                        "Nombre": "S.S. Metropolitano Occidente",
+                        "Activo": 1,
+                        "Eliminado": 0
+                    }
+                ],
+                "Parentezco": {
+                    "Id": 26,
+                    "Codigo": "SEL",
+                    "Nombre": "La misma persona",
+                    "Descripcion": "La misma persona",
+                    "Consanguineo": false,
+                    "Sexo": 5,
+                    "Mostrar": true,
+                    "Editar": true
+                },
+                "VacunasCovid": [],
+                "Contactabilidad": {
+                    "Id": 1,
+                    "FechaHoraRegistro": "2021-06-18T12:53:30.81",
+                    "Run": "400000018",
+                    "Telefono": "940178392",
+                    "Email": "vcoronado.alarcon@gmail.com",
+                    "NombreSocial": "Corito pro",
+                    "EtiquetaTelefono": "MOVIL_FICHA_FAMILIAR",
+                    "Eliminado": 0
+                }
+            }
+        };
     }
     ngOnInit() {
         moment__WEBPACK_IMPORTED_MODULE_13__["locale"]('es');
@@ -336,6 +872,50 @@ let NuevoLoginPage = class NuevoLoginPage {
             }
         });
     }
+    procesoLocal() {
+        //aca enviar una alerta, diciendo que no se puede comunicar por la red
+        //que se cargarán los datos de forma local para el usuario
+        //mostrar dicho mensaje
+        localStorage.setItem('REGISTRO', JSON.stringify(this.dataLocalStorage.REGISTRO));
+        localStorage.setItem('TIENE_REGISTRO', 'true');
+        //autentificarse
+        sessionStorage.setItem("UsuarioAps", JSON.stringify(this.dataSessionStorage.UsuarioAps));
+        localStorage.setItem('MI_RUT', this.dataLocalStorage.MI_RUT);
+        var retorno = this.dataLocalStorage;
+        localStorage.setItem('MI_NOMBRE', retorno.UsuarioAps.Nombres + ' ' + retorno.UsuarioAps.ApellidoPaterno);
+        localStorage.setItem('MI_COLOR', retorno.UsuarioAps.Color);
+        localStorage.setItem('MI_IMAGEN', retorno.UsuarioAps.UrlImagen);
+        //lo vamos a guardar en el local storage para realizar la llamada
+        //en el background
+        localStorage.setItem('UsuarioAps', JSON.stringify(this.dataSessionStorage.UsuarioAps));
+        if (retorno.UsuariosFamilia) {
+            //debemos quitar los repetidos según última revisión
+            let hash = {};
+            var familia = retorno.UsuariosFamilia.filter(o => hash[o.Id] ? false : hash[o.Id] = true);
+            retorno.UsuariosFamilia = familia;
+            var userFamilia = JSON.stringify(retorno.UsuariosFamilia);
+            //variable de sessión muy importante para el resto de la app.
+            localStorage.setItem("UsuariosFamilia", userFamilia);
+        }
+        localStorage.setItem('FAMILIA-POR-ACEPTAR', JSON.stringify(this.dataLocalStorage.FAMILIA_POR_ACEPTAR));
+        localStorage.setItem('FAMILIA-ACEPTADA', JSON.stringify(this.dataLocalStorage.FAMILIA_ACEPTADA));
+        localStorage.setItem('FAMILIA-RECHAZADA', JSON.stringify(this.dataLocalStorage.FAMILIA_RECHAZAZDA));
+        this.tokenDispositivo = (Math.random() * (1000000 - 1) + 1).toString() + ' local';
+        localStorage.setItem('token_dispositivo', this.tokenDispositivo);
+        sessionStorage.setItem('ENTRADA', JSON.stringify(this.dataSessionStorage.ENTRADA));
+        sessionStorage.setItem('LOG_MOVIMIENTOS', JSON.stringify(this.dataSessionStorage.LOG_MOVIMIENTOS));
+        localStorage.setItem('ANTECEDENTES', JSON.stringify(this.dataLocalStorage.ANTECEDENTES));
+        localStorage.setItem('MORBIDOS', JSON.stringify(this.dataLocalStorage.MORBIDOS));
+        localStorage.setItem('ALERGIAS', JSON.stringify(this.dataLocalStorage.ALERGIAS));
+        localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+        localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+        localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+        localStorage.setItem('PARAMETROS_APP', JSON.stringify(this.dataLocalStorage.PARAMETROS_APP));
+        this.CodigoMensaje = 0;
+        this.Mensaje = 'Exito';
+        this.loggedIn = true;
+        this.irAHome();
+    }
     loguearseRegistro() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let correo = this.forma.controls.email.value;
@@ -366,10 +946,11 @@ let NuevoLoginPage = class NuevoLoginPage {
                             return;
                         }
                     }, error => {
-                        console.log(error.message);
-                        this.utiles.presentToast("Error de conexión.", "middle", 3000);
+                        //console.log(error.message);
+                        //this.utiles.presentToast("Error de conexión.", "middle", 3000);
                         this.estaCargando = false;
                         loader.dismiss();
+                        this.procesoLocal();
                     });
                 }
                 else {
@@ -390,10 +971,11 @@ let NuevoLoginPage = class NuevoLoginPage {
                             return;
                         }
                     }).catch(error => {
-                        console.log(error.message);
-                        this.utiles.presentToast("Error de conexión.", "middle", 3000);
+                        //console.log(error.message);
+                        //this.utiles.presentToast("Error de conexión.", "middle", 3000);
                         this.estaCargando = false;
                         loader.dismiss();
+                        this.procesoLocal();
                     });
                 }
             }));
@@ -582,6 +1164,7 @@ NuevoLoginPage.ctorParameters = () => [
     { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_11__["AppVersion"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_12__["Device"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
     { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_10__["ServicioNotificaciones"] }
 ];
 NuevoLoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

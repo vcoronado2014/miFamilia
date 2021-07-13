@@ -4046,7 +4046,7 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                         }
                     }).catch(error => {
                         console.log(error.message);
-                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                        //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
                 else {
@@ -4074,7 +4074,7 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                         }
                     }).catch(error => {
                         console.log(error.message);
-                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                        //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
             }
@@ -4104,7 +4104,7 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                         }
                     }, error => {
                         console.log(error.message);
-                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                        //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
                 else {
@@ -4132,7 +4132,7 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                         }
                     }, error => {
                         console.log(error.message);
-                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                        //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
             }
@@ -4224,7 +4224,7 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                         }
                     }).catch(error => {
                         console.log(error.message);
-                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                        //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
                 else {
@@ -4254,7 +4254,8 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                         }
                     }).catch(error => {
                         console.log(error.message);
-                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                        //lo comentamos por mientras
+                        //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
             }
@@ -4311,7 +4312,8 @@ let ServicioNotificaciones = class ServicioNotificaciones {
                         }
                     }, error => {
                         console.log(error.message);
-                        this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
+                        //lo comentamos por miientras
+                        //this.utiles.presentToast('Hay errores al comunicarse con el servidor, contacte al administrador', 'bottom', 2000);
                     });
                 }
             }

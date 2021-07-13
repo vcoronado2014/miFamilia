@@ -320,7 +320,333 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.scrollTo = null; //tiene eventos hoy
 
         this.tieneEventosHoy = false;
-        this.tieneEventosFuturos = false;
+        this.tieneEventosFuturos = false; //data local
+
+        this.EVENTOS_LOCAL = [{
+          "FechaCompleta": "2021-06-01T00:00:00",
+          "NumeroDia": 1,
+          "NombreDia": "martes",
+          "NombreDiaReducido": "mar",
+          "Id": 1,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-02T00:00:00",
+          "NumeroDia": 2,
+          "NombreDia": "miércoles",
+          "NombreDiaReducido": "mié",
+          "Id": 2,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-03T00:00:00",
+          "NumeroDia": 3,
+          "NombreDia": "jueves",
+          "NombreDiaReducido": "jue",
+          "Id": 3,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-04T00:00:00",
+          "NumeroDia": 4,
+          "NombreDia": "viernes",
+          "NombreDiaReducido": "vie",
+          "Id": 4,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-05T00:00:00",
+          "NumeroDia": 5,
+          "NombreDia": "sábado",
+          "NombreDiaReducido": "sáb",
+          "Id": 5,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-06T00:00:00",
+          "NumeroDia": 6,
+          "NombreDia": "domingo",
+          "NombreDiaReducido": "dom",
+          "Id": 6,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-07T00:00:00",
+          "NumeroDia": 7,
+          "NombreDia": "lunes",
+          "NombreDiaReducido": "lun",
+          "Id": 7,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-08T00:00:00",
+          "NumeroDia": 8,
+          "NombreDia": "martes",
+          "NombreDiaReducido": "mar",
+          "Id": 8,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-09T00:00:00",
+          "NumeroDia": 9,
+          "NombreDia": "miércoles",
+          "NombreDiaReducido": "mié",
+          "Id": 9,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-10T00:00:00",
+          "NumeroDia": 10,
+          "NombreDia": "jueves",
+          "NombreDiaReducido": "jue",
+          "Id": 10,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-11T00:00:00",
+          "NumeroDia": 11,
+          "NombreDia": "viernes",
+          "NombreDiaReducido": "vie",
+          "Id": 11,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-12T00:00:00",
+          "NumeroDia": 12,
+          "NombreDia": "sábado",
+          "NombreDiaReducido": "sáb",
+          "Id": 12,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-13T00:00:00",
+          "NumeroDia": 13,
+          "NombreDia": "domingo",
+          "NombreDiaReducido": "dom",
+          "Id": 13,
+          "Eventos": [{
+            "NombrePrincipal": "Leche Purita Fortificada",
+            "NombreSecundario": "2",
+            "HoraInicioFin": "13:00",
+            "Imagen": "alimento.png",
+            "DetalleEventoMes": {
+              "FechaHora": "2021-06-13T13:00:00",
+              "NombrePaciente": "Victor Edgardo Coronado Troncoso",
+              "DescripcionPrincipal": "Leche Purita Fortificada",
+              "DescripcionSecundaria": "2",
+              "Lugar": "RAYENSALUD [CESFAM]",
+              "Titulo": "Alimento",
+              "Subtitulo": "Alimento Entregado",
+              "IdElemento": 14105,
+              "Estado": ""
+            },
+            "ListaFarmacos": null,
+            "Color": "#757575"
+          }, {
+            "NombrePrincipal": "Bebida Lactea Años Dorados",
+            "NombreSecundario": "1",
+            "HoraInicioFin": "13:00",
+            "Imagen": "alimento.png",
+            "DetalleEventoMes": {
+              "FechaHora": "2021-06-13T13:00:00",
+              "NombrePaciente": "Victor Edgardo Coronado Troncoso",
+              "DescripcionPrincipal": "Bebida Lactea Años Dorados",
+              "DescripcionSecundaria": "1",
+              "Lugar": "RAYENSALUD [CESFAM]",
+              "Titulo": "Alimento",
+              "Subtitulo": "Alimento Entregado",
+              "IdElemento": 14126,
+              "Estado": ""
+            },
+            "ListaFarmacos": null,
+            "Color": "#757575"
+          }],
+          "Mostrar": true,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-14T00:00:00",
+          "NumeroDia": 14,
+          "NombreDia": "lunes",
+          "NombreDiaReducido": "lun",
+          "Id": 14,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-15T00:00:00",
+          "NumeroDia": 15,
+          "NombreDia": "martes",
+          "NombreDiaReducido": "mar",
+          "Id": 15,
+          "Eventos": [{
+            "NombrePrincipal": "Rinofaringitis aguda (resfriado común)",
+            "NombreSecundario": "J00",
+            "HoraInicioFin": "13:09",
+            "Imagen": "diagnostico.png",
+            "DetalleEventoMes": {
+              "FechaHora": "2021-06-15T13:09:54.547",
+              "NombrePaciente": "Victor Edgardo Coronado Troncoso",
+              "DescripcionPrincipal": "Rinofaringitis aguda (resfriado común)",
+              "DescripcionSecundaria": "J00",
+              "Lugar": "RAYENSALUD [CESFAM]",
+              "Titulo": "Atención",
+              "Subtitulo": "Atención Realizada",
+              "IdElemento": 390333192,
+              "Estado": ""
+            },
+            "ListaFarmacos": null,
+            "Color": "#757575"
+          }],
+          "Mostrar": true,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-16T00:00:00",
+          "NumeroDia": 16,
+          "NombreDia": "miércoles",
+          "NombreDiaReducido": "mié",
+          "Id": 16,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-17T00:00:00",
+          "NumeroDia": 17,
+          "NombreDia": "jueves",
+          "NombreDiaReducido": "jue",
+          "Id": 17,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-18T00:00:00",
+          "NumeroDia": 18,
+          "NombreDia": "viernes",
+          "NombreDiaReducido": "vie",
+          "Id": 18,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-19T00:00:00",
+          "NumeroDia": 19,
+          "NombreDia": "sábado",
+          "NombreDiaReducido": "sáb",
+          "Id": 19,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-20T00:00:00",
+          "NumeroDia": 20,
+          "NombreDia": "domingo",
+          "NombreDiaReducido": "dom",
+          "Id": 20,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-21T00:00:00",
+          "NumeroDia": 21,
+          "NombreDia": "lunes",
+          "NombreDiaReducido": "lun",
+          "Id": 21,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-22T00:00:00",
+          "NumeroDia": 22,
+          "NombreDia": "martes",
+          "NombreDiaReducido": "mar",
+          "Id": 22,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-23T00:00:00",
+          "NumeroDia": 23,
+          "NombreDia": "miércoles",
+          "NombreDiaReducido": "mié",
+          "Id": 23,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-24T00:00:00",
+          "NumeroDia": 24,
+          "NombreDia": "jueves",
+          "NombreDiaReducido": "jue",
+          "Id": 24,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-25T00:00:00",
+          "NumeroDia": 25,
+          "NombreDia": "viernes",
+          "NombreDiaReducido": "vie",
+          "Id": 25,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-26T00:00:00",
+          "NumeroDia": 26,
+          "NombreDia": "sábado",
+          "NombreDiaReducido": "sáb",
+          "Id": 26,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-27T00:00:00",
+          "NumeroDia": 27,
+          "NombreDia": "domingo",
+          "NombreDiaReducido": "dom",
+          "Id": 27,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-28T00:00:00",
+          "NumeroDia": 28,
+          "NombreDia": "lunes",
+          "NombreDiaReducido": "lun",
+          "Id": 28,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-29T00:00:00",
+          "NumeroDia": 29,
+          "NombreDia": "martes",
+          "NombreDiaReducido": "mar",
+          "Id": 29,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }, {
+          "FechaCompleta": "2021-06-30T00:00:00",
+          "NumeroDia": 30,
+          "NombreDia": "miércoles",
+          "NombreDiaReducido": "mié",
+          "Id": 30,
+          "Eventos": [],
+          "Mostrar": false,
+          "indice": 0
+        }];
 
         this.hasMin = function (attrib) {
           return this.length && this.reduce(function (prev, curr) {
@@ -380,10 +706,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return date != null ? new Date(date).getTime() : 0;
         }
       }, {
+        key: "cargarDataLocal",
+        value: function cargarDataLocal() {
+          var _this = this;
+
+          sessionStorage.setItem('EVENTOS_LOCAL', JSON.stringify(this.EVENTOS_LOCAL));
+          this.citasVerticalTodas = this.EVENTOS_LOCAL;
+          this.procesarArregloCitasTodas();
+          this.citasVerticalMostrar = this.citasVerticalTodas.filter(function (e) {
+            return e.Mostrar == true;
+          });
+          this.citasVerticalMostrar.sort(function (a, b) {
+            return _this.getTime(a.FechaCompleta) - _this.getTime(b.FechaCompleta);
+          }); //guardamos la variable de ordenamiento
+
+          sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
+
+          this.citasVerticalTodasTop = this.citasVerticalMostrar.slice(0, this.topLimit);
+        }
+      }, {
         key: "cargarTodosLosEventosApi",
         value: function cargarTodosLosEventosApi() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var _this = this;
+            var _this2 = this;
 
             var fechaActual, mesActual, loader;
             return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -413,8 +758,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     this.tituloLoading = 'Obteniendo calendario';
                     _context4.next = 11;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                        var _this2 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                        var _this3 = this;
 
                         return regeneratorRuntime.wrap(function _callee3$(_context3) {
                           while (1) {
@@ -423,8 +768,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.cita.entregaPorMesNuevoApi(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).subscribe(function (response) {
-                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                      var _this3 = this;
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                      var _this4 = this;
 
                                       return regeneratorRuntime.wrap(function _callee$(_context) {
                                         while (1) {
@@ -436,7 +781,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                 return e.Mostrar == true;
                                               });
                                               this.citasVerticalMostrar.sort(function (a, b) {
-                                                return _this3.getTime(a.FechaCompleta) - _this3.getTime(b.FechaCompleta);
+                                                return _this4.getTime(a.FechaCompleta) - _this4.getTime(b.FechaCompleta);
                                               }); //guardamos la variable de ordenamiento
 
                                               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
@@ -458,22 +803,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                     }));
                                   }, function (error) {
                                     //console.log(error.message);
-                                    _this2.estaCargando = false;
-                                    _this2.tituloLoading = '';
-                                    loader.dismiss();
-                                    _this2.tiene = false;
+                                    _this3.estaCargando = false;
+                                    _this3.tituloLoading = '';
+                                    loader.dismiss(); //LO COMENTAMOS POR MIENTRAS
+                                    //this.tiene = false;
+                                    //this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
+                                    //this.agregarUnElemento(moment().toDate());
+                                    //******************* */
 
-                                    _this2.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
+                                    _this3.cargarDataLocal();
 
-                                    _this2.agregarUnElemento(moment__WEBPACK_IMPORTED_MODULE_10__().toDate());
-
-                                    console.log(_this2.tieneEventosFuturos);
+                                    console.log(_this3.tieneEventosFuturos);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.cita.entregaPorMesNuevoApiNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).then(function (response) {
-                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                                      var _this4 = this;
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                                      var _this5 = this;
 
                                       return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                         while (1) {
@@ -488,7 +834,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                               //ordenamos
 
                                               this.citasVerticalMostrar.sort(function (a, b) {
-                                                return _this4.getTime(a.FechaCompleta) - _this4.getTime(b.FechaCompleta);
+                                                return _this5.getTime(a.FechaCompleta) - _this5.getTime(b.FechaCompleta);
                                               }); //guardamos la variable de ordenamiento
 
                                               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
@@ -508,14 +854,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                     }));
                                   })["catch"](function (error) {
                                     //console.log(error.message);
-                                    _this2.estaCargando = false;
-                                    _this2.tituloLoading = '';
-                                    loader.dismiss();
-                                    _this2.tiene = false;
+                                    _this3.estaCargando = false;
+                                    _this3.tituloLoading = '';
+                                    loader.dismiss(); //LO COMENTAMOS POR MIENTRAS
+                                    //this.tiene = false;
+                                    //this.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
+                                    //this.agregarUnElemento(moment().toDate());
+                                    //**************** */
 
-                                    _this2.utiles.presentToast('Se produjo un error al obtener la información, vuelva a intentarlo más tarde', 'bottom', 3000);
-
-                                    _this2.agregarUnElemento(moment__WEBPACK_IMPORTED_MODULE_10__().toDate());
+                                    _this3.cargarDataLocal();
                                   });
                                 }
 
@@ -540,7 +887,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "cargarTodosLosEventos",
         value: function cargarTodosLosEventos() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
-            var _this5 = this;
+            var _this6 = this;
 
             var fechaActual, fechaAnterior, fechaPosterior, mesAnterior, mesActual, mesPosterior, loader;
             return regeneratorRuntime.wrap(function _callee12$(_context12) {
@@ -580,8 +927,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     this.tituloLoading = 'Cargando calendario';
                     _context12.next = 15;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this5, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
-                        var _this6 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+                        var _this7 = this;
 
                         return regeneratorRuntime.wrap(function _callee11$(_context11) {
                           while (1) {
@@ -590,8 +937,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesAnterior.mes, mesAnterior.anno).subscribe(function (response) {
-                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-                                      var _this7 = this;
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+                                      var _this8 = this;
 
                                       return regeneratorRuntime.wrap(function _callee7$(_context7) {
                                         while (1) {
@@ -600,8 +947,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                               this.citasVerticalTodas = response; //segunda llamada
 
                                               this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).subscribe(function (responseDos) {
-                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-                                                  var _this8 = this;
+                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this8, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+                                                  var _this9 = this;
 
                                                   return regeneratorRuntime.wrap(function _callee6$(_context6) {
                                                     while (1) {
@@ -610,8 +957,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                           this.citasVerticalTodas = this.citasVerticalTodas.concat(responseDos); //tercera llamada
 
                                                           this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesPosterior.mes, mesPosterior.anno).subscribe(function (responseTres) {
-                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this8, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-                                                              var _this9 = this;
+                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this9, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+                                                              var _this10 = this;
 
                                                               return regeneratorRuntime.wrap(function _callee5$(_context5) {
                                                                 while (1) {
@@ -627,7 +974,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       //ordenamos
 
                                                                       this.citasVerticalMostrar.sort(function (a, b) {
-                                                                        return _this9.getTime(a.FechaCompleta) - _this9.getTime(b.FechaCompleta);
+                                                                        return _this10.getTime(a.FechaCompleta) - _this10.getTime(b.FechaCompleta);
                                                                       }); //guardamos la variable de ordenamiento
 
                                                                       sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
@@ -667,8 +1014,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 } else {
                                   //llamada nativa
                                   this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesAnterior.mes, mesAnterior.anno).then(function (response) {
-                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this6, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
-                                      var _this10 = this;
+                                    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+                                      var _this11 = this;
 
                                       return regeneratorRuntime.wrap(function _callee10$(_context10) {
                                         while (1) {
@@ -677,8 +1024,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                               this.citasVerticalTodas = JSON.parse(response.data); //segunda llamada
 
                                               this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesActual.mes, mesActual.anno).then(function (responseDos) {
-                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this10, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
-                                                  var _this11 = this;
+                                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this11, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+                                                  var _this12 = this;
 
                                                   var dataDos;
                                                   return regeneratorRuntime.wrap(function _callee9$(_context9) {
@@ -689,8 +1036,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                           this.citasVerticalTodas = this.citasVerticalTodas.concat(dataDos); //tercera llamada
 
                                                           this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesPosterior.mes, mesPosterior.anno).then(function (responseTres) {
-                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this11, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-                                                              var _this12 = this;
+                                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this12, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+                                                              var _this13 = this;
 
                                                               var dataTres;
                                                               return regeneratorRuntime.wrap(function _callee8$(_context8) {
@@ -707,7 +1054,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                       //ordenamos
 
                                                                       this.citasVerticalMostrar.sort(function (a, b) {
-                                                                        return _this12.getTime(b.FechaCompleta) - _this12.getTime(a.FechaCompleta);
+                                                                        return _this13.getTime(b.FechaCompleta) - _this13.getTime(a.FechaCompleta);
                                                                       }); //guardamos la variable de ordenamiento
 
                                                                       sessionStorage.setItem('ORDEN_EVENTOS', 'descendente'); //creamos top limit al nuevo arreglo de citas
@@ -1035,25 +1382,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "ordenar",
         value: function ordenar() {
-          var _this13 = this;
+          var _this14 = this;
 
           if (sessionStorage.getItem('ORDEN_EVENTOS')) {
             var orden = sessionStorage.getItem('ORDEN_EVENTOS');
 
             if (orden == 'descendente') {
               this.citasVerticalTodasTop.sort(function (a, b) {
-                return _this13.getTime(a.FechaCompleta) - _this13.getTime(b.FechaCompleta);
+                return _this14.getTime(a.FechaCompleta) - _this14.getTime(b.FechaCompleta);
               });
               sessionStorage.setItem('ORDEN_EVENTOS', 'ascendente');
             } else {
               this.citasVerticalTodasTop.sort(function (a, b) {
-                return _this13.getTime(b.FechaCompleta) - _this13.getTime(a.FechaCompleta);
+                return _this14.getTime(b.FechaCompleta) - _this14.getTime(a.FechaCompleta);
               });
               sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
             }
           } else {
             this.citasVerticalTodasTop.sort(function (a, b) {
-              return _this13.getTime(b.FechaCompleta) - _this13.getTime(a.FechaCompleta);
+              return _this14.getTime(b.FechaCompleta) - _this14.getTime(a.FechaCompleta);
             });
             sessionStorage.setItem('ORDEN_EVENTOS', 'descendente');
           }
@@ -1063,15 +1410,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "loadData",
         value: function loadData(event) {
-          var _this14 = this;
+          var _this15 = this;
 
           setTimeout(function () {
             ////console.log('Done');
-            _this14.topLimit += 5;
-            _this14.citasVerticalTodasTop = _this14.citasVerticalMostrar.slice(0, _this14.topLimit);
+            _this15.topLimit += 5;
+            _this15.citasVerticalTodasTop = _this15.citasVerticalMostrar.slice(0, _this15.topLimit);
             event.target.complete(); //aplicamos disabled si la cantidad de registros es la misma que el total
 
-            if (_this14.citasVerticalTodasTop.length == _this14.citasVerticalMostrar.length) {
+            if (_this15.citasVerticalTodasTop.length == _this15.citasVerticalMostrar.length) {
               event.target.disabled = true;
             }
           }, 500);
@@ -1079,13 +1426,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "cargarDatosNativeN",
         value: function cargarDatosNativeN(mesConsultar, annoConsultar, loader) {
-          var _this15 = this;
+          var _this16 = this;
 
           //lo cambiamos para probar el nuevo metodo
           //this.cita.entregaPorMesNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(async (response: any)=>{
           this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(function (response) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this15, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
-              var _this16 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this16, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
+              var _this17 = this;
 
               var consultaMes;
               return regeneratorRuntime.wrap(function _callee14$(_context14) {
@@ -1093,7 +1440,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   switch (_context14.prev = _context14.next) {
                     case 0:
                       consultaMes = this.cita.entregaPorMesNuevoNative(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).then(function (response) {
-                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this16, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this17, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
                           return regeneratorRuntime.wrap(function _callee13$(_context13) {
                             while (1) {
                               switch (_context13.prev = _context13.next) {
@@ -1128,7 +1475,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "cargarDatosWebN",
         value: function cargarDatosWebN(mesConsultar, annoConsultar, loader) {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
-            var _this17 = this;
+            var _this18 = this;
 
             var consultaMes;
             return regeneratorRuntime.wrap(function _callee16$(_context16) {
@@ -1137,7 +1484,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     //ACA NO SE REALIZA LA CONSULTA A INETGRACIÓN PARA MOSTRAR O MEZCLAR LAS CITAS, YA QUE EL SP TRAE LA INFO DE LAS CITAS WEB
                     consultaMes = this.cita.entregaPorMesNuevo(this.usuarioAps.Id, this.usuarioAps.IdRyf, this.usuarioAps.NodId, mesConsultar, annoConsultar).subscribe(function (response) {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this17, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this18, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
                         return regeneratorRuntime.wrap(function _callee15$(_context15) {
                           while (1) {
                             switch (_context15.prev = _context15.next) {
@@ -1216,7 +1563,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "goToDetalleCita",
         value: function goToDetalleCita(evento) {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee17() {
-            var _this18 = this;
+            var _this19 = this;
 
             var modal;
             return regeneratorRuntime.wrap(function _callee17$(_context17) {
@@ -1245,20 +1592,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         ////console.log(mesActual);
                         //***************************** */
 
-                        _this18.tratamientoMeses();
+                        _this19.tratamientoMeses();
 
                         if (accion === 'booked') {
-                          _this18.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
+                          _this19.utiles.presentToast('Cita reservada con éxito!!', 'bottom', 3000);
                         } else if (accion === 'confirmed') {
-                          _this18.utiles.presentToast('Cita confirmada con éxito!!', 'bottom', 3000);
+                          _this19.utiles.presentToast('Cita confirmada con éxito!!', 'bottom', 3000);
                         } else if (accion === 'cancelled') {
-                          _this18.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
+                          _this19.utiles.presentToast('Cita anulada con éxito!!', 'bottom', 3000);
                         }
 
-                        if (_this18.parametrosApp.USA_API_MANAGEMENT()) {
-                          _this18.cargarTodosLosEventosApi();
+                        if (_this19.parametrosApp.USA_API_MANAGEMENT()) {
+                          _this19.cargarTodosLosEventosApi();
                         } else {
-                          _this18.cargarTodosLosEventos();
+                          _this19.cargarTodosLosEventos();
                         }
                       }
                     });
@@ -1321,7 +1668,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "presentAlertConfirm",
         value: function presentAlertConfirm(boton, evento) {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee18() {
-            var _this19 = this;
+            var _this20 = this;
 
             var titulo, alert;
             return regeneratorRuntime.wrap(function _callee18$(_context18) {
@@ -1344,7 +1691,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         cssClass: 'success',
                         handler: function handler() {
                           //aca debemos realizar la operación
-                          _this19.accionCita(boton, evento);
+                          _this20.accionCita(boton, evento);
                         }
                       }]
                     });
@@ -1366,7 +1713,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "accionCita",
         value: function accionCita(boton, evento) {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee20() {
-            var _this20 = this;
+            var _this21 = this;
 
             var usuarioCita, idPaciente, idCita, accion, loader;
             return regeneratorRuntime.wrap(function _callee20$(_context20) {
@@ -1404,8 +1751,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     this.tituloLoading = 'Obteniendo respuesta';
                     _context20.next = 12;
                     return loader.present().then(function () {
-                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this20, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
-                        var _this21 = this;
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this21, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
+                        var _this22 = this;
 
                         var retorno;
                         return regeneratorRuntime.wrap(function _callee19$(_context19) {
@@ -1417,14 +1764,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
                                   this.cita.getOperacionCita(idCita, idPaciente, accion).subscribe(function (response) {
-                                    _this21.procesarRespuestaAgendar(response, loader, accion);
+                                    _this22.procesarRespuestaAgendar(response, loader, accion);
                                   });
                                 } else {
                                   //llamada nativa
                                   this.cita.getOperacionCitaNative(idCita, idPaciente, accion).then(function (responseData) {
                                     var response = JSON.parse(responseData.data);
 
-                                    _this21.procesarRespuestaAgendar(response, loader, accion);
+                                    _this22.procesarRespuestaAgendar(response, loader, accion);
                                   });
                                 }
 
@@ -1573,14 +1920,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "scrollListVisible",
         value: function scrollListVisible() {
-          var _this22 = this;
+          var _this23 = this;
 
           //this.determinaFechaMasCercana();
           setTimeout(function () {
-            var min = _this22.finder(Math.min, _this22.citasVerticalTodasTop, 'DiferenciaFechas');
+            var min = _this23.finder(Math.min, _this23.citasVerticalTodasTop, 'DiferenciaFechas');
 
             if (min) {
-              var entidad = _this22.citasVerticalTodasTop.filter(function (p) {
+              var entidad = _this23.citasVerticalTodasTop.filter(function (p) {
                 return p.DiferenciaFechas == min;
               })[0];
 
@@ -1591,7 +1938,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var yOffset = document.getElementById(entidad.DiferenciaFechas.toString()).offsetTop;
 
                 if (yOffset != null) {
-                  _this22.content.scrollToPoint(0, yOffset, 600);
+                  _this23.content.scrollToPoint(0, yOffset, 600);
                 }
               }
             }
