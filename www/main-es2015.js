@@ -989,6 +989,10 @@ const routes = [
         path: 'modal-busqueda',
         loadChildren: () => Promise.all(/*! import() | modal-busqueda-modal-busqueda-module */[__webpack_require__.e("common"), __webpack_require__.e("modal-busqueda-modal-busqueda-module")]).then(__webpack_require__.bind(null, /*! ./modal-busqueda/modal-busqueda.module */ "./src/app/modal-busqueda/modal-busqueda.module.ts")).then(m => m.ModalBusquedaPageModule)
     },
+    {
+        path: 'error',
+        loadChildren: () => __webpack_require__.e(/*! import() | error-error-module */ "error-error-module").then(__webpack_require__.bind(null, /*! ./error/error.module */ "./src/app/error/error.module.ts")).then(m => m.ErrorPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -1037,6 +1041,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app/services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
 /* harmony import */ var _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/services/ServicioUtiles */ "./src/app/services/ServicioUtiles.ts");
 /* harmony import */ var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app/services/ServicioFCM */ "./src/app/services/ServicioFCM.ts");
+/* harmony import */ var _app_services_network_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../app/services/network.service */ "./src/app/services/network.service.ts");
 
 
 
@@ -1047,14 +1052,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, notificacion, utiles, fcmService) {
+    constructor(platform, splashScreen, statusBar, notificacion, utiles, fcmService, networkService) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.notificacion = notificacion;
         this.utiles = utiles;
         this.fcmService = fcmService;
+        this.networkService = networkService;
         this.initializeApp();
     }
     //mirar background geolocation
@@ -1063,12 +1070,27 @@ let AppComponent = class AppComponent {
         this.platform.ready().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            //this.notificacion.buscarCitas();
-            this.notificacion.buscarCitasTodas();
-            yield this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].production);
-            yield this.utiles.crearTokenPlano();
-            this.fcmService.initFCM();
-            this.fcmService.receiveMessage(true);
+            if (this.utiles.isAppOnDevice()) {
+                this.networkService.onNetworkChange().subscribe((status) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                    if (status == _app_services_network_service__WEBPACK_IMPORTED_MODULE_9__["ConnectionStatus"].Offline) {
+                        console.log('NO HAY INTERNET');
+                    }
+                    else {
+                        this.notificacion.buscarCitasTodas();
+                        yield this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].production);
+                        yield this.utiles.crearTokenPlano();
+                        this.fcmService.initFCM();
+                        this.fcmService.receiveMessage(true);
+                    }
+                }));
+            }
+            else {
+                this.notificacion.buscarCitasTodas();
+                yield this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].production);
+                yield this.utiles.crearTokenPlano();
+                this.fcmService.initFCM();
+                this.fcmService.receiveMessage(true);
+            }
         }));
     }
 };
@@ -1078,7 +1100,8 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
     { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_6__["ServicioNotificaciones"] },
     { type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_7__["ServicioUtiles"] },
-    { type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_8__["ServicioFCM"] }
+    { type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_8__["ServicioFCM"] },
+    { type: _app_services_network_service__WEBPACK_IMPORTED_MODULE_9__["NetworkService"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1139,23 +1162,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
 /* harmony import */ var _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./services/ServicioFCM */ "./src/app/services/ServicioFCM.ts");
 /* harmony import */ var _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./services/ServicioNotificacionesLocales */ "./src/app/services/ServicioNotificacionesLocales.ts");
-/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
-/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
-/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
-/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
-/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @angular/material/datepicker */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/datepicker.js");
-/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
-/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
-/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../environments/firebaseconfig */ "./src/environments/firebaseconfig.ts");
-/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
-/* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
-/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
-/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
-/* harmony import */ var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @ionic-native/firebase-messaging/ngx */ "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/components.module */ "./src/app/components/components.module.ts");
-/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! @angular/material-moment-adapter */ "./node_modules/@angular/material-moment-adapter/__ivy_ngcc__/fesm2015/material-moment-adapter.js");
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _services_network_service__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./services/network.service */ "./src/app/services/network.service.ts");
+/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
+/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @angular/material/datepicker */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/datepicker.js");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../environments/firebaseconfig */ "./src/environments/firebaseconfig.ts");
+/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
+/* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
+/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
+/* harmony import */ var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @ionic-native/firebase-messaging/ngx */ "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/components.module */ "./src/app/components/components.module.ts");
+/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @angular/material-moment-adapter */ "./node_modules/@angular/material-moment-adapter/__ivy_ngcc__/fesm2015/material-moment-adapter.js");
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js");
 
 
 
@@ -1182,6 +1206,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //servicios
+
 
 
 
@@ -1233,23 +1258,23 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         imports: [
             _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
-            _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"],
-            _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"],
-            _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"],
-            _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"],
-            _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"],
-            _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__["MatIconModule"],
-            _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__["MatDatepickerModule"],
+            _angular_material_card__WEBPACK_IMPORTED_MODULE_38__["MatCardModule"],
+            _angular_material_button__WEBPACK_IMPORTED_MODULE_39__["MatButtonModule"],
+            _angular_material_form_field__WEBPACK_IMPORTED_MODULE_40__["MatFormFieldModule"],
+            _angular_material_select__WEBPACK_IMPORTED_MODULE_43__["MatSelectModule"],
+            _angular_material_input__WEBPACK_IMPORTED_MODULE_41__["MatInputModule"],
+            _angular_material_icon__WEBPACK_IMPORTED_MODULE_44__["MatIconModule"],
+            _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_42__["MatDatepickerModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"],
-            _components_components_module__WEBPACK_IMPORTED_MODULE_51__["ComponentsModule"],
+            _components_components_module__WEBPACK_IMPORTED_MODULE_52__["ComponentsModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"],
-            _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__["AngularFireDatabaseModule"],
-            _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__["AngularFireStorageModule"],
-            _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__["AngularFireMessagingModule"],
-            _angular_fire__WEBPACK_IMPORTED_MODULE_46__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__["firebaseConfig"])
+            _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__["AngularFireDatabaseModule"],
+            _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__["AngularFireStorageModule"],
+            _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__["AngularFireMessagingModule"],
+            _angular_fire__WEBPACK_IMPORTED_MODULE_47__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__["firebaseConfig"])
         ],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
@@ -1271,19 +1296,20 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"],
             _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"],
             _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"],
+            _services_network_service__WEBPACK_IMPORTED_MODULE_37__["NetworkService"],
             _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"],
             _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"],
             _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"],
             _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"],
-            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__["LocalNotifications"],
-            _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__["FirebaseMessaging"],
-            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_LOCALE"], useValue: 'es-CL' },
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_45__["LocalNotifications"],
+            _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__["FirebaseMessaging"],
+            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"], useValue: 'es-CL' },
             {
-                provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["DateAdapter"],
-                useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MomentDateAdapter"],
-                deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
+                provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["DateAdapter"],
+                useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MomentDateAdapter"],
+                deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
             },
-            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_FORMATS"], useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MAT_MOMENT_DATE_FORMATS"] },
+            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_FORMATS"], useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_FORMATS"] },
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"]]
@@ -1717,17 +1743,30 @@ let ItemHomeComponent = class ItemHomeComponent {
     }
     ngOnInit() { }
     openGenerico(modulo) {
-        var pageName = modulo.toLowerCase();
-        if (modulo == 'EXAMENES') {
-            pageName = 'pre-ordenes';
-        }
-        //registramos movimiento
-        if (sessionStorage.getItem("RSS_ID")) {
-            if (this.parametrosApp.USA_LOG_MODULOS()) {
-                this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), modulo.toUpperCase());
+        var tieneInternet = true;
+        if (this.utiles.isAppOnDevice()) {
+            if (sessionStorage.getItem('CONEXION')) {
+                if (sessionStorage.getItem('CONEXION') == 'Offline') {
+                    tieneInternet = false;
+                }
             }
         }
-        this.navCtrl.navigateRoot(pageName);
+        if (tieneInternet == false) {
+            this.navCtrl.navigateRoot('error');
+        }
+        else {
+            var pageName = modulo.toLowerCase();
+            if (modulo == 'EXAMENES') {
+                pageName = 'pre-ordenes';
+            }
+            //registramos movimiento
+            if (sessionStorage.getItem("RSS_ID")) {
+                if (this.parametrosApp.USA_LOG_MODULOS()) {
+                    this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), modulo.toUpperCase());
+                }
+            }
+            this.navCtrl.navigateRoot(pageName);
+        }
     }
     openItemPage(modulo) {
         this.openGenerico(modulo);
@@ -4728,7 +4767,7 @@ let ServicioParametrosApp = class ServicioParametrosApp {
             return retorno;
         };
         this.USA_API_MANAGEMENT = () => {
-            let retorno = false;
+            let retorno = true;
             if (localStorage.getItem('PARAMETROS_APP')) {
                 let elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
                 if (elementos && elementos.length > 0) {
@@ -4814,10 +4853,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/ServicioGeo */ "./src/app/services/ServicioGeo.ts");
+
 
 
 
@@ -4828,12 +4869,13 @@ __webpack_require__.r(__webpack_exports__);
 //servicio
 
 let ServicioUtiles = class ServicioUtiles {
-    constructor(platform, appVersion, toast, device, servicioGeo) {
+    constructor(platform, appVersion, toast, device, servicioGeo, network) {
         this.platform = platform;
         this.appVersion = appVersion;
         this.toast = toast;
         this.device = device;
         this.servicioGeo = servicioGeo;
+        this.network = network;
         this.infoAplicacion = {
             VersionAppName: '',
             VersionNumnber: '',
@@ -4847,7 +4889,7 @@ let ServicioUtiles = class ServicioUtiles {
         };
         this.semanas = [];
         //inicializamos los valores
-        moment__WEBPACK_IMPORTED_MODULE_5__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_6__["locale"]('es');
     }
     isAppOnDevice() {
         if (window.location.port === '8100') {
@@ -4918,7 +4960,7 @@ let ServicioUtiles = class ServicioUtiles {
         return retorno;
     }
     textoBienvenida(nombre) {
-        var fecha = moment__WEBPACK_IMPORTED_MODULE_5__();
+        var fecha = moment__WEBPACK_IMPORTED_MODULE_6__();
         var hrs = fecha.hour();
         var sms = '';
         if (hrs < 12) {
@@ -5052,18 +5094,18 @@ let ServicioUtiles = class ServicioUtiles {
         return arrPages;
     }
     entregaMiImagen() {
-        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
+        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
         if (sessionStorage.getItem('UsuarioAps')) {
             var usuarioAps = JSON.parse(sessionStorage.getItem('UsuarioAps'));
             if (usuarioAps.UrlImagen && usuarioAps.UrlImagen != '') {
                 if (localStorage.getItem('MI_IMAGEN')) {
                     var imagen = localStorage.getItem('MI_IMAGEN');
                     if (imagen != usuarioAps.Color) {
-                        retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + imagen;
+                        retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + imagen;
                     }
                 }
                 else {
-                    retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
+                    retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
                 }
             }
         }
@@ -5083,17 +5125,17 @@ let ServicioUtiles = class ServicioUtiles {
         return retorno;
     }
     entregaImagen(usuarioAps) {
-        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
+        var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
         if (usuarioAps) {
             if (usuarioAps.UrlImagen && usuarioAps.UrlImagen != '') {
-                retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
+                retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
             }
         }
         //mostramos solo si tiene imagen valida
         if (retorno.includes('Recursos/logousuario.png')) {
             retorno = '';
         }
-        if (retorno == _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + 'Recursos/') {
+        if (retorno == _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + 'Recursos/') {
             retorno = '';
         }
         return retorno;
@@ -5140,9 +5182,9 @@ let ServicioUtiles = class ServicioUtiles {
         var actual = fechaInicio;
         var fechaInicioSemana = new Date(actual.getFullYear(), actual.getMonth(), actual.getDate(), 0, 0, 0, 0);
         var fechaInicioSemanaH = new Date(actual.getFullYear(), actual.getMonth(), actual.getDate(), 23, 59, 0, 0);
-        var inicioSemanaM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioSemana).add(1, 'day');
+        var inicioSemanaM = moment__WEBPACK_IMPORTED_MODULE_6__(fechaInicioSemana).add(1, 'day');
         console.log(inicioSemanaM.format());
-        var inicioSemanaH = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioSemanaH).add(7, 'day');
+        var inicioSemanaH = moment__WEBPACK_IMPORTED_MODULE_6__(fechaInicioSemanaH).add(7, 'day');
         console.log(inicioSemanaH.format());
         var diff = inicioSemanaH.diff(inicioSemanaM, 'days');
         console.log(diff);
@@ -5159,8 +5201,8 @@ let ServicioUtiles = class ServicioUtiles {
                 //volvemos a procesar fechas locales
                 var fechaInicioLocal = new Date(inicioSemanaM.year(), inicioSemanaM.month(), inicioSemanaM.date(), 0, 0, 0, 0);
                 var fechaTerminoLocal = new Date(inicioSemanaM.year(), inicioSemanaM.month(), inicioSemanaM.date(), 23, 59, 0, 0);
-                var fechaInicioLocalM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioLocal).add(i, 'day');
-                var fechaTerminoLocalM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaTerminoLocal).add(i, 'day');
+                var fechaInicioLocalM = moment__WEBPACK_IMPORTED_MODULE_6__(fechaInicioLocal).add(i, 'day');
+                var fechaTerminoLocalM = moment__WEBPACK_IMPORTED_MODULE_6__(fechaTerminoLocal).add(i, 'day');
                 console.log('inicio local ' + fechaInicioLocalM.format() + ' termino local ' + fechaTerminoLocalM.format());
                 var entidad = {
                     start: fechaInicioLocalM.format(),
@@ -5217,13 +5259,13 @@ let ServicioUtiles = class ServicioUtiles {
         if (arrEventos && arrEventos.length > 0) {
             arrEventos.forEach(evento => {
                 arrCitas.forEach(cita => {
-                    var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_5__(evento.FechaCompleta).format('YYYY-MM-DD');
-                    var fechaCita = moment__WEBPACK_IMPORTED_MODULE_5__(cita.FechaHoraInicio).format('YYYY-MM-DD');
+                    var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_6__(evento.FechaCompleta).format('YYYY-MM-DD');
+                    var fechaCita = moment__WEBPACK_IMPORTED_MODULE_6__(cita.FechaHoraInicio).format('YYYY-MM-DD');
                     if (fechaEvento == fechaCita) {
                         //coinciden hay que agregar eventos
                         var entidadEventoAgregar = {
                             Color: "#FF6666",
-                            HoraInicioFin: moment__WEBPACK_IMPORTED_MODULE_5__(cita.FechaHoraInicio).format('HH:mm'),
+                            HoraInicioFin: moment__WEBPACK_IMPORTED_MODULE_6__(cita.FechaHoraInicio).format('HH:mm'),
                             Imagen: "cita.png",
                             ListaFarmacos: null,
                             NombrePrincipal: "Consulta Médica Web",
@@ -5670,8 +5712,8 @@ let ServicioUtiles = class ServicioUtiles {
     }
     necesitaActualizarDatosPaciente(uspId) {
         var retorno = true;
-        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
-        var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_6__();
+        var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__();
         if (localStorage.getItem('ANTECEDENTES')) {
             //tiene antecedentes, pero puede que no tenga antecddentes el usuario aps, en este caso hay que acrualizar
             var tiene = false;
@@ -5687,7 +5729,7 @@ let ServicioUtiles = class ServicioUtiles {
             }
             else {
                 if (localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES')) {
-                    fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES'));
+                    fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__(localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES'));
                     var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
                     if (diferencia < 1) {
                         retorno = false;
@@ -5699,8 +5741,8 @@ let ServicioUtiles = class ServicioUtiles {
     }
     necesitaActualizarAlergiasPacientes(uspId) {
         var retorno = true;
-        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
-        var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_6__();
+        var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__();
         var tiene = false;
         let alergias = JSON.parse(localStorage.getItem('ALERGIAS'));
         if (alergias && alergias.length > 0) {
@@ -5715,7 +5757,7 @@ let ServicioUtiles = class ServicioUtiles {
         else {
             if (localStorage.getItem('ALERGIAS')) {
                 if (localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS')) {
-                    fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS'));
+                    fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__(localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS'));
                     var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
                     if (diferencia < 1) {
                         retorno = false;
@@ -5727,8 +5769,8 @@ let ServicioUtiles = class ServicioUtiles {
     }
     necesitaActualizarMorbidosPacientes(uspId) {
         var retorno = true;
-        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
-        var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+        var fechaActual = moment__WEBPACK_IMPORTED_MODULE_6__();
+        var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__();
         var tiene = false;
         let morbidos = JSON.parse(localStorage.getItem('MORBIDOS'));
         if (morbidos && morbidos.length > 0) {
@@ -5743,7 +5785,7 @@ let ServicioUtiles = class ServicioUtiles {
         else {
             if (localStorage.getItem('MORBIDOS')) {
                 if (localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS')) {
-                    fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS'));
+                    fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__(localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS'));
                     var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
                     if (diferencia < 1) {
                         retorno = false;
@@ -5801,11 +5843,101 @@ ServicioUtiles.ctorParameters = () => [
     { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_3__["AppVersion"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
     { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_4__["Device"] },
-    { type: _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__["ServicioGeo"] }
+    { type: _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__["ServicioGeo"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"] }
 ];
 ServicioUtiles = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
 ], ServicioUtiles);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/network.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/network.service.ts ***!
+  \*********************************************/
+/*! exports provided: ConnectionStatus, NetworkService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConnectionStatus", function() { return ConnectionStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NetworkService", function() { return NetworkService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+
+
+
+
+
+var ConnectionStatus;
+(function (ConnectionStatus) {
+    ConnectionStatus[ConnectionStatus["Online"] = 0] = "Online";
+    ConnectionStatus[ConnectionStatus["Offline"] = 1] = "Offline";
+})(ConnectionStatus || (ConnectionStatus = {}));
+let NetworkService = class NetworkService {
+    constructor(network, toastController, plt, navCtrl) {
+        this.network = network;
+        this.toastController = toastController;
+        this.plt = plt;
+        this.navCtrl = navCtrl;
+        this.status = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](ConnectionStatus.Offline);
+        this.plt.ready().then(() => {
+            this.initializeNetworkEvents();
+            let status = this.network.type !== 'none' ? ConnectionStatus.Online : ConnectionStatus.Offline;
+            this.status.next(status);
+        });
+    }
+    initializeNetworkEvents() {
+        this.network.onDisconnect().subscribe(() => {
+            if (this.status.getValue() === ConnectionStatus.Online) {
+                console.log('WE ARE OFFLINE');
+                this.updateNetworkStatus(ConnectionStatus.Offline);
+            }
+        });
+        this.network.onConnect().subscribe(() => {
+            if (this.status.getValue() === ConnectionStatus.Offline) {
+                console.log('WE ARE ONLINE');
+                this.updateNetworkStatus(ConnectionStatus.Online);
+            }
+        });
+    }
+    updateNetworkStatus(status) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.status.next(status);
+            let connection = status == ConnectionStatus.Offline ? 'Offline' : 'Online';
+            sessionStorage.setItem('CONEXION', connection);
+            let toast = this.toastController.create({
+                message: `Estás ${connection} en internet`,
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.then(toast => toast.present());
+        });
+    }
+    onNetworkChange() {
+        return this.status.asObservable();
+    }
+    getCurrentNetworkStatus() {
+        return this.status.getValue();
+    }
+};
+NetworkService.ctorParameters = () => [
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] }
+];
+NetworkService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], NetworkService);
 
 
 

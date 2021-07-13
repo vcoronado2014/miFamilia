@@ -1021,6 +1021,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.ModalBusquedaPageModule;
         });
       }
+    }, {
+      path: 'error',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | error-error-module */
+        "error-error-module").then(__webpack_require__.bind(null,
+        /*! ./error/error.module */
+        "./src/app/error/error.module.ts")).then(function (m) {
+          return m.ErrorPageModule;
+        });
+      }
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -1128,11 +1139,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ../app/services/ServicioFCM */
-    "./src/app/services/ServicioFCM.ts"); //servicio de notificaciones para prueba
+    "./src/app/services/ServicioFCM.ts");
+    /* harmony import */
+
+
+    var _app_services_network_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ../app/services/network.service */
+    "./src/app/services/network.service.ts"); //servicio de notificaciones para prueba
 
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(platform, splashScreen, statusBar, notificacion, utiles, fcmService) {
+      function AppComponent(platform, splashScreen, statusBar, notificacion, utiles, fcmService, networkService) {
         _classCallCheck(this, AppComponent);
 
         this.platform = platform;
@@ -1141,6 +1158,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.notificacion = notificacion;
         this.utiles = utiles;
         this.fcmService = fcmService;
+        this.networkService = networkService;
         this.initializeApp();
       } //mirar background geolocation
       //https://github.com/mauron85/cordova-plugin-background-geolocation
@@ -1152,32 +1170,79 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this = this;
 
           this.platform.ready().then(function () {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              return regeneratorRuntime.wrap(function _callee$(_context) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var _this2 = this;
+
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
-                  switch (_context.prev = _context.next) {
+                  switch (_context2.prev = _context2.next) {
                     case 0:
                       this.statusBar.styleDefault();
-                      this.splashScreen.hide(); //this.notificacion.buscarCitas();
+                      this.splashScreen.hide();
 
+                      if (!this.utiles.isAppOnDevice()) {
+                        _context2.next = 6;
+                        break;
+                      }
+
+                      this.networkService.onNetworkChange().subscribe(function (status) {
+                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                          return regeneratorRuntime.wrap(function _callee$(_context) {
+                            while (1) {
+                              switch (_context.prev = _context.next) {
+                                case 0:
+                                  if (!(status == _app_services_network_service__WEBPACK_IMPORTED_MODULE_9__["ConnectionStatus"].Offline)) {
+                                    _context.next = 4;
+                                    break;
+                                  }
+
+                                  console.log('NO HAY INTERNET');
+                                  _context.next = 11;
+                                  break;
+
+                                case 4:
+                                  this.notificacion.buscarCitasTodas();
+                                  _context.next = 7;
+                                  return this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].production);
+
+                                case 7:
+                                  _context.next = 9;
+                                  return this.utiles.crearTokenPlano();
+
+                                case 9:
+                                  this.fcmService.initFCM();
+                                  this.fcmService.receiveMessage(true);
+
+                                case 11:
+                                case "end":
+                                  return _context.stop();
+                              }
+                            }
+                          }, _callee, this);
+                        }));
+                      });
+                      _context2.next = 13;
+                      break;
+
+                    case 6:
                       this.notificacion.buscarCitasTodas();
-                      _context.next = 5;
+                      _context2.next = 9;
                       return this.utiles.obtenerParametrosApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].production);
 
-                    case 5:
-                      _context.next = 7;
+                    case 9:
+                      _context2.next = 11;
                       return this.utiles.crearTokenPlano();
 
-                    case 7:
+                    case 11:
                       this.fcmService.initFCM();
                       this.fcmService.receiveMessage(true);
 
-                    case 9:
+                    case 13:
                     case "end":
-                      return _context.stop();
+                      return _context2.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee2, this);
             }));
           });
         }
@@ -1199,6 +1264,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _app_services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_7__["ServicioUtiles"]
       }, {
         type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_8__["ServicioFCM"]
+      }, {
+        type: _app_services_network_service__WEBPACK_IMPORTED_MODULE_9__["NetworkService"]
       }];
     };
 
@@ -1458,103 +1525,109 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_material_card__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
+    var _services_network_service__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
+    /*! ./services/network.service */
+    "./src/app/services/network.service.ts");
+    /* harmony import */
+
+
+    var _angular_material_card__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
     /*! @angular/material/card */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
     /* harmony import */
 
 
-    var _angular_material_button__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
+    var _angular_material_button__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
     /*! @angular/material/button */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
     /* harmony import */
 
 
-    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
+    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
     /*! @angular/material/form-field */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
     /* harmony import */
 
 
-    var _angular_material_input__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
+    var _angular_material_input__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
     /*! @angular/material/input */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
     /* harmony import */
 
 
-    var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
+    var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
     /*! @angular/material/datepicker */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/datepicker.js");
     /* harmony import */
 
 
-    var _angular_material_select__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
+    var _angular_material_select__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
     /*! @angular/material/select */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
     /* harmony import */
 
 
-    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
+    var _angular_material_icon__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
     /*! @angular/material/icon */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/icon.js");
     /* harmony import */
 
 
-    var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
+    var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
     /*! @ionic-native/local-notifications/ngx */
     "./node_modules/@ionic-native/local-notifications/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(
+    var _environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
     /*! ../environments/firebaseconfig */
     "./src/environments/firebaseconfig.ts");
     /* harmony import */
 
 
-    var _angular_fire__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(
+    var _angular_fire__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
     /*! @angular/fire */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
     /* harmony import */
 
 
-    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(
+    var _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
     /*! @angular/fire/database */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-database.js");
     /* harmony import */
 
 
-    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(
+    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
     /*! @angular/fire/storage */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
     /* harmony import */
 
 
-    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
+    var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
     /*! @angular/fire/messaging */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-messaging.js");
     /* harmony import */
 
 
-    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
+    var _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
     /*! @ionic-native/firebase-messaging/ngx */
     "./node_modules/@ionic-native/firebase-messaging/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _components_components_module__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(
     /*! ./components/components.module */
     "./src/app/components/components.module.ts");
     /* harmony import */
 
 
-    var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(
+    var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(
     /*! @angular/material-moment-adapter */
     "./node_modules/@angular/material-moment-adapter/__ivy_ngcc__/fesm2015/material-moment-adapter.js");
     /* harmony import */
 
 
-    var _angular_material_core__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(
+    var _angular_material_core__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(
     /*! @angular/material/core */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js"); //nativos
     //Pipes
@@ -1575,17 +1648,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"], _app_pipes_toCelsius_pipe__WEBPACK_IMPORTED_MODULE_19__["CelsiusPipe"], _app_pipes_split_pipe__WEBPACK_IMPORTED_MODULE_20__["SplitPipe"], _app_pipes_fecha_pipe__WEBPACK_IMPORTED_MODULE_21__["MomentPipe"], _app_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_22__["FilterPipe"]],
       entryComponents: [],
-      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_37__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_38__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_40__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_43__["MatIconModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_41__["MatDatepickerModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_51__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_47__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_48__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_49__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_46__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_45__["firebaseConfig"])],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_44__["LocalNotifications"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_50__["FirebaseMessaging"], {
-        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_LOCALE"],
+      imports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_38__["MatCardModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_39__["MatButtonModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_40__["MatFormFieldModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_43__["MatSelectModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_41__["MatInputModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_44__["MatIconModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_42__["MatDatepickerModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_18__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_17__["AppRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_52__["ComponentsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"], _angular_fire_database__WEBPACK_IMPORTED_MODULE_48__["AngularFireDatabaseModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_49__["AngularFireStorageModule"], _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_50__["AngularFireMessagingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_47__["AngularFireModule"].initializeApp(_environments_firebaseconfig__WEBPACK_IMPORTED_MODULE_46__["firebaseConfig"])],
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_15__["InAppBrowser"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__["Network"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_12__["HTTP"], _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"], _ionic_native_location_accuracy_ngx__WEBPACK_IMPORTED_MODULE_10__["LocationAccuracy"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"], _services_ServicioUtiles__WEBPACK_IMPORTED_MODULE_23__["ServicioUtiles"], _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_24__["ServicioGeo"], _services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_25__["ServicioAcceso"], _services_ServicioInfoUsuario__WEBPACK_IMPORTED_MODULE_26__["ServicioInfoUsuario"], _services_ServicioImagen__WEBPACK_IMPORTED_MODULE_27__["ServicioImagen"], _services_ServicioLaboratorio__WEBPACK_IMPORTED_MODULE_28__["ServicioLaboratorio"], _services_ServicioCitas__WEBPACK_IMPORTED_MODULE_29__["ServicioCitas"], _services_ServicioPaginacion__WEBPACK_IMPORTED_MODULE_30__["ServicioPaginacion"], _services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_31__["ServicioNotificaciones"], _services_ServicioNotificacionesLocales__WEBPACK_IMPORTED_MODULE_36__["ServicioNotificacionesLocales"], _services_network_service__WEBPACK_IMPORTED_MODULE_37__["NetworkService"], _services_ServicioClaveUnica__WEBPACK_IMPORTED_MODULE_32__["ServicioClaveUnica"], _services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_33__["ServicioParametrosApp"], _services_ServicioFCM__WEBPACK_IMPORTED_MODULE_35__["ServicioFCM"], _ionic_native_launch_navigator_ngx__WEBPACK_IMPORTED_MODULE_13__["LaunchNavigator"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_45__["LocalNotifications"], _ionic_native_firebase_messaging_ngx__WEBPACK_IMPORTED_MODULE_51__["FirebaseMessaging"], {
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"],
         useValue: 'es-CL'
       }, {
-        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["DateAdapter"],
-        useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MomentDateAdapter"],
-        deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["DateAdapter"],
+        useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MomentDateAdapter"],
+        deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
       }, {
-        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_53__["MAT_DATE_FORMATS"],
-        useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_52__["MAT_MOMENT_DATE_FORMATS"]
+        provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_54__["MAT_DATE_FORMATS"],
+        useValue: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_53__["MAT_MOMENT_DATE_FORMATS"]
       }, {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
@@ -2273,20 +2346,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "openGenerico",
         value: function openGenerico(modulo) {
-          var pageName = modulo.toLowerCase();
+          var tieneInternet = true;
 
-          if (modulo == 'EXAMENES') {
-            pageName = 'pre-ordenes';
-          } //registramos movimiento
-
-
-          if (sessionStorage.getItem("RSS_ID")) {
-            if (this.parametrosApp.USA_LOG_MODULOS()) {
-              this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), modulo.toUpperCase());
+          if (this.utiles.isAppOnDevice()) {
+            if (sessionStorage.getItem('CONEXION')) {
+              if (sessionStorage.getItem('CONEXION') == 'Offline') {
+                tieneInternet = false;
+              }
             }
           }
 
-          this.navCtrl.navigateRoot(pageName);
+          if (tieneInternet == false) {
+            this.navCtrl.navigateRoot('error');
+          } else {
+            var pageName = modulo.toLowerCase();
+
+            if (modulo == 'EXAMENES') {
+              pageName = 'pre-ordenes';
+            } //registramos movimiento
+
+
+            if (sessionStorage.getItem("RSS_ID")) {
+              if (this.parametrosApp.USA_LOG_MODULOS()) {
+                this.utiles.registrarMovimiento(sessionStorage.getItem("RSS_ID"), modulo.toUpperCase());
+              }
+            }
+
+            this.navCtrl.navigateRoot(pageName);
+          }
         }
       }, {
         key: "openItemPage",
@@ -2916,7 +3003,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ServicioAcceso, [{
         key: "loginWeb",
         value: function loginWeb(userInfo) {
-          var _this2 = this;
+          var _this3 = this;
 
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Autentificacion?UserName=' + userInfo.UserName + '&Password=' + userInfo.Password; //return this.http.get(url, {}, {}).map(res => res.text()).map(res => { });
 
@@ -2941,20 +3028,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   localStorage.setItem("UsuariosFamilia", userFamilia);
                 }
 
-                _this2.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
-                _this2.Mensaje = retorno.RespuestaBase.Mensaje;
-                _this2.username = userInfo.usuario;
-                _this2.loggedIn = true;
+                _this3.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
+                _this3.Mensaje = retorno.RespuestaBase.Mensaje;
+                _this3.username = userInfo.usuario;
+                _this3.loggedIn = true;
               } else {
-                _this2.loggedIn = false;
-                _this2.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
-                _this2.Mensaje = retorno.RespuestaBase.Mensaje;
+                _this3.loggedIn = false;
+                _this3.CodigoMensaje = retorno.RespuestaBase.CodigoMensaje;
+                _this3.Mensaje = retorno.RespuestaBase.Mensaje;
               }
             } else {
               //error también
-              _this2.loggedIn = false;
-              _this2.CodigoMensaje = 1000;
-              _this2.Mensaje = 'Error de llamada Http;';
+              _this3.loggedIn = false;
+              _this3.CodigoMensaje = 1000;
+              _this3.Mensaje = 'Error de llamada Http;';
             }
           });
         } //cambiado por la otra api
@@ -3189,7 +3276,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getDiagnosticosByUspId",
         value: function getDiagnosticosByUspId(uspId) {
-          var _this3 = this;
+          var _this4 = this;
 
           var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Diagnostico';
           var urlFarmacoPendiente = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'FarmacoPendiente';
@@ -3212,257 +3299,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
           var repos = this.httpClient.post(url, iJson, options);
           repos.subscribe(function (response) {
-            _this3.arregloDiagnosticos = response.DiagnosticosUsp;
+            _this4.arregloDiagnosticos = response.DiagnosticosUsp;
 
             if (response.RespuestaBase) {
               if (response.RespuestaBase.CodigoMensaje != 0) {
-                _this3.arregloErrores.push(response.RespuestaBase);
-              }
-            } //procesar la data
-
-
-            if (_this3.arregloDiagnosticos) {
-              for (var s in _this3.arregloDiagnosticos) {
-                //vamos creando una entidad genérica con los resultados
-                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this3.arregloDiagnosticos[s].FechaHoraInicio); //definimos la fecha de termino en una hora más de la de inicio
-
-                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
-                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
-                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
-                var todoElDia = false; //definimos el titulo con el nombre TDA
-
-                var titulo = _this3.arregloDiagnosticos[s].NombreUsuario + '|' + _this3.arregloDiagnosticos[s].NombreTDA; //ahora creamos la entidad con estos valores
-
-                var entidadDiagnosticosUsp = {
-                  title: titulo,
-                  startTime: ini,
-                  endTime: ter,
-                  allDay: todoElDia
-                }; //ahora lo insertamos en nuestro arreglo
-
-                _this3.arregloGeneral.push(entidadDiagnosticosUsp);
-              }
-            }
-          }); //farmacos pendientes
-
-          var reposFar = this.httpClient.post(urlFarmacoPendiente, iJson, options);
-          reposFar.subscribe(function (data) {
-            _this3.arregloFarmacosPendientes = data.FarmacosPendientesUsp;
-
-            if (data.RespuestaBase) {
-              if (data.RespuestaBase.CodigoMensaje != 0) {
-                _this3.arregloErrores.push(data.RespuestaBase);
-              }
-            } //procesar la data
-
-
-            if (_this3.arregloFarmacosPendientes) {
-              for (var s in _this3.arregloFarmacosPendientes) {
-                //vamos creando una entidad genérica con los resultados
-                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this3.arregloFarmacosPendientes[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
-
-                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
-                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
-                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
-                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
-
-                var titulo = _this3.arregloFarmacosPendientes[s].NombreUsuario + '|' + _this3.arregloFarmacosPendientes[s].Diagnostico + ' ' + _this3.arregloFarmacosPendientes[s].Articulo; //ahora creamos la entidad con estos valores
-
-                var entidadFarmacosPendientes = {
-                  title: titulo,
-                  startTime: ini,
-                  endTime: ter,
-                  allDay: todoElDia
-                }; //ahora lo insertamos en nuestro arreglo
-
-                _this3.arregloGeneral.push(entidadFarmacosPendientes);
-              }
-            }
-          }, function (err) {
-            return console.error(err);
-          }, function () {
-            return console.log('get completed');
-          }); //vacunas
-
-          var reposVac = this.httpClient.post(urlVacunas, iJson, options);
-          reposVac.subscribe(function (data) {
-            _this3.arregloVacunas = data.VacunasUsp;
-
-            if (data.RespuestaBase) {
-              if (data.RespuestaBase.CodigoMensaje != 0) {
-                _this3.arregloErrores.push(data.RespuestaBase);
-              }
-            } //procesar la data
-
-
-            if (_this3.arregloVacunas) {
-              for (var s in _this3.arregloVacunas) {
-                //vamos creando una entidad genérica con los resultados
-                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this3.arregloVacunas[s].FechaProximaDosis); //definimos la fecha de termino en una hora más de la de inicio
-
-                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
-                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
-                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
-                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
-
-                var titulo = _this3.arregloVacunas[s].NombreUsuario + '|' + _this3.arregloVacunas[s].Descripcion + ', ' + _this3.arregloVacunas[s].DescripcionDosis; //ahora creamos la entidad con estos valores
-
-                var entidadVacuna = {
-                  title: titulo,
-                  startTime: ini,
-                  endTime: ter,
-                  allDay: todoElDia
-                }; //ahora lo insertamos en nuestro arreglo
-
-                _this3.arregloGeneral.push(entidadVacuna);
-              }
-            }
-          }, function (err) {
-            return console.error(err);
-          }, function () {
-            return console.log('get completed');
-          }); //farmacos en uso
-
-          var repoFarUso = this.httpClient.post(urlFarmacoUso, iJson, options);
-          repoFarUso.subscribe(function (data) {
-            _this3.arregloFarmacosUso = data.FarmacosEnUsoUsp;
-
-            if (data.RespuestaBase) {
-              if (data.RespuestaBase.CodigoMensaje != 0) {
-                _this3.arregloErrores.push(data.RespuestaBase);
-              }
-            } //procesar la data
-
-
-            if (_this3.arregloFarmacosUso) {
-              for (var s in _this3.arregloFarmacosUso) {
-                //vamos creando una entidad genérica con los resultados
-                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this3.arregloFarmacosUso[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
-
-                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
-                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
-                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
-                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
-
-                var titulo = _this3.arregloFarmacosUso[s].NombreUsuario + '|' + _this3.arregloFarmacosUso[s].Descripcion; //ahora creamos la entidad con estos valores
-
-                var entidadFarUso = {
-                  title: titulo,
-                  startTime: ini,
-                  endTime: ter,
-                  allDay: todoElDia
-                }; //ahora lo insertamos en nuestro arreglo
-
-                _this3.arregloGeneral.push(entidadFarUso);
-              }
-            }
-          }, function (err) {
-            return console.error(err);
-          }, function () {
-            return console.log('get completed');
-          }); //alimento entregado
-
-          var repoAlimentoEntregado = this.httpClient.post(urlAlimentoEntregado, iJson, options);
-          repoAlimentoEntregado.subscribe(function (data) {
-            _this3.arregloAlimentoEntregado = data.AlimentosEntregadosUsp;
-
-            if (data.RespuestaBase) {
-              if (data.RespuestaBase.CodigoMensaje != 0) {
-                _this3.arregloErrores.push(data.RespuestaBase);
-              }
-            } //procesar la data
-
-
-            if (_this3.arregloAlimentoEntregado) {
-              for (var s in _this3.arregloAlimentoEntregado) {
-                //vamos creando una entidad genérica con los resultados
-                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this3.arregloAlimentoEntregado[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
-
-                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
-                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
-                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
-                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
-
-                var titulo = _this3.arregloAlimentoEntregado[s].NombreUsuario + '|' + _this3.arregloAlimentoEntregado[s].NombreAlimento; //ahora creamos la entidad con estos valores
-
-                var entidadAlimento = {
-                  title: titulo,
-                  startTime: ini,
-                  endTime: ter,
-                  allDay: todoElDia
-                }; //ahora lo insertamos en nuestro arreglo
-
-                _this3.arregloGeneral.push(entidadAlimento);
-              }
-            }
-          }, function (err) {
-            return console.error(err);
-          }, function () {
-            return console.log('get completed');
-          }); //alimento futuro
-
-          var repoAlimentoFuturo = this.httpClient.post(urlAlimentoFuturo, iJson, options);
-          repoAlimentoFuturo.subscribe(function (data) {
-            _this3.arregloAlimentofuturo = data.AlimentosFuturosUsp;
-
-            if (data.RespuestaBase) {
-              if (data.RespuestaBase.CodigoMensaje != 0) {
-                _this3.arregloErrores.push(data.RespuestaBase);
-              }
-            } //procesar la data
-
-
-            if (_this3.arregloAlimentofuturo) {
-              for (var s in _this3.arregloAlimentofuturo) {
-                //vamos creando una entidad genérica con los resultados
-                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this3.arregloAlimentofuturo[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
-
-                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
-                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
-                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
-                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
-
-                var titulo = _this3.arregloAlimentofuturo[s].NombreUsuario + '|' + _this3.arregloAlimentofuturo[s].NombreAlimento; //ahora creamos la entidad con estos valores
-
-                var entidadAlimento = {
-                  title: titulo,
-                  startTime: ini,
-                  endTime: ter,
-                  allDay: todoElDia
-                }; //ahora lo insertamos en nuestro arreglo
-
-                _this3.arregloGeneral.push(entidadAlimento);
-              }
-            }
-          }, function (err) {
-            return console.error(err);
-          }, function () {
-            return console.log('get completed');
-          });
-          return this.arregloGeneral;
-        }
-      }, {
-        key: "getDiagnosticosByUspIdNative",
-        value: function getDiagnosticosByUspIdNative(uspId) {
-          var _this4 = this;
-
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Diagnostico';
-          var urlFarmacoPendiente = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'FarmacoPendiente';
-          var urlVacunas = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Vacuna';
-          var urlFarmacoUso = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'FarmacoEnUso';
-          var urlAlimentoEntregado = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AlimentoEntregado';
-          var urlAlimentoFuturo = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AlimentoFuturo';
-          var iJson = {
-            UspId: uspId.toString()
-          };
-          var repos = this.http.post(url, iJson, {});
-          repos.then(function (response) {
-            var data = JSON.parse(response.data);
-            _this4.arregloDiagnosticos = data.DiagnosticosUsp;
-
-            if (data.RespuestaBase) {
-              if (data.RespuestaBase.CodigoMensaje != 0) {
-                _this4.arregloErrores.push(data.RespuestaBase);
+                _this4.arregloErrores.push(response.RespuestaBase);
               }
             } //procesar la data
 
@@ -3491,14 +3332,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }); //farmacos pendientes
 
-          var reposFar = this.http.post(urlFarmacoPendiente, iJson, {});
-          reposFar.then(function (data) {
-            var response = JSON.parse(data.data);
-            _this4.arregloFarmacosPendientes = response.FarmacosPendientesUsp;
+          var reposFar = this.httpClient.post(urlFarmacoPendiente, iJson, options);
+          reposFar.subscribe(function (data) {
+            _this4.arregloFarmacosPendientes = data.FarmacosPendientesUsp;
 
-            if (response.RespuestaBase) {
-              if (response.RespuestaBase.CodigoMensaje != 0) {
-                _this4.arregloErrores.push(response.RespuestaBase);
+            if (data.RespuestaBase) {
+              if (data.RespuestaBase.CodigoMensaje != 0) {
+                _this4.arregloErrores.push(data.RespuestaBase);
               }
             } //procesar la data
 
@@ -3525,16 +3365,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _this4.arregloGeneral.push(entidadFarmacosPendientes);
               }
             }
+          }, function (err) {
+            return console.error(err);
+          }, function () {
+            return console.log('get completed');
           }); //vacunas
 
-          var reposVac = this.http.post(urlVacunas, iJson, {});
-          reposVac.then(function (data) {
-            var response = JSON.parse(data.data);
-            _this4.arregloVacunas = response.VacunasUsp;
+          var reposVac = this.httpClient.post(urlVacunas, iJson, options);
+          reposVac.subscribe(function (data) {
+            _this4.arregloVacunas = data.VacunasUsp;
 
-            if (response.RespuestaBase) {
-              if (response.RespuestaBase.CodigoMensaje != 0) {
-                _this4.arregloErrores.push(response.RespuestaBase);
+            if (data.RespuestaBase) {
+              if (data.RespuestaBase.CodigoMensaje != 0) {
+                _this4.arregloErrores.push(data.RespuestaBase);
               }
             } //procesar la data
 
@@ -3561,16 +3404,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _this4.arregloGeneral.push(entidadVacuna);
               }
             }
+          }, function (err) {
+            return console.error(err);
+          }, function () {
+            return console.log('get completed');
           }); //farmacos en uso
 
-          var repoFarUso = this.http.post(urlFarmacoUso, iJson, {});
-          repoFarUso.then(function (data) {
-            var response = JSON.parse(data.data);
-            _this4.arregloFarmacosUso = response.FarmacosEnUsoUsp;
+          var repoFarUso = this.httpClient.post(urlFarmacoUso, iJson, options);
+          repoFarUso.subscribe(function (data) {
+            _this4.arregloFarmacosUso = data.FarmacosEnUsoUsp;
 
-            if (response.RespuestaBase) {
-              if (response.RespuestaBase.CodigoMensaje != 0) {
-                _this4.arregloErrores.push(response.RespuestaBase);
+            if (data.RespuestaBase) {
+              if (data.RespuestaBase.CodigoMensaje != 0) {
+                _this4.arregloErrores.push(data.RespuestaBase);
               }
             } //procesar la data
 
@@ -3597,16 +3443,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _this4.arregloGeneral.push(entidadFarUso);
               }
             }
+          }, function (err) {
+            return console.error(err);
+          }, function () {
+            return console.log('get completed');
           }); //alimento entregado
 
-          var repoAlimentoEntregado = this.http.post(urlAlimentoEntregado, iJson, {});
-          repoAlimentoEntregado.then(function (data) {
-            var response = JSON.parse(data.data);
-            _this4.arregloAlimentoEntregado = response.AlimentosEntregadosUsp;
+          var repoAlimentoEntregado = this.httpClient.post(urlAlimentoEntregado, iJson, options);
+          repoAlimentoEntregado.subscribe(function (data) {
+            _this4.arregloAlimentoEntregado = data.AlimentosEntregadosUsp;
 
-            if (response.RespuestaBase) {
-              if (response.RespuestaBase.CodigoMensaje != 0) {
-                _this4.arregloErrores.push(response.RespuestaBase);
+            if (data.RespuestaBase) {
+              if (data.RespuestaBase.CodigoMensaje != 0) {
+                _this4.arregloErrores.push(data.RespuestaBase);
               }
             } //procesar la data
 
@@ -3633,16 +3482,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _this4.arregloGeneral.push(entidadAlimento);
               }
             }
+          }, function (err) {
+            return console.error(err);
+          }, function () {
+            return console.log('get completed');
           }); //alimento futuro
 
-          var repoAlimentoFuturo = this.http.post(urlAlimentoFuturo, iJson, {});
-          repoAlimentoFuturo.then(function (data) {
-            var response = JSON.parse(data.data);
-            _this4.arregloAlimentofuturo = response.AlimentosFuturosUsp;
+          var repoAlimentoFuturo = this.httpClient.post(urlAlimentoFuturo, iJson, options);
+          repoAlimentoFuturo.subscribe(function (data) {
+            _this4.arregloAlimentofuturo = data.AlimentosFuturosUsp;
 
-            if (response.RespuestaBase) {
-              if (response.RespuestaBase.CodigoMensaje != 0) {
-                _this4.arregloErrores.push(response.RespuestaBase);
+            if (data.RespuestaBase) {
+              if (data.RespuestaBase.CodigoMensaje != 0) {
+                _this4.arregloErrores.push(data.RespuestaBase);
               }
             } //procesar la data
 
@@ -3667,6 +3519,241 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }; //ahora lo insertamos en nuestro arreglo
 
                 _this4.arregloGeneral.push(entidadAlimento);
+              }
+            }
+          }, function (err) {
+            return console.error(err);
+          }, function () {
+            return console.log('get completed');
+          });
+          return this.arregloGeneral;
+        }
+      }, {
+        key: "getDiagnosticosByUspIdNative",
+        value: function getDiagnosticosByUspIdNative(uspId) {
+          var _this5 = this;
+
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Diagnostico';
+          var urlFarmacoPendiente = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'FarmacoPendiente';
+          var urlVacunas = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'Vacuna';
+          var urlFarmacoUso = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'FarmacoEnUso';
+          var urlAlimentoEntregado = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AlimentoEntregado';
+          var urlAlimentoFuturo = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'AlimentoFuturo';
+          var iJson = {
+            UspId: uspId.toString()
+          };
+          var repos = this.http.post(url, iJson, {});
+          repos.then(function (response) {
+            var data = JSON.parse(response.data);
+            _this5.arregloDiagnosticos = data.DiagnosticosUsp;
+
+            if (data.RespuestaBase) {
+              if (data.RespuestaBase.CodigoMensaje != 0) {
+                _this5.arregloErrores.push(data.RespuestaBase);
+              }
+            } //procesar la data
+
+
+            if (_this5.arregloDiagnosticos) {
+              for (var s in _this5.arregloDiagnosticos) {
+                //vamos creando una entidad genérica con los resultados
+                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this5.arregloDiagnosticos[s].FechaHoraInicio); //definimos la fecha de termino en una hora más de la de inicio
+
+                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
+                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
+                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
+                var todoElDia = false; //definimos el titulo con el nombre TDA
+
+                var titulo = _this5.arregloDiagnosticos[s].NombreUsuario + '|' + _this5.arregloDiagnosticos[s].NombreTDA; //ahora creamos la entidad con estos valores
+
+                var entidadDiagnosticosUsp = {
+                  title: titulo,
+                  startTime: ini,
+                  endTime: ter,
+                  allDay: todoElDia
+                }; //ahora lo insertamos en nuestro arreglo
+
+                _this5.arregloGeneral.push(entidadDiagnosticosUsp);
+              }
+            }
+          }); //farmacos pendientes
+
+          var reposFar = this.http.post(urlFarmacoPendiente, iJson, {});
+          reposFar.then(function (data) {
+            var response = JSON.parse(data.data);
+            _this5.arregloFarmacosPendientes = response.FarmacosPendientesUsp;
+
+            if (response.RespuestaBase) {
+              if (response.RespuestaBase.CodigoMensaje != 0) {
+                _this5.arregloErrores.push(response.RespuestaBase);
+              }
+            } //procesar la data
+
+
+            if (_this5.arregloFarmacosPendientes) {
+              for (var s in _this5.arregloFarmacosPendientes) {
+                //vamos creando una entidad genérica con los resultados
+                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this5.arregloFarmacosPendientes[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
+
+                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
+                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
+                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
+                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
+
+                var titulo = _this5.arregloFarmacosPendientes[s].NombreUsuario + '|' + _this5.arregloFarmacosPendientes[s].Diagnostico + ' ' + _this5.arregloFarmacosPendientes[s].Articulo; //ahora creamos la entidad con estos valores
+
+                var entidadFarmacosPendientes = {
+                  title: titulo,
+                  startTime: ini,
+                  endTime: ter,
+                  allDay: todoElDia
+                }; //ahora lo insertamos en nuestro arreglo
+
+                _this5.arregloGeneral.push(entidadFarmacosPendientes);
+              }
+            }
+          }); //vacunas
+
+          var reposVac = this.http.post(urlVacunas, iJson, {});
+          reposVac.then(function (data) {
+            var response = JSON.parse(data.data);
+            _this5.arregloVacunas = response.VacunasUsp;
+
+            if (response.RespuestaBase) {
+              if (response.RespuestaBase.CodigoMensaje != 0) {
+                _this5.arregloErrores.push(response.RespuestaBase);
+              }
+            } //procesar la data
+
+
+            if (_this5.arregloVacunas) {
+              for (var s in _this5.arregloVacunas) {
+                //vamos creando una entidad genérica con los resultados
+                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this5.arregloVacunas[s].FechaProximaDosis); //definimos la fecha de termino en una hora más de la de inicio
+
+                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
+                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
+                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
+                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
+
+                var titulo = _this5.arregloVacunas[s].NombreUsuario + '|' + _this5.arregloVacunas[s].Descripcion + ', ' + _this5.arregloVacunas[s].DescripcionDosis; //ahora creamos la entidad con estos valores
+
+                var entidadVacuna = {
+                  title: titulo,
+                  startTime: ini,
+                  endTime: ter,
+                  allDay: todoElDia
+                }; //ahora lo insertamos en nuestro arreglo
+
+                _this5.arregloGeneral.push(entidadVacuna);
+              }
+            }
+          }); //farmacos en uso
+
+          var repoFarUso = this.http.post(urlFarmacoUso, iJson, {});
+          repoFarUso.then(function (data) {
+            var response = JSON.parse(data.data);
+            _this5.arregloFarmacosUso = response.FarmacosEnUsoUsp;
+
+            if (response.RespuestaBase) {
+              if (response.RespuestaBase.CodigoMensaje != 0) {
+                _this5.arregloErrores.push(response.RespuestaBase);
+              }
+            } //procesar la data
+
+
+            if (_this5.arregloFarmacosUso) {
+              for (var s in _this5.arregloFarmacosUso) {
+                //vamos creando una entidad genérica con los resultados
+                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this5.arregloFarmacosUso[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
+
+                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
+                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
+                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
+                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
+
+                var titulo = _this5.arregloFarmacosUso[s].NombreUsuario + '|' + _this5.arregloFarmacosUso[s].Descripcion; //ahora creamos la entidad con estos valores
+
+                var entidadFarUso = {
+                  title: titulo,
+                  startTime: ini,
+                  endTime: ter,
+                  allDay: todoElDia
+                }; //ahora lo insertamos en nuestro arreglo
+
+                _this5.arregloGeneral.push(entidadFarUso);
+              }
+            }
+          }); //alimento entregado
+
+          var repoAlimentoEntregado = this.http.post(urlAlimentoEntregado, iJson, {});
+          repoAlimentoEntregado.then(function (data) {
+            var response = JSON.parse(data.data);
+            _this5.arregloAlimentoEntregado = response.AlimentosEntregadosUsp;
+
+            if (response.RespuestaBase) {
+              if (response.RespuestaBase.CodigoMensaje != 0) {
+                _this5.arregloErrores.push(response.RespuestaBase);
+              }
+            } //procesar la data
+
+
+            if (_this5.arregloAlimentoEntregado) {
+              for (var s in _this5.arregloAlimentoEntregado) {
+                //vamos creando una entidad genérica con los resultados
+                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this5.arregloAlimentoEntregado[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
+
+                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
+                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
+                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
+                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
+
+                var titulo = _this5.arregloAlimentoEntregado[s].NombreUsuario + '|' + _this5.arregloAlimentoEntregado[s].NombreAlimento; //ahora creamos la entidad con estos valores
+
+                var entidadAlimento = {
+                  title: titulo,
+                  startTime: ini,
+                  endTime: ter,
+                  allDay: todoElDia
+                }; //ahora lo insertamos en nuestro arreglo
+
+                _this5.arregloGeneral.push(entidadAlimento);
+              }
+            }
+          }); //alimento futuro
+
+          var repoAlimentoFuturo = this.http.post(urlAlimentoFuturo, iJson, {});
+          repoAlimentoFuturo.then(function (data) {
+            var response = JSON.parse(data.data);
+            _this5.arregloAlimentofuturo = response.AlimentosFuturosUsp;
+
+            if (response.RespuestaBase) {
+              if (response.RespuestaBase.CodigoMensaje != 0) {
+                _this5.arregloErrores.push(response.RespuestaBase);
+              }
+            } //procesar la data
+
+
+            if (_this5.arregloAlimentofuturo) {
+              for (var s in _this5.arregloAlimentofuturo) {
+                //vamos creando una entidad genérica con los resultados
+                var fechaIni = moment__WEBPACK_IMPORTED_MODULE_6__(_this5.arregloAlimentofuturo[s].FechaEntrega); //definimos la fecha de termino en una hora más de la de inicio
+
+                var fechaTer = moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).add(1, 'hours');
+                var ini = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaIni).second(), 0));
+                var ter = new Date(Date.UTC(moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).year(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).month(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).date(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).hour(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).minute(), moment__WEBPACK_IMPORTED_MODULE_6__(fechaTer).second(), 0));
+                var todoElDia = false; //definimos el titulo con el nombre diagnostico + articulo
+
+                var titulo = _this5.arregloAlimentofuturo[s].NombreUsuario + '|' + _this5.arregloAlimentofuturo[s].NombreAlimento; //ahora creamos la entidad con estos valores
+
+                var entidadAlimento = {
+                  title: titulo,
+                  startTime: ini,
+                  endTime: ter,
+                  allDay: todoElDia
+                }; //ahora lo insertamos en nuestro arreglo
+
+                _this5.arregloGeneral.push(entidadAlimento);
               }
             }
           });
@@ -4148,7 +4235,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "receiveMessage",
         value: function receiveMessage(esNotificacion) {
-          var _this5 = this;
+          var _this6 = this;
 
           if (this.verificaTokenSession()) {
             if (this.utiles.isAppOnDevice()) {
@@ -4169,7 +4256,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   console.log(payload);
                   console.log(payload.notification); //aca crear mensaje web con toast
 
-                  _this5.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
+                  _this6.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
                 });
                 /*                     this.fm.onBackgroundMessage(function(payload:any){
                                         this.notificaciones.crearNotificacion(payload.notification.tag, payload.notification.title, payload.notification.body);
@@ -5496,7 +5583,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "buscarCitas",
         value: function buscarCitas() {
-          var _this6 = this;
+          var _this7 = this;
 
           var usuario = null;
 
@@ -5554,7 +5641,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
                         var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                        _this6.crearNotificacion(id, titulo, texto);
+                        _this7.crearNotificacion(id, titulo, texto);
                       }
                     }
 
@@ -5587,7 +5674,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
                         var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                        _this6.crearNotificacion(id, titulo, texto);
+                        _this7.crearNotificacion(id, titulo, texto);
                       }
                     }
 
@@ -5622,7 +5709,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
                         var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                        _this6.crearNotificacion(id, titulo, texto);
+                        _this7.crearNotificacion(id, titulo, texto);
                       }
                     }
 
@@ -5655,7 +5742,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
                         var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                        _this6.crearNotificacion(id, titulo, texto);
+                        _this7.crearNotificacion(id, titulo, texto);
                       }
                     }
 
@@ -5707,7 +5794,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "buscarCitasTodas",
         value: function buscarCitasTodas() {
-          var _this7 = this;
+          var _this8 = this;
 
           var indice = 1000;
           var usuario = null;
@@ -5760,11 +5847,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
                           var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                          _this7.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                          _this8.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
 
                           indice++;
 
-                          _this7.crearNotificacion(id, titulo, texto);
+                          _this8.crearNotificacion(id, titulo, texto);
                         }
                       }
                     }
@@ -5796,11 +5883,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
                         var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                        _this7.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                        _this8.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
 
                         indice++;
 
-                        _this7.crearNotificacion(id, titulo, texto);
+                        _this8.crearNotificacion(id, titulo, texto);
                       }
                     }
 
@@ -5829,11 +5916,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           var titulo = todas[i].Eventos[s].DetalleEventoMes.Titulo;
                           var texto = fecha + ' ' + hora + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionPrincipal + '\n' + todas[i].Eventos[s].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                          _this7.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                          _this8.agregarEntidadLocal(todas[i].Eventos[s].DetalleEventoMes.Titulo, todas[i].Eventos[s].DetalleEventoMes.NombrePaciente, indice, id, texto);
 
                           indice++;
 
-                          _this7.crearNotificacion(id, titulo, texto);
+                          _this8.crearNotificacion(id, titulo, texto);
                         }
                       }
                     }
@@ -5863,11 +5950,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         var titulo = total[i].Eventos[0].DetalleEventoMes.Titulo;
                         var texto = fecha + ' ' + hora + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + '\n' + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria + '\n' + lugar; //var texto = total[i].Eventos[0].DetalleEventoMes.DescripcionPrincipal + ", " + total[i].Eventos[0].DetalleEventoMes.DescripcionSecundaria;
 
-                        _this7.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
+                        _this8.agregarEntidadLocal(total[i].Eventos[0].DetalleEventoMes.Titulo, total[i].Eventos[0].DetalleEventoMes.NombrePaciente, indice, id, texto);
 
                         indice++;
 
-                        _this7.crearNotificacion(id, titulo, texto);
+                        _this8.crearNotificacion(id, titulo, texto);
                       }
                     }
 
@@ -6493,7 +6580,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
 
       this.USA_API_MANAGEMENT = function () {
-        var retorno = false;
+        var retorno = true;
 
         if (localStorage.getItem('PARAMETROS_APP')) {
           var elementos = JSON.parse(localStorage.getItem('PARAMETROS_APP'));
@@ -6644,29 +6731,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/network/ngx */
+    "./node_modules/@ionic-native/network/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+    var moment__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
     /* harmony import */
 
 
-    var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../../environments/environment */
     "./src/environments/environment.ts");
     /* harmony import */
 
 
-    var _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ../services/ServicioGeo */
     "./src/app/services/ServicioGeo.ts"); //servicio
 
 
     var ServicioUtiles = /*#__PURE__*/function () {
-      function ServicioUtiles(platform, appVersion, toast, device, servicioGeo) {
+      function ServicioUtiles(platform, appVersion, toast, device, servicioGeo, network) {
         _classCallCheck(this, ServicioUtiles);
 
         this.platform = platform;
@@ -6674,6 +6767,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.toast = toast;
         this.device = device;
         this.servicioGeo = servicioGeo;
+        this.network = network;
         this.infoAplicacion = {
           VersionAppName: '',
           VersionNumnber: '',
@@ -6687,7 +6781,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         };
         this.semanas = []; //inicializamos los valores
 
-        moment__WEBPACK_IMPORTED_MODULE_5__["locale"]('es');
+        moment__WEBPACK_IMPORTED_MODULE_6__["locale"]('es');
       }
 
       _createClass(ServicioUtiles, [{
@@ -6702,7 +6796,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "procesarRespuestaMapa",
         value: function procesarRespuestaMapa(objeto) {
-          var _this8 = this;
+          var _this9 = this;
 
           //lo cambiamos a local storage para hacerlo más global
           //y no consultar tantas veces para ocupar la api
@@ -6718,8 +6812,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaCom) {
-                    _this8.comuna = element.long_name;
-                    localStorage.setItem('comuna', _this8.comuna);
+                    _this9.comuna = element.long_name;
+                    localStorage.setItem('comuna', _this9.comuna);
                   }
 
                   var busquedaReg = element.types.find(function (ele) {
@@ -6727,8 +6821,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaReg) {
-                    _this8.region = element.long_name;
-                    localStorage.setItem('region', _this8.region);
+                    _this9.region = element.long_name;
+                    localStorage.setItem('region', _this9.region);
                   }
 
                   var busquedaProv = element.types.find(function (ele) {
@@ -6736,8 +6830,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaProv) {
-                    _this8.provincia = element.long_name;
-                    localStorage.setItem('provincia', _this8.provincia);
+                    _this9.provincia = element.long_name;
+                    localStorage.setItem('provincia', _this9.provincia);
                   }
 
                   var busquedaPais = element.types.find(function (ele) {
@@ -6745,8 +6839,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   });
 
                   if (busquedaPais) {
-                    _this8.pais = element.long_name;
-                    localStorage.setItem('pais', _this8.pais);
+                    _this9.pais = element.long_name;
+                    localStorage.setItem('pais', _this9.pais);
                   }
                 });
               }
@@ -6762,13 +6856,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "presentToast",
         value: function presentToast(mensaje, posicion, duracion) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
             var toas;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
               while (1) {
-                switch (_context2.prev = _context2.next) {
+                switch (_context3.prev = _context3.next) {
                   case 0:
-                    _context2.next = 2;
+                    _context3.next = 2;
                     return this.toast.create({
                       message: mensaje,
                       position: posicion,
@@ -6776,15 +6870,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 2:
-                    toas = _context2.sent;
+                    toas = _context3.sent;
                     toas.present();
 
                   case 4:
                   case "end":
-                    return _context2.stop();
+                    return _context3.stop();
                 }
               }
-            }, _callee2, this);
+            }, _callee3, this);
           }));
         }
       }, {
@@ -6804,7 +6898,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "textoBienvenida",
         value: function textoBienvenida(nombre) {
-          var fecha = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fecha = moment__WEBPACK_IMPORTED_MODULE_6__();
           var hrs = fecha.hour();
           var sms = '';
 
@@ -6967,7 +7061,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "entregaMiImagen",
         value: function entregaMiImagen() {
-          var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
+          var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
 
           if (sessionStorage.getItem('UsuarioAps')) {
             var usuarioAps = JSON.parse(sessionStorage.getItem('UsuarioAps'));
@@ -6977,10 +7071,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var imagen = localStorage.getItem('MI_IMAGEN');
 
                 if (imagen != usuarioAps.Color) {
-                  retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + imagen;
+                  retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + imagen;
                 }
               } else {
-                retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
+                retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
               }
             }
           } //mostramos solo si tiene imagen valida
@@ -7008,11 +7102,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "entregaImagen",
         value: function entregaImagen(usuarioAps) {
-          var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
+          var retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + '/Recursos/logousuario.png';
 
           if (usuarioAps) {
             if (usuarioAps.UrlImagen && usuarioAps.UrlImagen != '') {
-              retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
+              retorno = _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + usuarioAps.UrlImagen;
             }
           } //mostramos solo si tiene imagen valida
 
@@ -7021,7 +7115,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             retorno = '';
           }
 
-          if (retorno == _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].URL_FOTOS + 'Recursos/') {
+          if (retorno == _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].URL_FOTOS + 'Recursos/') {
             retorno = '';
           }
 
@@ -7074,9 +7168,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var actual = fechaInicio;
           var fechaInicioSemana = new Date(actual.getFullYear(), actual.getMonth(), actual.getDate(), 0, 0, 0, 0);
           var fechaInicioSemanaH = new Date(actual.getFullYear(), actual.getMonth(), actual.getDate(), 23, 59, 0, 0);
-          var inicioSemanaM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioSemana).add(1, 'day');
+          var inicioSemanaM = moment__WEBPACK_IMPORTED_MODULE_6__(fechaInicioSemana).add(1, 'day');
           console.log(inicioSemanaM.format());
-          var inicioSemanaH = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioSemanaH).add(7, 'day');
+          var inicioSemanaH = moment__WEBPACK_IMPORTED_MODULE_6__(fechaInicioSemanaH).add(7, 'day');
           console.log(inicioSemanaH.format());
           var diff = inicioSemanaH.diff(inicioSemanaM, 'days');
           console.log(diff);
@@ -7094,8 +7188,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               //volvemos a procesar fechas locales
               var fechaInicioLocal = new Date(inicioSemanaM.year(), inicioSemanaM.month(), inicioSemanaM.date(), 0, 0, 0, 0);
               var fechaTerminoLocal = new Date(inicioSemanaM.year(), inicioSemanaM.month(), inicioSemanaM.date(), 23, 59, 0, 0);
-              var fechaInicioLocalM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaInicioLocal).add(i, 'day');
-              var fechaTerminoLocalM = moment__WEBPACK_IMPORTED_MODULE_5__(fechaTerminoLocal).add(i, 'day');
+              var fechaInicioLocalM = moment__WEBPACK_IMPORTED_MODULE_6__(fechaInicioLocal).add(i, 'day');
+              var fechaTerminoLocalM = moment__WEBPACK_IMPORTED_MODULE_6__(fechaTerminoLocal).add(i, 'day');
               console.log('inicio local ' + fechaInicioLocalM.format() + ' termino local ' + fechaTerminoLocalM.format());
               var entidad = {
                 start: fechaInicioLocalM.format(),
@@ -7157,14 +7251,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (arrEventos && arrEventos.length > 0) {
             arrEventos.forEach(function (evento) {
               arrCitas.forEach(function (cita) {
-                var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_5__(evento.FechaCompleta).format('YYYY-MM-DD');
-                var fechaCita = moment__WEBPACK_IMPORTED_MODULE_5__(cita.FechaHoraInicio).format('YYYY-MM-DD');
+                var fechaEvento = moment__WEBPACK_IMPORTED_MODULE_6__(evento.FechaCompleta).format('YYYY-MM-DD');
+                var fechaCita = moment__WEBPACK_IMPORTED_MODULE_6__(cita.FechaHoraInicio).format('YYYY-MM-DD');
 
                 if (fechaEvento == fechaCita) {
                   //coinciden hay que agregar eventos
                   var entidadEventoAgregar = {
                     Color: "#FF6666",
-                    HoraInicioFin: moment__WEBPACK_IMPORTED_MODULE_5__(cita.FechaHoraInicio).format('HH:mm'),
+                    HoraInicioFin: moment__WEBPACK_IMPORTED_MODULE_6__(cita.FechaHoraInicio).format('HH:mm'),
                     Imagen: "cita.png",
                     ListaFarmacos: null,
                     NombrePrincipal: "Consulta Médica Web",
@@ -7380,11 +7474,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "obtenerParametrosApp",
         value: function obtenerParametrosApp(esProduccion) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
             var strProd;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context4.prev = _context4.next) {
                   case 0:
                     strProd = '0';
 
@@ -7410,20 +7504,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 3:
                   case "end":
-                    return _context3.stop();
+                    return _context4.stop();
                 }
               }
-            }, _callee3, this);
+            }, _callee4, this);
           }));
         } //para registrar los movimientos
 
       }, {
         key: "registrarMovimiento",
         value: function registrarMovimiento(rssId, modulo) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context5.prev = _context5.next) {
                   case 0:
                     if (!this.isAppOnDevice()) {
                       //llamada web
@@ -7442,10 +7536,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 1:
                   case "end":
-                    return _context4.stop();
+                    return _context5.stop();
                 }
               }
-            }, _callee4, this);
+            }, _callee5, this);
           }));
         }
       }, {
@@ -7658,11 +7752,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "crearTokenPlano",
         value: function crearTokenPlano() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
             var entidad, tokenDispositivo;
-            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
               while (1) {
-                switch (_context5.prev = _context5.next) {
+                switch (_context6.prev = _context6.next) {
                   case 0:
                     entidad = {
                       tokenDispositivo: '',
@@ -7672,7 +7766,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     };
 
                     if (this.isAppOnDevice()) {
-                      _context5.next = 11;
+                      _context6.next = 11;
                       break;
                     }
 
@@ -7694,47 +7788,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     localStorage.setItem('version_app_name', entidad.versionAppName);
                     localStorage.setItem('version_number', entidad.versionNumber);
                     localStorage.setItem('plataforma', entidad.plataforma);
-                    _context5.next = 37;
+                    _context6.next = 37;
                     break;
 
                   case 11:
                     if (!this.platform.is('ios')) {
-                      _context5.next = 21;
+                      _context6.next = 21;
                       break;
                     }
 
-                    _context5.next = 14;
+                    _context6.next = 14;
                     return this.appVersion.getAppName();
 
                   case 14:
-                    entidad.versionAppName = _context5.sent;
-                    _context5.next = 17;
+                    entidad.versionAppName = _context6.sent;
+                    _context6.next = 17;
                     return this.appVersion.getVersionNumber();
 
                   case 17:
-                    entidad.versionNumber = _context5.sent;
+                    entidad.versionNumber = _context6.sent;
                     entidad.plataforma = "iOS";
-                    _context5.next = 32;
+                    _context6.next = 32;
                     break;
 
                   case 21:
                     if (!this.platform.is('android')) {
-                      _context5.next = 31;
+                      _context6.next = 31;
                       break;
                     }
 
-                    _context5.next = 24;
+                    _context6.next = 24;
                     return this.appVersion.getAppName();
 
                   case 24:
-                    entidad.versionAppName = _context5.sent;
-                    _context5.next = 27;
+                    entidad.versionAppName = _context6.sent;
+                    _context6.next = 27;
                     return this.appVersion.getVersionNumber();
 
                   case 27:
-                    entidad.versionNumber = _context5.sent;
+                    entidad.versionNumber = _context6.sent;
                     entidad.plataforma = "Android";
-                    _context5.next = 32;
+                    _context6.next = 32;
                     break;
 
                   case 31:
@@ -7759,18 +7853,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 37:
                   case "end":
-                    return _context5.stop();
+                    return _context6.stop();
                 }
               }
-            }, _callee5, this);
+            }, _callee6, this);
           }));
         }
       }, {
         key: "necesitaActualizarDatosPaciente",
         value: function necesitaActualizarDatosPaciente(uspId) {
           var retorno = true;
-          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
-          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_6__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__();
 
           if (localStorage.getItem('ANTECEDENTES')) {
             //tiene antecedentes, pero puede que no tenga antecddentes el usuario aps, en este caso hay que acrualizar
@@ -7791,7 +7885,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               retorno = true;
             } else {
               if (localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES')) {
-                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES'));
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__(localStorage.getItem('FECHA_ACTUALIZACION_ANTECEDENTES'));
                 var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
 
                 if (diferencia < 1) {
@@ -7807,8 +7901,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "necesitaActualizarAlergiasPacientes",
         value: function necesitaActualizarAlergiasPacientes(uspId) {
           var retorno = true;
-          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
-          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_6__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__();
           var tiene = false;
           var alergias = JSON.parse(localStorage.getItem('ALERGIAS'));
 
@@ -7827,7 +7921,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else {
             if (localStorage.getItem('ALERGIAS')) {
               if (localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS')) {
-                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS'));
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__(localStorage.getItem('FECHA_ACTUALIZACION_ALERGIAS'));
                 var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
 
                 if (diferencia < 1) {
@@ -7843,8 +7937,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "necesitaActualizarMorbidosPacientes",
         value: function necesitaActualizarMorbidosPacientes(uspId) {
           var retorno = true;
-          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_5__();
-          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__();
+          var fechaActual = moment__WEBPACK_IMPORTED_MODULE_6__();
+          var fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__();
           var tiene = false;
           var morbidos = JSON.parse(localStorage.getItem('MORBIDOS'));
 
@@ -7863,7 +7957,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else {
             if (localStorage.getItem('MORBIDOS')) {
               if (localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS')) {
-                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_5__(localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS'));
+                fechaUltimaActualizacion = moment__WEBPACK_IMPORTED_MODULE_6__(localStorage.getItem('FECHA_ACTUALIZACION_MORBIDOS'));
                 var diferencia = fechaActual.diff(fechaUltimaActualizacion, 'days');
 
                 if (diferencia < 1) {
@@ -7947,11 +8041,178 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_4__["Device"]
       }, {
-        type: _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_7__["ServicioGeo"]
+        type: _services_ServicioGeo__WEBPACK_IMPORTED_MODULE_8__["ServicioGeo"]
+      }, {
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"]
       }];
     };
 
     ServicioUtiles = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], ServicioUtiles);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/network.service.ts":
+  /*!*********************************************!*\
+    !*** ./src/app/services/network.service.ts ***!
+    \*********************************************/
+
+  /*! exports provided: ConnectionStatus, NetworkService */
+
+  /***/
+  function srcAppServicesNetworkServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ConnectionStatus", function () {
+      return ConnectionStatus;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "NetworkService", function () {
+      return NetworkService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic-native/network/ngx */
+    "./node_modules/@ionic-native/network/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs */
+    "./node_modules/rxjs/_esm2015/index.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+
+    var ConnectionStatus;
+
+    (function (ConnectionStatus) {
+      ConnectionStatus[ConnectionStatus["Online"] = 0] = "Online";
+      ConnectionStatus[ConnectionStatus["Offline"] = 1] = "Offline";
+    })(ConnectionStatus || (ConnectionStatus = {}));
+
+    var NetworkService = /*#__PURE__*/function () {
+      function NetworkService(network, toastController, plt, navCtrl) {
+        var _this10 = this;
+
+        _classCallCheck(this, NetworkService);
+
+        this.network = network;
+        this.toastController = toastController;
+        this.plt = plt;
+        this.navCtrl = navCtrl;
+        this.status = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](ConnectionStatus.Offline);
+        this.plt.ready().then(function () {
+          _this10.initializeNetworkEvents();
+
+          var status = _this10.network.type !== 'none' ? ConnectionStatus.Online : ConnectionStatus.Offline;
+
+          _this10.status.next(status);
+        });
+      }
+
+      _createClass(NetworkService, [{
+        key: "initializeNetworkEvents",
+        value: function initializeNetworkEvents() {
+          var _this11 = this;
+
+          this.network.onDisconnect().subscribe(function () {
+            if (_this11.status.getValue() === ConnectionStatus.Online) {
+              console.log('WE ARE OFFLINE');
+
+              _this11.updateNetworkStatus(ConnectionStatus.Offline);
+            }
+          });
+          this.network.onConnect().subscribe(function () {
+            if (_this11.status.getValue() === ConnectionStatus.Offline) {
+              console.log('WE ARE ONLINE');
+
+              _this11.updateNetworkStatus(ConnectionStatus.Online);
+            }
+          });
+        }
+      }, {
+        key: "updateNetworkStatus",
+        value: function updateNetworkStatus(status) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+            var connection, toast;
+            return regeneratorRuntime.wrap(function _callee7$(_context7) {
+              while (1) {
+                switch (_context7.prev = _context7.next) {
+                  case 0:
+                    this.status.next(status);
+                    connection = status == ConnectionStatus.Offline ? 'Offline' : 'Online';
+                    sessionStorage.setItem('CONEXION', connection);
+                    toast = this.toastController.create({
+                      message: "Est\xE1s ".concat(connection, " en internet"),
+                      duration: 3000,
+                      position: 'bottom'
+                    });
+                    toast.then(function (toast) {
+                      return toast.present();
+                    });
+
+                  case 5:
+                  case "end":
+                    return _context7.stop();
+                }
+              }
+            }, _callee7, this);
+          }));
+        }
+      }, {
+        key: "onNetworkChange",
+        value: function onNetworkChange() {
+          return this.status.asObservable();
+        }
+      }, {
+        key: "getCurrentNetworkStatus",
+        value: function getCurrentNetworkStatus() {
+          return this.status.getValue();
+        }
+      }]);
+
+      return NetworkService;
+    }();
+
+    NetworkService.ctorParameters = function () {
+      return [{
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"]
+      }];
+    };
+
+    NetworkService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], NetworkService);
     /***/
   },
 

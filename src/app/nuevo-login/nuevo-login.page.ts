@@ -9,12 +9,13 @@ import { ServicioAcceso } from '../../app/services/ServicioAcceso';
 import { ServicioParametrosApp } from '../../app/services/ServicioParametrosApp';
 import { ServicioFCM } from '../../app/services/ServicioFCM';
 import { ServicioNotificaciones } from '../../app/services/ServicioNotificaciones';
+import { NetworkService, ConnectionStatus } from '../../app/services/network.service';
 import { NavigationExtras } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Network } from '@ionic-native/network/ngx';
 import { Device } from '@ionic-native/device/ngx';
 
 import * as moment from 'moment';
-
 
 //estoy implementando progress bar
 //aca hay que controlar cuando no hay internet
@@ -610,7 +611,7 @@ export class NuevoLoginPage implements OnInit {
     }
   }
 
-
+  statusNetwork = 'online';
   constructor(
     private navCtrl: NavController,
     public utiles: ServicioUtiles,
@@ -627,11 +628,13 @@ export class NuevoLoginPage implements OnInit {
     public device: Device,
     private alertController: AlertController,
     public servNotificaciones: ServicioNotificaciones,
-  ) { }
+    public networkService: NetworkService,
+    public network: Network
+  ) { 
+  }
 
   ngOnInit() {
     moment.locale('es');
-    //vamos a obtener las notificaciones push en esta pantalla
     this.servNotificaciones.buscarCitasTodas();
     this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
     this.cargarForma();
@@ -929,16 +932,33 @@ export class NuevoLoginPage implements OnInit {
   }
 
   async onSubmit() {
-    if (this.forma.invalid) {
-      return;
+    //this.utiles.verificaInternet();
+    var puede = true;
+    if (this.utiles.isAppOnDevice()) {
+      if (sessionStorage.getItem('CONEXION')) {
+        if (sessionStorage.getItem('CONEXION') == 'Offline') {
+          puede = false;
+        }
+      }
+
     }
-    if (this.usaEnrolamiento) {
-      //loguearse con enrolamiento
-      this.loguearseEnrolamiento();
+    if (puede == false) {
+      this.utiles.presentToast('NO tienes conexión a internet', 'bottom', 3000);
+      //levantar una ventana de información a internet
+      this.navCtrl.navigateRoot('error');
     }
     else {
-      //loguearse con registro app
-      this.loguearseRegistro();
+      if (this.forma.invalid) {
+        return;
+      }
+      if (this.usaEnrolamiento) {
+        //loguearse con enrolamiento
+        this.loguearseEnrolamiento();
+      }
+      else {
+        //loguearse con registro app
+        this.loguearseRegistro();
+      }
     }
   }
   async autentificarse(userName, password) {

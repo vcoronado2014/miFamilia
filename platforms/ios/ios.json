@@ -10,7 +10,7 @@
           "NSCameraUsageDescription": [
             {
               "xml": "<string>You can take photos</string>",
-              "count": 12
+              "count": 29
             }
           ],
           "UIBackgroundModes": [

@@ -245,31 +245,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _app_services_network_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! ../../app/services/network.service */
+    "./src/app/services/network.service.ts");
+    /* harmony import */
+
+
+    var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! @ionic-native/app-version/ngx */
     "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! @ionic-native/network/ngx */
+    "./node_modules/@ionic-native/network/__ivy_ngcc__/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! @ionic-native/device/ngx */
     "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
     /*! moment */
     "./node_modules/moment/moment.js");
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_13__); //servicios
+    var moment__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_15__); //servicios
     //estoy implementando progress bar
     //aca hay que controlar cuando no hay internet
 
 
     var NuevoLoginPage = /*#__PURE__*/function () {
-      function NuevoLoginPage(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device, alertController, servNotificaciones) {
+      function NuevoLoginPage(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device, alertController, servNotificaciones, networkService, network) {
         _classCallCheck(this, NuevoLoginPage);
 
         this.navCtrl = navCtrl;
@@ -287,6 +299,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.device = device;
         this.alertController = alertController;
         this.servNotificaciones = servNotificaciones;
+        this.networkService = networkService;
+        this.network = network;
         this.hide = true; //para validar
 
         this.patternOnlyLetter = "[a-zA-Z\xC0-\xFF\xF1\xD1]+(s*[a-zA-Z\xC0-\xFF\xF1\xD1]*)*[a-zA-Z\xC0-\xFF\xF1\xD1 ]+$";
@@ -796,13 +810,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }
         };
+        this.statusNetwork = 'online';
       }
 
       _createClass(NuevoLoginPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          moment__WEBPACK_IMPORTED_MODULE_13__["locale"]('es'); //vamos a obtener las notificaciones push en esta pantalla
-
+          moment__WEBPACK_IMPORTED_MODULE_15__["locale"]('es');
           this.servNotificaciones.buscarCitasTodas();
           this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
           this.cargarForma();
@@ -1117,9 +1131,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           localStorage.setItem('ANTECEDENTES', JSON.stringify(this.dataLocalStorage.ANTECEDENTES));
           localStorage.setItem('MORBIDOS', JSON.stringify(this.dataLocalStorage.MORBIDOS));
           localStorage.setItem('ALERGIAS', JSON.stringify(this.dataLocalStorage.ALERGIAS));
-          localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
-          localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
-          localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+          localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_15__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+          localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_15__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+          localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_15__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
           localStorage.setItem('PARAMETROS_APP', JSON.stringify(this.dataLocalStorage.PARAMETROS_APP));
           this.CodigoMensaje = 0;
           this.Mensaje = 'Exito';
@@ -1258,18 +1272,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "onSubmit",
         value: function onSubmit() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            var puede;
             return regeneratorRuntime.wrap(function _callee8$(_context8) {
               while (1) {
                 switch (_context8.prev = _context8.next) {
                   case 0:
+                    //this.utiles.verificaInternet();
+                    puede = true;
+
+                    if (this.utiles.isAppOnDevice()) {
+                      if (sessionStorage.getItem('CONEXION')) {
+                        if (sessionStorage.getItem('CONEXION') == 'Offline') {
+                          puede = false;
+                        }
+                      }
+                    }
+
+                    if (!(puede == false)) {
+                      _context8.next = 7;
+                      break;
+                    }
+
+                    this.utiles.presentToast('NO tienes conexión a internet', 'bottom', 3000); //levantar una ventana de información a internet
+
+                    this.navCtrl.navigateRoot('error');
+                    _context8.next = 10;
+                    break;
+
+                  case 7:
                     if (!this.forma.invalid) {
-                      _context8.next = 2;
+                      _context8.next = 9;
                       break;
                     }
 
                     return _context8.abrupt("return");
 
-                  case 2:
+                  case 9:
                     if (this.usaEnrolamiento) {
                       //loguearse con enrolamiento
                       this.loguearseEnrolamiento();
@@ -1278,7 +1316,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       this.loguearseRegistro();
                     }
 
-                  case 3:
+                  case 10:
                   case "end":
                     return _context8.stop();
                 }
@@ -1517,15 +1555,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__["ServicioFCM"]
       }, {
-        type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_11__["AppVersion"]
+        type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_12__["AppVersion"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
       }, {
-        type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_12__["Device"]
+        type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
       }, {
         type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_10__["ServicioNotificaciones"]
+      }, {
+        type: _app_services_network_service__WEBPACK_IMPORTED_MODULE_11__["NetworkService"]
+      }, {
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_13__["Network"]
       }];
     };
 

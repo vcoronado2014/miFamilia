@@ -113,10 +113,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/services/ServicioParametrosApp */ "./src/app/services/ServicioParametrosApp.ts");
 /* harmony import */ var _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/ServicioFCM */ "./src/app/services/ServicioFCM.ts");
 /* harmony import */ var _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../app/services/ServicioNotificaciones */ "./src/app/services/ServicioNotificaciones.ts");
-/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _app_services_network_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../app/services/network.service */ "./src/app/services/network.service.ts");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/device/ngx */ "./node_modules/@ionic-native/device/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_15__);
 
 
 
@@ -132,10 +134,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 //estoy implementando progress bar
 //aca hay que controlar cuando no hay internet
 let NuevoLoginPage = class NuevoLoginPage {
-    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device, alertController, servNotificaciones) {
+    constructor(navCtrl, utiles, servicioGeo, loading, formBuilder, activatedRoute, router, acceso, parametrosApp, fcmService, appVersion, platform, device, alertController, servNotificaciones, networkService, network) {
         this.navCtrl = navCtrl;
         this.utiles = utiles;
         this.servicioGeo = servicioGeo;
@@ -151,6 +155,8 @@ let NuevoLoginPage = class NuevoLoginPage {
         this.device = device;
         this.alertController = alertController;
         this.servNotificaciones = servNotificaciones;
+        this.networkService = networkService;
+        this.network = network;
         this.hide = true;
         //para validar
         this.patternOnlyLetter = '[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$';
@@ -706,10 +712,10 @@ let NuevoLoginPage = class NuevoLoginPage {
                 }
             }
         };
+        this.statusNetwork = 'online';
     }
     ngOnInit() {
-        moment__WEBPACK_IMPORTED_MODULE_13__["locale"]('es');
-        //vamos a obtener las notificaciones push en esta pantalla
+        moment__WEBPACK_IMPORTED_MODULE_15__["locale"]('es');
         this.servNotificaciones.buscarCitasTodas();
         this.usaEnrolamiento = this.parametrosApp.USA_LOGIN_ENROLAMIENTO();
         this.cargarForma();
@@ -907,9 +913,9 @@ let NuevoLoginPage = class NuevoLoginPage {
         localStorage.setItem('ANTECEDENTES', JSON.stringify(this.dataLocalStorage.ANTECEDENTES));
         localStorage.setItem('MORBIDOS', JSON.stringify(this.dataLocalStorage.MORBIDOS));
         localStorage.setItem('ALERGIAS', JSON.stringify(this.dataLocalStorage.ALERGIAS));
-        localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
-        localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
-        localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_13__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+        localStorage.setItem('FECHA_ACTUALIZACION_ANTECEDENTES', moment__WEBPACK_IMPORTED_MODULE_15__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+        localStorage.setItem('FECHA_ACTUALIZACION_ALERGIAS', moment__WEBPACK_IMPORTED_MODULE_15__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
+        localStorage.setItem('FECHA_ACTUALIZACION_MORBIDOS', moment__WEBPACK_IMPORTED_MODULE_15__().add(1, 'days').format('YYYY-MM-DD HH:mm'));
         localStorage.setItem('PARAMETROS_APP', JSON.stringify(this.dataLocalStorage.PARAMETROS_APP));
         this.CodigoMensaje = 0;
         this.Mensaje = 'Exito';
@@ -992,16 +998,32 @@ let NuevoLoginPage = class NuevoLoginPage {
     }
     onSubmit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            if (this.forma.invalid) {
-                return;
+            //this.utiles.verificaInternet();
+            var puede = true;
+            if (this.utiles.isAppOnDevice()) {
+                if (sessionStorage.getItem('CONEXION')) {
+                    if (sessionStorage.getItem('CONEXION') == 'Offline') {
+                        puede = false;
+                    }
+                }
             }
-            if (this.usaEnrolamiento) {
-                //loguearse con enrolamiento
-                this.loguearseEnrolamiento();
+            if (puede == false) {
+                this.utiles.presentToast('NO tienes conexión a internet', 'bottom', 3000);
+                //levantar una ventana de información a internet
+                this.navCtrl.navigateRoot('error');
             }
             else {
-                //loguearse con registro app
-                this.loguearseRegistro();
+                if (this.forma.invalid) {
+                    return;
+                }
+                if (this.usaEnrolamiento) {
+                    //loguearse con enrolamiento
+                    this.loguearseEnrolamiento();
+                }
+                else {
+                    //loguearse con registro app
+                    this.loguearseRegistro();
+                }
             }
         });
     }
@@ -1161,11 +1183,13 @@ NuevoLoginPage.ctorParameters = () => [
     { type: _app_services_ServicioAcceso__WEBPACK_IMPORTED_MODULE_7__["ServicioAcceso"] },
     { type: _app_services_ServicioParametrosApp__WEBPACK_IMPORTED_MODULE_8__["ServicioParametrosApp"] },
     { type: _app_services_ServicioFCM__WEBPACK_IMPORTED_MODULE_9__["ServicioFCM"] },
-    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_11__["AppVersion"] },
+    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_12__["AppVersion"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
-    { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_12__["Device"] },
+    { type: _ionic_native_device_ngx__WEBPACK_IMPORTED_MODULE_14__["Device"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
-    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_10__["ServicioNotificaciones"] }
+    { type: _app_services_ServicioNotificaciones__WEBPACK_IMPORTED_MODULE_10__["ServicioNotificaciones"] },
+    { type: _app_services_network_service__WEBPACK_IMPORTED_MODULE_11__["NetworkService"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_13__["Network"] }
 ];
 NuevoLoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

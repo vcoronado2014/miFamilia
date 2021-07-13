@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 import { ServicioNotificaciones } from '../app/services/ServicioNotificaciones';
 import { ServicioUtiles } from '../app/services/ServicioUtiles';
 import { ServicioFCM } from '../app/services/ServicioFCM';
+import { NetworkService, ConnectionStatus } from '../app/services/network.service';
+
 
 declare var window;
 
@@ -19,6 +21,7 @@ declare var window;
 export class AppComponent {
   intervalo;
   arr;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -26,7 +29,7 @@ export class AppComponent {
     public notificacion: ServicioNotificaciones,
     public utiles: ServicioUtiles,
     public fcmService: ServicioFCM,
-
+    public networkService: NetworkService
   ) {
     this.initializeApp();
   }
@@ -37,12 +40,29 @@ export class AppComponent {
     this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //this.notificacion.buscarCitas();
-      this.notificacion.buscarCitasTodas();
-      await this.utiles.obtenerParametrosApp(environment.production);
-      await this.utiles.crearTokenPlano();
-      this.fcmService.initFCM();
-      this.fcmService.receiveMessage(true);
+      if (this.utiles.isAppOnDevice()){
+        this.networkService.onNetworkChange().subscribe(async (status: ConnectionStatus) => {
+          if (status == ConnectionStatus.Offline) {
+            console.log('NO HAY INTERNET');
+          }
+          else{
+            this.notificacion.buscarCitasTodas();
+            await this.utiles.obtenerParametrosApp(environment.production);
+            await this.utiles.crearTokenPlano();
+            this.fcmService.initFCM();
+            this.fcmService.receiveMessage(true);
+          }
+
+        });
+      }
+      else{
+        this.notificacion.buscarCitasTodas();
+        await this.utiles.obtenerParametrosApp(environment.production);
+        await this.utiles.crearTokenPlano();
+        this.fcmService.initFCM();
+        this.fcmService.receiveMessage(true);
+      }
+
     });
   }
 }

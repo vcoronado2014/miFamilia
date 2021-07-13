@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
+	<string>1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>1.0.0</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<string>true</string>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
@@ -50,53 +50,18 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>google.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
-			<key>maps.google.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>maps.googleapis.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>maps.gstatic.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>fonts.googleapis.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Activar su cámara le permite cambiar su avatar por una foto obtenida desde el dispositivo.</string>
+	<string>You can take photos</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Activar lo servicios de ubicación nos permite entregarle datos importantes sobre su establecimiento de salud (lugar y hora de sus citas, retiro de medicamentos, entre otros), esta información no se comparte con terceros es sólo de coordinación con su centro de salud</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Activar lo servicios de ubicación en segundo plano nos permite entregarle datos importantes sobre su establecimiento de salud (lugar y hora de sus citas, retiro de medicamentos, entre otros), esta información no se comparte con terceros es sólo de coordinación con su centro de salud</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Activar lo servicios de ubicación nos permite entregarle datos importantes sobre su establecimiento de salud (lugar y hora de sus citas, retiro de medicamentos, entre otros), esta información no se comparte con terceros es sólo de coordinación con su centro de salud</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Activar lo servicios de ubicación nos permite entregarle datos importantes sobre su establecimiento de salud (lugar y hora de sus citas, retiro de medicamentos, entre otros), esta información no se comparte con terceros es sólo de coordinación con su centro de salud</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Activar lo servicios de ubicación nos permite entregarle datos importantes sobre su establecimiento de salud (lugar y hora de sus citas, retiro de medicamentos, entre otros), esta información no se comparte con terceros es sólo de coordinación con su centro de salud</string>
 	<key>NSMainNibFile~ipad</key>
 	<string></string>

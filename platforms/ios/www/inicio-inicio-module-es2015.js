@@ -143,17 +143,21 @@ let InicioPage = class InicioPage {
                 sessionStorage.setItem("longitud", JSON.stringify(resp.coords.longitude));
                 var lat = sessionStorage.getItem('latitud');
                 var lon = sessionStorage.getItem('longitud');
+                this.doGeocode(lat, lon);
                 //obtener la info de registro y setear los campos que corresponden
-                if (!this.utiles.isAppOnDevice()) {
-                    //this.doGeocode(lat, lon);
-                    //console.log('web');
-                    this.doGeocode(lat, lon);
-                }
-                else {
-                    //this.doGeocodeNative(lat, lon);
-                    //console.log('native');
-                    this.doGeocodeNative(lat, lon);
-                }
+                /*         if (!this.utiles.isAppOnDevice()) {
+                          //this.doGeocode(lat, lon);
+                          //console.log('web');
+                          this.doGeocode(lat, lon);
+                        }
+                        else {
+                          //this.doGeocodeNative(lat, lon);
+                          //console.log('native');
+                          this.networkService.initializeNetworkEvents();
+                          this.status = this.networkService.getCurrentNetworkStatus();
+                          this.doGeocodeNative(lat, lon);
+                
+                        } */
             }).catch((error) => {
                 console.log('Error getting location', error);
             });
@@ -473,10 +477,15 @@ let InicioPage = class InicioPage {
             console.log('Datos politicos existentes');
         }
         else {
+            /* if (this.status == ConnectionStatus.Online) { */
             this.servicioGeo.getMapaNative(lat, lon).then(response => {
                 //console.log(data);
                 this.utiles.procesarRespuestaMapa(JSON.parse(response.data));
             });
+            /*       }
+                  else{
+                    console.log('NO HAY CONEXIÓN A INTERNET');
+                  } */
         }
     }
     doGeocode(lat, lon) {

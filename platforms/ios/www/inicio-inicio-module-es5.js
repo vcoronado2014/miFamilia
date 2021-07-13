@@ -251,17 +251,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             sessionStorage.setItem("latitud", JSON.stringify(resp.coords.latitude));
             sessionStorage.setItem("longitud", JSON.stringify(resp.coords.longitude));
             var lat = sessionStorage.getItem('latitud');
-            var lon = sessionStorage.getItem('longitud'); //obtener la info de registro y setear los campos que corresponden
+            var lon = sessionStorage.getItem('longitud');
 
-            if (!_this.utiles.isAppOnDevice()) {
-              //this.doGeocode(lat, lon);
-              //console.log('web');
-              _this.doGeocode(lat, lon);
-            } else {
-              //this.doGeocodeNative(lat, lon);
-              //console.log('native');
-              _this.doGeocodeNative(lat, lon);
-            }
+            _this.doGeocode(lat, lon); //obtener la info de registro y setear los campos que corresponden
+
+            /*         if (!this.utiles.isAppOnDevice()) {
+                      //this.doGeocode(lat, lon);
+                      //console.log('web');
+                      this.doGeocode(lat, lon);
+                    }
+                    else {
+                      //this.doGeocodeNative(lat, lon);
+                      //console.log('native');
+                      this.networkService.initializeNetworkEvents();
+                      this.status = this.networkService.getCurrentNetworkStatus();
+                      this.doGeocodeNative(lat, lon);
+            
+                    } */
+
           })["catch"](function (error) {
             console.log('Error getting location', error);
           });
@@ -770,10 +777,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (this.comuna && this.pais && this.region && this.provincia) {
             console.log('Datos politicos existentes');
           } else {
+            /* if (this.status == ConnectionStatus.Online) { */
             this.servicioGeo.getMapaNative(lat, lon).then(function (response) {
               //console.log(data);
               _this9.utiles.procesarRespuestaMapa(JSON.parse(response.data));
             });
+            /*       }
+                  else{
+                    console.log('NO HAY CONEXIÓN A INTERNET');
+                  } */
           }
         }
       }, {

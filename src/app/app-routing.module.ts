@@ -132,7 +132,10 @@ const routes: Routes = [
     path: 'modal-busqueda',
     loadChildren: () => import('./modal-busqueda/modal-busqueda.module').then( m => m.ModalBusquedaPageModule)
   },
-
+  {
+    path: 'error',
+    loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
+  },
 
 ];
 

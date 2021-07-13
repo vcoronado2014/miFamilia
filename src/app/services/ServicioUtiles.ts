@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Platform, ToastController } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Device } from '@ionic-native/device/ngx';
+import { Network } from '@ionic-native/network/ngx';
 import * as moment from 'moment';
 import { environment } from '../../environments/environment';
 //servicio
@@ -34,7 +35,8 @@ export class ServicioUtiles{
         public appVersion: AppVersion,
         public toast: ToastController,
         public device: Device,
-        private servicioGeo: ServicioGeo
+        private servicioGeo: ServicioGeo,
+        public network: Network
     ){
       //inicializamos los valores
       moment.locale('es');
