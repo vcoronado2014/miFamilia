@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<string>true</string>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
@@ -54,7 +54,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>You can take photos</string>
+	<string>Activar el servicio de camara nos permitirá cambiar nuestro avatar con una foto del dispositiivo</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Activar lo servicios de ubicación nos permite entregarle datos importantes sobre su establecimiento de salud (lugar y hora de sus citas, retiro de medicamentos, entre otros), esta información no se comparte con terceros es sólo de coordinación con su centro de salud</string>
 	<key>NSLocationAlwaysUsageDescription</key>

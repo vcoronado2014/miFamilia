@@ -1032,6 +1032,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.ErrorPageModule;
         });
       }
+    }, {
+      path: 'error',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | error-error-module */
+        "error-error-module").then(__webpack_require__.bind(null,
+        /*! ./error/error.module */
+        "./src/app/error/error.module.ts")).then(function (m) {
+          return m.ErrorPageModule;
+        });
+      }
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -4459,7 +4470,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getRegistroAppCorreoPassword",
         value: function getRegistroAppCorreoPassword(correo, password) {
-          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password;
+          var url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password; //this.httpClient.setRequestTimeout(5.0);
+
           var data = this.httpClient.get(url, {});
           return data;
         }

@@ -120,6 +120,7 @@ export class ServicioGeo{
   }
   getRegistroAppCorreoPassword(correo, password){
     let url = environment.API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password;
+    //this.httpClient.setRequestTimeout(5.0);
     let data = this.httpClient.get(url,{});
     return data;
   }

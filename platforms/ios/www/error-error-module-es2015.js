@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n    <div class=\"div_error\" text-center>\n      <h1>Sin Conexión</h1>\n      <p>Te has quedado sin conexión a internet, revisa que tu dispositivo tenga la conexión de datos/wifi activa o el modo avión este ddesactivado.</p>\n      <ion-button style=\"padding-top: 10%;\" color=\"primary\" (click)=\"reconectar()\">Aceptar</ion-button>\n    </div>\n  </ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar color=\"primary\" mode=\"md\">\n    <ion-title>Sin Conexión</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"back-app\">\n  <div class=\"div_error\">\n    \n    <p>No cuentas con conexión a internet, activa tus datos/wifi o revisa el modo avión de tu dispositivo.</p>\n    <ion-button color=\"primary\" (click)=\"acpetar()\">Aceptar</ion-button> \n\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -26,16 +26,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _error_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./error.page */ "./src/app/error/error.page.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/card.js");
-/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
-/* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/components.module */ "./src/app/components/components.module.ts");
-
-
-
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _error_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./error.page */ "./src/app/error/error.page.ts");
 
 
 
@@ -49,19 +43,16 @@ ErrorPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"],
-            _angular_material_card__WEBPACK_IMPORTED_MODULE_7__["MatCardModule"],
-            _angular_material_button__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
-            _components_components_module__WEBPACK_IMPORTED_MODULE_9__["ComponentsModule"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"].forChild([
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                 {
                     path: '',
-                    component: _error_page__WEBPACK_IMPORTED_MODULE_5__["ErrorPage"]
+                    component: _error_page__WEBPACK_IMPORTED_MODULE_6__["ErrorPage"]
                 }
             ])
         ],
-        declarations: [_error_page__WEBPACK_IMPORTED_MODULE_5__["ErrorPage"]]
+        declarations: [_error_page__WEBPACK_IMPORTED_MODULE_6__["ErrorPage"]]
     })
 ], ErrorPageModule);
 
@@ -78,7 +69,7 @@ ErrorPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".div_error {\n  background-color: #39B5E9;\n  height: 100%;\n  padding-top: 50%;\n  text-align: center;\n}\n.div_error img {\n  height: 15%;\n  margin-bottom: 5%;\n}\n.div_error p {\n  padding: 0 10%;\n  font-size: 1.8rem;\n  margin-bottom: 5%;\n}\n.div_error button {\n  margin-top: 5%;\n  font-size: 1em;\n}\n.embarazada {\n  color: #c1005b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy92aWN0b3Jjb3JvbmFkby9EZXNrdG9wL21pRmFtaWxpYV9wcmUvc3JjL2FwcC9lcnJvci9lcnJvci5wYWdlLnNjc3MiLCJzcmMvYXBwL2Vycm9yL2Vycm9yLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHlCQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0VBQ0Esa0JBQUE7QUNDSjtBRENJO0VBQ0ksV0FBQTtFQUNBLGlCQUFBO0FDQ1I7QURDSTtFQUNJLGNBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBO0FDQ1I7QURDSTtFQUNJLGNBQUE7RUFDQSxjQUFBO0FDQ1I7QURFQTtFQUNJLGNBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2Vycm9yL2Vycm9yLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kaXZfZXJyb3J7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzM5QjVFOTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgcGFkZGluZy10b3A6IDUwJTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgXG4gICAgaW1ne1xuICAgICAgICBoZWlnaHQ6IDE1JTtcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogNSU7XG4gICAgfVxuICAgIHB7XG4gICAgICAgIHBhZGRpbmc6IDAgMTAlO1xuICAgICAgICBmb250LXNpemU6IDEuOHJlbTtcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogNSU7XG4gICAgfVxuICAgIGJ1dHRvbntcbiAgICAgICAgbWFyZ2luLXRvcDogNSU7XG4gICAgICAgIGZvbnQtc2l6ZTogMWVtO1xuICAgIH1cbn1cbi5lbWJhcmF6YWRhe1xuICAgIGNvbG9yOiAjYzEwMDViO1xufSIsIi5kaXZfZXJyb3Ige1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMzlCNUU5O1xuICBoZWlnaHQ6IDEwMCU7XG4gIHBhZGRpbmctdG9wOiA1MCU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbi5kaXZfZXJyb3IgaW1nIHtcbiAgaGVpZ2h0OiAxNSU7XG4gIG1hcmdpbi1ib3R0b206IDUlO1xufVxuLmRpdl9lcnJvciBwIHtcbiAgcGFkZGluZzogMCAxMCU7XG4gIGZvbnQtc2l6ZTogMS44cmVtO1xuICBtYXJnaW4tYm90dG9tOiA1JTtcbn1cbi5kaXZfZXJyb3IgYnV0dG9uIHtcbiAgbWFyZ2luLXRvcDogNSU7XG4gIGZvbnQtc2l6ZTogMWVtO1xufVxuXG4uZW1iYXJhemFkYSB7XG4gIGNvbG9yOiAjYzEwMDViO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".div_error {\n  background-color: #39B5E9;\n  height: 100%;\n  padding-top: 50%;\n  text-align: center;\n}\n.div_error img {\n  height: 15%;\n  margin-bottom: 5%;\n}\n.div_error p {\n  padding: 0 10%;\n  font-size: 1.8rem;\n  margin-bottom: 5%;\n}\n.div_error ion-button {\n  margin-top: 5%;\n  font-size: 1em;\n}\n.embarazada {\n  color: #c1005b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy92aWN0b3Jjb3JvbmFkby9EZXNrdG9wL21pRmFtaWxpYV9wcmUvc3JjL2FwcC9lcnJvci9lcnJvci5wYWdlLnNjc3MiLCJzcmMvYXBwL2Vycm9yL2Vycm9yLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHlCQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0VBQ0Esa0JBQUE7QUNDSjtBRENJO0VBQ0ksV0FBQTtFQUNBLGlCQUFBO0FDQ1I7QURDSTtFQUNJLGNBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBO0FDQ1I7QURDSTtFQUNJLGNBQUE7RUFDQSxjQUFBO0FDQ1I7QURFQTtFQUNJLGNBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2Vycm9yL2Vycm9yLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kaXZfZXJyb3J7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzM5QjVFOTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgcGFkZGluZy10b3A6IDUwJTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgXG4gICAgaW1ne1xuICAgICAgICBoZWlnaHQ6IDE1JTtcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogNSU7XG4gICAgfVxuICAgIHB7XG4gICAgICAgIHBhZGRpbmc6IDAgMTAlO1xuICAgICAgICBmb250LXNpemU6IDEuOHJlbTtcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogNSU7XG4gICAgfVxuICAgIGlvbi1idXR0b257XG4gICAgICAgIG1hcmdpbi10b3A6IDUlO1xuICAgICAgICBmb250LXNpemU6IDFlbTtcbiAgICB9XG59XG4uZW1iYXJhemFkYXtcbiAgICBjb2xvcjogI2MxMDA1Yjtcbn0iLCIuZGl2X2Vycm9yIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzM5QjVFOTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBwYWRkaW5nLXRvcDogNTAlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4uZGl2X2Vycm9yIGltZyB7XG4gIGhlaWdodDogMTUlO1xuICBtYXJnaW4tYm90dG9tOiA1JTtcbn1cbi5kaXZfZXJyb3IgcCB7XG4gIHBhZGRpbmc6IDAgMTAlO1xuICBmb250LXNpemU6IDEuOHJlbTtcbiAgbWFyZ2luLWJvdHRvbTogNSU7XG59XG4uZGl2X2Vycm9yIGlvbi1idXR0b24ge1xuICBtYXJnaW4tdG9wOiA1JTtcbiAgZm9udC1zaXplOiAxZW07XG59XG5cbi5lbWJhcmF6YWRhIHtcbiAgY29sb3I6ICNjMTAwNWI7XG59Il19 */");
 
 /***/ }),
 
@@ -95,39 +86,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
 
-
-//router
 
 let ErrorPage = class ErrorPage {
-    constructor(ref, toast, geolocation, navCtrl, route, router) {
-        this.ref = ref;
-        this.toast = toast;
-        this.geolocation = geolocation;
+    constructor(navCtrl) {
         this.navCtrl = navCtrl;
-        this.route = route;
-        this.router = router;
-        this.paginaOrigen = '';
-        //Funcion que detecta los cambios de las variables
-        /*     setInterval(() => {
-              this.ref.detectChanges();
-            }, 100); */
     }
     ngOnInit() {
     }
-    reconectar() {
+    acpetar() {
         this.navCtrl.navigateRoot('nuevo-login');
     }
 };
 ErrorPage.ctorParameters = () => [
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
-    { type: undefined },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] }
 ];
 ErrorPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

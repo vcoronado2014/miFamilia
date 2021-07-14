@@ -1175,57 +1175,61 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                               case 0:
                                 if (!this.utiles.isAppOnDevice()) {
                                   //llamada web
-                                  this.servicioGeo.getRegistroAppCorreoPassword(correo, password).subscribe(function (data) {
-                                    if (data) {
-                                      var respuesta = data;
-                                      localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
-                                      localStorage.setItem('TIENE_REGISTRO', 'true');
-                                      loader.dismiss();
-                                      var registro = JSON.parse(localStorage.getItem('REGISTRO'));
+                                  setTimeout(function () {
+                                    _this5.servicioGeo.getRegistroAppCorreoPassword(correo, password).subscribe(function (data) {
+                                      if (data) {
+                                        var respuesta = data;
+                                        localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                                        localStorage.setItem('TIENE_REGISTRO', 'true');
+                                        loader.dismiss();
+                                        var registro = JSON.parse(localStorage.getItem('REGISTRO'));
 
-                                      _this5.autentificarse(registro.Run, password);
-                                    } else {
-                                      _this5.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+                                        _this5.autentificarse(registro.Run, password);
+                                      } else {
+                                        _this5.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
 
+                                        _this5.estaCargando = false;
+                                        loader.dismiss();
+                                        return;
+                                      }
+                                    }, function (error) {
+                                      //console.log(error.message);
+                                      //this.utiles.presentToast("Error de conexión.", "middle", 3000);
                                       _this5.estaCargando = false;
                                       loader.dismiss();
-                                      return;
-                                    }
-                                  }, function (error) {
-                                    //console.log(error.message);
-                                    //this.utiles.presentToast("Error de conexión.", "middle", 3000);
-                                    _this5.estaCargando = false;
-                                    loader.dismiss();
 
-                                    _this5.procesoLocal();
-                                  });
+                                      _this5.procesoLocal();
+                                    });
+                                  }, 5000);
                                 } else {
                                   //llamada nativa
-                                  this.servicioGeo.getRegistroAppNativeCorreoPassword(correo, password).then(function (data) {
-                                    var respuesta = JSON.parse(data.data);
+                                  setTimeout(function () {
+                                    _this5.servicioGeo.getRegistroAppNativeCorreoPassword(correo, password).then(function (data) {
+                                      var respuesta = JSON.parse(data.data);
 
-                                    if (respuesta) {
-                                      localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
-                                      localStorage.setItem('TIENE_REGISTRO', 'true');
-                                      loader.dismiss();
-                                      var registro = JSON.parse(localStorage.getItem('REGISTRO'));
+                                      if (respuesta) {
+                                        localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+                                        localStorage.setItem('TIENE_REGISTRO', 'true');
+                                        loader.dismiss();
+                                        var registro = JSON.parse(localStorage.getItem('REGISTRO'));
 
-                                      _this5.autentificarse(registro.Run, password);
-                                    } else {
-                                      _this5.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+                                        _this5.autentificarse(registro.Run, password);
+                                      } else {
+                                        _this5.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
 
+                                        _this5.estaCargando = false;
+                                        loader.dismiss();
+                                        return;
+                                      }
+                                    })["catch"](function (error) {
+                                      //console.log(error.message);
+                                      //this.utiles.presentToast("Error de conexión.", "middle", 3000);
                                       _this5.estaCargando = false;
                                       loader.dismiss();
-                                      return;
-                                    }
-                                  })["catch"](function (error) {
-                                    //console.log(error.message);
-                                    //this.utiles.presentToast("Error de conexión.", "middle", 3000);
-                                    _this5.estaCargando = false;
-                                    loader.dismiss();
 
-                                    _this5.procesoLocal();
-                                  });
+                                      _this5.procesoLocal();
+                                    });
+                                  }, 5000);
                                 }
 
                               case 1:

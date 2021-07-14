@@ -993,6 +993,10 @@ const routes = [
         path: 'error',
         loadChildren: () => __webpack_require__.e(/*! import() | error-error-module */ "error-error-module").then(__webpack_require__.bind(null, /*! ./error/error.module */ "./src/app/error/error.module.ts")).then(m => m.ErrorPageModule)
     },
+    {
+        path: 'error',
+        loadChildren: () => __webpack_require__.e(/*! import() | error-error-module */ "error-error-module").then(__webpack_require__.bind(null, /*! ./error/error.module */ "./src/app/error/error.module.ts")).then(m => m.ErrorPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -3254,6 +3258,7 @@ let ServicioGeo = class ServicioGeo {
     }
     getRegistroAppCorreoPassword(correo, password) {
         let url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].API_ENDPOINT + 'RegistroAppFamilia?Correo=' + correo + '&Password=' + password;
+        //this.httpClient.setRequestTimeout(5.0);
         let data = this.httpClient.get(url, {});
         return data;
     }

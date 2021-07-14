@@ -869,56 +869,60 @@ export class NuevoLoginPage implements OnInit {
     await loader.present().then(async () => {
       if (!this.utiles.isAppOnDevice()) {
         //llamada web
-        this.servicioGeo.getRegistroAppCorreoPassword(correo, password).subscribe((data) => {
-          if (data) {
-            let respuesta = data;
-            localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
-            localStorage.setItem('TIENE_REGISTRO', 'true');
-            loader.dismiss();
-            let registro = JSON.parse(localStorage.getItem('REGISTRO'));
-
-            this.autentificarse(registro.Run, password);
-          }
-          else {
-            this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+        setTimeout(() => {
+          this.servicioGeo.getRegistroAppCorreoPassword(correo, password).subscribe((data) => {
+            if (data) {
+              let respuesta = data;
+              localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+              localStorage.setItem('TIENE_REGISTRO', 'true');
+              loader.dismiss();
+              let registro = JSON.parse(localStorage.getItem('REGISTRO'));
+  
+              this.autentificarse(registro.Run, password);
+            }
+            else {
+              this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+              this.estaCargando = false;
+              loader.dismiss();
+              return;
+            }
+  
+          }, error => {
+            //console.log(error.message);
+            //this.utiles.presentToast("Error de conexión.", "middle", 3000);
             this.estaCargando = false;
             loader.dismiss();
-            return;
-          }
-
-        }, error => {
-          //console.log(error.message);
-          //this.utiles.presentToast("Error de conexión.", "middle", 3000);
-          this.estaCargando = false;
-          loader.dismiss();
-          this.procesoLocal();
-        })
+            this.procesoLocal();
+          })
+        }, 5000);
       }
       else {
         //llamada nativa
-        this.servicioGeo.getRegistroAppNativeCorreoPassword(correo, password).then((data) => {
-          let respuesta = JSON.parse(data.data);
-          if (respuesta) {
-            localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
-            localStorage.setItem('TIENE_REGISTRO', 'true');
-            loader.dismiss();
-            let registro = JSON.parse(localStorage.getItem('REGISTRO'));
-            this.autentificarse(registro.Run, password);
-          }
-          else {
-            this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+        setTimeout(() => {
+          this.servicioGeo.getRegistroAppNativeCorreoPassword(correo, password).then((data) => {
+            let respuesta = JSON.parse(data.data);
+            if (respuesta) {
+              localStorage.setItem('REGISTRO', JSON.stringify(respuesta));
+              localStorage.setItem('TIENE_REGISTRO', 'true');
+              loader.dismiss();
+              let registro = JSON.parse(localStorage.getItem('REGISTRO'));
+              this.autentificarse(registro.Run, password);
+            }
+            else {
+              this.utiles.presentToast("No se encontró registro de usuario.", "middle", 3000);
+              this.estaCargando = false;
+              loader.dismiss();
+              return;
+            }
+  
+          }).catch(error => {
+            //console.log(error.message);
+            //this.utiles.presentToast("Error de conexión.", "middle", 3000);
             this.estaCargando = false;
             loader.dismiss();
-            return;
-          }
-
-        }).catch(error => {
-          //console.log(error.message);
-          //this.utiles.presentToast("Error de conexión.", "middle", 3000);
-          this.estaCargando = false;
-          loader.dismiss();
-          this.procesoLocal();
-        })
+            this.procesoLocal();
+          })
+        }, 5000);
       }
     })
   }
