@@ -1,8 +1,11 @@
 .text-avatar-1{
     color:#000000DE;
-    font-size: 16pt;
+    font-size: 12pt;
     letter-spacing: 0.5pt;
-    margin-top: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
 }
 .subtext-avatar-1{
     color:#00000099;

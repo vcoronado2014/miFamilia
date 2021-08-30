@@ -85,7 +85,7 @@
    </ion-slides> -->
    <ion-grid>
      <app-progress [mostrar]="estaCargando" titulo="Buscando preferencias"></app-progress>
-     <ion-row [hidden]="estaCargando" class="ion-padding-top">
+     <ion-row [hidden]="estaCargando" class="ion-padding-top" style="padding-top: 24px;">
        <ion-col size="6" *ngFor="let modulo of itemsMenu">
          <app-item-home [modulo]="modulo.NombreModulo" [classImagen]="modulo.ClaseImagen" [rutaImagen]="modulo.Imagen"></app-item-home>
        </ion-col>

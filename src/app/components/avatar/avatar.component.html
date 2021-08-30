@@ -4,7 +4,7 @@
     <img *ngIf="urlImagen != ''" src={{urlImagen}}>
     <img *ngIf="urlImagen == ''" src="../assets/img/no-imagen.jpg">
   </ion-avatar>
-  <ion-row style="display: block; width: 100%;">
+  <ion-row class="avatar-container" style="display: block; width: 100%; padding-top: 14px;">
     <div class="text-avatar">{{nombreCompleto}}</div>
     <div class="subtext-avatar">{{parentezco}}</div>
   </ion-row>

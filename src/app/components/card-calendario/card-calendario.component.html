@@ -9,12 +9,14 @@
           *ngIf="transformDate(item.FechaCompleta, 'YYYY-MM-DD') == fechaActual && item.Eventos[0].NombrePrincipal == 'Nada planificado para hoy'">
           <ion-grid style="background-color: #d1c4e9;
                       font-size: 16px;
+
                       width: initial;
                       border-radius: 4px;
                       height: 40px;
                       margin: 8px;
                       margin-top: 0;
-                      margin-bottom: 0;" id="0">
+                      margin-bottom: 0;
+                      padding: 8px" id="0">
             <ion-col>
               <span><strong>{{item.NumeroDia}} de
                   {{transformDate(item.FechaCompleta, 'MMMM')}}</strong></span>

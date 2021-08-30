@@ -20,14 +20,14 @@
 <!--SI HAY ORDENES -->
 <app-progress [mostrar]="estaCargando" titulo="Cargando exámenes"></app-progress>
 <div [hidden]="estaCargando" style="padding-top: 24px;">
-  <ion-item lines="none" style="--background:#FAF9FA; padding-bottom: 24px;">
+  <ion-item lines="none" style="background:#FAF9FA; padding-bottom: 24px;">
     <!-- poner avatar -->
-    <ion-avatar slot="start">
+    <ion-avatar slot="start" >
       <img *ngIf="usuarioAps.UrlImagen != ''" src={{usuarioAps.UrlImagen}}>
       <img *ngIf="usuarioAps.UrlImagen == ''" src="../assets/img/no-imagen.jpg">
     </ion-avatar>
-    <ion-row style="display: block;">
-      <div class="text-avatar">{{usuarioAps.Nombres + ' ' + usuarioAps.ApellidoPaterno + ' ' + usuarioAps.ApellidoMaterno}}</div>
+    <ion-row style="display: block; height: 64px; padding-top: 14px;">
+      <div class="text-avatar-1">{{usuarioAps.Nombres + ' ' + usuarioAps.ApellidoPaterno + ' ' + usuarioAps.ApellidoMaterno}}</div>
       <div class="subtext-avatar">{{usuarioAps.Parentezco.Nombre}}</div>
     </ion-row>
   </ion-item>
@@ -83,7 +83,7 @@
 </ion-card>   -->
 <!-- NO HAY ORDENES -->
 <div [hidden]="estaCargando" *ngIf="tiene == false" style="position: relative; height: 30vh;">
-  <div style="position: absolute; display: table; height: 100%; font-size: 16pt; color:#0000008A; text-align: center;width: 100%;letter-spacing: 0.5pt;">
+  <div style="position: absolute; display: table; height: 100%; font-size: 12pt; color:#0000008A; text-align: center;width: 100%;letter-spacing: 0.5pt;">
     <p style="display: table-cell; vertical-align: middle">No tiene exámenes  <br>registrados
     </p>
   </div>

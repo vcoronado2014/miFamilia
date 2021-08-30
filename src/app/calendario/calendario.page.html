@@ -14,7 +14,6 @@
  <div *ngIf="!tiene">
   <div [hidden]="estaCargando" *ngFor="let item of citasVerticalTodasTop">
     <ion-grid *ngIf="item.Mostrar">
-      <app-card-calendario [fechaActual]="fechaActual" [item]="item" [anioActual]="anioActual"></app-card-calendario>
       <ion-row class="ion-no-padding ion-no-margin row-card"
         *ngIf="item.Eventos[0].NombrePrincipal != 'Nada planificado para hoy'">
         <mat-card *ngFor="let evento of item.Eventos" color="light" style="margin-bottom: 8px;" id="myListCard">
