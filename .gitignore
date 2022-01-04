@@ -24,7 +24,11 @@ npm-debug.log*
 /.versions
 /.vscode
 /coverage
-/dist
-/node_modules
-/plugins
-/www
+/dist/
+/node_modules/
+/plugins/
+/www/
+config.xml
+package.json
+package-lock.json
+
