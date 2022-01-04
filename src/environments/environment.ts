@@ -14,6 +14,8 @@ export const environment = {
   //API_ENDPOINT: 'http://localhost:1960/Api/',
   //API_ENDPOINT: 'https://10.211.55.5:45456/Api/',
   //URL_FOTOS: 'http://localhost:27563/',
+  //API_ENDPOINT: 'http://192.168.0.152/MiFamilia.WebApi/Api/',
+  //URL_FOTOS: 'http://192.168.0.152/MiFamilia.WebApi/',
   API_KEY_MAPA: 'AIzaSyAqx2BInVZJP-xhUh5oSUgKSPh3rpB_Rzc',
   USA_CALENDARIO: false,
   HORAS_FECHA_INICIO: 3,
