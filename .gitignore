@@ -25,10 +25,12 @@ npm-debug.log*
 /.vscode
 /coverage
 /dist/
-/node_modules/
-/plugins/
-/www/
+/node_modules
+/plugins
+/www
 config.xml
 package.json
 package-lock.json
+/e2e
+/miFamilia
 
